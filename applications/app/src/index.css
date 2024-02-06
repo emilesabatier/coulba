@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  * {
+    @apply m-0 p-0 list-none scroll-smooth outline-none;
+  }
+
+  span,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  label,
+  small,
+  input,
+  button,
+  textarea,
+  select {
+    @apply text-base font-normal font-lato text-neutral;
+  }
+
+  a {
+    @apply no-underline;
+  }
+
+  html {
+    @apply bg-background;
+  }
+
+  body {
+    @apply w-[100dvw] min-h-[100dvh] h-[100dvh];
+  }
+
+  #root {
+    @apply w-full h-full overflow-auto;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    @apply box-border block;
+  }
+
+  input,
+  button {
+    @apply focus:outline-none;
+  }
+
+  svg {
+    @apply stroke-[1px];
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary;
+  }
+}

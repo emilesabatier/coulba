@@ -1,0 +1,16 @@
+import z from "zod"
+import { userInclude } from "../../models/user/user.include.js"
+import { userSchema } from "../../models/user/user.schema.js"
+
+
+// Input
+export const readOneUserParams = userSchema.pick({ id: true })
+export type ReadOneUserParams = z.infer<typeof readOneUserParams>
+
+
+// Output
+export const readOneUserReturn = userSchema.pick(userInclude).merge(z.object({
+    lastUpdatedByUser: userSchema.pick(userInclude).nullable(),
+    createdByUser: userSchema.pick(userInclude).nullable(),
+}))
+export type ReadOneUserReturn = z.infer<typeof readOneUserReturn>

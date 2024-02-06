@@ -1,0 +1,32 @@
+{
+    "name": "@monassosportive/database",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "studio": "pnpm drizzle-kit studio --port 4000 --config=drizzle.config.ts",
+        "generate": "pnpm drizzle-kit generate:pg --config=drizzle.config.ts",
+        "push": "pnpm drizzle-kit push:pg --config=drizzle.config.ts",
+        "pull": "pnpm drizzle-kit introspect:pg --config=drizzle.config.ts",
+        "migrate": "tsx ./src/migrate.ts",
+        "seed": "tsx ./src/seed/seed.ts",
+        "clear": "tsx ./src/clearDB.ts && pnpm run push",
+        "reset": "tsx ./src/clearDB.ts && pnpm run push && tsx ./src/seed/seed.ts",
+        "drop": "pnpm drizzle-kit drop --config=drizzle.config.ts"
+    },
+    "dependencies": {
+        "@monassosportive/schemas": "workspace:*",
+        "@ngneat/falso": "7.1.1",
+        "dotenv": "^16.4.1",
+        "drizzle-orm": "0.29.3",
+        "nanoid": "3.0.0",
+        "pg": "8.11.3",
+        "postgres": "3.4.3",
+        "zod": "3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "20.10.6",
+        "drizzle-kit": "0.20.9",
+        "tsx": "3.12.7",
+        "typescript": "5.3.3"
+    }
+}

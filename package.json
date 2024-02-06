@@ -1,0 +1,28 @@
+{
+    "name": "monassosportive",
+    "version": "1.0.3",
+    "private": true,
+    "description": "",
+    "browserslist": [
+        "last 5 versions",
+        ">0.3%",
+        "not dead"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "start": "turbo run start",
+        "preview": "turbo run preview"
+    },
+    "workspaces": [
+        "applications/*",
+        "packages/*",
+        "tools/*"
+    ],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "turbo": "1.11.2"
+    }
+}

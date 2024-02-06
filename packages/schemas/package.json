@@ -1,0 +1,38 @@
+{
+    "name": "@monassosportive/schemas",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "tsc --build --watch",
+        "build": "tsc --build"
+    },
+    "dependencies": {
+        "drizzle-orm": "0.29.3",
+        "drizzle-zod": "0.5.1",
+        "postgres": "3.4.3",
+        "zod": "3.22.4"
+    },
+    "devDependencies": {
+        "@types/node": "20.10.6",
+        "drizzle-kit": "0.19.13",
+        "typescript": "5.3.3"
+    },
+    "exports": {
+        "./models": {
+            "types": "./lib/models/index.d.ts",
+            "default": "./lib/models/index.js"
+        },
+        "./routes": {
+            "types": "./lib/routes/index.d.ts",
+            "default": "./lib/routes/index.js"
+        },
+        "./components": {
+            "types": "./lib/components/index.d.ts",
+            "default": "./lib/components/index.js"
+        },
+        "./services": {
+            "types": "./lib/services/index.d.ts",
+            "default": "./lib/services/index.js"
+        }
+    }
+}

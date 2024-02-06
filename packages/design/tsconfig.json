@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        // "baseUrl": "src",
+        // "rootDir": "src",
+        "outDir": "lib",
+        "target": "ES2022",
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        // "declaration": false,
+        // "declaration": true,
+        // "declarationMap": true,
+        "allowJs": false,
+        // "emitDeclarationOnly": true,
+        // "composite": true,
+        "incremental": true,
+        "jsx": "react-jsx",
+        "sourceMap": true
+    }
+}
