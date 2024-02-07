@@ -1,10 +1,10 @@
-import { attachmentInclude } from "./attachment.include.js"
-import { attachmentModel } from "./attachment.model.js"
-import { attachmentWith } from "./attachment.with.js"
+import { attachmentInclude } from "./attachment.include"
+import { attachmentModel } from "./attachment.model"
+import { attachmentWith } from "./attachment.with"
 
 
-export * as attachmentModel from "./attachment.model.js"
-export type * from "./attachment.type.js"
+export * as attachmentModel from "./attachment.model"
+export type * from "./attachment.type"
 
 export const attachment = {
     model: attachmentModel,

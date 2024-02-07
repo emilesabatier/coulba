@@ -1,5 +1,5 @@
 import z from "zod"
-import { userSchema } from "../../models/user/user.schema.js"
+import { userSchema } from "../../models/user/user.schema"
 
 
 // Input

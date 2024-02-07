@@ -1,6 +1,6 @@
 import { z } from "zod"
-import { textSchema } from "../../components/schemas/text.schema.js"
-import { userSchema } from "../../models/user/user.schema.js"
+import { textSchema } from "../../components/schemas/text.schema"
+import { userSchema } from "../../models/user/user.schema"
 
 
 // Input

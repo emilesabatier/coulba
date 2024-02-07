@@ -1,8 +1,8 @@
 import { relations } from "drizzle-orm"
 import { boolean, pgTable, text } from "drizzle-orm/pg-core"
-import { dateTimeColumn } from "../../components/models/dateTime.column.js"
-import { idColumn } from "../../components/models/id.column.js"
-import { userModel } from "../user/user.model.js"
+import { dateTimeColumn } from "../../components/models/dateTime.column"
+import { idColumn } from "../../components/models/id.column"
+import { userModel } from "../user/user.model"
 
 
 // Model

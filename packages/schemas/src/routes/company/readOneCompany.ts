@@ -1,8 +1,8 @@
 import z from "zod"
-import { companyInclude } from "../../models/company/company.include.js"
-import { companySchema } from "../../models/company/company.schema.js"
-import { userInclude } from "../../models/user/user.include.js"
-import { userSchema } from "../../models/user/user.schema.js"
+import { companyInclude } from "../../models/company/company.include"
+import { companySchema } from "../../models/company/company.schema"
+import { userInclude } from "../../models/user/user.include"
+import { userSchema } from "../../models/user/user.schema"
 
 
 // Input

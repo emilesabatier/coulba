@@ -1,5 +1,5 @@
 import z from "zod"
-import { journalSchema } from "../../models/journal/journal.schema.js"
+import { journalSchema } from "../../models/journal/journal.schema"
 
 
 // Input

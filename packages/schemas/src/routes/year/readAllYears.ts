@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { readOneYearReturn } from "./readOneYear.js"
+import { readOneYearReturn } from "./readOneYear"
 
 
 // Output

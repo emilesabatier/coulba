@@ -1,3 +1,3 @@
-export * from "./schemas/index.js"
+export * from "./schemas"
 
-export * from "./values/index.js"
+export * from "./values"

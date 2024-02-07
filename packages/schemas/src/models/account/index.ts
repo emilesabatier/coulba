@@ -1,10 +1,10 @@
-import { accountInclude } from "./account.include.js"
-import { accountModel } from "./account.model.js"
-import { accountWith } from "./account.with.js"
+import { accountInclude } from "./account.include"
+import { accountModel } from "./account.model"
+import { accountWith } from "./account.with"
 
 
-export * as accountModel from "./account.model.js"
-export type * from "./account.type.js"
+export * as accountModel from "./account.model"
+export type * from "./account.type"
 
 export const account = {
     model: accountModel,

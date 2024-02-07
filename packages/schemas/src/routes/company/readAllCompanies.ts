@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { readOneCompanyReturn } from "./readOneCompany.js"
+import { readOneCompanyReturn } from "./readOneCompany"
 
 
 // Output

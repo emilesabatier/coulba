@@ -1,5 +1,5 @@
-import { sessionInclude } from "./session.include.js"
-import { sessionModel } from "./session.model.js"
+import { sessionInclude } from "./session.include"
+import { sessionModel } from "./session.model"
 
 
 type SessionInclude = keyof Readonly<typeof sessionInclude>

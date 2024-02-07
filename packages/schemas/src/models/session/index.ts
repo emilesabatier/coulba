@@ -1,10 +1,10 @@
-import { sessionInclude } from "./session.include.js"
-import { sessionModel } from "./session.model.js"
-import { sessionWith } from "./session.with.js"
+import { sessionInclude } from "./session.include"
+import { sessionModel } from "./session.model"
+import { sessionWith } from "./session.with"
 
 
-export * as sessionModel from "./session.model.js"
-export type * from "./session.type.js"
+export * as sessionModel from "./session.model"
+export type * from "./session.type"
 
 export const session = {
     model: sessionModel,

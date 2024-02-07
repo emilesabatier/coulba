@@ -1,5 +1,5 @@
-import { entryInclude } from "./entry.include.js"
-import { entryModel } from "./entry.model.js"
+import { entryInclude } from "./entry.include"
+import { entryModel } from "./entry.model"
 
 
 type entryInclude = keyof typeof entryInclude

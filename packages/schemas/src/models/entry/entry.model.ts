@@ -1,13 +1,13 @@
 import { relations } from "drizzle-orm"
 import { numeric, pgEnum, pgTable, text } from "drizzle-orm/pg-core"
-import { entryStates } from "../../components/index.js"
-import { dateTimeColumn } from "../../components/models/dateTime.column.js"
-import { idColumn } from "../../components/models/id.column.js"
-import { accountModel } from "../account/account.model.js"
-import { attachmentModel } from "../attachment/attachment.model.js"
-import { companyModel } from "../company/company.model.js"
-import { journalModel } from "../journal/journal.model.js"
-import { userModel } from "../user/user.model.js"
+import { entryStates } from "../../components"
+import { dateTimeColumn } from "../../components/models/dateTime.column"
+import { idColumn } from "../../components/models/id.column"
+import { accountModel } from "../account/account.model"
+import { attachmentModel } from "../attachment/attachment.model"
+import { companyModel } from "../company/company.model"
+import { journalModel } from "../journal/journal.model"
+import { userModel } from "../user/user.model"
 
 
 // Model

@@ -1,5 +1,5 @@
-import { entryInclude } from "../entry/entry.include.js"
-import { userInclude } from "../user/user.include.js"
+import { entryInclude } from "../entry/entry.include"
+import { userInclude } from "../user/user.include"
 
 
 export const attachmentWith = {

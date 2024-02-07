@@ -1,10 +1,10 @@
-import { journalInclude } from "./journal.include.js"
-import { journalModel } from "./journal.model.js"
-import { journalWith } from "./journal.with.js"
+import { journalInclude } from "./journal.include"
+import { journalModel } from "./journal.model"
+import { journalWith } from "./journal.with"
 
 
-export * as journalModel from "./journal.model.js"
-export type * from "./journal.type.js"
+export * as journalModel from "./journal.model"
+export type * from "./journal.type"
 
 export const journal = {
     model: journalModel,

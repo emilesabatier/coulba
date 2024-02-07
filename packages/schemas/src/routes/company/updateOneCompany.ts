@@ -1,5 +1,5 @@
 import z from "zod"
-import { companySchema } from "../../models/company/company.schema.js"
+import { companySchema } from "../../models/company/company.schema"
 
 
 // Input

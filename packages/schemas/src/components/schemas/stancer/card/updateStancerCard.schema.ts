@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { stancerCardSchema } from "./stancerCard.schema.js"
+import { stancerCardSchema } from "./stancerCard.schema"
 
 
 export const updateStancerCardQuerySchema = z.object({

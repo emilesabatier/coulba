@@ -1,5 +1,5 @@
 import z from "zod"
-import { yearSchema } from "../../models/year/year.schema.js"
+import { yearSchema } from "../../models/year/year.schema"
 
 
 // Input

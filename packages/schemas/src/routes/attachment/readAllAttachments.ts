@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { readOneAttachmentReturn } from "./readOneAttachment.js"
+import { readOneAttachmentReturn } from "./readOneAttachment"
 
 
 // Output

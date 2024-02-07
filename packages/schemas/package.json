@@ -18,21 +18,9 @@
         "typescript": "5.3.3"
     },
     "exports": {
-        "./models": {
-            "types": "./lib/models/index.d.ts",
-            "default": "./lib/models/index.js"
-        },
-        "./routes": {
-            "types": "./lib/routes/index.d.ts",
-            "default": "./lib/routes/index.js"
-        },
-        "./components": {
-            "types": "./lib/components/index.d.ts",
-            "default": "./lib/components/index.js"
-        },
-        "./services": {
-            "types": "./lib/services/index.d.ts",
-            "default": "./lib/services/index.js"
-        }
+        "./models": "./src/models/index.ts",
+        "./routes": "./src/routes/index.ts",
+        "./components": "./src/components/index.ts",
+        "./services": "./scr/services/index.ts"
     }
 }

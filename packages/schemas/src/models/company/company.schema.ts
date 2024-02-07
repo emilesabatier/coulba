@@ -1,9 +1,9 @@
 import { createSelectSchema } from "drizzle-zod"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
-import { idSchema } from "../../components/schemas/id.schema.js"
-import { sirenSchema } from "../../components/schemas/siren.schema.js"
-import { textSchema } from "../../components/schemas/text.schema.js"
-import { companyModel } from "./company.model.js"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
+import { idSchema } from "../../components/schemas/id.schema"
+import { sirenSchema } from "../../components/schemas/siren.schema"
+import { textSchema } from "../../components/schemas/text.schema"
+import { companyModel } from "./company.model"
 
 
 export const companySchema = createSelectSchema(companyModel, {

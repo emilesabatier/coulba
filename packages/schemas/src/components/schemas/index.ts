@@ -1,5 +1,5 @@
-export * from "./dateTime.schema.js"
-export * from "./integer.schema.js"
-export * from "./time.schema.js"
+export * from "./dateTime.schema"
+export * from "./integer.schema"
+export * from "./time.schema"
 
-export * from "./stancer/index.js"
+export * from "./stancer"

@@ -1,7 +1,7 @@
-import { accountInclude } from "../account/account.include.js"
-import { attachmentInclude } from "../attachment/attachment.include.js"
-import { journalInclude } from "../journal/journal.include.js"
-import { userInclude } from "../user/user.include.js"
+import { accountInclude } from "../account/account.include"
+import { attachmentInclude } from "../attachment/attachment.include"
+import { journalInclude } from "../journal/journal.include"
+import { userInclude } from "../user/user.include"
 
 
 export const entryWith = {

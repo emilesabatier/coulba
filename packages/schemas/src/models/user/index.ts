@@ -1,10 +1,10 @@
-import { userInclude } from "./user.include.js"
-import { userModel } from "./user.model.js"
-import { userWith } from "./user.with.js"
+import { userInclude } from "./user.include"
+import { userModel } from "./user.model"
+import { userWith } from "./user.with"
 
 
-export * as userModel from "./user.model.js"
-export type * from "./user.type.js"
+export * as userModel from "./user.model"
+export type * from "./user.type"
 
 export const user = {
     model: userModel,

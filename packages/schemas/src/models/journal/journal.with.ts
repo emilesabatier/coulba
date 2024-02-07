@@ -1,4 +1,4 @@
-import { userInclude } from "../user/user.include.js"
+import { userInclude } from "../user/user.include"
 
 
 export const journalWith = {

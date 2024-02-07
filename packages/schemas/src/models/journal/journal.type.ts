@@ -1,5 +1,5 @@
-import { journalInclude } from "./journal.include.js"
-import { journalModel } from "./journal.model.js"
+import { journalInclude } from "./journal.include"
+import { journalModel } from "./journal.model"
 
 
 type journalInclude = keyof typeof journalInclude

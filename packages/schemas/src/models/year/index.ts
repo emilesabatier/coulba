@@ -1,10 +1,10 @@
-import { yearInclude } from "./year.include.js"
-import { yearModel } from "./year.model.js"
-import { yearWith } from "./year.with.js"
+import { yearInclude } from "./year.include"
+import { yearModel } from "./year.model"
+import { yearWith } from "./year.with"
 
 
-export * as yearModel from "./year.model.js"
-export type * from "./year.type.js"
+export * as yearModel from "./year.model"
+export type * from "./year.type"
 
 export const year = {
     model: yearModel,

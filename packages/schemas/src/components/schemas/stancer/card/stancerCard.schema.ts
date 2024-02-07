@@ -1,6 +1,6 @@
 import { z } from "zod"
-import { cardCVCSchema } from "../../cardCVC.schema.js"
-import { cardNumberSchema } from "../../cardNumber.schema.js"
+import { cardCVCSchema } from "../../cardCVC.schema"
+import { cardNumberSchema } from "../../cardNumber.schema"
 
 
 export const stancerCardSchema = z.object({

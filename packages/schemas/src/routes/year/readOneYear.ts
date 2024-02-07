@@ -1,8 +1,8 @@
 import z from "zod"
-import { userInclude } from "../../models/user/user.include.js"
-import { userSchema } from "../../models/user/user.schema.js"
-import { yearInclude } from "../../models/year/year.include.js"
-import { yearSchema } from "../../models/year/year.schema.js"
+import { userInclude } from "../../models/user/user.include"
+import { userSchema } from "../../models/user/user.schema"
+import { yearInclude } from "../../models/year/year.include"
+import { yearSchema } from "../../models/year/year.schema"
 
 
 // Input

@@ -1,8 +1,8 @@
 import { createSelectSchema } from "drizzle-zod"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
-import { idSchema } from "../../components/schemas/id.schema.js"
-import { textSchema } from "../../components/schemas/text.schema.js"
-import { journalModel } from "./journal.model.js"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
+import { idSchema } from "../../components/schemas/id.schema"
+import { textSchema } from "../../components/schemas/text.schema"
+import { journalModel } from "./journal.model"
 
 
 export const journalSchema = createSelectSchema(journalModel, {

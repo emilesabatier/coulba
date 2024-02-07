@@ -1,11 +1,11 @@
 import z from "zod"
-import { accountSchema } from "../../models/account/account.schema.js"
-import { attachmentSchema } from "../../models/attachment/attachment.schema.js"
-import { entryInclude } from "../../models/entry/entry.include.js"
-import { entrySchema } from "../../models/entry/entry.schema.js"
-import { journalSchema } from "../../models/journal/journal.schema.js"
-import { userInclude } from "../../models/user/user.include.js"
-import { userSchema } from "../../models/user/user.schema.js"
+import { accountSchema } from "../../models/account/account.schema"
+import { attachmentSchema } from "../../models/attachment/attachment.schema"
+import { entryInclude } from "../../models/entry/entry.include"
+import { entrySchema } from "../../models/entry/entry.schema"
+import { journalSchema } from "../../models/journal/journal.schema"
+import { userInclude } from "../../models/user/user.include"
+import { userSchema } from "../../models/user/user.schema"
 
 
 // Input

@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { stancerPaymentSchema } from "./stancerPayment.schema.js"
+import { stancerPaymentSchema } from "./stancerPayment.schema"
 
 
 export const readStancerPaymentQuerySchema = z.object({

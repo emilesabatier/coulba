@@ -1,3 +1,3 @@
-export * from "./colorVariants.js"
-export * from "./days.js"
-export * from "./entryStates.js"
+export * from "./colorVariants"
+export * from "./days"
+export * from "./entryStates"

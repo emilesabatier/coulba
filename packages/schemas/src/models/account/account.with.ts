@@ -1,5 +1,5 @@
-import { userInclude } from "../user/user.include.js"
-import { accountInclude } from "./account.include.js"
+import { userInclude } from "../user/user.include"
+import { accountInclude } from "./account.include"
 
 
 export const accountWith = {

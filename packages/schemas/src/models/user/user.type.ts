@@ -1,5 +1,5 @@
-import { userInclude } from "./user.include.js"
-import { userModel } from "./user.model.js"
+import { userInclude } from "./user.include"
+import { userModel } from "./user.model"
 
 
 type UserInclude = keyof typeof userInclude

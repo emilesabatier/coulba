@@ -1,9 +1,9 @@
 import { createSelectSchema } from "drizzle-zod"
-import { integerSchema } from "../../components/index.js"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
-import { idSchema } from "../../components/schemas/id.schema.js"
-import { textSchema } from "../../components/schemas/text.schema.js"
-import { accountModel } from "./account.model.js"
+import { integerSchema } from "../../components"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
+import { idSchema } from "../../components/schemas/id.schema"
+import { textSchema } from "../../components/schemas/text.schema"
+import { accountModel } from "./account.model"
 
 
 export const accountSchema = createSelectSchema(accountModel, {

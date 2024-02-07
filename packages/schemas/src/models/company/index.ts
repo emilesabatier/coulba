@@ -1,10 +1,10 @@
-import { companyInclude } from "./company.include.js"
-import { companyModel } from "./company.model.js"
-import { companyWith } from "./company.with.js"
+import { companyInclude } from "./company.include"
+import { companyModel } from "./company.model"
+import { companyWith } from "./company.with"
 
 
-export * as companyModel from "./company.model.js"
-export type * from "./company.type.js"
+export * as companyModel from "./company.model"
+export type * from "./company.type"
 
 export const company = {
     model: companyModel,

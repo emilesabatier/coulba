@@ -1,10 +1,10 @@
 import { createSelectSchema } from "drizzle-zod"
-import { booleanSchema } from "../../components/schemas/boolean.schema.js"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
-import { emailSchema } from "../../components/schemas/email.schema.js"
-import { idSchema } from "../../components/schemas/id.schema.js"
-import { textSchema } from "../../components/schemas/text.schema.js"
-import { userModel } from "./user.model.js"
+import { booleanSchema } from "../../components/schemas/boolean.schema"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
+import { emailSchema } from "../../components/schemas/email.schema"
+import { idSchema } from "../../components/schemas/id.schema"
+import { textSchema } from "../../components/schemas/text.schema"
+import { userModel } from "./user.model"
 
 
 

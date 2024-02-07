@@ -1,4 +1,4 @@
-import { userInclude } from "./user.include.js"
+import { userInclude } from "./user.include"
 
 
 export const userWith = {

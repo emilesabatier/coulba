@@ -1,9 +1,9 @@
 import z from "zod"
-import { attachmentInclude } from "../../models/attachment/attachment.include.js"
-import { attachmentSchema } from "../../models/attachment/attachment.schema.js"
-import { entrySchema } from "../../models/entry/entry.schema.js"
-import { userInclude } from "../../models/user/user.include.js"
-import { userSchema } from "../../models/user/user.schema.js"
+import { attachmentInclude } from "../../models/attachment/attachment.include"
+import { attachmentSchema } from "../../models/attachment/attachment.schema"
+import { entrySchema } from "../../models/entry/entry.schema"
+import { userInclude } from "../../models/user/user.include"
+import { userSchema } from "../../models/user/user.schema"
 
 
 // Input

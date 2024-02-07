@@ -1,7 +1,7 @@
 import { z } from "zod"
-import { stancerAuthSchema } from "../auth/stancerAuth.schema.js"
-import { stancerCardSchema } from "../card/stancerCard.schema.js"
-import { stancerDeviceSchema } from "../device/stancerDevice.schema.js"
+import { stancerAuthSchema } from "../auth/stancerAuth.schema"
+import { stancerCardSchema } from "../card/stancerCard.schema"
+import { stancerDeviceSchema } from "../device/stancerDevice.schema"
 
 const currencyEnum = <const>["EUR", "USD", "GBP"]
 const methodEnum = <const>["card", "sepa"]
