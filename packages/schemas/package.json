@@ -1,5 +1,5 @@
 {
-    "name": "@monassosportive/schemas",
+    "name": "@coulba/schemas",
     "private": true,
     "type": "module",
     "scripts": {
@@ -14,13 +14,29 @@
     },
     "devDependencies": {
         "@types/node": "20.10.6",
-        "drizzle-kit": "0.19.13",
+        "drizzle-kit": "0.20.9",
         "typescript": "5.3.3"
     },
     "exports": {
-        "./models": "./src/models/index.ts",
-        "./routes": "./src/routes/index.ts",
-        "./components": "./src/components/index.ts",
-        "./services": "./scr/services/index.ts"
+        "./models": {
+            "types": "./lib/models/index.d.ts",
+            "default": "./lib/models/index.js"
+        },
+        "./schemas": {
+            "types": "./lib/schemas/index.d.ts",
+            "default": "./lib/schemas/index.js"
+        },
+        "./routes": {
+            "types": "./lib/routes/index.d.ts",
+            "default": "./lib/routes/index.js"
+        },
+        "./components": {
+            "types": "./lib/components/index.d.ts",
+            "default": "./lib/components/index.js"
+        },
+        "./services": {
+            "types": "./lib/services/index.d.ts",
+            "default": "./lib/services/index.js"
+        }
     }
 }

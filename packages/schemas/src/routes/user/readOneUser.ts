@@ -1,6 +1,6 @@
 import z from "zod"
-import { userInclude } from "../../models/user/user.include"
-import { userSchema } from "../../models/user/user.schema"
+import { userInclude } from "../../schemas/user/user.include"
+import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input

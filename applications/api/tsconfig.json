@@ -10,35 +10,11 @@
             "#exceptions/*": [
                 "./src/exceptions/*.js"
             ],
-            "#models/*": [
-                "./src/models/*.js"
-            ],
-            "#mails/*": [
-                "./src/mails/*.js"
+            "#routes/*": [
+                "./src/routes/*.js"
             ],
             "#services/*": [
                 "./src/services/*.js"
-            ],
-            "#listeners/*": [
-                "./src/listeners/*.js"
-            ],
-            "#events/*": [
-                "./src/events/*.js"
-            ],
-            "#middleware/*": [
-                "./src/middleware/*.js"
-            ],
-            "#validators/*": [
-                "./src/validators/*.js"
-            ],
-            "#providers/*": [
-                "./providers/*.js"
-            ],
-            "#policies/*": [
-                "./src/policies/*.js"
-            ],
-            "#abilities/*": [
-                "./src/abilities/*.js"
             ],
             "#tests/*": [
                 "./tests/*.js"

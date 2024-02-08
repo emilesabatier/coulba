@@ -1,5 +1,5 @@
 {
-    "name": "@monassosportive/website",
+    "name": "@coulba/website",
     "private": true,
     "type": "module",
     "browserslist": {
@@ -23,8 +23,8 @@
     },
     "dependencies": {
         "@hookform/resolvers": "3.1.1",
-        "@monassosportive/design": "workspace:*",
-        "@monassosportive/schemas": "workspace:*",
+        "@coulba/design": "workspace:*",
+        "@coulba/schemas": "workspace:*",
         "@tabler/icons-react": "2.45.0",
         "@tanstack/react-router": "1.15.10",
         "nanoid": "5.0.4",

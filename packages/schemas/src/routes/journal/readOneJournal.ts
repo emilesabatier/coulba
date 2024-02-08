@@ -1,8 +1,8 @@
 import z from "zod"
-import { journalInclude } from "../../models/journal/journal.include"
-import { journalSchema } from "../../models/journal/journal.schema"
-import { userInclude } from "../../models/user/user.include"
-import { userSchema } from "../../models/user/user.schema"
+import { journalInclude } from "../../schemas/journal/journal.include"
+import { journalSchema } from "../../schemas/journal/journal.schema"
+import { userInclude } from "../../schemas/user/user.include"
+import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input

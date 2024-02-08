@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": "src",
         "outDir": "lib",
-        "target": "ES2022",
+        "target": "ESNext",
         "noImplicitAny": true,
         "skipLibCheck": true,
         "strict": true,
@@ -15,10 +15,10 @@
         "isolatedModules": true,
         "declaration": true,
         "declarationMap": true,
-        "sourceMap": false
+        "sourceMap": true,
+        "composite": true
     },
     "include": [
-        "src",
-        "src/routes/dashboard/order/refreshOneOrder.ts"
+        "src"
     ]
 }

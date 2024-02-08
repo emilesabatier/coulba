@@ -1,5 +1,5 @@
 import z from "zod"
-import { attachmentSchema } from "../../models/attachment/attachment.schema"
+import { attachmentSchema } from "../../schemas/attachment/attachment.schema"
 
 
 // Input
