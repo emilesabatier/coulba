@@ -8,9 +8,9 @@
     },
     "dependencies": {
         "drizzle-orm": "0.29.3",
-        "drizzle-zod": "0.5.1",
+        "drizzle-valibot": "^0.1.1",
         "postgres": "3.4.3",
-        "zod": "3.22.4"
+        "valibot": "^0.28.1"
     },
     "devDependencies": {
         "@types/node": "20.10.6",
@@ -19,24 +19,24 @@
     },
     "exports": {
         "./models": {
-            "types": "./lib/models/index.d.ts",
-            "default": "./lib/models/index.js"
+            "types": "./lib/src/models/index.d.ts",
+            "default": "./lib/src/models/index.js"
         },
         "./schemas": {
-            "types": "./lib/schemas/index.d.ts",
-            "default": "./lib/schemas/index.js"
+            "types": "./lib/src/schemas/index.d.ts",
+            "default": "./lib/src/schemas/index.js"
         },
         "./routes": {
-            "types": "./lib/routes/index.d.ts",
-            "default": "./lib/routes/index.js"
+            "types": "./lib/src/routes/index.d.ts",
+            "default": "./lib/src/routes/index.js"
         },
         "./components": {
-            "types": "./lib/components/index.d.ts",
-            "default": "./lib/components/index.js"
+            "types": "./lib/src/components/index.d.ts",
+            "default": "./lib/src/components/index.js"
         },
         "./services": {
-            "types": "./lib/services/index.d.ts",
-            "default": "./lib/services/index.js"
+            "types": "./lib/src/services/index.d.ts",
+            "default": "./lib/src/services/index.js"
         }
     }
 }

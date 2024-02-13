@@ -1,4 +1,4 @@
-import { companies } from "models"
+import { companies } from "../../models"
 import { companyInclude } from "./company.include"
 
 

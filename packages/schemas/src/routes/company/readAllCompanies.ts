@@ -1,7 +1,6 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { readOneCompanyReturn } from "./readOneCompany"
 
 
 // Output
-export const readAllCompaniesReturn = readOneCompanyReturn.array()
-export type ReadAllCompaniesReturn = z.infer<typeof readAllCompaniesReturn>
+export const readAllCompaniesReturn = v.array(readOneCompanyReturn)

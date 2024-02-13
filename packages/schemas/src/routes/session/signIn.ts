@@ -1,11 +1,10 @@
-import { z } from "zod"
-import { textSchema } from "../../components/schemas/text.schema"
+import * as v from "valibot"
+import { passwordSchema } from "../../components/schemas/password.schema"
 import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input
-export const signInBody = z.object({
-    email: userSchema.shape.emailAddress,
-    password: textSchema.min(2, { message: "Trop court (min. 2)" })
+export const signInBody = v.object({
+    email: userSchema.entries.emailAddress,
+    password: passwordSchema
 })
-export type SignInBody = z.infer<typeof signInBody>

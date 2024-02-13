@@ -1,2 +1,9 @@
-import z from "zod"
-export const emailSchema = z.string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." }).trim().toLowerCase().email({ message: "Le format email est requis." })
+import * as v from "valibot"
+
+export const emailSchema = v
+    .string([
+        v.toTrimmed(),
+        v.toLowerCase(),
+        v.email('Le format email est requis.'),
+        v.maxLength(64, "L'email est trop long."),
+    ])

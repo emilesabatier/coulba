@@ -1,4 +1,4 @@
-import { attachments } from "models"
+import { attachments } from "../../models"
 import { attachmentInclude } from "./attachment.include"
 
 

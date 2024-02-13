@@ -1,20 +1,22 @@
-import z from "zod"
-import { attachmentInclude } from "../../schemas/attachment/attachment.include"
+import * as v from "valibot"
 import { attachmentSchema } from "../../schemas/attachment/attachment.schema"
 import { entrySchema } from "../../schemas/entry/entry.schema"
-import { userInclude } from "../../schemas/user/user.include"
+import { userKeys } from "../../schemas/user/user.include"
 import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input
-export const readOneAttachmentParams = attachmentSchema.pick({ id: true })
-export type ReadOneAttachmentParams = z.infer<typeof readOneAttachmentParams>
+export const readOneAttachmentParams = v.object({
+    idAttachment: attachmentSchema.entries.id
+})
 
 
 // Output
-export const readOneAttachmentReturn = attachmentSchema.pick(attachmentInclude).merge(z.object({
-    entries: entrySchema.array(),
-    lastUpdatedByUser: userSchema.pick(userInclude).nullable(),
-    createdByUser: userSchema.pick(userInclude).nullable(),
-}))
-export type ReadOneAttachmentReturn = z.infer<typeof readOneAttachmentReturn>
+export const readOneAttachmentReturn = v.merge([
+    attachmentSchema,
+    v.object({
+        entries: v.array(entrySchema),
+        lastUpdatedByUser: v.nullable(v.pick(userSchema, userKeys)),
+        createdByUser: v.nullable(v.pick(userSchema, userKeys)),
+    })
+])

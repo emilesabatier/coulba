@@ -1,7 +1,6 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { readOneAttachmentReturn } from "./readOneAttachment"
 
 
 // Output
-export const readAllAttachmentsReturn = readOneAttachmentReturn.array()
-export type ReadAllAttachmentsReturn = z.infer<typeof readAllAttachmentsReturn>
+export const readAllAttachmentsReturn = v.array(readOneAttachmentReturn)

@@ -1,14 +1,14 @@
-import { createSelectSchema } from "drizzle-zod"
-import { z } from "zod"
+import { createSelectSchema } from 'drizzle-valibot'
+import * as v from "valibot"
 import { entryStates } from "../../components"
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { idSchema } from "../../components/schemas/id.schema"
 import { numericSchema } from "../../components/schemas/numeric.schema"
 import { textSchema } from "../../components/schemas/text.schema"
-import { entries } from "models"
+import { entries } from "../../models"
 
 
-const entryStateSchema = z.enum(entryStates)
+const entryStateSchema = v.picklist(entryStates)
 
 export const entrySchema = createSelectSchema(entries, {
     id: idSchema,

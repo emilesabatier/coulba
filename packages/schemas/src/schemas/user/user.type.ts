@@ -1,4 +1,4 @@
-import { users } from "models/user.model"
+import { users } from "../../models"
 import { userInclude } from "./user.include"
 
 

@@ -1,18 +1,17 @@
-import z from "zod"
+import * as v from "valibot"
 import { companySchema } from "../../schemas/company/company.schema"
 
 
 // Input
-export const updateOneCompanyParams = companySchema.pick({ id: true })
-export type UpdateOneCompanyParams = z.infer<typeof updateOneCompanyParams>
+export const updateOneCompanyParams = v.object({
+    idCompany: companySchema.entries.id
+})
 
-export const updateOneCompanyBody = z.object({
-    siren: companySchema.shape.siren,
-    name: companySchema.shape.name
-}).partial()
-export type UpdateOneCompanyBody = z.infer<typeof updateOneCompanyBody>
+export const updateOneCompanyBody = v.partial(v.object({
+    siren: companySchema.entries.siren,
+    name: companySchema.entries.name
+}))
 
 
 // Output
-export const updateOneCompanyReturn = companySchema.pick({ id: true })
-export type UpdateOneCompanyReturn = z.infer<typeof updateOneCompanyReturn>
+export const updateOneCompanyReturn = companySchema

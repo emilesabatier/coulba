@@ -1,6 +1,7 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const sirenSchema = z
-    .string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
-    .regex(/^[0-9]/, { message: "Seulement des chiffres doivent être renseignés." })
-    .length(9, { message: "La longueur doit être de 9." })
+export const sirenSchema = v
+    .string([
+        v.regex(/^[0-9]/, "Seulement des chiffres doivent être renseignés."),
+        v.length(9, "La longueur doit être de 9.")
+    ])

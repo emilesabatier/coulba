@@ -1,23 +1,22 @@
-import z from "zod"
+import * as v from "valibot"
 import { entrySchema } from "../../schemas/entry/entry.schema"
 
 
 // Input
-export const updateOneEntryParams = entrySchema.pick({ id: true })
-export type UpdateOneEntryParams = z.infer<typeof updateOneEntryParams>
+export const updateOneEntryParams = v.object({
+    idEntry: entrySchema.entries.id
+})
 
-export const updateOneEntryBody = z.object({
-    idAccount: entrySchema.shape.idAccount,
-    idJournal: entrySchema.shape.idJournal,
-    idAttachment: entrySchema.shape.idAttachment,
-    label: entrySchema.shape.label,
-    date: entrySchema.shape.date,
-    debit: entrySchema.shape.debit,
-    credit: entrySchema.shape.credit,
-}).partial()
-export type UpdateOneEntryBody = z.infer<typeof updateOneEntryBody>
+export const updateOneEntryBody = v.partial(v.object({
+    idAccount: entrySchema.entries.idAccount,
+    idJournal: entrySchema.entries.idJournal,
+    idAttachment: entrySchema.entries.idAttachment,
+    label: entrySchema.entries.label,
+    date: entrySchema.entries.date,
+    debit: entrySchema.entries.debit,
+    credit: entrySchema.entries.credit,
+}))
 
 
 // Output
-export const updateOneEntryReturn = entrySchema.pick({ id: true })
-export type UpdateOneEntryReturn = z.infer<typeof updateOneEntryReturn>
+export const updateOneEntryReturn = entrySchema

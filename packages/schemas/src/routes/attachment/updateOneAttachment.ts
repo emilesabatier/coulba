@@ -1,18 +1,17 @@
-import z from "zod"
+import * as v from "valibot"
 import { attachmentSchema } from "../../schemas/attachment/attachment.schema"
 
 
 // Input
-export const updateOneAttachmentParams = attachmentSchema.pick({ id: true })
-export type UpdateOneAttachmentParams = z.infer<typeof updateOneAttachmentParams>
+export const updateOneAttachmentParams = v.object({
+    idAttachment: attachmentSchema.entries.id
+})
 
-export const updateOneAttachmentBody = z.object({
-    reference: attachmentSchema.shape.reference,
-    label: attachmentSchema.shape.label
-}).partial()
-export type UpdateOneAttachmentBody = z.infer<typeof updateOneAttachmentBody>
+export const updateOneAttachmentBody = v.partial(v.object({
+    reference: attachmentSchema.entries.reference,
+    label: attachmentSchema.entries.label
+}))
 
 
 // Output
-export const updateOneAttachmentReturn = attachmentSchema.pick({ id: true })
-export type UpdateOneAttachmentReturn = z.infer<typeof updateOneAttachmentReturn>
+export const updateOneAttachmentReturn = attachmentSchema

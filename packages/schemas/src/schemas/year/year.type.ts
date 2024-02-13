@@ -1,4 +1,4 @@
-import { years } from "models/year.model"
+import { years } from "../../models"
 import { yearInclude } from "./year.include"
 
 

@@ -1,16 +1,18 @@
-import z from "zod"
-import { userInclude } from "../../schemas/user/user.include"
+import * as v from "valibot"
+import { userKeys } from "../../schemas/user/user.include"
 import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input
-export const readOneUserParams = userSchema.pick({ id: true })
-export type ReadOneUserParams = z.infer<typeof readOneUserParams>
-
+export const readOneUserParams = v.object({
+    idUser: userSchema.entries.id
+})
 
 // Output
-export const readOneUserReturn = userSchema.pick(userInclude).merge(z.object({
-    lastUpdatedByUser: userSchema.pick(userInclude).nullable(),
-    createdByUser: userSchema.pick(userInclude).nullable(),
-}))
-export type ReadOneUserReturn = z.infer<typeof readOneUserReturn>
+export const readOneUserReturn = v.merge([
+    v.pick(userSchema, userKeys),
+    v.object({
+        lastUpdatedByUser: v.nullable(v.pick(userSchema, userKeys)),
+        createdByUser: v.nullable(v.pick(userSchema, userKeys)),
+    })
+])

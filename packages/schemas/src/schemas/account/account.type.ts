@@ -1,4 +1,4 @@
-import { accounts } from "models"
+import { accounts } from "../../models"
 import { accountInclude } from "./account.include"
 
 

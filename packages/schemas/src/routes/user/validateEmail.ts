@@ -1,11 +1,10 @@
-import z from "zod"
+import * as v from "valibot"
 import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input
-export const validateEmailBody = z.object({
-    id: userSchema.shape.id,
-    token: userSchema.shape.emailToken,
-    email: userSchema.shape.emailAddressTemporary
+export const validateEmailBody = v.object({
+    id: userSchema.entries.id,
+    token: userSchema.entries.emailToken,
+    email: userSchema.entries.emailAddressTemporary
 })
-export type ValidateEmailBody = z.infer<typeof validateEmailBody>

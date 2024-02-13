@@ -1,9 +1,8 @@
-import z from "zod"
+import * as v from "valibot"
 import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input
-export const resetPasswordBody = z.object({
-    email: userSchema.shape.emailAddress
+export const resetPasswordBody = v.object({
+    email: userSchema.entries.emailAddress
 })
-export type ResetPasswordBody = z.infer<typeof resetPasswordBody>

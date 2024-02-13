@@ -1,12 +1,11 @@
-import z from "zod"
+import * as v from "valibot"
 import { entrySchema } from "../../schemas/entry/entry.schema"
 
 
 // Input
-export const deleteOneEntryParams = entrySchema.pick({ id: true })
-export type DeleteOneEntryParams = z.infer<typeof deleteOneEntryParams>
-
+export const deleteOneEntryParams = v.object({
+    idEntry: entrySchema.entries.id
+})
 
 // Output
-export const deleteOneEntryReturn = entrySchema.pick({ id: true })
-export type DeleteOneEntryReturn = z.infer<typeof deleteOneEntryReturn>
+export const deleteOneEntryReturn = entrySchema

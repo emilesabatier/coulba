@@ -1,3 +1,4 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const numericSchema = z.coerce.string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
+export const numericSchema = v
+    .number("Doit être un nombre.")

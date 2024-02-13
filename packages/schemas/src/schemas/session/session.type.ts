@@ -1,4 +1,4 @@
-import { sessions } from "models/session.model"
+import { sessions } from "../../models"
 import { sessionInclude } from "./session.include"
 
 

@@ -1,2 +1,4 @@
-import z from "zod"
-export const booleanSchema = z.boolean({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
+import * as v from "valibot"
+
+export const booleanSchema = v
+    .boolean("La valeur doit être un booléen.")

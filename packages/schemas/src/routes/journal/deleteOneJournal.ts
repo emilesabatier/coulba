@@ -1,12 +1,11 @@
-import z from "zod"
+import * as v from "valibot"
 import { journalSchema } from "../../schemas/journal/journal.schema"
 
 
 // Input
-export const deleteOneJournalParams = journalSchema.pick({ id: true })
-export type DeleteOneJournalParams = z.infer<typeof deleteOneJournalParams>
-
+export const deleteOneJournalParams = v.object({
+    idJournal: journalSchema.entries.id
+})
 
 // Output
-export const deleteOneJournalReturn = journalSchema.pick({ id: true })
-export type DeleteOneJournalReturn = z.infer<typeof deleteOneJournalReturn>
+export const deleteOneJournalReturn = journalSchema

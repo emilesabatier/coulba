@@ -23,7 +23,7 @@ export const users = pgTable(
         passwordTemporaryHash: text("password_temporary_hash"),
         passwordSalt: text("password_salt").notNull(),
         isActive: boolean("is_active").default(true).notNull(),
-        lastCredentialsSentAt: dateTimeColumn("last_credentials_sent_at"),
+        lastInvitationSentAt: dateTimeColumn("last_credentials_sent_at"),
         lastUpdatedAt: dateTimeColumn("last_updated_at").defaultNow().notNull(),
         createdAt: dateTimeColumn("created_at").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by"),

@@ -1,18 +1,16 @@
-import z from "zod"
+import * as v from "valibot"
 import { journalSchema } from "../../schemas/journal/journal.schema"
 
 
 // Input
-export const updateOneJournalParams = journalSchema.pick({ id: true })
-export type UpdateOneJournalParams = z.infer<typeof updateOneJournalParams>
+export const updateOneJournalParams = v.object({
+    idJournal: journalSchema.entries.id
+})
 
-export const updateOneJournalBody = z.object({
-    acronym: journalSchema.shape.acronym,
-    label: journalSchema.shape.label
-}).partial()
-export type UpdateOneJournalBody = z.infer<typeof updateOneJournalBody>
-
+export const updateOneJournalBody = v.partial(v.object({
+    acronym: journalSchema.entries.acronym,
+    label: journalSchema.entries.label
+}))
 
 // Output
-export const updateOneJournalReturn = journalSchema.pick({ id: true })
-export type UpdateOneJournalReturn = z.infer<typeof updateOneJournalReturn>
+export const updateOneJournalReturn = journalSchema

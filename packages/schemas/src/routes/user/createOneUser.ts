@@ -1,17 +1,15 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { userSchema } from "../../schemas/user/user.schema"
 
 
 // Input
-export const createOneUserBody = z.object({
-    forename: userSchema.shape.forename,
-    surname: userSchema.shape.surname,
-    emailAddress: userSchema.shape.emailAddress,
-    isActive: userSchema.shape.isActive.optional(),
+export const createOneUserBody = v.object({
+    forename: userSchema.entries.forename,
+    surname: userSchema.entries.surname,
+    emailAddress: userSchema.entries.emailAddress,
+    isActive: v.optional(userSchema.entries.isActive),
 })
-export type CreateOneUserBody = z.infer<typeof createOneUserBody>
 
 
 // Output
-export const createOneUserReturn = userSchema.pick({ id: true })
-export type CreateOneUserReturn = z.infer<typeof createOneUserReturn>
+export const createOneUserReturn = userSchema

@@ -1,15 +1,13 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { attachmentSchema } from "../../schemas/attachment/attachment.schema"
 
 
 // Input
-export const createOneAttachmentBody = z.object({
-    reference: attachmentSchema.shape.reference,
-    label: attachmentSchema.shape.label.optional()
+export const createOneAttachmentBody = v.object({
+    reference: attachmentSchema.entries.reference,
+    label: v.optional(attachmentSchema.entries.label)
 })
-export type CreateOneAttachmentBody = z.infer<typeof createOneAttachmentBody>
 
 
 // Output
-export const createOneAttachmentReturn = attachmentSchema.pick({ id: true })
-export type CreateOneAttachmentReturn = z.infer<typeof createOneAttachmentReturn>
+export const createOneAttachmentReturn = attachmentSchema

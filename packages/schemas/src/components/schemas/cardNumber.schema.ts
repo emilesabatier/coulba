@@ -1,6 +1,7 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const cardNumberSchema = z
-    .string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
-    .regex(/^[0-9]/, { message: "Seulement des chiffres doivent être renseignés." })
-    .length(16, { message: "La longueur doit être de 16." })
+export const cardNumberSchema = v
+    .string([
+        v.regex(/^[0-9]/, "Seulement des chiffres doivent être renseignés."),
+        v.length(16, "La longueur doit être de 16.")
+    ])

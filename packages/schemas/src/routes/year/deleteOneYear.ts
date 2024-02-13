@@ -1,12 +1,12 @@
-import z from "zod"
+import * as v from "valibot"
 import { yearSchema } from "../../schemas/year/year.schema"
 
 
 // Input
-export const deleteOneYearParams = yearSchema.pick({ id: true })
-export type DeleteOneYearParams = z.infer<typeof deleteOneYearParams>
+export const deleteOneYearParams = v.object({
+    idYear: yearSchema.entries.id
+})
 
 
 // Output
-export const deleteOneYearReturn = yearSchema.pick({ id: true })
-export type DeleteOneYearReturn = z.infer<typeof deleteOneYearReturn>
+export const deleteOneYearReturn = yearSchema

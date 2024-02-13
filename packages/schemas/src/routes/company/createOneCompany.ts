@@ -1,15 +1,13 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { companySchema } from "../../schemas/company/company.schema"
 
 
 // Input
-export const createOneCompanyBody = z.object({
-    siren: companySchema.shape.siren,
-    name: companySchema.shape.name
+export const createOneCompanyBody = v.object({
+    siren: companySchema.entries.siren,
+    name: companySchema.entries.name
 })
-export type CreateOneCompanyBody = z.infer<typeof createOneCompanyBody>
 
 
 // Output
-export const createOneCompanyReturn = companySchema.pick({ id: true })
-export type CreateOneCompanyReturn = z.infer<typeof createOneCompanyReturn>
+export const createOneCompanyReturn = companySchema

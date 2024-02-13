@@ -1,3 +1,6 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const integerSchema = z.number({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." }).int({ message: "Doit être un nombre entier." })
+export const integerSchema = v
+    .number([
+        v.integer("Doit être un nombre entier.")
+    ])

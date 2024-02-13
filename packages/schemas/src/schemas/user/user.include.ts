@@ -1,5 +1,7 @@
 
-export const userInclude = {
+export const userKeys = <const>["id", "idCompany", "isAdmin", "forename", "surname", "emailAddress", "emailAddressTemporary", "lastInvitationSentAt", "isActive", "lastUpdatedAt", "createdAt", "lastUpdatedBy", "createdBy"]
+
+export const userInclude: Record<typeof userKeys[number], true> = {
     id: true,
     idCompany: true,
     isAdmin: true,
@@ -7,10 +9,10 @@ export const userInclude = {
     surname: true,
     emailAddress: true,
     emailAddressTemporary: true,
-    lastCredentialsSentAt: true,
+    lastInvitationSentAt: true,
     isActive: true,
     lastUpdatedAt: true,
     createdAt: true,
     lastUpdatedBy: true,
     createdBy: true
-} as const
+}

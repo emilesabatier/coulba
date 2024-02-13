@@ -1,18 +1,19 @@
-import z from "zod"
-import { userInclude } from "../../schemas/user/user.include"
+import * as v from "valibot"
+import { userKeys } from "../../schemas/user/user.include"
 import { userSchema } from "../../schemas/user/user.schema"
-import { yearInclude } from "../../schemas/year/year.include"
 import { yearSchema } from "../../schemas/year/year.schema"
 
 
 // Input
-export const readOneYearParams = yearSchema.pick({ id: true })
-export type ReadOneYearParams = z.infer<typeof readOneYearParams>
-
+export const readOneYearParams = v.object({
+    idYear: yearSchema.entries.id
+})
 
 // Output
-export const readOneYearReturn = yearSchema.pick(yearInclude).merge(z.object({
-    lastUpdatedByUser: userSchema.pick(userInclude).nullable(),
-    createdByUser: userSchema.pick(userInclude).nullable(),
-}))
-export type ReadOneYearReturn = z.infer<typeof readOneYearReturn>
+export const readOneYearReturn = v.merge([
+    yearSchema,
+    v.object({
+        lastUpdatedByUser: v.nullable(v.pick(userSchema, userKeys)),
+        createdByUser: v.nullable(v.pick(userSchema, userKeys)),
+    })
+])

@@ -1,20 +1,18 @@
-import { z } from "zod"
+import * as v from "valibot"
 import { entrySchema } from "../../schemas/entry/entry.schema"
 
 
 // Input
-export const createOneEntryBody = z.object({
-    idAccount: entrySchema.shape.idAccount,
-    idJournal: entrySchema.shape.idJournal.optional(),
-    idAttachment: entrySchema.shape.idAttachment.optional(),
-    label: entrySchema.shape.label,
-    date: entrySchema.shape.date,
-    debit: entrySchema.shape.debit,
-    credit: entrySchema.shape.credit,
+export const createOneEntryBody = v.object({
+    idAccount: entrySchema.entries.idAccount,
+    idJournal: v.optional(entrySchema.entries.idJournal),
+    idAttachment: v.optional(entrySchema.entries.idAttachment),
+    label: entrySchema.entries.label,
+    date: entrySchema.entries.date,
+    debit: entrySchema.entries.debit,
+    credit: entrySchema.entries.credit,
 })
-export type CreateOneEntryBody = z.infer<typeof createOneEntryBody>
 
 
 // Output
-export const createOneEntryReturn = entrySchema.pick({ id: true })
-export type CreateOneEntryReturn = z.infer<typeof createOneEntryReturn>
+export const createOneEntryReturn = entrySchema

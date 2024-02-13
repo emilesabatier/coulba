@@ -1,8 +1,8 @@
-import { createSelectSchema } from "drizzle-zod"
+import { createSelectSchema } from 'drizzle-valibot'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { idSchema } from "../../components/schemas/id.schema"
 import { textSchema } from "../../components/schemas/text.schema"
-import { journals } from "models"
+import { journals } from "../../models"
 
 
 export const journalSchema = createSelectSchema(journals, {

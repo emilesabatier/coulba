@@ -1,10 +1,10 @@
-import { createSelectSchema } from "drizzle-zod"
+import { createSelectSchema } from 'drizzle-valibot'
 import { booleanSchema } from "../../components/schemas/boolean.schema"
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { emailSchema } from "../../components/schemas/email.schema"
 import { idSchema } from "../../components/schemas/id.schema"
 import { textSchema } from "../../components/schemas/text.schema"
-import { users } from "models"
+import { users } from "../../models"
 
 
 
@@ -23,7 +23,7 @@ export const userSchema = createSelectSchema(users, {
     passwordTemporaryHash: textSchema,
     passwordSalt: textSchema,
     isActive: booleanSchema,
-    lastCredentialsSentAt: dateTimeSchema,
+    lastInvitationSentAt: dateTimeSchema,
     lastUpdatedAt: dateTimeSchema,
     createdAt: dateTimeSchema,
     lastUpdatedBy: idSchema,

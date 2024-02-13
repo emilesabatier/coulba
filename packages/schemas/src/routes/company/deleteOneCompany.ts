@@ -1,12 +1,12 @@
-import z from "zod"
+import * as v from "valibot"
 import { companySchema } from "../../schemas/company/company.schema"
 
 
 // Input
-export const deleteOneCompanyParams = companySchema.pick({ id: true })
-export type DeleteOneCompanyParams = z.infer<typeof deleteOneCompanyParams>
+export const deleteOneCompanyParams = v.object({
+    idCompany: companySchema.entries.id
+})
 
 
 // Output
-export const deleteOneCompanyReturn = companySchema.pick({ id: true })
-export type DeleteOneCompanyReturn = z.infer<typeof deleteOneCompanyReturn>
+export const deleteOneCompanyReturn = companySchema

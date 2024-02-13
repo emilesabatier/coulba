@@ -1,4 +1,4 @@
-import { journals } from "models"
+import { journals } from "../../models"
 import { journalInclude } from "./journal.include"
 
 

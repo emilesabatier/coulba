@@ -1,19 +1,18 @@
-import z from "zod"
+import * as v from "valibot"
 import { yearSchema } from "../../schemas/year/year.schema"
 
 
 // Input
-export const updateOneYearParams = yearSchema.pick({ id: true })
-export type UpdateOneYearParams = z.infer<typeof updateOneYearParams>
+export const updateOneYearParams = v.object({
+    idYear: yearSchema.entries.id
+})
 
-export const updateOneYearBody = z.object({
-    label: yearSchema.shape.label,
-    startingAt: yearSchema.shape.startingAt,
-    endingAt: yearSchema.shape.endingAt
-}).partial()
-export type UpdateOneYearBody = z.infer<typeof updateOneYearBody>
+export const updateOneYearBody = v.partial(v.object({
+    label: yearSchema.entries.label,
+    startingAt: yearSchema.entries.startingAt,
+    endingAt: yearSchema.entries.endingAt
+}))
 
 
 // Output
-export const updateOneYearReturn = yearSchema.pick({ id: true })
-export type UpdateOneYearReturn = z.infer<typeof updateOneYearReturn>
+export const updateOneYearReturn = yearSchema
