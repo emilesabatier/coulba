@@ -10,7 +10,7 @@ export const companies = pgTable(
     "companies",
     {
         id: idColumn("id").primaryKey(),
-        siren: text("siren").notNull(),
+        siren: text("siren").notNull().unique(),
         name: text("name").notNull(),
         lastUpdatedAt: dateTimeColumn("last_updated_at").defaultNow().notNull(),
         createdAt: dateTimeColumn("created_at").defaultNow().notNull(),
