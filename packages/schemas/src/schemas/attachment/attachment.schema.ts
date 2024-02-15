@@ -11,8 +11,8 @@ export const attachmentSchema = createSelectSchema(attachments, {
     idYear: idSchema,
     reference: textSchema,
     label: textSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

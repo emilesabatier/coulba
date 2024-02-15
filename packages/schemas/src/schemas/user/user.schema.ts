@@ -19,13 +19,12 @@ export const userSchema = createSelectSchema(users, {
     emailToken: textSchema,
     emailTokenExpiresAt: dateTimeSchema,
     passwordHash: textSchema,
-    passwordTemporary: textSchema,
-    passwordTemporaryHash: textSchema,
     passwordSalt: textSchema,
     isActive: booleanSchema,
-    lastInvitationSentAt: dateTimeSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    invitationToken: textSchema,
+    invitationLastSentOn: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

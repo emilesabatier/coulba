@@ -16,8 +16,8 @@ export const attachments = pgTable(
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         reference: text("reference").notNull(),
         label: text("label"),
-        lastUpdatedAt: dateTimeColumn("last_updated_at").defaultNow().notNull(),
-        createdAt: dateTimeColumn("created_at").defaultNow().notNull(),
+        lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
+        createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by"),
         createdBy: idColumn("created_by")
     }

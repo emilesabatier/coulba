@@ -10,8 +10,8 @@ export const journalSchema = createSelectSchema(journals, {
     idCompany: idSchema,
     acronym: textSchema,
     label: textSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

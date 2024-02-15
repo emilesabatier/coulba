@@ -16,8 +16,8 @@ export const accounts = pgTable(
         idAccountParent: idColumn("id_account_parent"),
         label: text("label").notNull(),
         number: integer("number").notNull().unique(),
-        lastUpdatedAt: dateTimeColumn("last_updated_at").defaultNow().notNull(),
-        createdAt: dateTimeColumn("created_at").defaultNow().notNull(),
+        lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
+        createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by"),
         createdBy: idColumn("created_by")
     }

@@ -11,8 +11,8 @@ export const entryInclude = {
     date: true,
     debit: true,
     credit: true,
-    lastUpdatedAt: true,
-    createdAt: true,
+    lastUpdatedOn: true,
+    createdOn: true,
     lastUpdatedBy: true,
     createdBy: true
 } as const

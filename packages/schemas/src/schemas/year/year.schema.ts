@@ -9,10 +9,10 @@ export const yearSchema = createSelectSchema(years, {
     id: idSchema,
     idCompany: idSchema,
     label: textSchema,
-    startingAt: dateTimeSchema,
-    endingAt: dateTimeSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    startingOn: dateTimeSchema,
+    endingOn: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

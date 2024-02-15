@@ -10,8 +10,8 @@ export const companySchema = createSelectSchema(companies, {
     id: idSchema,
     siren: sirenSchema,
     name: textSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

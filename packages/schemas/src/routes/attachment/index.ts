@@ -1,5 +1,0 @@
-export * from "./createOneAttachment"
-export * from "./deleteOneAttachment"
-export * from "./readAllAttachments"
-export * from "./readOneAttachment"
-export * from "./updateOneAttachment"

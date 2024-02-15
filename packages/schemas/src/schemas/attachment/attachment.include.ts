@@ -5,8 +5,8 @@ export const attachmentInclude = {
     idYear: true,
     reference: true,
     label: true,
-    lastUpdatedAt: true,
-    createdAt: true,
+    lastUpdatedOn: true,
+    createdOn: true,
     lastUpdatedBy: true,
     createdBy: true
 } as const

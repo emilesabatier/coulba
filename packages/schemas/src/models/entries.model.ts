@@ -28,8 +28,8 @@ export const entries = pgTable(
         date: dateTimeColumn("date").notNull(),
         debit: numeric("debit", { scale: 2 }).notNull(),
         credit: numeric("credit", { scale: 2 }).notNull(),
-        lastUpdatedAt: dateTimeColumn("last_updated_at").defaultNow().notNull(),
-        createdAt: dateTimeColumn("created_at").defaultNow().notNull(),
+        lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
+        createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by"),
         createdBy: idColumn("created_by")
     }

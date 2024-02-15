@@ -5,8 +5,8 @@ export const accountInclude = {
     idAccountParent: true,
     label: true,
     number: true,
-    lastUpdatedAt: true,
-    createdAt: true,
+    lastUpdatedOn: true,
+    createdOn: true,
     lastUpdatedBy: true,
     createdBy: true
 } as const

@@ -22,8 +22,8 @@ export const entrySchema = createSelectSchema(entries, {
     date: dateTimeSchema,
     debit: numericSchema,
     credit: numericSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

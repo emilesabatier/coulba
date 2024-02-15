@@ -32,12 +32,12 @@ export function associationData(association: DashboardAssociation.ReadAssociatio
             title: "Métadonnées",
             items: [
                 {
-                    key: "lastUpdatedAt",
+                    key: "lastUpdatedOn",
                     label: 'Dernière modification',
-                    value: <FormatDateTime isoDate={association.lastUpdatedAt} />
+                    value: <FormatDateTime isoDate={association.lastUpdatedOn} />
                 },
                 {
-                    key: "lastUpdatedAtByAccount",
+                    key: "lastUpdatedOnByAccount",
                     label: 'Dernière modification par',
                     value: !association.lastUpdatedBy ? <FormatNull /> : <FormatAccountWithFetch idAccount={association.lastUpdatedBy} />
                 }

@@ -1,10 +1,8 @@
 export const sessionInclude = {
     id: true,
     idUser: true,
-    ip: true,
-    token: true,
-    expiresAt: true,
+    expiresOn: true,
     isActive: true,
-    lastUpdatedAt: true,
-    createdAt: true
+    lastUpdatedOn: true,
+    createdOn: true
 } as const

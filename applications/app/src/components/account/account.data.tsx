@@ -73,9 +73,9 @@ export function accountData(account: DashboardAccount.ReadOneAccountReturn) {
                     description: undefined
                 },
                 {
-                    key: "lastUpdatedAt",
+                    key: "lastUpdatedOn",
                     label: "Dernière modification le",
-                    value: <FormatDateTime isoDate={account.lastUpdatedAt} />,
+                    value: <FormatDateTime isoDate={account.lastUpdatedOn} />,
                     description: undefined
                 },
                 {
@@ -85,9 +85,9 @@ export function accountData(account: DashboardAccount.ReadOneAccountReturn) {
                     description: undefined
                 },
                 {
-                    key: "createdAt",
+                    key: "createdOn",
                     label: "Créé le",
-                    value: <FormatDateTime isoDate={account.createdAt} />,
+                    value: <FormatDateTime isoDate={account.createdOn} />,
                     description: undefined
                 },
                 {

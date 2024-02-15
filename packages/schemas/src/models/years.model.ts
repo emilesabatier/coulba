@@ -13,10 +13,10 @@ export const years = pgTable(
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         label: text("label"),
-        startingAt: dateTimeColumn("starting_at").notNull(),
-        endingAt: dateTimeColumn("ending_at").notNull(),
-        lastUpdatedAt: dateTimeColumn("last_updated_at").defaultNow().notNull(),
-        createdAt: dateTimeColumn("created_at").defaultNow().notNull(),
+        startingOn: dateTimeColumn("starting_on").notNull(),
+        endingOn: dateTimeColumn("ending_on").notNull(),
+        lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
+        createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by"),
         createdBy: idColumn("created_by")
     }

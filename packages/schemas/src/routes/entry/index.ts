@@ -1,5 +1,0 @@
-export * from "./createOneEntry"
-export * from "./deleteOneEntry"
-export * from "./readAllEntries"
-export * from "./readOneEntry"
-export * from "./updateOneEntry"

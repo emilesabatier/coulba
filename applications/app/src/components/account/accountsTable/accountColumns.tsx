@@ -146,10 +146,10 @@ export const accountColumns: Columns<DashboardAccount.ReadOneAccountReturn>[] = 
         filterElement: <FilterDateRange />
     },
     {
-        accessorKey: "lastUpdatedAt",
-        accessorFn: (account) => formatDateTime(account.lastUpdatedAt),
+        accessorKey: "lastUpdatedOn",
+        accessorFn: (account) => formatDateTime(account.lastUpdatedOn),
         header: "Dernière modification le",
-        cell: (account) => <FormatDateTime isoDate={account.lastUpdatedAt} />,
+        cell: (account) => <FormatDateTime isoDate={account.lastUpdatedOn} />,
         enableSorting: true,
         enableColumnFilter: true,
         filterFn: dateRangeFilter,
@@ -166,10 +166,10 @@ export const accountColumns: Columns<DashboardAccount.ReadOneAccountReturn>[] = 
         filterElement: <FilterAccount />
     },
     {
-        accessorKey: "createdAt",
-        accessorFn: (account) => formatDateTime(account.createdAt),
+        accessorKey: "createdOn",
+        accessorFn: (account) => formatDateTime(account.createdOn),
         header: "Créé le",
-        cell: (account) => <FormatDateTime isoDate={account.createdAt} />,
+        cell: (account) => <FormatDateTime isoDate={account.createdOn} />,
         enableSorting: true,
         enableColumnFilter: true,
         filterFn: dateRangeFilter,

@@ -10,7 +10,7 @@ export function AccountsTable() {
     const accounts = useAccounts()
 
     const accountsData = (accounts.data ?? [])
-        .sort((a, b) => b.lastUpdatedAt?.localeCompare(a.lastUpdatedAt))
+        .sort((a, b) => b.lastUpdatedOn?.localeCompare(a.lastUpdatedOn))
 
     return (
         <Placeholder error={accounts.error} isLoading={accounts.isLoading}>

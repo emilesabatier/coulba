@@ -13,10 +13,10 @@ export function getDaysBetweenDates(fromDate: string | undefined, toDate: string
     current.setDate(current.getDate() + (dayNumber - current.getDay() + 7) % 7)
 
     while (current < new Date(toDate)) {
-        const startingAt = new Date(new Date(+current).setHours(Number(startingTime.split(" : ").at(0)), Number(startingTime.split(":").at(1)), 0)).toISOString()
+        const startingOn = new Date(new Date(+current).setHours(Number(startingTime.split(" : ").at(0)), Number(startingTime.split(":").at(1)), 0)).toISOString()
         result.push({
             state: !state ? "tentative" : state,
-            startingAt: startingAt,
+            startingOn: startingOn,
             duration: duration
         })
         current.setDate(current.getDate() + 7)

@@ -1,5 +1,0 @@
-export * from "./createOneJournal"
-export * from "./deleteOneJournal"
-export * from "./readAllJournals"
-export * from "./readOneJournal"
-export * from "./updateOneJournal"

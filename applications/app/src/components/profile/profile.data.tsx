@@ -50,14 +50,14 @@ export function profileData(profile: DashboardProfile.ReadProfileReturn) {
             title: "Métadonnées",
             items: [
                 {
-                    key: "lastUpdatedAt",
+                    key: "lastUpdatedOn",
                     label: 'Dernière modification',
-                    value: <FormatDateTime isoDate={profile.lastUpdatedAt} />
+                    value: <FormatDateTime isoDate={profile.lastUpdatedOn} />
                 },
                 {
-                    key: "lastUpdatedAtByAccount",
+                    key: "lastUpdatedOnByAccount",
                     label: 'Date de création',
-                    value: <FormatDateTime isoDate={profile.createdAt} />
+                    value: <FormatDateTime isoDate={profile.createdOn} />
                 }
             ]
         }

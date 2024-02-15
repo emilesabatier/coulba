@@ -12,8 +12,8 @@ export const accountSchema = createSelectSchema(accounts, {
     idAccountParent: idSchema,
     label: textSchema,
     number: integerSchema,
-    lastUpdatedAt: dateTimeSchema,
-    createdAt: dateTimeSchema,
+    lastUpdatedOn: dateTimeSchema,
+    createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,
     createdBy: idSchema
 })

@@ -3,10 +3,10 @@ export const yearInclude = {
     id: true,
     idCompany: true,
     label: true,
-    startingAt: true,
-    endingAt: true,
-    lastUpdatedAt: true,
-    createdAt: true,
+    startingOn: true,
+    endingOn: true,
+    lastUpdatedOn: true,
+    createdOn: true,
     lastUpdatedBy: true,
     createdBy: true
 } as const

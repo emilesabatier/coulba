@@ -1,5 +1,5 @@
 
-export const userKeys = <const>["id", "idCompany", "isAdmin", "forename", "surname", "emailAddress", "emailAddressTemporary", "lastInvitationSentAt", "isActive", "lastUpdatedAt", "createdAt", "lastUpdatedBy", "createdBy"]
+export const userKeys = <const>["id", "idCompany", "isAdmin", "forename", "surname", "emailAddress", "emailAddressTemporary", "invitationLastSentOn", "isActive", "lastUpdatedOn", "createdOn", "lastUpdatedBy", "createdBy"]
 
 export const userInclude: Record<typeof userKeys[number], true> = {
     id: true,
@@ -9,10 +9,10 @@ export const userInclude: Record<typeof userKeys[number], true> = {
     surname: true,
     emailAddress: true,
     emailAddressTemporary: true,
-    lastInvitationSentAt: true,
+    invitationLastSentOn: true,
     isActive: true,
-    lastUpdatedAt: true,
-    createdAt: true,
+    lastUpdatedOn: true,
+    createdOn: true,
     lastUpdatedBy: true,
     createdBy: true
 }
