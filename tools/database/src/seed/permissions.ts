@@ -1,4 +1,4 @@
-import { Action, Resource } from "@monassosportive/schemas/components"
+import { Action, Resource } from "@coulba/schemas/components"
 
 
 export const permissions: {

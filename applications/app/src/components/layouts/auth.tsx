@@ -1,4 +1,4 @@
-"use client"
+
 
 import { ReactNode } from "react"
 import { useSession } from "../../contexts/session/useSession"

@@ -17,7 +17,7 @@ export type ButtonOutlineContent = {
 export function ButtonOutlineContent(props: ButtonOutlineContent) {
     let variants = {
         "neutral": {
-            container: "border-neutral/25 hover:bg-neutral/5 group-focus:bg-neutral/5",
+            container: "border-neutral/50 hover:bg-neutral/5 group-focus:bg-neutral/5",
             loader: "fill-neutral",
             icon: "text-neutral",
             text: "text-neutral",
@@ -57,7 +57,7 @@ export function ButtonOutlineContent(props: ButtonOutlineContent) {
         <div
             aria-disabled={props.disabled || props.loading}
             className={cn(
-                "overflow-hidden min-w-[42px] w-fit min-h-[40px] h-full max-h-[40px] flex justify-start items-center rounded-sm border",
+                "overflow-hidden min-w-[42px] w-fit min-h-[40px] h-full max-h-[40px] flex justify-start items-center border",
                 "aria-disabled:opacity-30",
                 !props.text ? "p-2.5 w-[42px]" : "w-fit p-2.5 gap-2",
                 variants[props?.color ?? "neutral"].container,

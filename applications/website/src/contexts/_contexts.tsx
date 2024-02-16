@@ -1,6 +1,6 @@
-'use client'
 
-import { Toaster } from '@monassosportive/design/overlays'
+
+import { Toaster } from '@coulba/design/overlays'
 import { Fragment, ReactNode } from 'react'
 
 

@@ -1,8 +1,6 @@
-'use client'
-
 import { ReactNode } from "react"
 import { SWRConfig, SWRConfiguration } from 'swr'
-import { z } from "zod"
+import * as v from "valibot"
 
 
 export const SWRFetcher = async (path: string) => {
@@ -19,7 +17,7 @@ export const SWRFetcher = async (path: string) => {
 
     if (!response.ok) {
         const error = new Error(await response.json())
-        const parsedError = z.object({ idError: z.string(), message: z.string(), description: z.string().optional() }).safeParse(error)
+        const parsedError = v.safeParse(v.object({ idError: v.string(), message: v.string(), description: v.optional(v.string()) }), error)
         if (!parsedError.success) {
             // toast({ title: "Erreur avec le serveur.", variant: "error" })
             return {

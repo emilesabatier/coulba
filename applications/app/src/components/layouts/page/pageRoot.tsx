@@ -1,4 +1,4 @@
-import { cn } from "@monassosportive/design/services"
+import { cn } from "@coulba/design/services"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -13,7 +13,7 @@ export function PageRoot(props: PageRoot) {
         <div
             id={props.id}
             className={cn(
-                "relative z-[1] min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-visible grid grid-cols-1 grid-rows-[max-content_auto] gap-2",
+                "relative z-[1] min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-visible grid grid-cols-1 grid-rows-[max-content_auto] bg-white",
                 props.className
             )}
             children={props.children}

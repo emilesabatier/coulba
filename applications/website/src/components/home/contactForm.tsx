@@ -1,11 +1,11 @@
-'use client'
 
+
+import { ButtonPlain } from "@coulba/design/buttons"
+import { FormControl, FormError, FormField, FormItem, FormRoot } from "@coulba/design/forms"
+import { InputText } from "@coulba/design/inputs"
+import { toast } from "@coulba/design/overlays"
+import { PublicContact, publicSchema } from "@coulba/schemas/routes"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ButtonPlain } from "@monassosportive/design/buttons"
-import { FormControl, FormError, FormField, FormItem, FormRoot } from "@monassosportive/design/forms"
-import { InputText } from "@monassosportive/design/inputs"
-import { toast } from "@monassosportive/design/overlays"
-import { PublicContact, publicSchema } from "@monassosportive/schemas/routes"
 import { useForm } from "react-hook-form"
 import { sendContactEmail } from "../../services/routes/contact/sendContactEmail"
 

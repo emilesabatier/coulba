@@ -1,4 +1,4 @@
-import { ticketTypes } from "@monassosportive/schemas/components"
+import { ticketTypes } from "@coulba/schemas/components"
 import { getOptions } from "../../services/getOptions.service"
 
 

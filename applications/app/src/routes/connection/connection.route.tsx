@@ -1,4 +1,4 @@
-import { CircularLoader } from "@monassosportive/design/layouts"
+import { CircularLoader } from "@coulba/design/layouts"
 import { createRoute, redirect } from "@tanstack/react-router"
 import { ConnectionPage } from "../../pages/connection/connectionPage"
 import { rootLayout } from "../root.layout"

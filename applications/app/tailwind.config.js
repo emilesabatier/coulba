@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import tailwindConfig from "@monassosportive/design/tailwind.config"
+import tailwindConfig from "@coulba/design/tailwind.config"
 
 
 export default {

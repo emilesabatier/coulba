@@ -1,7 +1,7 @@
-'use client'
 
-import { ButtonPlain } from '@monassosportive/design/buttons'
-import { Logo } from '@monassosportive/design/layouts'
+
+import { ButtonPlain } from '@coulba/design/buttons'
+import { Logo } from '@coulba/design/layouts'
 
 
 export function DefaultContent() {

@@ -1,5 +1,5 @@
-import { AccordionTrigger } from "@monassosportive/design/layouts"
-import { cn } from "@monassosportive/design/services"
+import { AccordionTrigger } from "@coulba/design/layouts"
+import { cn } from "@coulba/design/services"
 import { IconChevronDown } from "@tabler/icons-react"
 import { FieldValues, Path, useFormContext } from "react-hook-form"
 

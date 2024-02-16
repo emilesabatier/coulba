@@ -1,164 +1,78 @@
 import { NavigateOptions, ParseRoute, createRouter } from '@tanstack/react-router'
+import { attachmentRoute } from './auth/attachments/attachment.route'
+import { attachmentsLayout } from './auth/attachments/attachments.layout'
+import { attachmentsRoute } from './auth/attachments/attachments.route'
+import { authLayout } from './auth/auth.layout'
+import { APIRoute } from './auth/configuration/API.route'
+import { accountsRoute } from './auth/configuration/accounts.route'
+import { companyRoute } from './auth/configuration/company.route'
+import { configurationLayout } from './auth/configuration/configuration.layout'
+import { configurationRoute } from './auth/configuration/configuration.route'
+import { journalsRoute } from './auth/configuration/journals.route'
+import { subscriptionRoute } from './auth/configuration/subscription.route'
+import { usersRoute } from './auth/configuration/users.route'
+import { yearsRoute } from './auth/configuration/years.route'
+import { overviewRoute } from './auth/overview/overview.route'
+import { profileLayout } from './auth/profile/profile.layout'
+import { profileRoute } from './auth/profile/profile.route'
+import { settingsRoute } from './auth/profile/settings.route'
+import { balanceRoute } from './auth/records/balance.route'
+import { entriesLayout } from './auth/records/entries/entries.layout'
+import { entriesRoute } from './auth/records/entries/entries.route'
+import { entryRoute } from './auth/records/entries/entry.route'
+import { ledgerRoute } from './auth/records/ledger.route'
+import { recordsLayout } from './auth/records/records.layout'
+import { recordsRoute } from './auth/records/records.route'
+import { closingRoute } from './auth/reports/closing.route'
+import { reportsLayout } from './auth/reports/reports.layout'
+import { reportsRoute } from './auth/reports/reports.route'
+import { sheetRoute } from './auth/reports/sheet.route'
+import { statementRoute } from './auth/reports/statement.route'
 import { connectionRoute } from './connection/connection.route'
-import { accountRoute } from './dashboard/accounts/account.route'
-import { accountsLayout } from './dashboard/accounts/accounts.layout'
-import { accountsRoute } from './dashboard/accounts/accounts.route'
-import { roleRoute } from './dashboard/accounts/roles/role.route'
-import { rolesLayout } from './dashboard/accounts/roles/roles.layout'
-import { rolesRoute } from './dashboard/accounts/roles/roles.route'
-import { adherentRoute } from './dashboard/adherents/adherent.route'
-import { adherentsExportRoute } from './dashboard/adherents/adherents.export.route'
-import { adherentsLayout } from './dashboard/adherents/adherents.layout'
-import { adherentsRoute } from './dashboard/adherents/adherents.route'
-import { registrationFormsLayout } from './dashboard/adherents/registrationForms/registrationForms.layout'
-import { registrationFormsRoute } from './dashboard/adherents/registrationForms/registrationForms.route'
-import { registrationRoute } from './dashboard/adherents/registrationForms/registrations/registration.route'
-import { registrationsLayout } from './dashboard/adherents/registrationForms/registrations/registrations.layout'
-import { registrationsRoute } from './dashboard/adherents/registrationForms/registrations/registrations.route'
-import { agendaLayout } from './dashboard/agenda/agenda.layout'
-import { agendaRoute } from './dashboard/agenda/agenda.route'
-import { calendarRoute } from './dashboard/agenda/calendar/calendar.route'
-import { eventRoute } from './dashboard/agenda/events/event.route'
-import { eventsLayout } from './dashboard/agenda/events/events.layout'
-import { eventsRoute } from './dashboard/agenda/events/events.route'
-import { lessonRoute } from './dashboard/agenda/lessons/lesson.route'
-import { lessonsLayout } from './dashboard/agenda/lessons/lessons.layout'
-import { lessonsRoute } from './dashboard/agenda/lessons/lessons.route'
-import { rollcallRoute } from './dashboard/agenda/rollcalls/rollcall.route'
-import { rollcallsLayout } from './dashboard/agenda/rollcalls/rollcalls.layout'
-import { rollcallsRoute } from './dashboard/agenda/rollcalls/rollcalls.route'
-import { associationInformationRoute } from './dashboard/association/association.information.route'
-import { associationLayout } from './dashboard/association/association.layout'
-import { associationRoute } from './dashboard/association/association.route'
-import { associationSeasonsRoute } from './dashboard/association/association.seasons.route'
-import { associationSportRoute } from './dashboard/association/sports/association.sport.route'
-import { associationSportsLayout } from './dashboard/association/sports/association.sports.layout'
-import { associationSportsRoute } from './dashboard/association/sports/association.sports.route'
-import { collaboratorRoute } from './dashboard/collaborators/collaborator.route'
-import { collaboratorsLayout } from './dashboard/collaborators/collaborators.layout'
-import { collaboratorsRoute } from './dashboard/collaborators/collaborators.route'
-import { announcementRoute } from './dashboard/communication/announcements/announcement.route'
-import { announcementsLayout } from './dashboard/communication/announcements/announcements.layout'
-import { announcementsRoute } from './dashboard/communication/announcements/announcements.route'
-import { chatLayout } from './dashboard/communication/chat/chat.layout'
-import { conversationRoute } from './dashboard/communication/chat/conversation.route'
-import { conversationsRoute } from './dashboard/communication/chat/conversations.route'
-import { communicationLayout } from './dashboard/communication/communication.layout'
-import { communicationRoute } from './dashboard/communication/communication.route'
-import { contactRoute } from './dashboard/communication/contacts/contact.route'
-import { contactsLayout } from './dashboard/communication/contacts/contacts.layout'
-import { contactsRoute } from './dashboard/communication/contacts/contacts.route'
-import { dashboardLayout } from './dashboard/dashboard.layout'
-import { overviewRoute } from './dashboard/overview/overview.route'
-import { profileLayout } from './dashboard/profile/profile.layout'
-import { profileRoute } from './dashboard/profile/profile.route'
-import { profileInformationRoute } from './dashboard/profile/profileInformation.route'
-import { profileSecurityRoute } from './dashboard/profile/profileSecurity.route'
-import { subscriptionCardsRoute } from './dashboard/subscription/subscription.cards.route'
-import { subscriptionInformationRoute } from './dashboard/subscription/subscription.information.route'
-import { subscriptionLayout } from './dashboard/subscription/subscription.layout'
-import { subscriptionOrdersRoute } from './dashboard/subscription/subscription.orders.route'
-import { subscriptionPaymentsRoute } from './dashboard/subscription/subscription.payments.route'
-import { subscriptionRoute } from './dashboard/subscription/subscription.route'
-import { subscriptionVouchersRoute } from './dashboard/subscription/subscription.vouchers.route'
 import { rootLayout } from './root.layout'
-import { positionRoute } from './dashboard/collaborators/positions/position.route'
-import { positionsLayout } from './dashboard/collaborators/positions/positions.layout'
-import { positionsRoute } from './dashboard/collaborators/positions/positions.route'
 
 
 const routeTree = rootLayout.addChildren([
     connectionRoute,
-    dashboardLayout.addChildren([
+    authLayout.addChildren([
         overviewRoute,
 
-        adherentsLayout.addChildren([
-            adherentsRoute,
-            adherentRoute,
-            registrationFormsLayout.addChildren([
-                registrationFormsRoute,
-                registrationsLayout.addChildren([
-                    registrationsRoute,
-                    registrationRoute
-                ])
+        recordsLayout.addChildren([
+            recordsRoute,
+            entriesLayout.addChildren([
+                entriesRoute,
+                entryRoute
             ]),
-            adherentsExportRoute,
+            ledgerRoute,
+            balanceRoute
         ]),
 
-        collaboratorsLayout.addChildren([
-            collaboratorsRoute,
-            collaboratorRoute,
-            positionsLayout.addChildren([
-                positionsRoute,
-                positionRoute
-            ]),
+        attachmentsLayout.addChildren([
+            attachmentsRoute,
+            attachmentRoute
         ]),
 
-        accountsLayout.addChildren([
-            accountsRoute,
-            accountRoute,
-            rolesLayout.addChildren([
-                rolesRoute,
-                roleRoute
-            ]),
+        reportsLayout.addChildren([
+            reportsRoute,
+            sheetRoute,
+            statementRoute,
+            closingRoute
         ]),
 
-        agendaLayout.addChildren([
-            agendaRoute,
-            calendarRoute,
-            lessonsLayout.addChildren([
-                lessonsRoute,
-                lessonRoute
-            ]),
-            eventsLayout.addChildren([
-                eventsRoute,
-                eventRoute
-            ]),
-            rollcallsLayout.addChildren([
-                rollcallsRoute,
-                rollcallRoute
-            ])
-        ]),
-
-        communicationLayout.addChildren([
-            communicationRoute,
-            chatLayout.addChildren([
-                conversationsRoute,
-                conversationRoute
-            ]),
-            announcementsLayout.addChildren([
-                announcementsRoute,
-                announcementRoute
-            ]),
-            contactsLayout.addChildren([
-                contactsRoute,
-                contactRoute
-            ])
-        ]),
-
-        subscriptionLayout.addChildren([
+        configurationLayout.addChildren([
+            configurationRoute,
+            companyRoute,
             subscriptionRoute,
-            subscriptionInformationRoute,
-            subscriptionOrdersRoute,
-            subscriptionPaymentsRoute,
-            subscriptionCardsRoute,
-            subscriptionVouchersRoute
-        ]),
-
-        associationLayout.addChildren([
-            associationRoute,
-            associationInformationRoute,
-            associationSportsLayout.addChildren([
-                associationSportsRoute,
-                associationSportRoute
-            ]),
-            associationSeasonsRoute
+            usersRoute,
+            APIRoute,
+            yearsRoute,
+            accountsRoute,
+            journalsRoute,
         ]),
 
         profileLayout.addChildren([
             profileRoute,
-            profileInformationRoute,
-            profileSecurityRoute
+            settingsRoute
         ])
 
     ])
@@ -171,10 +85,7 @@ export type ValidParams = NavigateOptions<typeof routeTree>["params"]
 export const router = createRouter({
     routeTree,
     context: {
-        label: undefined,
         title: undefined,
-        icon: undefined,
-        subNavigationParent: undefined,
         session: {
             isSignedIn: undefined
         }

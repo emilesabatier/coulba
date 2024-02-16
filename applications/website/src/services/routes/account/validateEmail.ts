@@ -1,4 +1,4 @@
-import { PublicAccount } from "@monassosportive/schemas/routes"
+import { PublicAccount } from "@coulba/schemas/routes"
 import { z } from "zod"
 import { ReturnResponse } from "../returnType"
 

@@ -1,4 +1,4 @@
-import { AccordionContent } from "@monassosportive/design/layouts"
+import { AccordionContent } from "@coulba/design/layouts"
 import { ReactNode } from "react"
 
 

@@ -1,4 +1,4 @@
-import { PublicRegistration } from "@monassosportive/schemas/routes"
+import { PublicRegistration } from "@coulba/schemas/routes"
 
 
 type CreateOneRegistration = {

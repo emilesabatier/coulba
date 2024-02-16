@@ -1,20 +1,21 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ButtonPlain } from "@monassosportive/design/buttons"
-import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@monassosportive/design/forms"
-import { InputPassword, InputText } from "@monassosportive/design/inputs"
-import { PublicSession, publicSchema } from "@monassosportive/schemas/routes"
+import { ButtonPlain } from "@coulba/design/buttons"
+import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@coulba/design/forms"
+import { InputPassword, InputText } from "@coulba/design/inputs"
+import { shared } from "@coulba/schemas/routes"
+import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
+import * as v from "valibot"
 import { useSession } from "../../contexts/session/useSession"
 
 
 export function ConnectionForm() {
     const session = useSession()
 
-    const form = useForm<PublicSession.SignInBody>({
+    const form = useForm<v.Output<typeof shared.sessions.signIn.body>>({
         mode: "onSubmit",
         criteriaMode: "all",
         shouldFocusError: true,
-        resolver: zodResolver(publicSchema.session.signInBody),
+        resolver: valibotResolver(shared.sessions.signIn.body),
     })
 
     const onSubmit = async () => {

@@ -1,7 +1,7 @@
 'use server'
 
-import { formatPrice } from "@monassosportive/design/formats"
-import { InputInteger, InputSlider } from "@monassosportive/design/inputs"
+import { formatPrice } from "@coulba/design/formats"
+import { InputInteger, InputSlider } from "@coulba/design/inputs"
 import { IconCheck, IconDiscountCheck } from "@tabler/icons-react"
 import { useState } from "react"
 import { included } from "./included"

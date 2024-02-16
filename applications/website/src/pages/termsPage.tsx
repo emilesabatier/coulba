@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useEffect } from "react"
 import { Main } from "../components/layout/main/main"
@@ -551,7 +551,7 @@ export function TermsPage() {
                             </Text.SubTitle>
                             <Text.Paragraph>
                                 Les présentes Conditions Générales sont régies et interprétées conformément au droit français.
-                                Pour toute réclamation relative aux Services, le Client doit contacter le service client de la Société via l’adresse mail suivante : support@monassosportive.fr
+                                Pour toute réclamation relative aux Services, le Client doit contacter le service client de la Société via l’adresse mail suivante : support@coulba.fr
                                 En l'absence de résolution amiable d'un litige, tout différend, réclamation ou question concernant l'interprétation, la mise en œuvre ou la validité des présentes Conditions Générales, ou lié à l'utilisation des Services, sera soumis à la compétence exclusive des tribunaux situés dans le ressort de la cour d'appel de Paris. Cette compétence s'applique sans égard à toute pluralité de défendeurs ou à toute action en garantie.
                             </Text.Paragraph>
                         </TextSection>

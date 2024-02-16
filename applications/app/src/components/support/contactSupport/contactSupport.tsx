@@ -1,4 +1,4 @@
-import { ButtonPlain } from "@monassosportive/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { IconMailPlus } from "@tabler/icons-react"
 import { CreateOneTicket } from "./createOneTicket/createOneTicket"
 

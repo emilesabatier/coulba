@@ -1,7 +1,7 @@
-import { toast } from '@monassosportive/design/overlays'
+import { toast } from '@coulba/design/overlays'
 import { ReactNode, createContext, useState } from 'react'
-import { SignIn, signIn } from '../../services/routes/public/session/signIn'
-import { signOut } from '../../services/routes/public/session/signOut'
+import { SignIn, signIn } from '../../services/routes/shared/sessions/signIn'
+import { signOut } from '../../services/routes/shared/sessions/signOut'
 
 
 function deleteCookies() {

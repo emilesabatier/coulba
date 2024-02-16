@@ -1,4 +1,4 @@
-import { Card } from "@monassosportive/design/layouts"
+import { Card } from "@coulba/design/layouts"
 import { CreateOneTicket } from "../support/contactSupport/createOneTicket/createOneTicket"
 
 

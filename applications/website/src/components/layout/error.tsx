@@ -1,4 +1,4 @@
-import { Card } from "@monassosportive/design/layouts"
+import { Card } from "@coulba/design/layouts"
 
 
 export function Error() {
@@ -9,7 +9,7 @@ export function Error() {
             </p>
             <p className="text-error"  >
                 Si le problème persiste, n&apos;hésitez pas à contacter le&nbsp;
-                <a className="text-error underline cursor-pointer hover:no-underline" href={`mailto:support@monassosportive.fr`} target="_blank" rel="noopener noreferrer">
+                <a className="text-error underline cursor-pointer hover:no-underline" href={`mailto:support@coulba.fr`} target="_blank" rel="noopener noreferrer">
                     support
                 </a>
                 .

@@ -1,4 +1,4 @@
-import { Card } from "@monassosportive/design/layouts"
+import { Card } from "@coulba/design/layouts"
 import { ReactNode } from "react"
 import { CreateOneTicket } from "../support/contactSupport/createOneTicket/createOneTicket"
 import { Loading } from "./loading"

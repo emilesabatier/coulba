@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useEffect } from "react"
 import { Main } from "../components/layout/main/main"

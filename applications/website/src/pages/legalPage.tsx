@@ -1,4 +1,4 @@
-"use client"
+
 
 import { useEffect } from "react"
 import { Main } from "../components/layout/main/main"
@@ -34,7 +34,7 @@ export function LegalPage() {
                         <Text.Paragraph>
                             Le siège social de la Société est localisé au <b>93 Rue Sedaine, 75011 Paris</b>, en <b>France</b>.
                             <br />
-                            L'adresse de contact est <Text.Link href="mailto:bonjour@monassosportive.fr">bonjour@monassosportive.fr</Text.Link>.
+                            L'adresse de contact est <Text.Link href="mailto:bonjour@coulba.fr">bonjour@coulba.fr</Text.Link>.
                         </Text.Paragraph>
                     </Text.Section>
                     <Text.Section>

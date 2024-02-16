@@ -1,4 +1,4 @@
-"use client"
+
 
 import { IconCheck, IconSelector } from "@tabler/icons-react"
 import { CommandLoading } from "cmdk"

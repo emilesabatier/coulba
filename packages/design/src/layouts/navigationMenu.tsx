@@ -1,4 +1,4 @@
-"use client"
+
 
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { IconChevronDown } from "@tabler/icons-react"

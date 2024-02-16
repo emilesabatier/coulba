@@ -1,8 +1,8 @@
-"use client"
 
-import { FormatSelect } from "@monassosportive/design/formats"
-import { useDeviceDetect } from "@monassosportive/design/hooks"
-import { InputSelect } from "@monassosportive/design/inputs"
+
+import { FormatSelect } from "@coulba/design/formats"
+import { useDeviceDetect } from "@coulba/design/hooks"
+import { InputSelect } from "@coulba/design/inputs"
 import { useState } from "react"
 import { features } from "./features"
 import { tagColors, tagOptions } from "./tagOptions"

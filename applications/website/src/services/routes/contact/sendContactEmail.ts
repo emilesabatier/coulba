@@ -1,4 +1,4 @@
-import { PublicContact } from "@monassosportive/schemas/routes"
+import { PublicContact } from "@coulba/schemas/routes"
 import { z } from "zod"
 import { ReturnResponse } from "../returnType"
 

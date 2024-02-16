@@ -1,5 +1,5 @@
-import { Button } from "@monassosportive/design/buttons"
-import { cn } from "@monassosportive/design/services"
+import { Button } from "@coulba/design/buttons"
+import { cn } from "@coulba/design/services"
 import { cloneElement } from "react"
 import { ApplicationRoute } from "../../../hooks/useApplications"
 

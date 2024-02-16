@@ -10,7 +10,7 @@ export function RootLayout() {
         .reverse()
         .find((d) => d.context.title)
 
-    const title = matchWithTitle?.context.title || 'MonAssoSportive'
+    const title = matchWithTitle?.context.title || 'Coulba'
 
     useEffect(() => { document.title = title }, [title])
 

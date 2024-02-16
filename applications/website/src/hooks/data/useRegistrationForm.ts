@@ -1,4 +1,4 @@
-import { PublicRegistrationForm } from '@monassosportive/schemas/routes'
+import { PublicRegistrationForm } from '@coulba/schemas/routes'
 import { useEffect, useState } from 'react'
 import { readOneRegistrationForm } from '../../services/routes/registrationForm/getRegistrationForm'
 

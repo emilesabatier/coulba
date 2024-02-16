@@ -1,4 +1,4 @@
-import { ButtonGhostContent } from "@monassosportive/design/buttons"
+import { ButtonGhostContent } from "@coulba/design/buttons"
 import { IconArrowBack } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import { ValidParams, ValidRoutes } from "../../routes/router"

@@ -1,4 +1,4 @@
-import { Action, Resource, Scope } from "@monassosportive/schemas/components"
+import { Action, Resource, Scope } from "@coulba/schemas/components"
 
 
 export const permissionRoles: {

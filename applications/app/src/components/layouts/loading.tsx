@@ -1,4 +1,4 @@
-import { CircularLoader, LinearLoader } from "@monassosportive/design/layouts"
+import { CircularLoader, LinearLoader } from "@coulba/design/layouts"
 import { ReactNode } from "react"
 
 

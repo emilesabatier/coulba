@@ -1,4 +1,4 @@
-import { cn } from "@monassosportive/design/services"
+import { cn } from "@coulba/design/services"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -9,11 +9,12 @@ type MainRoot = {
 
 export function MainRoot(props: MainRoot) {
     return (
-        <div className={cn(
-            "w-full min-h-fit h-full max-h-full overflow-hidden grid grid-cols-1 grid-rows-[auto_max-content] md:grid-rows-[max-content_auto]",
-            props.className
-        )}>
-            {props.children}
-        </div>
+        <div
+            className={cn(
+                "relative z-[1] min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-auto grid grid-cols-1 grid-rows-[max-content_auto]",
+                props.className
+            )}
+            children={props.children}
+        />
     )
 }
