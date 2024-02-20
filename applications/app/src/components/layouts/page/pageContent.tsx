@@ -1,9 +1,9 @@
 import { cn } from "@coulba/design/services"
-import { ComponentProps, ReactNode } from "react"
+import { ComponentProps, ReactElement } from "react"
 
 
 type PageContent = {
-    children: ReactNode
+    children: ReactElement
     className?: ComponentProps<'div'>['className']
 }
 

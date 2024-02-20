@@ -11,7 +11,7 @@ import {
     UNDO_COMMAND
 } from "lexical"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { ButtonSubtle } from "../../buttons"
+import { ButtonGhost } from "../../buttons"
 
 const LowPriority = 1
 
@@ -457,7 +457,7 @@ export function ToolbarPlugin() {
 
     return (
         <div className="w-full flex justify-start items-center gap-1 p-2 border border-b-0 border-neutral/25 rounded-t-sm" ref={toolbarRef}>
-            <ButtonSubtle
+            <ButtonGhost
                 icon={<IconArrowBackUp />}
                 disabled={!canUndo}
                 onClick={() => {
@@ -465,7 +465,7 @@ export function ToolbarPlugin() {
                 }}
                 aria-label="Undo"
             />
-            <ButtonSubtle
+            <ButtonGhost
                 icon={<IconArrowForwardUp />}
                 disabled={!canRedo}
                 onClick={() => {

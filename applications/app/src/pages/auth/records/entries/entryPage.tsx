@@ -1,3 +1,4 @@
+import { Main } from "../../../../components/layouts/main/main"
 
 
 export function EntryPage() {
@@ -7,6 +8,11 @@ export function EntryPage() {
     // if (!account.data) return null
 
     return (
-        <span>entrée</span>
+        <Main.Root>
+            <Main.Header />
+            <Main.Content>
+                <span>entrée</span>
+            </Main.Content>
+        </Main.Root>
     )
 }

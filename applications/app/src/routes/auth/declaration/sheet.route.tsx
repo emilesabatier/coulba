@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router"
-import { SheetPage } from "../../../pages/auth/reports/sheetPage"
+import { SheetPage } from "../../../pages/auth/declaration/sheetPage"
 import { reportsLayout } from "./reports.layout"
 
 

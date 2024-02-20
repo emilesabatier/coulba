@@ -12,7 +12,7 @@ export const updateOneEntryBody = v.partial(v.object({
     idAccount: entrySchema.entries.idAccount,
     idJournal: entrySchema.entries.idJournal,
     idAttachment: entrySchema.entries.idAttachment,
-    state: entrySchema.entries.state,
+    isConfirmed: entrySchema.entries.isConfirmed,
     label: entrySchema.entries.label,
     date: entrySchema.entries.date,
     debit: entrySchema.entries.debit,

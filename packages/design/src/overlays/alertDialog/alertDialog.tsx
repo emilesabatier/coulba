@@ -2,7 +2,7 @@
 
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from "react"
-import { ButtonPlain, ButtonSubtle, PlainColors } from "../../buttons"
+import { ButtonGhost, ButtonPlain, PlainColors } from "../../buttons"
 import { cn } from "../../services/cn"
 
 
@@ -126,7 +126,7 @@ const AlertDialogCancel = forwardRef<
         ref={ref}
         asChild
     >
-        <ButtonSubtle
+        <ButtonGhost
             text="Annuler"
         />
     </AlertDialogPrimitive.Cancel>

@@ -13,7 +13,7 @@ export function PageHeader() {
     const session = useSession()
 
     return (
-        <div className="w-full flex flex-col justify-start items-stretch gap-4 md:gap-8 border-b-2 border-neutral/25 p-4 md:p-8 pb-0 md:pb-0">
+        <div className="w-full flex flex-col justify-start items-stretch gap-4 md:gap-8 border-b-2 border-neutral/25 p-4 md:p-8 pb-0 md:pb-0 bg-background">
             <div className="w-full flex justify-between items-center gap-2 md:gap-4">
                 <div className="w-fit flex flex-wrap justify-start items-center gap-2">
                     <Link to="/" className="w-fit flex justify-start items-center">

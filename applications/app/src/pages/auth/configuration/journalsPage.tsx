@@ -1,7 +1,13 @@
+import { Main } from "../../../components/layouts/main/main"
 
 
 export function JournalsPage() {
     return (
-        <span>journaux</span>
+        <Main.Root>
+            <Main.Header />
+            <Main.Content>
+                <span>journaux comptables</span>
+            </Main.Content>
+        </Main.Root>
     )
 }

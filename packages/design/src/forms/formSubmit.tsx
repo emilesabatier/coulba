@@ -1,4 +1,4 @@
-import { ButtonPlain, ButtonSubtle } from "../buttons"
+import { ButtonGhost, ButtonPlain } from "../buttons"
 
 
 export type FormSubmit<T> = {
@@ -26,7 +26,7 @@ export function FormSubmit<T>(props: FormSubmit<T>) {
             <div className="w-full flex flex-row justify-end items-center gap-2">
                 {
                     (props.previousCallback === undefined) ? null : (
-                        <ButtonSubtle
+                        <ButtonGhost
                             text={props.previousLabel}
                             onClick={handlePrevious}
                         />

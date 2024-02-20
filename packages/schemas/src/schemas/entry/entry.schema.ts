@@ -1,6 +1,7 @@
 import { createSelectSchema } from 'drizzle-valibot'
 import * as v from "valibot"
 import { entryStates } from "../../components"
+import { booleanSchema } from '../../components/schemas/boolean.schema'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { idSchema } from "../../components/schemas/id.schema"
 import { numericSchema } from "../../components/schemas/numeric.schema"
@@ -17,7 +18,7 @@ export const entrySchema = createSelectSchema(entries, {
     idAccount: idSchema,
     idJournal: idSchema,
     idAttachment: idSchema,
-    state: entryStateSchema,
+    isConfirmed: booleanSchema,
     label: textSchema,
     date: dateTimeSchema,
     debit: numericSchema,

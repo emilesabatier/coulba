@@ -1,6 +1,5 @@
 import { CircularLoader } from "@coulba/design/layouts"
-import { createRoute } from "@tanstack/react-router"
-import { AttachmentsLayout } from "../../../pages/auth/attachments/attachmentsLayout"
+import { Outlet, createRoute } from "@tanstack/react-router"
 import { authLayout } from "../auth.layout"
 
 
@@ -11,5 +10,5 @@ export const attachmentsLayout = createRoute({
     }),
     path: '/pieces',
     pendingComponent: () => <CircularLoader />,
-    component: () => <AttachmentsLayout />
+    component: () => <Outlet />
 })

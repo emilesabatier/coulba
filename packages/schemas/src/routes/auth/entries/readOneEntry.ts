@@ -9,7 +9,7 @@ import { userSchema } from "../../../schemas/user/user.schema"
 
 // Input
 export const readOneEntryParams = v.object({
-    idEntry: entrySchema.entries.id
+    idEntry: v.optional(entrySchema.entries.id)
 })
 
 // Output

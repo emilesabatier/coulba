@@ -15,7 +15,7 @@ export function RootLayout() {
     useEffect(() => { document.title = title }, [title])
 
     return (
-        <div className="w-full h-full bg-background overflow-auto">
+        <div className="w-full h-full overflow-auto">
             <Outlet />
         </div>
     )

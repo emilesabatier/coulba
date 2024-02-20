@@ -2,7 +2,7 @@ import { IconChevronDown, IconFilter, IconFilterOff } from "@tabler/icons-react"
 import { Table } from "@tanstack/react-table"
 import { cloneElement, useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Chip } from ".."
-import { ButtonGhost, ButtonSubtle } from "../../buttons"
+import { ButtonGhost } from "../../buttons"
 import { useDeviceDetect } from "../../hooks"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../../overlays"
 import { cn } from "../../services"
@@ -30,7 +30,7 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
                     <div className="flex flex-col justify-start items-stretch gap-2">
                         {
                             (columns.filter(x => x.getIsFiltered()).length === 0) ? null : (
-                                <ButtonSubtle
+                                <ButtonGhost
                                     icon={<IconFilterOff />}
                                     text='Enlever tous les filtres'
                                     onClick={() => table.resetColumnFilters()}
@@ -70,7 +70,7 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
                                                     }
                                                     {
                                                         !column.getIsFiltered() ? null : (
-                                                            <ButtonSubtle
+                                                            <ButtonGhost
                                                                 icon={<IconFilterOff />}
                                                                 text='Enlever le filtre'
                                                                 onClick={() => column.setFilterValue(undefined)}

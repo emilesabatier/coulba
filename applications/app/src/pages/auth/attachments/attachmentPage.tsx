@@ -1,3 +1,4 @@
+import { Main } from "../../../components/layouts/main/main"
 
 
 export function AttachmentPage() {
@@ -7,6 +8,11 @@ export function AttachmentPage() {
     // if (!account.data) return null
 
     return (
-        <span>pièce</span>
+        <Main.Root>
+            <Main.Header />
+            <Main.Content>
+                <span>pièce</span>
+            </Main.Content>
+        </Main.Root>
     )
 }

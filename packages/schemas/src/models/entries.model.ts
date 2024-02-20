@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm"
-import { numeric, pgEnum, pgTable, text } from "drizzle-orm/pg-core"
+import { boolean, numeric, pgEnum, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { entryStates } from "../components/values/entryStates.js"
@@ -23,7 +23,7 @@ export const entries = pgTable(
         idAccount: idColumn("id_account").references(() => accounts.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idJournal: idColumn("id_journal").references(() => journals.id, { onDelete: "set null", onUpdate: "cascade" }),
         idAttachment: idColumn("id_attachment").references(() => attachments.id, { onDelete: "set null", onUpdate: "cascade" }),
-        state: entryStateEnum("state").notNull(),
+        isConfirmed: boolean("is_confirmed").notNull(),
         label: text("label").notNull(),
         date: dateTimeColumn("date").notNull(),
         debit: numeric("debit", { scale: 2 }).notNull(),

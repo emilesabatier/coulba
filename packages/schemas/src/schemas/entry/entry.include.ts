@@ -6,7 +6,7 @@ export const entryInclude = {
     idAccount: true,
     idJournal: true,
     idAttachment: true,
-    state: true,
+    isConfirmed: true,
     label: true,
     date: true,
     debit: true,

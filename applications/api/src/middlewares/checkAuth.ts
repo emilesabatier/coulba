@@ -17,9 +17,9 @@ export type AuthEnv = {
 export const checkAuth: MiddlewareHandler<AuthEnv> = async (c, next) => {
 
     const cookiesKey = env()?.COOKIES_KEY
-    if (!cookiesKey) throw new HTTPException(401, { message: "Session invalide" })
+    if (!cookiesKey) throw new HTTPException(500, { message: "Erreur interne" })
 
-    const { idSession } = await getSignedCookie(c, cookiesKey)
+    const { id_session: idSession } = await getSignedCookie(c, cookiesKey)
     if (!idSession) throw new HTTPException(401, { message: "Session invalide" })
 
     const [readSession] = await db

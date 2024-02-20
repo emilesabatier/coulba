@@ -1,19 +1,22 @@
 
 
 import { Toaster } from "@coulba/design/overlays"
-import { Fragment } from "react"
+import { Fragment, ReactNode } from "react"
 import { SessionProvider } from "./session/session.context"
-import { SWRProvider } from "./swr.context"
+import { StateProvider } from "./state.context"
 
 
-export function Providers({ children }: { children: React.ReactNode }) {
+type Providers = {
+    children: ReactNode
+}
+export function Providers(props: Providers) {
     return (
         <Fragment>
             <Toaster />
             <SessionProvider>
-                <SWRProvider>
-                    {children}
-                </SWRProvider>
+                <StateProvider>
+                    {props.children}
+                </StateProvider>
             </SessionProvider>
         </Fragment>
     )

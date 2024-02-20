@@ -1,5 +1,5 @@
 // import { zodResolver } from "@hookform/resolvers/zod"
-// import { Button, ButtonPlain, ButtonSubtle } from "@coulba/design/buttons"
+// import { Button, ButtonPlain, ButtonGhost } from "@coulba/design/buttons"
 // import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@coulba/design/forms"
 // import { InputText } from "@coulba/design/inputs"
 // import { Card } from "@coulba/design/layouts"
@@ -81,7 +81,7 @@
 //                                     />
 //                                 </div>
 //                                 <div className="flex flex-row justify-end items-center gap-2">
-//                                     <ButtonSubtle onClick={() => onCancel()} text="Annuler" />
+//                                     <ButtonGhost onClick={() => onCancel()} text="Annuler" />
 //                                     <ButtonPlain
 //                                         onClick={() => onSubmit()}
 //                                         text="Recevoir le mot de passe temporaire"

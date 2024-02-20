@@ -1,7 +1,7 @@
 import { IconFreezeColumn } from "@tabler/icons-react"
 import { Table } from "@tanstack/react-table"
 import { ComponentProps, useState } from "react"
-import { ButtonSubtle } from "../../buttons"
+import { ButtonGhost } from "../../buttons"
 import { InputSwitch } from "../../inputs/switch/inputSwitch"
 import { Popover, PopoverContent, PopoverTrigger } from "../../overlays"
 import { cn } from "../../services"
@@ -13,7 +13,7 @@ export function ColumnVisibility<T>({ table, className }: { table: Table<T>, cla
     return (
         <Popover open={open} onOpenChange={() => setOpen(!open)}>
             <PopoverTrigger asChild>
-                <ButtonSubtle
+                <ButtonGhost
                     icon={<IconFreezeColumn />}
                     className={cn(className)}
                     onClick={() => setOpen(!open)}

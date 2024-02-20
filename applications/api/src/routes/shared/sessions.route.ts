@@ -50,14 +50,14 @@ export const sessionsRoute = new Hono()
                 })
                 .returning()
 
-            await setSignedCookie(c, "idSession", createSession.id, cookiesKey, {
+            await setSignedCookie(c, "id_session", createSession.id, cookiesKey, {
                 expires: expirationDate,
                 httpOnly: true,
                 secure: true,
                 sameSite: "None",
                 domain: env()?.COOKIES_DOMAIN
             })
-            setCookie(c, "isSignedIn", "true", {
+            setCookie(c, "is_signed_in", "true", {
                 expires: expirationDate,
                 httpOnly: false,
                 secure: true,

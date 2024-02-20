@@ -1,7 +1,14 @@
+import { EntriesTable } from "../../../../components/entries/entriesTable"
+import { Main } from "../../../../components/layouts/main/main"
 
 
 export function EntriesPage() {
     return (
-        <span>journal</span>
+        <Main.Root>
+            <Main.Header />
+            <Main.Content>
+                <EntriesTable />
+            </Main.Content>
+        </Main.Root>
     )
 }

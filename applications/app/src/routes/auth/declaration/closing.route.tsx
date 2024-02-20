@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router"
-import { ClosingPage } from "../../../pages/auth/reports/closingPage"
+import { ClosingPage } from "../../../pages/auth/declaration/closingPage"
 import { reportsLayout } from "./reports.layout"
 
 

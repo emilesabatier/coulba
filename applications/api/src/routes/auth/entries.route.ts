@@ -27,7 +27,7 @@ export const entriesRoute = new Hono<AuthEnv>()
                     idAccount: body.idAccount,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
-                    state: "draft",
+                    isConfirmed: false,
                     label: body.label,
                     date: body.date,
                     debit: body.debit.toString(),
@@ -39,7 +39,7 @@ export const entriesRoute = new Hono<AuthEnv>()
         }
     )
     .get(
-        "/:idEntry",
+        "/:idEntry?",
         validator("param", paramsValidator(auth.entries.read.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -50,7 +50,7 @@ export const entriesRoute = new Hono<AuthEnv>()
                     .from(entries)
                     .where(eq(entries.idCompany, c.var.user.idCompany))
 
-                if (readEntries.length < 1) throw new HTTPException(404, { message: "Entrées non trouvées" })
+                if (readEntries.length < 1) return c.body(null, 204)
                 return c.json(readEntries, 200)
             }
 
@@ -78,7 +78,7 @@ export const entriesRoute = new Hono<AuthEnv>()
                     idAccount: body.idAccount,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
-                    state: body.state,
+                    isConfirmed: body.isConfirmed,
                     label: body.label,
                     date: body.date,
                     debit: body.debit?.toString(),
