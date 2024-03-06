@@ -11,7 +11,7 @@ export function PageContent(props: PageContent) {
     return (
         <div
             className={cn(
-                "w-full max-w-full min-h-full h-full max-h-full overflow-hidden",
+                "w-full max-w-full min-h-full h-full max-h-full overflow-auto",
                 props.className
             )}
             children={props.children}

@@ -34,7 +34,7 @@ export const attachmentsRelations = relations(attachments, ({ one, many }) => ({
         fields: [attachments.idYear],
         references: [years.id],
     }),
-    entries: many(companies),
+    records: many(companies),
     lastUpdatedByUser: one(companies, {
         fields: [attachments.lastUpdatedBy],
         references: [companies.id],

@@ -5,15 +5,15 @@ import { updateOneAttachmentBody, updateOneAttachmentParams, updateOneAttachment
 
 
 export const attachments = {
-    create: {
+    post: {
         body: createOneAttachmentBody,
         return: createOneAttachmentReturn
     },
-    read: {
+    get: {
         params: readOneAttachmentParams,
         return: readOneAttachmentReturn
     },
-    update: {
+    put: {
         params: updateOneAttachmentParams,
         body: updateOneAttachmentBody,
         return: updateOneAttachmentReturn

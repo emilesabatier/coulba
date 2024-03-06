@@ -1,7 +1,7 @@
 import { toast } from '@coulba/design/overlays'
 import { ReactNode, createContext, useState } from 'react'
-import { SignIn, signIn } from '../../services/routes/shared/sessions/signIn'
-import { signOut } from '../../services/routes/shared/sessions/signOut'
+import { SignIn, signIn } from '../../services/api/shared/sessions/signIn'
+import { signOut } from '../../services/api/shared/sessions/signOut'
 
 
 function deleteCookies() {

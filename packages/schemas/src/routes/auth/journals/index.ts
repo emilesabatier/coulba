@@ -5,15 +5,15 @@ import { updateOneJournalBody, updateOneJournalParams, updateOneJournalReturn } 
 
 
 export const journals = {
-    create: {
+    post: {
         body: createOneJournalBody,
         return: createOneJournalReturn
     },
-    read: {
+    get: {
         params: readOneJournalParams,
         return: readOneJournalReturn
     },
-    update: {
+    put: {
         params: updateOneJournalParams,
         body: updateOneJournalBody,
         return: updateOneJournalReturn

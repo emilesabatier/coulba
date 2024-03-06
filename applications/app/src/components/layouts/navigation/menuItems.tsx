@@ -30,6 +30,11 @@ export const menuItems: MenuItem[] = [
         path: "/livres/journal",
         subMenuItems: [
             {
+                basePath: "/livres/enregistrements",
+                path: "/livres/enregistrements",
+                label: "Enregistrements provisoires"
+            },
+            {
                 basePath: "/livres/journal",
                 path: "/livres/journal",
                 label: "Journal"

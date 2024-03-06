@@ -13,7 +13,7 @@ import { paramsValidator } from "../../middlewares/paramsValidator"
 export const companiesRoute = new Hono<AuthEnv>()
     .get(
         "/:idCompany",
-        validator("param", paramsValidator(auth.companies.read.params)),
+        validator("param", paramsValidator(auth.companies.get.params)),
         async (c) => {
             const params = c.req.valid('param')
             if (!params.idCompany) throw new HTTPException(400, { message: "Impossible de lire l'identifiant de la société" })
@@ -29,8 +29,8 @@ export const companiesRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idCompany',
-        validator("param", paramsValidator(auth.companies.update.params)),
-        validator("json", bodyValidator(auth.companies.update.body)),
+        validator("param", paramsValidator(auth.companies.put.params)),
+        validator("json", bodyValidator(auth.companies.put.body)),
         async (c) => {
             const params = c.req.valid('param')
             const body = c.req.valid('json')

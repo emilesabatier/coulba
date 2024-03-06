@@ -5,15 +5,15 @@ import { updateOneYearBody, updateOneYearParams, updateOneYearReturn } from "./u
 
 
 export const years = {
-    create: {
+    post: {
         body: createOneYearBody,
         return: createOneYearReturn
     },
-    read: {
+    get: {
         params: readOneYearParams,
         return: readOneYearReturn
     },
-    update: {
+    put: {
         params: updateOneYearParams,
         body: updateOneYearBody,
         return: updateOneYearReturn

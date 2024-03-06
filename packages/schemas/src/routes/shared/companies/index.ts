@@ -2,7 +2,7 @@ import { createOneCompanyBody, createOneCompanyReturn } from "./createOneCompany
 
 
 export const companies = {
-    create: {
+    post: {
         body: createOneCompanyBody,
         return: createOneCompanyReturn
     }

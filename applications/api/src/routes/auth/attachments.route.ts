@@ -14,7 +14,7 @@ import { paramsValidator } from "../../middlewares/paramsValidator"
 export const attachmentsRoute = new Hono<AuthEnv>()
     .post(
         '/',
-        validator("json", bodyValidator(auth.attachments.create.body)),
+        validator("json", bodyValidator(auth.attachments.post.body)),
         async (c) => {
             const body = c.req.valid('json')
 
@@ -34,7 +34,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
     )
     .get(
         "/:idAttachment",
-        validator("param", paramsValidator(auth.attachments.read.params)),
+        validator("param", paramsValidator(auth.attachments.get.params)),
         async (c) => {
             const params = c.req.valid('param')
 
@@ -59,8 +59,8 @@ export const attachmentsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idAttachment',
-        validator("param", paramsValidator(auth.attachments.update.params)),
-        validator("json", bodyValidator(auth.attachments.update.body)),
+        validator("param", paramsValidator(auth.attachments.put.params)),
+        validator("json", bodyValidator(auth.attachments.put.body)),
         async (c) => {
             const params = c.req.valid('param')
             const body = c.req.valid('json')
@@ -80,7 +80,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idAttachment',
-        validator("param", paramsValidator(auth.attachments.update.params)),
+        validator("param", paramsValidator(auth.attachments.put.params)),
         async (c) => {
             const params = c.req.valid('param')
 

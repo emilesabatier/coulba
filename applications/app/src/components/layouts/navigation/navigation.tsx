@@ -1,4 +1,4 @@
-import { Popover, PopoverContent, PopoverTrigger } from "@coulba/design/overlays"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { IconChevronDown } from "@tabler/icons-react"
 import { Link, useRouter } from "@tanstack/react-router"
@@ -15,80 +15,84 @@ export function Navigation(props: Navigation) {
     const router = useRouter()
     const current = router.state.matches.at(-1)
 
-    // function onMenuClick(onClick: () => void) {
-    //     onClick()
-    //     if (!props.onAfterClick) return
-    //     props.onAfterClick()
-    // }
+    const currentOpenMenu = menuItems.find((menuItem) => current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath)
     return (
-        <nav className={cn("min-w-fit w-full max-w-full h-fit", props.className)}>
-            <ul className="min-w-fit max-w-full h-fit flex justify-start items-stretch gap-2 md:gap-4">
+        <nav className={cn("min-w-[256px] w-full max-w-full h-fit", props.className)}>
+            <Accordion
+                type="single"
+                collapsible
+                className="min-w-[var(--radix-accordion-content-width)] w-full flex flex-col justify-start items-stretch gap-1 md:gap-2"
+                defaultValue={currentOpenMenu?.key}
+            >
                 {
                     menuItems.map((menuItem) => {
-                        return (
-                            <li
-                                key={menuItem.key}
-                                aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
-                                className="relative flex justify-center items-center aria-current:after:-bottom-[2px] aria-current:after:absolute aria-current:after:border aria-current:after:border-neutral aria-current:after:z-[1] aria-current:after:content-[''] aria-current:after:w-full"
+                        if (!menuItem.subMenuItems) return (
+                            <Link
+                                to={menuItem.path}
+                                params={{}}
+                                className="w-full"
                             >
-                                {
-                                    !menuItem.subMenuItems ? (
-                                        <Link
-                                            to={menuItem.path}
-                                            params={{}}
-                                            className="flex justify-center items-center p-2 hover:bg-neutral/5 group"
-                                        >
-                                            <span className="text-neutral/75 text-lg group-hover:text-neutral group-aria-current:text-neutral">
-                                                {menuItem.label}
-                                            </span>
-                                        </Link>
-                                    ) : (
-                                        <Popover>
-                                            <PopoverTrigger className="group">
-                                                <div className="flex justify-center items-center gap-1 p-2 hover:bg-neutral/5">
-                                                    <span className="text-neutral/75 text-lg group-hover:text-neutral group-aria-current:text-neutral">
-                                                        {menuItem.label}
-                                                    </span>
-                                                    <IconChevronDown size={16} className="stroke-neutral/75 group-hover:stroke-neutral group-aria-current:stroke-neutral" />
-                                                </div>
-                                            </PopoverTrigger>
-                                            <PopoverContent
-                                                align="center"
-                                                side="bottom"
-                                                className="bg-background border-2 border-neutral/25 border-t-transparent"
-                                            >
-                                                <ul className="flex flex-col justify-start items-stretch">
-                                                    {
-                                                        menuItem.subMenuItems.map((subMenuItem) => {
-
-                                                            return (
-                                                                <li
-                                                                    key={subMenuItem.path}
-                                                                    className="group"
-                                                                >
-                                                                    <Link
-                                                                        to={subMenuItem.path}
-                                                                        params={{}}
-                                                                        className="flex justify-start items-center p-2 hover:bg-neutral/5"
-                                                                    >
-                                                                        <span className="text-neutral/75 text-lg group-hover:text-neutral group-aria-current:text-neutral text-left">
-                                                                            {subMenuItem.label}
-                                                                        </span>
-                                                                    </Link>
-                                                                </li>
-                                                            )
-                                                        })
-                                                    }
-                                                </ul>
-                                            </PopoverContent>
-                                        </Popover>
-                                    )
-                                }
-                            </li>
+                                <div
+                                    aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
+                                    className="group w-full flex justify-start items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
+                                >
+                                    <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral">
+                                        {menuItem.label}
+                                    </span>
+                                </div>
+                            </Link>
+                        )
+                        return (
+                            <AccordionItem
+                                key={menuItem.key}
+                                value={menuItem.key}
+                                className="min-w-fit w-full"
+                            >
+                                <AccordionTrigger className="w-full" style={{ minWidth: "var(--radix-accordion-content-width)" }}>
+                                    <div
+                                        aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
+                                        className="group w-full flex justify-between items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
+                                    >
+                                        <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral group-aria-current:text-neutral">
+                                            {menuItem.label}
+                                        </span>
+                                        <IconChevronDown size={16} className="stroke-neutral/75 group-hover:stroke-neutral group-aria-current:stroke-neutral" />
+                                    </div>
+                                </AccordionTrigger>
+                                <AccordionContent className="pl-4">
+                                    <ul className="w-full flex flex-col justify-start items-stretch border-l border-neutral/25 pl-2 py-2 gap-0.5 md:gap-1">
+                                        {
+                                            menuItem.subMenuItems.map((subMenuItem) => {
+                                                return (
+                                                    <li
+                                                        key={subMenuItem.path}
+                                                        className="group w-full"
+                                                    >
+                                                        <Link
+                                                            to={subMenuItem.path}
+                                                            params={{}}
+                                                            className="w-full"
+                                                        >
+                                                            <div
+                                                                aria-current={current?.pathname.split("/").slice(0, 3).join("/") === subMenuItem.basePath}
+                                                                className="group w-full flex justify-start items-center p-3 rounded-sm hover:bg-neutral/5 aria-current:bg-neutral/5"
+                                                            >
+                                                                <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral group-aria-current:text-neutral">
+                                                                    {subMenuItem.label}
+                                                                </span>
+                                                            </div>
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                </AccordionContent>
+                            </AccordionItem>
                         )
                     })
                 }
-            </ul>
+            </Accordion>
         </nav>
     )
 }

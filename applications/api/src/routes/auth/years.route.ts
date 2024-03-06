@@ -14,7 +14,7 @@ import { paramsValidator } from "../../middlewares/paramsValidator"
 export const yearsRoute = new Hono<AuthEnv>()
     .post(
         '/',
-        validator("json", bodyValidator(auth.years.create.body)),
+        validator("json", bodyValidator(auth.years.post.body)),
         async (c) => {
             const body = c.req.valid('json')
 
@@ -34,7 +34,7 @@ export const yearsRoute = new Hono<AuthEnv>()
     )
     .get(
         "/:idYear",
-        validator("param", paramsValidator(auth.years.read.params)),
+        validator("param", paramsValidator(auth.years.get.params)),
         async (c) => {
             const params = c.req.valid('param')
 
@@ -59,8 +59,8 @@ export const yearsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idYear',
-        validator("param", paramsValidator(auth.years.update.params)),
-        validator("json", bodyValidator(auth.years.update.body)),
+        validator("param", paramsValidator(auth.years.put.params)),
+        validator("json", bodyValidator(auth.years.put.body)),
         async (c) => {
             const params = c.req.valid('param')
             const body = c.req.valid('json')
@@ -80,7 +80,7 @@ export const yearsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idYear',
-        validator("param", paramsValidator(auth.years.update.params)),
+        validator("param", paramsValidator(auth.years.put.params)),
         async (c) => {
             const params = c.req.valid('param')
 

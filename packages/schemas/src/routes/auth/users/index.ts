@@ -6,15 +6,15 @@ import { updateOneUserBody, updateOneUserParams, updateOneUserReturn } from "./u
 
 
 export const users = {
-    create: {
+    post: {
         body: createOneUserBody,
         return: createOneUserReturn
     },
-    read: {
+    get: {
         params: readOneUserParams,
         return: readOneUserReturn
     },
-    update: {
+    put: {
         params: updateOneUserParams,
         body: updateOneUserBody,
         return: updateOneUserReturn

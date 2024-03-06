@@ -1,10 +1,10 @@
-import { entryInclude } from "../entry/entry.include"
+import { recordInclude } from "../record/record.include"
 import { userInclude } from "../user/user.include"
 
 
 export const attachmentWith = {
-    entries: {
-        columns: entryInclude
+    records: {
+        columns: recordInclude
     },
     lastUpdatedByUser: {
         columns: userInclude

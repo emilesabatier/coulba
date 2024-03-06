@@ -14,7 +14,7 @@ export function MainHeader(props: MainHeader) {
     const title = matchWithTitle?.context.title || 'Coulba'
 
     return (
-        <div className="w-full h-full flex justify-between items-stretch overflow-hidden gap-2 md:gap-4 p-4 md:p-8 border-b-2 border-neutral/5">
+        <div className="w-full h-full flex justify-between items-stretch overflow-hidden gap-2 md:gap-4">
             <span className="text-2xl">{title}</span>
             {props.children}
         </div>

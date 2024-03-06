@@ -12,7 +12,7 @@ import { paramsValidator } from "../../middlewares/paramsValidator"
 export const accountsRoute = new Hono<AuthEnv>()
     .get(
         "/:idAccount",
-        validator("param", paramsValidator(auth.accounts.read.params)),
+        validator("param", paramsValidator(auth.accounts.get.params)),
         async (c) => {
             const params = c.req.valid('param')
 

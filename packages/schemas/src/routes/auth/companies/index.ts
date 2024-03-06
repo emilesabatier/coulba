@@ -3,11 +3,11 @@ import { updateOneCompanyBody, updateOneCompanyParams, updateOneCompanyReturn } 
 
 
 export const companies = {
-    read: {
+    get: {
         params: readOneCompanyParams,
         return: readOneCompanyReturn
     },
-    update: {
+    put: {
         params: updateOneCompanyParams,
         body: updateOneCompanyBody,
         return: updateOneCompanyReturn

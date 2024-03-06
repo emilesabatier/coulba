@@ -21,15 +21,14 @@ import { overviewRoute } from './auth/overview/overview.route'
 import { profileLayout } from './auth/profile/profile.layout'
 import { profileRoute } from './auth/profile/profile.route'
 import { settingsRoute } from './auth/profile/settings.route'
-import { balanceRoute } from './auth/records/balance.route'
-import { entriesLayout } from './auth/records/entries/entries.layout'
-import { entriesRoute } from './auth/records/entries/entries.route'
-import { entryRoute } from './auth/records/entries/entry.route'
-import { ledgerRoute } from './auth/records/ledger.route'
-import { recordsLayout } from './auth/records/records.layout'
-import { recordsRoute } from './auth/records/records.route'
+import { balanceRoute } from './auth/transactions/balance.route'
+import { ledgerRoute } from './auth/transactions/ledger.route'
+import { pendingTransactionsRoute } from './auth/transactions/pendingTransactions.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
+import { recordsRoute } from './auth/transactions/records.route'
+import { transactionsLayout } from './auth/transactions/transactions.layout'
+import { transactionsRoute } from './auth/transactions/transactions.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -37,12 +36,10 @@ const routeTree = rootLayout.addChildren([
     authLayout.addChildren([
         overviewRoute,
 
-        recordsLayout.addChildren([
+        transactionsLayout.addChildren([
+            transactionsRoute,
+            pendingTransactionsRoute,
             recordsRoute,
-            entriesLayout.addChildren([
-                entriesRoute,
-                entryRoute
-            ]),
             ledgerRoute,
             balanceRoute
         ]),

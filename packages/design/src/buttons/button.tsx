@@ -30,7 +30,7 @@ export const Button = forwardRef<HTMLButtonElement, Button>(
                 {...props}
                 ref={ref}
                 className={cn(
-                    "flex flex-row justify-start items-center cursor-pointer disabled:cursor-not-allowed w-fit max-w-full h-fit max-h-fit overflow-hidden select-text",
+                    "flex flex-row justify-start items-center cursor-pointer disabled:cursor-not-allowed w-fit max-w-full h-fit max-h-fit select-text",
                     props.className
                 )}
                 onClick={handleClick}

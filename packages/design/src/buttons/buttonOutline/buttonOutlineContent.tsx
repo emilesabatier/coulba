@@ -57,7 +57,7 @@ export function ButtonOutlineContent(props: ButtonOutlineContent) {
         <div
             aria-disabled={props.disabled || props.loading}
             className={cn(
-                "overflow-hidden min-w-[42px] w-fit min-h-[40px] h-full max-h-[40px] flex justify-start items-center border",
+                "min-w-[42px] w-fit min-h-[40px] h-full max-h-[40px] flex justify-start items-center border rounded-sm shadow-button",
                 "aria-disabled:opacity-30",
                 !props.text ? "p-2.5 w-[42px]" : "w-fit p-2.5 gap-2",
                 variants[props?.color ?? "neutral"].container,

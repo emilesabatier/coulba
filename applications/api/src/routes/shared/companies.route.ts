@@ -10,7 +10,7 @@ import { bodyValidator } from "../../middlewares/bodyValidator"
 export const companiesRoute = new Hono()
     .post(
         '/',
-        validator("json", bodyValidator(shared.companies.create.body)),
+        validator("json", bodyValidator(shared.companies.post.body)),
         async (c) => {
             const body = c.req.valid('json')
 

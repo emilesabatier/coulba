@@ -3,18 +3,18 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
 import { AuthEnv } from "../../middlewares/checkAuth"
 import { paramsValidator } from "../../middlewares/paramsValidator"
-import { HTTPException } from "hono/http-exception"
 
 
 export const journalsRoute = new Hono<AuthEnv>()
     .post(
         '/',
-        validator("json", bodyValidator(auth.journals.create.body)),
+        validator("json", bodyValidator(auth.journals.post.body)),
         async (c) => {
             const body = c.req.valid('json')
 
@@ -33,7 +33,7 @@ export const journalsRoute = new Hono<AuthEnv>()
     )
     .get(
         "/:idJournal",
-        validator("param", paramsValidator(auth.journals.read.params)),
+        validator("param", paramsValidator(auth.journals.get.params)),
         async (c) => {
             const params = c.req.valid('param')
 
@@ -58,8 +58,8 @@ export const journalsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idJournal',
-        validator("param", paramsValidator(auth.journals.update.params)),
-        validator("json", bodyValidator(auth.journals.update.body)),
+        validator("param", paramsValidator(auth.journals.put.params)),
+        validator("json", bodyValidator(auth.journals.put.body)),
         async (c) => {
             const params = c.req.valid('param')
             const body = c.req.valid('json')
@@ -78,7 +78,7 @@ export const journalsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idJournal',
-        validator("param", paramsValidator(auth.journals.update.params)),
+        validator("param", paramsValidator(auth.journals.put.params)),
         async (c) => {
             const params = c.req.valid('param')
 

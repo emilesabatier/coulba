@@ -1,6 +1,6 @@
 import * as v from "valibot"
 import { attachmentSchema } from "../../../schemas/attachment/attachment.schema"
-import { entrySchema } from "../../../schemas/entry/entry.schema"
+import { recordSchema } from "../../../schemas/record/record.schema"
 import { userKeys } from "../../../schemas/user/user.include"
 import { userSchema } from "../../../schemas/user/user.schema"
 
@@ -15,7 +15,7 @@ export const readOneAttachmentParams = v.object({
 export const readOneAttachmentReturn = v.merge([
     attachmentSchema,
     v.object({
-        entries: v.array(entrySchema),
+        records: v.array(recordSchema),
         lastUpdatedByUser: v.nullable(v.pick(userSchema, userKeys)),
         createdByUser: v.nullable(v.pick(userSchema, userKeys)),
     })
