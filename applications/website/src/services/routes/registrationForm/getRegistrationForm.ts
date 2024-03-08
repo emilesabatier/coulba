@@ -1,11 +1,11 @@
 import { PublicRegistrationForm } from "@coulba/schemas/routes"
 
 
-type ReadOneRegistrationForm = {
-    params: PublicRegistrationForm.ReadOneRegistrationFormParams
+type ReadRegistrationForm = {
+    params: PublicRegistrationForm.ReadRegistrationFormParams
 }
 
-export async function readOneRegistrationForm(props: ReadOneRegistrationForm) {
+export async function readRegistrationForm(props: ReadRegistrationForm) {
     try {
         const response = await fetch(
             new URL(`${import.meta.env.VITE_PUBLIC_API_BASE}/public/registration-form/${props.params.idRegistrationForm}`),
@@ -18,7 +18,7 @@ export async function readOneRegistrationForm(props: ReadOneRegistrationForm) {
                 cache: "no-store"
             }
         )
-        if (response.ok) return response.json() as Promise<PublicRegistrationForm.ReadOneRegistrationFormReturn>
+        if (response.ok) return response.json() as Promise<PublicRegistrationForm.ReadRegistrationFormReturn>
         return false
     } catch {
         return false

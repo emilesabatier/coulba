@@ -52,7 +52,7 @@ export function Navigation() {
             <Link to="/">
                 <div className="flex flex-col justify-start items-start">
                     <Logo />
-                    <span className="text-primary">MonAssoSportive</span>
+                    <span className="text-neutral">MonAssoSportive</span>
                 </div>
             </Link>
             {

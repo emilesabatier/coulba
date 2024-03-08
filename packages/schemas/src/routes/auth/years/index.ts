@@ -1,25 +1,25 @@
-import { createOneYearBody, createOneYearReturn } from "./createOneYear"
-import { deleteOneYearParams, deleteOneYearReturn } from "./deleteOneYear"
-import { readOneYearParams, readOneYearReturn } from "./readOneYear"
-import { updateOneYearBody, updateOneYearParams, updateOneYearReturn } from "./updateOneYear"
+import { createYearBody, createYearReturn } from "./createYear"
+import { deleteYearParams, deleteYearReturn } from "./deleteYear"
+import { readYearParams, readYearReturn } from "./readYear"
+import { updateYearBody, updateYearParams, updateYearReturn } from "./updateYear"
 
 
 export const years = {
     post: {
-        body: createOneYearBody,
-        return: createOneYearReturn
+        body: createYearBody,
+        return: createYearReturn
     },
     get: {
-        params: readOneYearParams,
-        return: readOneYearReturn
+        params: readYearParams,
+        return: readYearReturn
     },
     put: {
-        params: updateOneYearParams,
-        body: updateOneYearBody,
-        return: updateOneYearReturn
+        params: updateYearParams,
+        body: updateYearBody,
+        return: updateYearReturn
     },
     delete: {
-        params: deleteOneYearParams,
-        return: deleteOneYearReturn
+        params: deleteYearParams,
+        return: deleteYearReturn
     }
 }

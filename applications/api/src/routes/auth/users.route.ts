@@ -42,7 +42,7 @@ export const usersRoute = new Hono<AuthEnv>()
         }
     )
     .get(
-        "/:idUser",
+        "/:idUser?",
         validator("param", paramsValidator(auth.users.get.params)),
         async (c) => {
             const params = c.req.valid('param')

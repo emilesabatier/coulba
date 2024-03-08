@@ -2,9 +2,9 @@ import { relations } from "drizzle-orm"
 import { integer, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
-import { companies } from "./companies.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
+import { companies } from "./companies.model.js"
 
 
 // Model
@@ -12,14 +12,15 @@ export const accounts = pgTable(
     "accounts",
     {
         id: idColumn("id").primaryKey(),
+        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idAccountParent: idColumn("id_account_parent"),
-        label: text("label").notNull(),
         number: integer("number").notNull().unique(),
+        label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
         createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
-        lastUpdatedBy: idColumn("last_updated_by"),
-        createdBy: idColumn("created_by")
+        lastUpdatedBy: idColumn("last_updated_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
+        createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     }
 )
 
@@ -33,13 +34,5 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
     accountParent: one(accounts, {
         fields: [accounts.idAccountParent],
         references: [accounts.id],
-    }),
-    lastUpdatedByUser: one(companies, {
-        fields: [accounts.lastUpdatedBy],
-        references: [companies.id],
-    }),
-    createdByUser: one(users, {
-        fields: [accounts.createdBy],
-        references: [users.id],
     })
 }))

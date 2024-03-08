@@ -1,5 +1,5 @@
 import { Card } from "@coulba/design/layouts"
-import { CreateOneTicket } from "../support/contactSupport/createOneTicket/createOneTicket"
+import { CreateTicket } from "../support/contactSupport/createTicket/createTicket"
 
 
 export function ContactBanner() {
@@ -13,11 +13,11 @@ export function ContactBanner() {
                     </span>
                 </Link>
                 &nbsp;ou&nbsp; */}
-                <CreateOneTicket>
+                <CreateTicket>
                     <span className="text-information underline cursor-pointer hover:no-underline">
                         nous contacter
                     </span>
-                </CreateOneTicket>
+                </CreateTicket>
                 .
             </p>
         </Card>

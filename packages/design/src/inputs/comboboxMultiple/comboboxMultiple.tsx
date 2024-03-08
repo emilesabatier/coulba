@@ -115,20 +115,20 @@ export function ComboboxMultiple<T>({ options, selectedValues, onChange, classNa
                                         }}
                                         className={cn(
                                             "p-3 h-[40px] flex justify-between items-center overflow-hidden gap-3",
-                                            selectedValues.map(x => props.getId(x)).includes(option.key) ? "bg-primary/10" : "bg-none hover:bg-neutral/5"
+                                            selectedValues.map(x => props.getId(x)).includes(option.key) ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
                                         )}
                                     >
                                         <span
                                             className={cn(
                                                 "text-base",
-                                                selectedValues.map(x => props.getId(x)).includes(option.key) ? "text-primary" : "text-neutral"
+                                                selectedValues.map(x => props.getId(x)).includes(option.key) ? "text-neutral" : "text-neutral"
                                             )}
                                         >
                                             {option.label}
                                         </span>
                                         <IconCheck
                                             className={cn(
-                                                "h-4 w-4 stroke-primary",
+                                                "h-4 w-4 stroke-neutral",
                                                 selectedValues.map(x => props.getId(x)).includes(option.key) ? "opacity-100" : "opacity-0"
                                             )}
                                         />

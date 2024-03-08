@@ -47,17 +47,17 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
                                             <AccordionTrigger className="group">
                                                 <div className={cn(
                                                     "w-full flex justify-between items-center gap-4 p-4 overflow-hidden",
-                                                    "group-data-[state=open]:border-none group-data-[state=open]:border-primary"
+                                                    "group-data-[state=open]:border-none group-data-[state=open]:border-neutral"
                                                 )}>
                                                     <div className="flex justify-start items-center gap-2">
-                                                        <span className="text-left group-data-[state=open]:text-primary">
+                                                        <span className="text-left group-data-[state=open]:text-neutral">
                                                             {column.columnDef.meta?.label}
                                                         </span>
                                                     </div>
                                                     <div className="flex justify-end items-center gap-2 overflow-hidden">
                                                         {!column.getIsFiltered() ? null : <Chip text="Actif" />}
                                                         <IconChevronDown
-                                                            className="stroke-neutral group-data-[state=open]:-rotate-180 group-data-[state=open]:stroke-primary"
+                                                            className="stroke-neutral group-data-[state=open]:-rotate-180 group-data-[state=open]:stroke-neutral"
                                                             size={16}
                                                         />
                                                     </div>

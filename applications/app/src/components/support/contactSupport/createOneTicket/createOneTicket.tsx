@@ -1,19 +1,19 @@
 // import { toast } from "@coulba/design/overlays"
 // import { DashboardSupport, dashboardSchema } from "@coulba/schemas/routes"
 // import { ReactElement, forwardRef } from "react"
-// import { CreateOneTicketForm } from "./createOneTicketForm"
+// import { CreateTicketForm } from "./createTicketForm"
 // import { contactSupport } from "../../../../services/routes/dashboard/support/contactSupport"
-// import { CreateOne } from "../../../layouts/actions/createOne"
+// import { Create } from "../../../layouts/actions/create"
 
 
-// type CreateOneTicket = {
+// type CreateTicket = {
 //     children: ReactElement
 // }
 
-// export const CreateOneTicket = forwardRef<HTMLButtonElement, CreateOneTicket>(
+// export const CreateTicket = forwardRef<HTMLButtonElement, CreateTicket>(
 //     function (props, ref) {
 
-//         const createOne = async (data: DashboardSupport.ContactSupportBody) => {
+//         const create = async (data: DashboardSupport.ContactSupportBody) => {
 //             const response = await contactSupport({ body: data })
 //             if (!response.status) return false
 
@@ -23,14 +23,14 @@
 //         }
 
 //         return (
-//             <CreateOne<DashboardSupport.ContactSupportBody>
+//             <Create<DashboardSupport.ContactSupportBody>
 //                 fRef={ref}
 //                 triggerElement={props.children}
 //                 title="Nous contacter"
 //                 submitLabel="Envoyer"
-//                 onSubmit={(data) => createOne(data)}
+//                 onSubmit={(data) => create(data)}
 //                 zodSchema={dashboardSchema.support.contactSupportBody}
-//                 children={<CreateOneTicketForm />}
+//                 children={<CreateTicketForm />}
 //             />
 
 //         )

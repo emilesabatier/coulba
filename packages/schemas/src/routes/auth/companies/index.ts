@@ -1,15 +1,14 @@
-import { readOneCompanyParams, readOneCompanyReturn } from "./readOneCompany"
-import { updateOneCompanyBody, updateOneCompanyParams, updateOneCompanyReturn } from "./updateOneCompany"
+import { readCompanyReturn } from "./readCompany"
+import { updateCompanyBody, updateCompanyParams, updateCompanyReturn } from "./updateCompany"
 
 
 export const companies = {
     get: {
-        params: readOneCompanyParams,
-        return: readOneCompanyReturn
+        return: readCompanyReturn
     },
     put: {
-        params: updateOneCompanyParams,
-        body: updateOneCompanyBody,
-        return: updateOneCompanyReturn
+        params: updateCompanyParams,
+        body: updateCompanyBody,
+        return: updateCompanyReturn
     }
 }

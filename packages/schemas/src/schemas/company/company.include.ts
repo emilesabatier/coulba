@@ -5,6 +5,5 @@ export const companyInclude = {
     name: true,
     lastUpdatedOn: true,
     createdOn: true,
-    lastUpdatedBy: true,
-    createdBy: true
+    lastUpdatedBy: true
 } as const

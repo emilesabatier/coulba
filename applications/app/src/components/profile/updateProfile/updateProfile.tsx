@@ -6,7 +6,7 @@
 // import { profileKey } from "../../../hooks/useProfile"
 // import { capitalize } from "../../../services/capitalize.service"
 // import { updateProfile } from "../../../services/routes/dashboard/profile/updateProfile"
-// import { UpdateOne } from "../../layouts/actions/updateOne"
+// import { Update } from "../../layouts/actions/update"
 
 
 // type UpdateProfile = {
@@ -17,7 +17,7 @@
 // export const UpdateProfile = forwardRef<HTMLButtonElement, UpdateProfile>(
 //     function (props, ref) {
 
-//         const updateOne = async (data: DashboardProfile.UpdateProfileBody) => {
+//         const update = async (data: DashboardProfile.UpdateProfileBody) => {
 //             const response = await updateProfile({ body: data })
 //             if (!response.status) return false
 
@@ -27,7 +27,7 @@
 //         }
 
 //         return (
-//             <UpdateOne<DashboardProfile.UpdateProfileBody>
+//             <Update<DashboardProfile.UpdateProfileBody>
 //                 fRef={ref}
 //                 triggerElement={props.children}
 //                 title="Mettre à jour le profil"
@@ -44,7 +44,7 @@
 //                         }
 //                     }
 //                 }}
-//                 onSubmit={(data) => updateOne(data)}
+//                 onSubmit={(data) => update(data)}
 //                 zodSchema={dashboardSchema.profile.updateProfileBody}
 //                 children={<UpdateProfileForm />}
 //             />

@@ -1,12 +1,12 @@
-import { companies, users, years } from '@coulba/schemas/models'
+import { accounts, companies, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName, randFullName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
-import { eq } from 'drizzle-orm'
 import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
+import { defaultAccounts } from './accounts'
 
 
 export function generateTemporaryPassword(): string {
@@ -24,22 +24,25 @@ async function seed() {
     try {
         await db.transaction(async (tx) => {
 
+
             // Company
             console.log("Add company")
             const newCompany: (typeof companies.$inferInsert) = {
                 id: generateId(),
-                idYear: null,
                 siren: "123123123",
-                name: "MonAssoDemo"
+                name: "MaSociétéDémo"
             }
             await tx.insert(companies).values(newCompany)
 
+
             // Years
             console.log("Add years")
+            const idCurrentYear = generateId()
             const newYears: (typeof years.$inferInsert)[] = [
                 {
-                    id: generateId(),
+                    id: idCurrentYear,
                     idCompany: newCompany.id,
+                    isCurrent: true,
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2024, 11, 31, 23, 99, 99).toISOString()
@@ -47,6 +50,7 @@ async function seed() {
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
+                    isCurrent: false,
                     label: "Exercice 2023",
                     startingOn: new Date(2023, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2023, 11, 31, 23, 99, 99).toISOString()
@@ -54,13 +58,26 @@ async function seed() {
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
+                    isCurrent: false,
                     label: "Exercice 2022",
                     startingOn: new Date(2022, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2022, 11, 31, 23, 99, 99).toISOString()
                 }
             ]
             await tx.insert(years).values(newYears)
-            await tx.update(companies).set({ idYear: newYears.at(0)?.id }).where(eq(companies.id, newCompany.id))
+
+
+            // Account
+            console.log("Add accounts")
+            const newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((defaultAccount) => ({
+                id: generateId(),
+                idCompany: newCompany.id,
+                idYear: idCurrentYear,
+                number: defaultAccount.number,
+                label: defaultAccount.label
+            }))
+            await tx.insert(accounts).values(newAccounts)
+
 
             // User
             console.log("Add user")

@@ -24,32 +24,10 @@ export const menuItems: MenuItem[] = [
         path: "/"
     },
     {
-        key: "records",
-        label: "Livres",
-        basePath: "/livres",
-        path: "/livres/journal",
-        subMenuItems: [
-            {
-                basePath: "/livres/enregistrements",
-                path: "/livres/enregistrements",
-                label: "Enregistrements provisoires"
-            },
-            {
-                basePath: "/livres/journal",
-                path: "/livres/journal",
-                label: "Journal"
-            },
-            {
-                basePath: "/livres/grand-livre",
-                path: "/livres/grand-livre",
-                label: "Grand livre"
-            },
-            {
-                basePath: "/livres/balance",
-                path: "/livres/balance",
-                label: "Balance"
-            }
-        ]
+        key: "transactions",
+        label: "Enregistrements",
+        basePath: "/enregistrements",
+        path: "/enregistrements"
     },
     {
         key: "attachments",
@@ -58,25 +36,35 @@ export const menuItems: MenuItem[] = [
         path: "/pieces"
     },
     {
-        key: "declaration",
-        label: "Liasse fiscale",
-        basePath: "/liasse",
-        path: "/liasse/bilan",
+        key: "reports",
+        label: "Documents comptables",
+        basePath: "/documents",
+        path: "/documents/bilan",
         subMenuItems: [
             {
-                basePath: "/liasse/bilan",
-                path: "/liasse/bilan",
+                basePath: "/documents/journal",
+                path: "/documents/journal",
+                label: "Journal"
+            },
+            {
+                basePath: "/documents/grand-livre",
+                path: "/documents/grand-livre",
+                label: "Grand livre"
+            },
+            {
+                basePath: "/documents/balance",
+                path: "/documents/balance",
+                label: "Balance"
+            },
+            {
+                basePath: "/documents/bilan",
+                path: "/documents/bilan",
                 label: "Bilan"
             },
             {
-                basePath: "/liasse/compte-de-resultat",
-                path: "/liasse/compte-de-resultat",
+                basePath: "/documents/compte-de-resultat",
+                path: "/documents/compte-de-resultat",
                 label: "Compte de résultats"
-            },
-            {
-                basePath: "/liasse/cloture",
-                path: "/liasse/cloture",
-                label: "Clôture"
             }
         ]
     },
@@ -109,7 +97,12 @@ export const menuItems: MenuItem[] = [
             {
                 basePath: "/configuration/exercices",
                 path: "/configuration/exercices",
-                label: "Exercices"
+                label: "Exercices fiscaux"
+            },
+            {
+                basePath: "/configuration/cloture",
+                path: "/configuration/cloture",
+                label: "Clôture"
             },
             {
                 basePath: "/configuration/journaux",

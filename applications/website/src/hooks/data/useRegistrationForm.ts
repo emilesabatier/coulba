@@ -1,10 +1,10 @@
 import { PublicRegistrationForm } from '@coulba/schemas/routes'
 import { useEffect, useState } from 'react'
-import { readOneRegistrationForm } from '../../services/routes/registrationForm/getRegistrationForm'
+import { readRegistrationForm } from '../../services/routes/registrationForm/getRegistrationForm'
 
 
 export function useRegistrationForm(idRegistrationForm: string | undefined) {
-    const [result, setResult] = useState<PublicRegistrationForm.ReadOneRegistrationFormReturn | undefined>(undefined)
+    const [result, setResult] = useState<PublicRegistrationForm.ReadRegistrationFormReturn | undefined>(undefined)
     const [loading, setLoading] = useState<boolean | null>(true)
 
     useEffect(() => {
@@ -12,7 +12,7 @@ export function useRegistrationForm(idRegistrationForm: string | undefined) {
             try {
                 if (idRegistrationForm === undefined) return setLoading(false)
 
-                const response = await readOneRegistrationForm({ params: { idRegistrationForm: idRegistrationForm } })
+                const response = await readRegistrationForm({ params: { idRegistrationForm: idRegistrationForm } })
 
                 if (response === false) {
                     setResult(undefined)
@@ -30,5 +30,5 @@ export function useRegistrationForm(idRegistrationForm: string | undefined) {
         }
     }, [idRegistrationForm])
 
-    return [result, loading] as [PublicRegistrationForm.ReadOneRegistrationFormReturn | undefined, boolean | null]
+    return [result, loading] as [PublicRegistrationForm.ReadRegistrationFormReturn | undefined, boolean | null]
 }

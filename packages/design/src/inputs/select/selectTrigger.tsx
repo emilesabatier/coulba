@@ -13,7 +13,7 @@ export const SelectTrigger = forwardRef<
         ref={ref}
         className={cn(
             "h-[40px] min-w-fit w-full flex flex-row justify-between items-center gap-2 p-2 border border-solid rounded-sm data-[placeholder]:text-neutral/50 disabled:cursor-not-allowed disabled:opacity-50",
-            "focus:border-primary focus:bg-primary/5",
+            "focus:border-neutral focus:bg-neutral/5",
             (!props.error) ? "border-neutral/25" : "border-error",
             className
         )}

@@ -1,25 +1,25 @@
-import { createOneAttachmentBody, createOneAttachmentReturn } from "./createOneAttachment"
-import { deleteOneAttachmentParams, deleteOneAttachmentReturn } from "./deleteOneAttachment"
-import { readOneAttachmentParams, readOneAttachmentReturn } from "./readOneAttachment"
-import { updateOneAttachmentBody, updateOneAttachmentParams, updateOneAttachmentReturn } from "./updateOneAttachment"
+import { createAttachmentBody, createAttachmentReturn } from "./createAttachment"
+import { deleteAttachmentParams, deleteAttachmentReturn } from "./deleteAttachment"
+import { readAttachmentParams, readAttachmentReturn } from "./readAttachment"
+import { updateAttachmentBody, updateAttachmentParams, updateAttachmentReturn } from "./updateAttachment"
 
 
 export const attachments = {
     post: {
-        body: createOneAttachmentBody,
-        return: createOneAttachmentReturn
+        body: createAttachmentBody,
+        return: createAttachmentReturn
     },
     get: {
-        params: readOneAttachmentParams,
-        return: readOneAttachmentReturn
+        params: readAttachmentParams,
+        return: readAttachmentReturn
     },
     put: {
-        params: updateOneAttachmentParams,
-        body: updateOneAttachmentBody,
-        return: updateOneAttachmentReturn
+        params: updateAttachmentParams,
+        body: updateAttachmentBody,
+        return: updateAttachmentReturn
     },
     delete: {
-        params: deleteOneAttachmentParams,
-        return: deleteOneAttachmentReturn
+        params: deleteAttachmentParams,
+        return: deleteAttachmentReturn
     }
 }

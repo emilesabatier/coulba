@@ -106,7 +106,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
         )}
         {...props}
     >
-        <div className="w-full group-aria-[checked=true]:bg-primary/10 flex justify-start items-center gap-2 p-2">
+        <div className="w-full group-aria-[checked=true]:bg-neutral/10 flex justify-start items-center gap-2 p-2">
             <DropdownMenuPrimitive.ItemIndicator>
                 <IconCheck size={16} />
             </DropdownMenuPrimitive.ItemIndicator>

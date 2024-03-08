@@ -1,9 +1,9 @@
-import { createOneCompanyBody, createOneCompanyReturn } from "./createOneCompany"
+import { createCompanyBody, createCompanyReturn } from "./createCompany"
 
 
 export const companies = {
     post: {
-        body: createOneCompanyBody,
-        return: createOneCompanyReturn
+        body: createCompanyBody,
+        return: createCompanyReturn
     }
 }

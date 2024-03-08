@@ -8,8 +8,8 @@ type BadmintonSVG = {
 export function BadmintonSVG(props: BadmintonSVG) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" className={props.className} preserveAspectRatio="xMidYMid meet">
-            <rect x="229.053" y="350.316" className="fill-primary/25" width="53.895" height="148.211" />
-            <path className="fill-primary/100" d="M390.737,154.947C390.737,69.509,330.294,0,256,0S121.263,69.509,121.263,154.947
+            <rect x="229.053" y="350.316" className="fill-neutral/25" width="53.895" height="148.211" />
+            <path className="fill-neutral/100" d="M390.737,154.947C390.737,69.509,330.294,0,256,0S121.263,69.509,121.263,154.947
 	c0,80.225,53.292,146.4,121.302,154.179c-0.015,0.256-0.039,0.509-0.039,0.768v26.947h-13.474c-7.442,0-13.474,6.034-13.474,13.474
 	v148.211c0,7.44,6.032,13.474,13.474,13.474h53.895c7.441,0,13.474-6.033,13.474-13.474V350.316c0-7.44-6.032-13.474-13.474-13.474
 	h-13.474v-26.947c0-0.26-0.024-0.512-0.039-0.768C337.444,301.347,390.737,235.172,390.737,154.947z M175.158,239.511

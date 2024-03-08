@@ -12,16 +12,12 @@ import { paramsValidator } from "../../middlewares/paramsValidator"
 
 export const companiesRoute = new Hono<AuthEnv>()
     .get(
-        "/:idCompany",
-        validator("param", paramsValidator(auth.companies.get.params)),
+        "/",
         async (c) => {
-            const params = c.req.valid('param')
-            if (!params.idCompany) throw new HTTPException(400, { message: "Impossible de lire l'identifiant de la société" })
-
             const [readCompany] = await db
                 .select()
                 .from(companies)
-                .where(eq(companies.id, params.idCompany))
+                .where(eq(companies.id, c.var.user.idCompany))
 
             if (!readCompany) throw new HTTPException(404, { message: "Société non trouvée" })
             return c.json(readCompany, 200)
@@ -38,7 +34,6 @@ export const companiesRoute = new Hono<AuthEnv>()
             const [updateCompany] = await db
                 .update(companies)
                 .set({
-                    idYear: body.idYear,
                     siren: body.siren,
                     name: body.name
                 })

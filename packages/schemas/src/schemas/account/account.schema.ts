@@ -8,6 +8,7 @@ import { accounts } from "../../models"
 
 export const accountSchema = createSelectSchema(accounts, {
     id: idSchema,
+    idCompany: idSchema,
     idYear: idSchema,
     idAccountParent: idSchema,
     label: textSchema,

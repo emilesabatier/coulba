@@ -18,29 +18,17 @@ export const attachments = pgTable(
         label: text("label"),
         lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
         createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
-        lastUpdatedBy: idColumn("last_updated_by"),
-        createdBy: idColumn("created_by")
+        lastUpdatedBy: idColumn("last_updated_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
+        createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     }
 )
 
 
 // Relations
 export const attachmentsRelations = relations(attachments, ({ one, many }) => ({
-    company: one(companies, {
-        fields: [attachments.idCompany],
-        references: [companies.id],
-    }),
     year: one(years, {
         fields: [attachments.idYear],
         references: [years.id],
     }),
-    records: many(companies),
-    lastUpdatedByUser: one(companies, {
-        fields: [attachments.lastUpdatedBy],
-        references: [companies.id],
-    }),
-    createdByUser: one(users, {
-        fields: [attachments.createdBy],
-        references: [users.id],
-    })
+    records: many(companies)
 }))

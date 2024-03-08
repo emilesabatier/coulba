@@ -6,7 +6,7 @@ export function AuthLayout() {
     return (
         <div id="app" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden">
             <Page.Root>
-                <Page.Header />
+                <Page.Navigation />
                 <Page.Content>
                     <Outlet />
                 </Page.Content>

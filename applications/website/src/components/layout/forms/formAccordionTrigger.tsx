@@ -27,10 +27,10 @@ export function FormAccordionTrigger<T extends FieldValues>(props: FormAccordion
         <AccordionTrigger className="group">
             <div className={cn(
                 "w-full flex justify-between items-center gap-4 p-4 overflow-hidden",
-                "group-data-[state=open]:border-none group-data-[state=open]:border-primary"
+                "group-data-[state=open]:border-none group-data-[state=open]:border-neutral"
             )}>
                 <div className="flex justify-start items-center gap-2">
-                    <span className="text-left leading-none text-neutral group-data-[state=open]:text-primary">
+                    <span className="text-left leading-none text-neutral group-data-[state=open]:text-neutral">
                         {props.label}
                     </span>
                 </div>
@@ -38,7 +38,7 @@ export function FormAccordionTrigger<T extends FieldValues>(props: FormAccordion
                     {
                         (errorsNumber === 0) ? null : (<span className="text-xs text-error whitespace-nowrap overflow-hidden text-ellipsis">{errorsNumber} erreur(s)</span>)
                     }
-                    <IconChevronDown className="stroke-neutral group-data-[state=open]:-rotate-180 group-data-[state=open]:stroke-primary" size={16} />
+                    <IconChevronDown className="stroke-neutral group-data-[state=open]:-rotate-180 group-data-[state=open]:stroke-neutral" size={16} />
                 </div>
             </div>
         </AccordionTrigger>

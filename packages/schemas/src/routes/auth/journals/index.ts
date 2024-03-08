@@ -1,25 +1,25 @@
-import { createOneJournalBody, createOneJournalReturn } from "./createOneJournal"
-import { deleteOneJournalParams, deleteOneJournalReturn } from "./deleteOneJournal"
-import { readOneJournalParams, readOneJournalReturn } from "./readOneJournal"
-import { updateOneJournalBody, updateOneJournalParams, updateOneJournalReturn } from "./updateOneJournal"
+import { createJournalBody, createJournalReturn } from "./createJournal"
+import { deleteJournalParams, deleteJournalReturn } from "./deleteJournal"
+import { readJournalParams, readJournalReturn } from "./readJournal"
+import { updateJournalBody, updateJournalParams, updateJournalReturn } from "./updateJournal"
 
 
 export const journals = {
     post: {
-        body: createOneJournalBody,
-        return: createOneJournalReturn
+        body: createJournalBody,
+        return: createJournalReturn
     },
     get: {
-        params: readOneJournalParams,
-        return: readOneJournalReturn
+        params: readJournalParams,
+        return: readJournalReturn
     },
     put: {
-        params: updateOneJournalParams,
-        body: updateOneJournalBody,
-        return: updateOneJournalReturn
+        params: updateJournalParams,
+        body: updateJournalBody,
+        return: updateJournalReturn
     },
     delete: {
-        params: deleteOneJournalParams,
-        return: deleteOneJournalReturn
+        params: deleteJournalParams,
+        return: deleteJournalReturn
     }
 }

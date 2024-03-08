@@ -32,7 +32,7 @@ export const journalsRoute = new Hono<AuthEnv>()
         }
     )
     .get(
-        "/:idJournal",
+        "/:idJournal?",
         validator("param", paramsValidator(auth.journals.get.params)),
         async (c) => {
             const params = c.req.valid('param')

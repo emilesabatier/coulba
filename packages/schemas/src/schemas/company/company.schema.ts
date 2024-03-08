@@ -12,6 +12,5 @@ export const companySchema = createSelectSchema(companies, {
     name: textSchema,
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
-    lastUpdatedBy: idSchema,
-    createdBy: idSchema
+    lastUpdatedBy: idSchema
 })

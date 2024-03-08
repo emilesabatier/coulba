@@ -1,11 +1,11 @@
 import { PublicRegistration } from "@coulba/schemas/routes"
 
 
-type CreateOneRegistration = {
-    body: PublicRegistration.CreateOneRegistrationBody
+type CreateRegistration = {
+    body: PublicRegistration.CreateRegistrationBody
 }
 
-export async function createOneRegistration(props: CreateOneRegistration) {
+export async function createRegistration(props: CreateRegistration) {
     try {
         const response = await fetch(
             new URL(`${import.meta.env.VITE_PUBLIC_API_BASE}/public/registration/`),

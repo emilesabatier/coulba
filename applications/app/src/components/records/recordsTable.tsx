@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { readRecord } from "../../services/api/auth/records/readRecord"
+import { readRecords } from "../../services/api/auth/records/readRecords"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Loading } from "../layouts/loading"
 
@@ -7,7 +7,7 @@ import { Loading } from "../layouts/loading"
 export function RecordsTable() {
     const { data, isPending, isError, error } = useQuery({
         queryKey: ["records"],
-        queryFn: () => readRecord({ params: {} })
+        queryFn: readRecords
     })
 
     if (isPending) return <Loading />

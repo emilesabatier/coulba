@@ -8,7 +8,7 @@ export function DefaultContent() {
     return (
         <div className='w-screen h-screen flex flex-col justify-center items-center gap-4'>
             <div className='max-w-[320px] p-8'>
-                <Logo className='stroke-primary fill-primary' />
+                <Logo className='stroke-neutral fill-neutral' />
             </div>
             <div className='flex flex-col justify-center items-center gap-2'>
                 <h2 className='mt-4'>Cette page n'existe pas ou la ressource demandée n'est pas disponible.</h2>

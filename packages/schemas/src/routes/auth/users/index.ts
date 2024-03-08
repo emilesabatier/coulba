@@ -1,27 +1,27 @@
-import { createOneUserBody, createOneUserReturn } from "./createOneUser"
-import { deleteOneUserParams, deleteOneUserReturn } from "./deleteOneUser"
-import { readOneUserParams, readOneUserReturn } from "./readOneUser"
+import { createUserBody, createUserReturn } from "./createUser"
+import { deleteUserParams, deleteUserReturn } from "./deleteUser"
+import { readUserParams, readUserReturn } from "./readUser"
 import { sendInvitationParams } from "./sendInvitation"
-import { updateOneUserBody, updateOneUserParams, updateOneUserReturn } from "./updateOneUser"
+import { updateUserBody, updateUserParams, updateUserReturn } from "./updateUser"
 
 
 export const users = {
     post: {
-        body: createOneUserBody,
-        return: createOneUserReturn
+        body: createUserBody,
+        return: createUserReturn
     },
     get: {
-        params: readOneUserParams,
-        return: readOneUserReturn
+        params: readUserParams,
+        return: readUserReturn
     },
     put: {
-        params: updateOneUserParams,
-        body: updateOneUserBody,
-        return: updateOneUserReturn
+        params: updateUserParams,
+        body: updateUserBody,
+        return: updateUserReturn
     },
     delete: {
-        params: deleteOneUserParams,
-        return: deleteOneUserReturn
+        params: deleteUserParams,
+        return: deleteUserReturn
     },
     sendInvitation: {
         params: sendInvitationParams

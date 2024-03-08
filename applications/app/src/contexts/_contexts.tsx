@@ -2,8 +2,10 @@
 
 import { Toaster } from "@coulba/design/overlays"
 import { Fragment, ReactNode } from "react"
+import { CompanyProvider } from "./company/company.provider"
+import { CurrentYearProvider } from "./currentYear/currentYear.provider"
 import { SessionProvider } from "./session/session.context"
-import { StateProvider } from "./state.context"
+import { StateProvider } from "./state/state.context"
 
 
 type Providers = {
@@ -14,9 +16,13 @@ export function Providers(props: Providers) {
         <Fragment>
             <Toaster />
             <SessionProvider>
-                <StateProvider>
-                    {props.children}
-                </StateProvider>
+                <CompanyProvider>
+                    <CurrentYearProvider>
+                        <StateProvider>
+                            {props.children}
+                        </StateProvider>
+                    </CurrentYearProvider>
+                </CompanyProvider>
             </SessionProvider>
         </Fragment>
     )

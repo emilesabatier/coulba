@@ -16,7 +16,7 @@ export function ContactForm() {
         mode: "onSubmit",
         criteriaMode: "all",
         shouldFocusError: true,
-        resolver: zodResolver(publicSchema.registration.createOneRegistrationBody),
+        resolver: zodResolver(publicSchema.registration.createRegistrationBody),
     })
 
     const onSubmit = async () => {

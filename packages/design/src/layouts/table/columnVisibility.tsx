@@ -41,7 +41,7 @@ export function ColumnVisibility<T>({ table, className }: { table: Table<T>, cla
                                     <span
                                         className={cn(
                                             "text-left",
-                                            column.getIsVisible() ? "text-primary" : ""
+                                            column.getIsVisible() ? "text-neutral" : ""
                                         )}
                                     >
                                         {column.columnDef.meta?.label}

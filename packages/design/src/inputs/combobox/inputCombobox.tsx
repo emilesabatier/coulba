@@ -1,5 +1,4 @@
 
-
 import { IconCheck, IconSelector } from "@tabler/icons-react"
 import { CommandLoading } from "cmdk"
 import { ComponentProps, useState } from "react"
@@ -16,23 +15,24 @@ export type Option = {
     key: string
     label: string
 }
-type InputCombobox<T> = {
+type InputCombobox = {
     error?: FieldError
     placeholder?: string
     value?: string | null
+    defaultValue?: string | null
     onChange: (value?: string | null) => void
-    options?: Option[]
+    options: Option[]
     loading?: boolean
-    format: (data: T) => string
+    // format: (data: T) => string
     isDisabled?: boolean
     autoFocus?: boolean
     className?: ComponentProps<'div'>['className']
     disallowEmpty?: boolean
 }
 
-export function InputCombobox<T>(props: InputCombobox<T>) {
+export function InputCombobox(props: InputCombobox) {
     const [open, setOpen] = useState(false)
-    const currentOption = props.options?.find(x => (x.key === props.value))
+    const currentOption = props.options?.find(x => (x.key === (props.value ?? props.defaultValue)))
 
     function output(value?: string | null) {
         if (!value) return null
@@ -40,7 +40,7 @@ export function InputCombobox<T>(props: InputCombobox<T>) {
     }
 
     return (
-        <Popover open={open} onOpenChange={() => setOpen(!open)}>
+        <Popover open={open} onOpenChange={setOpen} modal>
             <PopoverTrigger asChild>
                 <Button
                     role="combobox"
@@ -55,6 +55,7 @@ export function InputCombobox<T>(props: InputCombobox<T>) {
                         props.className
                     )}
                     autoFocus={props.autoFocus}
+                    disabled={props.isDisabled}
                 >
                     <div className={cn(
                         "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/50",
@@ -76,58 +77,63 @@ export function InputCombobox<T>(props: InputCombobox<T>) {
                     </div>
                 </Button>
             </PopoverTrigger>
-            <PopoverContent
-                align="start"
-            >
-                <Command
-                    className={cn(
-                        "w-full"
-                    )}
-                    filter={(value, search) => {
-                        const option = props.options?.find(x => x.key === value)?.label.toLowerCase()
-                        if (option?.includes(search.toLowerCase())) return 1
-                        return 0
-                    }}
-                >
-                    <CommandInput />
-                    {props.loading ? <CommandLoading><CircularLoader /></CommandLoading> : null}
-                    <CommandList className='max-h-64 overflow-auto flex flex-col justify-start items-stretch'>
-                        <CommandEmpty className="relative h-[40px] flex justify-start items-center p-3 cursor-default select-none outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50" >
-                            <FormatNull text="Aucun résultat" />
-                        </CommandEmpty>
-                        {
-                            props.options?.map((option) => (
-                                <CommandItem
-                                    key={option.key}
-                                    value={option.key}
-                                    onSelect={(currentValue) => {
-                                        props.onChange(output((!props.disallowEmpty && currentValue === props.value) ? undefined : currentValue))
-                                        setOpen(false)
-                                    }}
-                                    className={cn(
-                                        "h-[40px] flex justify-between items-center overflow-hidden gap-3 p-3",
-                                        currentOption?.key === option.key ? "bg-primary/10" : "bg-none hover:bg-neutral/5"
-                                    )}
-                                >
-                                    <span
-                                        className={cn(
-                                            currentOption?.key === option.key ? "text-primary" : "text-neutral"
-                                        )}
-                                    >
-                                        {option.label}
-                                    </span>
-                                    <IconCheck
-                                        className={cn(
-                                            "h-4 w-4 stroke-primary",
-                                            currentOption?.key === option.key ? "opacity-100" : "opacity-0"
-                                        )}
-                                    />
-                                </CommandItem>
-                            ))
-                        }
-                    </CommandList>
-                </Command>
-            </PopoverContent>
+            {
+                !open ? null : (
+                    <PopoverContent align="start">
+                        <Command
+                            className={cn(
+                                "w-full"
+                            )}
+                            filter={(value, search) => {
+                                const option = props.options?.find(x => x.key === value)?.label.toLowerCase()
+                                if (option?.includes(search.toLowerCase())) return 1
+                                return 0
+                            }}
+                        >
+                            <CommandInput />
+                            {props.loading ? <CommandLoading><CircularLoader /></CommandLoading> : null}
+                            <CommandList className='max-h-64 overflow-auto flex flex-col justify-start items-stretch'>
+                                <CommandEmpty className="relative h-[40px] flex justify-start items-center p-3 cursor-default select-none outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50" >
+                                    <FormatNull text="Aucun résultat" />
+                                </CommandEmpty>
+                                {
+                                    props.options.map((option) => {
+                                        // if (option.key === (props.value ?? props.defaultValue)) return null
+                                        return (
+                                            <CommandItem
+                                                key={option.key}
+                                                value={option.key}
+                                                onSelect={(currentValue) => {
+                                                    if (props.isDisabled) return
+                                                    props.onChange(output((!props.disallowEmpty && currentValue === props.value) ? undefined : currentValue))
+                                                    setOpen(false)
+                                                }}
+                                                className={cn(
+                                                    "h-[40px] flex justify-between items-center overflow-hidden gap-3 p-3",
+                                                    currentOption?.key === option.key ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
+                                                )}
+                                            >
+                                                <span
+                                                    className={cn(
+                                                        currentOption?.key === option.key ? "text-neutral" : "text-neutral"
+                                                    )}
+                                                >
+                                                    {option.label}
+                                                </span>
+                                                <IconCheck
+                                                    className={cn(
+                                                        "h-4 w-4 stroke-neutral",
+                                                        currentOption?.key === option.key ? "opacity-100" : "opacity-0"
+                                                    )}
+                                                />
+                                            </CommandItem>
+                                        )
+                                    })
+                                }
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                )}
         </Popover>
     )
 }

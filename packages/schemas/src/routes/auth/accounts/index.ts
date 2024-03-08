@@ -1,9 +1,9 @@
-import { readOneAccountParams, readOneAccountReturn } from "./readOneAccount"
+import { readAccountParams, readAccountReturn } from "./readAccount"
 
 
 export const accounts = {
     get: {
-        params: readOneAccountParams,
-        return: readOneAccountReturn
+        params: readAccountParams,
+        return: readAccountReturn
     }
 }

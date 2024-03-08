@@ -16,7 +16,7 @@ export function HomePage() {
                     <h1 className="text-5xl">
                         Toute votre association sportive,
                         <br />
-                        <span className="text-primary text-5xl">en un seul endroit !</span>
+                        <span className="text-neutral text-5xl">en un seul endroit !</span>
                     </h1>
                     <h2 className="text-lg text-neutral/50">Faites le pas et simplifiez votre gestion associative ! Ne laissez pas le décalage entre les attentes grandissantes de vos adhérents et partenaires et notre monde hyperconnecté vous ralentir.</h2>
                 </div>

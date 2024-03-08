@@ -1,0 +1,14 @@
+import * as v from "valibot"
+import { yearSchema } from "../../../schemas/year/year.schema"
+
+
+// Input
+export const createYearBody = v.object({
+    label: v.optional(yearSchema.entries.label),
+    startingOn: yearSchema.entries.startingOn,
+    endingOn: yearSchema.entries.endingOn
+})
+
+
+// Output
+export const createYearReturn = yearSchema

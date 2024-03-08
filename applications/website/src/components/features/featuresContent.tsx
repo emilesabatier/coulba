@@ -40,9 +40,9 @@ export function FeaturesContent() {
                                         <button
                                             onClick={() => setCurrentFeature(feature)}
                                             aria-current={currentFeature.key === feature.key}
-                                            className="w-full aria-current:bg-primary/5 p-2 rounded-sm flex justify-end items-center hover:bg-background/50 group"
+                                            className="w-full aria-current:bg-neutral/5 p-2 rounded-sm flex justify-end items-center hover:bg-background/50 group"
                                         >
-                                            <span className="text-right group-aria-current:text-primary group-hover:underline">
+                                            <span className="text-right group-aria-current:text-neutral group-hover:underline">
                                                 {feature.title}
                                             </span>
                                         </button>

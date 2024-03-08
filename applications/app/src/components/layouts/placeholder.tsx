@@ -1,6 +1,6 @@
 import { Card } from "@coulba/design/layouts"
 import { ReactNode } from "react"
-import { CreateOneTicket } from "../support/contactSupport/createOneTicket/createOneTicket"
+import { CreateTicket } from "../support/contactSupport/createTicket/createTicket"
 import { Loading } from "./loading"
 
 
@@ -30,11 +30,11 @@ export function Placeholder(props: Placeholder) {
             </p>
             <p className="text-error mt-4">
                 Si le problème persiste, n&apos;hésitez pas à contacter le&nbsp;
-                <CreateOneTicket>
+                <CreateTicket>
                     <span className="text-error underline cursor-pointer hover:no-underline">
                         support
                     </span>
-                </CreateOneTicket>
+                </CreateTicket>
                 .
             </p>
         </Card>

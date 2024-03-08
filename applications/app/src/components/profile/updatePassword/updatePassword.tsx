@@ -3,7 +3,7 @@
 // import { ReactElement, forwardRef } from "react"
 // import { UpdatePasswordForm } from "./updatePasswordForm"
 // import { updatePassword } from "../../../services/routes/dashboard/profile/updatePassword"
-// import { UpdateOne } from "../../layouts/actions/updateOne"
+// import { Update } from "../../layouts/actions/update"
 
 
 // type UpdatePassword = {
@@ -22,7 +22,7 @@
 //         }
 
 //         return (
-//             <UpdateOne<DashboardProfile.UpdatePasswordBody>
+//             <Update<DashboardProfile.UpdatePasswordBody>
 //                 fRef={ref}
 //                 triggerElement={props.children}
 //                 title="Mettre à jour le mot de passe"

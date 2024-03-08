@@ -33,7 +33,7 @@ export const FormLabel = forwardRef<
                 <TooltipProvider>
                     <Tooltip delayDuration={0}>
                         <TooltipTrigger className="cursor-help" onClick={(e) => e.preventDefault()} tabIndex={-1}>
-                            <IconInfoSquare size={20} className="text-neutral/50 hover:text-primary hover:fill-primary/5" />
+                            <IconInfoSquare size={20} className="text-neutral/50 hover:text-neutral hover:fill-neutral/5" />
                         </TooltipTrigger>
                         <TooltipContent className="bg-neutral p-2">
                             <p className="break-words hyphens-auto text-white text-sm">{props.tooltip}</p>

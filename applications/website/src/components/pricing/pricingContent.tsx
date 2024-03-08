@@ -30,7 +30,7 @@ export function PricingContent() {
                                 key={index.toString()}
                                 className="flex justify-start items-center gap-2"
                             >
-                                <IconCheck size={16} className="stroke-primary" />
+                                <IconCheck size={16} className="stroke-neutral" />
                                 <span>{item}</span>
                             </li>
                         ))

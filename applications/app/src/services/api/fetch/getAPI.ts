@@ -23,20 +23,21 @@ export async function getAPI<T extends v.ObjectSchema<v.ObjectEntries> | v.Array
 
         if (!response.ok) throw new Error("Error with the response")
 
-        const parsedResponse = v.safeParse(props.schema, await response.json())
-        if (!parsedResponse.success) throw new Error(parsedResponse.issues.toString())
+        const parsedResponse = v.parse(props.schema, await response.json())
 
-        return {
-            status: true,
-            data: parsedResponse.output
-        } as const
+        return parsedResponse
 
     } catch (error) {
-        if (import.meta.env.VITE_ENV !== "production") console.log(error)
+        if (import.meta.env.VITE_ENV !== "production") {
+            if (error instanceof v.ValiError) {
+                console.log(v.flatten<typeof props.schema>(error))
+            }
+            else {
+                console.log(error)
+            }
+        }
 
         if (props.message) toast({ title: props.message ?? "Erreur avec la requête", variant: "error" })
-        return {
-            status: false
-        } as const
+
     }
 }

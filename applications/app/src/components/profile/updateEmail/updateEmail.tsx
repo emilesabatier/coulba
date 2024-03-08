@@ -6,7 +6,7 @@
 // import { profileKey } from "../../../hooks/useProfile"
 // import { sendEmailValidation } from "../../../services/routes/dashboard/profile/sendEmailValidation"
 // import { updateEmail } from "../../../services/routes/dashboard/profile/updateEmail"
-// import { CreateOne } from "../../layouts/actions/createOne"
+// import { Create } from "../../layouts/actions/create"
 
 
 // type UpdateEmail = {
@@ -30,7 +30,7 @@
 //         }
 
 //         return (
-//             <CreateOne<DashboardProfile.UpdateEmailBody>
+//             <Create<DashboardProfile.UpdateEmailBody>
 //                 fRef={ref}
 //                 triggerElement={props.children}
 //                 title="Mettre à jour l'email"

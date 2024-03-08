@@ -193,7 +193,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhone>(
                                         }}
                                         className={cn(
                                             "h-[40px] relative flex justify-between overflow-hidden w-full cursor-default select-none items-center p-3 gap-3 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                                            (country.key === currentCountry.key) ? "bg-primary/10" : "bg-none hover:bg-neutral/5"
+                                            (country.key === currentCountry.key) ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
                                         )}
                                     >
                                         <div className="flex flex-row justify-between items-center gap-2">
@@ -202,20 +202,20 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhone>(
                                             </div>
                                             <span className={cn(
                                                 "text-neutral",
-                                                (country.key === currentCountry.key) ? "text-primary" : ""
+                                                (country.key === currentCountry.key) ? "text-neutral" : ""
                                             )}>
                                                 {country.name}
                                             </span>
                                             <span className={cn(
                                                 "italic text-neutral/50",
-                                                (country.key === currentCountry.key) ? "text-primary/50" : ""
+                                                (country.key === currentCountry.key) ? "text-neutral/50" : ""
                                             )}>
                                                 ({country.prefix < 100 ? `+${country.prefix}` : `+${country.prefix}`})
                                             </span>
                                         </div>
                                         <IconCheck
                                             className={cn(
-                                                "h-4 w-4 stroke-primary",
+                                                "h-4 w-4 stroke-neutral",
                                                 (country.key === currentCountry.key) ? "opacity-100" : "opacity-0"
                                             )}
                                         />

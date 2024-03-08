@@ -20,7 +20,7 @@ const DialogOverlay = forwardRef<
     <DialogPrimitive.Overlay
         ref={ref}
         className={cn(
-            "fixed inset-0 z-50 w-full h-full grid justify-center items-center overflow-auto py-8 bg-neutral/25 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+            "fixed inset-0 z-50 w-full h-full flex justify-end items-start overflow-auto p-4 md:p-8 bg-neutral/25 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             className
         )}
         {...props}
@@ -40,7 +40,7 @@ const DialogContent = forwardRef<
                     {...props}
                     ref={ref}
                     className={cn(
-                        "min-w-[100dvw] md:min-w-md w-full max-w-[100dvw] md:max-w-md h-fit md:max-h-full overflow-auto border border-neutral/25 bg-white shadow-lg rounded-md",
+                        "min-w-full md:min-w-md w-full max-w-full md:max-w-md min-h-full h-full md:max-h-full overflow-auto bg-background shadow-lg rounded-sm flex flex-col justify-start items-stretch",
                         "duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
                         props.className
                     )}
@@ -61,7 +61,7 @@ const DialogHeader = ({
     <div
         {...props}
         className={cn(
-            "grid grid-cols-[auto_min-content] gap-x-2 items-center",
+            "grid grid-cols-[auto_min-content] gap-x-2 items-center bg-white border-b border-neutral/10 p-2 md:p-4",
             className
         )}
     >
@@ -83,7 +83,7 @@ const DialogFooter = ({
 }: HTMLAttributes<HTMLDivElement>) => (
     <div
         className={cn(
-            "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+            "mt-auto p-2 md:p-4 bg-white border-t border-neutral/10 flex justify-end items-center gap-1 md:gap-2",
             className
         )}
         {...props}
@@ -98,7 +98,7 @@ const DialogTitle = forwardRef<
     <DialogPrimitive.Title
         ref={ref}
         className={cn(
-            "text-lg font-semibold leading-none tracking-tight",
+            "text-xl overflow-hidden whitespace-nowrap text-ellipsis leading-none p-2",
             className
         )}
         {...props}

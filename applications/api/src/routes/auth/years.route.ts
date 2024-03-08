@@ -22,6 +22,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .insert(years)
                 .values({
                     id: generateId(),
+                    isCurrent: false,
                     idCompany: c.var.user.idCompany,
                     label: body.label,
                     startingOn: body.startingOn,
@@ -33,7 +34,7 @@ export const yearsRoute = new Hono<AuthEnv>()
         }
     )
     .get(
-        "/:idYear",
+        "/:idYear?",
         validator("param", paramsValidator(auth.years.get.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -68,6 +69,7 @@ export const yearsRoute = new Hono<AuthEnv>()
             const [updateYear] = await db
                 .update(years)
                 .set({
+                    isCurrent: body.isCurrent,
                     label: body.label,
                     startingOn: body.startingOn,
                     endingOn: body.endingOn

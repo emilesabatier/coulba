@@ -33,7 +33,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
         }
     )
     .get(
-        "/:idAttachment",
+        "/:idAttachment?",
         validator("param", paramsValidator(auth.attachments.get.params)),
         async (c) => {
             const params = c.req.valid('param')
