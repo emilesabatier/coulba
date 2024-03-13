@@ -44,7 +44,7 @@ export default {
         fontFamily: {
             sans: ['Graphik', 'sans-serif'],
             serif: ['Merriweather', 'serif'],
-            lato: ['Lato'],
+            switzer: ['Switzer'],
         },
         extend: {
             borderRadius: {

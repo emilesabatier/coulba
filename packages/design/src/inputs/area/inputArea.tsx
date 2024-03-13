@@ -13,7 +13,7 @@ export const InputArea = forwardRef<HTMLTextAreaElement, InputArea>(
     function (props, ref) {
 
         function input(value: string | undefined | null) {
-            if (!value) return undefined
+            if (!value) return ""
             return value
         }
 
@@ -26,14 +26,17 @@ export const InputArea = forwardRef<HTMLTextAreaElement, InputArea>(
             <textarea
                 {...props}
                 className={cn(
-                    "min-h-[5rem] h-20 w-full flex justify-between items-center gap-2 py-2 px-3 border rounded-sm text-base placeholder:text-neutral/50",
+                    "min-h-[5rem] h-20 w-full flex justify-between items-center gap-2 py-2 px-3 border rounded-sm text-base placeholder:text-neutral/25",
                     "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
                     (!props.error) ? "border-neutral/25" : "border-error",
                     props.className
                 )}
                 ref={ref}
                 value={input(props.value)}
-                onChange={(e) => props.onChange(output(e.currentTarget.value))}
+                onChange={(e) => {
+                    if (!props.onChange) return
+                    props?.onChange(output(e.currentTarget.value))
+                }}
             />
         )
     }

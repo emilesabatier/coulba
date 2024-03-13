@@ -64,7 +64,7 @@ export function ButtonPlainContent(props: ButtonPlainContent) {
             }
             <span
                 aria-disabled={props.disabled || props.loading}
-                className="font-bold text-white text-base aria-disabled:text-neutral/50 overflow-hidden whitespace-nowrap text-ellipsis"
+                className="text-white text-base aria-disabled:text-neutral/50 overflow-hidden whitespace-nowrap text-ellipsis"
             >
                 {props.text}
             </span>

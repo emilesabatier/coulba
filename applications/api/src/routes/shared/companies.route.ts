@@ -18,7 +18,6 @@ export const companiesRoute = new Hono()
                 .insert(companies)
                 .values({
                     id: generateId(),
-                    idYear: body.idYear,
                     siren: body.siren,
                     name: body.name
                 })

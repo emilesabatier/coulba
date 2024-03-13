@@ -16,14 +16,14 @@ export function TermsPage() {
                 title="Conditions Générales d'Utilisation et de Vente (CGUV)"
             />
             <Main.Content>
-                <span className="text-right self-end italic text-neutral/30">Dernière version le 05/02/2024.</span>
+                <span className="text-right self-end italic text-neutral/30">Dernière version le 13/03/2024.</span>
                 <Text.Root>
                     <Text.Section>
                         <Text.Title>
                             Introduction
                         </Text.Title>
                         <Text.Paragraph>
-                            La solution logicielle “MonAssoSportive” offre la possibilité de gérer les interactions entre les associations et leurs membres. Elle met également en place diverses fonctionnalités essentielles pour simplifier la gestion quotidienne des associations.
+                            La solution logicielle “Coulba” offre la possibilité de gérer la comptabilité des entreprises.
 
                             Les présentes conditions générales d'utilisation et de vente, également désignées sous le nom de "Conditions Générales", établissent les modalités selon lesquelles un client, tel que décrit ultérieurement, peut accéder et utiliser les services détaillés à l'Article 1.
                         </Text.Paragraph>
@@ -48,7 +48,7 @@ export function TermsPage() {
                                 1.2 Contact
                             </Text.SubTitle>
                             <Text.Paragraph>
-                                Le terme "Contact" fait référence à toute personne inscrite dans la base de données du Client grâce aux Services, incluant notamment mais non exclusivement, les membres, les adhérents, les bénévoles ou les employés du Client.
+                                Le terme "Contact" fait référence à toute personne inscrite dans la base de données du Client grâce aux Services, incluant notamment mais non exclusivement, les utilisateurs et clients de la solution.
                             </Text.Paragraph>
                         </TextSection>
                         <TextSection>
@@ -131,7 +131,7 @@ export function TermsPage() {
                                 1.11 Prix
                             </Text.SubTitle>
                             <Text.Paragraph>
-                                Le terme "Prix" fait référence à la structure tarifaire des Services, telle que présentée sur le site internet monassosportive.fr.
+                                Le terme "Prix" fait référence à la structure tarifaire des Services, telle que présentée sur le site internet https://coulba.com.
                             </Text.Paragraph>
                         </TextSection>
                         <TextSection>
@@ -267,9 +267,9 @@ export function TermsPage() {
                                 5.1 Prix.
                             </Text.SubTitle>
                             <Text.Paragraph>
-                                La tarification des Services proposés par la Société est présentée sur le site web https://monassosportive.com. Il est important de noter que ces tarifs varient en fonction du nombre de Contacts associés au Client.
+                                La tarification des Services proposés par la Société est présentée sur le site web https://coulba.com. Il est important de noter que ces tarifs varient en fonction du nombre de Contacts associés au Client.
 
-                                La Société a la faculté de réajuster sa grille tarifaire à chaque période de renouvellement d'abonnement. Le montant à payer pour tout renouvellement sera déterminé par les tarifs en vigueur sur le site https://monassosportive.com à la date de ce renouvellement.
+                                La Société a la faculté de réajuster sa grille tarifaire à chaque période de renouvellement d'abonnement. Le montant à payer pour tout renouvellement sera déterminé par les tarifs en vigueur sur le site https://coulba.com à la date de ce renouvellement.
                                 De plus, si de nouvelles taxes sont instaurées ou si les taux des taxes existantes sont revus à la hausse, la Société se réserve le droit de les appliquer immédiatement.
                             </Text.Paragraph>
                         </TextSection>

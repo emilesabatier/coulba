@@ -27,7 +27,7 @@
   button,
   textarea,
   select {
-    @apply text-base font-normal font-lato text-neutral;
+    @apply text-base font-normal font-switzer text-neutral;
   }
 
   a {

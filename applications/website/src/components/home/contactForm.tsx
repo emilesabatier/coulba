@@ -2,21 +2,22 @@
 
 import { ButtonPlain } from "@coulba/design/buttons"
 import { FormControl, FormError, FormField, FormItem, FormRoot } from "@coulba/design/forms"
-import { InputText } from "@coulba/design/inputs"
+import { InputArea, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
-import { PublicContact, publicSchema } from "@coulba/schemas/routes"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { shared } from "@coulba/schemas/routes"
+import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
-import { sendContactEmail } from "../../services/routes/contact/sendContactEmail"
+import * as v from "valibot"
+import { sendMessage } from "../../services/api/shared/contact/sendMessage"
 
 
 export function ContactForm() {
 
-    const form = useForm<PublicContact.SendContactEmailBody>({
+    const form = useForm<v.Output<typeof shared.contact.patch.sendMessage.body>>({
         mode: "onSubmit",
         criteriaMode: "all",
         shouldFocusError: true,
-        resolver: zodResolver(publicSchema.registration.createRegistrationBody),
+        resolver: valibotResolver(shared.contact.patch.sendMessage.body),
     })
 
     const onSubmit = async () => {
@@ -27,24 +28,21 @@ export function ContactForm() {
             return
         }
 
-        const response = await sendContactEmail({ body: data })
-        if (!response.status) {
-            toast({ title: "Inscription impossible", variant: "error" })
-            return
-        }
+        const response = await sendMessage({ body: data })
+        if (!response) return
 
         form.reset()
-        toast({ title: "Inscription prise en compte", variant: "success" })
+        toast({ title: "Message envoyé", variant: "success" })
     }
 
     return (
         <FormRoot {...form}>
-            <form className="w-full flex flex-wrap justify-start items-center gap-1">
+            <form className="w-full max-w-[768px] flex flex-col justify-start items-center gap-2">
                 <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem className="w-fit">
+                        <FormItem>
                             <FormControl>
                                 <InputText
                                     value={field.value}
@@ -56,11 +54,26 @@ export function ContactForm() {
                         </FormItem>
                     )}
                 />
+                <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <InputArea
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    placeholder="Votre message"
+                                />
+                            </FormControl>
+                            <FormError />
+                        </FormItem>
+                    )}
+                />
                 <ButtonPlain
-                    text="S'inscrire"
+                    text="Envoyer le message"
                     // icon={<IconPlugConnected />}
                     onClick={() => onSubmit()}
-                    className="min-w-fit"
                 />
             </form>
         </FormRoot>

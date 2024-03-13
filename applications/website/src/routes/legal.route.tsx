@@ -5,6 +5,6 @@ import { rootLayout } from "./root.layout"
 
 export const legalRoute = createRoute({
     getParentRoute: () => rootLayout,
-    path: '/mentions-legales',
+    path: '/legal',
     component: () => <LegalPage />
 })
