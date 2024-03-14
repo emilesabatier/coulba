@@ -3,7 +3,6 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -23,10 +22,12 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .values({
                     id: generateId(),
                     isCurrent: false,
-                    idCompany: c.var.user.idCompany,
+                    idCompany: c.var.company.id,
                     label: body.label,
                     startingOn: body.startingOn,
-                    endingOn: body.endingOn
+                    endingOn: body.endingOn,
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
                 })
                 .returning()
 
@@ -45,7 +46,6 @@ export const yearsRoute = new Hono<AuthEnv>()
                     .from(years)
                     .where(eq(years.idCompany, c.var.user.idCompany))
 
-                if (readYears.length < 1) throw new HTTPException(404, { message: "Exercices non trouvés" })
                 return c.json(readYears, 200)
             }
 
@@ -54,7 +54,6 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .from(years)
                 .where(eq(years.id, params.idYear))
 
-            if (!readYear) throw new HTTPException(404, { message: "Exercice non trouvé" })
             return c.json(readYear, 200)
         }
     )
@@ -72,7 +71,8 @@ export const yearsRoute = new Hono<AuthEnv>()
                     isCurrent: body.isCurrent,
                     label: body.label,
                     startingOn: body.startingOn,
-                    endingOn: body.endingOn
+                    endingOn: body.endingOn,
+                    lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(years.id, params.idYear))
                 .returning()

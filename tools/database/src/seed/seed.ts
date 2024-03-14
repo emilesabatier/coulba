@@ -6,7 +6,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultAccounts } from './accounts'
+import { DefaultAccount, defaultAccounts } from './accounts'
 
 
 export function generateTemporaryPassword(): string {
@@ -19,6 +19,23 @@ export function generateTemporaryPassword(): string {
 const connection = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
 const db = drizzle(connection)
 
+function flatAccounts(_accounts: DefaultAccount[], idCompany: string, idYear: string, idAccountParent?: string) {
+    const flatArray = _accounts.flatMap((_account) => {
+        const id = generateId()
+        return ([
+            {
+                id: id,
+                idCompany: idCompany,
+                idYear: idYear,
+                idAccountParent: idAccountParent,
+                number: _account.number,
+                label: _account.label
+            },
+            ...flatAccounts(_account.accounts, idCompany, idYear, id)
+        ])
+    }) as (typeof accounts.$inferInsert)[]
+    return flatArray as (typeof accounts.$inferInsert)[]
+}
 
 async function seed() {
     try {
@@ -69,13 +86,7 @@ async function seed() {
 
             // Account
             console.log("Add accounts")
-            const newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((defaultAccount) => ({
-                id: generateId(),
-                idCompany: newCompany.id,
-                idYear: idCurrentYear,
-                number: defaultAccount.number,
-                label: defaultAccount.label
-            }))
+            const newAccounts: (typeof accounts.$inferInsert)[] = flatAccounts(defaultAccounts, newCompany.id, idCurrentYear)
             await tx.insert(accounts).values(newAccounts)
 
 

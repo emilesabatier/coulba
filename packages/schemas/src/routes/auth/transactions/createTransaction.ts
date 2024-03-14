@@ -4,7 +4,6 @@ import { transactionSchema } from "../../../schemas/transaction/transaction.sche
 
 // Input
 export const createTransactionBody = v.object({
-    idYear: transactionSchema.entries.idYear,
     idAccount: transactionSchema.entries.idAccount,
     idJournal: v.optional(transactionSchema.entries.idJournal),
     idAttachment: v.optional(transactionSchema.entries.idAttachment),

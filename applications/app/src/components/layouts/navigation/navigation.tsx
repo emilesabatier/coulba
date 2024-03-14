@@ -28,6 +28,7 @@ export function Navigation(props: Navigation) {
                     menuItems.map((menuItem) => {
                         if (!menuItem.subMenuItems) return (
                             <Link
+                                key={menuItem.key}
                                 to={menuItem.path}
                                 params={{}}
                                 className="w-full"

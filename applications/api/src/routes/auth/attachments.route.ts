@@ -3,7 +3,6 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -44,7 +43,6 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                     .from(attachments)
                     .where(eq(attachments.idCompany, c.var.user.idCompany))
 
-                if (readAttachments.length < 1) throw new HTTPException(404, { message: "Pièces non trouvées" })
                 return c.json(readAttachments, 200)
             }
 
@@ -53,7 +51,6 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                 .from(attachments)
                 .where(eq(attachments.id, params.idAttachment))
 
-            if (!readAttachment) throw new HTTPException(404, { message: "Pièce non trouvée" })
             return c.json(readAttachment, 200)
         }
     )

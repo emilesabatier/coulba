@@ -3,26 +3,26 @@ import { FormRoot } from "@coulba/design/forms"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@coulba/design/overlays"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { ReactElement, Ref, cloneElement, useState } from "react"
-import { DefaultValues, FieldValues, useForm } from "react-hook-form"
+import { DefaultValues, useForm } from "react-hook-form"
 import * as v from "valibot"
 
 
-type Update<T extends FieldValues> = {
+type Update<T extends v.ObjectSchema<v.ObjectEntries>> = {
     triggerElement: ReactElement
     title: string
-    values?: T
-    defaultValues?: DefaultValues<T>
-    validationSchema: v.ObjectSchema<T>
-    onSubmit: (data: T) => Promise<boolean>
+    values?: v.Output<T>
+    defaultValues?: DefaultValues<v.Output<T>>
+    validationSchema: T
+    onSubmit: (data: v.Output<T>) => Promise<boolean>
     submitLabel: string
     children: ReactElement
-    fRef: Ref<HTMLButtonElement> | undefined
+    fRef?: Ref<HTMLButtonElement>
 }
 
-export function Update<T extends FieldValues>(props: Update<T>) {
+export function Update<T extends v.ObjectSchema<v.ObjectEntries>>(props: Update<T>) {
     const [open, setOpen] = useState(false)
 
-    const form = useForm<T>({
+    const form = useForm<v.Output<T>>({
         mode: "onSubmit",
         criteriaMode: "all",
         shouldFocusError: true,

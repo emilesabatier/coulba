@@ -3,7 +3,6 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -22,8 +21,8 @@ export const transactionsRoute = new Hono<AuthEnv>()
                 .insert(transactions)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.user.idCompany,
-                    idYear: body.idYear,
+                    idCompany: c.var.company.id,
+                    idYear: c.var.currentYear.id,
                     idAccount: body.idAccount,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
@@ -31,7 +30,9 @@ export const transactionsRoute = new Hono<AuthEnv>()
                     label: body.label,
                     date: body.date,
                     debit: (body.debit ?? 0).toString(),
-                    credit: (body.credit ?? 0).toString()
+                    credit: (body.credit ?? 0).toString(),
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
                 })
                 .returning()
 
@@ -58,7 +59,6 @@ export const transactionsRoute = new Hono<AuthEnv>()
                 .from(transactions)
                 .where(eq(transactions.id, params.idTransaction))
 
-            if (!readTransaction) throw new HTTPException(404, { message: "Entrée non trouvée" })
             return c.json(readTransaction, 200)
         }
     )
@@ -73,14 +73,14 @@ export const transactionsRoute = new Hono<AuthEnv>()
             const [updateTransaction] = await db
                 .update(transactions)
                 .set({
-                    idYear: body.idYear,
                     idAccount: body.idAccount,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
                     label: body.label,
                     date: body.date,
                     debit: body.debit?.toString(),
-                    credit: body.credit?.toString()
+                    credit: body.credit?.toString(),
+                    lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(transactions.id, params.idTransaction))
                 .returning()

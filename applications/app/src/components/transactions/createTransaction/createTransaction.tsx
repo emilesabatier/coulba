@@ -2,7 +2,6 @@ import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
-import { useCurrentYear } from "../../../contexts/currentYear/useCurrentYear"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { createTransaction } from "../../../services/api/auth/transactions/createTransaction"
 import { transactionOptions } from "../../../services/api/auth/transactions/transactionOptions"
@@ -16,21 +15,18 @@ type CreateTransaction = {
 }
 
 export function CreateTransaction(props: CreateTransaction) {
-    const currentYear = useCurrentYear()
 
     const mutation = useMutation({
         mutationKey: transactionOptions.queryKey,
         mutationFn: createTransaction
     })
 
-    if (!currentYear.data) return null
     return (
         <Create
             triggerElement={props.children}
             title="Ajouter un enregistrement"
             submitLabel="Ajouter"
             defaultValues={{
-                idYear: currentYear.data.id,
                 date: new Date().toISOString()
             }}
             onSubmit={async (data) => {

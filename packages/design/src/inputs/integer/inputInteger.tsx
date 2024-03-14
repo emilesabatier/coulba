@@ -40,7 +40,7 @@ export const InputInteger = forwardRef<HTMLInputElement, InputInteger>(
                 overwrite={true}
                 eager="append"
                 unmask={"typed"}
-                placeholder={"N"}
+                placeholder={undefined}
                 // onClick={(event) => { event.currentTarget.select() }}
                 // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
                 onAccept={(value) => props.onChange(output(value))}

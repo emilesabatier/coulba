@@ -11,7 +11,7 @@ export function MainRoot(props: MainRoot) {
     return (
         <div
             className={cn(
-                "w-full min-h-full h-full max-h-full overflow-hidden grid grid-rows-[max-content_auto] md:p-4",
+                "w-full max-w-[1280px] min-h-full h-full max-h-full overflow-hidden grid grid-rows-[max-content_auto] py-16",
                 props.className
             )}
             children={props.children}

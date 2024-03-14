@@ -25,10 +25,7 @@ export async function postAPI<T extends v.ObjectEntries>(props: PostAPI<T>) {
 
         if (!response.ok) throw new Error("Error with the response")
 
-        const parsedResponse = v.parse(props.schema, await response.json())
-
-        return parsedResponse
-
+        return v.parse(props.schema, await response.json())
     } catch (error) {
         if (import.meta.env.VITE_ENV !== "production") {
             if (error instanceof v.ValiError) {

@@ -3,6 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { readAccounts } from "../../services/api/auth/accounts/readAccounts"
+import { formatAccount } from "./formatAccount"
 
 
 type AccountCombobox = {
@@ -23,7 +24,7 @@ export function AccountCombobox(props: AccountCombobox) {
         .filter(props.filter ?? (() => true))
         .map((x) => ({
             key: x.id,
-            label: `${x.number} - ${x.label}`
+            label: formatAccount(x)
         }))
         .sort((a, b) => a.label.localeCompare(b.label))
 

@@ -1,5 +1,5 @@
-import { sessions, users } from "@coulba/schemas/models"
-import { UserReturned } from "@coulba/schemas/schemas"
+import { companies, sessions, users, years } from "@coulba/schemas/models"
+import { CompanyReturned, UserReturned, YearReturned } from "@coulba/schemas/schemas"
 import { and, eq } from "drizzle-orm"
 import { MiddlewareHandler } from "hono"
 import { getSignedCookie } from "hono/cookie"
@@ -10,6 +10,8 @@ import { env } from "../env"
 
 export type AuthEnv = {
     Variables: {
+        currentYear: YearReturned
+        company: CompanyReturned
         user: UserReturned
     }
 }
@@ -40,8 +42,27 @@ export const checkAuth: MiddlewareHandler<AuthEnv> = async (c, next) => {
             eq(users.id, readSession.idUser)
         )
     if (!readUser) throw new HTTPException(401, { message: "Session invalide" })
-
     c.set('user', readUser)
+
+    const [readCompany] = await db
+        .select()
+        .from(companies)
+        .where(
+            eq(companies.id, readUser.idCompany)
+        )
+    if (!readCompany) throw new HTTPException(401, { message: "Session invalide" })
+    c.set('company', readCompany)
+
+    const [readYear] = await db
+        .select()
+        .from(years)
+        .where(and(
+            eq(years.idCompany, readCompany.id),
+            eq(years.isCurrent, true)
+        ))
+    if (!readYear) throw new HTTPException(401, { message: "Session invalide" })
+    c.set('currentYear', readYear)
+
     await next()
 
 }

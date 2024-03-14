@@ -12,7 +12,7 @@ export const years = pgTable(
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         isCurrent: boolean("is_current").notNull(),
-        label: text("label"),
+        label: text("label").notNull(),
         startingOn: dateTimeColumn("starting_on").notNull(),
         endingOn: dateTimeColumn("ending_on").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),

@@ -10,6 +10,7 @@ export const companySchema = createSelectSchema(companies, {
     id: idSchema,
     siren: sirenSchema,
     name: textSchema,
+    apiKey: textSchema,
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema

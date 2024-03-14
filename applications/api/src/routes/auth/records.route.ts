@@ -2,7 +2,6 @@ import { records } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { AuthEnv } from "../../middlewares/checkAuth"
@@ -30,7 +29,6 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .from(records)
                 .where(eq(records.id, params.idRecord))
 
-            if (!readRecord) throw new HTTPException(404, { message: "Entrée non trouvée" })
             return c.json(readRecord, 200)
         }
     )

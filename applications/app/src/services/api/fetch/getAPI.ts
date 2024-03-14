@@ -38,6 +38,5 @@ export async function getAPI<T extends v.ObjectSchema<v.ObjectEntries> | v.Array
         }
 
         if (props.message) toast({ title: props.message ?? "Erreur avec la requête", variant: "error" })
-
     }
 }

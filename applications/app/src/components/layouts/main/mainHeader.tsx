@@ -1,21 +1,21 @@
-import { useRouter } from "@tanstack/react-router"
 import { ReactElement } from "react"
 
 
 type MainHeader = {
+    title: string
+    description?: string
     children?: ReactElement
 }
 
 export function MainHeader(props: MainHeader) {
-    const router = useRouter()
-
-    const matchWithTitle = [...router.state.matches].reverse().find((d) => d.context.title)
-
-    const title = matchWithTitle?.context.title || 'Coulba'
-
     return (
-        <div className="w-full h-full flex justify-between items-stretch overflow-hidden gap-2 md:gap-4">
-            <span className="text-2xl">{title}</span>
+        <div className="w-full h-full flex justify-between items-end flex-wrap gap-2 md:gap-4">
+            <div className="flex flex-col justify-start items-start">
+                <h1 className="text-2xl">{props.title}</h1>
+                {!props.description ? null : (
+                    <p className="text-neutral/50 max-w-[768px]">{props.description}</p>
+                )}
+            </div>
             {props.children}
         </div>
     )

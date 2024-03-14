@@ -3,7 +3,6 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -22,9 +21,11 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .insert(journals)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.user.idCompany,
+                    idCompany: c.var.company.id,
                     acronym: body.acronym,
-                    label: body.label
+                    label: body.label,
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
                 })
                 .returning()
 
@@ -43,7 +44,6 @@ export const journalsRoute = new Hono<AuthEnv>()
                     .from(journals)
                     .where(eq(journals.idCompany, c.var.user.idCompany))
 
-                if (readJournals.length < 1) throw new HTTPException(404, { message: "Journaux non trouvés" })
                 return c.json(readJournals, 200)
             }
 
@@ -52,7 +52,6 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .from(journals)
                 .where(eq(journals.id, params.idJournal))
 
-            if (!readJournal) throw new HTTPException(404, { message: "Journal non trouvé" })
             return c.json(readJournal, 200)
         }
     )
@@ -68,7 +67,8 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .update(journals)
                 .set({
                     acronym: body.acronym,
-                    label: body.label
+                    label: body.label,
+                    lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(journals.id, params.idJournal))
                 .returning()

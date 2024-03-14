@@ -1,0 +1,14 @@
+import * as v from "valibot"
+import { accountSchema } from "../../../schemas/account/account.schema"
+
+
+// Input
+export const createAccountBody = v.object({
+    idAccountParent: v.optional(accountSchema.entries.idAccountParent),
+    number: accountSchema.entries.number,
+    label: accountSchema.entries.label
+})
+
+
+// Output
+export const createAccountReturn = accountSchema

@@ -73,7 +73,7 @@ export const InputDate = forwardRef<HTMLInputElement, InputDate>(
                 placeholder={"JJ / MM / YYYY"}
                 // onClick={(event) => { event.currentTarget.select() }}
                 // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
-                onAccept={(value) => props.onChange(output(value))}
+                onComplete={(value) => props.onChange(output(value))}
                 value={input(props.value)}
                 className={cn(
                     "relative w-full flex flex-row justify-start items-center p-2 border border-solid rounded-sm",

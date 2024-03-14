@@ -11,7 +11,7 @@ export function MainRoot(props: MainRoot) {
     return (
         <main
             className={cn(
-                "relative z-[1] min-w-full w-full max-w-full min-h-full h-fit flex flex-col justify-start items-stretch gap-2 md:gap-4 p-4 md:p-8",
+                "relative z-[1] min-w-full w-full max-w-full min-h-full h-fit flex flex-col justify-start items-stretch gap-4 md:gap-8 p-4 md:p-8",
                 props.className
             )}
             children={props.children}

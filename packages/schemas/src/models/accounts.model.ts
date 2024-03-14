@@ -2,9 +2,9 @@ import { relations } from "drizzle-orm"
 import { integer, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
+import { companies } from "./companies.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
-import { companies } from "./companies.model.js"
 
 
 // Model

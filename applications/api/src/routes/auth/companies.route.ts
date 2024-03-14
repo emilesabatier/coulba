@@ -2,7 +2,6 @@ import { companies } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -19,7 +18,6 @@ export const companiesRoute = new Hono<AuthEnv>()
                 .from(companies)
                 .where(eq(companies.id, c.var.user.idCompany))
 
-            if (!readCompany) throw new HTTPException(404, { message: "Société non trouvée" })
             return c.json(readCompany, 200)
         }
     )

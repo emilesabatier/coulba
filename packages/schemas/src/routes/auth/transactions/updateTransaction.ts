@@ -8,7 +8,6 @@ export const updateTransactionParams = v.object({
 })
 
 export const updateTransactionBody = v.partial(v.object({
-    idYear: transactionSchema.entries.idYear,
     idAccount: transactionSchema.entries.idAccount,
     idJournal: transactionSchema.entries.idJournal,
     idAttachment: transactionSchema.entries.idAttachment,

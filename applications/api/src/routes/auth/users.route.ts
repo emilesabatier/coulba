@@ -4,7 +4,6 @@ import { generateId } from "@coulba/schemas/services"
 import { pbkdf2Sync, randomBytes } from "crypto"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -53,7 +52,6 @@ export const usersRoute = new Hono<AuthEnv>()
                     .from(users)
                     .where(eq(users.idCompany, c.var.user.idCompany))
 
-                if (readUsers.length < 1) throw new HTTPException(404, { message: "Utilisateurs non trouvés" })
                 return c.json(readUsers, 200)
             }
 
@@ -62,7 +60,6 @@ export const usersRoute = new Hono<AuthEnv>()
                 .from(users)
                 .where(eq(users.id, params.idUser))
 
-            if (!readUser) throw new HTTPException(404, { message: "Utilisateur non trouvé" })
             return c.json(readUser, 200)
         }
     )
