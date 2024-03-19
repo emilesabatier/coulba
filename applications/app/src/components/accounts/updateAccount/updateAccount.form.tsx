@@ -8,7 +8,7 @@ import { AccountCombobox } from "../accountCombobox"
 
 
 export function UpdateAccountForm() {
-    const form = useFormContext<v.Output<typeof auth.accounts.post.body>>()
+    const form = useFormContext<v.Output<typeof auth.accounts.put.body>>()
 
     return (
         <Fragment>

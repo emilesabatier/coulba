@@ -4,9 +4,13 @@ import { Main } from "../../../components/layouts/main/main"
 export function StatementPage() {
     return (
         <Main.Root>
-            <Main.Header />
+            <Main.Header
+                title="Compte de résultats"
+                description="todo"
+            >
+            </Main.Header>
             <Main.Content>
-                <span>compte de résultat</span>
+                <p>todo</p>
             </Main.Content>
         </Main.Root>
     )

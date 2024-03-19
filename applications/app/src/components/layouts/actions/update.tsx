@@ -55,7 +55,7 @@ export function Update<T extends v.ObjectSchema<v.ObjectEntries>>(props: Update<
     // }, [form.watch()])
 
     return (
-        <Dialog modal open={open} onOpenChange={(open) => setOpen(open)}>
+        <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
             <DialogTrigger asChild>
                 {cloneElement(props.triggerElement, { onClick: () => setOpen(true), ref: props.fRef })}
             </DialogTrigger>

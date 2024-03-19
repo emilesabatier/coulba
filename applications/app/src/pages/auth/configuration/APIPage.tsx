@@ -10,7 +10,7 @@ export function APIPage() {
             >
             </Main.Header>
             <Main.Content>
-                <span>api</span>
+                <p>La fonctionnalité d'API sera bientôt disponible.</p>
             </Main.Content>
         </Main.Root>
     )

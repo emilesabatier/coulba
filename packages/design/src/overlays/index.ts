@@ -6,8 +6,6 @@ export * from "./dialog/dialog"
 
 export * from "./alertDialog/alertDialog"
 
-export * from "./sheet/sheet"
-
 export * from "./popover/popover"
 export * from "./popover/popoverMenu"
 

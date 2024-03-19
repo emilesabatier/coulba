@@ -47,7 +47,8 @@ async function seed() {
             const newCompany: (typeof companies.$inferInsert) = {
                 id: generateId(),
                 siren: "123123123",
-                name: "MaSociétéDémo"
+                isValid: true,
+                email: "demo@coulba.fr"
             }
             await tx.insert(companies).values(newCompany)
 
@@ -99,7 +100,7 @@ async function seed() {
                 id: generateId(),
                 idCompany: newCompany.id,
                 isAdmin: true,
-                emailAddress: "demo@coulba.com",
+                email: "demo@coulba.com",
                 forename: randFirstName(),
                 surname: randFullName(),
                 passwordHash: passwordHash,

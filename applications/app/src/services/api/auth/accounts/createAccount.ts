@@ -12,6 +12,6 @@ export function createAccount(props: CreateAccount) {
         path: `/auth/accounts`,
         body: props.body,
         schema: auth.accounts.post.return,
-        message: "Erreur avec l'ajout d'un compte"
+        message: "Erreur avec l'ajout du compte"
     })
 }

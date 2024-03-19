@@ -1,5 +1,5 @@
 import { readCompanyReturn } from "./readCompany"
-import { updateCompanyBody, updateCompanyParams, updateCompanyReturn } from "./updateCompany"
+import { updateCompanyBody, updateCompanyReturn } from "./updateCompany"
 
 
 export const companies = {
@@ -7,7 +7,6 @@ export const companies = {
         return: readCompanyReturn
     },
     put: {
-        params: updateCompanyParams,
         body: updateCompanyBody,
         return: updateCompanyReturn
     }

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { readCompany } from '../../services/api/auth/company/readCompany'
+import { readCompany } from '../../services/api/auth/companies/readCompany'
 import { CompanyContext, companyContext } from './company.context'
 
 

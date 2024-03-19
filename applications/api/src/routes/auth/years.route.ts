@@ -72,6 +72,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                     label: body.label,
                     startingOn: body.startingOn,
                     endingOn: body.endingOn,
+                    lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(years.id, params.idYear))

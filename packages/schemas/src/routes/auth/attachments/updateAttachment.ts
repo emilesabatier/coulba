@@ -8,9 +8,11 @@ export const updateAttachmentParams = v.object({
 })
 
 export const updateAttachmentBody = v.partial(v.object({
-    idYear: attachmentSchema.entries.idYear,
     reference: attachmentSchema.entries.reference,
-    label: attachmentSchema.entries.label
+    label: attachmentSchema.entries.label,
+    storageKey: attachmentSchema.entries.storageKey,
+    type: attachmentSchema.entries.type,
+    size: attachmentSchema.entries.size
 }))
 
 

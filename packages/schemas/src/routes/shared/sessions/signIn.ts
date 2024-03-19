@@ -5,6 +5,6 @@ import { userSchema } from "../../../schemas/user/user.schema"
 
 // Input
 export const signInBody = v.object({
-    email: userSchema.entries.emailAddress,
+    email: userSchema.entries.email,
     password: passwordSchema
 })

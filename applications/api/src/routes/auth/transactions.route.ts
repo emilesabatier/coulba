@@ -80,6 +80,7 @@ export const transactionsRoute = new Hono<AuthEnv>()
                     date: body.date,
                     debit: body.debit?.toString(),
                     credit: body.credit?.toString(),
+                    lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(transactions.id, params.idTransaction))

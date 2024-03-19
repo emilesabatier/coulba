@@ -5,6 +5,8 @@ import { Fragment } from "react"
 import { useFormContext } from "react-hook-form"
 import * as v from "valibot"
 import { AccountCombobox } from "../../accounts/accountCombobox"
+import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
+import { JournalCombobox } from "../../journals/journalCombobox"
 
 
 export function CreateTransactionForm() {
@@ -104,6 +106,44 @@ export function CreateTransactionForm() {
                         />
                         <FormControl>
                             <InputPrice
+                                value={field.value}
+                                onChange={field.onChange}
+                            />
+                        </FormControl>
+                        <FormError />
+                    </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="idJournal"
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel
+                            label="Journal"
+                            tooltip="Le journal dans lequel s'inscrit l'enregistrement."
+                        />
+                        <FormControl>
+                            <JournalCombobox
+                                value={field.value}
+                                onChange={field.onChange}
+                            />
+                        </FormControl>
+                        <FormError />
+                    </FormItem>
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="idAttachment"
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel
+                            label="Pièce justificative"
+                            tooltip="Le fichier pour appuyer l'enregistrement."
+                        />
+                        <FormControl>
+                            <AttachmentCombobox
                                 value={field.value}
                                 onChange={field.onChange}
                             />

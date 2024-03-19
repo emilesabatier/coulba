@@ -31,7 +31,7 @@ export function PageNavigation() {
                             icon={<IconUser />}
                         />
                     }
-                    align="end"
+                    align="start"
                 >
                     <Link to="/profil/parametres">
                         <ButtonMenuContent
@@ -39,12 +39,12 @@ export function PageNavigation() {
                             text="Paramètres"
                         />
                     </Link>
-                    <a href="https://documentation.coulba.com" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                    {/* <a href="https://documentation.coulba.com" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
                         <ButtonMenuContent
                             // icon={<IconBook />}
                             text="Documentation"
                         />
-                    </a>
+                    </a> */}
                     {/* <CreateTicket>
                         <ButtonMenu
                             text="Contacter le support"

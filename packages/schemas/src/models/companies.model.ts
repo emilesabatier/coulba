@@ -1,4 +1,4 @@
-import { AnyPgColumn, pgTable, text } from "drizzle-orm/pg-core"
+import { AnyPgColumn, boolean, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { users } from "./users.model.js"
@@ -9,8 +9,9 @@ export const companies = pgTable(
     "companies",
     {
         id: idColumn("id").primaryKey(),
-        siren: text("siren").notNull().unique(),
-        name: text("name").notNull(),
+        siren: text("siren").unique(),
+        isValid: boolean("is_valid").notNull(),
+        email: text("email").notNull(),
         apiKey: text("api_key"),
         lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
         createdOn: dateTimeColumn("created_on").defaultNow().notNull(),

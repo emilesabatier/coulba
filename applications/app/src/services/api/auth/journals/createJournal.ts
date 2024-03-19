@@ -12,6 +12,6 @@ export function createJournal(props: CreateJournal) {
         path: `/auth/journals`,
         body: props.body,
         schema: auth.journals.post.return,
-        message: "Erreur avec l'ajout d'un journal"
+        message: "Erreur avec l'ajout du journal"
     })
 }

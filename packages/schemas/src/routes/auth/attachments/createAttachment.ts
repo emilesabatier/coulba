@@ -4,9 +4,11 @@ import { attachmentSchema } from "../../../schemas/attachment/attachment.schema"
 
 // Input
 export const createAttachmentBody = v.object({
-    idYear: attachmentSchema.entries.idYear,
     reference: attachmentSchema.entries.reference,
-    label: v.optional(attachmentSchema.entries.label)
+    label: v.optional(attachmentSchema.entries.label),
+    storageKey: attachmentSchema.entries.storageKey,
+    type: attachmentSchema.entries.type,
+    size: attachmentSchema.entries.size
 })
 
 

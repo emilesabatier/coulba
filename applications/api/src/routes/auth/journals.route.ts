@@ -68,6 +68,7 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .set({
                     acronym: body.acronym,
                     label: body.label,
+                    lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(journals.id, params.idJournal))

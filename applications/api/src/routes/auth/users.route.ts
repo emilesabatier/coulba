@@ -27,13 +27,16 @@ export const usersRoute = new Hono<AuthEnv>()
                 .values({
                     id: generateId(),
                     idCompany: c.var.user.idCompany,
+                    isAdmin: body.isAdmin,
                     forename: body.forename,
                     surname: body.surname,
-                    emailAddress: body.emailAddress,
-                    isActive: body.isActive,
+                    email: body.email,
+                    isActive: true,
                     passwordHash: passwordHash,
                     passwordSalt: passwordSalt,
-                    invitationToken: invitationToken
+                    invitationToken: invitationToken,
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
                 })
                 .returning()
 
@@ -76,8 +79,10 @@ export const usersRoute = new Hono<AuthEnv>()
                 .set({
                     forename: body.forename,
                     surname: body.surname,
-                    emailAddress: body.emailAddress,
-                    isActive: body.isActive
+                    email: body.email,
+                    isAdmin: body.isAdmin,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(users.id, params.idUser))
                 .returning()

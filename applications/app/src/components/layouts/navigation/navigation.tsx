@@ -21,7 +21,7 @@ export function Navigation(props: Navigation) {
             <Accordion
                 type="single"
                 collapsible
-                className="min-w-[var(--radix-accordion-content-width)] w-full flex flex-col justify-start items-stretch gap-1 md:gap-2"
+                className="min-w-[var(--radix-accordion-content-width)] w-full flex flex-col justify-start items-stretch gap-1"
                 defaultValue={currentOpenMenu?.key}
             >
                 {

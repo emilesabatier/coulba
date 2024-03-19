@@ -6,5 +6,5 @@ import { userSchema } from "../../../schemas/user/user.schema"
 export const validateEmailBody = v.object({
     id: userSchema.entries.id,
     token: userSchema.entries.emailToken,
-    email: userSchema.entries.emailAddressTemporary
+    email: userSchema.entries.emailTemporary
 })

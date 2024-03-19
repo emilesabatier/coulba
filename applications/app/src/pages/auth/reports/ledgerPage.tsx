@@ -4,9 +4,13 @@ import { Main } from "../../../components/layouts/main/main"
 export function LedgerPage() {
     return (
         <Main.Root>
-            <Main.Header />
+            <Main.Header
+                title="Grand livre"
+                description="todo"
+            >
+            </Main.Header>
             <Main.Content>
-                <span>grand livre</span>
+                <p>todo</p>
             </Main.Content>
         </Main.Root>
     )

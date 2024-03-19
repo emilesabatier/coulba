@@ -24,6 +24,7 @@
         "sourceMap": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
         "strictNullChecks": true,
         "outDir": "dist",
     },

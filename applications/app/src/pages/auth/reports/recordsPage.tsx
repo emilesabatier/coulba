@@ -1,13 +1,16 @@
 import { Main } from "../../../components/layouts/main/main"
-import { RecordsTable } from "../../../components/records/recordsTable"
 
 
 export function RecordsPage() {
     return (
         <Main.Root>
-            <Main.Header />
+            <Main.Header
+                title="Journal"
+                description="todo"
+            >
+            </Main.Header>
             <Main.Content>
-                <RecordsTable />
+                <p>todo</p>
             </Main.Content>
         </Main.Root>
     )

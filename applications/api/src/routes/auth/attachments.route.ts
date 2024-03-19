@@ -21,10 +21,15 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                 .insert(attachments)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.user.idCompany,
-                    idYear: body.idYear,
+                    idCompany: c.var.company.id,
+                    idYear: c.var.currentYear.id,
                     reference: body.reference,
-                    label: body.label
+                    label: body.label,
+                    storageKey: body.storageKey,
+                    type: body.type,
+                    size: body.size,
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
                 })
                 .returning()
 
@@ -65,9 +70,13 @@ export const attachmentsRoute = new Hono<AuthEnv>()
             const [updateAttachment] = await db
                 .update(attachments)
                 .set({
-                    idYear: body.idYear,
                     reference: body.reference,
-                    label: body.label
+                    label: body.label,
+                    storageKey: body.storageKey,
+                    type: body.type,
+                    size: body.size,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
                 })
                 .where(eq(attachments.id, params.idAttachment))
                 .returning()

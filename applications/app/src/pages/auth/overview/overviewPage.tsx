@@ -4,9 +4,13 @@ import { Main } from "../../../components/layouts/main/main"
 export function OverviewPage() {
     return (
         <Main.Root>
-            <Main.Header />
+            <Main.Header
+                title="Vue d'ensemble"
+                description="todo"
+            >
+            </Main.Header>
             <Main.Content>
-                <span>overview</span>
+                <p>todo</p>
             </Main.Content>
         </Main.Root>
     )

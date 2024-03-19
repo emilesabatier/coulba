@@ -24,7 +24,7 @@ export const sessionsRoute = new Hono()
                 .from(users)
                 .where(
                     and(
-                        eq(users.emailAddress, body.email),
+                        eq(users.email, body.email),
                         eq(users.isActive, true)
                     )
                 )

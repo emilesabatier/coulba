@@ -6,8 +6,8 @@ import { userSchema } from "../../../schemas/user/user.schema"
 export const createUserBody = v.object({
     forename: userSchema.entries.forename,
     surname: userSchema.entries.surname,
-    emailAddress: userSchema.entries.emailAddress,
-    isActive: v.optional(userSchema.entries.isActive),
+    email: userSchema.entries.email,
+    isAdmin: v.optional(userSchema.entries.isAdmin),
 })
 
 

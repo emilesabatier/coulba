@@ -12,6 +12,6 @@ export function createYear(props: CreateYear) {
         path: `/auth/years`,
         body: props.body,
         schema: auth.years.post.return,
-        message: "Erreur avec l'ajout d'un exercice"
+        message: "Erreur avec l'ajout de l'exercice"
     })
 }

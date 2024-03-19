@@ -1,4 +1,3 @@
-import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { IconCheck, IconSelector } from "@tabler/icons-react"
 import { ElementRef, HTMLAttributes, forwardRef, useState } from 'react'
 import { FieldError } from 'react-hook-form'
@@ -20,7 +19,7 @@ type InputSelect = Omit<HTMLAttributes<HTMLDivElement>, "value" | "onChange"> & 
     isDisabled?: boolean
 }
 
-export const InputSelect = forwardRef<ElementRef<typeof DropdownMenuTrigger>, InputSelect>(
+export const InputSelect = forwardRef<ElementRef<typeof Button>, InputSelect>(
     function (props, ref) {
         const [open, setOpen] = useState(false)
 
@@ -36,7 +35,7 @@ export const InputSelect = forwardRef<ElementRef<typeof DropdownMenuTrigger>, In
         const currentOption = props.options.find(x => x.key === input(props.value ?? props.defaultValue))
 
         return (
-            <Popover open={open} onOpenChange={() => setOpen(!open)}>
+            <Popover open={open} onOpenChange={setOpen} modal>
                 <PopoverTrigger asChild>
                     <Button
                         ref={ref}
@@ -73,44 +72,48 @@ export const InputSelect = forwardRef<ElementRef<typeof DropdownMenuTrigger>, In
                         </div>
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent
-                    align="center"
-                >
-                    {
-                        props.options?.map((option) => (
-                            <div
-                                key={option.key}
-                                onClick={() => {
-                                    if (props.allowEmpty && (option.key === props.value)) {
-                                        props.onChange(null)
-                                        setOpen(false)
-                                        return
-                                    }
-                                    props.onChange(output(option.key))
-                                    setOpen(false)
-                                }}
-                                className={cn(
-                                    "h-[40px] relative flex justify-between overflow-hidden w-full cursor-default select-none items-center p-3 gap-3 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                                    option.key === props.value ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
-                                )}
-                            >
-                                <span
-                                    className={cn(
-                                        option.key === props.value ? "text-neutral" : ""
-                                    )}
-                                >
-                                    {option.label}
-                                </span>
-                                <IconCheck
-                                    className={cn(
-                                        "h-4 w-4 stroke-neutral",
-                                        currentOption?.key === option.key ? "opacity-100" : "opacity-0"
-                                    )}
-                                />
-                            </div>
-                        ))
-                    }
-                </PopoverContent>
+                {
+                    !open ? null : (
+                        <PopoverContent
+                            align="start"
+                        >
+                            {
+                                props.options?.map((option) => (
+                                    <div
+                                        key={option.key}
+                                        onClick={() => {
+                                            if (props.isDisabled) return
+                                            if (props.allowEmpty && (option.key === props.value)) {
+                                                props.onChange(null)
+                                                setOpen(false)
+                                                return
+                                            }
+                                            props.onChange(output(option.key))
+                                            setOpen(false)
+                                        }}
+                                        className={cn(
+                                            "h-[40px] relative flex justify-between overflow-hidden w-full cursor-default select-none items-center p-3 gap-3 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+                                            option.key === props.value ? "bg-primary/10" : "bg-none hover:bg-neutral/5"
+                                        )}
+                                    >
+                                        <span
+                                            className={cn(
+                                                option.key === props.value ? "text-primary" : ""
+                                            )}
+                                        >
+                                            {option.label}
+                                        </span>
+                                        <IconCheck
+                                            className={cn(
+                                                "h-4 w-4 stroke-primary",
+                                                currentOption?.key === option.key ? "opacity-100" : "opacity-0"
+                                            )}
+                                        />
+                                    </div>
+                                ))
+                            }
+                        </PopoverContent>
+                    )}
             </Popover>
         )
     }

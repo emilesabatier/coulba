@@ -21,6 +21,10 @@ const envSchema = v.object({
     WEBSITE_BASE_URL: v.string(),
     STANCER_PRIVATE_KEY: v.string(),
     STANCER_PUBLIC_KEY: v.string(),
+    SCW_BUCKET_ENDPOINT: v.string(),
+    SCW_ACCESS_KEY: v.string(),
+    SCW_SECRET_KEY: v.string(),
+    SCW_BUCKET_NAME: v.string()
 })
 
 

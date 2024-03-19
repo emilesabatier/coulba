@@ -4,9 +4,13 @@ import { Main } from "../../../components/layouts/main/main"
 export function SheetPage() {
     return (
         <Main.Root>
-            <Main.Header />
+            <Main.Header
+                title="Bilan"
+                description="todo"
+            >
+            </Main.Header>
             <Main.Content>
-                <span>bilan</span>
+                <p>todo</p>
             </Main.Content>
         </Main.Root>
     )

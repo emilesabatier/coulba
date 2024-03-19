@@ -1,6 +1,4 @@
 import { NavigateOptions, ParseRoute, createRouter } from '@tanstack/react-router'
-import { attachmentRoute } from './auth/attachments/attachment.route'
-import { attachmentsLayout } from './auth/attachments/attachments.layout'
 import { attachmentsRoute } from './auth/attachments/attachments.route'
 import { authLayout } from './auth/auth.layout'
 import { APIRoute } from './auth/configuration/API.route'
@@ -24,9 +22,9 @@ import { reportsLayout } from './auth/reports/reports.layout'
 import { reportsRoute } from './auth/reports/reports.route'
 import { sheetRoute } from './auth/reports/sheet.route'
 import { statementRoute } from './auth/reports/statement.route'
+import { transactionsRoute } from './auth/transactions/transactions.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
-import { transactionsRoute } from './auth/transactions/transactions.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -36,10 +34,7 @@ const routeTree = rootLayout.addChildren([
 
         transactionsRoute,
 
-        attachmentsLayout.addChildren([
-            attachmentsRoute,
-            attachmentRoute
-        ]),
+        attachmentsRoute,
 
         reportsLayout.addChildren([
             reportsRoute,

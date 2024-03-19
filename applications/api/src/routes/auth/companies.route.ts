@@ -6,7 +6,6 @@ import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
 import { AuthEnv } from "../../middlewares/checkAuth"
-import { paramsValidator } from "../../middlewares/paramsValidator"
 
 
 export const companiesRoute = new Hono<AuthEnv>()
@@ -23,19 +22,19 @@ export const companiesRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idCompany',
-        validator("param", paramsValidator(auth.companies.put.params)),
         validator("json", bodyValidator(auth.companies.put.body)),
         async (c) => {
-            const params = c.req.valid('param')
             const body = c.req.valid('json')
 
             const [updateCompany] = await db
                 .update(companies)
                 .set({
                     siren: body.siren,
-                    name: body.name
+                    email: body.email,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(companies.id, params.idCompany))
+                .where(eq(companies.id, c.var.company.id))
                 .returning()
 
             return c.json(updateCompany, 200)

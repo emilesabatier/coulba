@@ -4,7 +4,7 @@ import { cloneElement, useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Chip } from ".."
 import { ButtonGhost } from "../../buttons"
 import { useDeviceDetect } from "../../hooks"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../../overlays"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../overlays"
 import { cn } from "../../services"
 
 
@@ -15,18 +15,18 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
     const columns = table.getVisibleFlatColumns().filter(x => x.columnDef.enableColumnFilter)
 
     return (
-        <Sheet open={open} onOpenChange={(open) => setOpen(open)}>
-            <SheetTrigger asChild>
+        <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
+            <DialogTrigger asChild>
                 <ButtonGhost
                     icon={<IconFilter />}
                     onClick={() => setOpen(true)}
                 />
-            </SheetTrigger>
+            </DialogTrigger>
             {!open ? null : (
-                <SheetContent onInteractOutside={() => setOpen(false)} side={isMobile ? "bottom" : "right"} forceMount>
-                    <SheetHeader>
-                        <SheetTitle>Filtres</SheetTitle>
-                    </SheetHeader>
+                <DialogContent onInteractOutside={() => setOpen(false)}>
+                    <DialogHeader>
+                        <DialogTitle>Filtres</DialogTitle>
+                    </DialogHeader>
                     <div className="flex flex-col justify-start items-stretch gap-2">
                         {
                             (columns.filter(x => x.getIsFiltered()).length === 0) ? null : (
@@ -86,8 +86,8 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
                             }
                         </Accordion>
                     </div>
-                </SheetContent>
+                </DialogContent>
             )}
-        </Sheet>
+        </Dialog>
     )
 }
