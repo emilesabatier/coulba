@@ -14,12 +14,15 @@ import { UpdateYear } from "./updateYear/updateYear"
 export function YearsList() {
     const years = useQuery(yearOptions)
 
+    const yearsArray = (years.data ?? [])
+        .sort((a, b) => b.label.localeCompare(a.label))
+
     if (years.isPending) return <Loading />
     if (years.isError) return <ErrorMessage message={years.error.message} />
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
             {
-                (!years.data || years.data?.length === 0) ? (<FormatNull />) : years.data.map((year, index) => {
+                (yearsArray.length === 0) ? (<FormatNull />) : yearsArray.map((year, index) => {
                     return (
                         <Fragment>
                             {index === 0 ? null : (<div className="h-[1px] w-full bg-neutral/10" />)}
@@ -27,7 +30,7 @@ export function YearsList() {
                                 <div className="flex justify-start items-center gap-4 p-2">
                                     <h2>{year.label}</h2>
                                     <span className="text-neutral/50">{formatDate(year.startingOn)} - {formatDate(year.endingOn)}</span>
-                                    {!year.isCurrent ? null : <Chip color="success" text="Actuel" />}
+                                    {!year.isSelected ? null : <Chip color="success" text="Sélectionné" />}
                                 </div>
                                 <div className="flex justify-end items-center gap-1">
                                     <UpdateYear year={year}>

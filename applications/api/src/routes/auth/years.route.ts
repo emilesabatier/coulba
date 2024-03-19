@@ -21,7 +21,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .insert(years)
                 .values({
                     id: generateId(),
-                    isCurrent: false,
+                    isSelected: false,
                     idCompany: c.var.company.id,
                     label: body.label,
                     startingOn: body.startingOn,
@@ -68,7 +68,7 @@ export const yearsRoute = new Hono<AuthEnv>()
             const [updateYear] = await db
                 .update(years)
                 .set({
-                    isCurrent: body.isCurrent,
+                    isSelected: body.isSelected,
                     label: body.label,
                     startingOn: body.startingOn,
                     endingOn: body.endingOn,
@@ -93,5 +93,33 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .returning()
 
             return c.json(deleteYear, 200)
+        }
+    )
+    .patch(
+        '/switch/:idYear',
+        validator("param", paramsValidator(auth.years.patch.switch.params)),
+        async (c) => {
+            const params = c.req.valid('param')
+
+            await db
+                .update(years)
+                .set({
+                    isSelected: false,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(eq(years.idCompany, c.var.company.id))
+
+            const [updateYear] = await db
+                .update(years)
+                .set({
+                    isSelected: true,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(eq(years.id, params.idYear))
+                .returning()
+
+            return c.json(updateYear, 200)
         }
     )

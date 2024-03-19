@@ -8,7 +8,7 @@ export const updateYearParams = v.object({
 })
 
 export const updateYearBody = v.partial(v.object({
-    isCurrent: yearSchema.entries.isCurrent,
+    isSelected: yearSchema.entries.isSelected,
     label: yearSchema.entries.label,
     startingOn: yearSchema.entries.startingOn,
     endingOn: yearSchema.entries.endingOn

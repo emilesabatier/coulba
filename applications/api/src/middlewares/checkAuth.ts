@@ -58,7 +58,7 @@ export const checkAuth: MiddlewareHandler<AuthEnv> = async (c, next) => {
         .from(years)
         .where(and(
             eq(years.idCompany, readCompany.id),
-            eq(years.isCurrent, true)
+            eq(years.isSelected, true)
         ))
     if (!readYear) throw new HTTPException(401, { message: "Session invalide" })
     c.set('currentYear', readYear)

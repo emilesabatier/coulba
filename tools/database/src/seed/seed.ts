@@ -60,7 +60,7 @@ async function seed() {
                 {
                     id: idCurrentYear,
                     idCompany: newCompany.id,
-                    isCurrent: true,
+                    isSelected: true,
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2024, 11, 31, 23, 99, 99).toISOString()
@@ -68,7 +68,7 @@ async function seed() {
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    isCurrent: false,
+                    isSelected: false,
                     label: "Exercice 2023",
                     startingOn: new Date(2023, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2023, 11, 31, 23, 99, 99).toISOString()
@@ -76,7 +76,7 @@ async function seed() {
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    isCurrent: false,
+                    isSelected: false,
                     label: "Exercice 2022",
                     startingOn: new Date(2022, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2022, 11, 31, 23, 99, 99).toISOString()

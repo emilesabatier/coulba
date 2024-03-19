@@ -2,7 +2,7 @@
 export const yearInclude = {
     id: true,
     idCompany: true,
-    isCurrent: true,
+    isSelected: true,
     label: true,
     startingOn: true,
     endingOn: true,

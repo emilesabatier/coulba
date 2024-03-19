@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { readYears } from "../../services/api/auth/years/readYears"
 import { formatYear } from "./formatYear"
+import { ComponentProps } from "react"
 
 
 type YearCombobox = {
@@ -12,6 +13,7 @@ type YearCombobox = {
     filter?: (value: v.Output<typeof auth.years.get.return>) => boolean
     isDisabled?: boolean
     autoFocus?: boolean
+    className?: ComponentProps<'div'>['className']
 }
 
 export function YearCombobox(props: YearCombobox) {
@@ -36,6 +38,7 @@ export function YearCombobox(props: YearCombobox) {
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}
+            className={props.className}
         />
     )
 }

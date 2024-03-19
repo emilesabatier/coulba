@@ -3,6 +3,7 @@ import { IconPlus } from "@tabler/icons-react"
 import { Main } from "../../../components/layouts/main/main"
 import { CreateYear } from "../../../components/years/createYear/createYear"
 import { YearsList } from "../../../components/years/yearsList"
+import { SwitchYear } from "../../../components/years/switchYear"
 
 
 export function YearsPage() {
@@ -20,6 +21,7 @@ export function YearsPage() {
                 </CreateYear>
             </Main.Header>
             <Main.Content>
+                <SwitchYear />
                 <YearsList />
             </Main.Content>
         </Main.Root>

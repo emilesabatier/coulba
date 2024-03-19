@@ -109,20 +109,20 @@ export function InputCombobox(props: InputCombobox) {
                                                     setOpen(false)
                                                 }}
                                                 className={cn(
-                                                    "h-[40px] flex justify-between items-center overflow-hidden gap-3 p-3",
-                                                    currentOption?.key === option.key ? "bg-primary/10" : "bg-none hover:bg-neutral/5"
+                                                    "h-[40px] flex justify-between items-center overflow-hidden gap-2 p-2",
+                                                    currentOption?.key === option.key ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
                                                 )}
                                             >
                                                 <span
                                                     className={cn(
-                                                        currentOption?.key === option.key ? "text-primary" : "text-neutral"
+                                                        currentOption?.key === option.key ? "text-neutral" : "text-neutral"
                                                     )}
                                                 >
                                                     {option.label}
                                                 </span>
                                                 <IconCheck
                                                     className={cn(
-                                                        "h-4 w-4 stroke-primary",
+                                                        "h-4 w-4 stroke-neutral",
                                                         currentOption?.key === option.key ? "opacity-100" : "opacity-0"
                                                     )}
                                                 />

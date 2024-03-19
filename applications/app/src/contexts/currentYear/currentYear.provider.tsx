@@ -11,7 +11,7 @@ export const CurrentYearProvider = ({ children }: { children: ReactNode }) => {
         setIsLoading(!isLoading)
 
         const response = await readYears()
-        const currentYear = response?.find(x => x.isCurrent)
+        const currentYear = response?.find(x => x.isSelected)
         if (!currentYear) {
             setIsLoading(false)
             return
