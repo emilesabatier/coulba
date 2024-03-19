@@ -1,4 +1,4 @@
-import { accounts, companies, users, years } from '@coulba/schemas/models'
+import { accounts, companies, journals, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName, randFullName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -83,6 +83,37 @@ async function seed() {
                 }
             ]
             await tx.insert(years).values(newYears)
+
+
+            // Journals
+            console.log("Add journals")
+            const newJournals: (typeof journals.$inferInsert)[] = [
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    acronym: "VT",
+                    label: "Ventes"
+                },
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    acronym: "HA",
+                    label: "Achats"
+                },
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    acronym: "SL",
+                    label: "Salaires"
+                },
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    acronym: "BQ",
+                    label: "Banque"
+                },
+            ]
+            await tx.insert(journals).values(newJournals)
 
 
             // Account
