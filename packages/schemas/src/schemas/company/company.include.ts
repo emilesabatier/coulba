@@ -2,7 +2,8 @@
 export const companyInclude = {
     id: true,
     siren: true,
-    isValid: true,
+    name: true,
+    address: true,
     email: true,
     apiKey: true,
     lastUpdatedOn: true,

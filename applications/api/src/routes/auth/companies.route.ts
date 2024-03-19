@@ -30,6 +30,8 @@ export const companiesRoute = new Hono<AuthEnv>()
                 .update(companies)
                 .set({
                     siren: body.siren,
+                    name: body.name,
+                    address: body.address,
                     email: body.email,
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()

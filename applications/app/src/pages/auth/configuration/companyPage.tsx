@@ -2,6 +2,7 @@ import { ButtonOutline } from "@coulba/design/buttons"
 import { IconPencil } from "@tabler/icons-react"
 import { UpdateCompany } from "../../../components/company/updateCompany/updateCompany"
 import { Main } from "../../../components/layouts/main/main"
+import { CompanyData } from "../../../components/company/companyData"
 
 
 export function CompanyPage() {
@@ -19,7 +20,7 @@ export function CompanyPage() {
                 </UpdateCompany>
             </Main.Header>
             <Main.Content>
-                <span>todo</span>
+                <CompanyData />
             </Main.Content>
         </Main.Root>
     )

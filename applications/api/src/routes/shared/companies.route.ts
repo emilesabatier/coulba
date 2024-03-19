@@ -19,7 +19,9 @@ export const companiesRoute = new Hono()
                 .values({
                     id: generateId(),
                     siren: body.siren,
-                    name: body.name
+                    name: body.name,
+                    address: body.address,
+                    email: body.email
                 })
                 .returning()
 

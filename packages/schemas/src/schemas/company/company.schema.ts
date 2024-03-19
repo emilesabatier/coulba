@@ -1,5 +1,4 @@
 import { createSelectSchema } from 'drizzle-valibot'
-import { booleanSchema } from '../../components/schemas/boolean.schema'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { emailSchema } from '../../components/schemas/email.schema'
 import { idSchema } from "../../components/schemas/id.schema"
@@ -11,7 +10,8 @@ import { companies } from "../../models"
 export const companySchema = createSelectSchema(companies, {
     id: idSchema,
     siren: sirenSchema,
-    isValid: booleanSchema,
+    name: textSchema,
+    address: textSchema,
     email: emailSchema,
     apiKey: textSchema,
     lastUpdatedOn: dateTimeSchema,

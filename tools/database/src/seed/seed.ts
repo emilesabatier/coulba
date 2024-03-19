@@ -47,7 +47,8 @@ async function seed() {
             const newCompany: (typeof companies.$inferInsert) = {
                 id: generateId(),
                 siren: "123123123",
-                isValid: true,
+                name: "MaSociétéDémo",
+                address: "13 rue des grands champs, 75000 Paris",
                 email: "demo@coulba.fr"
             }
             await tx.insert(companies).values(newCompany)
