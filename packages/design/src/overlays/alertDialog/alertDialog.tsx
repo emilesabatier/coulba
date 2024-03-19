@@ -18,7 +18,7 @@ const AlertDialogOverlay = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Overlay
         className={cn(
-            "fixed inset-0 z-50 bg-background/80",// backdrop-blur-sm ",
+            "fixed inset-0 z-50 bg-neutral/25",// backdrop-blur-sm ",
             "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             className
         )}
@@ -80,7 +80,7 @@ const AlertDialogTitle = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Title
         ref={ref}
-        className={cn("text-lg font-semibold", className)}
+        className={cn("text-xl", className)}
         {...props}
     />
 ))
@@ -92,7 +92,7 @@ const AlertDialogDescription = forwardRef<
 >(({ className, ...props }, ref) => (
     <AlertDialogPrimitive.Description
         ref={ref}
-        className={cn("text-sm text-muted-foreground text-neutral/50", className)}
+        className={cn("text-neutral/75", className)}
         {...props}
     />
 ))

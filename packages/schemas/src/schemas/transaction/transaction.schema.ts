@@ -4,15 +4,15 @@ import { booleanSchema } from '../../components/schemas/boolean.schema'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { idSchema } from "../../components/schemas/id.schema"
 import { numericSchema } from "../../components/schemas/numeric.schema"
-import { transactions } from '../../models/transactions.model'
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema'
+import { transactions } from '../../models/transactions.model'
 
 
 export const transactionSchema = createSelectSchema(transactions, {
     id: idSchema,
     idCompany: idSchema,
     idYear: idSchema,
-    idAccount: idSchema,
+    idAccount: v.nonNullish(idSchema, "Le compte mouvementé doit être renseigné"),
     idJournal: idSchema,
     idAttachment: idSchema,
     idRecord: idSchema,

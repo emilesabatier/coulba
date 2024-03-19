@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
+import { UsersPage } from "../../../pages/auth/configuration/users/usersPage"
 import { configurationLayout } from "./configuration.layout"
-import { UsersPage } from "../../../pages/auth/configuration/usersPage"
 
 
 export const usersRoute = createRoute({

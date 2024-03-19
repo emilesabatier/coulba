@@ -3,18 +3,19 @@ import { FormatNull } from "@coulba/design/formats"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react"
-import { attachmentOptions } from "../../services/api/auth/attachments/attachmentsOptions"
+import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
-import { Loading } from "../layouts/loading"
 import { DeleteAttachment } from "./deleteAttachment/deleteAttachment"
 import { UpdateAttachment } from "./updateAttachment/updateAttachment"
+import { CircularLoader } from "@coulba/design/layouts"
 
 
 export function AttachmentsList() {
-    const attachments = useQuery(attachmentOptions)
+    const attachments = useQuery(attachmentsOptions)
 
-    if (attachments.isPending) return <Loading />
+    if (attachments.isLoading) return <CircularLoader />
     if (attachments.isError) return <ErrorMessage message={attachments.error.message} />
+    if (!attachments.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
             {

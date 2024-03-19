@@ -1,15 +1,10 @@
-import { CircularLoader } from "@coulba/design/layouts"
 import { createRoute } from "@tanstack/react-router"
 import { AttachmentsPage } from "../../../pages/auth/attachments/attachmentsPage"
-import { authLayout } from "../auth.layout"
+import { attachmentsLayout } from "./attachments.layout"
 
 
 export const attachmentsRoute = createRoute({
-    getParentRoute: () => authLayout,
-    beforeLoad: () => ({
-        title: "Stockage de fichiers"
-    }),
-    path: '/stockage',
-    pendingComponent: () => <CircularLoader />,
+    getParentRoute: () => attachmentsLayout,
+    path: '/',
     component: () => <AttachmentsPage />
 })

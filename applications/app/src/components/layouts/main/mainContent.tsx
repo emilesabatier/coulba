@@ -13,7 +13,7 @@ export function MainContent(props: MainContent) {
     return (
         <div
             className={cn(
-                "w-full max-w-full min-h-full h-full max-h-full overflow-auto flex flex-col justify-start items-stretch gap-2",
+                "w-full max-w-full min-h-full h-full max-h-full overflow-auto flex flex-col justify-start items-stretch gap-8",
                 props.className
             )}
         >

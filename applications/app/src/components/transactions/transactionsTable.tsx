@@ -10,13 +10,13 @@ import {
 } from '@tanstack/react-table'
 import { Fragment, useMemo } from "react"
 import * as v from "valibot"
-import { transactionOptions } from "../../services/api/auth/transactions/transactionOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Loading } from "../layouts/loading"
+import { transactionsOptions } from "../../services/api/auth/transactions/transactionOptions"
 
 
 export function TransactionsTable() {
-    const transactions = useQuery(transactionOptions)
+    const transactions = useQuery(transactionsOptions)
     const memoizedData = useMemo(() => transactions.data ?? [], [transactions.data])
 
     const columns: ColumnDef<v.Output<typeof auth.transactions.get.return>>[] = [

@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router"
-import { CompanyPage } from "../../../pages/auth/configuration/companyPage"
+import { CompanyPage } from "../../../pages/auth/configuration/company/companyPage"
 import { configurationLayout } from "./configuration.layout"
 
 

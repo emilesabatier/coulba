@@ -22,9 +22,15 @@ import { reportsLayout } from './auth/reports/reports.layout'
 import { reportsRoute } from './auth/reports/reports.route'
 import { sheetRoute } from './auth/reports/sheet.route'
 import { statementRoute } from './auth/reports/statement.route'
+import { addTransactionRoute } from './auth/transactions/addTransaction.route'
+import { transactionsLayout } from './auth/transactions/transactions.layout'
 import { transactionsRoute } from './auth/transactions/transactions.route'
+import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
+import { addAttachmentRoute } from './auth/attachments/addAttachment.route'
+import { attachmentsLayout } from './auth/attachments/attachments.layout'
+import { updateAttachmentRoute } from './auth/attachments/updateAttachment.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -32,9 +38,17 @@ const routeTree = rootLayout.addChildren([
     authLayout.addChildren([
         overviewRoute,
 
-        transactionsRoute,
+        transactionsLayout.addChildren([
+            transactionsRoute,
+            addTransactionRoute,
+            updateTransactionRoute
+        ]),
 
-        attachmentsRoute,
+        attachmentsLayout.addChildren([
+            attachmentsRoute,
+            addAttachmentRoute,
+            updateAttachmentRoute
+        ]),
 
         reportsLayout.addChildren([
             reportsRoute,

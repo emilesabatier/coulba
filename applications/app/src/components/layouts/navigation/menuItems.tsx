@@ -32,8 +32,8 @@ export const menuItems: MenuItem[] = [
     {
         key: "attachments",
         label: "Stockage de fichiers",
-        basePath: "/stockage",
-        path: "/stockage"
+        basePath: "/fichiers",
+        path: "/fichiers"
     },
     {
         key: "reports",

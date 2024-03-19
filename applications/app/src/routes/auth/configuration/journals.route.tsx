@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
+import { JournalsPage } from "../../../pages/auth/configuration/journals/journalsPage"
 import { configurationLayout } from "./configuration.layout"
-import { JournalsPage } from "../../../pages/auth/configuration/journalsPage"
 
 
 export const journalsRoute = createRoute({

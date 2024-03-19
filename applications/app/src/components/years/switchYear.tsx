@@ -22,8 +22,8 @@ export function SwitchYear() {
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-4 overflow-auto border border-neutral/25 rounded-sm p-4">
             <div className="flex flex-col justify-start items-start gap-1">
-                <h2 className="text-xl">Exercice fiscal actuel</h2>
-                <p className="text-neutral/75">Cela permet de changer l'exercice fiscal actuel dans l'application. C'est utile notamment pour consulter l'historique des exercices.</p>
+                <h2 className="text-xl">Exercice sélectionné</h2>
+                <p className="text-neutral/75">Cela permet de changer l'exercice fiscal sélectionné dans l'application. C'est utile pour notamment consulter l'historique des exercices.</p>
             </div>
             <div className="flex justify-start items-center gap-1">
                 <YearCombobox

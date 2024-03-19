@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { attachmentOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
+import { attachmentsOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
 import { deleteAttachment } from "../../../services/api/auth/attachments/deleteAttachment"
 import { generateDelete } from "../../../services/api/auth/services/signedurl/generateDelete"
 import { Delete } from "../../layouts/actions/delete"
@@ -18,13 +18,13 @@ type DeleteAttachment = {
 export function DeleteAttachment(props: DeleteAttachment) {
 
     const mutation = useMutation({
-        mutationKey: attachmentOptions.queryKey,
+        mutationKey: attachmentsOptions.queryKey,
         mutationFn: deleteAttachment
     })
 
     return (
         <Delete
-            title="Supprimer le document ?"
+            title="Supprimer le fichier ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
                 const signedUrlResponse = await generateDelete({
@@ -42,8 +42,8 @@ export function DeleteAttachment(props: DeleteAttachment) {
 
                 mutation.mutate({ params: { idAttachment: props.attachment.id } }, {
                     onSuccess: (data) => {
-                        queryClient.setQueryData(attachmentOptions.queryKey, (_data) => _data?.filter((attachment) => attachment.id !== data?.id))
-                        toast({ title: "Document supprimé", variant: "success" })
+                        queryClient.setQueryData(attachmentsOptions.queryKey, (_data) => _data?.filter((attachment) => attachment.id !== data?.id))
+                        toast({ title: "Fichier supprimé", variant: "success" })
                         return true
                     }
                 })

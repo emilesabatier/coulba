@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router"
-import { YearsPage } from "../../../pages/auth/configuration/yearsPage"
+import { YearsPage } from "../../../pages/auth/configuration/years/yearsPage"
 import { configurationLayout } from "./configuration.layout"
 
 

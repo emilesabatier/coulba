@@ -1,4 +1,5 @@
-import { ButtonOutline } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
+import { IconPlus } from "@tabler/icons-react"
 import { AttachmentsList } from "../../../components/attachments/attachmentsList"
 import { CreateAttachment } from "../../../components/attachments/createAttachment/createAttachment"
 import { Main } from "../../../components/layouts/main/main"
@@ -10,15 +11,17 @@ export function AttachmentsPage() {
             <Main.Header
                 title="Stockage de fichiers"
                 description="Vous trouverez sur cette page la liste des pièces justificatives et autres fichiers."
-            >
-                <CreateAttachment>
-                    <ButtonOutline
-                        text="Ajouter un fichier"
-                    />
-                </CreateAttachment>
-            </Main.Header>
+            />
             <Main.Content>
-                <AttachmentsList />
+                <div className="flex flex-col justify-start items-stretch gap-2">
+                    <CreateAttachment>
+                        <ButtonPlain
+                            icon={<IconPlus />}
+                            text="Ajouter un fichier"
+                        />
+                    </CreateAttachment>
+                    <AttachmentsList />
+                </div>
             </Main.Content>
         </Main.Root>
     )

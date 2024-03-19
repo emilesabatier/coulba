@@ -1,13 +1,10 @@
 import { createRoute } from "@tanstack/react-router"
 import { TransactionsPage } from "../../../pages/auth/transactions/transactionsPage"
-import { authLayout } from "../auth.layout"
+import { transactionsLayout } from "./transactions.layout"
 
 
 export const transactionsRoute = createRoute({
-    getParentRoute: () => authLayout,
-    beforeLoad: () => ({
-        title: "Enregistrements"
-    }),
-    path: '/enregistrements',
+    getParentRoute: () => transactionsLayout,
+    path: '/',
     component: () => <TransactionsPage />
 })
