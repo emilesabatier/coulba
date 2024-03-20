@@ -1,24 +1,24 @@
 import { ButtonGhost } from "@coulba/design/buttons"
 import { FormatNull, formatDate } from "@coulba/design/formats"
-import { Chip } from "@coulba/design/layouts"
+import { Chip, CircularLoader } from "@coulba/design/layouts"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react"
-import { yearOptions } from "../../services/api/auth/years/yearsOptions"
+import { yearsOptions } from "../../services/api/auth/years/yearsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
-import { Loading } from "../layouts/loading"
 import { DeleteYear } from "./deleteYear/deleteYear"
 import { UpdateYear } from "./updateYear/updateYear"
 
 
 export function YearsList() {
-    const years = useQuery(yearOptions)
+    const years = useQuery(yearsOptions)
 
     const yearsArray = (years.data ?? [])
         .sort((a, b) => b.label.localeCompare(a.label))
 
-    if (years.isPending) return <Loading />
+    if (years.isLoading) return <CircularLoader />
     if (years.isError) return <ErrorMessage message={years.error.message} />
+    if (!years.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
             {

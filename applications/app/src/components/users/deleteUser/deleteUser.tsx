@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { deleteUser } from "../../../services/api/auth/users/deleteUser"
-import { userOptions } from "../../../services/api/auth/users/usersOptions"
 import { Delete } from "../../layouts/actions/delete"
+import { usersOptions } from "../../../services/api/auth/users/usersOptions"
 
 
 type DeleteUser = {
@@ -17,7 +17,7 @@ type DeleteUser = {
 export function DeleteUser(props: DeleteUser) {
 
     const mutation = useMutation({
-        mutationKey: userOptions.queryKey,
+        mutationKey: usersOptions.queryKey,
         mutationFn: deleteUser
     })
 
@@ -28,7 +28,7 @@ export function DeleteUser(props: DeleteUser) {
             onSubmit={async () => {
                 mutation.mutate({ params: { idUser: props.user.id } }, {
                     onSuccess: (data) => {
-                        queryClient.setQueryData(userOptions.queryKey, (_data) => _data?.filter((user) => user.id !== data?.id))
+                        queryClient.setQueryData(usersOptions.queryKey, (_data) => _data?.filter((user) => user.id !== data?.id))
                         toast({ title: "Accès utilisateur supprimé", variant: "success" })
                         return true
                     }

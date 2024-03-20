@@ -1,22 +1,22 @@
 import { ButtonGhost } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
-import { Chip } from "@coulba/design/layouts"
+import { Chip, CircularLoader } from "@coulba/design/layouts"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react"
-import { userOptions } from "../../services/api/auth/users/usersOptions"
+import { usersOptions } from "../../services/api/auth/users/usersOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
-import { Loading } from "../layouts/loading"
 import { DeleteUser } from "./deleteUser/deleteUser"
 import { formatUser } from "./formatUser"
 import { UpdateUser } from "./updateUser/updateUser"
 
 
 export function UsersList() {
-    const users = useQuery(userOptions)
+    const users = useQuery(usersOptions)
 
-    if (users.isPending) return <Loading />
+    if (users.isLoading) return <CircularLoader />
     if (users.isError) return <ErrorMessage message={users.error.message} />
+    if (!users.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
             {

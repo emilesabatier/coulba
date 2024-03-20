@@ -1,16 +1,28 @@
 import { NavigateOptions, ParseRoute, createRouter } from '@tanstack/react-router'
+import { addAttachmentRoute } from './auth/attachments/addAttachment.route'
+import { attachmentsLayout } from './auth/attachments/attachments.layout'
 import { attachmentsRoute } from './auth/attachments/attachments.route'
+import { updateAttachmentRoute } from './auth/attachments/updateAttachment.route'
 import { authLayout } from './auth/auth.layout'
 import { APIRoute } from './auth/configuration/API.route'
-import { accountsRoute } from './auth/configuration/accounts.route'
+import { accountsLayout } from './auth/configuration/accounts/accounts.layout'
+import { addAccountRoute } from './auth/configuration/accounts/addAccount.route'
+import { updateAccountRoute } from './auth/configuration/accounts/updateAccount.route'
 import { closingRoute } from './auth/configuration/closing.route'
-import { companyRoute } from './auth/configuration/company.route'
+import { companyLayout } from './auth/configuration/company/company.layout'
+import { updateCompanyRoute } from './auth/configuration/company/updateCompany.route'
 import { configurationLayout } from './auth/configuration/configuration.layout'
 import { configurationRoute } from './auth/configuration/configuration.route'
-import { journalsRoute } from './auth/configuration/journals.route'
+import { addJournalRoute } from './auth/configuration/journals/addJournal.route'
+import { journalsLayout } from './auth/configuration/journals/journals.layout'
+import { updateJournalRoute } from './auth/configuration/journals/updateJournal.route'
 import { subscriptionRoute } from './auth/configuration/subscription.route'
-import { usersRoute } from './auth/configuration/users.route'
-import { yearsRoute } from './auth/configuration/years.route'
+import { addUserRoute } from './auth/configuration/users/addUser.route'
+import { updateUserRoute } from './auth/configuration/users/updateUser.route'
+import { usersLayout } from './auth/configuration/users/users.layout'
+import { addYearRoute } from './auth/configuration/years/addYear.route'
+import { updateYearRoute } from './auth/configuration/years/updateYear.route'
+import { yearsLayout } from './auth/configuration/years/years.layout'
 import { overviewRoute } from './auth/overview/overview.route'
 import { profileLayout } from './auth/profile/profile.layout'
 import { profileRoute } from './auth/profile/profile.route'
@@ -28,9 +40,11 @@ import { transactionsRoute } from './auth/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
-import { addAttachmentRoute } from './auth/attachments/addAttachment.route'
-import { attachmentsLayout } from './auth/attachments/attachments.layout'
-import { updateAttachmentRoute } from './auth/attachments/updateAttachment.route'
+import { accountsRoute } from './auth/configuration/accounts/accounts.route'
+import { companyRoute } from './auth/configuration/company/company.route'
+import { journalsRoute } from './auth/configuration/journals/journals.route'
+import { usersRoute } from './auth/configuration/users/users.route'
+import { yearsRoute } from './auth/configuration/years/years.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -61,14 +75,33 @@ const routeTree = rootLayout.addChildren([
 
         configurationLayout.addChildren([
             configurationRoute,
-            companyRoute,
+            companyLayout.addChildren([
+                companyRoute,
+                updateCompanyRoute
+            ]),
             subscriptionRoute,
-            usersRoute,
+            usersLayout.addChildren([
+                usersRoute,
+                addUserRoute,
+                updateUserRoute
+            ]),
             APIRoute,
-            yearsRoute,
+            yearsLayout.addChildren([
+                yearsRoute,
+                addYearRoute,
+                updateYearRoute
+            ]),
             closingRoute,
-            accountsRoute,
-            journalsRoute,
+            accountsLayout.addChildren([
+                accountsRoute,
+                addAccountRoute,
+                updateAccountRoute
+            ]),
+            journalsLayout.addChildren([
+                journalsRoute,
+                addJournalRoute,
+                updateJournalRoute
+            ]),
         ]),
 
         profileLayout.addChildren([

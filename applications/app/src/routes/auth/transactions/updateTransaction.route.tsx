@@ -5,6 +5,6 @@ import { transactionsLayout } from "./transactions.layout"
 
 export const updateTransactionRoute = createRoute({
     getParentRoute: () => transactionsLayout,
-    path: '/modifier/$idTransaction',
+    path: '/$idTransaction/modifier',
     component: () => <UpdateTransactionPage />
 })

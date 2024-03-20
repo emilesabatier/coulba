@@ -4,9 +4,9 @@ import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { accountOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { deleteAccount } from "../../../services/api/auth/accounts/deleteAccount"
 import { Delete } from "../../layouts/actions/delete"
+import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 
 
 type DeleteAccount = {
@@ -17,7 +17,7 @@ type DeleteAccount = {
 export function DeleteAccount(props: DeleteAccount) {
 
     const mutation = useMutation({
-        mutationKey: accountOptions.queryKey,
+        mutationKey: accountsOptions.queryKey,
         mutationFn: deleteAccount
     })
 
@@ -28,7 +28,7 @@ export function DeleteAccount(props: DeleteAccount) {
             onSubmit={async () => {
                 mutation.mutate({ params: { idAccount: props.account.id } }, {
                     onSuccess: (newData) => {
-                        queryClient.setQueryData(accountOptions.queryKey, (oldData) => oldData?.filter((account) => account.id !== newData?.id))
+                        queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData?.filter((account) => account.id !== newData?.id))
                         toast({ title: "Compte supprimé", variant: "success" })
                         return true
                     }

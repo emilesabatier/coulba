@@ -1,15 +1,14 @@
 import { ButtonGhost } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@coulba/design/layouts"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
 import { IconChevronDown, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { ComponentProps } from "react"
 import * as v from "valibot"
-import { accountOptions } from "../../services/api/auth/accounts/accountsOptions"
+import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
-import { Loading } from "../layouts/loading"
 import { DeleteAccount } from "./deleteAccount/deleteAccount"
 import { UpdateAccount } from "./updateAccount/updateAccount"
 
@@ -33,13 +32,14 @@ function groupAccounts(accounts: v.Output<typeof auth.accounts.get.return>[], di
 }
 
 export function AccountsList() {
-    const accounts = useQuery(accountOptions)
+    const accounts = useQuery(accountsOptions)
 
     const groupedAccounts = groupAccounts(accounts.data ?? [], 1)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
-    if (accounts.isPending) return <Loading />
+    if (accounts.isLoading) return <CircularLoader />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
+    if (!accounts.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
             <Accordion type="multiple">

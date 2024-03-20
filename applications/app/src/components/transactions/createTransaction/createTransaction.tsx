@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router"
 import { ReactElement } from "react"
 
 
-
 type CreateTransaction = {
     children: ReactElement
 }

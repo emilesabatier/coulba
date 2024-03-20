@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { deleteYear } from "../../../services/api/auth/years/deleteYear"
-import { yearOptions } from "../../../services/api/auth/years/yearsOptions"
 import { Delete } from "../../layouts/actions/delete"
+import { yearsOptions } from "../../../services/api/auth/years/yearsOptions"
 
 
 type DeleteYear = {
@@ -17,7 +17,7 @@ type DeleteYear = {
 export function DeleteYear(props: DeleteYear) {
 
     const mutation = useMutation({
-        mutationKey: yearOptions.queryKey,
+        mutationKey: yearsOptions.queryKey,
         mutationFn: deleteYear
     })
 
@@ -28,7 +28,7 @@ export function DeleteYear(props: DeleteYear) {
             onSubmit={async () => {
                 mutation.mutate({ params: { idYear: props.year.id } }, {
                     onSuccess: (data) => {
-                        queryClient.setQueryData(yearOptions.queryKey, (_data) => _data?.filter((year) => year.id !== data?.id))
+                        queryClient.setQueryData(yearsOptions.queryKey, (_data) => _data?.filter((year) => year.id !== data?.id))
                         toast({ title: "Exercice supprimé", variant: "success" })
                         return true
                     }

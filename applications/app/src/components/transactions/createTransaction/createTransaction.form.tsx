@@ -35,8 +35,8 @@ export function CreateTransactionForm() {
                     onSuccess: (data) => {
                         queryClient.setQueryData(transactionsOptions.queryKey, (oldData) => oldData && data && [data, ...oldData])
 
-                        toast({ title: "Nouvel enregistrement ajouté", variant: "success" })
                         router.navigate({ to: "/enregistrements" })
+                        toast({ title: "Nouvel enregistrement ajouté", variant: "success" })
 
                         return true
                     }

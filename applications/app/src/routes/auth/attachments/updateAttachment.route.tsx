@@ -5,6 +5,6 @@ import { attachmentsLayout } from "./attachments.layout"
 
 export const updateAttachmentRoute = createRoute({
     getParentRoute: () => attachmentsLayout,
-    path: '/modifier/$idAttachment',
+    path: '/$idAttachment/modifier',
     component: () => <UpdateAttachmentPage />
 })

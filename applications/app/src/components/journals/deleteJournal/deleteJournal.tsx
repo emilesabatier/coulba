@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { deleteJournal } from "../../../services/api/auth/journals/deleteJournal"
-import { journalOptions } from "../../../services/api/auth/journals/journalsOptions"
 import { Delete } from "../../layouts/actions/delete"
+import { journalsOptions } from "../../../services/api/auth/journals/journalsOptions"
 
 
 type DeleteJournal = {
@@ -17,7 +17,7 @@ type DeleteJournal = {
 export function DeleteJournal(props: DeleteJournal) {
 
     const mutation = useMutation({
-        mutationKey: journalOptions.queryKey,
+        mutationKey: journalsOptions.queryKey,
         mutationFn: deleteJournal
     })
 
@@ -28,7 +28,7 @@ export function DeleteJournal(props: DeleteJournal) {
             onSubmit={async () => {
                 mutation.mutate({ params: { idJournal: props.journal.id } }, {
                     onSuccess: (data) => {
-                        queryClient.setQueryData(journalOptions.queryKey, (_data) => _data?.filter((journal) => journal.id !== data?.id))
+                        queryClient.setQueryData(journalsOptions.queryKey, (_data) => _data?.filter((journal) => journal.id !== data?.id))
                         toast({ title: "Journal supprimé", variant: "success" })
                         return true
                     }

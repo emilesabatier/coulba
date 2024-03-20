@@ -36,15 +36,16 @@ export function UpdateAttachmentForm() {
             submitLabel="Modifier le fichier"
             onSubmit={async (data) => {
                 mutation.mutate({
-                    params: { idAttachment: idAttachment }, body: {
+                    params: { idAttachment: idAttachment },
+                    body: {
                         reference: data.reference,
                         label: data.label
                     }
                 }, {
                     onSuccess: (data) => {
                         queryClient.setQueryData(attachmentsOptions.queryKey, (_data) => _data && data && [data, ..._data.filter((attachment) => attachment.id !== data.id)])
-                        toast({ title: "Fichier mis à jour", variant: "success" })
                         router.navigate({ to: "/fichiers" })
+                        toast({ title: "Fichier mis à jour", variant: "success" })
                         return true
                     }
                 })

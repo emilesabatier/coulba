@@ -41,6 +41,7 @@ export function UpdateTransactionForm() {
                 mutation.mutate({ params: { idTransaction: idTransaction }, body: data }, {
                     onSuccess: (data) => {
                         queryClient.setQueryData(transactionsOptions.queryKey, (oldData) => oldData && data && [data, ...oldData])
+                        router.navigate({ to: "/enregistrements" })
                         toast({ title: "Enregistrement mis à jour", variant: "success" })
                         return true
                     }

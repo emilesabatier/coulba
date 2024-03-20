@@ -3,18 +3,19 @@ import { FormatNull } from "@coulba/design/formats"
 import { IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react"
-import { journalOptions } from "../../services/api/auth/journals/journalsOptions"
+import { journalsOptions } from "../../services/api/auth/journals/journalsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
-import { Loading } from "../layouts/loading"
 import { DeleteJournal } from "./deleteJournal/deleteJournal"
 import { UpdateJournal } from "./updateJournal/updateJournal"
+import { CircularLoader } from "@coulba/design/layouts"
 
 
 export function JournalsList() {
-    const journals = useQuery(journalOptions)
+    const journals = useQuery(journalsOptions)
 
-    if (journals.isPending) return <Loading />
+    if (journals.isLoading) return <CircularLoader />
     if (journals.isError) return <ErrorMessage message={journals.error.message} />
+    if (!journals.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
             {
