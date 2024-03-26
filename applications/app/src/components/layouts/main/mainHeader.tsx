@@ -9,7 +9,7 @@ type MainHeader = {
 
 export function MainHeader(props: MainHeader) {
     return (
-        <div className="w-full h-full flex justify-between items-end flex-wrap gap-2 md:gap-4">
+        <div className="w-full h-full flex justify-between items-START flex-wrap gap-2 md:gap-4">
             <div className="flex flex-col justify-start items-start">
                 <h1 className="text-2xl">{props.title}</h1>
                 {!props.description ? null : (

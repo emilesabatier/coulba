@@ -1,5 +1,5 @@
 import { Main } from "../../../components/layouts/main/main"
-import { UpdateTransactionForm } from "../../../components/transactions/updateTransaction/updateTransaction.form"
+import { UpdateTransactionForm } from "../../../components/transactions/update/updateTransaction.form"
 
 
 export function UpdateTransactionPage() {

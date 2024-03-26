@@ -1,5 +1,5 @@
 import { Main } from "../../../../components/layouts/main/main"
-import { UpdateUserForm } from "../../../../components/users/updateUser/updateUser.form"
+import { UpdateUserForm } from "../../../../components/users/update/updateUser.form"
 
 
 export function UpdateUserPage() {

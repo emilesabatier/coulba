@@ -8,7 +8,6 @@ import { authLayout } from './auth/auth.layout'
 import { APIRoute } from './auth/configuration/API.route'
 import { accountsLayout } from './auth/configuration/accounts/accounts.layout'
 import { accountsRoute } from './auth/configuration/accounts/accounts.route'
-import { addAccountRoute } from './auth/configuration/accounts/addAccount.route'
 import { updateAccountRoute } from './auth/configuration/accounts/updateAccount.route'
 import { closingRoute } from './auth/configuration/closing.route'
 import { companyLayout } from './auth/configuration/company/company.layout'
@@ -16,16 +15,13 @@ import { companyRoute } from './auth/configuration/company/company.route'
 import { updateCompanyRoute } from './auth/configuration/company/updateCompany.route'
 import { configurationLayout } from './auth/configuration/configuration.layout'
 import { configurationRoute } from './auth/configuration/configuration.route'
-import { addJournalRoute } from './auth/configuration/journals/addJournal.route'
 import { journalsLayout } from './auth/configuration/journals/journals.layout'
 import { journalsRoute } from './auth/configuration/journals/journals.route'
 import { updateJournalRoute } from './auth/configuration/journals/updateJournal.route'
 import { subscriptionRoute } from './auth/configuration/subscription.route'
-import { addUserRoute } from './auth/configuration/users/addUser.route'
 import { updateUserRoute } from './auth/configuration/users/updateUser.route'
 import { usersLayout } from './auth/configuration/users/users.layout'
 import { usersRoute } from './auth/configuration/users/users.route'
-import { addYearRoute } from './auth/configuration/years/addYear.route'
 import { updateYearRoute } from './auth/configuration/years/updateYear.route'
 import { yearsLayout } from './auth/configuration/years/years.layout'
 import { yearsRoute } from './auth/configuration/years/years.route'
@@ -40,12 +36,17 @@ import { reportsLayout } from './auth/reports/reports.layout'
 import { reportsRoute } from './auth/reports/reports.route'
 import { sheetRoute } from './auth/reports/sheet.route'
 import { statementRoute } from './auth/reports/statement.route'
-import { addTransactionRoute } from './auth/transactions/addTransaction.route'
+import { createTransactionRoute } from './auth/transactions/createTransaction.route'
+import { readTransactionRoute } from './auth/transactions/readTransaction.route'
 import { transactionsLayout } from './auth/transactions/transactions.layout'
 import { transactionsRoute } from './auth/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
+import { createAccountRoute } from './auth/configuration/accounts/createAccount.route'
+import { createJournalRoute } from './auth/configuration/journals/createJournal.route'
+import { createUserRoute } from './auth/configuration/users/createUser.route'
+import { createYearRoute } from './auth/configuration/years/createYear.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -55,7 +56,8 @@ const routeTree = rootLayout.addChildren([
 
         transactionsLayout.addChildren([
             transactionsRoute,
-            addTransactionRoute,
+            createTransactionRoute,
+            readTransactionRoute,
             updateTransactionRoute
         ]),
 
@@ -84,24 +86,24 @@ const routeTree = rootLayout.addChildren([
             subscriptionRoute,
             usersLayout.addChildren([
                 usersRoute,
-                addUserRoute,
+                createUserRoute,
                 updateUserRoute
             ]),
             APIRoute,
             yearsLayout.addChildren([
                 yearsRoute,
-                addYearRoute,
+                createYearRoute,
                 updateYearRoute
             ]),
             closingRoute,
             accountsLayout.addChildren([
                 accountsRoute,
-                addAccountRoute,
+                createAccountRoute,
                 updateAccountRoute
             ]),
             journalsLayout.addChildren([
                 journalsRoute,
-                addJournalRoute,
+                createJournalRoute,
                 updateJournalRoute
             ]),
         ]),

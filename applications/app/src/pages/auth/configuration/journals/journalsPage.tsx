@@ -1,6 +1,3 @@
-import { ButtonPlain } from "@coulba/design/buttons"
-import { IconPlus } from "@tabler/icons-react"
-import { CreateJournal } from "../../../../components/journals/createJournal/createJournal"
 import { JournalsList } from "../../../../components/journals/journalsList"
 import { Main } from "../../../../components/layouts/main/main"
 
@@ -13,15 +10,7 @@ export function JournalsPage() {
                 description="Vous retrouvez sur cette page la liste des journaux comptables."
             />
             <Main.Content>
-                <div className="flex flex-col justify-start items-stretch gap-2">
-                    <CreateJournal>
-                        <ButtonPlain
-                            icon={<IconPlus />}
-                            text="Ajouter un journal"
-                        />
-                    </CreateJournal>
-                    <JournalsList />
-                </div>
+                <JournalsList />
             </Main.Content>
         </Main.Root>
     )

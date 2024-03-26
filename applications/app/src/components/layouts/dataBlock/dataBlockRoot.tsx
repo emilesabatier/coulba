@@ -1,14 +1,19 @@
-import { ReactElement } from "react"
+import { cn } from "@coulba/design/services"
+import { ComponentProps, ReactElement } from "react"
 
 
 type DataBlockRoot = {
     children: null | ReactElement | (null | ReactElement)[]
+    className?: ComponentProps<'div'>['className']
 }
 
 export function DataBlockRoot(props: DataBlockRoot) {
     return (
         <div
-            className="shrink-0 w-full h-fit gap-2 md:gap-4 grid grid-cols-1 md:grid-cols-3 p-2 md:p-4 bg-white border border-neutral/10 rounded-sm"
+            className={cn(
+                "shrink-0 w-full h-fit grid grid-cols-[max-content_auto] gap-x-4 gap-y-2 p-4 bg-white border border-neutral/25 rounded-md",
+                props.className
+            )}
             children={props.children}
         />
     )

@@ -1,4 +1,4 @@
-import { UpdateJournalForm } from "../../../../components/journals/updateJournal/updateJournal.form"
+import { UpdateJournalForm } from "../../../../components/journals/update/updateJournal.form"
 import { Main } from "../../../../components/layouts/main/main"
 
 

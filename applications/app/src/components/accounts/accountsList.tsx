@@ -1,16 +1,17 @@
-import { ButtonGhost } from "@coulba/design/buttons"
+import { ButtonGhost, ButtonOutline } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronDown, IconPencil, IconTrash } from "@tabler/icons-react"
+import { IconChevronDown, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { ComponentProps } from "react"
 import * as v from "valibot"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
-import { DeleteAccount } from "./deleteAccount/deleteAccount"
-import { UpdateAccount } from "./updateAccount/updateAccount"
+import { CreateAccount } from "./create/createAccount"
+import { DeleteAccount } from "./delete/deleteAccount"
+import { UpdateAccount } from "./update/updateAccount"
 
 
 type GroupedAccount = {
@@ -41,8 +42,17 @@ export function AccountsList() {
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-2 overflow-auto border border-neutral/25 rounded-sm p-4">
-            <Accordion type="multiple">
+        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/25 rounded-md">
+            <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
+                <CreateAccount>
+                    <ButtonOutline
+                        icon={<IconPlus />}
+                        text="Ajouter un compte"
+                        className="border-dashed"
+                    />
+                </CreateAccount>
+            </div>
+            <Accordion type="multiple" className="p-4">
                 {
                     (groupedAccounts.length === 0) ? (<FormatNull />) : groupedAccounts.map((groupedAccount) => (
                         <AccountItem
@@ -76,11 +86,11 @@ function AccountItem(props: AccountItem) {
                 props.className
             )}
         >
-            <div className="flex justify-between items-center gap-4 hover:bg-background rounded-sm">
+            <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
                 <AccordionTrigger className="w-full flex justify-start items-center ">
                     <div className="flex justify-start items-center gap-2 p-2">
-                        <h2>{props.groupedAccount.account.number}</h2>
-                        <span className="text-neutral/50">{props.groupedAccount.account.label}</span>
+                        <h2 className="font-bold">{props.groupedAccount.account.number}</h2>
+                        <span className="text-neutral/75">{props.groupedAccount.account.label}</span>
                     </div>
                     <IconChevronDown size={16} className={cn(
                         "stroke-neutral/50",

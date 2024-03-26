@@ -1,5 +1,5 @@
 import { Main } from "../../../../components/layouts/main/main"
-import { UpdateYearForm } from "../../../../components/years/updateYear/updateYear.form"
+import { UpdateYearForm } from "../../../../components/years/update/updateYear.form"
 
 
 export function UpdateYearPage() {

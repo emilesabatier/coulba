@@ -1,4 +1,4 @@
-import { CreateAttachmentForm } from "../../../components/attachments/createAttachment/createAttachment.form"
+import { CreateAttachmentForm } from "../../../components/attachments/create/createAttachment.form"
 import { Main } from "../../../components/layouts/main/main"
 
 

@@ -1,4 +1,4 @@
-import { UpdateAttachmentForm } from "../../../components/attachments/updateAttachment/updateAttachment.form"
+import { UpdateAttachmentForm } from "../../../components/attachments/update/updateAttachment.form"
 import { Main } from "../../../components/layouts/main/main"
 
 

@@ -1,4 +1,4 @@
-import { UpdateAccountForm } from "../../../../components/accounts/updateAccount/updateAccount.form"
+import { UpdateAccountForm } from "../../../../components/accounts/update/updateAccount.form"
 import { Main } from "../../../../components/layouts/main/main"
 
 

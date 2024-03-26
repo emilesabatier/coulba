@@ -1,7 +1,7 @@
-import { transactions } from "@coulba/schemas/models"
+import { records, transactions } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
@@ -83,7 +83,10 @@ export const transactionsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(transactions.id, params.idTransaction))
+                .where(and(
+                    eq(transactions.id, params.idTransaction),
+                    eq(transactions.isConfirmed, false)
+                ))
                 .returning()
 
             return c.json(updateTransaction, 200)
@@ -97,9 +100,52 @@ export const transactionsRoute = new Hono<AuthEnv>()
 
             const [deleteTransaction] = await db
                 .delete(transactions)
-                .where(eq(transactions.id, params.idTransaction))
+                .where(and(
+                    eq(transactions.id, params.idTransaction),
+                    eq(transactions.isConfirmed, false)
+                ))
                 .returning()
 
             return c.json(deleteTransaction, 200)
+        }
+    )
+    .patch(
+        '/:idTransaction/validate',
+        validator("param", paramsValidator(auth.transactions.patch.validate.params)),
+        async (c) => {
+            const params = c.req.valid('param')
+
+            const updateTransaction = await db.transaction(async (tx) => {
+                const [updateTransaction] = await tx
+                    .update(transactions)
+                    .set({
+                        isConfirmed: true,
+                        lastUpdatedBy: c.var.user.id,
+                        lastUpdatedOn: new Date().toISOString()
+                    })
+                    .where(eq(transactions.id, params.idTransaction))
+                    .returning()
+
+                await tx
+                    .insert(records)
+                    .values({
+                        id: generateId(),
+                        idCompany: updateTransaction.idCompany,
+                        idYear: updateTransaction.idYear,
+                        idAccount: updateTransaction.idAccount,
+                        idJournal: updateTransaction.idJournal,
+                        idAttachment: updateTransaction.idAttachment,
+                        label: updateTransaction.label,
+                        date: updateTransaction.date,
+                        debit: updateTransaction.debit,
+                        credit: updateTransaction.credit,
+                        createdOn: updateTransaction.createdOn,
+                        createdBy: updateTransaction.createdBy
+                    })
+
+                return updateTransaction
+            })
+
+            return c.json(updateTransaction, 200)
         }
     )

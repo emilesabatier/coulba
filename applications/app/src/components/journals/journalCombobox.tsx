@@ -3,7 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { readJournals } from "../../services/api/auth/journals/readJournals"
-import { formatJournal } from "./formatJournal"
+import { formatJournal } from "./format/formatJournal"
 
 
 type JournalCombobox = {

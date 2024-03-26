@@ -39,7 +39,7 @@ export function Form<T extends v.ObjectSchema<v.ObjectEntries>>(props: Form<T>) 
         const submitResponse = await props.onSubmit(form.getValues())
         if (!submitResponse) return
 
-        form.reset(props.defaultValues, {
+        form.reset({}, {
             keepValues: false,
             keepDirtyValues: false,
             keepDefaultValues: false

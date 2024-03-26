@@ -1,4 +1,4 @@
-import { AttachmentContent } from "../../../components/attachments/readAttachment/attachmentContent"
+import { AttachmentContent } from "../../../components/attachments/read/attachmentContent"
 import { Main } from "../../../components/layouts/main/main"
 
 

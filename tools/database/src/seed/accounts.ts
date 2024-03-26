@@ -10,7 +10,7 @@ export type DefaultAccount = {
 export const defaultAccounts: DefaultAccount[] = [
     {
         number: 1,
-        label: "Capitaux",
+        label: "Comptes de capitaux",
         system: "condensed",
         accounts: [
             {
@@ -852,7 +852,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 2,
-        label: "Immobilisations",
+        label: "Comptes d'immobilisations",
         system: "condensed",
         accounts: [
             {
@@ -1914,7 +1914,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 3,
-        label: "Stocks et en-cours",
+        label: "Comptes de stocks et en-cours",
         system: "condensed",
         accounts: [
             {
@@ -2358,7 +2358,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 4,
-        label: "Tiers",
+        label: "Comptes de tiers",
         system: "condensed",
         accounts: [
             {
@@ -3462,7 +3462,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 5,
-        label: "Financiers",
+        label: "Comptes financiers",
         system: "condensed",
         accounts: [
             {
@@ -3832,7 +3832,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 6,
-        label: "Charges",
+        label: "Comptes de charges",
         system: "condensed",
         accounts: [
             {
@@ -5460,7 +5460,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 7,
-        label: "Produits",
+        label: "Comptes de produits",
         system: "condensed",
         accounts: [
             {
@@ -6286,7 +6286,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 8,
-        label: "Spéciaux",
+        label: "Comptes spéciaux",
         system: "condensed",
         accounts: [
             {
@@ -6413,18 +6413,20 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 89,
                 label: "Bilan",
                 system: "base",
-                accounts: [{
-                    number: 890,
-                    label: "Bilan d'ouverture",
-                    system: "base",
-                    accounts: []
-                },
-                {
-                    number: 891,
-                    label: "Bilan de clôture",
-                    system: "base",
-                    accounts: []
-                }]
+                accounts: [
+                    {
+                        number: 890,
+                        label: "Bilan d'ouverture",
+                        system: "base",
+                        accounts: []
+                    },
+                    {
+                        number: 891,
+                        label: "Bilan de clôture",
+                        system: "base",
+                        accounts: []
+                    }
+                ]
             }
         ]
     }

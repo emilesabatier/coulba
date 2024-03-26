@@ -1,8 +1,7 @@
-import { ButtonPlain } from "@coulba/design/buttons"
-import { IconPlus } from "@tabler/icons-react"
 import { Main } from "../../../components/layouts/main/main"
-import { CreateTransaction } from "../../../components/transactions/createTransaction/createTransaction"
-import { TransactionsTable } from "../../../components/transactions/transactionsTable"
+import { Section } from "../../../components/layouts/section/section"
+import { ConfirmedTransactions } from "../../../components/transactions/table/confirmedTransactions"
+import { PendingTransactions } from "../../../components/transactions/table/pendingTransactions"
 
 
 export function TransactionsPage() {
@@ -13,15 +12,18 @@ export function TransactionsPage() {
                 description="Vous trouverez sur cette page la liste des enregistrements comptables provisoires, avant leur validation et ajout définitif au journal."
             />
             <Main.Content>
-                <div className="flex flex-col justify-start items-stretch gap-2">
-                    <CreateTransaction>
-                        <ButtonPlain
-                            icon={<IconPlus />}
-                            text="Ajouter un enregistrement"
-                        />
-                    </CreateTransaction>
-                    <TransactionsTable />
-                </div>
+                <Section.Root>
+                    <Section.Header title="Enregistrements non validés" />
+                    <Section.Content>
+                        <PendingTransactions />
+                    </Section.Content>
+                </Section.Root>
+                <Section.Root>
+                    <Section.Header title="Enregistrements validés" />
+                    <Section.Content>
+                        <ConfirmedTransactions />
+                    </Section.Content>
+                </Section.Root>
             </Main.Content>
         </Main.Root>
     )

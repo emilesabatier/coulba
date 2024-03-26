@@ -3,7 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { readAccounts } from "../../services/api/auth/accounts/readAccounts"
-import { formatAccount } from "./formatAccount"
+import { formatAccount } from "./format/formatAccount"
 
 
 type AccountCombobox = {

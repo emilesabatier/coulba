@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@coulba/design/overlays"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
-import { ReactElement } from "react"
+import { Fragment, ReactElement } from "react"
 
 
 type DataBlockItem = {
@@ -11,9 +11,9 @@ type DataBlockItem = {
 
 export function DataBlockItem(props: DataBlockItem) {
     return (
-        <div className="basis-full md:basis-1/4 flex flex-col justify-start items-start gap-1">
+        <Fragment>
             <div className="flex justify-start items-center gap-2">
-                <span className="uppercase text-neutral/50 text-sm">{props.label}</span>
+                <span className="uppercase text-neutral/50">{props.label}</span>
                 {
                     (!props.description) ? null : (
                         <TooltipProvider>
@@ -37,6 +37,6 @@ export function DataBlockItem(props: DataBlockItem) {
                         )
                 }
             </div>
-        </div>
+        </Fragment>
     )
 }

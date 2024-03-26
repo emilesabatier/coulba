@@ -15,7 +15,7 @@ export function PageNavigation() {
     const session = useSession()
 
     return (
-        <div className="w-full flex flex-col justify-start items-stretch gap-4 md:gap-8 border-r border-neutral/25 p-2 md:p-4 bg-background">
+        <div className="w-full flex flex-col justify-start items-stretch gap-4 md:gap-8 border-r border-neutral/25 p-2 md:p-4">
             <div className="w-fit flex justify-start items-center gap-2">
                 <Link to="/" className="w-fit flex justify-center items-center">
                     <Logo />

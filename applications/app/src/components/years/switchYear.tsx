@@ -5,8 +5,8 @@ import { useState } from "react"
 import { useCurrentYear } from "../../contexts/currentYear/useCurrentYear"
 import { queryClient } from "../../contexts/state/queryClient"
 import { switchYear } from "../../services/api/auth/years/switchYear"
-import { yearOptions } from "../../services/api/auth/years/yearsOptions"
-import { YearCombobox } from "./yearCombobox"
+import { yearsOptions } from "../../services/api/auth/years/yearsOptions"
+import { YearCombobox } from "./input/yearCombobox"
 
 
 export function SwitchYear() {
@@ -14,16 +14,16 @@ export function SwitchYear() {
     const [idYear, setIdYear] = useState<string | undefined>(undefined)
 
     const mutation = useMutation({
-        mutationKey: yearOptions.queryKey,
+        mutationKey: yearsOptions.queryKey,
         mutationFn: switchYear
     })
 
     if (!currentYear.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4 overflow-auto border border-neutral/25 rounded-sm p-4">
+        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4 overflow-auto border border-neutral/25 rounded-md p-4">
             <div className="flex flex-col justify-start items-start gap-1">
-                <h2 className="text-xl">Exercice sélectionné</h2>
-                <p className="text-neutral/75">Cela permet de changer l'exercice fiscal sélectionné dans l'application. C'est utile pour notamment consulter l'historique des exercices.</p>
+                <h2 className="text-xl">Changer d'exercice</h2>
+                <p className="text-neutral/75">Cela permet de changer l'exercice fiscal sélectionné dans l'application. C'est utile pour notamment consulter les données des exercices précédents.</p>
             </div>
             <div className="flex justify-start items-center gap-1">
                 <YearCombobox
@@ -43,7 +43,7 @@ export function SwitchYear() {
 
                         mutation.mutate({ params: { idYear: idYear } }, {
                             onSuccess: () => {
-                                queryClient.invalidateQueries({ queryKey: yearOptions.queryKey })
+                                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
                                 currentYear.mutate()
                                 toast({ title: "L'exercice actuel a été changé", variant: "success" })
                             }
