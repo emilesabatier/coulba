@@ -23,23 +23,27 @@ export const InputText = forwardRef<HTMLInputElement, InputText>(
         }
 
         return (
-            <input
-                {...props}
-                type="text"
-                className={cn(
-                    "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/25",
-                    "overflow-hidden whitespace-nowrap text-ellipsis",
-                    "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
-                    (!props.error) ? "border-neutral/25" : "border-error",
-                    props.className
-                )}
-                ref={ref}
-                value={input(props.value)}
-                onChange={(e) => {
-                    if (!props.onChange) return
-                    props?.onChange(output(e.currentTarget.value))
-                }}
-            />
+            <div className={cn(
+                "h-[40px] w-full flex justify-start items-stretch gap-2 border border-neutral/20 rounded-sm",
+                (!props.error) ? "" : "border-error",
+                props.className
+            )}>
+                <input
+                    {...props}
+                    type="text"
+                    className={cn(
+                        "rounded-sm w-full text-base placeholder:text-neutral/25 p-2",
+                        "overflow-hidden whitespace-nowrap text-ellipsis",
+                        " focus:bg-neutral/5",
+                    )}
+                    ref={ref}
+                    value={input(props.value)}
+                    onChange={(e) => {
+                        if (!props.onChange) return
+                        props?.onChange(output(e.currentTarget.value))
+                    }}
+                />
+            </div>
         )
     }
 )

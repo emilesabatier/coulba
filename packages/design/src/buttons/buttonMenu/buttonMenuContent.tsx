@@ -51,7 +51,7 @@ export function ButtonMenuContent(props: ButtonMenuContent) {
         <div
             aria-disabled={props.disabled || props.loading}
             className={cn(
-                "overflow-hidden w-full min-h-[40px] h-full max-h-[40px] flex justify-start items-center gap-2 p-2 border border-transparent",
+                "rounded-sm overflow-hidden w-full min-h-[40px] h-full max-h-[40px] flex justify-start items-center gap-2 p-2 border border-transparent",
                 "aria-disabled:opacity-30 group",
                 variants[props?.color ?? "neutral"].container,
                 props.className

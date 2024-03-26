@@ -1,4 +1,4 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@monassosportive/design/overlays"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@coulba/design/overlays"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
 import { ReactElement } from "react"
 
@@ -13,7 +13,7 @@ export function DataBlockItem(props: DataBlockItem) {
     return (
         <div className="basis-full md:basis-1/4 flex flex-col justify-start items-start gap-1">
             <div className="flex justify-start items-center gap-2">
-                <span className="uppercase text-neutral/30 text-sm">{props.label}</span>
+                <span className="uppercase text-neutral/50 text-sm">{props.label}</span>
                 {
                     (!props.description) ? null : (
                         <TooltipProvider>

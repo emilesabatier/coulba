@@ -25,7 +25,7 @@ export function DeleteAttachment(props: DeleteAttachment) {
     return (
         <Delete
             title="Supprimer le fichier ?"
-            description="Attention, cela supprimera toutes les données."
+            description="Attention, cela supprimera définitivement le fichier."
             onSubmit={async () => {
                 const signedUrlResponse = await generateDelete({
                     body: { storageKey: props.attachment.storageKey }

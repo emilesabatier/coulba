@@ -2,7 +2,7 @@ import { CreateAttachmentForm } from "../../../components/attachments/createAtta
 import { Main } from "../../../components/layouts/main/main"
 
 
-export function AddAttachmentPage() {
+export function CreateAttachmentPage() {
     return (
         <Main.Root>
             <Main.Header

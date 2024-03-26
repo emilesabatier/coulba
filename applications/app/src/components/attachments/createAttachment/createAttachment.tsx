@@ -9,6 +9,7 @@ type CreateAttachment = {
 export function CreateAttachment(props: CreateAttachment) {
     return (
         <Link
+            className="w-fit"
             to="/fichiers/ajouter"
             children={props.children}
         />

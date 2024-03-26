@@ -34,3 +34,6 @@ export * from "./duration/formatDuration"
 
 export * from "./price/formatPrice"
 export * from "./price/price.format"
+
+export * from "./fileSize/fileSize.format"
+export * from "./fileSize/formatFileSize"

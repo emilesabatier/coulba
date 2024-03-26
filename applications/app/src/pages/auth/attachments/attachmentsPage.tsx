@@ -1,6 +1,6 @@
 import { ButtonPlain } from "@coulba/design/buttons"
 import { IconPlus } from "@tabler/icons-react"
-import { AttachmentsList } from "../../../components/attachments/attachmentsList"
+import { AttachmentsTable } from "../../../components/attachments/attachmentsTable"
 import { CreateAttachment } from "../../../components/attachments/createAttachment/createAttachment"
 import { Main } from "../../../components/layouts/main/main"
 
@@ -20,7 +20,7 @@ export function AttachmentsPage() {
                             text="Ajouter un fichier"
                         />
                     </CreateAttachment>
-                    <AttachmentsList />
+                    <AttachmentsTable />
                 </div>
             </Main.Content>
         </Main.Root>
