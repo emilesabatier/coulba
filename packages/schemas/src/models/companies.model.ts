@@ -13,7 +13,7 @@ export const companies = pgTable(
         name: text("name"),
         address: text("address"),
         email: text("email").notNull(),
-        apiKey: text("api_key"),
+        apiKeyHash: text("api_key_hash").unique(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
         createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by").references((): AnyPgColumn => users.id, { onDelete: "set null", onUpdate: "cascade" })

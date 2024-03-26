@@ -1,3 +1,4 @@
+import { ApiContent } from "../../../components/company/apiContent"
 import { Main } from "../../../components/layouts/main/main"
 
 
@@ -10,7 +11,7 @@ export function APIPage() {
             >
             </Main.Header>
             <Main.Content>
-                <p>La fonctionnalité d'API sera bientôt disponible.</p>
+                <ApiContent />
             </Main.Content>
         </Main.Root>
     )

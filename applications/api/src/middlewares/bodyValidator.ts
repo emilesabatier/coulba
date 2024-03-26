@@ -8,7 +8,7 @@ export function bodyValidator<T extends v.ObjectSchema<{}>>(schema: T) {
         const parsed = v.safeParse(schema, value)
         if (!parsed.success) {
             if (env()?.ENV !== "production") console.log(parsed.issues)
-            return c.text('Paramètres de la requête invalides.', 401)
+            return c.text('Données de la requête invalides.', 401)
         }
         return parsed.output
     }

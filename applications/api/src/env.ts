@@ -16,6 +16,7 @@ const envSchema = v.object({
     SESSION_PRIVATE_KEY: v.string(),
     SESSION_LIFETIME: v.string(),
     COOKIES_KEY: v.string(),
+    V1_API_KEY_SALT: v.string(),
     API_BASE_URL: v.string(),
     APP_BASE_URL: v.string(),
     WEBSITE_BASE_URL: v.string(),

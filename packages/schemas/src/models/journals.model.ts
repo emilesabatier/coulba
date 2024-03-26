@@ -1,4 +1,4 @@
-import { pgTable, text } from "drizzle-orm/pg-core"
+import { pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { companies } from "./companies.model.js"
@@ -17,5 +17,8 @@ export const journals = pgTable(
         createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
         lastUpdatedBy: idColumn("last_updated_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
-    }
+    },
+    (t) => ({
+        uniqueConstraint: unique().on(t.acronym, t.idCompany)
+    })
 )
