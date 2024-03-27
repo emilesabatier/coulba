@@ -2,6 +2,7 @@ import { accounts } from "./accounts"
 import { attachments } from "./attachments"
 import { companies } from "./companies"
 import { journals } from "./journals"
+import { profile } from "./profile"
 import { records } from "./records"
 import { services } from "./services"
 import { transactions } from "./transactions"
@@ -18,5 +19,6 @@ export const auth = {
     journals: journals,
     users: users,
     years: years,
-    services: services
+    services: services,
+    profile: profile
 }

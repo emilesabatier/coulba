@@ -16,3 +16,6 @@ export const userInclude: Record<typeof userKeys[number], true> = {
     lastUpdatedBy: true,
     createdBy: true
 }
+
+
+export const userIncludeKeys = ["id", "idCompany", "isAdmin", "forename", "surname", "email", "emailTemporary", "invitationLastSentOn", "isActive", "lastUpdatedOn", "lastUpdatedBy", "createdOn", "createdBy"] as const

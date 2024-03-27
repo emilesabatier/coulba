@@ -3,9 +3,9 @@ import { booleanSchema } from "../../components/schemas/boolean.schema"
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
 import { emailSchema } from "../../components/schemas/email.schema"
 import { idSchema } from "../../components/schemas/id.schema"
+import { requiredTextSchema } from '../../components/schemas/requiredText.schema'
 import { textSchema } from "../../components/schemas/text.schema"
 import { users } from '../../models'
-import { requiredTextSchema } from '../../components/schemas/requiredText.schema'
 
 
 
@@ -18,7 +18,7 @@ export const userSchema = createSelectSchema(users, {
     email: emailSchema,
     emailTemporary: emailSchema,
     emailToken: textSchema,
-    emailTokenExpiresAt: dateTimeSchema,
+    emailTokenExpiresOn: dateTimeSchema,
     passwordHash: textSchema,
     passwordSalt: textSchema,
     isActive: booleanSchema,

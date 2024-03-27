@@ -24,6 +24,7 @@ const corsConfig: Parameters<typeof cors>[0] = {
     credentials: true
 }
 app.use('/auth/*', cors(corsConfig))
+app.use('/shared/*', cors(corsConfig))
 
 
 app.onError((error, c) => {

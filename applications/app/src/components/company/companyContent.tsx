@@ -7,7 +7,7 @@ import { DataBlock } from "../layouts/dataBlock/dataBlock"
 import { UpdateCompany } from "./updateCompany/updateCompany"
 
 
-export function CompanyData() {
+export function CompanyContent() {
     const company = useCompany()
 
     if (company.isLoading) return <CircularLoader />

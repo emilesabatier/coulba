@@ -2,14 +2,14 @@ import { Link } from "@tanstack/react-router"
 import { ReactElement } from "react"
 
 
-type UpdateProfile = {
+type UpdateProfilePassword = {
     children: ReactElement
 }
 
-export function UpdateProfile(props: UpdateProfile) {
+export function UpdateProfilePassword(props: UpdateProfilePassword) {
     return (
         <Link
-            to="/profil/modifier"
+            to="/profil/modifier/motdepasse"
             children={props.children}
         />
     )

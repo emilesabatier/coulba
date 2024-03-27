@@ -1,4 +1,4 @@
-import { CompanyData } from "../../../../components/company/companyData"
+import { CompanyContent } from "../../../../components/company/companyContent"
 import { Main } from "../../../../components/layouts/main/main"
 
 
@@ -10,7 +10,7 @@ export function CompanyPage() {
                 description="Vous retrouvez sur cette page les informations sur votre société."
             />
             <Main.Content>
-                <CompanyData />
+                <CompanyContent />
             </Main.Content>
         </Main.Root>
     )

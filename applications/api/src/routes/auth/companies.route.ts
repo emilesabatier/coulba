@@ -18,7 +18,7 @@ export const companiesRoute = new Hono<AuthEnv>()
             const [readCompany] = await db
                 .select()
                 .from(companies)
-                .where(eq(companies.id, c.var.user.idCompany))
+                .where(eq(companies.id, c.var.company.id))
 
             return c.json(readCompany, 200)
         }
@@ -32,7 +32,6 @@ export const companiesRoute = new Hono<AuthEnv>()
             const [updateCompany] = await db
                 .update(companies)
                 .set({
-                    siren: body.siren,
                     name: body.name,
                     address: body.address,
                     email: body.email,

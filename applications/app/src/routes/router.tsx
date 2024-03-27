@@ -8,6 +8,7 @@ import { authLayout } from './auth/auth.layout'
 import { APIRoute } from './auth/configuration/API.route'
 import { accountsLayout } from './auth/configuration/accounts/accounts.layout'
 import { accountsRoute } from './auth/configuration/accounts/accounts.route'
+import { createAccountRoute } from './auth/configuration/accounts/createAccount.route'
 import { updateAccountRoute } from './auth/configuration/accounts/updateAccount.route'
 import { closingRoute } from './auth/configuration/closing.route'
 import { companyLayout } from './auth/configuration/company/company.layout'
@@ -15,20 +16,26 @@ import { companyRoute } from './auth/configuration/company/company.route'
 import { updateCompanyRoute } from './auth/configuration/company/updateCompany.route'
 import { configurationLayout } from './auth/configuration/configuration.layout'
 import { configurationRoute } from './auth/configuration/configuration.route'
+import { createJournalRoute } from './auth/configuration/journals/createJournal.route'
 import { journalsLayout } from './auth/configuration/journals/journals.layout'
 import { journalsRoute } from './auth/configuration/journals/journals.route'
 import { updateJournalRoute } from './auth/configuration/journals/updateJournal.route'
 import { subscriptionRoute } from './auth/configuration/subscription.route'
+import { createUserRoute } from './auth/configuration/users/createUser.route'
 import { updateUserRoute } from './auth/configuration/users/updateUser.route'
 import { usersLayout } from './auth/configuration/users/users.layout'
 import { usersRoute } from './auth/configuration/users/users.route'
+import { createYearRoute } from './auth/configuration/years/createYear.route'
 import { updateYearRoute } from './auth/configuration/years/updateYear.route'
 import { yearsLayout } from './auth/configuration/years/years.layout'
 import { yearsRoute } from './auth/configuration/years/years.route'
 import { overviewRoute } from './auth/overview/overview.route'
 import { profileLayout } from './auth/profile/profile.layout'
 import { profileRoute } from './auth/profile/profile.route'
-import { settingsRoute } from './auth/profile/settings.route'
+import { updateProfileLayout } from './auth/profile/update/updateProfile.layout'
+import { updateProfileRoute } from './auth/profile/update/updateProfile.page'
+import { updateProfileEmailRoute } from './auth/profile/update/updateProfileEmail.page'
+import { updateProfilePasswordRoute } from './auth/profile/update/updateProfilePassword.page'
 import { balanceRoute } from './auth/reports/balance.route'
 import { ledgerRoute } from './auth/reports/ledger.route'
 import { recordsRoute } from './auth/reports/records.route'
@@ -43,10 +50,6 @@ import { transactionsRoute } from './auth/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
-import { createAccountRoute } from './auth/configuration/accounts/createAccount.route'
-import { createJournalRoute } from './auth/configuration/journals/createJournal.route'
-import { createUserRoute } from './auth/configuration/users/createUser.route'
-import { createYearRoute } from './auth/configuration/years/createYear.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -110,7 +113,11 @@ const routeTree = rootLayout.addChildren([
 
         profileLayout.addChildren([
             profileRoute,
-            settingsRoute
+            updateProfileLayout.addChildren([
+                updateProfileRoute,
+                updateProfileEmailRoute,
+                updateProfilePasswordRoute
+            ])
         ])
 
     ])

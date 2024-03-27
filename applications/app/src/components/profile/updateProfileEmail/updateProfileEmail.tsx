@@ -2,14 +2,14 @@ import { Link } from "@tanstack/react-router"
 import { ReactElement } from "react"
 
 
-type UpdateProfile = {
+type UpdateProfileEmail = {
     children: ReactElement
 }
 
-export function UpdateProfile(props: UpdateProfile) {
+export function UpdateProfileEmail(props: UpdateProfileEmail) {
     return (
         <Link
-            to="/profil/modifier"
+            to="/profil/modifier/email"
             children={props.children}
         />
     )

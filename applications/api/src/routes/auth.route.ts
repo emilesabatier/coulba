@@ -4,6 +4,7 @@ import { accountsRoute } from './auth/accounts.route'
 import { attachmentsRoute } from './auth/attachments.route'
 import { companiesRoute } from './auth/companies.route'
 import { journalsRoute } from './auth/journals.route'
+import { profileRoute } from './auth/profile.route'
 import { recordsRoute } from './auth/records.route'
 import { servicesRoute } from './auth/services.route'
 import { transactionsRoute } from './auth/transactions.route'
@@ -22,3 +23,4 @@ export const authRoute = new Hono()
     .route('/years', yearsRoute)
     .route('/journals', journalsRoute)
     .route('/services', servicesRoute)
+    .route('/profile', profileRoute)

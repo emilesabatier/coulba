@@ -1,5 +1,4 @@
 import { companies, sessions, users, years } from "@coulba/schemas/models"
-import { CompanyReturned, UserReturned, YearReturned } from "@coulba/schemas/schemas"
 import { and, eq } from "drizzle-orm"
 import { MiddlewareHandler } from "hono"
 import { getSignedCookie } from "hono/cookie"
@@ -10,9 +9,9 @@ import { env } from "../env"
 
 export type AuthEnv = {
     Variables: {
-        currentYear: YearReturned
-        company: CompanyReturned
-        user: UserReturned
+        currentYear: typeof years.$inferSelect
+        company: typeof companies.$inferSelect
+        user: typeof users.$inferSelect
     }
 }
 

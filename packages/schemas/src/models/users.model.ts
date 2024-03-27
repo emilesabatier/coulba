@@ -16,7 +16,7 @@ export const users = pgTable(
         email: text("email").notNull().unique(),
         emailTemporary: text("email_temporary"),
         emailToken: text("email_token"),
-        emailTokenExpiresAt: dateTimeColumn("email_token_expires_on"),
+        emailTokenExpiresOn: dateTimeColumn("email_token_expires_on"),
         passwordHash: text("password_hash").notNull(),
         passwordSalt: text("password_salt").notNull(),
         isActive: boolean("is_active").default(true).notNull(),
