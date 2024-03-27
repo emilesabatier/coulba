@@ -135,6 +135,7 @@ export const transactionsRoute = new Hono<AuthEnv>()
                         idAccount: updateTransaction.idAccount,
                         idJournal: updateTransaction.idJournal,
                         idAttachment: updateTransaction.idAttachment,
+                        idTransaction: params.idTransaction,
                         label: updateTransaction.label,
                         date: updateTransaction.date,
                         debit: updateTransaction.debit,

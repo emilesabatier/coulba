@@ -2,8 +2,8 @@ import { InputCombobox } from "@coulba/design/inputs"
 import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
-import { readAttachments } from "../../../services/api/auth/attachments/readAttachments"
-import { formatAttachment } from "../format/formatAttachment"
+import { readAttachments } from "../../services/api/auth/attachments/readAttachments"
+import { formatAttachment } from "./format/formatAttachment"
 
 
 type AttachmentCombobox = {

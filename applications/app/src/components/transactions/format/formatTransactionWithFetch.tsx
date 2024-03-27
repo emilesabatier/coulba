@@ -20,7 +20,7 @@ export function FormatTransactionWithFetch(props: FormatTransactionWithFetch) {
     if (transaction.isError) return <ErrorMessage message={transaction.error.message} />
     if (!transaction.data) return <FormatNull />
     return (
-        <ReadTransaction transaction={transaction.data}>
+        <ReadTransaction idTransaction={props.idTransaction}>
             <FormatText
                 text={formatTransaction(transaction.data)}
                 className="underline hover:no-underline"

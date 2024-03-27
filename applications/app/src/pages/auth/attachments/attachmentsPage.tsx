@@ -1,4 +1,4 @@
-import { AttachmentsTable } from "../../../components/attachments/table/attachmentsTable"
+import { AttachmentsTable } from "../../../components/attachments/attachmentsTable"
 import { Main } from "../../../components/layouts/main/main"
 
 

@@ -1,5 +1,5 @@
 import { ButtonGhost } from "@coulba/design/buttons"
-import { FormatDate, FormatDateTime, FormatNull, FormatPrice } from "@coulba/design/formats"
+import { FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { InputDebounced, InputText } from "@coulba/design/inputs"
 import { auth } from "@coulba/schemas/routes"
 import { IconChevronLeft, IconChevronRight, IconEye } from "@tabler/icons-react"
@@ -38,7 +38,7 @@ export function TransactionsTable(props: TransactionsTable) {
         {
             accessorKey: 'label',
             header: 'Libellé',
-            cell: ({ getValue }) => (getValue()),
+            cell: ({ row }) => (<FormatText text={row.original.label} />),
             filterFn: 'includesString'
         },
         {
@@ -88,7 +88,7 @@ export function TransactionsTable(props: TransactionsTable) {
             header: () => null,
             cell: ({ cell }) => {
                 return (
-                    <ReadTransaction transaction={cell.row.original}>
+                    <ReadTransaction idTransaction={cell.row.original.id}>
                         <ButtonGhost
                             icon={<IconEye />}
                         />

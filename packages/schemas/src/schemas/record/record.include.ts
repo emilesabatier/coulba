@@ -6,6 +6,7 @@ export const recordInclude = {
     idAccount: true,
     idJournal: true,
     idAttachment: true,
+    idTransaction: true,
     label: true,
     date: true,
     debit: true,

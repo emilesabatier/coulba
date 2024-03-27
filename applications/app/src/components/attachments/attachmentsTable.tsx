@@ -1,5 +1,5 @@
 import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
-import { FormatDateTime, FormatFileSize, FormatNull } from "@coulba/design/formats"
+import { FormatDateTime, FormatFileSize, FormatNull, FormatText } from "@coulba/design/formats"
 import { InputDebounced, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { auth } from "@coulba/schemas/routes"
@@ -17,10 +17,10 @@ import {
 } from '@tanstack/react-table'
 import { useMemo, useState } from "react"
 import * as v from "valibot"
-import { attachmentsOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
-import { ErrorMessage } from "../../layouts/errorMessage"
-import { CreateAttachment } from "../create/createAttachment"
-import { ReadAttachment } from "../read/readAttachment"
+import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
+import { ErrorMessage } from "../layouts/errorMessage"
+import { CreateAttachment } from "./create/createAttachment"
+import { ReadAttachment } from "./read/readAttachment"
 
 
 export function AttachmentsTable() {
@@ -36,13 +36,13 @@ export function AttachmentsTable() {
         {
             accessorKey: 'label',
             header: "Libellé",
-            cell: ({ getValue }) => (getValue()),
+            cell: ({ row }) => (!row.original.label ? <FormatNull /> : <FormatText text={row.original.label} />),
             filterFn: 'includesString'
         },
         {
             accessorKey: 'reference',
             header: 'Référence',
-            cell: ({ getValue }) => (getValue()),
+            cell: ({ row }) => (<FormatText text={row.original.reference} />),
             filterFn: 'includesString'
         },
         {
