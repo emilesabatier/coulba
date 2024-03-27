@@ -1,32 +1,54 @@
+import { PutObjectCommand } from "@aws-sdk/client-s3"
 import { attachments } from "@coulba/schemas/models"
-import { auth } from "@coulba/schemas/routes"
+import { v1 } from "@coulba/schemas/routes"
+import { generateId } from "@coulba/schemas/services"
 import { Hono } from 'hono'
-import { validator } from 'hono/validator'
+import * as v from "valibot"
 import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
+import { s3Client } from "../../clients/storage"
+import { env } from "../../env"
+import { V1Env } from "../../middlewares/checkApiKey"
 
 
-export const attachmentsRoute = new Hono<AuthEnv>()
+export const attachmentsRoute = new Hono<V1Env>()
     .post(
         '/',
-        validator("json", bodyValidator(auth.attachments.post.body)),
         async (c) => {
-            const body = c.req.valid('json')
+            const rawBody = await c.req.parseBody()
+            const parsedBody = v.safeParse(v1.attachments.post.body, rawBody)
+            if (!parsedBody.success) {
+                if (env()?.ENV !== "production") console.log(parsedBody.issues)
+                return c.text('Données de la requête invalides.', 401)
+            }
+            const body = parsedBody.output
+
+            const size = body.file.size
+            const type = body.file.type
+
+            const key = `companies/${c.var.company.id}/${c.var.currentYear.id}/${generateId()}`
+            await s3Client.send(new PutObjectCommand({
+                ACL: "authenticated-read",
+                Bucket: env()?.SCW_BUCKET_NAME,
+                Key: key,
+                Body: Buffer.from(await body.file.arrayBuffer()),
+                ContentType: type,
+                Metadata: {
+                    idCompany: c.var.company.id,
+                    idYear: c.var.currentYear.id
+                }
+            }))
 
             const [createAttachment] = await db
                 .insert(attachments)
                 .values({
-                    // id: generateId(),
-                    // idCompany: c.var.company.id,
-                    // idYear: c.var.currentYear.id,
-                    // reference: body.reference,
-                    // label: body.label,
-                    // storageKey: body.storageKey,
-                    // type: body.type,
-                    // size: body.size,
-                    // lastUpdatedBy: c.var.user.id,
-                    // createdBy: c.var.user.id
+                    id: generateId(),
+                    idCompany: c.var.company.id,
+                    idYear: c.var.currentYear.id,
+                    reference: body.reference,
+                    label: body.label,
+                    storageKey: key,
+                    type: type,
+                    size: size
                 })
                 .returning()
 

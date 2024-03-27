@@ -17,14 +17,13 @@ const app = new Hono()
 app.use(logger())
 
 // CORS
-const corsConfig = {
+const corsConfig: Parameters<typeof cors>[0] = {
     origin: env()?.APP_BASE_URL ?? "",
     allowHeaders: ['Content-Type', 'Authorization', 'Cookie', 'Set-Cookie', 'Credentials'],
     allowMethods: ['POST', 'GET', 'OPTIONS', 'PUT', 'PATCH', 'DELETE', "UPDATE"],
     credentials: true
 }
 app.use('/auth/*', cors(corsConfig))
-app.use('/shared/*', cors(corsConfig))
 
 
 app.onError((error, c) => {

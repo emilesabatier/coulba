@@ -14,7 +14,6 @@ export const companySchema = createSelectSchema(companies, {
     address: textSchema,
     email: emailSchema,
     apiKeyHash: textSchema,
-    apiKeySalt: textSchema,
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema

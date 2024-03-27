@@ -49,7 +49,7 @@ export const signedUrlRoute = new Hono<AuthEnv>()
 
             if (body.size > 10000000) throw new HTTPException(500, { message: "File too large" })
 
-            const key = `companies/${c.var.company.id}/${generateId()}`
+            const key = `companies/${c.var.company.id}/${c.var.currentYear.id}/${generateId()}`
 
             const url = await getSignedUrl(
                 s3Client,
@@ -61,6 +61,7 @@ export const signedUrlRoute = new Hono<AuthEnv>()
                     ContentType: body.contentType,
                     Metadata: {
                         idCompany: c.var.company.id,
+                        idYear: c.var.currentYear.id,
                         idUser: c.var.user.id
                     }
                 }),
