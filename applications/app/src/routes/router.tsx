@@ -50,6 +50,14 @@ import { transactionsRoute } from './auth/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
 import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
+import { createSheetRoute } from './auth/configuration/sheets/createSheet.route'
+import { sheetsLayout } from './auth/configuration/sheets/sheets.layout'
+import { sheetsRoute } from './auth/configuration/sheets/sheets.route'
+import { updateSheetRoute } from './auth/configuration/sheets/updateSheet.route'
+import { createStatementRoute } from './auth/configuration/statements/createStatement.route'
+import { statementsLayout } from './auth/configuration/statements/statements.layout'
+import { statementsRoute } from './auth/configuration/statements/statements.route'
+import { updateStatementRoute } from './auth/configuration/statements/updateStatement.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -99,16 +107,26 @@ const routeTree = rootLayout.addChildren([
                 updateYearRoute
             ]),
             closingRoute,
-            accountsLayout.addChildren([
-                accountsRoute,
-                createAccountRoute,
-                updateAccountRoute
-            ]),
             journalsLayout.addChildren([
                 journalsRoute,
                 createJournalRoute,
                 updateJournalRoute
             ]),
+            accountsLayout.addChildren([
+                accountsRoute,
+                createAccountRoute,
+                updateAccountRoute
+            ]),
+            sheetsLayout.addChildren([
+                sheetsRoute,
+                createSheetRoute,
+                updateSheetRoute
+            ]),
+            statementsLayout.addChildren([
+                statementsRoute,
+                createStatementRoute,
+                updateStatementRoute
+            ])
         ]),
 
         profileLayout.addChildren([

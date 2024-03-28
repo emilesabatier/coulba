@@ -1,5 +1,5 @@
 import { Main } from "../../../components/layouts/main/main"
-import { RecordsTable } from "../../../components/records/recordsTable"
+import { RecordsContent } from "../../../components/reports/records/recordsContent"
 
 
 export function RecordsPage() {
@@ -7,11 +7,11 @@ export function RecordsPage() {
         <Main.Root>
             <Main.Header
                 title="Journal"
-                description="Le journal comptable qui contient toutes les entrées enregistrées et validées. Il représente toutes les opérations de votre société."
+                description="Le journal comptable contient toutes les entrées enregistrées et validées. Il représente toutes les opérations de votre société."
             >
             </Main.Header>
             <Main.Content>
-                <RecordsTable />
+                <RecordsContent />
             </Main.Content>
         </Main.Root>
     )

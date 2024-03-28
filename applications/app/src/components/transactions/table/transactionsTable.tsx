@@ -27,7 +27,7 @@ type TransactionsTable = {
 }
 
 export function TransactionsTable(props: TransactionsTable) {
-    const memoizedData = useMemo(() => props.transactions ?? [], [props.transactions])
+    const memoizedData = useMemo(() => props.transactions, [props.transactions])
     const [globalFilter, setGlobalFilter] = useState("")
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
@@ -50,7 +50,7 @@ export function TransactionsTable(props: TransactionsTable) {
         {
             accessorKey: 'idAccount',
             header: 'Compte',
-            cell: ({ row }) => (!row.original.idAccount ? <FormatNull /> : <FormatAccountWithFetch idAccount={row.original.idAccount} />),
+            cell: ({ row }) => (<FormatAccountWithFetch idAccount={row.original.idAccount} />),
             filterFn: 'includesString'
         },
         {

@@ -3,6 +3,8 @@ export const accountInclude = {
     id: true,
     idCompany: true,
     idYear: true,
+    idSheet: true,
+    idStatement: true,
     idAccountParent: true,
     label: true,
     number: true,

@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm"
 import { integer, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
@@ -28,13 +27,3 @@ export const attachments = pgTable(
         uniqueConstraint: unique().on(t.reference, t.idYear, t.idCompany)
     })
 )
-
-
-// Relations
-export const attachmentsRelations = relations(attachments, ({ one, many }) => ({
-    year: one(years, {
-        fields: [attachments.idYear],
-        references: [years.id],
-    }),
-    records: many(companies)
-}))

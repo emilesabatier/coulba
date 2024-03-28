@@ -5,7 +5,7 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
-import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionOptions"
+import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { validateTransaction } from "../../../services/api/auth/transactions/validateTransaction"
 import { ConfirmDialog } from "../../layouts/actions/confirmDialog"
 

@@ -1,6 +1,6 @@
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
-import { transactionsOptions } from "../../../services/api/auth/transactions/transactionOptions"
+import { transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { TransactionsTable } from "./transactionsTable"
 

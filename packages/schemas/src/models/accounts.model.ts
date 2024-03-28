@@ -1,8 +1,9 @@
-import { relations } from "drizzle-orm"
 import { integer, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { companies } from "./companies.model.js"
+import { sheets } from "./sheets.model.js"
+import { statements } from "./statements.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
 
@@ -14,8 +15,10 @@ export const accounts = pgTable(
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idSheet: idColumn("id_sheet").references(() => sheets.id, { onDelete: "restrict", onUpdate: "cascade" }),
+        idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "restrict", onUpdate: "cascade" }),
         idAccountParent: idColumn("id_account_parent"),
-        number: integer("number").notNull().unique(),
+        number: integer("number").notNull(),
         label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").defaultNow().notNull(),
         createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
@@ -26,16 +29,3 @@ export const accounts = pgTable(
         uniqueConstraint: unique().on(t.number, t.idYear, t.idCompany)
     })
 )
-
-
-// Relations
-export const accountsRelations = relations(accounts, ({ one }) => ({
-    year: one(years, {
-        fields: [accounts.idYear],
-        references: [years.id],
-    }),
-    accountParent: one(accounts, {
-        fields: [accounts.idAccountParent],
-        references: [accounts.id],
-    })
-}))

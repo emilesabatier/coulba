@@ -1,4 +1,3 @@
-import { relations } from "drizzle-orm"
 import { AnyPgColumn, numeric, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
@@ -30,24 +29,3 @@ export const records = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     }
 )
-
-
-// Relations
-export const recordsRelations = relations(records, ({ one }) => ({
-    year: one(years, {
-        fields: [records.idYear],
-        references: [years.id],
-    }),
-    account: one(accounts, {
-        fields: [records.idAccount],
-        references: [accounts.id],
-    }),
-    journal: one(journals, {
-        fields: [records.idJournal],
-        references: [journals.id],
-    }),
-    attachment: one(attachments, {
-        fields: [records.idAttachment],
-        references: [attachments.id],
-    })
-}))

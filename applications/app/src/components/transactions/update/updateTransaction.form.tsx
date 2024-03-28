@@ -9,7 +9,7 @@ import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { updateTransactionRoute } from "../../../routes/auth/transactions/updateTransaction.route"
 import { router } from "../../../routes/router"
-import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionOptions"
+import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { updateTransaction } from "../../../services/api/auth/transactions/updateTransaction"
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
@@ -139,7 +139,7 @@ export function UpdateTransactionForm() {
                                 </FormItem>
                             )}
                         />
-                        <div className="flex justify-start items-center gap-1">
+                        <div className="flex justify-start items-start gap-1">
                             <FormField
                                 control={form.control}
                                 name="debit"

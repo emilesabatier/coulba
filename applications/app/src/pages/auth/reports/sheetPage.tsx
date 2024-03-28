@@ -1,4 +1,5 @@
 import { Main } from "../../../components/layouts/main/main"
+import { SheetContent } from "../../../components/reports/sheet/sheetContent"
 
 
 export function SheetPage() {
@@ -6,11 +7,11 @@ export function SheetPage() {
         <Main.Root>
             <Main.Header
                 title="Bilan"
-                description="todo"
+                description="Le bilan comptable permet d'avoir une vue globale sur la santé de l'entreprise. Il présente ce que l'entreprise possède (actif) et ce qu'elle doit (passif)."
             >
             </Main.Header>
             <Main.Content>
-                <p>todo</p>
+                <SheetContent />
             </Main.Content>
         </Main.Root>
     )

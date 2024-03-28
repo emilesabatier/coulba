@@ -4,6 +4,8 @@ import { accountSchema } from "../../../schemas/account/account.schema"
 
 // Input
 export const createAccountBody = v.object({
+    idSheet: accountSchema.entries.idSheet,
+    idStatement: accountSchema.entries.idStatement,
     idAccountParent: v.optional(accountSchema.entries.idAccountParent),
     number: accountSchema.entries.number,
     label: accountSchema.entries.label

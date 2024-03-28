@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query"
-import { readAttachments } from "./readAttachments"
 import { readAttachment } from "./readAttachment"
+import { readAttachments } from "./readAttachments"
 
 
 export const attachmentsOptions = queryOptions({
@@ -9,6 +9,6 @@ export const attachmentsOptions = queryOptions({
 })
 
 export const attachmentOptions = (idAttachment: string) => queryOptions({
-    queryKey: ["transactions", idAttachment],
+    queryKey: ["attachments", idAttachment],
     queryFn: () => readAttachment({ params: { idAttachment: idAttachment } })
 })

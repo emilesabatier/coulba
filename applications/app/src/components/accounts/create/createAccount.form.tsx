@@ -69,7 +69,7 @@ export function CreateAccountForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le libellé qui définit l'opération ajoutée."
+                                    tooltip="Le numéro qui définit le compte ajouté."
                                     isRequired
                                 />
                                 <FormControl>

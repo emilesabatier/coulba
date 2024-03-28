@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query"
-import { readUsers } from "./readUsers"
 import { readUser } from "./readUser"
+import { readUsers } from "./readUsers"
 
 
 export const usersOptions = queryOptions({
@@ -9,6 +9,6 @@ export const usersOptions = queryOptions({
 })
 
 export const userOptions = (idUser: string) => queryOptions({
-    queryKey: ["transactions", idUser],
+    queryKey: ["users", idUser],
     queryFn: () => readUser({ params: { idUser: idUser } })
 })

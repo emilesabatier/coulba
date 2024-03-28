@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query"
-import { readYears } from "./readYears"
 import { readYear } from "./readYear"
+import { readYears } from "./readYears"
 
 
 export const yearsOptions = queryOptions({
@@ -10,6 +10,6 @@ export const yearsOptions = queryOptions({
 
 
 export const yearOptions = (idYear: string) => queryOptions({
-    queryKey: ["transactions", idYear],
+    queryKey: ["years", idYear],
     queryFn: () => readYear({ params: { idYear: idYear } })
 })

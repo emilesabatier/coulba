@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query"
-import { readJournals } from "./readJournals"
 import { readJournal } from "./readJournal"
+import { readJournals } from "./readJournals"
 
 
 export const journalsOptions = queryOptions({
@@ -9,6 +9,6 @@ export const journalsOptions = queryOptions({
 })
 
 export const journalOptions = (idJournal: string) => queryOptions({
-    queryKey: ["transactions", idJournal],
+    queryKey: ["journals", idJournal],
     queryFn: () => readJournal({ params: { idJournal: idJournal } })
 })

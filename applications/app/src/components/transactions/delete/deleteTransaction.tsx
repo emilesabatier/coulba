@@ -6,7 +6,7 @@ import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { deleteTransaction } from "../../../services/api/auth/transactions/deleteTransaction"
-import { transactionsOptions } from "../../../services/api/auth/transactions/transactionOptions"
+import { transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { Delete } from "../../layouts/actions/delete"
 
 

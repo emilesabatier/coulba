@@ -1723,6 +1723,12 @@ export const defaultAccounts: DefaultAccount[] = [
                                 system: "base",
                                 accounts: [
                                     {
+                                        number: 28183,
+                                        label: "Amortissements du matériel de bureau et du matériel informatique",
+                                        system: "developed",
+                                        accounts: []
+                                    },
+                                    {
                                         number: 28187,
                                         label: "Amortissement du mali de fusion sur actifs corporels",
                                         system: "base",
@@ -2828,6 +2834,12 @@ export const defaultAccounts: DefaultAccount[] = [
                                 accounts: []
                             },
                             {
+                                number: 4453,
+                                label: "TVA due extracommunautaire",
+                                system: "base",
+                                accounts: []
+                            },
+                            {
                                 number: 4455,
                                 label: "Taxes sur le chiffre d'affaires à décaisser",
                                 system: "base",
@@ -2867,7 +2879,20 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 44566,
                                         label: "TVA sur autres biens et services",
                                         system: "developed",
-                                        accounts: []
+                                        accounts: [
+                                            {
+                                                number: 445662,
+                                                label: "TVA déductible intracommunautaire",
+                                                system: "developed",
+                                                accounts: []
+                                            },
+                                            {
+                                                number: 445663,
+                                                label: "TVA déductible extracommunautaire",
+                                                system: "developed",
+                                                accounts: []
+                                            }
+                                        ]
                                     },
                                     {
                                         number: 44567,

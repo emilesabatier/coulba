@@ -1,4 +1,5 @@
 import { Main } from "../../../components/layouts/main/main"
+import { BalanceContent } from "../../../components/reports/balance/balanceContent"
 
 
 export function BalancePage() {
@@ -6,11 +7,11 @@ export function BalancePage() {
         <Main.Root>
             <Main.Header
                 title="Balance"
-                description="todo"
+                description="La balance comptable agrège le débit & crédit des opérations par compte et affiche le solde de chacun."
             >
             </Main.Header>
             <Main.Content>
-                <p>todo</p>
+                <BalanceContent />
             </Main.Content>
         </Main.Root>
     )

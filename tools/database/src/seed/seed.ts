@@ -1,4 +1,4 @@
-import { accounts, companies, journals, users, years } from '@coulba/schemas/models'
+import { accounts, companies, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName, randFullName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -7,6 +7,9 @@ import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
 import { DefaultAccount, defaultAccounts } from './accounts'
+import { defaultRecords } from './records'
+import { DefaultSheet, defaultSheets } from './sheets'
+import { DefaultStatement, defaultStatements } from './statements'
 
 
 export function generateTemporaryPassword(): string {
@@ -19,30 +22,76 @@ export function generateTemporaryPassword(): string {
 const connection = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
 const db = drizzle(connection)
 
-function flatAccounts(_accounts: DefaultAccount[], idCompany: string, idYear: string, idAccountParent?: string) {
-    const flatArray = _accounts.flatMap((_account) => {
+function flatSheets(_sheets: DefaultSheet[], idCompany: string, idYear: string, idSheetParent?: string) {
+    const flatArray = _sheets.flatMap((_sheet) => {
         const id = generateId()
         return ([
             {
                 id: id,
                 idCompany: idCompany,
                 idYear: idYear,
+                idSheetParent: idSheetParent,
+                side: _sheet.side,
+                number: _sheet.number,
+                label: _sheet.label,
+                accounts: _sheet.accounts
+            },
+            ...flatSheets(_sheet.sheets, idCompany, idYear, id)
+        ])
+    }) as (typeof sheets.$inferInsert & { accounts: number[] })[]
+    return flatArray as (typeof sheets.$inferInsert & { accounts: number[] })[]
+}
+
+function flatStatements(_statements: DefaultStatement[], idCompany: string, idYear: string, idStatementParent?: string) {
+    const flatArray = _statements.flatMap((_statement) => {
+        const id = generateId()
+        return ([
+            {
+                id: id,
+                idCompany: idCompany,
+                idYear: idYear,
+                idStatementParent: idStatementParent,
+                number: _statement.number,
+                label: _statement.label,
+                accounts: _statement.accounts
+            },
+            ...flatStatements(_statement.statements, idCompany, idYear, id)
+        ])
+    }) as (typeof statements.$inferInsert & { accounts: number[] })[]
+    return flatArray as (typeof statements.$inferInsert & { accounts: number[] })[]
+}
+
+
+function flatAccounts(newSheets: (typeof sheets.$inferInsert & { accounts: number[] })[], newStatements: (typeof statements.$inferInsert & { accounts: number[] })[], _accounts: DefaultAccount[], idCompany: string, idYear: string, idAccountParent?: string) {
+    const flatArray = _accounts.flatMap((_account) => {
+        const id = generateId()
+        const sheet = newSheets.find((_sheet) => _sheet.accounts.includes(_account.number))
+        const statement = newStatements.find((_statement) => _statement.accounts.includes(_account.number))
+
+        return ([
+            {
+                id: id,
+                idCompany: idCompany,
+                idYear: idYear,
+                idSheet: sheet?.id,
+                idStatement: statement?.id,
                 idAccountParent: idAccountParent,
                 number: _account.number,
                 label: _account.label
             },
-            ...flatAccounts(_account.accounts, idCompany, idYear, id)
+            ...flatAccounts(newSheets, newStatements, _account.accounts, idCompany, idYear, id)
         ])
     }) as (typeof accounts.$inferInsert)[]
     return flatArray as (typeof accounts.$inferInsert)[]
 }
+
 
 async function seed() {
     try {
         await db.transaction(async (tx) => {
 
 
-            // Company
+            // Companies
             console.log("Add company")
             const newCompany: (typeof companies.$inferInsert) = {
                 id: generateId(),
@@ -117,13 +166,25 @@ async function seed() {
             await tx.insert(journals).values(newJournals)
 
 
-            // Account
+            // Sheets
+            console.log("Add sheets")
+            const newSheets: (typeof sheets.$inferInsert & { accounts: number[] })[] = flatSheets(defaultSheets, newCompany.id, idCurrentYear)
+            await tx.insert(sheets).values(newSheets)
+
+
+            // Accounts
+            console.log("Add statements")
+            const newStatements: (typeof statements.$inferInsert & { accounts: number[] })[] = flatStatements(defaultStatements, newCompany.id, idCurrentYear)
+            await tx.insert(statements).values(newStatements)
+
+
+            // Accounts
             console.log("Add accounts")
-            const newAccounts: (typeof accounts.$inferInsert)[] = flatAccounts(defaultAccounts, newCompany.id, idCurrentYear)
+            const newAccounts: (typeof accounts.$inferInsert)[] = flatAccounts(newSheets, newStatements, defaultAccounts, newCompany.id, idCurrentYear)
             await tx.insert(accounts).values(newAccounts)
 
 
-            // User
+            // Users
             console.log("Add user")
             const passwordSalt = randomBytes(16).toString('hex')
             const invitationToken = "c5524D0e"
@@ -141,6 +202,27 @@ async function seed() {
             }
             await tx.insert(users).values(adminUser)
 
+
+            // Records
+            console.log("Add records")
+            const newRecords: (typeof records.$inferInsert)[] = defaultRecords.flatMap((record) => {
+                const idAccount = newAccounts.find((account) => account.number === record.accountNumber)?.id
+                if (!idAccount) {
+                    console.log("Erreur record", record)
+                    return []
+                }
+                return ([{
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    idYear: idCurrentYear,
+                    idAccount: idAccount,
+                    label: record.label,
+                    date: record.date,
+                    debit: record.debit.toString(),
+                    credit: record.credit.toString()
+                }])
+            })
+            await tx.insert(records).values(newRecords)
         })
 
     } catch (error) {

@@ -1,4 +1,5 @@
 import { Main } from "../../../components/layouts/main/main"
+import { LedgerContent } from "../../../components/reports/ledger/ledgerContent"
 
 
 export function LedgerPage() {
@@ -6,11 +7,11 @@ export function LedgerPage() {
         <Main.Root>
             <Main.Header
                 title="Grand livre"
-                description="todo"
+                description="Le grand livre présente les mêmes données que celle du journal mais agrégées par compte."
             >
             </Main.Header>
             <Main.Content>
-                <p>todo</p>
+                <LedgerContent />
             </Main.Content>
         </Main.Root>
     )

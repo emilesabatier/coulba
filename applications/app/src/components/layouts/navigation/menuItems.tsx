@@ -113,6 +113,16 @@ export const menuItems: MenuItem[] = [
                 basePath: "/configuration/comptes",
                 path: "/configuration/comptes",
                 label: "Plan des comptes"
+            },
+            {
+                basePath: "/configuration/bilan",
+                path: "/configuration/bilan",
+                label: "Bilan"
+            },
+            {
+                basePath: "/configuration/compte-de-resultat",
+                path: "/configuration/compte-de-resultat",
+                label: "Compte de résultat"
             }
         ]
     },
