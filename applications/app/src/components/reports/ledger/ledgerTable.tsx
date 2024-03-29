@@ -24,11 +24,11 @@ export function LedgerTable(props: LedgerTable) {
                             <Table.Header.Cell>
                                 <span className="text-neutral/75 text-sm">Libellé</span>
                             </Table.Header.Cell>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Débit</span>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Débit</span>
                             </Table.Header.Cell>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Crédit</span>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Crédit</span>
                             </Table.Header.Cell>
                         </Table.Header.Row>
                     </Table.Header.Root>
@@ -41,10 +41,10 @@ export function LedgerTable(props: LedgerTable) {
                                             <Table.Body.Cell colSpan={3}>
                                                 <FormatText text={entry.label} />
                                             </Table.Body.Cell>
-                                            <Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
                                                 <FormatPrice price={entry.debit} />
                                             </Table.Body.Cell>
-                                            <Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
                                                 <FormatPrice price={entry.credit} />
                                             </Table.Body.Cell>
                                         </Table.Body.Row>
@@ -60,10 +60,10 @@ export function LedgerTable(props: LedgerTable) {
                                                             <Table.Body.Cell>
                                                                 <FormatText text={record.label} />
                                                             </Table.Body.Cell>
-                                                            <Table.Body.Cell>
+                                                            <Table.Body.Cell className="w-[1%]" align="right">
                                                                 <FormatPrice price={record.debit} />
                                                             </Table.Body.Cell>
-                                                            <Table.Body.Cell>
+                                                            <Table.Body.Cell className="w-[1%]" align="right">
                                                                 <FormatPrice price={record.credit} />
                                                             </Table.Body.Cell>
                                                         </Table.Body.Row>

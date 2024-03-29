@@ -3,14 +3,14 @@ import { cn } from "@coulba/design/services"
 import { Fragment } from "react"
 import { toRoman } from "../../../services/toRoman"
 import { Table } from "../../layouts/table/table"
-import { SheetAsset } from "./sheetContent"
+import { SheetLiability } from "./sheetContent"
 
 
-type SheetAssetsTable = {
-    sheet: SheetAsset[]
+type SheetLiabilitiesTable = {
+    sheet: SheetLiability[]
 }
 
-export function SheetAssetsTable(props: SheetAssetsTable) {
+export function SheetLiabilitiesTable(props: SheetLiabilitiesTable) {
     return (
         <div className="w-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
             <div className="w-full flex flex-col justify-start items-stretch overflow-auto">
@@ -19,18 +19,12 @@ export function SheetAssetsTable(props: SheetAssetsTable) {
                         <Table.Header.Row>
                             <Table.Header.Cell />
                             <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm">Brut</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm whitespace-nowrap">Amort. & Dépre.</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
                                 <span className="text-neutral/75 text-sm">Net</span>
                             </Table.Header.Cell>
                         </Table.Header.Row>
                     </Table.Header.Root>
                     <Table.Body.Root>
-                        <SheetAssetBody sheet={props.sheet} displayNumber={true} increment={0} />
+                        <SheetLiabilityBody sheet={props.sheet} displayNumber={true} increment={0} />
                     </Table.Body.Root>
                 </Table.Root>
             </div>
@@ -39,13 +33,13 @@ export function SheetAssetsTable(props: SheetAssetsTable) {
 }
 
 
-type SheetAssetBody = {
-    sheet: SheetAsset[]
+type SheetLiabilityBody = {
+    sheet: SheetLiability[]
     increment: number
     displayNumber?: boolean
 }
 
-function SheetAssetBody(props: SheetAssetBody) {
+function SheetLiabilityBody(props: SheetLiabilityBody) {
     return (
         <Fragment>
             {
@@ -70,16 +64,10 @@ function SheetAssetBody(props: SheetAssetBody) {
                                     />
                                 </Table.Body.Cell>
                                 <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.gross} />
-                                </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.allowance} />
-                                </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
                                     <FormatPrice price={entry.net} />
                                 </Table.Body.Cell>
                             </Table.Body.Row>
-                            <SheetAssetBody sheet={entry.sheets} increment={props.increment + 1} />
+                            <SheetLiabilityBody sheet={entry.sheets} increment={props.increment + 1} />
                         </Fragment>
                     )
                 })

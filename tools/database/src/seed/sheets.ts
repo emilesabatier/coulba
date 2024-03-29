@@ -440,7 +440,7 @@ export const defaultSheets: DefaultSheet[] = [
                     {
                         side: "asset",
                         number: 2,
-                        label: "En-cours de production [biens et services]",
+                        label: "En-cours de production (biens et services)",
                         accounts: [
                             33,
                             331,
@@ -539,7 +539,7 @@ export const defaultSheets: DefaultSheet[] = [
                     {
                         side: "asset",
                         number: 1,
-                        label: "Créances Clients et comptes rattachés",
+                        label: "Créances clients et comptes rattachés",
                         accounts: [
                             410,
                             411,

@@ -16,7 +16,7 @@ export function FormatPrice(props: FormatPrice) {
         <FormatBase className={props.className}>
             <span className={cn(
                 "w-fit max-w-full overflow-hidden whitespace-nowrap text-ellipsis text-base break-words",
-                Number(props.price) === 0 ? "text-neutral/25" : ""
+                formatPrice(props.price) === "0.00" ? "text-neutral/25" : ""
             )}>
                 {formatPrice(props.price)}
             </span>

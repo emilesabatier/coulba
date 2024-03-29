@@ -1,6 +1,7 @@
 import { FormatPrice, FormatText } from "@coulba/design/formats"
+import { Balance } from "../../../services/reports/getBalance"
+import { formatAccount } from "../../accounts/format/formatAccount"
 import { Table } from "../../layouts/table/table"
-import { Balance } from "./balanceContent"
 
 
 type BalanceTable = {
@@ -17,17 +18,17 @@ export function BalanceTable(props: BalanceTable) {
                             <Table.Header.Cell>
                                 <span className="text-neutral/75 text-sm">Compte</span>
                             </Table.Header.Cell>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Débit</span>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Débit</span>
                             </Table.Header.Cell>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Crédit</span>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Crédit</span>
                             </Table.Header.Cell>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Solde débiteur</span>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Solde débiteur</span>
                             </Table.Header.Cell>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Solde créditeur</span>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Solde créditeur</span>
                             </Table.Header.Cell>
                         </Table.Header.Row>
                     </Table.Header.Root>
@@ -35,20 +36,20 @@ export function BalanceTable(props: BalanceTable) {
                         {
                             props.balance.map((entry) => {
                                 return (
-                                    <Table.Body.Row key={entry.key} className="border-neutral/5">
+                                    <Table.Body.Row key={entry.account.id} className="border-neutral/5">
                                         <Table.Body.Cell>
-                                            <FormatText text={entry.label} />
+                                            <FormatText text={formatAccount(entry.account)} />
                                         </Table.Body.Cell>
-                                        <Table.Body.Cell>
+                                        <Table.Body.Cell className="w-[1%]" align="right">
                                             <FormatPrice price={entry.sum.debit} />
                                         </Table.Body.Cell>
-                                        <Table.Body.Cell>
+                                        <Table.Body.Cell className="w-[1%]" align="right">
                                             <FormatPrice price={entry.sum.credit} />
                                         </Table.Body.Cell>
-                                        <Table.Body.Cell>
+                                        <Table.Body.Cell className="w-[1%]" align="right">
                                             <FormatPrice price={entry.balance.debit} />
                                         </Table.Body.Cell>
-                                        <Table.Body.Cell>
+                                        <Table.Body.Cell className="w-[1%]" align="right">
                                             <FormatPrice price={entry.balance.credit} />
                                         </Table.Body.Cell>
                                     </Table.Body.Row>

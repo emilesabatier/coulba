@@ -1,3 +1,4 @@
+import { formatPrice } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
@@ -5,17 +6,19 @@ import * as v from "valibot"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
+import { Balance, getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { SheetAssetsTable } from "./sheetAssetsTable"
+import { SheetLiabilitiesTable } from "./sheetLiabilitiesTable"
 
 
 export type SheetAsset = {
     key: string
     number: number
     label: string
-    gross: number | null
-    allowance: number | null
-    net: number | null
+    gross: number
+    allowance: number
+    net: number
     sheets: SheetAsset[]
 }
 
@@ -23,18 +26,36 @@ export type SheetLiability = {
     key: string
     number: number
     label: string
-    gross: number | null
-    net: number | null
+    net: number
     sheets: SheetLiability[]
 }
 
-function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], idParent?: string | null): SheetAsset[] {
+function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Balance[], idParent?: string | null): SheetAsset[] {
     return sheets
         .filter((sheet) => sheet.idSheetParent === idParent)
         .map((sheet) => {
-            const gross = 0
-            const allowance = 0
-            const net = 0
+            const childrenSheets = groupSheetsAssets(sheets, balance, sheet.id)
+
+            let gross = 0
+            let allowance = 0
+            let net = 0
+
+            if (childrenSheets.length === 0) {
+                balance
+                    .filter((_balance) => _balance.account.idSheet === sheet.id)
+                    .forEach((_balance) => {
+                        gross += _balance.balance.debit
+                        allowance += (_balance.balance.debit > 0) ? _balance.balance.credit : 0
+                    })
+            } else {
+                childrenSheets.forEach((childSheet) => {
+                    gross += childSheet.gross
+                    allowance += childSheet.allowance
+                })
+            }
+
+            net = gross - allowance
+
             return ({
                 key: sheet.id,
                 number: sheet.number,
@@ -42,24 +63,37 @@ function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], id
                 gross: gross,
                 allowance: allowance,
                 net: net,
-                sheets: groupSheetsAssets(sheets, sheet.id)
+                sheets: childrenSheets
             })
         })
 }
 
-function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[], idParent?: string | null): SheetLiability[] {
+function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Balance[], idParent?: string | null): SheetLiability[] {
     return sheets
         .filter((sheet) => sheet.idSheetParent === idParent)
         .map((sheet) => {
-            const gross = 0
-            const net = 0
+            const childrenSheets = groupSheetsAssets(sheets, balance, sheet.id)
+
+            let net = 0
+
+            if (childrenSheets.length === 0) {
+                balance
+                    .filter((_balance) => _balance.account.idSheet === sheet.id)
+                    .forEach((_balance) => {
+                        net += _balance.balance.credit
+                    })
+            } else {
+                childrenSheets.forEach((childSheet) => {
+                    net += childSheet.net
+                })
+            }
+
             return ({
                 key: sheet.id,
                 number: sheet.number,
                 label: sheet.label,
-                gross: gross,
                 net: net,
-                sheets: groupSheetsLiabilities(sheets, sheet.id)
+                sheets: childrenSheets
             })
         })
 }
@@ -69,19 +103,17 @@ export function SheetContent() {
     const records = useQuery(recordsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), null)
+    const balance = getBalance(records.data ?? [], accounts.data ?? [])
+
+    const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), balance, null)
+        .sort((a, b) => a.number - b.number)
+
+    const sheetLiabilities = groupSheetsLiabilities((sheets.data ?? []).filter((sheet) => sheet.side === "liability"), balance, null)
         .sort((a, b) => a.label.localeCompare(b.label))
 
-    const sheetLiabilities = groupSheetsLiabilities((sheets.data ?? []).filter((sheet) => sheet.side === "liability"), null)
-        .sort((a, b) => a.label.localeCompare(b.label))
+    const totalSheetAsset = sheetAssets.reduce<number>((previous, entry) => previous + Number(entry.net), 0)
 
-    // const totalSheetDebit = sheet.reduce<number>((previous, entry) => {
-    //     return previous + Number(entry.sheet.debit)
-    // }, 0)
-
-    // const totalSheetCredit = sheet.reduce<number>((previous, entry) => {
-    //     return previous + Number(entry.sheet.credit)
-    // }, 0)
+    const totalSheetLiability = sheetLiabilities.reduce<number>((previous, entry) => previous + Number(entry.net), 0)
 
     if (records.isLoading || accounts.isLoading) return <CircularLoader />
     if (records.isError) return <ErrorMessage message={records.error.message} />
@@ -89,18 +121,20 @@ export function SheetContent() {
     if (!records.data || !accounts.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
-            {/* <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center items-center gap-2">
                 <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
-                    <span className="text-2xl text-neutral/50">Solde débiteur total</span>
-                    <span className="text-2xl">{formatPrice(totalSheetDebit)}</span>
+                    <span className="text-2xl text-neutral/50">Total actif</span>
+                    <span className="text-2xl">{formatPrice(totalSheetAsset)}</span>
                 </div>
                 <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
-                    <span className="text-2xl text-neutral/50">Solde créditeur total</span>
-                    <span className="text-2xl">{formatPrice(totalSheetCredit)}</span>
+                    <span className="text-2xl text-neutral/50">Total passif</span>
+                    <span className="text-2xl">{formatPrice(totalSheetLiability)}</span>
                 </div>
-            </div> */}
-            <SheetAssetsTable sheet={sheetAssets} />
-            {/* <SheetLiabilitiesTable sheet={sheetLiabilities} /> */}
+            </div>
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
+                <SheetAssetsTable sheet={sheetAssets} />
+                <SheetLiabilitiesTable sheet={sheetLiabilities} />
+            </div>
         </div>
     )
 }
