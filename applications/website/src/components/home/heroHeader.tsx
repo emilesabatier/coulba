@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonGhost, ButtonPlainContent } from "@coulba/design/buttons"
 import { IconArrowDown } from "@tabler/icons-react"
 import { useNavigate } from "@tanstack/react-router"
 import { ScreenshotFrame } from "./screenshotFrame"
@@ -27,9 +27,15 @@ export function HeroHeader() {
                         onClick={() => navigate({ to: "/", hash: "fonctionnalites" })}
                         className="min-w-fit"
                     />
-                    <ButtonPlain
-                        text="Créer un compte"
-                    />
+                    <a
+                        href={`${import.meta.env.VITE_PUBLIC_APP_BASE}/inscription`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <ButtonPlainContent
+                            text="Créer un compte"
+                        />
+                    </a>
                 </div>
             </div>
             <div className="p-8">
