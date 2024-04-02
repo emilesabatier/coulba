@@ -1,5 +1,5 @@
 import { ButtonPlain } from "@coulba/design/buttons"
-import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@coulba/design/forms"
+import { FormControl, FormError, FormField, FormItem, FormRoot } from "@coulba/design/forms"
 import { InputPassword, InputText } from "@coulba/design/inputs"
 import { shared } from "@coulba/schemas/routes"
 import { valibotResolver } from "@hookform/resolvers/valibot"
@@ -8,14 +8,14 @@ import * as v from "valibot"
 import { useSession } from "../../contexts/session/useSession"
 
 
-export function ConnectionForm() {
+export function SignInForm() {
     const session = useSession()
 
-    const form = useForm<v.Output<typeof shared.sessions.signIn.body>>({
+    const form = useForm<v.Output<typeof shared.sessions.patch.signIn.body>>({
         mode: "onSubmit",
         criteriaMode: "all",
         shouldFocusError: true,
-        resolver: valibotResolver(shared.sessions.signIn.body),
+        resolver: valibotResolver(shared.sessions.patch.signIn.body),
     })
 
     const onSubmit = async () => {
@@ -32,23 +32,24 @@ export function ConnectionForm() {
 
     return (
         <FormRoot {...form}>
-            <form className="flex flex-col justify-start items-stretch gap-8">
+            <form className="flex flex-col justify-start items-stretch gap-4">
                 <div className="flex flex-col justify-start items-stretch gap-2">
                     <FormField
                         control={form.control}
                         name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel
+                                {/* <FormLabel
                                     label="Email"
                                     isRequired
-                                />
+                                /> */}
                                 <FormControl>
                                     <InputText
                                         value={field.value}
                                         onChange={field.onChange}
                                         inputMode="email"
                                         autoFocus
+                                        placeholder="Email"
                                     />
                                 </FormControl>
                                 <FormError />
@@ -60,14 +61,15 @@ export function ConnectionForm() {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel
+                                {/* <FormLabel
                                     label="Mot de passe"
                                     isRequired
-                                />
+                                /> */}
                                 <FormControl>
                                     <InputPassword
                                         value={field.value}
                                         onChange={field.onChange}
+                                        placeholder="Mot de passe"
                                     />
                                 </FormControl>
                                 <FormError />
@@ -79,6 +81,7 @@ export function ConnectionForm() {
                     <ButtonPlain
                         onClick={() => onSubmit()}
                         text="Se connecter"
+                        className="w-full justify-center"
                     />
                 </div>
             </form>

@@ -8,3 +8,7 @@ export const validateEmailBody = v.object({
     token: userSchema.entries.emailToken,
     email: userSchema.entries.emailTemporary
 })
+
+
+// Output
+export const validateEmailReturn = v.object({})

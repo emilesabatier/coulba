@@ -20,6 +20,14 @@ import { createJournalRoute } from './auth/configuration/journals/createJournal.
 import { journalsLayout } from './auth/configuration/journals/journals.layout'
 import { journalsRoute } from './auth/configuration/journals/journals.route'
 import { updateJournalRoute } from './auth/configuration/journals/updateJournal.route'
+import { createSheetRoute } from './auth/configuration/sheets/createSheet.route'
+import { sheetsLayout } from './auth/configuration/sheets/sheets.layout'
+import { sheetsRoute } from './auth/configuration/sheets/sheets.route'
+import { updateSheetRoute } from './auth/configuration/sheets/updateSheet.route'
+import { createStatementRoute } from './auth/configuration/statements/createStatement.route'
+import { statementsLayout } from './auth/configuration/statements/statements.layout'
+import { statementsRoute } from './auth/configuration/statements/statements.route'
+import { updateStatementRoute } from './auth/configuration/statements/updateStatement.route'
 import { subscriptionRoute } from './auth/configuration/subscription.route'
 import { createUserRoute } from './auth/configuration/users/createUser.route'
 import { updateUserRoute } from './auth/configuration/users/updateUser.route'
@@ -48,20 +56,21 @@ import { readTransactionRoute } from './auth/transactions/readTransaction.route'
 import { transactionsLayout } from './auth/transactions/transactions.layout'
 import { transactionsRoute } from './auth/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
-import { connectionRoute } from './connection/connection.route'
 import { rootLayout } from './root.layout'
-import { createSheetRoute } from './auth/configuration/sheets/createSheet.route'
-import { sheetsLayout } from './auth/configuration/sheets/sheets.layout'
-import { sheetsRoute } from './auth/configuration/sheets/sheets.route'
-import { updateSheetRoute } from './auth/configuration/sheets/updateSheet.route'
-import { createStatementRoute } from './auth/configuration/statements/createStatement.route'
-import { statementsLayout } from './auth/configuration/statements/statements.layout'
-import { statementsRoute } from './auth/configuration/statements/statements.route'
-import { updateStatementRoute } from './auth/configuration/statements/updateStatement.route'
+import { resetPasswordRoute } from './signIn/resetPassword.route'
+import { signInLayout } from './signIn/signIn.layout'
+import { signInRoute } from './signIn/signIn.route'
+import { signUpRoute } from './signUp/signUp.Route'
 
 
 const routeTree = rootLayout.addChildren([
-    connectionRoute,
+
+    signUpRoute,
+    signInLayout.addChildren([
+        signInRoute,
+        resetPasswordRoute
+    ]),
+
     authLayout.addChildren([
         overviewRoute,
 

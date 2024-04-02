@@ -6,3 +6,7 @@ import { userSchema } from "../../../schemas/user/user.schema"
 export const resetPasswordBody = v.object({
     email: userSchema.entries.email
 })
+
+
+// Output
+export const resetPasswordReturn = v.object({})

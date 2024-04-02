@@ -58,10 +58,10 @@ export function InputCombobox(props: InputCombobox) {
                     disabled={props.isDisabled}
                 >
                     <div className={cn(
-                        "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/50",
+                        "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/25",
                         "group-focus:border-neutral/50 group-focus:shadow-outer group-focus:bg-neutral/5",
                         "group-data-[state=open]:border-neutral/50 group-data-[state=open]:bg-neutral/5 group-data-[state=open]:shadow-outer",
-                        (!props.error) ? "border-neutral/25" : "border-error",
+                        (!props.error) ? "border-neutral/20" : "border-error",
                         props.isDisabled ? "bg-background" : ""
                     )}>
                         {

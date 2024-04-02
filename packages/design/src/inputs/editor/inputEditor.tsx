@@ -28,7 +28,7 @@ export const InputEditor = forwardRef<HTMLInputElement, InputEditor>(
             <div
                 className={cn(
                     "w-full h-fit flex justify-between items-center gap-2",
-                    (!props.error) ? "border-neutral/25" : "border-error",
+                    (!props.error) ? "border-neutral/20" : "border-error",
                     className
                 )}
             >

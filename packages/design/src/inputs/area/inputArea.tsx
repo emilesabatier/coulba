@@ -27,8 +27,8 @@ export const InputArea = forwardRef<HTMLTextAreaElement, InputArea>(
                 {...props}
                 className={cn(
                     "min-h-[5rem] h-20 w-full flex justify-between items-center gap-2 py-2 px-3 border rounded-sm text-base placeholder:text-neutral/25",
-                    "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
-                    (!props.error) ? "border-neutral/25" : "border-error",
+                    "focus:border-neutral/20 focus:shadow-inner focus:bg-neutral/5",
+                    (!props.error) ? "border-neutral/20" : "border-error",
                     props.className
                 )}
                 ref={ref}

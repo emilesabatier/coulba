@@ -1,12 +1,16 @@
-import { resetPasswordBody } from "./resetPassword"
-import { validateEmailBody } from "./validateEmail"
+import { resetPasswordBody, resetPasswordReturn } from "./resetPassword"
+import { validateEmailBody, validateEmailReturn } from "./validateEmail"
 
 
 export const users = {
-    validateEmail: {
-        body: validateEmailBody
-    },
-    resetPassword: {
-        body: resetPasswordBody
+    patch: {
+        validateEmail: {
+            body: validateEmailBody,
+            return: validateEmailReturn
+        },
+        resetPassword: {
+            body: resetPasswordBody,
+            return: resetPasswordReturn
+        }
     }
 }

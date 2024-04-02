@@ -8,3 +8,7 @@ export const signInBody = v.object({
     email: userSchema.entries.email,
     password: passwordSchema
 })
+
+
+// Output
+export const signInReturn = v.object({})

@@ -1,3 +1,4 @@
+import { ButtonOutline } from "@coulba/design/buttons"
 import { Main } from "../../../components/layouts/main/main"
 
 
@@ -10,7 +11,18 @@ export function ClosingPage() {
             >
             </Main.Header>
             <Main.Content>
-                <p>La fonctionnalité de clôture sera bientôt disponible.</p>
+                <div>
+                    <div>
+                        <p>
+                            Vous pouvez télécharger le Fichier des Écritures Comptables (FEC) en cliquant sur le bouton ci-contre. Le fichier est dans le format
+                        </p>
+                        <CloseYear>
+                            <ButtonOutline
+                                text="Télécharger le fichier"
+                            />
+                        </CloseYear>
+                    </div>
+                </div>
             </Main.Content>
         </Main.Root>
     )

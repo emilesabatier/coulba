@@ -1,10 +1,9 @@
 import { CircularLoader } from "@coulba/design/layouts"
-import { createRoute, redirect } from "@tanstack/react-router"
-import { ConnectionPage } from "../../pages/connection/connectionPage"
+import { Outlet, createRoute, redirect } from "@tanstack/react-router"
 import { rootLayout } from "../root.layout"
 
 
-export const connectionRoute = createRoute({
+export const signInLayout = createRoute({
     getParentRoute: () => rootLayout,
     path: '/connexion',
     pendingComponent: () => <CircularLoader />,
@@ -15,5 +14,5 @@ export const connectionRoute = createRoute({
             })
         }
     },
-    component: () => <ConnectionPage />
+    component: () => <Outlet />
 })

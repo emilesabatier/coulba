@@ -161,10 +161,10 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhone>(
                             )}
                         >
                             <div className={cn(
-                                "h-[40px] w-full flex justify-between items-center gap-2 p-2 border border-solid rounded-sm text-base placeholder:text-neutral/50",
+                                "h-[40px] w-full flex justify-between items-center gap-2 p-2 border border-solid rounded-sm text-base placeholder:text-neutral/25",
                                 "group-focus:border-neutral/50 group-focus:shadow-outer group-focus:bg-neutral/5",
                                 "group-data-[state=open]:border-neutral/50 group-data-[state=open]:bg-neutral/5 group-data-[state=open]:shadow-outer",
-                                (!props.error) ? "border-neutral/25" : "border-error",
+                                (!props.error) ? "border-neutral/20" : "border-error",
                                 className
                             )}>
                                 <div className="rounded-sm min-h-[24px] h-[24px] w-auto min-w-max p-1">

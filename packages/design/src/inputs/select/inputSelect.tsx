@@ -52,11 +52,11 @@ export const InputSelect = forwardRef<ElementRef<typeof Button>, InputSelect>(
                         data-open={open}
                     >
                         <div className={cn(
-                            "h-[40px] min-w-fit w-full grid grid-cols-[auto_min-content] items-center gap-x-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/50",
+                            "h-[40px] min-w-fit w-full grid grid-cols-[auto_min-content] items-center gap-x-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/25",
                             "group-focus:border-neutral/50 group-focus:shadow-outer group-focus:bg-neutral/5",
                             "hover:bg-neutral/5",
                             "group-data-[state=open]:border-neutral/50 group-data-[state=open]:bg-neutral/5 group-data-[state=open]:shadow-outer",
-                            (!props.error) ? "border-neutral/25" : "border-error",
+                            (!props.error) ? "border-neutral/20" : "border-error",
                             props.isDisabled ? "bg-background" : ""
                         )}>
                             {

@@ -35,7 +35,7 @@ export const InputText = forwardRef<HTMLInputElement, InputText>(
                         "rounded-sm w-full text-base placeholder:text-neutral/25 p-2",
                         "focus:shadow-inner focus:bg-neutral/5",
                         "overflow-hidden whitespace-nowrap text-ellipsis",
-                        " focus:bg-neutral/5",
+                        "focus:bg-neutral/5",
                     )}
                     ref={ref}
                     value={input(props.value)}

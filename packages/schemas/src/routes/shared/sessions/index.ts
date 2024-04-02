@@ -1,8 +1,15 @@
-import { signInBody } from "./signIn"
+import { signInBody, signInReturn } from "./signIn"
+import { signOutReturn } from "./signOut"
 
 
 export const sessions = {
-    signIn: {
-        body: signInBody
+    patch: {
+        signIn: {
+            body: signInBody,
+            return: signInReturn
+        },
+        signOut: {
+            return: signOutReturn
+        }
     }
 }

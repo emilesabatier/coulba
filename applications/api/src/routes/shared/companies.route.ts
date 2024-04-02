@@ -1,7 +1,9 @@
-import { companies } from "@coulba/schemas/models"
+import { companies, users } from "@coulba/schemas/models"
 import { shared } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
+import { pbkdf2Sync, randomBytes } from "crypto"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -14,17 +16,41 @@ export const companiesRoute = new Hono()
         async (c) => {
             const body = c.req.valid('json')
 
-            const [createCompany] = await db
-                .insert(companies)
-                .values({
-                    id: generateId(),
-                    siren: body.siren,
-                    name: body.name,
-                    address: body.address,
-                    email: body.email
-                })
-                .returning()
+            if (body.user.password !== body.user.passwordCheck) throw new HTTPException(400, { message: "Les mots de passe renseignés sont différents" })
 
-            return c.json(createCompany, 200)
+            const createResponse = await db.transaction(async (tx) => {
+
+                const idCompany = generateId()
+                const passwordSalt = randomBytes(16).toString('hex')
+                const passwordHash = pbkdf2Sync(body.user.password, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+
+                await tx
+                    .insert(users)
+                    .values({
+                        id: generateId(),
+                        idCompany: idCompany,
+                        isAdmin: true,
+                        forename: body.user.forename,
+                        surname: body.user.surname,
+                        email: body.user.email,
+                        isActive: true,
+                        passwordHash: passwordHash,
+                        passwordSalt: passwordSalt
+                    })
+                    .returning()
+
+                return await tx
+                    .insert(companies)
+                    .values({
+                        id: idCompany,
+                        siren: body.siren,
+                        name: body.name,
+                        address: body.address,
+                        email: body.email
+                    })
+                    .returning()
+            })
+
+            return c.json(createResponse, 200)
         }
     )

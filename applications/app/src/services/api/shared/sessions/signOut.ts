@@ -1,30 +1,11 @@
-import { ReturnResponse } from "../../../routes/returnType"
+import { shared } from "@coulba/schemas/routes"
+import { patchAPI } from "../../fetch/patchAPI"
 
 
-export async function signOut(): Promise<ReturnResponse<undefined>> {
-    try {
-        const response = await fetch(
-            new URL(`${import.meta.env.VITE_PUBLIC_API_BASE}/public/session/sign-out`),
-            {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: 'include'
-            }
-        )
-
-        if (!response.ok) throw await response.json()
-
-        return {
-            status: true,
-            data: undefined
-        }
-
-    } catch (error) {
-        return {
-            status: false,
-            message: String(error)
-        }
-    }
+export function signOut() {
+    return patchAPI({
+        path: `/shared/sessions/sign-out`,
+        schema: shared.sessions.patch.signOut.return,
+        message: "Erreur avec la déconnexion"
+    })
 }

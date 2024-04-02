@@ -98,8 +98,8 @@ export const InputDateTime = forwardRef<HTMLInputElement, InputDateTime>(
                 value={input(props.value)}
                 className={cn(
                     "relative w-full flex flex-row justify-start items-center p-2 border border-solid rounded-sm",
-                    "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
-                    (!props.error) ? "border-neutral/25" : "border-error",
+                    "focus:border-neutral/20 focus:shadow-inner focus:bg-neutral/5",
+                    (!props.error) ? "border-neutral/20" : "border-error",
                     props.className
                 )}
                 inputMode="decimal"
@@ -230,8 +230,8 @@ export const InputDateTime = forwardRef<HTMLInputElement, InputDateTime>(
 //                 value={props.value ?? undefined}
 //                 className={cn(
 //                     "relative w-full flex flex-row justify-start items-center p-2 border border-solid rounded-sm",
-//                     "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
-//                     (!props.error) ? "border-neutral/25" : "border-error",
+//                     "focus:border-neutral/20 focus:shadow-inner focus:bg-neutral/5",
+//                     (!props.error) ? "border-neutral/20" : "border-error",
 //                     props.className
 //                 )}
 //                 inputMode="decimal"

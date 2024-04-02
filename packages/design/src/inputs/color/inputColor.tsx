@@ -35,9 +35,9 @@ export const InputColor = forwardRef<HTMLInputElement, InputColor>(
                     value={input(props.value)}
                     onChange={(e) => props.onChange(output(e.currentTarget.value))}
                     className={cn(
-                        "h-[40px] w-full p-1 border rounded-sm text-base placeholder:text-neutral/50 bg-white cursor-pointer",
+                        "h-[40px] w-full p-1 border rounded-sm text-base placeholder:text-neutral/25 bg-white cursor-pointer",
                         "focus:border-neutral/50 focus:shadow-outer focus:bg-neutral/5",
-                        (!props.error) ? "border-neutral/25" : "border-error",
+                        (!props.error) ? "border-neutral/20" : "border-error",
                     )}
                     inputMode="tel"
                 />

@@ -1,4 +1,5 @@
 import * as v from "valibot"
+import { passwordSchema } from "../../../components/schemas/password.schema"
 import { companySchema } from "../../../schemas/company/company.schema"
 import { userSchema } from "../../../schemas/user/user.schema"
 
@@ -12,7 +13,9 @@ export const createCompanyBody = v.object({
     user: v.object({
         surname: userSchema.entries.surname,
         forename: userSchema.entries.forename,
-        email: userSchema.entries.email
+        email: userSchema.entries.email,
+        password: passwordSchema,
+        passwordCheck: passwordSchema
     })
 })
 

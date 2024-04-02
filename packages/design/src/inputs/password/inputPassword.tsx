@@ -37,9 +37,9 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                     {...props}
                     type={showPassword ? "text" : "password"}
                     className={cn(
-                        "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/50",
-                        "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
-                        (!props.error) ? "border-neutral/25" : "border-error",
+                        "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/25",
+                        "focus:border-neutral/20 focus:shadow-inner focus:bg-neutral/5",
+                        (!props.error) ? "border-neutral/20" : "border-error",
                         props.className
                     )}
                     ref={ref}

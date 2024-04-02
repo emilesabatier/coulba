@@ -10,7 +10,7 @@ function deleteCookies() {
     for (let c = 0; c < cookies.length; c++) {
         const d = window.location.hostname.split(".")
         while (d.length > 0) {
-            const cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path='
+            const cookieBase = encodeURIComponent(cookies[c]?.split(";")?.at(0)?.split("=")?.at(0) ?? "") + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path='
             const p = location.pathname.split('/')
             document.cookie = cookieBase + '/'
             while (p.length > 0) {
@@ -55,7 +55,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     const handleSignIn = async (props: SignIn) => {
         const response = await signIn(props)
 
-        if (response.status) {
+        if (response) {
             setIsSignedIn(true)
 
             toast({ title: "Connexion réussie.", variant: "success" })
