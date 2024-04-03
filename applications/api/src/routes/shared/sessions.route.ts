@@ -15,7 +15,7 @@ import { bodyValidator } from "../../middlewares/bodyValidator"
 export const sessionsRoute = new Hono()
     .patch(
         '/sign-in',
-        validator("json", bodyValidator(shared.sessions.signIn.body)),
+        validator("json", bodyValidator(shared.sessions.patch.signIn.body)),
         async (c) => {
             const body = c.req.valid('json')
 
