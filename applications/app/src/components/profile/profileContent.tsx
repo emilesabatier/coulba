@@ -2,7 +2,7 @@ import { ButtonOutline } from "@coulba/design/buttons"
 import { FormatLink, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconMailCog, IconPasswordUser, IconPencil } from "@tabler/icons-react"
-import { useProfile } from "../../contexts/profile/useProfile"
+import { useSession } from "../../contexts/session/useSession"
 import { DataBlock } from "../layouts/dataBlock/dataBlock"
 import { UpdateProfile } from "./updateProfile/updateProfile"
 import { UpdateProfileEmail } from "./updateProfileEmail/updateProfileEmail"
@@ -10,10 +10,10 @@ import { UpdateProfilePassword } from "./updateProfilePassword/updateProfilePass
 
 
 export function ProfileContent() {
-    const profile = useProfile()
+    const session = useSession()
 
-    if (profile.isLoading) return <CircularLoader />
-    if (!profile.data) return null
+    if (session.isLoading) return <CircularLoader />
+    if (!session.user) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/25 rounded-md">
             <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
@@ -42,13 +42,13 @@ export function ProfileContent() {
             </div>
             <DataBlock.Root className="border-0">
                 <DataBlock.Item label="Prénom">
-                    <FormatText text={profile.data.forename} />
+                    <FormatText text={session.user.forename} />
                 </DataBlock.Item>
                 <DataBlock.Item label="Nom">
-                    <FormatText text={profile.data.surname} />
+                    <FormatText text={session.user.surname} />
                 </DataBlock.Item>
                 <DataBlock.Item label="Email">
-                    <FormatLink text={profile.data.email} />
+                    <FormatLink text={session.user.email} />
                 </DataBlock.Item>
             </DataBlock.Root>
         </div>

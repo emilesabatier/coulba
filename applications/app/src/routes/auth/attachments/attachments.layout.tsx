@@ -1,9 +1,9 @@
 import { Outlet, createRoute } from "@tanstack/react-router"
-import { authLayout } from "../auth.layout"
+import { appLayout } from "../app.layout"
 
 
 export const attachmentsLayout = createRoute({
-    getParentRoute: () => authLayout,
+    getParentRoute: () => appLayout,
     beforeLoad: () => ({
         title: "Stockage de fichiers"
     }),

@@ -6,7 +6,7 @@ import { userSchema } from "../../../schemas/user/user.schema"
 // Input
 export const updateEmailBody = v.object({
     currentPassword: textSchema,
-    emailTemporary: userSchema.entries.emailTemporary,
+    emailToValidate: userSchema.entries.emailToValidate,
 })
 
 // Output

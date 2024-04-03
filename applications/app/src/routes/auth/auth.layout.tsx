@@ -1,6 +1,5 @@
 import { CircularLoader } from "@coulba/design/layouts"
-import { createRoute, redirect } from "@tanstack/react-router"
-import { AuthLayout } from "../../pages/auth/authLayout"
+import { Outlet, createRoute, redirect } from "@tanstack/react-router"
 import { rootLayout } from "../root.layout"
 
 
@@ -21,5 +20,5 @@ export const authLayout = createRoute({
             })
         }
     },
-    component: () => <AuthLayout />
+    component: () => <Outlet />
 })

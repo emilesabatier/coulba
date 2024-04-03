@@ -4,28 +4,28 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { Fragment } from "react"
-import { useProfile } from "../../../contexts/profile/useProfile"
+import { useSession } from "../../../contexts/session/useSession"
 import { router } from "../../../routes/router"
 import { updateProfile } from "../../../services/api/auth/profile/updateProfile"
 import { Form } from "../../layouts/forms/form"
 
 
 export function UpdateProfileForm() {
-    const profile = useProfile()
+    const session = useSession()
 
-    if (profile.isLoading) return <CircularLoader />
-    if (!profile.data) return null
+    if (session.isLoading) return <CircularLoader />
+    if (!session.user) return null
     return (
         <Form
             validationSchema={auth.profile.put.body}
-            defaultValues={profile.data}
+            defaultValues={session.user}
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier"
             onSubmit={async (data) => {
                 const response = await updateProfile({ body: data })
                 if (!response) return false
 
-                profile.mutate()
+                session.mutate()
                 router.navigate({ to: "/profil" })
                 toast({ title: "Profil mis à jour", variant: "success" })
 

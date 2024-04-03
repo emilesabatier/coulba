@@ -1,81 +1,28 @@
-import { toast } from '@coulba/design/overlays'
-import { ReactNode, createContext, useState } from 'react'
-import { SignIn, signIn } from '../../services/api/shared/sessions/signIn'
-import { signOut } from '../../services/api/shared/sessions/signOut'
-
-
-function deleteCookies() {
-    const cookies = document.cookie.split("; ")
-
-    for (let c = 0; c < cookies.length; c++) {
-        const d = window.location.hostname.split(".")
-        while (d.length > 0) {
-            const cookieBase = encodeURIComponent(cookies[c]?.split(";")?.at(0)?.split("=")?.at(0) ?? "") + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path='
-            const p = location.pathname.split('/')
-            document.cookie = cookieBase + '/'
-            while (p.length > 0) {
-                document.cookie = cookieBase + p.join('/')
-                p.pop()
-            }
-            d.shift()
-        }
-    }
-}
-
-
-function getIsSignedIn() {
-    const stringCookies = document?.cookie?.split("; ")
-    const cookie = stringCookies?.find(x => x.includes("is_signed_in"))
-    if (!cookie) return false
-
-    const newIsSignedIn = cookie.split("=").at(1)
-    if (!newIsSignedIn) return false
-
-    return true
-}
+import { auth } from '@coulba/schemas/routes'
+import { createContext } from 'react'
+import * as v from 'valibot'
+import { SignIn } from '../../services/api/shared/sessions/signIn'
+import { getIsSignedIn } from './getIsSignedIn'
 
 
 export type SessionContext = {
+    user: v.Output<typeof auth.users.get.return> | undefined
+    setUser: (data: v.Output<typeof auth.users.get.return>) => void
+    mutate: () => Promise<void>
     isSignedIn: boolean | undefined
     signIn: (props: SignIn) => Promise<void>
     signOut: () => Promise<void>
+    isLoading: boolean
 }
 
 const initalState: SessionContext = {
+    user: undefined,
+    setUser: () => { },
+    mutate: async () => { },
     isSignedIn: getIsSignedIn(),
     signIn: async () => { },
-    signOut: async () => { }
+    signOut: async () => { },
+    isLoading: false
 }
 
 export const SessionContext = createContext(initalState)
-
-export const SessionProvider = ({ children }: { children: ReactNode }) => {
-    const [isSignedIn, setIsSignedIn] = useState<SessionContext["isSignedIn"]>(getIsSignedIn())
-
-    const handleSignIn = async (props: SignIn) => {
-        const response = await signIn(props)
-
-        if (response) {
-            setIsSignedIn(true)
-
-            toast({ title: "Connexion réussie.", variant: "success" })
-            window.location.reload()
-        }
-    }
-
-    const handleSignOut = async () => {
-        await signOut()
-
-        deleteCookies()
-        setIsSignedIn(false)
-
-        toast({ title: "Déconnexion réussie.", variant: "success" })
-        window.location.reload()
-    }
-
-    return (
-        <SessionContext.Provider value={{ isSignedIn, signIn: handleSignIn, signOut: handleSignOut }}>
-            {children}
-        </SessionContext.Provider>
-    )
-}

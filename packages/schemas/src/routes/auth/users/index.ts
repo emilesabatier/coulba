@@ -1,7 +1,7 @@
 import { createUserBody, createUserReturn } from "./createUser"
 import { deleteUserParams, deleteUserReturn } from "./deleteUser"
 import { readUserParams, readUserReturn } from "./readUser"
-import { sendInvitationParams } from "./sendInvitation"
+import { sendInvitationParams, sendInvitationReturn } from "./sendInvitation"
 import { updateUserBody, updateUserParams, updateUserReturn } from "./updateUser"
 
 
@@ -23,7 +23,10 @@ export const users = {
         params: deleteUserParams,
         return: deleteUserReturn
     },
-    sendInvitation: {
-        params: sendInvitationParams
+    patch: {
+        sendInvitation: {
+            params: sendInvitationParams,
+            return: sendInvitationReturn
+        }
     }
 }

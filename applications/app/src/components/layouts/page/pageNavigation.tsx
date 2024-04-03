@@ -2,7 +2,7 @@ import { ButtonMenu, ButtonMenuContent, ButtonOutline } from "@coulba/design/but
 import { Logo } from "@coulba/design/layouts"
 import { PopoverMenu } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
-import { IconBook, IconLogout2, IconSettings, IconUser } from "@tabler/icons-react"
+import { IconBook, IconExternalLink, IconLogout2, IconSettings, IconUser } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import * as v from 'valibot'
 import { SessionContext } from "../../../contexts/session/session.context"
@@ -49,6 +49,12 @@ export function PageNavigation(props: PageNavigation) {
                         <ButtonMenuContent
                             icon={<IconBook />}
                             text="Documentation"
+                        />
+                    </a>
+                    <a href={import.meta.env.VITE_PUBLIC_WEBSITE_BASE} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                        <ButtonMenuContent
+                            icon={<IconExternalLink />}
+                            text="Site internet"
                         />
                     </a>
                     {/* <CreateTicket>

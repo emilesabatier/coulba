@@ -1,9 +1,9 @@
 import { Outlet, createRoute } from "@tanstack/react-router"
-import { authLayout } from "../auth.layout"
+import { appLayout } from "../app.layout"
 
 
 export const transactionsLayout = createRoute({
-    getParentRoute: () => authLayout,
+    getParentRoute: () => appLayout,
     beforeLoad: () => ({
         title: "Enregistrements"
     }),

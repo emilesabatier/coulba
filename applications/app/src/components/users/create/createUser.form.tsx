@@ -7,6 +7,7 @@ import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { createUser } from "../../../services/api/auth/users/createUser"
+import { sendInvitation } from "../../../services/api/auth/users/sendInvitation"
 import { usersOptions } from "../../../services/api/auth/users/usersOptions"
 import { Form } from "../../layouts/forms/form"
 
@@ -27,11 +28,16 @@ export function CreateUserForm() {
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
+                    onSuccess: async (newData) => {
+                        if (!newData) return false
                         queryClient.setQueryData(usersOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
                         router.navigate({ to: "/configuration/utilisateurs" })
                         toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })
-                        return true
+
+                        const response = await sendInvitation({ params: { idUser: newData.id } })
+                        if (response) {
+                            toast({ title: "Invitation envoyée", variant: "success" })
+                        }
                     }
                 })
 

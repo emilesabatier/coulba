@@ -1,3 +1,4 @@
+import { activateBody, activateReturn } from "./activate"
 import { readProfileReturn } from "./readProfile"
 import { sendValidationEmailReturn } from "./sendValidationEmail"
 import { updateEmailBody, updateEmailReturn } from "./updateEmail"
@@ -14,6 +15,10 @@ export const profile = {
         return: updateProfileReturn
     },
     patch: {
+        activate: {
+            body: activateBody,
+            return: activateReturn
+        },
         updateEmail: {
             body: updateEmailBody,
             return: updateEmailReturn

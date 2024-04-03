@@ -7,6 +7,8 @@ import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
+import { sendEmail } from "../../services/email/sendEmail"
+import { signUpTemplate } from "../../services/email/templates/signUp"
 
 
 export const companiesRoute = new Hono()
@@ -17,6 +19,7 @@ export const companiesRoute = new Hono()
             const body = c.req.valid('json')
 
             if (body.user.password !== body.user.passwordCheck) throw new HTTPException(400, { message: "Les mots de passe renseignés sont différents" })
+            const emailToken = randomBytes(128).toString('hex')
 
             const createResponse = await db.transaction(async (tx) => {
 
@@ -33,6 +36,10 @@ export const companiesRoute = new Hono()
                         forename: body.user.forename,
                         surname: body.user.surname,
                         email: body.user.email,
+                        isEmailValidated: false,
+                        emailToValidate: body.user.email,
+                        emailToken: emailToken,
+                        emailTokenExpiresOn: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString(),
                         isActive: true,
                         passwordHash: passwordHash,
                         passwordSalt: passwordSalt
@@ -49,6 +56,12 @@ export const companiesRoute = new Hono()
                         email: body.email
                     })
                     .returning()
+            })
+
+            await sendEmail({
+                to: body.user.email,
+                subject: "Valider votre adresse email | Coulba",
+                html: signUpTemplate()
             })
 
             return c.json(createResponse, 200)

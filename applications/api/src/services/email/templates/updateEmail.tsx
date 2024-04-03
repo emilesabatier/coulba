@@ -1,6 +1,6 @@
 
 
-function SignUp() {
+function UpdateEmail() {
     return (
         <html>
             <body>
@@ -10,6 +10,6 @@ function SignUp() {
     )
 }
 
-export function signUpTemplate() {
-    return SignUp.toString()
+export function updateEmailTemplate() {
+    return UpdateEmail.toString()
 }

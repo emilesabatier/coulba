@@ -1,10 +1,10 @@
 import { CircularLoader } from "@coulba/design/layouts"
 import { Outlet, createRoute } from "@tanstack/react-router"
-import { authLayout } from "../auth.layout"
+import { appLayout } from "../app.layout"
 
 
 export const configurationLayout = createRoute({
-    getParentRoute: () => authLayout,
+    getParentRoute: () => appLayout,
     path: '/configuration',
     pendingComponent: () => <CircularLoader />,
     component: () => <Outlet />

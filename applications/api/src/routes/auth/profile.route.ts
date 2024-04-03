@@ -54,7 +54,7 @@ export const profileRoute = new Hono<AuthEnv>()
             const [updateUser] = await db
                 .update(users)
                 .set({
-                    emailTemporary: body.emailTemporary,
+                    emailToValidate: body.emailToValidate,
                     emailToken: randomBytes(128).toString('hex'),
                     emailTokenExpiresOn: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString(),
                     lastUpdatedOn: new Date().toISOString(),
@@ -81,6 +81,31 @@ export const profileRoute = new Hono<AuthEnv>()
                 .update(users)
                 .set({
                     passwordHash: newPasswordHash,
+                    lastUpdatedOn: new Date().toISOString(),
+                    lastUpdatedBy: c.var.user.id
+                })
+                .where(eq(users.id, c.var.user.id))
+                .returning()
+
+            return c.json(updateUser, 200)
+        }
+    )
+    .patch(
+        '/activate',
+        validator("json", bodyValidator(auth.profile.patch.activate.body)),
+        async (c) => {
+            const body = c.req.valid('json')
+
+
+            const newPasswordHash = pbkdf2Sync(body.password, c.var.user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+
+            const [updateUser] = await db
+                .update(users)
+                .set({
+                    passwordHash: newPasswordHash,
+                    isInvitationValidated: true,
+                    invitationToken: null,
+                    invitationTokenExpiresOn: null,
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { generateGet } from "../services/api/auth/services/signedurl/generateGet"
+import { generateGet } from "../api/auth/services/signedurl/generateGet"
 
 
 export function useFile(key?: string | null): [string | undefined, boolean] {

@@ -1,4 +1,6 @@
 import { NavigateOptions, ParseRoute, createRouter } from '@tanstack/react-router'
+import { activationRoute } from './auth/activation.route'
+import { appLayout } from './auth/app.layout'
 import { attachmentsLayout } from './auth/attachments/attachments.layout'
 import { attachmentsRoute } from './auth/attachments/attachments.route'
 import { createAttachmentRoute } from './auth/attachments/createAttachment.route'
@@ -57,96 +59,106 @@ import { transactionsLayout } from './auth/transactions/transactions.layout'
 import { transactionsRoute } from './auth/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/transactions/updateTransaction.route'
 import { rootLayout } from './root.layout'
+import { sharedLayout } from './shared/shared.layout'
+import { validateInvitationRoute } from './shared/validateInvitation.route'
 import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
 import { signInRoute } from './signIn/signIn.route'
-import { signUpRoute } from './signUp/signUp.Route'
+import { signUpRoute } from './signUp/signUp.route'
 
 
 const routeTree = rootLayout.addChildren([
 
     signUpRoute,
+
     signInLayout.addChildren([
         signInRoute,
         resetPasswordRoute
     ]),
 
+    sharedLayout.addChildren([
+        activationRoute,
+        validateInvitationRoute
+    ]),
+
     authLayout.addChildren([
-        overviewRoute,
+        activationRoute,
+        appLayout.addChildren([
+            overviewRoute,
 
-        transactionsLayout.addChildren([
-            transactionsRoute,
-            createTransactionRoute,
-            readTransactionRoute,
-            updateTransactionRoute
-        ]),
+            transactionsLayout.addChildren([
+                transactionsRoute,
+                createTransactionRoute,
+                readTransactionRoute,
+                updateTransactionRoute
+            ]),
 
-        attachmentsLayout.addChildren([
-            attachmentsRoute,
-            createAttachmentRoute,
-            readAttachmentRoute,
-            updateAttachmentRoute
-        ]),
+            attachmentsLayout.addChildren([
+                attachmentsRoute,
+                createAttachmentRoute,
+                readAttachmentRoute,
+                updateAttachmentRoute
+            ]),
 
-        reportsLayout.addChildren([
-            reportsRoute,
-            recordsRoute,
-            ledgerRoute,
-            balanceRoute,
-            sheetRoute,
-            statementRoute
-        ]),
+            reportsLayout.addChildren([
+                reportsRoute,
+                recordsRoute,
+                ledgerRoute,
+                balanceRoute,
+                sheetRoute,
+                statementRoute
+            ]),
 
-        configurationLayout.addChildren([
-            configurationRoute,
-            companyLayout.addChildren([
-                companyRoute,
-                updateCompanyRoute
+            configurationLayout.addChildren([
+                configurationRoute,
+                companyLayout.addChildren([
+                    companyRoute,
+                    updateCompanyRoute
+                ]),
+                subscriptionRoute,
+                usersLayout.addChildren([
+                    usersRoute,
+                    createUserRoute,
+                    updateUserRoute
+                ]),
+                APIRoute,
+                yearsLayout.addChildren([
+                    yearsRoute,
+                    createYearRoute,
+                    updateYearRoute
+                ]),
+                closingRoute,
+                journalsLayout.addChildren([
+                    journalsRoute,
+                    createJournalRoute,
+                    updateJournalRoute
+                ]),
+                accountsLayout.addChildren([
+                    accountsRoute,
+                    createAccountRoute,
+                    updateAccountRoute
+                ]),
+                sheetsLayout.addChildren([
+                    sheetsRoute,
+                    createSheetRoute,
+                    updateSheetRoute
+                ]),
+                statementsLayout.addChildren([
+                    statementsRoute,
+                    createStatementRoute,
+                    updateStatementRoute
+                ])
             ]),
-            subscriptionRoute,
-            usersLayout.addChildren([
-                usersRoute,
-                createUserRoute,
-                updateUserRoute
-            ]),
-            APIRoute,
-            yearsLayout.addChildren([
-                yearsRoute,
-                createYearRoute,
-                updateYearRoute
-            ]),
-            closingRoute,
-            journalsLayout.addChildren([
-                journalsRoute,
-                createJournalRoute,
-                updateJournalRoute
-            ]),
-            accountsLayout.addChildren([
-                accountsRoute,
-                createAccountRoute,
-                updateAccountRoute
-            ]),
-            sheetsLayout.addChildren([
-                sheetsRoute,
-                createSheetRoute,
-                updateSheetRoute
-            ]),
-            statementsLayout.addChildren([
-                statementsRoute,
-                createStatementRoute,
-                updateStatementRoute
-            ])
-        ]),
 
-        profileLayout.addChildren([
-            profileRoute,
-            updateProfileLayout.addChildren([
-                updateProfileRoute,
-                updateProfileEmailRoute,
-                updateProfilePasswordRoute
+            profileLayout.addChildren([
+                profileRoute,
+                updateProfileLayout.addChildren([
+                    updateProfileRoute,
+                    updateProfileEmailRoute,
+                    updateProfilePasswordRoute
+                ])
             ])
         ])
-
     ])
 ])
 

@@ -1,10 +1,10 @@
 import { createRoute } from "@tanstack/react-router"
 import { OverviewPage } from "../../../pages/auth/overview/overviewPage"
-import { authLayout } from "../auth.layout"
+import { appLayout } from "../app.layout"
 
 
 export const overviewRoute = createRoute({
-    getParentRoute: () => authLayout,
+    getParentRoute: () => appLayout,
     beforeLoad: () => ({
         title: "Vue d'ensemble"
     }),

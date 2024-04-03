@@ -1,13 +1,14 @@
 import { ButtonGhost, ButtonOutline } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { Chip, CircularLoader } from "@coulba/design/layouts"
-import { IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconPencil, IconPlus, IconSend, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { usersOptions } from "../../services/api/auth/users/usersOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { CreateUser } from "./create/createUser"
 import { DeleteUser } from "./delete/deleteUser"
 import { formatUser } from "./format/formatUser"
+import { SendInvitation } from "./sendInvitation/sendInvitation"
 import { UpdateUser } from "./update/updateUser"
 
 
@@ -38,6 +39,12 @@ export function UsersList() {
                                 {!user.isAdmin ? null : <Chip color="neutral" text="Administrateur" />}
                             </div>
                             <div className="flex justify-end items-center gap-1">
+                                <SendInvitation user={user}>
+                                    <ButtonGhost
+                                        icon={<IconSend />}
+                                        color="success"
+                                    />
+                                </SendInvitation>
                                 <UpdateUser user={user}>
                                     <ButtonGhost
                                         icon={<IconPencil />}

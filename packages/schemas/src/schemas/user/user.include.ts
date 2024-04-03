@@ -1,14 +1,19 @@
 
-export const userKeys = <const>["id", "idCompany", "isAdmin", "forename", "surname", "email", "emailTemporary", "invitationLastSentOn", "isActive", "lastUpdatedOn", "createdOn", "lastUpdatedBy", "createdBy"]
 
-export const userInclude: Record<typeof userKeys[number], true> = {
+export const userInclude = {
     id: true,
     idCompany: true,
     isAdmin: true,
     forename: true,
     surname: true,
     email: true,
-    emailTemporary: true,
+    isEmailValidated: true,
+    emailToValidate: true,
+    emailToken: true,
+    emailTokenExpiresOn: true,
+    invitationToken: true,
+    isInvitationValidated: true,
+    invitationTokenExpiresOn: true,
     invitationLastSentOn: true,
     isActive: true,
     lastUpdatedOn: true,
@@ -18,4 +23,4 @@ export const userInclude: Record<typeof userKeys[number], true> = {
 }
 
 
-export const userIncludeKeys = ["id", "idCompany", "isAdmin", "forename", "surname", "email", "emailTemporary", "invitationLastSentOn", "isActive", "lastUpdatedOn", "lastUpdatedBy", "createdOn", "createdBy"] as const
+export const userKeys = <const>["id", "idCompany", "isAdmin", "forename", "surname", "email", "isEmailValidated", "emailToValidate", "emailToken", "emailTokenExpiresOn", "invitationToken", "isInvitationValidated", "invitationTokenExpiresOn", "invitationLastSentOn", "isActive", "lastUpdatedOn", "createdOn", "lastUpdatedBy", "createdBy"]
