@@ -36,6 +36,7 @@ export function StatementCombobox(props: StatementCombobox) {
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}
+            isLoading={statements.isLoading}
         />
     )
 }

@@ -36,6 +36,7 @@ export function JournalCombobox(props: JournalCombobox) {
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}
+            isLoading={journals.isLoading}
         />
     )
 }

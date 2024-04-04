@@ -36,6 +36,7 @@ export function SheetCombobox(props: SheetCombobox) {
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}
+            isLoading={sheets.isLoading}
         />
     )
 }

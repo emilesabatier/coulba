@@ -36,6 +36,7 @@ export function AccountCombobox(props: AccountCombobox) {
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}
+            isLoading={accounts.isLoading}
         />
     )
 }

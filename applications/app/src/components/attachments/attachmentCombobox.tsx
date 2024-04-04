@@ -36,6 +36,7 @@ export function AttachmentCombobox(props: AttachmentCombobox) {
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}
+            isLoading={attachments.isLoading}
         />
     )
 }

@@ -4,7 +4,6 @@ export { Chip } from "./chip"
 export { CircularLoader } from "./loaders/circularLoader"
 export { LinearLoader } from "./loaders/linearLoader"
 export { Logo } from "./logo"
-export { Separator } from "./separator"
 
 export * from "./accordion"
 export * from "./collapsible"
