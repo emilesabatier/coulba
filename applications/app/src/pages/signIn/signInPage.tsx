@@ -11,7 +11,7 @@ export function SignInPage() {
 
     return (
         <div id="signin" className="w-full h-full grid grid-cols-2">
-            <div className="w-full bg-white border-y flex justify-center items-center border-r border-neutral/25">
+            <div className="w-full bg-white border-y flex justify-center items-center border-r border-neutral/20">
                 <div className="min-w-[300px] w-full max-w-[50%] flex justify-center items-center">
                     <div className="flex flex-col justify-start items-start gap-8">
                         <Logo />
@@ -34,7 +34,7 @@ export function SignInPage() {
                         </div>
                         <Link
                             to="/inscription"
-                            className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-md p-2 border border-dashed border-neutral/25 hover:bg-neutral/5"
+                            className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-md p-2 border border-dashed border-neutral/20 hover:bg-neutral/5"
                         >
                             <span className="p-0">Créer un compte</span>
                             <IconArrowRight size={16} />
@@ -49,7 +49,7 @@ export function SignInPage() {
                             href="https://documentation.coulba.fr"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-md p-2 border border-dashed border-neutral/25 hover:bg-neutral/5"
+                            className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-md p-2 border border-dashed border-neutral/20 hover:bg-neutral/5"
                         >
                             <span className="p-0">Consulter la documentation</span>
                             <IconExternalLink size={16} />
@@ -64,7 +64,7 @@ export function SignInPage() {
                             href={import.meta.env.VITE_PUBLIC_WEBSITE_BASE}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-md p-2 border border-dashed border-neutral/25 hover:bg-neutral/5"
+                            className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-md p-2 border border-dashed border-neutral/20 hover:bg-neutral/5"
                         >
                             <span className="p-0">Se rendre sur le site</span>
                             <IconExternalLink size={16} />

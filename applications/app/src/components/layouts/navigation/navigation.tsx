@@ -61,7 +61,7 @@ export function Navigation(props: Navigation) {
                                     </div>
                                 </AccordionTrigger>
                                 <AccordionContent className="pl-4">
-                                    <ul className="w-full flex flex-col justify-start items-stretch border-l border-neutral/25 pl-2 py-2 gap-0.5 md:gap-1">
+                                    <ul className="w-full flex flex-col justify-start items-stretch border-l border-neutral/20 pl-2 py-2 gap-0.5 md:gap-1">
                                         {
                                             menuItem.subMenuItems.map((subMenuItem) => {
                                                 return (

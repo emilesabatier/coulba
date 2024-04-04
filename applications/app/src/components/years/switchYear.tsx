@@ -20,7 +20,7 @@ export function SwitchYear() {
 
     if (!currentYear.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4 overflow-auto border border-neutral/25 rounded-md p-4">
+        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4 overflow-auto border border-neutral/20 rounded-md p-4">
             <div className="flex flex-col justify-start items-start gap-1">
                 <h2 className="text-xl">Changer d'exercice</h2>
                 <p className="text-neutral/75">Cela permet de changer l'exercice fiscal sélectionné dans l'application. C'est utile pour notamment consulter les données des exercices précédents.</p>

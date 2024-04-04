@@ -14,7 +14,7 @@ export function FormatRecordContent(props: FormatRecordContent) {
         <div
             aria-disabled={props.disabled}
             className={cn(
-                "w-full max-w-fit grid grid-cols-[min-content_auto] items-center gap-1 overflow-hidden p-1.5 rounded-sm border-solid border bg-neutral/5 border-neutral/25",
+                "w-full max-w-fit grid grid-cols-[min-content_auto] items-center gap-1 overflow-hidden p-1.5 rounded-sm border-solid border bg-neutral/5 border-neutral/20",
                 "aria-disabled:bg-transparent aria-disabled:border-neutral/10 aria-disabled:cursor-default",
                 "group-focus:bg-neutral/10",
                 "hover:bg-neutral/10"

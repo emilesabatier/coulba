@@ -30,7 +30,7 @@ export function ApiContent() {
     if (company.isLoading) return <CircularLoader />
     if (!company.data) return null
     return (
-        <div className="w-fit h-full flex flex-col justify-start items-stretch border border-neutral/25 rounded-md">
+        <div className="w-fit h-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
             <div className="border-b border-neutral/10 p-4 flex justify-start items-center gap-4">
                 <ButtonOutline
                     icon={<IconReload />}

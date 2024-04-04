@@ -1,1 +1,1 @@
-export const ticketTypes = <const>["bug", "enhancement", "other"]
+export const ticketTypes = <const>["bug", "enhancement", "need", "other"]

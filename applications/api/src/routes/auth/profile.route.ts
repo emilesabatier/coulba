@@ -8,6 +8,8 @@ import { validator } from "hono/validator"
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
 import { AuthEnv } from "../../middlewares/checkAuth"
+import { sendEmail } from "../../services/email/sendEmail"
+import { supportTemplate } from "../../services/email/templates/support"
 
 
 export const profileRoute = new Hono<AuthEnv>()
@@ -114,5 +116,24 @@ export const profileRoute = new Hono<AuthEnv>()
                 .returning()
 
             return c.json(updateUser, 200)
+        }
+    )
+    .patch(
+        '/send-support-message',
+        validator("json", bodyValidator(auth.profile.patch.sendSupportMessage.body)),
+        async (c) => {
+            const body = c.req.valid('json')
+
+            await sendEmail({
+                to: "support@coulba.fr",
+                subject: `[Support] ${c.var.user.id}`,
+                html: supportTemplate({
+                    category: body.category,
+                    date: new Date().toISOString(),
+                    message: body.message
+                })
+            })
+
+            return c.json({}, 200)
         }
     )

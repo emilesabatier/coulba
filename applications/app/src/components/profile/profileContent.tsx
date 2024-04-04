@@ -15,7 +15,7 @@ export function ProfileContent() {
     if (session.isLoading) return <CircularLoader />
     if (!session.user) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/25 rounded-md">
+        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
             <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
                 <UpdateProfile>
                     <ButtonOutline

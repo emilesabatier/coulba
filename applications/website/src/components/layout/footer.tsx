@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router"
 
 export function Footer() {
     return (
-        <div className="w-full bg-background border-t border-neutral/25 p-4 flex justify-center items-center">
+        <div className="w-full bg-background border-t border-neutral/20 p-4 flex justify-center items-center">
             <div className="w-full max-w-[1280px] flex justify-between items-center gap-4 overflow-hidden">
                 <div className="inline-flex flex-wrap justify-start items-center gap-2">
                     <span className="text-neutral/50 text-sm">© {new Date().getFullYear()}</span>

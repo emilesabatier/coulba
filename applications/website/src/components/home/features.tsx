@@ -65,7 +65,7 @@ export function Features() {
                 {
                     features.map((feature) => {
                         return (
-                            <div className="min-w-[300px] w-full max-w-[600px] border border-neutral/25 rounded-md p-2 md:p-4 shadow-sm flex flex-col justify-start items-start gap-4">
+                            <div className="min-w-[300px] w-full max-w-[600px] border border-neutral/20 rounded-md p-2 md:p-4 shadow-sm flex flex-col justify-start items-start gap-4">
                                 <div className="flex justify-start items-center gap-2">
                                     {feature.icon}
                                     <h3 className="text-lg leading-none uppercase whitespace-nowrap">{feature.title}</h3>

@@ -30,11 +30,11 @@ export function BalanceContent() {
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
             <div className="flex justify-center items-center gap-2">
-                <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
+                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
                     <span className="text-2xl text-neutral/50">Solde débiteur total</span>
                     <span className="text-2xl">{formatPrice(totalBalanceDebit)}</span>
                 </div>
-                <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
+                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
                     <span className="text-2xl text-neutral/50">Solde créditeur total</span>
                     <span className="text-2xl">{formatPrice(totalBalanceCredit)}</span>
                 </div>

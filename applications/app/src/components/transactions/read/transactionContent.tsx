@@ -5,7 +5,7 @@ import { IconChevronLeft, IconLockCheck, IconPencil, IconTrash } from "@tabler/i
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
-import { readTransactionRoute } from "../../../routes/auth/transactions/readTransaction.route"
+import { readTransactionRoute } from "../../../routes/auth/app/transactions/readTransaction.route"
 import { router } from "../../../routes/router"
 import { transactionOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithFetch"
@@ -33,7 +33,7 @@ export function TransactionContent() {
                 <ButtonOutline
                     onClick={() => router.navigate({ to: "/enregistrements" })}
                     icon={<IconChevronLeft />}
-                    text="Retour"
+                    text="Retour aux enregistrements"
                 />
                 <div className="flex justify-end items-center gap-1">
                     {transaction.data.isConfirmed ? null : (

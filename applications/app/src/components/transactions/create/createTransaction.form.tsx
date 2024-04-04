@@ -28,6 +28,7 @@ export function CreateTransactionForm() {
             defaultValues={{
                 date: new Date().toISOString()
             }}
+            cancelLabel="Retour aux enregistrements"
             onCancel={() => router.navigate({ to: "/enregistrements" })}
             submitLabel="Ajouter l'enregistrement"
             onSubmit={async (data) => {

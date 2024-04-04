@@ -12,6 +12,7 @@ type Form<T extends v.ObjectSchema<v.ObjectEntries>> = {
     defaultValues?: DefaultValues<v.Output<T>>
     validationSchema: T
     onCancel: () => void
+    cancelLabel: string
     onSubmit: (data: v.Output<T>) => Promise<boolean>
     submitLabel: string
     children: (form: UseFormReturn<v.Output<T>, unknown, undefined>) => ReactElement | ReactElement[]
@@ -53,7 +54,7 @@ export function Form<T extends v.ObjectSchema<v.ObjectEntries>>(props: Form<T>) 
                     <ButtonOutline
                         onClick={() => props.onCancel()}
                         icon={<IconChevronLeft />}
-                        text="Retour"
+                        text={props.cancelLabel}
                     />
                     <ButtonPlain
                         onClick={() => onSubmit()}

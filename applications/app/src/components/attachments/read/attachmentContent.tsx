@@ -4,7 +4,7 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readAttachmentRoute } from "../../../routes/auth/attachments/readAttachment.route"
+import { readAttachmentRoute } from "../../../routes/auth/app/attachments/readAttachment.route"
 import { router } from "../../../routes/router"
 import { attachmentOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
 import { useFile } from "../../../services/file/useFile"
@@ -30,7 +30,7 @@ export function AttachmentContent() {
                 <ButtonOutline
                     onClick={() => router.navigate({ to: "/fichiers" })}
                     icon={<IconChevronLeft />}
-                    text="Retour"
+                    text="Retour aux fichiers"
                 />
                 <div className="flex justify-end items-center gap-1">
                     <UpdateAttachment attachment={attachment.data}>

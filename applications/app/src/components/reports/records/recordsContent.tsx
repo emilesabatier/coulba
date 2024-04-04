@@ -35,11 +35,11 @@ export function RecordsContent() {
                 )
             }
             <div className="flex justify-center items-center gap-2">
-                <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
+                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
                     <span className="text-2xl text-neutral/50">Débit total</span>
                     <span className="text-2xl">{formatPrice(totalDebit)}</span>
                 </div>
-                <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
+                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
                     <span className="text-2xl text-neutral/50">Crédit total</span>
                     <span className="text-2xl">{formatPrice(totalCredit)}</span>
                 </div>

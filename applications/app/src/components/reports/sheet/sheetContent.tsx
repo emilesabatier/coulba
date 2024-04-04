@@ -122,11 +122,11 @@ export function SheetContent() {
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
             <div className="flex justify-center items-center gap-2">
-                <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
+                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
                     <span className="text-2xl text-neutral/50">Total actif</span>
                     <span className="text-2xl">{formatPrice(totalSheetAsset)}</span>
                 </div>
-                <div className="w-full p-4 border border-neutral/25 rounded-md flex justify-start items-center gap-4">
+                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
                     <span className="text-2xl text-neutral/50">Total passif</span>
                     <span className="text-2xl">{formatPrice(totalSheetLiability)}</span>
                 </div>

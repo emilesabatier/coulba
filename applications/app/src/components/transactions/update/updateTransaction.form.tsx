@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateTransactionRoute } from "../../../routes/auth/transactions/updateTransaction.route"
+import { updateTransactionRoute } from "../../../routes/auth/app/transactions/updateTransaction.route"
 import { router } from "../../../routes/router"
 import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { updateTransaction } from "../../../services/api/auth/transactions/updateTransaction"
@@ -35,6 +35,7 @@ export function UpdateTransactionForm() {
         <Form
             validationSchema={auth.transactions.post.body}
             defaultValues={transaction.data}
+            cancelLabel="Retour"
             onCancel={() => {
                 if (!transaction.data) return null
                 router.navigate({ to: "/enregistrements/$idTransaction", params: { idTransaction: transaction.data.id } })

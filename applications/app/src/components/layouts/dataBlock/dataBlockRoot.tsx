@@ -11,7 +11,7 @@ export function DataBlockRoot(props: DataBlockRoot) {
     return (
         <div
             className={cn(
-                "shrink-0 w-full h-fit grid grid-cols-[max-content_auto] gap-x-4 gap-y-2 p-4 bg-white border border-neutral/25 rounded-md",
+                "shrink-0 w-full h-fit grid grid-cols-[max-content_auto] gap-x-4 gap-y-2 p-4 bg-white border border-neutral/20 rounded-md",
                 props.className
             )}
             children={props.children}

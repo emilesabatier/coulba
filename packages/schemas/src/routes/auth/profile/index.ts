@@ -1,5 +1,6 @@
 import { activateBody, activateReturn } from "./activate"
 import { readProfileReturn } from "./readProfile"
+import { sendSupportMessageBody, sendSupportMessageReturn } from "./sendSupportMessage"
 import { sendValidationEmailReturn } from "./sendValidationEmail"
 import { updateEmailBody, updateEmailReturn } from "./updateEmail"
 import { updatePasswordBody, updatePasswordReturn } from "./updatePassword"
@@ -29,6 +30,10 @@ export const profile = {
         },
         sendValidationEmail: {
             return: sendValidationEmailReturn
+        },
+        sendSupportMessage: {
+            body: sendSupportMessageBody,
+            return: sendSupportMessageReturn
         }
     }
 }
