@@ -58,9 +58,9 @@ export function InputCombobox(props: InputCombobox) {
                     disabled={props.isDisabled}
                 >
                     <div className={cn(
-                        "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/25",
-                        "group-focus:border-neutral/50 group-focus:shadow-outer group-focus:bg-neutral/5",
-                        "group-data-[state=open]:border-neutral/50 group-data-[state=open]:bg-neutral/5 group-data-[state=open]:shadow-outer",
+                        "h-[40px] w-full flex justify-between items-center gap-2 p-2 border rounded-sm text-base placeholder:text-neutral/25",
+                        "group-focus:shadow-inner group-focus:bg-neutral/5",
+                        "group-data-[state=open]:bg-neutral/5 group-data-[state=open]:shadow-inner",
                         (!props.error) ? "border-neutral/20" : "border-error",
                         props.isDisabled ? "bg-background" : ""
                     )}>
@@ -96,6 +96,11 @@ export function InputCombobox(props: InputCombobox) {
                                 <CommandEmpty className="relative h-[40px] flex justify-start items-center p-3 cursor-default select-none outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50" >
                                     <FormatNull text="Aucun résultat" />
                                 </CommandEmpty>
+                                {props.options.length > 0 ? null : (
+                                    <div className="relative h-[40px] flex justify-start items-center p-3 cursor-default select-none outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50" >
+                                        <FormatNull text="Aucun résultat" />
+                                    </div>
+                                )}
                                 {
                                     props.options.map((option) => {
                                         // if (option.key === (props.value ?? props.defaultValue)) return null
@@ -110,7 +115,7 @@ export function InputCombobox(props: InputCombobox) {
                                                 }}
                                                 className={cn(
                                                     "h-[40px] flex justify-between items-center overflow-hidden gap-2 p-2",
-                                                    currentOption?.key === option.key ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
+                                                    currentOption?.key === option.key ? "bg-neutral/5" : "bg-none hover:bg-neutral/5"
                                                 )}
                                             >
                                                 <span

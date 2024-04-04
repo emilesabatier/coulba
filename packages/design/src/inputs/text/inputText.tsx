@@ -12,36 +12,27 @@ type InputText = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange
 export const InputText = forwardRef<HTMLInputElement, InputText>(
     function (props, ref) {
 
-        function input(value: string | undefined | null) {
-            if (!value) return ""
-            return value
-        }
-
-        function output(value: string) {
-            if (!value) return null
-            return value
-        }
-
         return (
-            <div className={cn(
-                "h-[40px] w-full flex justify-start items-stretch gap-2 border border-neutral/20 rounded-sm",
-                (!props.error) ? "" : "border-error",
-                props.className
-            )}>
+            <div
+                className={cn(
+                    "h-[40px] w-full flex justify-start items-stretch gap-2 border border-neutral/20 rounded-sm",
+                    (!props.error) ? "" : "border-error",
+                    props.className
+                )}
+            >
                 <input
                     {...props}
                     type="text"
                     className={cn(
-                        "rounded-sm w-full text-base placeholder:text-neutral/25 p-2",
+                        "rounded-[inherit] w-full text-base placeholder:text-neutral/25 p-2",
                         "focus:shadow-inner focus:bg-neutral/5",
                         "overflow-hidden whitespace-nowrap text-ellipsis",
-                        "focus:bg-neutral/5",
                     )}
                     ref={ref}
-                    value={input(props.value)}
+                    value={!props.value ? "" : props.value}
                     onChange={(e) => {
                         if (!props.onChange) return
-                        props?.onChange(output(e.currentTarget.value))
+                        props?.onChange(!e.currentTarget.value ? null : e.currentTarget.value)
                     }}
                 />
             </div>

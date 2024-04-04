@@ -84,7 +84,6 @@ export function UpdateSheetForm() {
                                     <InputText
                                         value={field.value}
                                         onChange={field.onChange}
-                                        autoFocus
                                     />
                                 </FormControl>
                                 <FormError />

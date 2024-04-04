@@ -84,7 +84,6 @@ export function UpdateStatementForm() {
                                     <InputText
                                         value={field.value}
                                         onChange={field.onChange}
-                                        autoFocus
                                     />
                                 </FormControl>
                                 <FormError />

@@ -55,6 +55,7 @@ export function CreateSheetForm() {
                                     <InputInteger
                                         value={field.value}
                                         onChange={field.onChange}
+                                        autoFocus
                                     />
                                 </FormControl>
                                 <FormError />
@@ -74,7 +75,6 @@ export function CreateSheetForm() {
                                     <InputText
                                         value={field.value}
                                         onChange={field.onChange}
-                                        autoFocus
                                     />
                                 </FormControl>
                                 <FormError />

@@ -92,6 +92,7 @@ export function ActivationForm() {
                         onClick={() => onSubmit()}
                         text="Activer mon compte"
                         className="w-full justify-center"
+                        loader
                     />
                 </div>
             </form>

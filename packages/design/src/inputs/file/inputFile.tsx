@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, forwardRef, useImperativeHandle, useRef } from 'react'
+import { InputHTMLAttributes, forwardRef, useImperativeHandle, useRef } from 'react'
 import { FieldError } from 'react-hook-form'
 import { Button } from '../../buttons'
 
@@ -16,34 +16,37 @@ export const InputFile = forwardRef<HTMLInputElement, InputFile>(
 
         useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
 
-        const handleClick = () => {
-            inputRef.current?.click()
-        }
-
-
-        const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-            if (!props.onChange) return
-            if (event.target.files) {
-                props.onChange(event.target.files[0])
-            }
-        }
-
-
         return (
-            <div className="border border-neutral/25 border-dashed bg-background/50 rounded-sm flex justify-center items-center">
+            <div
+                className="border border-neutral/20 border-dashed hover:bg-neutral/5 rounded-sm flex justify-center items-center"
+                onDrop={(event) => {
+                    event.preventDefault()
+                    if (!props.onChange) return
+                    if (event.dataTransfer.files) {
+                        props.onChange(event.dataTransfer.files[0])
+                    }
+                }}
+                onDragOver={(event) => event.preventDefault()}
+            >
                 <input
                     ref={inputRef}
+                    multiple={false}
                     type="file"
-                    onChange={handleChange}
+                    onChange={(event) => {
+                        if (!props.onChange) return
+                        if (event.target.files) {
+                            props.onChange(event.target.files[0])
+                        }
+                    }}
                     accept={!props.type ? "*" : "image/*"}
                     className="hidden w-full h-full"
                 />
                 <Button
-                    onClick={handleClick}
+                    onClick={(event) => { inputRef.current?.click() }}
                     className="cursor-pointer w-full h-full p-2 md:p-4 flex justify-center items-center"
                 >
-                    <span>
-                        {props.value?.name ?? props.placeholder ?? "Veuillez ajouter un fichier"}
+                    <span className="text-neutral/75">
+                        {props.value?.name ?? props.placeholder ?? "Glissez-déposez ou cliquez pour ajouter un fichier"}
                     </span>
                 </Button>
             </div>

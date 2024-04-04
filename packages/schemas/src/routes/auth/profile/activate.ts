@@ -4,8 +4,8 @@ import { passwordSchema } from "../../../components/schemas/password.schema"
 
 // Input
 export const activateBody = v.object({
-    password: passwordSchema,
-    passwordCheck: passwordSchema,
+    password: v.nonNullish(passwordSchema, "Le mot de passe doit être renseigné"),
+    passwordCheck: v.nonNullish(passwordSchema, "Le mot de passe doit être renseigné à nouveau")
 },
     [
         v.custom(

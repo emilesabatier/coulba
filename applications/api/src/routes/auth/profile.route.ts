@@ -102,6 +102,7 @@ export const profileRoute = new Hono<AuthEnv>()
             const [updateUser] = await db
                 .update(users)
                 .set({
+                    isEmailValidated: true,
                     passwordHash: newPasswordHash,
                     isInvitationValidated: true,
                     invitationToken: null,

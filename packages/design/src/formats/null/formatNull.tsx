@@ -10,7 +10,7 @@ type FormatNull = {
 export function FormatNull(props: FormatNull) {
     return (
         <FormatBase className={props.className}>
-            <span className="inline-flex flex-row justify-start items-center italic text-neutral/50 whitespace-nowrap overflow-hidden text-ellipsis">{props.text ?? "/"}</span>
+            <span className="inline-flex flex-row justify-start items-center italic text-neutral/25 whitespace-nowrap overflow-hidden text-ellipsis">{props.text ?? "/"}</span>
         </FormatBase>
     )
 }
