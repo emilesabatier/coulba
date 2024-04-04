@@ -4,8 +4,8 @@ import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { Fragment } from "react"
 import { router } from "../../../routes/router"
-import { Form } from "../../layouts/forms/form"
 import { updateProfileEmail } from "../../../services/api/auth/profile/updateProfileEmail"
+import { Form } from "../../layouts/forms/form"
 
 
 export function UpdateProfileEmailForm() {
@@ -13,6 +13,7 @@ export function UpdateProfileEmailForm() {
         <Form
             validationSchema={auth.profile.patch.updateEmail.body}
             defaultValues={{}}
+            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier l'email"
             onSubmit={async (data) => {
@@ -50,7 +51,7 @@ export function UpdateProfileEmailForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="emailTemporary"
+                        name="emailToValidate"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

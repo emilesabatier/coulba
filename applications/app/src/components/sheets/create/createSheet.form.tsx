@@ -23,6 +23,7 @@ export function CreateSheetForm() {
         <Form
             validationSchema={auth.sheets.post.body}
             defaultValues={{}}
+            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/bilan" })}
             submitLabel="Ajouter la ligne"
             onSubmit={async (data) => {

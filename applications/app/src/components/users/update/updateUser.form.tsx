@@ -31,6 +31,7 @@ export function UpdateUserForm() {
         <Form
             validationSchema={auth.users.put.body}
             defaultValues={user.data}
+            cancelLabel="Retour aux utilisateurs"
             onCancel={() => router.navigate({ to: "/configuration/utilisateurs" })}
             submitLabel="Modifier l'utilisateur"
             onSubmit={async (data) => {

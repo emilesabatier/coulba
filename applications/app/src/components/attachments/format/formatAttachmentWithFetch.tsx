@@ -20,7 +20,7 @@ export function FormatAttachmentWithFetch(props: FormatAttachmentWithFetch) {
     if (attachment.isError) return <ErrorMessage message={attachment.error.message} />
     if (!attachment.data) return <FormatNull />
     return (
-        <ReadAttachment attachment={attachment.data}>
+        <ReadAttachment idAttachment={props.idAttachment}>
             <FormatText
                 text={formatAttachment(attachment.data)}
                 className="underline hover:no-underline"

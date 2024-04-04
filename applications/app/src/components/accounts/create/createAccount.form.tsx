@@ -23,6 +23,7 @@ export function CreateAccountForm() {
         <Form
             validationSchema={auth.accounts.post.body}
             defaultValues={{}}
+            cancelLabel="Retour aux comptes"
             onCancel={() => router.navigate({ to: "/configuration/comptes" })}
             submitLabel="Ajouter le compte"
             onSubmit={async (data) => {

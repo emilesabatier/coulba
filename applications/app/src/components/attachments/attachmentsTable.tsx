@@ -68,7 +68,7 @@ export function AttachmentsTable() {
             header: () => null,
             cell: ({ cell }) => {
                 return (
-                    <ReadAttachment attachment={cell.row.original}>
+                    <ReadAttachment idAttachment={cell.row.original.id}>
                         <ButtonGhost
                             icon={<IconEye />}
                         />

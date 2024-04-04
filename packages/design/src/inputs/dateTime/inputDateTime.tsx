@@ -41,8 +41,10 @@ export const InputDateTime = forwardRef<HTMLInputElement, InputDateTime>(
             if (!value) return undefined
 
             const datetime = value.split("  ")
-            const yearMonthDay = datetime[0].split(' / ')
-            const hourMinute = datetime[1].split(' : ')
+            const yearMonthDay = datetime[0]?.split(' / ')
+            const hourMinute = datetime[1]?.split(' : ')
+
+            if (!yearMonthDay || !hourMinute) return undefined
 
             return new Date(Number(yearMonthDay[2]), Number(yearMonthDay[1]) - 1, Number(yearMonthDay[0]), Number(hourMinute[0]), Number(hourMinute[1]), 0)?.toISOString()
         }

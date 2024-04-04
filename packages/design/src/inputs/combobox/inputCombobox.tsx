@@ -135,6 +135,7 @@ export function InputCombobox(props: InputCombobox) {
                                     >
                                         {virtualOptions.map((virtualOption) => {
                                             const option = filteredOptions[virtualOption.index]
+                                            if (!option) return null
                                             return (
                                                 <CommandItem
                                                     style={{

@@ -13,6 +13,7 @@ export function UpdateProfilePasswordForm() {
         <Form
             validationSchema={auth.profile.patch.updatePassword.body}
             defaultValues={{}}
+            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier le mot de passe"
             onSubmit={async (data) => {

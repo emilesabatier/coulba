@@ -19,6 +19,7 @@ export function UpdateCompanyForm() {
         <Form
             validationSchema={auth.companies.put.body}
             defaultValues={company.data}
+            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/societe" })}
             submitLabel="Modifier les informations"
             onSubmit={async (data) => {

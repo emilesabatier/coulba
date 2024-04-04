@@ -19,6 +19,7 @@ export function UpdateProfileForm() {
         <Form
             validationSchema={auth.profile.put.body}
             defaultValues={session.user}
+            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier"
             onSubmit={async (data) => {

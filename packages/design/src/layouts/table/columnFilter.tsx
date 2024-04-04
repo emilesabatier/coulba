@@ -3,14 +3,12 @@ import { Table } from "@tanstack/react-table"
 import { cloneElement, useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Chip } from ".."
 import { ButtonGhost } from "../../buttons"
-import { useDeviceDetect } from "../../hooks"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../overlays"
 import { cn } from "../../services"
 
 
 export function ColumnFilter<T>({ table }: { table: Table<T> }) {
     const [open, setOpen] = useState(false)
-    const { isMobile } = useDeviceDetect()
 
     const columns = table.getVisibleFlatColumns().filter(x => x.columnDef.enableColumnFilter)
 

@@ -15,7 +15,7 @@ export function Navigation(props: Navigation) {
     const router = useRouter()
     const current = router.state.matches.at(-1)
 
-    const currentOpenMenu = menuItems.find((menuItem) => current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath)
+    const currentOpenMenu = menuItems.find((menuItem) => menuItem.basePath === current?.pathname.split("/").slice(0, 2).join("/"))
     return (
         <nav className={cn("min-w-[256px] w-full max-w-full h-fit", props.className)}>
             <Accordion
@@ -31,6 +31,7 @@ export function Navigation(props: Navigation) {
                                 key={menuItem.key}
                                 to={menuItem.path}
                                 params={{}}
+                                search={{}}
                                 className="w-full"
                             >
                                 <div
@@ -72,6 +73,7 @@ export function Navigation(props: Navigation) {
                                                         <Link
                                                             to={subMenuItem.path}
                                                             params={{}}
+                                                            search={{}}
                                                             className="w-full"
                                                         >
                                                             <div

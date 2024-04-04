@@ -42,7 +42,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputFile>(
                     className="hidden w-full h-full"
                 />
                 <Button
-                    onClick={(event) => { inputRef.current?.click() }}
+                    onClick={(_event) => { inputRef.current?.click() }}
                     className="cursor-pointer w-full h-full p-2 md:p-4 flex justify-center items-center"
                 >
                     <span className="text-neutral/75">

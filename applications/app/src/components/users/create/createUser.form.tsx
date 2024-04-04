@@ -23,6 +23,7 @@ export function CreateUserForm() {
         <Form
             validationSchema={auth.users.post.body}
             defaultValues={{}}
+            cancelLabel="Retour aux utilisateurs"
             onCancel={() => router.navigate({ to: "/configuration/utilisateurs" })}
             submitLabel="Ajouter l'utilisateur"
             onSubmit={async (data) => {
