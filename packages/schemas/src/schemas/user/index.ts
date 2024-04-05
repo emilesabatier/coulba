@@ -1,6 +1,1 @@
-import { userInclude } from "./user.include"
-export type * from "./user.type"
-
-export const user = {
-    include: userInclude
-}
+export type * from "./user.type.js";

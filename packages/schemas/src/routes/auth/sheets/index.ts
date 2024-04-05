@@ -1,7 +1,7 @@
-import { createSheetBody, createSheetReturn } from "./createSheet"
-import { deleteSheetParams, deleteSheetReturn } from "./deleteSheet"
-import { readSheetParams, readSheetReturn } from "./readSheet"
-import { updateSheetBody, updateSheetParams, updateSheetReturn } from "./updateSheet"
+import { createSheetBody, createSheetReturn } from "./createSheet.js"
+import { deleteSheetParams, deleteSheetReturn } from "./deleteSheet.js"
+import { readSheetParams, readSheetReturn } from "./readSheet.js"
+import { updateSheetBody, updateSheetParams, updateSheetReturn } from "./updateSheet.js"
 
 
 export const sheets = {

@@ -1,5 +1,5 @@
-import { attachments } from "../../models"
-import { attachmentInclude } from "./attachment.include"
+import { attachments } from "../../models/index.js"
+import { attachmentInclude } from "./attachment.include.js"
 
 
 type attachmentInclude = keyof typeof attachmentInclude

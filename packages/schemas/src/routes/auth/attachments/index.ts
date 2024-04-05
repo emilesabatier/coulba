@@ -1,7 +1,7 @@
-import { createAttachmentBody, createAttachmentReturn } from "./createAttachment"
-import { deleteAttachmentParams, deleteAttachmentReturn } from "./deleteAttachment"
-import { readAttachmentParams, readAttachmentReturn } from "./readAttachment"
-import { updateAttachmentBody, updateAttachmentParams, updateAttachmentReturn } from "./updateAttachment"
+import { createAttachmentBody, createAttachmentReturn } from "./createAttachment.js"
+import { deleteAttachmentParams, deleteAttachmentReturn } from "./deleteAttachment.js"
+import { readAttachmentParams, readAttachmentReturn } from "./readAttachment.js"
+import { updateAttachmentBody, updateAttachmentParams, updateAttachmentReturn } from "./updateAttachment.js"
 
 
 export const attachments = {

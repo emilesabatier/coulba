@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { passwordSchema } from "../../../components/schemas/password.schema"
+import { passwordSchema } from "../../../components/schemas/password.schema.js"
 
 
 // Input

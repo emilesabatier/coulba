@@ -1,8 +1,8 @@
-import { createYearBody, createYearReturn } from "./createYear"
-import { deleteYearParams, deleteYearReturn } from "./deleteYear"
-import { readYearParams, readYearReturn } from "./readYear"
-import { switchYearParams, switchYearReturn } from "./switchYear"
-import { updateYearBody, updateYearParams, updateYearReturn } from "./updateYear"
+import { createYearBody, createYearReturn } from "./createYear.js"
+import { deleteYearParams, deleteYearReturn } from "./deleteYear.js"
+import { readYearParams, readYearReturn } from "./readYear.js"
+import { switchYearParams, switchYearReturn } from "./switchYear.js"
+import { updateYearBody, updateYearParams, updateYearReturn } from "./updateYear.js"
 
 
 export const years = {

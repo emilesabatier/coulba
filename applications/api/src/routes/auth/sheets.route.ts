@@ -4,10 +4,10 @@ import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
-import { paramsValidator } from "../../middlewares/paramsValidator"
+import { db } from "../../clients/db.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
+import { paramsValidator } from "../../middlewares/paramsValidator.js"
 
 
 export const sheetsRoute = new Hono<AuthEnv>()
@@ -24,6 +24,7 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     idCompany: c.var.company.id,
                     idYear: c.var.currentYear.id,
                     idSheetParent: body.idSheetParent,
+                    side: body.side,
                     label: body.label,
                     number: body.number,
                     lastUpdatedBy: c.var.user.id,

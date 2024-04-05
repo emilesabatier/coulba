@@ -1,7 +1,7 @@
 import { shared } from '@coulba/schemas/routes'
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
-import { bodyValidator } from '../../middlewares/bodyValidator'
+import { bodyValidator } from '../../middlewares/bodyValidator.js'
 
 
 export const contactRoute = new Hono()

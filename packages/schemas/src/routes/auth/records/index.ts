@@ -1,4 +1,4 @@
-import { readRecordReturn } from "./readRecord"
+import { readRecordReturn } from "./readRecord.js"
 
 
 export const records = {

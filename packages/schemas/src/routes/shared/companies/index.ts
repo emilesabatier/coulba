@@ -1,4 +1,4 @@
-import { createCompanyBody, createCompanyReturn } from "./createCompany"
+import { createCompanyBody, createCompanyReturn } from "./createCompany.js"
 
 
 export const companies = {

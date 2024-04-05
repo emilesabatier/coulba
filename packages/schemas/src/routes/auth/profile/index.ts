@@ -1,10 +1,10 @@
-import { activateBody, activateReturn } from "./activate"
-import { readProfileReturn } from "./readProfile"
-import { sendSupportMessageBody, sendSupportMessageReturn } from "./sendSupportMessage"
-import { sendValidationEmailReturn } from "./sendValidationEmail"
-import { updateEmailBody, updateEmailReturn } from "./updateEmail"
-import { updatePasswordBody, updatePasswordReturn } from "./updatePassword"
-import { updateProfileBody, updateProfileReturn } from "./updateProfile"
+import { activateBody, activateReturn } from "./activate.js"
+import { readProfileReturn } from "./readProfile.js"
+import { sendSupportMessageBody, sendSupportMessageReturn } from "./sendSupportMessage.js"
+import { sendValidationEmailReturn } from "./sendValidationEmail.js"
+import { updateEmailBody, updateEmailReturn } from "./updateEmail.js"
+import { updatePasswordBody, updatePasswordReturn } from "./updatePassword.js"
+import { updateProfileBody, updateProfileReturn } from "./updateProfile.js"
 
 
 export const profile = {

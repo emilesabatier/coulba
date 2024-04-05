@@ -1,7 +1,7 @@
-import { createStatementBody, createStatementReturn } from "./createStatement"
-import { deleteStatementParams, deleteStatementReturn } from "./deleteStatement"
-import { readStatementParams, readStatementReturn } from "./readStatement"
-import { updateStatementBody, updateStatementParams, updateStatementReturn } from "./updateStatement"
+import { createStatementBody, createStatementReturn } from "./createStatement.js"
+import { deleteStatementParams, deleteStatementReturn } from "./deleteStatement.js"
+import { readStatementParams, readStatementReturn } from "./readStatement.js"
+import { updateStatementBody, updateStatementParams, updateStatementReturn } from "./updateStatement.js"
 
 
 export const statements = {

@@ -1,7 +1,7 @@
-import { createAccountBody, createAccountReturn } from "./createAccount"
-import { deleteAccountParams, deleteAccountReturn } from "./deleteAccount"
-import { readAccountParams, readAccountReturn } from "./readAccount"
-import { updateAccountBody, updateAccountParams, updateAccountReturn } from "./updateAccount"
+import { createAccountBody, createAccountReturn } from "./createAccount.js"
+import { deleteAccountParams, deleteAccountReturn } from "./deleteAccount.js"
+import { readAccountParams, readAccountReturn } from "./readAccount.js"
+import { updateAccountBody, updateAccountParams, updateAccountReturn } from "./updateAccount.js"
 
 
 export const accounts = {

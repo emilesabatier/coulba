@@ -5,9 +5,9 @@ import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { V1Env } from "../../middlewares/checkApiKey"
+import { db } from "../../clients/db.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { V1Env } from "../../middlewares/checkApiKey.js"
 
 
 export const transactionsRoute = new Hono<V1Env>()

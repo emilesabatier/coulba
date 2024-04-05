@@ -1,3 +1,3 @@
-export * from "./dateTime.schema"
-export * from "./file.schema"
-export * from "./integer.schema"
+export * from "./dateTime.schema.js"
+export * from "./file.schema.js"
+export * from "./integer.schema.js"

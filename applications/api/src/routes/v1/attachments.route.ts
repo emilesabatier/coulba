@@ -4,10 +4,10 @@ import { v1 } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { Hono } from 'hono'
 import * as v from "valibot"
-import { db } from "../../clients/db"
-import { s3Client } from "../../clients/storage"
-import { env } from "../../env"
-import { V1Env } from "../../middlewares/checkApiKey"
+import { db } from "../../clients/db.js"
+import { s3Client } from "../../clients/storage.js"
+import { env } from "../../env.js"
+import { V1Env } from "../../middlewares/checkApiKey.js"
 
 
 export const attachmentsRoute = new Hono<V1Env>()

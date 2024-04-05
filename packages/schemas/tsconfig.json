@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "baseUrl": "src",
-        "outDir": "lib",
+        "rootDir": "src",
+        "outDir": "build",
         "target": "ESNext",
         "noImplicitAny": true,
         "skipLibCheck": true,
@@ -15,10 +15,9 @@
         "isolatedModules": true,
         "declaration": true,
         "declarationMap": true,
-        "sourceMap": true,
-        "composite": true
+        "sourceMap": true
     },
     "include": [
-        "src"
+        "src/"
     ]
 }

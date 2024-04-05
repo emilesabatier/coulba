@@ -1,6 +1,6 @@
 import { Context, } from "hono"
 import * as v from "valibot"
-import { env } from "../env"
+import { env } from "../env.js"
 
 
 export function bodyValidator<T extends v.ObjectSchema<{}>>(schema: T) {

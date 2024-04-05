@@ -13,9 +13,7 @@
                 "^build"
             ],
             "outputs": [
-                "lib/**",
-                ".next",
-                "dist/**",
+                "build/**",
                 "public/**"
             ]
         },

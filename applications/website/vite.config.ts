@@ -18,6 +18,17 @@ export default defineConfig(({ mode }) => {
         },
         preview: {
             port: Number(env.VITE_PORT)
+        },
+        build: {
+            rollupOptions: {
+                output: {
+                    manualChunks(id: string) {
+                        if (id.includes('react-dom')) {
+                            return 'react-dom'
+                        }
+                    }
+                }
+            }
         }
     }
 })

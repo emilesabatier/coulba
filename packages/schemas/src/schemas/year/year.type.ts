@@ -1,5 +1,5 @@
-import { years } from "../../models"
-import { yearInclude } from "./year.include"
+import { years } from "../../models/index.js"
+import { yearInclude } from "./year.include.js"
 
 
 type yearInclude = keyof typeof yearInclude

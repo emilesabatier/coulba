@@ -4,10 +4,10 @@ import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
-import { paramsValidator } from "../../middlewares/paramsValidator"
+import { db } from "../../clients/db.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
+import { paramsValidator } from "../../middlewares/paramsValidator.js"
 
 
 export const attachmentsRoute = new Hono<AuthEnv>()
@@ -72,9 +72,9 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                 .set({
                     reference: body.reference,
                     label: body.label,
-                    storageKey: body.storageKey,
-                    type: body.type,
-                    size: body.size,
+                    // storageKey: body.storageKey,
+                    // type: body.type,
+                    // size: body.size,
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })

@@ -1,7 +1,7 @@
-import { createJournalBody, createJournalReturn } from "./createJournal"
-import { deleteJournalParams, deleteJournalReturn } from "./deleteJournal"
-import { readJournalParams, readJournalReturn } from "./readJournal"
-import { updateJournalBody, updateJournalParams, updateJournalReturn } from "./updateJournal"
+import { createJournalBody, createJournalReturn } from "./createJournal.js"
+import { deleteJournalParams, deleteJournalReturn } from "./deleteJournal.js"
+import { readJournalParams, readJournalReturn } from "./readJournal.js"
+import { updateJournalBody, updateJournalParams, updateJournalReturn } from "./updateJournal.js"
 
 
 export const journals = {

@@ -1,22 +1,7 @@
 node_modules
+build
+
 .env
-lib
-.next
-next-env.d.ts
+.turbo
 
 pnpm-lock.yaml
-
-drizzle
-.turbo
-.storybook
-build
-dist
-types
-apps/dashboard/dist
-apps/adherent/dist
-
-
-apps/api/logs/errors.log
-apps/api/logs/incomings.log
-apps/api/logs/requests.log
-storybook-static

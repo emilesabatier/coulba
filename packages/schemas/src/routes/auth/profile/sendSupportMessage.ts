@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { ticketTypes } from "../../../components"
-import { textSchema } from "../../../components/schemas/text.schema"
+import { ticketTypes } from "../../../components/index.js"
+import { textSchema } from "../../../components/schemas/text.schema.js"
 
 
 // Input

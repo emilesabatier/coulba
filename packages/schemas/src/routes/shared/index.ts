@@ -1,7 +1,7 @@
-import { companies } from "./companies"
-import { contact } from "./contact"
-import { sessions } from "./sessions"
-import { users } from "./users"
+import { companies } from "./companies/index.js"
+import { contact } from "./contact/index.js"
+import { sessions } from "./sessions/index.js"
+import { users } from "./users/index.js"
 
 
 export const shared = {

@@ -1,4 +1,4 @@
-import { createAttachmentBody, createAttachmentReturn } from "./createAttachment"
+import { createAttachmentBody, createAttachmentReturn } from "./createAttachment.js"
 
 
 export const attachments = {

@@ -19,24 +19,24 @@
     },
     "exports": {
         "./models": {
-            "types": "./lib/src/models/index.d.ts",
-            "default": "./lib/src/models/index.js"
+            "default": "./build/models/index.js",
+            "types": "./build/models/index.d.ts"
         },
         "./schemas": {
-            "types": "./lib/src/schemas/index.d.ts",
-            "default": "./lib/src/schemas/index.js"
+            "default": "./build/schemas/index.js",
+            "types": "./build/schemas/index.d.ts"
         },
         "./routes": {
-            "types": "./lib/src/routes/index.d.ts",
-            "default": "./lib/src/routes/index.js"
+            "default": "./build/routes/index.js",
+            "types": "./build/routes/index.d.ts"
         },
         "./components": {
-            "types": "./lib/src/components/index.d.ts",
-            "default": "./lib/src/components/index.js"
+            "default": "./build/components/index.js",
+            "types": "./build/components/index.d.ts"
         },
         "./services": {
-            "types": "./lib/src/services/index.d.ts",
-            "default": "./lib/src/services/index.js"
+            "default": "./build/services/index.js",
+            "types": "./build/services/index.d.ts"
         }
     }
 }

@@ -1,6 +1,6 @@
-import { generateDeleteBody, generateDeleteReturn } from "./signedUrl/generateDelete"
-import { generateGetBody, generateGetReturn } from "./signedUrl/generateGet"
-import { generatePutBody, generatePutReturn } from "./signedUrl/generatePut"
+import { generateDeleteBody, generateDeleteReturn } from "./signedUrl/generateDelete.js"
+import { generateGetBody, generateGetReturn } from "./signedUrl/generateGet.js"
+import { generatePutBody, generatePutReturn } from "./signedUrl/generatePut.js"
 
 
 export const services = {

@@ -1,8 +1,8 @@
 import { records } from "@coulba/schemas/models"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { db } from "../../clients/db"
-import { AuthEnv } from "../../middlewares/checkAuth"
+import { db } from "../../clients/db.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
 
 
 export const recordsRoute = new Hono<AuthEnv>()

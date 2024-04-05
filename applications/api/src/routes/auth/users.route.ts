@@ -6,13 +6,13 @@ import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { env } from "../../env"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
-import { paramsValidator } from "../../middlewares/paramsValidator"
-import { sendEmail } from "../../services/email/sendEmail"
-import { invitationTemplate } from "../../services/email/templates/invitationTemplate"
+import { db } from "../../clients/db.js"
+import { env } from "../../env.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
+import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { sendEmail } from "../../services/email/sendEmail.js"
+import { invitationTemplate } from "../../services/email/templates/invitationTemplate.js"
 
 
 export const usersRoute = new Hono<AuthEnv>()

@@ -5,10 +5,10 @@ import { pbkdf2Sync, randomBytes } from "crypto"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { sendEmail } from "../../services/email/sendEmail"
-import { signUpTemplate } from "../../services/email/templates/signUp"
+import { db } from "../../clients/db.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { sendEmail } from "../../services/email/sendEmail.js"
+import { signUpTemplate } from "../../services/email/templates/signUp.js"
 
 
 export const companiesRoute = new Hono()

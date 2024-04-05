@@ -1,10 +1,10 @@
 import { createSelectSchema } from 'drizzle-valibot'
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
-import { emailSchema } from '../../components/schemas/email.schema'
-import { idSchema } from "../../components/schemas/id.schema"
-import { sirenSchema } from "../../components/schemas/siren.schema"
-import { textSchema } from "../../components/schemas/text.schema"
-import { companies } from "../../models"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
+import { emailSchema } from '../../components/schemas/email.schema.js'
+import { idSchema } from "../../components/schemas/id.schema.js"
+import { sirenSchema } from "../../components/schemas/siren.schema.js"
+import { textSchema } from "../../components/schemas/text.schema.js"
+import { companies } from "../../models/index.js"
 
 
 export const companySchema = createSelectSchema(companies, {

@@ -1,6 +1,6 @@
-import { generateApiKeyBody, generateApiKeyReturn } from "./generateApiKey"
-import { readCompanyReturn } from "./readCompany"
-import { updateCompanyBody, updateCompanyReturn } from "./updateCompany"
+import { generateApiKeyBody, generateApiKeyReturn } from "./generateApiKey.js"
+import { readCompanyReturn } from "./readCompany.js"
+import { updateCompanyBody, updateCompanyReturn } from "./updateCompany.js"
 
 
 export const companies = {

@@ -7,9 +7,9 @@ import { Hono } from 'hono'
 import { setCookie, setSignedCookie } from "hono/cookie"
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { env } from "../../env"
-import { bodyValidator } from "../../middlewares/bodyValidator"
+import { db } from "../../clients/db.js"
+import { env } from "../../env.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
 
 
 export const sessionsRoute = new Hono()

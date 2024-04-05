@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { requiredTextSchema } from "../../../components/schemas/requiredText.schema"
-import { passwordSchema } from "../../../components/schemas/password.schema"
+import { passwordSchema } from "../../../components/schemas/password.schema.js"
+import { requiredTextSchema } from "../../../components/schemas/requiredText.schema.js"
 
 
 // Input

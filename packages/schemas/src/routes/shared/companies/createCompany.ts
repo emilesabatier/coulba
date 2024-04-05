@@ -1,7 +1,7 @@
 import * as v from "valibot"
-import { passwordSchema } from "../../../components/schemas/password.schema"
-import { companySchema } from "../../../schemas/company/company.schema"
-import { userSchema } from "../../../schemas/user/user.schema"
+import { passwordSchema } from "../../../components/schemas/password.schema.js"
+import { companySchema } from "../../../schemas/company/company.schema.js"
+import { userSchema } from "../../../schemas/user/user.schema.js"
 
 
 // Input

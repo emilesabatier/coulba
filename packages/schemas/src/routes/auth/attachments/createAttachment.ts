@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { attachmentSchema } from "../../../schemas/attachment/attachment.schema"
+import { attachmentSchema } from "../../../schemas/attachment/attachment.schema.js"
 
 
 // Input

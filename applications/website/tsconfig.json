@@ -23,12 +23,10 @@
         "sourceMap": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "outDir": "dist",
+        "outDir": "build",
     },
     "include": [
-        "src/**/*",
-        "tailwind.config.js",
-        "postcss.config.js"
+        "src/**/*"
     ],
     "types": [
         "vite/client"

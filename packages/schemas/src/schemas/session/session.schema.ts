@@ -1,8 +1,8 @@
 import { createSelectSchema } from 'drizzle-valibot'
-import { booleanSchema } from "../../components/schemas/boolean.schema"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
-import { idSchema } from "../../components/schemas/id.schema"
-import { sessions } from "../../models"
+import { booleanSchema } from "../../components/schemas/boolean.schema.js"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
+import { idSchema } from "../../components/schemas/id.schema.js"
+import { sessions } from "../../models/index.js"
 
 
 export const sessionSchema = createSelectSchema(sessions, {

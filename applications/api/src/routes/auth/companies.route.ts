@@ -5,10 +5,10 @@ import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db"
-import { env } from "../../env"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
+import { db } from "../../clients/db.js"
+import { env } from "../../env.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
 
 
 export const companiesRoute = new Hono<AuthEnv>()

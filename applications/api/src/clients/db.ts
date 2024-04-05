@@ -2,7 +2,7 @@ import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 
 import * as schema from "@coulba/schemas/models"
-import { env } from '../env'
+import { env } from '../env.js'
 
 
 const databaseUrl = env()?.DATABASE_URL

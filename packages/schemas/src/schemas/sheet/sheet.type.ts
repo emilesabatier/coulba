@@ -1,5 +1,5 @@
-import { sheets } from "../../models"
-import { sheetInclude } from "./sheet.include"
+import { sheets } from "../../models/index.js"
+import { sheetInclude } from "./sheet.include.js"
 
 
 type sheetInclude = keyof typeof sheetInclude

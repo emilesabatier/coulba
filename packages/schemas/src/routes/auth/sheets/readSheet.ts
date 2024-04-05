@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { sheetSchema } from "../../../schemas/sheet/sheet.schema"
+import { sheetSchema } from "../../../schemas/sheet/sheet.schema.js"
 
 
 // Input

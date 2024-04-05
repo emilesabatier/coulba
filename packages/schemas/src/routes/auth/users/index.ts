@@ -1,8 +1,8 @@
-import { createUserBody, createUserReturn } from "./createUser"
-import { deleteUserParams, deleteUserReturn } from "./deleteUser"
-import { readUserParams, readUserReturn } from "./readUser"
-import { sendInvitationParams, sendInvitationReturn } from "./sendInvitation"
-import { updateUserBody, updateUserParams, updateUserReturn } from "./updateUser"
+import { createUserBody, createUserReturn } from "./createUser.js"
+import { deleteUserParams, deleteUserReturn } from "./deleteUser.js"
+import { readUserParams, readUserReturn } from "./readUser.js"
+import { sendInvitationParams, sendInvitationReturn } from "./sendInvitation.js"
+import { updateUserBody, updateUserParams, updateUserReturn } from "./updateUser.js"
 
 
 export const users = {

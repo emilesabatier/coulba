@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": "src",
+        "outDir": "build",
         "target": "ESNext",
         "useDefineForClassFields": true,
         "lib": [
@@ -26,7 +27,6 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedIndexedAccess": true,
         "strictNullChecks": true,
-        "outDir": "dist",
     },
     "include": [
         "src/**/*",

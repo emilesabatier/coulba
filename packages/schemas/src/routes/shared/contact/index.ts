@@ -1,4 +1,4 @@
-import { sendMessageBody, sendMessageReturn } from "./sendMessage"
+import { sendMessageBody, sendMessageReturn } from "./sendMessage.js"
 
 
 export const contact = {

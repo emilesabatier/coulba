@@ -1,8 +1,8 @@
-import { createTransactionBody, createTransactionReturn } from "./createTransaction"
-import { deleteTransactionParams, deleteTransactionReturn } from "./deleteTransaction"
-import { readTransactionParams, readTransactionReturn } from "./readTransaction"
-import { updateTransactionBody, updateTransactionParams, updateTransactionReturn } from "./updateTransaction"
-import { validateTransactionParams, validateTransactionReturn } from "./validateTransaction"
+import { createTransactionBody, createTransactionReturn } from "./createTransaction.js"
+import { deleteTransactionParams, deleteTransactionReturn } from "./deleteTransaction.js"
+import { readTransactionParams, readTransactionReturn } from "./readTransaction.js"
+import { updateTransactionBody, updateTransactionParams, updateTransactionReturn } from "./updateTransaction.js"
+import { validateTransactionParams, validateTransactionReturn } from "./validateTransaction.js"
 
 
 export const transactions = {

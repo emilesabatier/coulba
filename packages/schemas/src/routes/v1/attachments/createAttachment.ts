@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { fileSchema } from "../../../components"
-import { attachmentSchema } from "../../../schemas/attachment/attachment.schema"
+import { fileSchema } from "../../../components/index.js"
+import { attachmentSchema } from "../../../schemas/attachment/attachment.schema.js"
 
 
 // Input

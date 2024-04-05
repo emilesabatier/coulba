@@ -5,11 +5,11 @@ import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from "hono/validator"
-import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
-import { sendEmail } from "../../services/email/sendEmail"
-import { supportTemplate } from "../../services/email/templates/support"
+import { db } from "../../clients/db.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
+import { sendEmail } from "../../services/email/sendEmail.js"
+import { supportTemplate } from "../../services/email/templates/support.js"
 
 
 export const profileRoute = new Hono<AuthEnv>()
@@ -128,7 +128,7 @@ export const profileRoute = new Hono<AuthEnv>()
                 to: "support@coulba.fr",
                 subject: `[Support] ${c.var.user.id}`,
                 html: supportTemplate({
-                    category: body.category,
+                    category: body.category ?? "null",
                     date: new Date().toISOString(),
                     message: body.message
                 })

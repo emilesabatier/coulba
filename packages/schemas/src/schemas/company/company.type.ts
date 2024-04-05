@@ -1,5 +1,5 @@
-import { companies } from "../../models"
-import { companyInclude } from "./company.include"
+import { companies } from "../../models/index.js"
+import { companyInclude } from "./company.include.js"
 
 
 type companyInclude = keyof typeof companyInclude

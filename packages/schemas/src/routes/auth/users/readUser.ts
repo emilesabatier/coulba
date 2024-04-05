@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { userKeys } from "../../../schemas/user/user.include"
-import { userSchema } from "../../../schemas/user/user.schema"
+import { userKeys } from "../../../schemas/user/user.include.js"
+import { userSchema } from "../../../schemas/user/user.schema.js"
 
 
 // Input

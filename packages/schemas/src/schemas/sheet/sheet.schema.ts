@@ -1,11 +1,11 @@
 import { createSelectSchema } from 'drizzle-valibot'
 import * as v from "valibot"
-import { integerSchema } from "../../components"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
-import { idSchema } from "../../components/schemas/id.schema"
-import { requiredTextSchema } from '../../components/schemas/requiredText.schema'
-import { sheetSides } from '../../components/values/sheetSide'
-import { sheets } from "../../models"
+import { integerSchema } from "../../components/index.js"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
+import { idSchema } from "../../components/schemas/id.schema.js"
+import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
+import { sheetSides } from '../../components/values/sheetSide.js'
+import { sheets } from "../../models/index.js"
 
 
 const sheetSideSchema = v.picklist(sheetSides)

@@ -6,10 +6,10 @@ import { cors } from 'hono/cors'
 import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
 import { createServer } from 'node:https'
-import { env } from './env'
-import { authRoute } from './routes/auth.route'
-import { sharedRoute } from './routes/shared.route'
-import { v1Route } from './routes/v1.route'
+import { env } from './env.js'
+import { authRoute } from './routes/auth.route.js'
+import { sharedRoute } from './routes/shared.route.js'
+import { v1Route } from './routes/v1.route.js'
 
 
 const app = new Hono()

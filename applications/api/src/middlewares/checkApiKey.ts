@@ -4,8 +4,8 @@ import { pbkdf2Sync } from "crypto"
 import { and, eq } from "drizzle-orm"
 import { MiddlewareHandler } from "hono"
 import { HTTPException } from "hono/http-exception"
-import { db } from "../clients/db"
-import { env } from "../env"
+import { db } from "../clients/db.js"
+import { env } from "../env.js"
 
 
 export type V1Env = {

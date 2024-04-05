@@ -1,9 +1,9 @@
 import { createSelectSchema } from 'drizzle-valibot'
-import { integerSchema } from "../../components"
-import { dateTimeSchema } from "../../components/schemas/dateTime.schema"
-import { idSchema } from "../../components/schemas/id.schema"
-import { requiredTextSchema } from '../../components/schemas/requiredText.schema'
-import { statements } from "../../models"
+import { integerSchema } from "../../components/index.js"
+import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
+import { idSchema } from "../../components/schemas/id.schema.js"
+import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
+import { statements } from "../../models/index.js"
 
 
 export const statementSchema = createSelectSchema(statements, {

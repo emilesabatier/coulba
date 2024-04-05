@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { companyIncludeKeys } from "../../../schemas/company/company.include"
-import { companySchema } from "../../../schemas/company/company.schema"
+import { companyIncludeKeys } from "../../../schemas/company/company.include.js"
+import { companySchema } from "../../../schemas/company/company.schema.js"
 
 
 // Input
