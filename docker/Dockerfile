@@ -6,7 +6,7 @@ RUN npm install -g pnpm
 FROM base AS build
 WORKDIR /root
 COPY package.json package.json
-COPY pnpm-lock.yaml pnpm-lock.yaml
+# COPY pnpm-lock.yaml pnpm-lock.yaml
 COPY pnpm-workspace.yaml pnpm-workspace.yaml
 COPY turbo.json turbo.json
 COPY ./applications ./applications
