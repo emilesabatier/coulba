@@ -1,19 +1,29 @@
-'use client'
-
-import { Toaster } from "@monassosportive/design/overlays"
-import { SWRProvider } from "./swr.context"
-import { Fragment } from "react"
-import { SessionProvider } from "./session/session.context"
 
 
-export function Providers({ children }: { children: React.ReactNode }) {
+import { Toaster } from "@coulba/design/overlays"
+import { Fragment, ReactNode } from "react"
+import { CompanyProvider } from "./company/company.provider"
+import { CurrentYearProvider } from "./currentYear/currentYear.provider"
+import { SessionProvider } from "./session/session.provider"
+import { StateProvider } from "./state/state.context"
+
+
+type Providers = {
+    children: ReactNode
+}
+
+export function Providers(props: Providers) {
     return (
         <Fragment>
             <Toaster />
             <SessionProvider>
-                <SWRProvider>
-                    {children}
-                </SWRProvider>
+                <CompanyProvider>
+                    <CurrentYearProvider>
+                        <StateProvider>
+                            {props.children}
+                        </StateProvider>
+                    </CurrentYearProvider>
+                </CompanyProvider>
             </SessionProvider>
         </Fragment>
     )

@@ -33,24 +33,29 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                     "w-full grid grid-cols-[auto_min-content] gap-x-1",
                 )}
             >
-                <input
-                    {...props}
-                    type={showPassword ? "text" : "password"}
-                    className={cn(
-                        "h-[40px] w-full flex justify-between items-center gap-2 py-2 px-3 border border-solid rounded-sm text-base placeholder:text-neutral/50",
-                        "focus:border-neutral/50 focus:shadow-inner focus:bg-neutral/5",
-                        (!props.error) ? "border-neutral/25" : "border-error",
-                        props.className
-                    )}
-                    ref={ref}
-                    value={input(props.value)}
-                    onChange={(e) => props.onChange(output(e.currentTarget.value))}
-                    autoFocus={props.autoFocus}
-                />
+                <div className={cn(
+                    "h-[40px] w-full flex justify-start items-stretch gap-2 border border-neutral/20 rounded-sm",
+                    (!props.error) ? "" : "border-error",
+                    props.className
+                )}>
+                    <input
+                        {...props}
+                        type={showPassword ? "text" : "password"}
+                        className={cn(
+                            "rounded-[inherit] w-full text-base placeholder:text-neutral/25 p-2",
+                            "focus:shadow-inner focus:bg-neutral/5",
+                            "overflow-hidden whitespace-nowrap text-ellipsis"
+                        )}
+                        ref={ref}
+                        value={input(props.value)}
+                        onChange={(e) => props.onChange(output(e.currentTarget.value))}
+                        autoFocus={props.autoFocus}
+                    />
+                </div>
                 <ButtonOutline
                     icon={showPassword ? <IconEye /> : <IconEyeClosed />}
                     onClick={handleClickShowPassword}
-                    className="border-neutral/25"
+                    className="border-neutral/20"
                 />
             </div>
         )

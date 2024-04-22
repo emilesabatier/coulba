@@ -27,7 +27,7 @@
   button,
   textarea,
   select {
-    @apply text-base font-normal font-lato text-neutral;
+    @apply text-base font-normal font-switzer text-neutral;
   }
 
   a {
@@ -61,17 +61,5 @@
 
   svg {
     @apply stroke-1;
-  }
-
-  ::-webkit-scrollbar {
-    @apply w-2 h-2;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-primary;
   }
 }

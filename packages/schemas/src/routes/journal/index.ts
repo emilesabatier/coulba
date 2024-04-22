@@ -1,5 +1,0 @@
-export * from "./createOneJournal.js"
-export * from "./deleteOneJournal.js"
-export * from "./readAllJournals.js"
-export * from "./readOneJournal.js"
-export * from "./updateOneJournal.js"

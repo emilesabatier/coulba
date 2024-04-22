@@ -1,4 +1,5 @@
 import { ComponentProps } from "react"
+import { cn } from "../../services"
 import { FormatBase } from "../formatBase"
 import { FormatNull } from "../null/formatNull"
 import { formatPrice } from "./price.format"
@@ -13,7 +14,10 @@ export function FormatPrice(props: FormatPrice) {
     if (props.price === undefined || props.price === null) return <FormatNull />
     return (
         <FormatBase className={props.className}>
-            <span className="w-fit max-w-full overflow-hidden whitespace-nowrap text-ellipsis text-base break-words">
+            <span className={cn(
+                "w-fit max-w-full overflow-hidden whitespace-nowrap text-ellipsis text-base break-words",
+                formatPrice(props.price) === "0.00" ? "text-neutral/25" : ""
+            )}>
                 {formatPrice(props.price)}
             </span>
         </FormatBase>

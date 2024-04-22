@@ -14,7 +14,7 @@ export default {
         },
         colors: {
             transparent: "transparent",
-            background: "#F4F4F4",
+            background: "#FAFAFA",
             white: "#FFFFFF",
             primary: {
                 DEFAULT: "#953737",
@@ -44,7 +44,7 @@ export default {
         fontFamily: {
             sans: ['Graphik', 'sans-serif'],
             serif: ['Merriweather', 'serif'],
-            lato: ['Lato'],
+            switzer: ['Switzer'],
         },
         extend: {
             borderRadius: {
@@ -105,17 +105,8 @@ export default {
                 current: 'current="true"'
             },
             boxShadow: {
-                "inner": "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
-                "outer": "0 2px 4px 0 rgb(0 0 0 / 0.05)",
-                "sm": "rgba(0, 0, 0, 0.16) 0px -1px 4px",
-                "sm-desktop": "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-                // "md": "rgba(0, 0, 0, 0.15) 0px -5px 15px 0px",
-                "md-desktop": "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                "scrollbar": "inset 1px 1px 4px 4px rgba(0,0,0,0.05)",
-                "table-header": "0px 6px 6px -3px rgba(0,0,0,0.25)",
-                "table-pinned": "10px 0px 10px -5px rgba(0,0,0,0.25)",
-                "content": "0px 0px 4px 1px rgba(0,0,0,0.1)",
-                "popover": "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;"
+                "sm": "rgba(0, 0, 0, 0.1) 0px 2px 4px",
+                "md": "rgba(0, 0, 0, 0.1) 0px 4px 12px"
             },
             backdropBlur: {
                 xs: ".5px"

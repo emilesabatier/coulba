@@ -13,7 +13,7 @@ export const Command = React.forwardRef<
     <CommandPrimitive
         ref={ref}
         className={cn(
-            "flex h-full w-full flex-col overflow-hidden rounded-[inherit] bg-white",
+            "flex h-full w-full flex-col overflow-hidden rounded-[inherit]",
             className
         )}
         {...props}
@@ -43,7 +43,7 @@ export const CommandInput = React.forwardRef<
         <CommandPrimitive.Input
             ref={ref}
             className={cn(
-                "flex w-full rounded-sm bg-transparent text-base outline-none placeholder:text-neutral/50 disabled:cursor-not-allowed disabled:opacity-50",
+                "flex w-full rounded-sm bg-transparent text-base outline-none placeholder:text-neutral/25 disabled:cursor-not-allowed disabled:opacity-50",
                 className
             )}
             {...props}

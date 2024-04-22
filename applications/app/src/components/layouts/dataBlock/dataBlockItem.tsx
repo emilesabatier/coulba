@@ -1,10 +1,9 @@
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@monassosportive/design/overlays"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@coulba/design/overlays"
 import { IconInfoSquareRounded } from "@tabler/icons-react"
-import { ReactElement } from "react"
+import { Fragment, ReactElement } from "react"
 
 
 type DataBlockItem = {
-    key: string
     label: string
     description?: string
     children: string | ReactElement
@@ -12,9 +11,9 @@ type DataBlockItem = {
 
 export function DataBlockItem(props: DataBlockItem) {
     return (
-        <div key={props.key}>
+        <Fragment>
             <div className="flex justify-start items-center gap-2">
-                <span className="uppercase text-neutral/30 text-sm">{props.label}</span>
+                <span className="uppercase text-neutral/50">{props.label}</span>
                 {
                     (!props.description) ? null : (
                         <TooltipProvider>
@@ -38,6 +37,6 @@ export function DataBlockItem(props: DataBlockItem) {
                         )
                 }
             </div>
-        </div>
+        </Fragment>
     )
 }

@@ -3,7 +3,7 @@ import { CircularLoader } from "../../layouts"
 import { cn } from "../../services/cn"
 
 
-export type GhostColors = "neutral" | "primary" | "error" | "warning" | "success" | "information"
+export type GhostColors = "neutral" | "error" | "warning" | "success" | "information"
 
 export type ButtonGhostContent = {
     loading?: boolean
@@ -21,12 +21,6 @@ export function ButtonGhostContent(props: ButtonGhostContent) {
             loader: "stroke-neutral",
             icon: "stroke-neutral",
             text: "text-neutral"
-        },
-        "primary": {
-            container: "hover:bg-primary/10 hover:bg-primary/10",
-            loader: "stroke-primary",
-            icon: "stroke-primary",
-            text: "text-primary"
         },
         "error": {
             container: "hover:bg-error/5 group-focus:bg-error/5",

@@ -1,4 +1,4 @@
-import { cn } from "@monassosportive/design/services"
+import { cn } from "@coulba/design/services"
 import { ComponentProps, ReactElement } from "react"
 
 

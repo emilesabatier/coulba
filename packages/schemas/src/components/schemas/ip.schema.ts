@@ -1,2 +1,7 @@
-import z from "zod"
-export const ipSchema = z.string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." }).trim().ip()
+import * as v from "valibot"
+
+export const ipSchema = v
+    .string([
+        v.toTrimmed(),
+        v.ipv4("Doit être une ip valide.")
+    ])

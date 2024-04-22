@@ -27,10 +27,11 @@ export * from "./records/formatRecords"
 export * from "./relativeDateTime/formatRelativeDateTime"
 export * from "./relativeDateTime/relativeDateTime.format"
 
-export * from "./editor/formatEditor"
-
 export * from "./duration/duration.format"
 export * from "./duration/formatDuration"
 
 export * from "./price/formatPrice"
 export * from "./price/price.format"
+
+export * from "./fileSize/fileSize.format"
+export * from "./fileSize/formatFileSize"

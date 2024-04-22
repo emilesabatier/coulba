@@ -27,7 +27,7 @@
   button,
   textarea,
   select {
-    @apply text-base font-normal font-lato text-neutral;
+    @apply text-base font-normal font-switzer text-neutral;
   }
 
   a {
@@ -35,7 +35,7 @@
   }
 
   html {
-    @apply bg-background;
+    @apply bg-white;
   }
 
   body {
@@ -63,15 +63,4 @@
     @apply stroke-[1px];
   }
 
-  ::-webkit-scrollbar {
-    @apply w-2 h-2;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-primary;
-  }
 }

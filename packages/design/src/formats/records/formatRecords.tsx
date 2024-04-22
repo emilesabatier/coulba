@@ -42,7 +42,7 @@ export function FormatRecords<T>(props: FormatRecords<T>) {
                                 onClick={() => setIndexLimit(props.records.length !== recordsToDisplay.length ? props.records.length : defaultLimit)}
                                 className="mt-2"
                             >
-                                <span className="overflow-hidden hover:underline text-primary">{(props.records.length !== recordsToDisplay.length) ? "Afficher plus" : "Afficher moins"}</span>
+                                <span className="overflow-hidden hover:underline text-neutral">{(props.records.length !== recordsToDisplay.length) ? "Afficher plus" : "Afficher moins"}</span>
                             </Button>
                         </li>
                     }

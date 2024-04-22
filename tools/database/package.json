@@ -1,5 +1,5 @@
 {
-    "name": "@monassosportive/database",
+    "name": "@coulba/database",
     "private": true,
     "type": "module",
     "scripts": {
@@ -14,7 +14,7 @@
         "drop": "pnpm drizzle-kit drop --config=drizzle.config.ts"
     },
     "dependencies": {
-        "@monassosportive/schemas": "workspace:*",
+        "@coulba/schemas": "workspace:*",
         "@ngneat/falso": "7.1.1",
         "dotenv": "^16.4.1",
         "drizzle-orm": "0.29.3",

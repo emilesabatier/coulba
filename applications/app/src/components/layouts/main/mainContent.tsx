@@ -1,18 +1,22 @@
-import { cn } from "@monassosportive/design/services"
-import { ComponentProps, ReactElement } from "react"
+import { cn } from "@coulba/design/services"
+import { ComponentProps, ReactNode } from "react"
+import { MenuItem } from "../navigation/menuItems"
 
 
 type MainContent = {
+    children: ReactNode
     className?: ComponentProps<'div'>['className']
-    children: ReactElement | ReactElement[]
+    menu?: MenuItem[]
 }
 
 export function MainContent(props: MainContent) {
     return (
-        <div className={cn(
-            "shrink-0 w-full min-h-fit h-full max-h-full overflow-auto",
-            props.className
-        )}>
+        <div
+            className={cn(
+                "w-full max-w-full min-h-full h-full max-h-full overflow-y-auto overflow-x-visible flex flex-col justify-start items-stretch gap-8",
+                props.className
+            )}
+        >
             {props.children}
         </div>
     )

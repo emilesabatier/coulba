@@ -1,6 +1,7 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const cardNameSchema = z
-    .string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
-    .min(4, { message: "Trop court (min. 4)" })
-    .max(64, { message: "Trop long (max. 64)" })
+export const cardNameSchema = v
+    .string([
+        v.minLength(4, 'Trop court (min. 4)'),
+        v.maxLength(64, 'Trop long (max. 64)'),
+    ])

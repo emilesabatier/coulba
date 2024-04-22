@@ -1,8 +1,7 @@
-"use client"
+
 
 import { useEffect } from "react"
 import { Main } from "../components/layout/main/main"
-import { PricingContent } from "../components/pricing/pricingContent"
 
 
 export function PricingPage() {
@@ -12,11 +11,10 @@ export function PricingPage() {
     return (
         <Main.Root>
             <Main.Header
-                title="Un prix transparent et flexible"
-                description="Adapté à votre association."
+                title="Tarif"
             />
             <Main.Content>
-                <PricingContent />
+                <p>todo</p>
             </Main.Content>
         </Main.Root>
     )

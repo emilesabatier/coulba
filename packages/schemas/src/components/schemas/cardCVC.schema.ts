@@ -1,5 +1,9 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const cardCVCSchema = z
-    .string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
-    .regex(/^\d{3}$/, { message: "Format requis: 000 ou 999." })
+export const cardCVCSchema = v
+    .string([
+        v.regex(
+            /^\d{3}$/,
+            "Format requis: 000 ou 999."
+        )
+    ])

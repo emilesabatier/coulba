@@ -1,2 +1,6 @@
-import z from "zod"
-export const textSchema = z.string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." }).trim()
+import * as v from "valibot"
+
+export const textSchema = v
+    .string([
+        v.toTrimmed()
+    ])

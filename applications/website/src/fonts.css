@@ -1,13 +1,13 @@
 @font-face {
-  font-family: "Lato";
-  src: url("./assets/fonts/lato/Lato-Regular.ttf");
+  font-family: "Switzer";
+  src: url("./assets/fonts/switzer/Switzer-Regular.ttf");
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "Lato";
-  src: url("./assets/fonts/lato/Lato-Bold.ttf");
+  font-family: "Switzer";
+  src: url("./assets/fonts/switzer/Switzer-Bold.ttf");
   font-style: normal;
   font-weight: bold;
 }

@@ -10,12 +10,12 @@ export function RootLayout() {
         .reverse()
         .find((d) => d.context.title)
 
-    const title = matchWithTitle?.context.title || 'MonAssoSportive'
+    const title = matchWithTitle?.context.title || 'Coulba'
 
     useEffect(() => { document.title = title }, [title])
 
     return (
-        <div className="w-full h-full bg-background overflow-auto">
+        <div className="w-full h-full overflow-auto">
             <Outlet />
         </div>
     )

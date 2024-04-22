@@ -18,8 +18,8 @@ export function Chip(props: Chip) {
             text: "text-neutral"
         },
         "primary": {
-            bg: "bg-primary/10",
-            text: "text-primary"
+            bg: "bg-neutral/10",
+            text: "text-neutral"
         },
         "information": {
             bg: "bg-information/10",

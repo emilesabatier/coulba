@@ -1,5 +1,0 @@
-export * from "./createOneAttachment.js"
-export * from "./deleteOneAttachment.js"
-export * from "./readAllAttachments.js"
-export * from "./readOneAttachment.js"
-export * from "./updateOneAttachment.js"

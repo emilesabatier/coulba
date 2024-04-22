@@ -1,5 +1,5 @@
 {
-    "name": "@monassosportive/website",
+    "name": "@coulba/website",
     "private": true,
     "type": "module",
     "browserslist": {
@@ -22,17 +22,15 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@hookform/resolvers": "3.1.1",
-        "@monassosportive/design": "workspace:*",
-        "@monassosportive/schemas": "workspace:*",
+        "@coulba/design": "workspace:*",
+        "@coulba/schemas": "workspace:*",
+        "@hookform/resolvers": "3.3.4",
         "@tabler/icons-react": "2.45.0",
         "@tanstack/react-router": "1.15.10",
-        "nanoid": "5.0.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-hook-form": "7.49.2",
-        "swr": "2.2.4",
-        "zod": "3.22.4"
+        "valibot": "^0.28.1"
     },
     "devDependencies": {
         "@types/node": "20.10.6",

@@ -1,14 +1,64 @@
-import { ReactElement } from "react"
+import { ButtonOutline, ButtonOutlineContent } from "@coulba/design/buttons"
+import { useDeviceDetect } from "@coulba/design/hooks"
+import { Logo } from "@coulba/design/layouts"
+import { Popover, PopoverContent, PopoverTrigger } from "@coulba/design/overlays"
+import { IconMenu } from "@tabler/icons-react"
+import { Link } from "@tanstack/react-router"
+import { Fragment } from "react"
 
 
-type Header = {
-    children: ReactElement
-}
+export function Header() {
+    const { isMobile } = useDeviceDetect()
 
-export function Header(props: Header) {
+    const menus = (
+        <Fragment>
+            {/* <a href={import.meta.env.VITE_PUBLIC_DOCUMENTATION_BASE} target="_blank" rel="noopener noreferrer" className="w-full md:w-fit">
+                    <ButtonGhostContent
+                        icon={<IconExternalLink />}
+                        text="Documentation"
+                        className="w-full md:w-fit justify-end"
+                    />
+                </a> */}
+            <a href={import.meta.env.VITE_PUBLIC_APP_BASE} target="_blank" rel="noopener noreferrer" className="w-full md:w-fit">
+                <ButtonOutlineContent
+                    text="Connexion"
+                    className="w-full md:w-fit justify-center"
+                />
+            </a>
+        </Fragment>
+    )
     return (
-        <div className="h-auto w-full rounded-b-md bg-white shadow-outer p-4 flex justify-start items-stretch overflow-hidden">
-            {props.children}
+        <div className="w-full bg-background border-b border-neutral/20 p-4 flex justify-center items-center">
+            <nav className="w-full max-w-[1280px] flex justify-between items-center gap-4 overflow-hidden">
+                <div className="relative w-fit flex justify-start items-center gap-2">
+                    <Link to="/" className="w-fit flex justify-center items-center">
+                        <Logo />
+                    </Link>
+                    <div className="absolute top-0 right-0 rounded-sm bg-neutral/10 h-fit w-fit flex justify-center items-center p-1.5">
+                        <span className="text-xs leading-none">beta</span>
+                    </div>
+                </div>
+                {
+                    isMobile ? (
+                        <Popover>
+                            <PopoverTrigger asChild >
+                                <ButtonOutline
+                                    icon={<IconMenu />}
+                                />
+                            </PopoverTrigger>
+                            <PopoverContent align="end">
+                                <div className="p-4 flex flex-col justify-start items-start">
+                                    {menus}
+                                </div>
+                            </PopoverContent>
+                        </Popover>
+                    ) : (
+                        <div className="flex justify-end items-center gap-1">
+                            {menus}
+                        </div>
+                    )
+                }
+            </nav>
         </div>
     )
 }

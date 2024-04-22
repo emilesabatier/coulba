@@ -1,5 +1,0 @@
-export * from "./createOneEntry.js"
-export * from "./deleteOneEntry.js"
-export * from "./readAllEntries.js"
-export * from "./readOneEntry.js"
-export * from "./updateOneEntry.js"

@@ -1,5 +1,5 @@
 {
-    "name": "@monassosportive/schemas",
+    "name": "@coulba/schemas",
     "private": true,
     "type": "module",
     "scripts": {
@@ -8,31 +8,35 @@
     },
     "dependencies": {
         "drizzle-orm": "0.29.3",
-        "drizzle-zod": "0.5.1",
+        "drizzle-valibot": "^0.1.1",
         "postgres": "3.4.3",
-        "zod": "3.22.4"
+        "valibot": "^0.28.1"
     },
     "devDependencies": {
         "@types/node": "20.10.6",
-        "drizzle-kit": "0.19.13",
+        "drizzle-kit": "0.20.9",
         "typescript": "5.3.3"
     },
     "exports": {
         "./models": {
-            "types": "./lib/models/index.d.ts",
-            "default": "./lib/models/index.js"
+            "default": "./build/models/index.js",
+            "types": "./build/models/index.d.ts"
+        },
+        "./schemas": {
+            "default": "./build/schemas/index.js",
+            "types": "./build/schemas/index.d.ts"
         },
         "./routes": {
-            "types": "./lib/routes/index.d.ts",
-            "default": "./lib/routes/index.js"
+            "default": "./build/routes/index.js",
+            "types": "./build/routes/index.d.ts"
         },
         "./components": {
-            "types": "./lib/components/index.d.ts",
-            "default": "./lib/components/index.js"
+            "default": "./build/components/index.js",
+            "types": "./build/components/index.d.ts"
         },
         "./services": {
-            "types": "./lib/services/index.d.ts",
-            "default": "./lib/services/index.js"
+            "default": "./build/services/index.js",
+            "types": "./build/services/index.d.ts"
         }
     }
 }

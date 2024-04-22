@@ -1,5 +1,0 @@
-export * from "./createOneCompany.js"
-export * from "./deleteOneCompany.js"
-export * from "./readAllCompanies.js"
-export * from "./readOneCompany.js"
-export * from "./updateOneCompany.js"

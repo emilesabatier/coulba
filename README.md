@@ -1,5 +1,5 @@
-## MonAssoSportive
+## Coulba
 
-- Repertoire synchronisé de l'application MonAssoSportive.
-- développé par Emile Sabatier en partenariat avec Adrian Millon
-- projet commencé en mars 2023
+- Repertoire synchronisé de l'application Coulba.
+- développé par Emile Sabatier
+- projet commencé en février 2024

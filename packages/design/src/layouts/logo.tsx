@@ -1,5 +1,5 @@
 import { ComponentProps } from "react"
-import { LogoMAS } from "../assets/svg/logoMAS"
+import { LogoSvg } from "../assets/svg/logo"
 import { cn } from "../services/cn"
 
 
@@ -9,8 +9,6 @@ type Logo = {
 
 export function Logo(props: Logo) {
     return (
-        <div className="h-[40px] w-fit flex justify-center items-center">
-            <LogoMAS className={cn("w-auto h-full fill-primary overflow-visible", props.className)} />
-        </div>
+        <LogoSvg className={cn("h-[64px] w-fit fill-neutral overflow-visible", props.className)} />
     )
 }

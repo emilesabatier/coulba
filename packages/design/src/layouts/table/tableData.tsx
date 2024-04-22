@@ -174,8 +174,8 @@ export function TableData<T extends { id: string }>({ id, columns, data }: Table
                                             onMouseDown={header.getResizeHandler()}
                                             onTouchStart={header.getResizeHandler()}
                                             className={cn(
-                                                "absolute right-0 h-full w-1 hover:bg-primary/10 cursor-col-resize select-none touch-none",
-                                                header.column.getIsResizing() ? 'bg-primary' : ''
+                                                "absolute right-0 h-full w-1 hover:bg-neutral/10 cursor-col-resize select-none touch-none",
+                                                header.column.getIsResizing() ? 'bg-neutral' : ''
                                             )}
                                             style={{
                                                 transform:

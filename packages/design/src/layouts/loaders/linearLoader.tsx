@@ -11,7 +11,7 @@ export function LinearLoader(props: LinearLoader) {
         <div className="relative w-full h-1 rounded-sm overflow-hidden">
             <div
                 className={cn(
-                    "w-full h-full bg-primary rounded-sm animate-pulse",
+                    "w-full h-full bg-neutral rounded-sm animate-pulse",
                     props.className
                 )}
             />

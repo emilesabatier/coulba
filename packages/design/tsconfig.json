@@ -2,7 +2,7 @@
     "compilerOptions": {
         // "baseUrl": "src",
         // "rootDir": "src",
-        "outDir": "lib",
+        "outDir": "build",
         "target": "ES2022",
         "noImplicitAny": true,
         "skipLibCheck": true,
@@ -22,5 +22,8 @@
         "incremental": true,
         "jsx": "react-jsx",
         "sourceMap": true
-    }
+    },
+    "include": [
+        "**/*"
+    ]
 }

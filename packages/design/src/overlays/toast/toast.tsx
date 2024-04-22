@@ -23,23 +23,23 @@ const ToastViewport = forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastIcons = {
-    error: <IconAlertHexagonFilled className="text-white" />,
-    success: <IconCircleCheckFilled className="text-white" />,
-    warning: <IconAlertTriangleFilled className="text-white" />,
-    information: <IconInfoSquareFilled className="text-white" />
+    error: <IconAlertHexagonFilled className="text-error" />,
+    success: <IconCircleCheckFilled className="text-success" />,
+    warning: <IconAlertTriangleFilled className="text-warning" />,
+    information: <IconInfoSquareFilled className="text-information" />
 }
 const toastVariants = cva(
     cn(
-        "group pointer-events-auto relative flex w-full items-start justify-start space-x-4 overflow-hidden rounded-md border p-4 pr-6 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-left-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+        "group pointer-events-auto relative flex w-full items-start justify-start space-x-4 overflow-hidden rounded-sm border-l-4 p-4 pr-6 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-left-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
         "bg-white"
     ),
     {
         variants: {
             variant: {
-                error: "border-error bg-error",
-                success: "border-success bg-success",
-                warning: "border-warning bg-warning ",
-                information: "border-information bg-information"
+                error: "text-error border-error",
+                success: "text-success",
+                warning: "text-warning",
+                information: "text-information"
             },
         },
         defaultVariants: {
@@ -94,7 +94,7 @@ const ToastClose = forwardRef<
         toast-close=""
         {...props}
     >
-        <IconX className="stroke-white" />
+        <IconX className="stroke-neutral/25" />
     </ToastPrimitives.Close>
 ))
 ToastClose.displayName = ToastPrimitives.Close.displayName
@@ -105,7 +105,7 @@ const ToastTitle = forwardRef<
 >(({ className, ...props }, ref) => (
     <ToastPrimitives.Title
         ref={ref}
-        className={cn("text-base [&+div]:text-xs text-white", className)}
+        className={cn("text-base [&+div]:text-xs text-inherit", className)}
         {...props}
     />
 ))
@@ -117,7 +117,7 @@ const ToastDescription = forwardRef<
 >(({ className, ...props }, ref) => (
     <ToastPrimitives.Description
         ref={ref}
-        className={cn("text-sm text-white/75", className)}
+        className={cn("text-sm text-inherit/75", className)}
         {...props}
     />
 ))

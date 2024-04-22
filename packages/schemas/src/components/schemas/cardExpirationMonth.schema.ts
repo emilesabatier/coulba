@@ -1,5 +1,9 @@
-import z from "zod"
+import * as v from "valibot"
 
-export const cardExpirationMonthSchema = z
-    .string({ invalid_type_error: "Format invalide.", required_error: "Le champ est requis." })
-    .regex(/^(0[1-9]|1[012])$/, { message: "Format requis: 01 ou 12." })
+export const cardExpirationMonthSchema = v
+    .string([
+        v.regex(
+            /^(0[1-9]|1[012])$/,
+            "Format requis: 01 ou 12."
+        )
+    ])

@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "baseUrl": "src",
-        "target": "ES2022",
+        "outDir": "build",
+        "target": "ESNext",
         "useDefineForClassFields": true,
         "lib": [
             "ES2022",
@@ -24,8 +25,8 @@
         "sourceMap": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
         "strictNullChecks": true,
-        "outDir": "dist",
     },
     "include": [
         "src/**/*",

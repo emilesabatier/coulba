@@ -14,7 +14,7 @@ export function env() {
     } catch (err) {
         if (err instanceof z.ZodError) {
             const { fieldErrors } = err.flatten()
-            const errorMessage = Object.entries(fieldErrors)
+            const errorMessage = Object.records(fieldErrors)
                 .map(([field, errors]) =>
                     errors ? `${field}: ${errors.join(", ")}` : field,
                 )

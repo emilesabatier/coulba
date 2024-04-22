@@ -1,9 +1,9 @@
-import { cn } from "@monassosportive/design/services"
-import { ComponentProps, ReactNode } from "react"
+import { cn } from "@coulba/design/services"
+import { ComponentProps, ReactElement } from "react"
 
 
 type PageContent = {
-    children: ReactNode
+    children: ReactElement
     className?: ComponentProps<'div'>['className']
 }
 
@@ -11,7 +11,7 @@ export function PageContent(props: PageContent) {
     return (
         <div
             className={cn(
-                "relative z-[1] w-full min-h-fit max-h-full bg-white md:rounded-tl-md shadow-outer overflow-hidden",
+                "w-full max-w-full min-h-full h-full max-h-full overflow-auto",
                 props.className
             )}
             children={props.children}

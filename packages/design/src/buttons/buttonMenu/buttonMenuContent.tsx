@@ -20,39 +20,39 @@ export function ButtonMenuContent(props: ButtonMenuContent) {
             container: "hover:bg-neutral/5 group-focus:bg-neutral/5",
             loader: "fill-neutral",
             icon: "text-neutral",
-            text: "text-neutral"
+            text: "text-neutral/75 group-hover:text-neutral"
         },
         "error": {
             container: "hover:bg-error/5 group-focus:bg-error/5",
             loader: "fill-error",
             icon: "text-error",
-            text: "text-error"
+            text: "text-error/75 group-hover:text-error"
         },
         "warning": {
             container: "hover:bg-warning/5 group-focus:bg-warning/5",
             loader: "fill-warning",
             icon: "text-warning",
-            text: "text-warning"
+            text: "text-warning/75 group-hover:text-warning"
         },
         "success": {
             container: "hover:bg-success/5 group-focus:bg-success/5",
             loader: "fill-success",
             icon: "text-success",
-            text: "text-success"
+            text: "text-success/75 group-hover:text-success"
         },
         "information": {
             container: "hover:bg-information/5 group-focus:bg-information/5",
             loader: "fill-information",
             icon: "text-information",
-            text: "text-information"
+            text: "text-information/75 group-hover:text-information"
         }
     }
     return (
         <div
             aria-disabled={props.disabled || props.loading}
             className={cn(
-                "overflow-hidden w-full min-h-[40px] h-full max-h-[40px] flex justify-start items-center gap-2 p-2 border border-transparent rounded-sm",
-                "aria-disabled:opacity-30",
+                "rounded-sm overflow-hidden w-full min-h-[40px] h-full max-h-[40px] flex justify-start items-center gap-2 p-2 border border-transparent",
+                "aria-disabled:opacity-30 group",
                 variants[props?.color ?? "neutral"].container,
                 props.className
             )}

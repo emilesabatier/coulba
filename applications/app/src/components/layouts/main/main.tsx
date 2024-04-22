@@ -1,10 +1,10 @@
 import { MainContent } from "./mainContent"
-import { MainNavigation } from "./mainNavigation"
+import { MainHeader } from "./mainHeader"
 import { MainRoot } from "./mainRoot"
 
 
 export const Main = {
     Root: MainRoot,
-    Navigation: MainNavigation,
+    Header: MainHeader,
     Content: MainContent
 }
