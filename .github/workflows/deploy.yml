@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+    release:
+        types: [published]
+
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+    deploy-image:
+
+        runs-on: ubuntu-22.04
+
+        permissions:
+            contents: read
+            packages: write
+
+        steps:
+            -   name: Deploy the new image
+                uses: appleboy/ssh-action@v1.0.3
+                with:
+                    host: ${{ secrets.SSH_HOST }}
+                    username: ${{ secrets.SSH_USERNAME }}
+                    password: ${{ secrets.SSH_PASSWORD }}
+                    key: ${{ secrets.SSH_KEY }}
+                    script: |
+                        cd ~/coulba
+                        docker stack deploy -c compose.web.yml --with-registry-auth coulba
