@@ -1,0 +1,21 @@
+services:
+
+  coulba:
+    image: "ghcr.io/emilesabatier/coulba/api"
+    container_name: "coulba.api"
+    networks:
+      - web
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.docker.lbswarm=true
+        - traefik.docker.network=web
+        - traefik.http.routers.coulba-web.rule=Host(`api.coulba.fr`)
+        - traefik.http.routers.coulba-web.tls=true
+        - traefik.http.routers.coulba-web.tls.certresolver=myresolver
+        - traefik.http.routers.coulba-web.entrypoints=websecure
+        - traefik.tcp.routers.coulba-web.tls.passthrough=true
+
+networks:
+  web:
+    external: true

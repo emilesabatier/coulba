@@ -2,6 +2,8 @@
 FROM node:20-alpine AS base
 RUN npm install -g pnpm
 
+LABEL org.opencontainers.image.source=https://github.com/emilesabatier/coulba
+
 # Build the monorepo
 FROM base AS build
 WORKDIR /root
