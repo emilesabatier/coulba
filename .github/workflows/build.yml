@@ -21,6 +21,8 @@ jobs:
                   target: website
                 - image: api
                   target: api
+                - image: app
+                  target: app
 
         permissions:
             contents: read

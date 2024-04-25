@@ -18,13 +18,14 @@ jobs:
             packages: write
 
         steps:
-            -   name: Deploy the new image
+            -   name: Deploy the new images
                 uses: appleboy/ssh-action@v1.0.3
                 with:
                     host: ${{ secrets.SSH_HOST }}
                     username: ${{ secrets.SSH_USERNAME }}
                     password: ${{ secrets.SSH_PASSWORD }}
-                    key: ${{ secrets.SSH_KEY }}
                     script: |
                         cd ~/coulba
-                        docker stack deploy -c compose.web.yml --with-registry-auth coulba
+                        docker stack deploy -c compose.website.yml --with-registry-auth coulba
+                        docker stack deploy -c compose.api.yml --with-registry-auth coulba
+                        docker stack deploy -c compose.app.yml --with-registry-auth coulba
