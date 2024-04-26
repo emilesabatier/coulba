@@ -26,18 +26,18 @@ FROM base AS api
 COPY --from=build /build/api /build/api
 WORKDIR /build/api
 EXPOSE 60000
-CMD [ "pnpm", "start"]
+CMD [ "node", "--env-file=.env", "./build/index.js"]
 
 # Start app
 FROM base AS app
 COPY --from=build /build/app /build/app
 WORKDIR /build/app
 EXPOSE 60010
-CMD [ "pnpm", "start" ]
+CMD ["pnpx", "serve", "./build"]
 
 # Start website
 FROM base AS website
 COPY --from=build /build/website /build/website
 WORKDIR /build/website
 EXPOSE 60020
-CMD [ "pnpm", "start" ]
+CMD ["pnpx", "serve", "./build"]
