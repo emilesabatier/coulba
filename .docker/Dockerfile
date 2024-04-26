@@ -26,7 +26,7 @@ FROM base AS api
 COPY --from=build /build/api /build/api
 WORKDIR /build/api
 EXPOSE 60000
-CMD [ "pnpm", "start" ]
+CMD [ "pnpm", "start"]
 
 # Start app
 FROM base AS app

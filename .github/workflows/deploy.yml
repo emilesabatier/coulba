@@ -21,4 +21,4 @@ jobs:
                     password: ${{ secrets.SSH_PASSWORD }}
                     script: |
                         cd ~/coulba
-                        docker stack deploy -c docker-compose.yml --with-registry-auth coulba
+                        docker compose -f docker-compose.yml up -d

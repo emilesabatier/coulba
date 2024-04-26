@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "tsx watch --env-file=.env src/index.ts",
         "build": "tsc --build",
-        "start": "node --env-file=.env build/index.js"
+        "start": "node --env-file=.env ./build/index.js"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.536.0",
