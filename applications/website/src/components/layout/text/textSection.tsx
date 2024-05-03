@@ -11,7 +11,7 @@ export function TextSection(props: TextSection) {
     return (
         <div
             className={cn(
-                "flex flex-col justify-start items-start gap-2",
+                "flex flex-col justify-start items-start gap-2 py-2",
                 props.className
             )}
             children={props.children}

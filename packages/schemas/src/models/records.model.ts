@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm"
 import { AnyPgColumn, numeric, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
@@ -25,7 +26,7 @@ export const records = pgTable(
         date: dateTimeColumn("date").notNull(),
         debit: numeric("debit", { scale: 2 }).notNull(),
         credit: numeric("credit", { scale: 2 }).notNull(),
-        createdOn: dateTimeColumn("created_on").defaultNow().notNull(),
+        createdOn: dateTimeColumn("created_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     }
 )

@@ -13,9 +13,9 @@ export function LegalPage() {
         <Main.Root>
             <Main.Header
                 title="Mentions légales"
+                description="Dernière version le 13/03/2024."
             />
             <Main.Content>
-                <span className="text-right self-end italic text-neutral/30">Dernière version le 13/03/2024.</span>
                 <Text.Root>
                     <Text.Section>
                         <Text.Title>

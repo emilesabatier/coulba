@@ -3,8 +3,7 @@ import * as v from 'valibot'
 enum Env {
     development = 'development',
     test = 'test',
-    production = 'production',
-    demo = 'demo',
+    production = 'production'
 }
 
 const envSchema = v.object({

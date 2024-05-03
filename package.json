@@ -1,13 +1,8 @@
 {
     "name": "coulba",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "description": "",
-    "browserslist": [
-        "last 5 versions",
-        ">0.3%",
-        "not dead"
-    ],
     "scripts": {
         "dev": "turbo run dev",
         "build": "turbo run build",
@@ -23,5 +18,10 @@
     "license": "ISC",
     "devDependencies": {
         "turbo": "1.11.2"
-    }
+    },
+    "browserslist": [
+        "last 5 versions",
+        ">0.3%",
+        "not dead"
+    ]
 }

@@ -1,4 +1,4 @@
-import { NavigateOptions, ParseRoute, createRouter } from '@tanstack/react-router'
+import { ParseRoute, createRouter } from '@tanstack/react-router'
 import { activationRoute } from './auth/activation.route'
 import { appLayout } from './auth/app.layout'
 import { attachmentsLayout } from './auth/app/attachments/attachments.layout'
@@ -52,6 +52,7 @@ import { reportsLayout } from './auth/app/reports/reports.layout'
 import { reportsRoute } from './auth/app/reports/reports.route'
 import { sheetRoute } from './auth/app/reports/sheet.route'
 import { statementRoute } from './auth/app/reports/statement.route'
+import { supportRoute } from './auth/app/support.route'
 import { createTransactionRoute } from './auth/app/transactions/createTransaction.route'
 import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
 import { transactionsLayout } from './auth/app/transactions/transactions.layout'
@@ -65,7 +66,6 @@ import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
 import { signInRoute } from './signIn/signIn.route'
 import { signUpRoute } from './signUp/signUp.route'
-import { supportRoute } from './auth/app/support.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -166,7 +166,7 @@ const routeTree = rootLayout.addChildren([
 ])
 
 export type ValidRoutes = ParseRoute<typeof routeTree>['fullPath']
-export type ValidParams = NavigateOptions<typeof routeTree>["params"]
+// export type ValidParams = NavigateOptions<typeof routeTree>["params"]
 
 
 export const router = createRouter({
