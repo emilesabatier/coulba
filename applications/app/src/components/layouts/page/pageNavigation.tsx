@@ -42,7 +42,7 @@ export function PageNavigation(props: PageNavigation) {
                     <Link to="/profil">
                         <ButtonMenuContent
                             icon={<IconSettings />}
-                            text="Profil & paramètres"
+                            text="Paramètres & sécurité"
                         />
                     </Link>
                     <a href="https://documentation.coulba.fr" target="_blank" rel="noopener noreferrer" className="cursor-pointer">

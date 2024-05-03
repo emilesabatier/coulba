@@ -28,15 +28,12 @@ export function Header() {
         </Fragment>
     )
     return (
-        <div className="w-full bg-background border-b border-neutral/20 p-4 flex justify-center items-center">
+        <div className="w-full p-4 flex justify-center items-center">
             <nav className="w-full max-w-[1280px] flex justify-between items-center gap-4 overflow-hidden">
                 <div className="relative w-fit flex justify-start items-center gap-2">
                     <Link to="/" className="w-fit flex justify-center items-center">
                         <Logo />
                     </Link>
-                    <div className="absolute top-0 right-0 rounded-sm bg-neutral/10 h-fit w-fit flex justify-center items-center p-1.5">
-                        <span className="text-xs leading-none">beta</span>
-                    </div>
                 </div>
                 {
                     isMobile ? (

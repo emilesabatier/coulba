@@ -11,8 +11,8 @@ export function HeroHeader() {
         <div className="w-full h-full flex flex-col justify-start items-center gap-8 py-16">
             <div className="flex flex-col justify-start items-center gap-4">
                 <div className="inline-flex flex-col justify-start items-center gap-2 max-w-[768px]">
-                    <h1 className="leading-none text-[48px] text-center font-bold uppercase">
-                        Reprenez la main sur votre comptabilité
+                    <h1 className="leading-none text-[48px] text-center font-bold uppercase text-balance">
+                        Reprendre la main sur sa comptabilité
                     </h1>
                     <p className="text-lg text-neutral/75 text-balance text-center">
                         La plupart des entrepreneurs individuels ou des très petites entreprises n'ont pas besoin de comptable, ni d'une application trop complexe.

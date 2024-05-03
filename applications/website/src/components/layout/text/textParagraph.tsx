@@ -11,7 +11,7 @@ export function TextParagraph(props: TextParagraph) {
     return (
         <p
             className={cn(
-                "p-2",
+                "py-2",
                 props.className
             )}
             children={props.children}

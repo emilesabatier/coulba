@@ -34,12 +34,8 @@
     @apply no-underline;
   }
 
-  #__next {
-    @apply isolate relative;
-  }
-
   html {
-    @apply bg-background;
+    @apply bg-white;
   }
 
   #__next {
