@@ -9,15 +9,7 @@ export const authLayout = createRoute({
     pendingComponent: () => <CircularLoader />,
     beforeLoad: async ({ context }) => {
         if (!context.session.isSignedIn) {
-            throw redirect({
-                to: '/connexion',
-                search: {
-                    // Use the current location to power a redirect after login
-                    // (Do not use `router.state.resolvedLocation` as it can
-                    // potentially lag behind the actual current location)
-                    redirect: location.href,
-                },
-            })
+            throw redirect({ to: '/connexion' })
         }
     },
     component: () => <Outlet />

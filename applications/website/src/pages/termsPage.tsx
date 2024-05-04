@@ -8,13 +8,13 @@ import { TextSection } from "../components/layout/text/textSection"
 
 export function TermsPage() {
 
-    useEffect(() => { document.title = "Conditions d'utilisation | MonAssoSportive" }, [])
+    useEffect(() => { document.title = "Conditions d'utilisation | Coulba" }, [])
 
     return (
         <Main.Root>
             <Main.Header
                 title="Conditions Générales d'Utilisation et de Vente (CGUV)"
-                description="Dernière version le 13/03/2024."
+                description="Dernière version le 04/05/2024."
             />
             <Main.Content>
                 <Text.Root>
@@ -219,7 +219,7 @@ export function TermsPage() {
                             </Text.SubTitle>
                             <Text.Paragraph>
                                 Les Services ont pour finalité de permettre au Client :
-                                d’utiliser le logiciel MonAssoSportive ;
+                                d’utiliser le logiciel Coulba ;
                                 de publier et de mettre à jour des informations sur ce logiciel ;
                                 de gérer ses interactions avec ses Contacts ;
                                 d'enregistrer des transactions comptables et de générer des documents liés à la comptabilité (facture, justificatifs de dons…) ;
@@ -617,7 +617,7 @@ export function TermsPage() {
                         <Text.Paragraph>
                             L'utilisation des Services offerts par la Société est optimisée pour une compatibilité minimale avec la dernière version des navigateurs suivants : Firefox, Edge (anciennement connu sous le nom d'Internet Explorer), Safari et Google Chrome. Il est essentiel pour les utilisateurs de ces Services de veiller à ce que leur navigateur soit mis à jour à la version la plus récente pour garantir une expérience optimale.
 
-                            La Société n'assurera pas la compatibilité de ses services, notamment le logiciel "MonAssoSportive", avec les versions obsolètes ou non mises à jour des navigateurs. Par conséquent, il est recommandé aux utilisateurs de maintenir à jour leur navigateur afin de bénéficier des fonctionnalités et des performances optimales des Services fournis par la Société.
+                            La Société n'assurera pas la compatibilité de ses services, notamment le logiciel "Coulba", avec les versions obsolètes ou non mises à jour des navigateurs. Par conséquent, il est recommandé aux utilisateurs de maintenir à jour leur navigateur afin de bénéficier des fonctionnalités et des performances optimales des Services fournis par la Société.
                         </Text.Paragraph>
                     </Text.Section>
                 </Text.Root>

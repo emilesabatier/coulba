@@ -7,13 +7,13 @@ import { Text } from "../components/layout/text/text"
 
 export function LegalPage() {
 
-    useEffect(() => { document.title = "Mentions légales | MonAssoSportive" }, [])
+    useEffect(() => { document.title = "Mentions légales | Coulba" }, [])
 
     return (
         <Main.Root>
             <Main.Header
                 title="Mentions légales"
-                description="Dernière version le 13/03/2024."
+                description="Dernière version le 04/05/2024."
             />
             <Main.Content>
                 <Text.Root>
@@ -81,7 +81,7 @@ export function LegalPage() {
                             <br />
                             Nous collectons des données d'utilisation de l'application disponible à l'adresse <Text.Link href="https://espace.coulba.fr">espace.coulba.fr</Text.Link> à des fins d'amélioration des services et de sécurité. Ces données sont strictement réservées à un usage interne et ne seront en aucun cas partagées ou vendues à des tiers.
                             <br /><br />
-                            Les données bancaires sont stockées chez notre partenaire français <b>Stancer</b> agréée par l'ACPR en qualité d'établissement de paiement sous le numéro d'agrément (CIB) : 11758. Vous pouvez retrouver plus d'informations sur leur site <Text.Link href="https://www.stancer.com/fr/">www.stancer.com</Text.Link>.
+                            {/* Les données bancaires sont stockées chez notre partenaire français <b>Stancer</b> agréée par l'ACPR en qualité d'établissement de paiement sous le numéro d'agrément (CIB) : 11758. Vous pouvez retrouver plus d'informations sur leur site <Text.Link href="https://www.stancer.com/fr/">www.stancer.com</Text.Link>. */}
                         </Text.Paragraph>
                     </Text.Section>
                 </Text.Root>
