@@ -44,8 +44,9 @@ function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], ba
                 balance
                     .filter((_balance) => _balance.account.idSheet === sheet.id)
                     .forEach((_balance) => {
-                        gross += _balance.balance.debit
-                        allowance += (_balance.balance.debit > 0) ? _balance.balance.credit : 0
+                        if (!_balance.account.flow) return
+                        gross += (!_balance.account.isAllowance) ? ((_balance.account.flow === "credit") ? _balance.balance.credit : _balance.balance.debit) : 0
+                        allowance += (_balance.account.isAllowance) ? ((_balance.account.flow === "credit") ? _balance.balance.credit : _balance.balance.debit) : 0
                     })
             } else {
                 childrenSheets.forEach((childSheet) => {
@@ -80,7 +81,8 @@ function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[
                 balance
                     .filter((_balance) => _balance.account.idSheet === sheet.id)
                     .forEach((_balance) => {
-                        net += _balance.balance.credit
+                        if (!_balance.account.flow) return
+                        net += (_balance.account.flow === "debit") ? _balance.balance.debit : _balance.balance.credit
                     })
             } else {
                 childrenSheets.forEach((childSheet) => {

@@ -1057,7 +1057,6 @@ export const defaultSheets: DefaultSheet[] = [
                     512,
                     514,
                     517,
-                    5186,
                     519,
                     5191,
                     5193,
@@ -1220,7 +1219,6 @@ export const defaultSheets: DefaultSheet[] = [
                     464,
                     467,
                     4686,
-                    4787,
                     47871,
                     47872,
                     509

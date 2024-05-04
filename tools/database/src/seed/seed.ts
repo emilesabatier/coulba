@@ -68,12 +68,15 @@ function flatAccounts(newSheets: (typeof sheets.$inferInsert & { accounts: numbe
         const sheet = newSheets.find((_sheet) => _sheet.accounts.includes(_account.number))
         const statement = newStatements.find((_statement) => _statement.accounts.includes(_account.number))
 
+        if (!sheet && _account.accounts.length === 0) console.log(_account.number)
         return ([
             {
                 id: id,
                 idCompany: idCompany,
                 idYear: idYear,
                 idSheet: sheet?.id,
+                flow: _account.flow,
+                isAllowance: _account.isAllowance,
                 idStatement: statement?.id,
                 idAccountParent: idAccountParent,
                 number: _account.number,

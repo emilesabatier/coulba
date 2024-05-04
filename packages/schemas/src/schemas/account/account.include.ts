@@ -4,6 +4,8 @@ export const accountInclude = {
     idCompany: true,
     idYear: true,
     idSheet: true,
+    flow: true,
+    isAllowance: true,
     idStatement: true,
     idAccountParent: true,
     label: true,

@@ -3,8 +3,10 @@
 export type DefaultAccount = {
     number: number
     label: string
-    accounts: DefaultAccount[]
     system: "base" | "condensed" | "developed"
+    flow?: "debit" | "credit"
+    isAllowance?: boolean
+    accounts: DefaultAccount[]
 }
 
 export const defaultAccounts: DefaultAccount[] = [
@@ -22,17 +24,20 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 101,
                         label: "Capital",
                         system: "condensed",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1011,
                                 label: "Capital souscrit - non appelé",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1012,
                                 label: "Capital souscrit - appelé, non versé",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
@@ -44,12 +49,14 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 10131,
                                         label: "Capital non amorti",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 10132,
                                         label: "Capital amorti",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -58,6 +65,7 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1018,
                                 label: "Capital souscrit soumis à des réglementations particulières",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -66,41 +74,49 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 102,
                         label: "Fonds fiduciaires",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 104,
                         label: "Primes liées au capital social",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1041,
                                 label: "Primes d'émission",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1042,
                                 label: "Primes de fusion",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1043,
                                 label: "Primes d'apport",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1044,
                                 label: "Primes de conversion d'obligations en actions",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1045,
                                 label: "Bons de souscription d'actions",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -109,41 +125,48 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 105,
                         label: "Écarts de réévaluation",
                         system: "condensed",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1051,
                                 label: "Réserve spéciale de réévaluation",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1052,
                                 label: "Écart de réévaluation libre",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1053,
                                 label: "Réserve de réévaluation",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1055,
                                 label: "Écarts de réévaluation (autres opérations légales)",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1057,
                                 label: "Autres écarts de réévaluation en France",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1058,
                                 label: "Autres écarts de réévaluation à l'étranger",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -157,17 +180,20 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1061,
                                 label: "Réserve légale",
                                 system: "condensed",
+                                flow: "credit",
                                 accounts: [
                                     {
                                         number: 10611,
                                         label: "Réserve légale proprement dite",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 10612,
                                         label: "Plus-values nettes à long terme",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -176,35 +202,41 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1062,
                                 label: "Réserves indisponibles",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1063,
                                 label: "Réserves statutaires ou contractuelles",
                                 system: "condensed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1064,
                                 label: "Réserves réglementées",
                                 system: "condensed",
+                                flow: "credit",
                                 accounts: [
                                     {
                                         number: 10641,
                                         label: "Plus-values nettes à long terme",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 10643,
                                         label: "Réserves consécutives à l'octroi de subventions d'investissement",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 10648,
                                         label: "Autres réserves réglementées",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -213,17 +245,20 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1068,
                                 label: "Autres réserves",
                                 system: "condensed",
+                                flow: "credit",
                                 accounts: [
                                     {
                                         number: 10681,
                                         label: "Réserve de propre assureur",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 10688,
                                         label: "Réserves diverses",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -234,18 +269,22 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 107,
                         label: "Écart d'équivalence",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 108,
                         label: "Compte de l'exploitant",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 109,
                         label: "Actionnaires : Capital souscrit - non appelé",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -254,17 +293,20 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 11,
                 label: "Report à nouveau (solde créditeur ou débiteur)",
                 system: "base",
+                flow: "credit",
                 accounts: [
                     {
                         number: 110,
                         label: "Report à nouveau (solde créditeur)",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 119,
                         label: "Report à nouveau (solde débiteur)",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -273,17 +315,20 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 12,
                 label: "Résultat de l'exercice (bénéfice ou perte)",
                 system: "condensed",
+                flow: "credit",
                 accounts: [
                     {
                         number: 120,
                         label: "Résultat de l'exercice (bénéfice)",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 129,
                         label: "Résultat de l'exercice (perte)",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -297,53 +342,62 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 131,
                         label: "Subventions d'équipement",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1311,
                                 label: "État",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1312,
                                 label: "Régions",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1313,
                                 label: "Départements",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1314,
                                 label: "Communes",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1315,
                                 label: "Collectivités publiques",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1316,
                                 label: "Entreprises publiques",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1317,
                                 label: "Entreprises et organismes privés",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1318,
                                 label: "Autres",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -352,6 +406,7 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 138,
                         label: "Autres subventions d'investissement (même ventilation que celle du compte 131)",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
@@ -363,53 +418,62 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1391,
                                 label: "Subventions d'équipement",
                                 system: "base",
+                                flow: "credit",
                                 accounts: [
                                     {
                                         number: 13911,
                                         label: "État",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13912,
                                         label: "Régions",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13913,
                                         label: "Départements",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13914,
                                         label: "Communes",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13915,
                                         label: "Collectivités publiques",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13916,
                                         label: "Entreprises publiques",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13917,
                                         label: "Entreprises et organismes privés",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 13918,
                                         label: "Autres",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -418,6 +482,7 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1398,
                                 label: "Autres subventions d'investissement (même ventilation que celle du compte 1391)",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -433,17 +498,20 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 142,
                         label: "Provisions réglementées relatives aux immobilisations",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1423,
                                 label: "Provisions pour reconstitution des gisements miniers et pétroliers",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1424,
                                 label: "Provisions pour investissement (participation des salariés)",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -452,17 +520,20 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 143,
                         label: "Provisions réglementées relatives aux stocks",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1431,
                                 label: "Hausse des prix",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1432,
                                 label: "Fluctuation des cours",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -471,30 +542,35 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 144,
                         label: "Provisions réglementées relatives aux autres éléments de l'actif",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 145,
                         label: "Amortissements dérogatoires",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 146,
                         label: "Provision spéciale de réévaluation",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 147,
                         label: "Plus-values réinvesties",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 148,
                         label: "Autres provisions réglementées",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -508,47 +584,55 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 151,
                         label: "Provisions pour risques",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1511,
                                 label: "Provisions pour litiges",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1512,
                                 label: "Provisions pour garanties données aux clients",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1513,
                                 label: "Provisions pour pertes sur marchés à terme",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1514,
                                 label: "Provisions pour amendes et pénalités",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1515,
                                 label: "Provisions pour pertes de change",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1516,
                                 label: "Provisions pour pertes sur contrats",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1518,
                                 label: "Autres provisions pour risques",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -557,35 +641,41 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 153,
                         label: "Provisions pour pensions et obligations similaires",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 154,
                         label: "Provisions pour restructurations",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 155,
                         label: "Provisions pour impôts",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 156,
                         label: "Provisions pour renouvellement des immobilisations (entreprises concessionnaires)",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 157,
                         label: "Provisions pour charges à répartir sur plusieurs exercices",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1572,
                                 label: "Provisions pour gros entretien ou grandes révisions",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -594,11 +684,13 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 158,
                         label: "Autres provisions pour charges",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1581,
                                 label: "Provisions pour remises en état",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -609,46 +701,55 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 16,
                 label: "Emprunts et dettes assimilées",
                 system: "condensed",
+                flow: "credit",
                 accounts: [
                     {
                         number: 161,
                         label: "Emprunts obligataires convertibles",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 162,
                         label: "Obligations représentatives de passifs nets remis en fiducie",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 163,
                         label: "Autres emprunts obligataires",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 164,
                         label: "Émprunts auprès des établissements de crédit",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 165,
                         label: "Dépôts et cautionnements reçus",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1651,
                                 label: "Dépôts",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1655,
                                 label: "Cautionnements",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -662,12 +763,14 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1661,
                                 label: "Comptes bloqués",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1662,
                                 label: "Fonds de participation",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -681,18 +784,21 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 1671,
                                 label: "Émissions de titres participatifs",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1674,
                                 label: "Avances conditionnées de l'État",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1675,
                                 label: "Emprunts participatifs",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -701,23 +807,27 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 168,
                         label: "Autres emprunts et dettes assimilées",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1681,
                                 label: "Autres emprunts",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1685,
                                 label: "Rentes viagères capitalisées",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1687,
                                 label: "Autres dettes",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
@@ -729,42 +839,49 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 16881,
                                         label: "Sur emprunts obligataires convertibles",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 16883,
                                         label: "Sur autres emprunts obligataires",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 16884,
                                         label: "Sur emprunts auprès des établissements de crédit",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 16885,
                                         label: "Sur dépôts et cautionnements reçus",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 16886,
                                         label: "Sur participation des salariés aux résultats",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 16887,
                                         label: "Sur emprunts et dettes assortis de conditions particulières",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 16888,
                                         label: "Sur autres emprunts et dettes assimilées",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -775,6 +892,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 169,
                         label: "Primes de remboursement des obligations",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -788,29 +907,34 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 171,
                         label: "Dettes rattachées à des participations (groupe)",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 174,
                         label: "Dettes rattachées à des participations (hors groupe)",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 178,
                         label: "Dettes rattachées à des sociétés en participation",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 1781,
                                 label: "Principal",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 1788,
                                 label: "Intérêts courus",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -821,29 +945,34 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 18,
                 label: "Comptes de liaison des établissements et sociétés en participation",
                 system: "base",
+                flow: "credit",
                 accounts: [
                     {
                         number: 181,
                         label: "Comptes de liaison des établissements",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 186,
                         label: "Biens et prestations de services échangés entre établissements (charges)",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 187,
                         label: "Biens et prestations de services échangés entre établissements (produits)",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 188,
                         label: "Comptes de liaison des sociétés en participation",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -869,6 +998,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2011,
                                 label: "Frais de constitution",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -880,12 +1011,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 20121,
                                         label: "Frais de prospection",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 20122,
                                         label: "Frais de publicité",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -894,6 +1029,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2013,
                                 label: "Frais d'augmentation de capital et d'opérations diverses (fusions, scissions, transformations)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -902,24 +1039,32 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 203,
                         label: "Frais de recherche et de développement",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 205,
                         label: "Concessions et droits similaires, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 206,
                         label: "Droit au bail",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 207,
                         label: "Fonds commercial",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -931,6 +1076,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2081,
                                 label: "Mali de fusion sur actifs incorporels",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -951,24 +1098,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2111,
                                 label: "Terrains nus",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2112,
                                 label: "Terrains aménagés",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2113,
                                 label: "Sous-sols et sursols",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2114,
                                 label: "Terrains de de carrières (tréfonds)",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -980,12 +1135,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 21151,
                                         label: "Ensembles immobiliers industriels (A, B, ...)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21155,
                                         label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
@@ -997,12 +1156,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                                 number: 211581,
                                                 label: "affectés aux opérations professionnelles (A, B, ...)",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             },
                                             {
                                                 number: 211588,
                                                 label: "affectés aux opérations non professionnelles (A, B, ...)",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             }
                                         ]
@@ -1013,6 +1176,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2116,
                                 label: "Compte d'ordre sur immobilisations",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1021,6 +1186,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 212,
                         label: "Agencements et aménagements de terrains (même ventilation que celle du compte 211)",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -1037,12 +1204,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 21311,
                                         label: "Ensembles immobiliers industriels (A, B, ...)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21315,
                                         label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
@@ -1054,12 +1225,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                                 number: 213181,
                                                 label: "affectés aux opérations professionnelles (A, B, ...)",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             },
                                             {
                                                 number: 213188,
                                                 label: "affectés aux opérations non professionnelles (A, B, ...)",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             }
                                         ]
@@ -1075,12 +1250,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 21351,
                                         label: "Ensembles immobiliers industriels (A, B, ...)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21355,
                                         label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
@@ -1092,12 +1271,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                                 number: 213581,
                                                 label: "affectés aux opérations professionnelles (A, B)",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             },
                                             {
                                                 number: 213588,
                                                 label: "affectés aux opérations non professionnelles (A, B)",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             }
                                         ]
@@ -1113,30 +1296,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 21381,
                                         label: "Voies de terre",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21382,
                                         label: "Voies de fer",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21383,
                                         label: "Voies d'eau",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21384,
                                         label: "Barrages",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21385,
                                         label: "Pistes d'aérodromes",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -1147,6 +1340,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 214,
                         label: "Constructions sur sol d'autrui (même ventilation que celle du compte 213)",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -1163,12 +1358,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 21511,
                                         label: "sur sol propre",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21514,
                                         label: "sur sol d'autrui",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -1182,12 +1381,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 21531,
                                         label: "sur sol propre",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 21534,
                                         label: "sur sol d'autrui",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -1196,18 +1399,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2154,
                                 label: "Matériel industriel",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2155,
                                 label: "Outillage industriel",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2157,
                                 label: "Agencements et aménagements du matériel et outillage industriels",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1221,42 +1430,56 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2181,
                                 label: "Installations générales, agencements, aménagements divers",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2182,
                                 label: "Matériel de transport",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2183,
                                 label: "Matériel de bureau et matériel informatique",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2184,
                                 label: "Mobilier",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2185,
                                 label: "Cheptel",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2186,
                                 label: "Emballages récupérables",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2187,
                                 label: "Mali de fusions sur actifs corporels",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1267,6 +1490,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 22,
                 label: "Immobilisations mises en concession",
                 system: "base",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -1283,24 +1508,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2312,
                                 label: "Terrains",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2313,
                                 label: "Constructions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2315,
                                 label: "Installations techniques, matériel et outillage industriels",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2318,
                                 label: "Autres immobilisations corporelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1309,12 +1542,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 232,
                         label: "Immobilisations incorporelles en cours",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 237,
                         label: "Avances et acomptes versés sur immobilisations incorporelles",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -1326,24 +1563,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2382,
                                 label: "Terrains",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2383,
                                 label: "Constructions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2385,
                                 label: "Installations techniques, matériel et outillage industriels",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2388,
                                 label: "Autres immobilisations corporelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1354,6 +1599,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 25,
                 label: "Parts dans des entreprises liées et créances sur des entreprises liées",
                 system: "base",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -1370,12 +1617,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2611,
                                 label: "Actions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2618,
                                 label: "Autres titres",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1389,6 +1640,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2661,
                                 label: "Droits représentatifs d'actifs nets remis en fiducie",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1402,36 +1655,48 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2671,
                                 label: "Créances rattachées à des participations (groupe)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2674,
                                 label: "Créances rattachées à des participations (hors groupe)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2675,
                                 label: "Versements représentatifs d'apports non capitalisés (appel de fonds)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2676,
                                 label: "Avances consolidables",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2677,
                                 label: "Autres créances rattachées à des participations",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2678,
                                 label: "Intérêts courus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1445,12 +1710,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2681,
                                 label: "Principal",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2688,
                                 label: "Intérêts courus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1459,6 +1728,7 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 269,
                         label: "Versements restant à effectuer sur titres de participation non libérés",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -1477,12 +1747,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2711,
                                 label: "Actions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2718,
                                 label: "Autres titres",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1496,12 +1770,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2721,
                                 label: "Obligations",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2722,
                                 label: "Bons",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1510,6 +1788,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 273,
                         label: "Titres immobilisés de l'activité de portefeuille",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -1521,24 +1801,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2741,
                                 label: "Prêts participatifs",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2742,
                                 label: "Prêts aux associés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2743,
                                 label: "Prêts au personnel",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2748,
                                 label: "Autres prêts",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1552,12 +1840,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2751,
                                 label: "Dépôts",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2755,
                                 label: "Cautionnements",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1571,6 +1863,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2761,
                                 label: "Créances diverses",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -1582,24 +1876,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 27682,
                                         label: "sur titres immobilisés (droit de créance)",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 27684,
                                         label: "sur prêts",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 27685,
                                         label: "sur dépôts et cautionnements",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 27688,
                                         label: "sur créances diverses",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -1615,12 +1917,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2771,
                                 label: "Actions propres ou parts propres",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2772,
                                 label: "Actions propres ou parts propres en voie d'annulation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1629,12 +1935,15 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 278,
                         label: "Mali de fusion sur actifs financiers",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 279,
                         label: "Versements restant à effectuer sur titres immobilisés non libérés",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -1653,24 +1962,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2801,
                                 label: "Frais d'établissement (même ventilation que celle du compte 201)",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2803,
                                 label: "Frais de recherche et de développement",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2805,
                                 label: "Concessions et droits similaires, brevets, licences, logiciels, droits et valeurs similaires",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 2807,
                                 label: "Fonds commercial",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -1682,6 +1999,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 28081,
                                         label: "Amortissements du mali de fusion sur actifs incorporels",
                                         system: "base",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -1697,24 +2016,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2812,
                                 label: "Agencements, aménagements de terrains (même ventilation que celle du compte 212)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2813,
                                 label: "Constructions (même ventilation que celle du compte 213)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2814,
                                 label: "Constructions sur sol d'autrui (même ventilation que celle du compte 214)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2815,
                                 label: "Installations, matériel et outillage industriels (même ventilation que celle du compte 215)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
@@ -1726,12 +2053,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 28183,
                                         label: "Amortissements du matériel de bureau et du matériel informatique",
                                         system: "developed",
+                                        flow: "credit",
+                                        isAllowance: true,
                                         accounts: []
                                     },
                                     {
                                         number: 28187,
                                         label: "Amortissement du mali de fusion sur actifs corporels",
                                         system: "base",
+                                        flow: "credit",
+                                        isAllowance: true,
                                         accounts: []
                                     }
                                 ]
@@ -1742,6 +2073,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 282,
                         label: "Amortissements des immobilisations mises en concession",
                         system: "base",
+                        flow: "credit",
+                        isAllowance: true,
                         accounts: []
                     }
                 ]
@@ -1760,18 +2093,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2905,
                                 label: "Marques, procédés, droits et valeurs similaires",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2906,
                                 label: "Droit au bail",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2907,
                                 label: "Fonds commercial",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
@@ -1783,6 +2122,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 29081,
                                         label: "Dépréciation du mali de fusion sur actifs incorporels",
                                         system: "base",
+                                        flow: "credit",
+                                        isAllowance: true,
                                         accounts: []
                                     }
                                 ]
@@ -1798,6 +2139,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 29187,
                                 label: "Dépréciation du mali de fusion sur actifs corporels",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -1806,6 +2149,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 292,
                         label: "Dépréciations des immobilisations mises en concession",
                         system: "base",
+                        flow: "credit",
+                        isAllowance: true,
                         accounts: []
                     },
                     {
@@ -1817,12 +2162,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2931,
                                 label: "Immobilisations corporelles en cours",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2932,
                                 label: "Immobilisations incorporelles en cours",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -1836,24 +2185,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2961,
                                 label: "Titres de participation",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2966,
                                 label: "Autres formes de participation",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2967,
                                 label: "Créances rattachées à des participations (même ventilation que celle du compte 267)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2968,
                                 label: "Créances rattachées à des sociétés en participation (même ventilation que celle du compte 268)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -1867,36 +2224,48 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 2971,
                                 label: "Titres immobilisés autres que les titres immobilisés de l'activité de portefeuille, droit de propriété (même ventilation que celle du compte 271)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2972,
                                 label: "Droit de créance (même ventilation que celle du compte 272)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2973,
                                 label: "Titres immobilisés de l'activité de portefeuille",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2974,
                                 label: "Prêts (même ventilation que celle du compte 274)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2975,
                                 label: "Dépôts et cautionnements versés (même ventilation que celle du compte 275)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 2976,
                                 label: "Autres créances immobilisées (même ventilation que celle du compte 276)",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
@@ -1908,6 +2277,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 29787,
                                         label: "Dépréciation du mali de fusion sur actifs financiers",
                                         system: "base",
+                                        flow: "credit",
+                                        isAllowance: true,
                                         accounts: []
                                     }
                                 ]
@@ -1932,18 +2303,24 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 311,
                         label: "Matières (ou groupe) A",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 312,
                         label: "Matières (ou groupe) B",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 317,
                         label: "Fournitures A, B, C, ...",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -1962,12 +2339,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3211,
                                 label: "Matières (ou groupe) C",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3212,
                                 label: "Matières (ou groupe) D",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -1981,30 +2362,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3221,
                                 label: "Combustibles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3222,
                                 label: "Produits d'entretien",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3223,
                                 label: "Fournitures d'atelier et d'usine",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3224,
                                 label: "Fournitures de magasin",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3225,
                                 label: "Fournitures de bureau",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2018,18 +2409,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3261,
                                 label: "Emballages perdus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3265,
                                 label: "Emballages récupérables non identifiables",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3267,
                                 label: "Emballages à usage mixte",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2050,12 +2447,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3311,
                                 label: "Produits en cours P1",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3312,
                                 label: "Produits en cours P2",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2069,12 +2470,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3351,
                                 label: "Travaux en cours T1",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3352,
                                 label: "Travaux en cours T2",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2095,12 +2500,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3411,
                                 label: "Études en cours E1",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3412,
                                 label: "Études en cours E2",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2114,12 +2523,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3451,
                                 label: "Prestations de services S1",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3452,
                                 label: "Prestations de services S2",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2140,12 +2553,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3511,
                                 label: "Produits intermédiaires (ou groupe) A",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3512,
                                 label: "Produits intermédiaires (ou groupe) B",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2159,12 +2576,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3551,
                                 label: "Produits finis (ou groupe) A",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3552,
                                 label: "Produits finis (ou groupe) B",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2178,18 +2599,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3581,
                                 label: "Déchets",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3585,
                                 label: "Rebuts",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 3586,
                                 label: "Matières de récupération",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2200,6 +2627,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 36,
                 label: "Stocks provenant d'immobilisations",
                 system: "base",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -2211,12 +2640,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 371,
                         label: "Marchandises (ou groupe) A",
                         system: "developed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 372,
                         label: "Marchandises (ou groupe) B",
                         system: "developed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -2225,6 +2658,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 38,
                 label: "Stocks en voie d'acheminement, mis en dépôt ou donnés en consignation",
                 system: "base",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -2241,18 +2676,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3911,
                                 label: "Matières (ou groupe) A",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3912,
                                 label: "Matières (ou groupe) B",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3917,
                                 label: "Fournitures A, B, C, ...",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -2266,18 +2707,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3921,
                                 label: "Matières consommables (même ventilation que celle du compte 321)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3922,
                                 label: "Fournitures consommables (même ventilation que celle du compte 322)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3926,
                                 label: "Emballages (même ventilation que celle du compte 326)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -2291,12 +2738,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3931,
                                 label: "Produits en cours (même ventilation que celle du compte 331)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3935,
                                 label: "Travaux en cours (même ventilation que celle du compte 335)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -2310,12 +2761,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3941,
                                 label: "Études en cours (même ventilation que celle du compte 341)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3945,
                                 label: "Prestations de services en cours (même ventilation que celle du compte 345)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -2329,12 +2784,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3951,
                                 label: "Produits intermédiaires (même ventilation que celle du compte 351)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3955,
                                 label: "Produits finis (même ventilation que celle du compte 355)",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -2348,12 +2807,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 3971,
                                 label: "Marchandise (ou groupe) A",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 3972,
                                 label: "Marchandise (ou groupe) B",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -2376,23 +2839,28 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 400,
                         label: "Fournisseurs et comptes rattachés",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 401,
                         label: "Fournisseurs",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4011,
                                 label: "Fournisseurs - Achats de biens et prestations de services",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4017,
                                 label: "Fournisseurs - Retenues de garantie",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2401,23 +2869,27 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 403,
                         label: "Fournisseurs - Effets à payer",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 404,
                         label: "Fournisseurs d'immobilisations",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4041,
                                 label: "Fournisseurs - Achats d'immobilisations",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4047,
                                 label: "Fournisseurs d'immobilisations - Retenues de garantie",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2426,29 +2898,34 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 405,
                         label: "Fournisseurs d'immobilisations - Effets à payer",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 408,
                         label: "Fournisseurs - Factures non parvenues",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4081,
                                 label: "Fournisseurs",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4084,
                                 label: "Fournisseurs d'immobilisations",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4088,
                                 label: "Fournisseurs - Intérêts courus",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2462,12 +2939,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4091,
                                 label: "Fournisseurs - Avances et acomptes versés sur commandes",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4096,
                                 label: "Fournisseurs - Créances pour emballages et matériel à rendre",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -2479,12 +2960,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 40971,
                                         label: "Fournisseurs d'exploitation",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 40974,
                                         label: "Fournisseurs d'immobilisations",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -2493,6 +2978,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4098,
                                 label: "Rabais, remises, ristournes à obtenir et autres avoirs non encore reçus",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2508,6 +2995,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 410,
                         label: "Clients et comptes rattachés",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -2519,12 +3008,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4111,
                                 label: "Clients - Ventes de biens ou de prestations de services",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4117,
                                 label: "Clients - Retenues de garantie",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2533,12 +3026,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 413,
                         label: "Clients - Effets à recevoir",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 416,
                         label: "Clients douteux ou litigieux",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -2550,12 +3047,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4181,
                                 label: "Clients - Factures à établir",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4188,
                                 label: "Clients - Intérêts courus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2564,29 +3065,34 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 419,
                         label: "Clients créditeurs",
                         system: "condensed",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4191,
                                 label: "Clients - Avances et acomptes reçus sur commandes",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4196,
                                 label: "Clients - Dettes sur emballages et matériels consignés",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4197,
                                 label: "Clients - Autres avoirs",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4198,
                                 label: "Rabais, remises, ristournes à accorder et autres avoirs à établir",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2602,29 +3108,34 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 421,
                         label: "Personnel - Rémunérations dues",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 422,
                         label: "Comités d'entreprises, d'établissement, ...",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 424,
                         label: "Participation des salariés aux résultats",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4246,
                                 label: "Réserve spéciale",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4248,
                                 label: "Comptes courants",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2633,47 +3144,57 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 425,
                         label: "Personnel - Avances et acomptes",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 426,
                         label: "Personnel - Dépôts",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 427,
                         label: "Personnel - Oppositions",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 428,
                         label: "Personnel - Charges à payer et produits à recevoir",
                         system: "condensed",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4282,
                                 label: "Dettes provisionnées pour congés à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4284,
                                 label: "Dettes provisionnées pour participation des salariés aux résultats",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4286,
                                 label: "Autres charges à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4287,
                                 label: "Produits à recevoir",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2684,40 +3205,47 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 43,
                 label: "Sécurité sociale et autres organismes sociaux",
                 system: "condensed",
+                flow: "credit",
                 accounts: [
                     {
                         number: 431,
                         label: "Sécurité sociale",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 437,
                         label: "Autres organismes sociaux",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 438,
                         label: "Organismes sociaux - Charges à payer et produits à recevoir",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4382,
                                 label: "Charges sociales sur congés à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4386,
                                 label: "Autres charges à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4387,
                                 label: "Produits à recevoir",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2738,24 +3266,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4411,
                                 label: "Subventions d'investissement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4417,
                                 label: "Subventions d'exploitation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4418,
                                 label: "Subventions d'équilibre",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4419,
                                 label: "Avances sur subventions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -2769,30 +3305,35 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4421,
                                 label: "Prélèvements à la source (Impôt sur le revenu)",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4422,
                                 label: "Prélèvements forfaitaires non libératoires",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4423,
                                 label: "Retenues et prélèvements sur les distributions",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4424,
                                 label: "Obligataires",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4425,
                                 label: "Associés",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2806,12 +3347,14 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4431,
                                 label: "Créances sur l'État résultant de la suppression de la règle du décalage d'un mois en matière de TVA",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4438,
                                 label: "Intérêts courus sur créances figurant au 4431",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -2820,40 +3363,47 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 444,
                         label: "État - Impôts sur les bénéfices",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 445,
                         label: "État - Taxes sur le chiffre d'affaires",
                         system: "condensed",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4452,
                                 label: "TVA due intracommunautaire",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4453,
                                 label: "TVA due extracommunautaire",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4455,
                                 label: "Taxes sur le chiffre d'affaires à décaisser",
                                 system: "base",
+                                flow: "credit",
                                 accounts: [
                                     {
                                         number: 44551,
                                         label: "TVA à décaisser",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 44558,
                                         label: "Taxes assimilées à la TVA",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -2867,12 +3417,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 44562,
                                         label: "TVA sur immobilisations",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 44563,
                                         label: "TVA transférée par d'autres entreprises",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
@@ -2884,12 +3438,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                                 number: 445662,
                                                 label: "TVA déductible intracommunautaire",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             },
                                             {
                                                 number: 445663,
                                                 label: "TVA déductible extracommunautaire",
                                                 system: "developed",
+                                                flow: "debit",
+                                                isAllowance: false,
                                                 accounts: []
                                             }
                                         ]
@@ -2898,12 +3456,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 44567,
                                         label: "Crédit de TVA à reporter",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 44568,
                                         label: "Taxes assimilées à la TVA",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -2912,17 +3474,20 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4457,
                                 label: "Taxes sur le chiffre d'affaires collectées par l'entreprise",
                                 system: "base",
+                                flow: "credit",
                                 accounts: [
                                     {
                                         number: 44571,
                                         label: "TVA collectée",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 44578,
                                         label: "Taxes assimilées à la TVA",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -2936,36 +3501,46 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 44581,
                                         label: "Acomptes - Régime simplifié d'imposition",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 44582,
                                         label: "Acomptes - Régime de forfait",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 44583,
                                         label: "Remboursement de taxes sur le chiffre d'affaires demandé",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 44584,
                                         label: "TVA récupérée d'avance",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 44586,
                                         label: "Taxes sur le chiffre d'affaires sur factures non parvenues",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 44587,
                                         label: "Taxes sur le chiffre d'affaires sur factures à établir",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -2976,12 +3551,14 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 446,
                         label: "Obligations cautionnées",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 447,
                         label: "Autres impôts, taxes et versements assimilés",
                         system: "condensed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
@@ -2993,18 +3570,22 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4482,
                                 label: "Charges fiscales sur congés à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4486,
                                 label: "Charges à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4487,
                                 label: "Produits à recevoir",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3013,6 +3594,7 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 449,
                         label: "Quotas d'émission à acquérir",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -3026,6 +3608,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 451,
                         label: "Groupe",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -3037,12 +3621,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4551,
                                 label: "Principal",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4558,
                                 label: "Intérêts courus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3061,12 +3649,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 45611,
                                         label: "Apports en nature",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 45615,
                                         label: "Apports en numéraire",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -3080,12 +3672,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 45621,
                                         label: "Actionnaires - Capital souscrit et appelé, non versé",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 45625,
                                         label: "Associés - Capital appelé, non versé",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -3094,24 +3690,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4563,
                                 label: "Associés - Versements reçus sur augmentation de capital",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4564,
                                 label: "Associés - Versements anticipés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4566,
                                 label: "Actionnaires défaillants",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4567,
                                 label: "Associés - Capital à rembourser",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3120,6 +3724,7 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 457,
                         label: "Associés - Dividendes à payer",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
@@ -3131,12 +3736,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4581,
                                 label: "Opérations courantes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4588,
                                 label: "Intérêts courus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3152,24 +3761,30 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 462,
                         label: "Créances sur cessions d'immobilisations",
                         system: "developed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 464,
                         label: "Dettes sur acquisitions de valeurs mobilières de placement",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 465,
                         label: "Créances sur cessions de valeurs mobilières de placement",
                         system: "developed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 467,
                         label: "Autres comptes débiteurs ou créditeurs",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
@@ -3181,12 +3796,15 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4686,
                                 label: "Charges à payer",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4687,
                                 label: "Produits à recevoir",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3202,18 +3820,24 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 471,
                         label: "Comptes d'attente",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 472,
                         label: "Comptes d'attente",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 473,
                         label: "Comptes d'attente",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -3225,12 +3849,15 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4746,
                                 label: "Différence d'évaluation de jetons sur des passifs - Actif",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4747,
                                 label: "Différence d'évaluation de jetons sur des passifs - Passif",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -3239,6 +3866,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 475,
                         label: "Comptes d'attente",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -3250,18 +3879,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4761,
                                 label: "Diminution des créances",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4762,
                                 label: "Augmentation des dettes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4768,
                                 label: "Différences compensées par couverture de change",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3270,23 +3905,27 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 477,
                         label: "Différences de conversion - Passif",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4771,
                                 label: "Augmentation des créances",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4772,
                                 label: "Diminution des dettes",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 4778,
                                 label: "Différences compensées par couverture de change",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -3305,12 +3944,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 47861,
                                         label: "Différences d'évaluation sur instruments financier à terme - Actif",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 47862,
                                         label: "Différences d'évaluation sur jetons détenus - Actif",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -3324,12 +3967,14 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 47871,
                                         label: "Différences d'évaluation sur instruments financier à terme - Passif",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     },
                                     {
                                         number: 47872,
                                         label: "Différences d'évaluation sur jetons détenus - Passif",
                                         system: "developed",
+                                        flow: "credit",
                                         accounts: []
                                     }
                                 ]
@@ -3352,24 +3997,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4811,
                                 label: "Charges différées",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4812,
                                 label: "Frais d'acquisition des immobilisations",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4816,
                                 label: "Frais d'émission des emprunts",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4818,
                                 label: "Charges à étaler",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3378,17 +4031,21 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 486,
                         label: "Charges constatées d'avance",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 487,
                         label: "Produits constatés d'avance",
                         system: "condensed",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 4871,
                                 label: "Produits constatés d'avance sur jetons émis",
                                 system: "base",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -3402,12 +4059,15 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4886,
                                 label: "Charges",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 4887,
                                 label: "Produits",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -3416,6 +4076,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 489,
                         label: "Quotas d'émission alloués par l'État",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -3429,6 +4091,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 491,
                         label: "Dépréciations des comptes de clients",
                         system: "condensed",
+                        flow: "credit",
+                        isAllowance: true,
                         accounts: []
                     },
                     {
@@ -3440,18 +4104,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4951,
                                 label: "Comptes du groupe",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 4955,
                                 label: "Comptes courants des associés",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 4958,
                                 label: "Opérations faites en commun et en GIE",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -3465,18 +4135,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 4962,
                                 label: "Créances sur cessions d'immobilisations",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 4965,
                                 label: "Créances sur cessions de valeurs mobilières de placement",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 4967,
                                 label: "Autres comptes débiteurs",
                                 system: "developed",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -3499,6 +4175,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 501,
                         label: "Parts dans des entreprises liées",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -3510,12 +4188,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5021,
                                 label: "Actions destinées à être attribuées aux employés et affectées à des plans déterminés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5022,
                                 label: "Actions disponibles pour être attribuées aux employés ou pour la régularisation des cours de bourse",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3529,12 +4211,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5031,
                                 label: "Titres cotés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5035,
                                 label: "Titres non cotés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3543,12 +4229,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 504,
                         label: "Autres titres conférant un droit de propriété",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 505,
                         label: "Obligations et bons émis par la société et rachetés par elle",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -3560,12 +4250,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5061,
                                 label: "Titres cotés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5065,
                                 label: "Titres non cotés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3574,6 +4268,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 507,
                         label: "Bons du Trésor et bons de caisse à court terme",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -3585,18 +4281,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5081,
                                 label: "Autres valeurs mobilières",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5082,
                                 label: "Bons de souscription",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5088,
                                 label: "Intérêts courus sur obligations, bons et valeurs assimilés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3605,6 +4307,7 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 509,
                         label: "Versements restant à effectuer sur valeurs mobilières de placement non libérées",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -3623,24 +4326,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5111,
                                 label: "Coupons échus à l'encaissement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5112,
                                 label: "Chèques à encaisser",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5113,
                                 label: "Effets à l'encaissement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5114,
                                 label: "Effets à l'escompte",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3649,17 +4360,20 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 512,
                         label: "Banques",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 5121,
                                 label: "Comptes en monnaie nationale",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 5124,
                                 label: "Comptes en devises",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -3668,24 +4382,30 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 514,
                         label: "Chèques postaux",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 515,
                         label: "Caisses du Trésor et des établissements publics",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 516,
                         label: "Sociétés de bourse",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 517,
                         label: "Autres organismes financiers",
                         system: "base",
+                        flow: "credit",
                         accounts: []
                     },
                     {
@@ -3697,12 +4417,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5181,
                                 label: "Intérêts courus à payer",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5188,
                                 label: "Intérêts courus à recevoir",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3711,23 +4435,27 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 519,
                         label: "Concours bancaires courants",
                         system: "base",
+                        flow: "credit",
                         accounts: [
                             {
                                 number: 5191,
                                 label: "Crédit de mobilisation de créances commerciales",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 5193,
                                 label: "Mobilisation de créances nées à l'étranger",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             },
                             {
                                 number: 5198,
                                 label: "Intérêts courus sur concours bancaires courants",
                                 system: "developed",
+                                flow: "credit",
                                 accounts: []
                             }
                         ]
@@ -3738,29 +4466,34 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 52,
                 label: "Instruments financiers à terme et jetons détenus",
                 system: "base",
+                flow: "credit",
                 accounts: [
                     {
                         number: 521,
                         label: "Instruments financiers à terme",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 522,
                         label: "Jetons détenus",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 523,
                         label: "Jetons auto-détenus",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     },
                     {
                         number: 524,
                         label: "Jetons empruntés",
                         system: "developed",
+                        flow: "credit",
                         accounts: []
                     }
                 ]
@@ -3779,12 +4512,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5311,
                                 label: "Caisse en monnaie nationale",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 5314,
                                 label: "Caisse en devises",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3793,12 +4530,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 532,
                         label: "Caisse succursale (ou usine) A",
                         system: "developed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 533,
                         label: "Caisse succursale (ou usine) B",
                         system: "developed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -3807,12 +4548,16 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 54,
                 label: "Régies d'avance et accréditifs",
                 system: "condensed",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
                 number: 58,
                 label: "Virements internes",
                 system: "condensed",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -3829,24 +4574,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 5903,
                                 label: "Actions",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 5904,
                                 label: "Autres titres conférant un droit de propriété",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 5906,
                                 label: "Obligations",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             },
                             {
                                 number: 5908,
                                 label: "Autres valeurs mobilières de placement et créances assimilées",
                                 system: "base",
+                                flow: "credit",
+                                isAllowance: true,
                                 accounts: []
                             }
                         ]
@@ -3874,18 +4627,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6011,
                                 label: "Matières (ou groupe) A",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6012,
                                 label: "Matières (ou groupe) B",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6017,
                                 label: "Fournitures A, B, C, ...",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -3904,12 +4663,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 60211,
                                         label: "Matières (ou groupe) C",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60212,
                                         label: "Matières (ou groupe) D",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -3923,30 +4686,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 60221,
                                         label: "Combustibles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60222,
                                         label: "Produits d'entretien",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60223,
                                         label: "Fournitures d'atelier et d'usine",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60224,
                                         label: "Fournitures de magasin",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60225,
                                         label: "Fourniture de bureau",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -3960,18 +4733,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 60261,
                                         label: "Emballages perdus",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60265,
                                         label: "Emballages récupérables non identifiables",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 60267,
                                         label: "Emballages à usage mixte",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -3987,18 +4766,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6031,
                                 label: "Variation des stocks de matières premières (et fournitures)",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6032,
                                 label: "Variation des stocks des autres approvisionnements",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6037,
                                 label: "Variation des stocks de marchandises",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4007,12 +4792,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 604,
                         label: "Achats d'études et prestations de services",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 605,
                         label: "Achats de matériel, équipements et travaux",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4024,24 +4813,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6061,
                                 label: "Fournitures non stockables (eau, énergie, ...)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6063,
                                 label: "Fournitures d'entretien et de petit équipement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6064,
                                 label: "Fournitures administratives",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6068,
                                 label: "Autres matières et fournitures",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4055,12 +4852,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6071,
                                 label: "Marchandise (ou groupe) A",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6072,
                                 label: "Marchandise (ou groupe) B",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4069,6 +4870,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 608,
                         label: "Récapitulation des frais accessoires incorporés aux achats",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4080,42 +4883,56 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6091,
                                 label: "de matières premières (et fournitures)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6092,
                                 label: "d'autres approvisionnements stockés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6094,
                                 label: "d'études et prestations de services",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6095,
                                 label: "de matériel, équipements et travaux",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6096,
                                 label: "d'approvisionnements non stockés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6097,
                                 label: "de marchandises",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6098,
                                 label: "Rabais, remises et ristournes non affectés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4131,6 +4948,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 611,
                         label: "Sous-traitance générale",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4142,12 +4961,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6122,
                                 label: "Crédit-bail mobilier",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6125,
                                 label: "Crédit-bail immobilier",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4161,18 +4984,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6132,
                                 label: "Locations immobilières",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6135,
                                 label: "Locations mobilières",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6136,
                                 label: "Malis sur emballages",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4181,6 +5010,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 614,
                         label: "Charges locatives et de copropriété",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4192,18 +5023,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6152,
                                 label: "sur biens immobiliers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6155,
                                 label: "sur biens mobiliers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6156,
                                 label: "Maintenance",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4217,12 +5054,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6161,
                                 label: "Multirisques",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6162,
                                 label: "Assurance obligatoire dommage construction",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -4234,18 +5075,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 61636,
                                         label: "sur achats",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 61637,
                                         label: "sur ventes",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 61638,
                                         label: "sur autres biens",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -4254,12 +5101,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6164,
                                 label: "Risques d'exploitation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6165,
                                 label: "Insolvabilité clients",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4268,6 +5119,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 617,
                         label: "Études et recherches",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4279,18 +5132,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6181,
                                 label: "Documentation générale",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6183,
                                 label: "Documentation technique",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6185,
                                 label: "Frais de colloques, séminaires, conférences",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4299,6 +5158,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 619,
                         label: "Rabais, remises et ristournes obtenus sur services extérieurs",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -4317,12 +5178,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6211,
                                 label: "Personnel intérimaire",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6214,
                                 label: "Personnel détaché ou prêté à l'entreprise",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4336,42 +5201,56 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6221,
                                 label: "Commissions et courtages sur achats",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6222,
                                 label: "Commissions et courtages sur ventes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6224,
                                 label: "Rémunérations des transitaires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6225,
                                 label: "Rémunérations d'affacturage",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6226,
                                 label: "Honoraires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6227,
                                 label: "Frais d'actes et de contentieux",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6228,
                                 label: "Divers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4385,48 +5264,64 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6231,
                                 label: "Annonces et insertions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6232,
                                 label: "Échantillons",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6233,
                                 label: "Foires et expositions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6234,
                                 label: "Cadeaux à la clientèle",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6235,
                                 label: "Primes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6236,
                                 label: "Catalogues et imprimés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6237,
                                 label: "Publications",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6238,
                                 label: "Divers (pourboires, dons courants, ...)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4440,36 +5335,48 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6241,
                                 label: "Transports sur achats",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6242,
                                 label: "Transports sur ventes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6243,
                                 label: "Transports entre établissements ou chantiers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6244,
                                 label: "Transports administratifs",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6247,
                                 label: "Transports collectifs du personnel",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6248,
                                 label: "Divers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4483,24 +5390,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6251,
                                 label: "Voyages et déplacements",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6255,
                                 label: "Frais de déménagement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6256,
                                 label: "Missions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6257,
                                 label: "Réceptions",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4509,6 +5424,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 626,
                         label: "Frais postaux et de télécommunications",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4520,30 +5437,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6271,
                                 label: "Frais sur titres (achat, vente, garde)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6272,
                                 label: "Commissions et frais sur émission d'emprunts",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6275,
                                 label: "Frais sur effets",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6276,
                                 label: "Location de coffres",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6278,
                                 label: "Autres frais et commissions sur prestations de services",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4557,12 +5484,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6281,
                                 label: "Concours divers (cotisations, ...)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6284,
                                 label: "Frais de recrutement de personnel",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4571,6 +5502,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 629,
                         label: "Rabais, remises et ristournes obtenus sur autres services extérieurs",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -4589,30 +5522,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6311,
                                 label: "Taxe sur les salaires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6312,
                                 label: "Taxe d'apprentissage",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6313,
                                 label: "Participation des employeurs à la formation professionnelle continue",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6314,
                                 label: "Cotisation pour défaut d'investissement obligatoire dans la construction",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6318,
                                 label: "Autres",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4626,36 +5569,48 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6331,
                                 label: "Versement de transport",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6332,
                                 label: "Allocations logement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6333,
                                 label: "Contribution unique des employeurs à la formation professionnelle",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6334,
                                 label: "Participation des employeurs à l'effort de construction",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6335,
                                 label: "Versements libératoires ouvrant droit à l'exonération de la taxe d'apprentissage",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6338,
                                 label: "Autres",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4674,24 +5629,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 63511,
                                         label: "Contribution économique territoriale",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 63512,
                                         label: "Taxes foncières",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 63513,
                                         label: "Autres impôts locaux",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 63514,
                                         label: "Taxe sur les véhicules des sociétés",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -4700,12 +5663,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6352,
                                 label: "Taxe sur le chiffre d'affaires non récupérables",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6353,
                                 label: "Impôts indirects",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -4717,6 +5684,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 63541,
                                         label: "Droits de mutation",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -4725,6 +5694,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6358,
                                 label: "Autres droits",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4738,24 +5709,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6371,
                                 label: "Contribution sociale de solidarité à la charge des sociétés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6372,
                                 label: "Taxes perçues par les organismes publics internationaux",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6374,
                                 label: "Impôts et taxes exigibles à l'Étranger",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6378,
                                 label: "Taxes diverses",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4776,30 +5755,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6411,
                                 label: "Salaires, appointements",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6412,
                                 label: "Congés payés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6413,
                                 label: "Primes et gratifications",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6414,
                                 label: "Indemnités et avantages divers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6415,
                                 label: "Supplément familial",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4808,6 +5797,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 644,
                         label: "Rémunération du travail de l'exploitant",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4819,30 +5810,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6451,
                                 label: "Cotisations à l'URSSAF",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6452,
                                 label: "Cotisations aux mutuelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6453,
                                 label: "Cotisations aux caisses de retraites",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6454,
                                 label: "Cotisations aux ASSEDIC",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6458,
                                 label: "Cotisations aux autres organismes sociaux",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4851,6 +5852,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 646,
                         label: "Cotisations sociales personnelles de l'exploitant",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4862,30 +5865,40 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6471,
                                 label: "Prestations directes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6472,
                                 label: "Versements aux comités d'entreprise et d'établissement",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6473,
                                 label: "Versements aux comités d'hygiène et de sécurité",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6474,
                                 label: "Versements aux autres œuvres sociales",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6475,
                                 label: "Médecine du travail, pharmacie",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4894,6 +5907,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 648,
                         label: "Autres charges de personnel",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -4912,18 +5927,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6511,
                                 label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6516,
                                 label: "Droits d'auteur et de reproduction",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6518,
                                 label: "Autres droits et valeurs similaires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4932,6 +5953,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 653,
                         label: "Jetons de présence",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -4943,12 +5966,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6541,
                                 label: "Créances de l'exercice",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6544,
                                 label: "Créances des exercices antérieurs",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4962,12 +5989,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6551,
                                 label: "Quote-part de bénéfice transférée (comptabilité du gérant)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6555,
                                 label: "Quote-part de perte supportée (comptabilité des associés non gérants)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -4976,12 +6007,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 656,
                         label: "Pertes de change sur créances commerciales",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 658,
                         label: "Charges diverses de gestion courante",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -5005,12 +6040,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 66116,
                                         label: "des emprunts et dettes assimilées",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 66117,
                                         label: "des dettes rattachées à des participations",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5019,24 +6058,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6612,
                                 label: "Charges de la fiducie, résultat de la période",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6615,
                                 label: "Intérêts des comptes courants et des dépôts créditeurs",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6616,
                                 label: "Intérêts bancaires et sur opérations de financement (escompte, ...)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6617,
                                 label: "Intérêts des obligations cautionnées",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -5048,12 +6095,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 66181,
                                         label: "des dettes commerciales",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 66188,
                                         label: "des dettes diverses",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5064,30 +6115,40 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 664,
                         label: "Pertes sur créances liées à des participations",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 665,
                         label: "Escomptes accordés",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 666,
                         label: "Pertes de change financières",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 667,
                         label: "Charges nettes sur cessions de valeurs mobilières de placement",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 668,
                         label: "Autres charges financières",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -5106,42 +6167,56 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6711,
                                 label: "Pénalités sur marchés (et dédits payés sur achats et ventes)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6712,
                                 label: "Pénalités, amendes fiscales et pénales",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6713,
                                 label: "Dons, libéralités",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6714,
                                 label: "Créances devenues irrécouvrables dans l'exercice",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6715,
                                 label: "Subventions accordées",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6717,
                                 label: "Rappel d'impôts (autres qu'impôts sur les bénéfices)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6718,
                                 label: "Autres charges exceptionnelles sur opérations de gestion",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5150,6 +6225,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 672,
                         label: "(Compte à la disposition des entités pour enregistrer, en cours d'exercice, les charges sur exercices antérieurs)",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -5161,12 +6238,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6741,
                                 label: "Opérations liées à la constitution de fiducie - Transfert des éléments",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6742,
                                 label: "Opérations liées à la liquidation de la fiducie",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5180,24 +6261,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6751,
                                 label: "Immobilisations incorporelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6752,
                                 label: "Immobilisations corporelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6756,
                                 label: "Immobilisations financières",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6758,
                                 label: "Autres éléments d'actif",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5211,24 +6300,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6781,
                                 label: "Malis provenant de clauses d'indexation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6782,
                                 label: "Lots",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6783,
                                 label: "Malis provenant du rachat par l'entreprise d'actions et obligations émises par elle-même",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6788,
                                 label: "Charges exceptionnelles diverses",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5254,12 +6351,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 68111,
                                         label: "Immobilisations incorporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 68112,
                                         label: "Immobilisations corporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5268,12 +6369,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6812,
                                 label: "Dotations aux amortissements des charges d'exploitation à répartir",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6815,
                                 label: "Dotations aux provisions d'exploitation",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -5285,12 +6390,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 68161,
                                         label: "Immobilisations incorporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 68162,
                                         label: "Immobilisations corporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5304,12 +6413,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 68173,
                                         label: "Stocks et en-cours",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 68174,
                                         label: "Créances",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5325,12 +6438,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6861,
                                 label: "Dotations aux amortissements des primes de remboursement des obligations",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6865,
                                 label: "Dotations aux provisions financières",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -5342,12 +6459,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 68662,
                                         label: "Immobilisations financières",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 68665,
                                         label: "Valeurs mobilières de placement",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5356,6 +6477,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6868,
                                 label: "Autres dotations",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5369,6 +6492,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6871,
                                 label: "Dotations aux amortissements exceptionnels des immobilisations",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -5380,6 +6505,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 68725,
                                         label: "Amortissements dérogatoires",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -5388,24 +6515,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6873,
                                 label: "Dotations aux provisions réglementées (stocks)",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6874,
                                 label: "Dotations aux autres provisions réglementées",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6875,
                                 label: "Dotations aux provisions exceptionnelles",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6876,
                                 label: "Dotations pour dépréciations exceptionnelles",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5421,6 +6556,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 691,
                         label: "Participation des salariés aux résultats",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -5432,18 +6569,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6951,
                                 label: "Impôts dus en France",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6952,
                                 label: "Contribution additionnelle à l'impôt sur les bénéfices",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6954,
                                 label: "Impôts dus à l'étranger",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5452,6 +6595,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 696,
                         label: "Suppléments d'impôt sur les sociétés liés aux distributions",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -5463,12 +6608,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 6981,
                                 label: "Intégration fiscale - Charges",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 6989,
                                 label: "Intégration fiscale - Produits",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5477,6 +6626,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 699,
                         label: "Produits - Reports en arrière des déficits",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -5502,12 +6653,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7011,
                                 label: "Produits finis (ou groupe) A",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7012,
                                 label: "Produits finis (ou groupe) B",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5516,12 +6671,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 702,
                         label: "Ventes de produits intermédiaires",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 703,
                         label: "Ventes de produits résiduels",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -5533,12 +6692,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7041,
                                 label: "Travaux de catégorie (ou activité) A",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7042,
                                 label: "Travaux de catégorie (ou activité) B",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5547,12 +6710,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 705,
                         label: "Études",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 706,
                         label: "Prestations de services",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -5564,12 +6731,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7071,
                                 label: "Marchandises (ou groupe) A",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7072,
                                 label: "Marchandises (ou groupe) B",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5583,48 +6754,64 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7081,
                                 label: "Produits des services exploités dans l'intérêt du personnel",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7082,
                                 label: "Commissions et courtages",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7083,
                                 label: "Locations diverses",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7084,
                                 label: "Mise à disposition de personnel facturée",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7085,
                                 label: "Ports et frais accessoires facturés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7086,
                                 label: "Bonis sur reprises d'emballages consignés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7087,
                                 label: "Bonifications obtenues des clients et primes sur ventes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7088,
                                 label: "Autres produits d'activités annexes (cessions d'approvisionnements, ...)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5638,42 +6825,56 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7091,
                                 label: "sur ventes de produits finis",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7092,
                                 label: "sur ventes de produits intermédiaires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7094,
                                 label: "sur travaux",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7095,
                                 label: "sur études",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7096,
                                 label: "sur prestations de services",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7097,
                                 label: "sur ventes de marchandises",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7098,
                                 label: "sur produits des activités annexes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5684,6 +6885,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 71,
                 label: "Production stockée (ou déstockage)",
                 system: "base",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -5700,12 +6903,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 71331,
                                 label: "Produits en cours",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 71335,
                                 label: "Travaux en cours",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5719,12 +6926,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 71341,
                                 label: "Études en cours",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 71345,
                                 label: "Prestations de services en cours",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5738,18 +6949,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 71351,
                                 label: "Produits intermédiaires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 71355,
                                 label: "Produits finis",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 71358,
                                 label: "Produits résiduels",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5765,12 +6982,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 721,
                         label: "Immobilisations incorporelles",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 722,
                         label: "Immobilisations corporelles",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -5779,6 +7000,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 74,
                 label: "Subventions d'exploitation",
                 system: "condensed",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -5795,18 +7018,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7511,
                                 label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7516,
                                 label: "Droits d'auteur et de reproduction",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7518,
                                 label: "Autres droits et valeurs similaires",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5815,18 +7044,24 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 752,
                         label: "Revenus des immeubles non affectés à des activités professionnelles",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 753,
                         label: "Jetons de présence et rémunérations d'administrateurs, gérants",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 754,
                         label: "Ristournes perçues des coopératives (provenant des excédents)",
                         system: "condensed",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -5838,12 +7073,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7551,
                                 label: "Quote-part de perte transférée (comptabilité du gérant)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7555,
                                 label: "Quote-part de bénéfice attribuée (comptabilité des associés non-gérants)",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5852,12 +7091,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 756,
                         label: "Gains de change sur créances commerciales",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 758,
                         label: "Produits divers de gestion courante",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -5876,24 +7119,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7611,
                                 label: "Revenus des titres de participation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7612,
                                 label: "Produits de la fiducie, résultat de la période",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7616,
                                 label: "Revenus sur autres formes de participation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7617,
                                 label: "Revenus des créances rattachées à des participations",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5907,18 +7158,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7621,
                                 label: "Revenus des titres immobilisés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7626,
                                 label: "Revenus des prêts",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7627,
                                 label: "Revenus des créances immobilisées",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5932,12 +7189,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7631,
                                 label: "Revenus des créances commerciales",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7638,
                                 label: "Revenus des créances diverses",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -5946,30 +7207,40 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 764,
                         label: "Revenus des valeurs mobilières de placement",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 765,
                         label: "Escomptes obtenus",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 766,
                         label: "Gains de change financiers",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 767,
                         label: "Produits nets sur cessions de valeurs mobilières de placement",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 768,
                         label: "Autres produits financiers",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -5988,36 +7259,48 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7711,
                                 label: "Dédits et pénalités perçus sur achats et sur ventes",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7713,
                                 label: "Libéralités reçues",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7714,
                                 label: "Rentrées sur créances amorties",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7715,
                                 label: "Subventions d'équilibre",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7717,
                                 label: "Dégrèvements d'impôts autres qu'impôts sur les bénéfices",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7718,
                                 label: "Autres produits exceptionnels sur opérations de gestion",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6026,6 +7309,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 772,
                         label: "(Compte à la disposition des entités pour enregistrer, en cours d'exercice, les produits sur exercices antérieurs)",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -6037,12 +7322,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7741,
                                 label: "Opérations liées à la constitution de fiducie - Transfert des éléments",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7742,
                                 label: "Opérations liées à la liquidation de la fiducie",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6056,24 +7345,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7751,
                                 label: "Immobilisations incorporelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7752,
                                 label: "Immobilisations corporelles",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7756,
                                 label: "Immobilisations financières",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7758,
                                 label: "Autres éléments d'actif",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6082,6 +7379,8 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 777,
                         label: "Quote-part des subventions d'investissement virée au résultat de l'exercice",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
@@ -6093,24 +7392,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7781,
                                 label: "Bonis provenant de clauses d'indexation",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7782,
                                 label: "Lots",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7783,
                                 label: "Bonis provenant du rachat par l'entreprise d'actions et d'obligations émises par elle-même",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7788,
                                 label: "Produits exceptionnels divers",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6136,12 +7443,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 78111,
                                         label: "Immobilisations incorporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 78112,
                                         label: "Immobilisations corporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6150,6 +7461,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7815,
                                 label: "Reprises sur provisions d'exploitation",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -6161,12 +7474,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 78161,
                                         label: "Immobilisations incorporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 78162,
                                         label: "Immobilisations corporelles",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6180,12 +7497,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 78173,
                                         label: "Stocks et en-cours",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 78174,
                                         label: "Créances",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6201,6 +7522,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7865,
                                 label: "Reprises sur provisions financières",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -6212,12 +7535,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 78662,
                                         label: "Immobilisations financières",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 78665,
                                         label: "Valeurs mobilières de placements",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6238,18 +7565,24 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 78725,
                                         label: "Amortissements dérogatoires",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 78726,
                                         label: "Provision spéciale de réévaluation",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 78727,
                                         label: "Plus-values réinvesties",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6258,24 +7591,32 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 7873,
                                 label: "Reprises sur provisions réglementées (stocks)",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7874,
                                 label: "Reprises sur autres provisions réglementées",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7875,
                                 label: "Reprises sur provisions exceptionnelles",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 7876,
                                 label: "Reprises sur dépréciations exceptionnelles",
                                 system: "base",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6291,18 +7632,24 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 791,
                         label: "Transferts de charges d'exploitation",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 796,
                         label: "Transferts de charges financières",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 797,
                         label: "Transferts de charges exceptionnelles",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]
@@ -6328,12 +7675,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 8011,
                                 label: "Avals, cautions, garanties",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 8014,
                                 label: "Effets circulant sous l'endos de l'entité",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -6345,12 +7696,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 80161,
                                         label: "Crédit-bail mobilier",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 80165,
                                         label: "Crédit-bail immobilier",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6359,6 +7714,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 8018,
                                 label: "Autres engagements donnés",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6372,12 +7729,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 8021,
                                 label: "Avals, cautions, garanties",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 8024,
                                 label: "Créances escomptées non échues",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
@@ -6389,12 +7750,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                         number: 80261,
                                         label: "Crédit-bail mobilier",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     },
                                     {
                                         number: 80265,
                                         label: "Crédit-bail immobilier",
                                         system: "developed",
+                                        flow: "debit",
+                                        isAllowance: false,
                                         accounts: []
                                     }
                                 ]
@@ -6403,6 +7768,8 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 8028,
                                 label: "Autres engagements reçus",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6416,12 +7783,16 @@ export const defaultAccounts: DefaultAccount[] = [
                                 number: 8091,
                                 label: "Contrepartie 801",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             },
                             {
                                 number: 8092,
                                 label: "Contrepartie 802",
                                 system: "developed",
+                                flow: "debit",
+                                isAllowance: false,
                                 accounts: []
                             }
                         ]
@@ -6432,6 +7803,8 @@ export const defaultAccounts: DefaultAccount[] = [
                 number: 88,
                 label: "Résultat en instance d'affectation",
                 system: "base",
+                flow: "debit",
+                isAllowance: false,
                 accounts: []
             },
             {
@@ -6443,12 +7816,16 @@ export const defaultAccounts: DefaultAccount[] = [
                         number: 890,
                         label: "Bilan d'ouverture",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     },
                     {
                         number: 891,
                         label: "Bilan de clôture",
                         system: "base",
+                        flow: "debit",
+                        isAllowance: false,
                         accounts: []
                     }
                 ]

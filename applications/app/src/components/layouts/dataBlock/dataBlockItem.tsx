@@ -13,7 +13,7 @@ export function DataBlockItem(props: DataBlockItem) {
     return (
         <Fragment>
             <div className="flex justify-start items-center gap-2">
-                <span className="uppercase text-neutral/50">{props.label}</span>
+                <span className="uppercase text-xs text-neutral/50">{props.label}</span>
                 {
                     (!props.description) ? null : (
                         <TooltipProvider>

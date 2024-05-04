@@ -5,6 +5,8 @@ import { accountSchema } from "../../../schemas/account/account.schema.js"
 // Input
 export const createAccountBody = v.object({
     idSheet: accountSchema.entries.idSheet,
+    flow: accountSchema.entries.flow,
+    isAllowance: accountSchema.entries.isAllowance,
     idStatement: accountSchema.entries.idStatement,
     idAccountParent: v.optional(accountSchema.entries.idAccountParent),
     number: accountSchema.entries.number,

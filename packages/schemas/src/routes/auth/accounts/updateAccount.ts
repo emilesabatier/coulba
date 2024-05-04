@@ -9,6 +9,8 @@ export const updateAccountParams = v.object({
 
 export const updateAccountBody = v.partial(v.object({
     idSheet: accountSchema.entries.idSheet,
+    flow: accountSchema.entries.flow,
+    isAllowance: accountSchema.entries.isAllowance,
     idStatement: accountSchema.entries.idStatement,
     idAccountParent: accountSchema.entries.idAccountParent,
     number: accountSchema.entries.number,
