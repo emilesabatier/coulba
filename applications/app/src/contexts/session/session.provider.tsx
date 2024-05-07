@@ -24,17 +24,23 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
         }
 
         if (!response.isInvitationValidated && router.parseLocation().pathname !== "/activation") {
+            setIsLoading(false)
             router.navigate({ to: "/activation" })
             window.location.reload()
         }
-        if (response.isInvitationValidated && router.parseLocation().pathname === "/activation") router.navigate({ to: "/" })
+        if (response.isInvitationValidated && router.parseLocation().pathname === "/activation") {
+            setIsLoading(false)
+            router.navigate({ to: "/" })
+            window.location.reload()
+        }
 
         setProfile(response)
         setIsLoading(false)
     }
 
     useEffect(() => {
-        getProfile()
+        if (isSignedIn) getProfile()
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
