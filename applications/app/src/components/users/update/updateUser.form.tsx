@@ -39,8 +39,8 @@ export function UpdateUserForm() {
                     params: { idUser: idUser },
                     body: data
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(usersOptions.queryKey, (_data) => _data && data && [data, ..._data.filter((user) => user.id !== data.id)])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/utilisateurs" })
                         toast({ title: "Utilisateur mis à jour", variant: "success" })
                         return true

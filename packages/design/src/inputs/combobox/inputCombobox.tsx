@@ -48,7 +48,6 @@ export function InputCombobox(props: InputCombobox) {
     })
 
     const virtualOptions = virtualizer.getVirtualItems()
-    console.log(virtualOptions.length)
 
     const handleSearch = (search: string) => {
         setFilteredOptions(
@@ -111,11 +110,11 @@ export function InputCombobox(props: InputCombobox) {
                                     <FormatNull text="Aucun résultat" />
                                 </CommandEmpty>
 
-                                {props.options.length > 0 ? null : (
+                                {/* {props.options.length > 0 ? null : (
                                     <div className="relative h-[40px] flex justify-start items-center p-3 cursor-default select-none outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50" >
                                         <FormatNull text="Aucun résultat" />
                                     </div>
-                                )}
+                                )} */}
 
                                 <CommandGroup
                                     ref={parentRef}

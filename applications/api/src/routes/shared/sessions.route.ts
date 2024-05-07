@@ -4,7 +4,7 @@ import { generateId } from "@coulba/schemas/services"
 import { pbkdf2Sync } from "crypto"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { setCookie, setSignedCookie } from "hono/cookie"
+import { deleteCookie, getSignedCookie, setCookie, setSignedCookie } from "hono/cookie"
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
@@ -66,5 +66,30 @@ export const sessionsRoute = new Hono()
             })
 
             return c.json(createSession, 200)
+        }
+    )
+    .patch(
+        '/sign-out',
+        async (c) => {
+
+            const cookiesKey = env()?.COOKIES_KEY
+            if (!cookiesKey) throw new HTTPException(500, { message: "Erreur interne" })
+
+            const { id_session: idSession } = await getSignedCookie(c, cookiesKey)
+            if (!idSession) throw new HTTPException(401, { message: "Session invalide" })
+
+            await db
+                .update(sessions)
+                .set({
+                    isActive: false,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(eq(sessions.id, idSession))
+                .returning()
+
+            deleteCookie(c, "id_session")
+            deleteCookie(c, "is_signed_in")
+
+            return c.json({}, 200)
         }
     )

@@ -21,7 +21,7 @@ export type Statement = {
 
 function groupStatement(statements: v.Output<typeof auth.statements.get.return>[], balance: Balance[], idParent?: string | null): Statement[] {
     return statements
-        .filter((statement) => statement.idStatementParent === idParent)
+        .filter((statement) => statement.idParent === idParent)
         .map((statement) => {
             const childrenStatements = groupStatement(statements, balance, statement.id)
 

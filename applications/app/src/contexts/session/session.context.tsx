@@ -6,8 +6,8 @@ import { getIsSignedIn } from './getIsSignedIn'
 
 
 export type SessionContext = {
-    user: v.Output<typeof auth.users.get.return> | undefined
-    setUser: (data: v.Output<typeof auth.users.get.return>) => void
+    profile: v.Output<typeof auth.users.get.return> | undefined
+    setProfile: (data: v.Output<typeof auth.users.get.return>) => void
     mutate: () => Promise<void>
     isSignedIn: boolean | undefined
     signIn: (props: SignIn) => Promise<void>
@@ -16,8 +16,8 @@ export type SessionContext = {
 }
 
 const initalState: SessionContext = {
-    user: undefined,
-    setUser: () => { },
+    profile: undefined,
+    setProfile: () => { },
     mutate: async () => { },
     isSignedIn: getIsSignedIn(),
     signIn: async () => { },

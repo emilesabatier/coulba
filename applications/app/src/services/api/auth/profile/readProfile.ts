@@ -6,6 +6,6 @@ export function readProfile() {
     return getAPI({
         path: `/auth/profile`,
         schema: auth.users.get.return,
-        message: "Erreur avec la lecture du profile"
+        message: "Erreur avec la lecture du profil"
     })
 }

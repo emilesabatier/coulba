@@ -40,8 +40,8 @@ export function UpdateSheetForm() {
                     params: { idSheet: idSheet },
                     body: data
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(sheetsOptions.queryKey, (_data) => _data && data && [..._data.filter((sheet) => sheet.id !== data.id), data])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/bilan" })
                         toast({ title: "Ligne mise à jour", variant: "success" })
                         return true
@@ -93,7 +93,7 @@ export function UpdateSheetForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idSheetParent"
+                        name="idParent"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

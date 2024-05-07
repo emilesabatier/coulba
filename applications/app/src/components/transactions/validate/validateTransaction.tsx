@@ -5,7 +5,7 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
-import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
+import { transactionOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { validateTransaction } from "../../../services/api/auth/transactions/validateTransaction"
 import { ConfirmDialog } from "../../layouts/actions/confirmDialog"
 
@@ -30,8 +30,8 @@ export function ValidateTransaction(props: ValidateTransaction) {
             color="success"
             onSubmit={async () => {
                 mutation.mutate({ params: { idTransaction: props.transaction.id } }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(transactionsOptions.queryKey, (_data) => _data?.filter((transaction) => transaction.id !== data?.id))
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/enregistrements" })
                         toast({ title: "Enregistrement validé", variant: "success" })
                         return true

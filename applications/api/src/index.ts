@@ -1,11 +1,9 @@
 import { serve } from '@hono/node-server'
-import { readFileSync } from 'fs'
 import { Hono } from 'hono'
 import { deleteCookie } from 'hono/cookie'
 import { cors } from 'hono/cors'
 import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
-import { createServer } from 'node:https'
 import { env } from './env.js'
 import { authRoute } from './routes/auth.route.js'
 import { sharedRoute } from './routes/shared.route.js'
@@ -53,10 +51,5 @@ console.log(`Server is running on port ${port}`)
 
 serve({
     fetch: app.fetch,
-    createServer: createServer,
-    port: port,
-    serverOptions: {
-        key: readFileSync('../../.cert/localhost-key.pem'),
-        cert: readFileSync('../../.cert/localhost.pem')
-    }
+    port: port
 })

@@ -22,7 +22,7 @@ type GroupedStatement = {
 function groupStatements(statements: v.Output<typeof auth.statements.get.return>[], idParent?: string | null) {
     if (statements.length === 0) return []
     return statements
-        .filter((statement) => statement.idStatementParent === idParent)
+        .filter((statement) => statement.idParent === idParent)
         .map((statement) => {
             const subStatements = groupStatements(statements, statement.id) as GroupedStatement[]
             return ({

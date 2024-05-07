@@ -30,7 +30,7 @@ export function ActivationForm() {
         })
 
         if (response) {
-            session.mutate()
+            await session.mutate()
             toast({ title: "Activation réussie", variant: "success" })
             router.navigate({ to: "/" })
         }

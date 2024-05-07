@@ -27,8 +27,8 @@ export function DeleteStatement(props: DeleteStatement) {
             description="Attention, cela supprimera toutes les données et les sous-lignes associés."
             onSubmit={async () => {
                 mutation.mutate({ params: { idStatement: props.statement.id } }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(statementsOptions.queryKey, (oldData) => oldData?.filter((statement) => statement.id !== newData?.id))
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         toast({ title: "Ligne supprimée", variant: "success" })
                         return true
                     }

@@ -32,7 +32,7 @@ export type SheetLiability = {
 
 function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Balance[], idParent?: string | null): SheetAsset[] {
     return sheets
-        .filter((sheet) => sheet.idSheetParent === idParent)
+        .filter((sheet) => sheet.idParent === idParent)
         .map((sheet) => {
             const childrenSheets = groupSheetsAssets(sheets, balance, sheet.id)
 
@@ -41,12 +41,14 @@ function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], ba
             let net = 0
 
             if (childrenSheets.length === 0) {
-                balance
-                    .filter((_balance) => _balance.account.idSheet === sheet.id)
-                    .forEach((_balance) => {
-                        gross += _balance.balance.debit
-                        allowance += (_balance.balance.debit > 0) ? _balance.balance.credit : 0
-                    })
+                sheet.accountSheets.forEach((accountSheet) => {
+                    balance
+                        .filter((_balance) => _balance.account.id === accountSheet.idAccount)
+                        .forEach((_balance) => {
+                            gross += accountSheet.isAllowance ? 0 : (accountSheet.flow === "debit" ? _balance.balance.debit : _balance.balance.credit)
+                            allowance += !accountSheet.isAllowance ? 0 : (accountSheet.flow === "debit" ? _balance.balance.debit : _balance.balance.credit)
+                        })
+                })
             } else {
                 childrenSheets.forEach((childSheet) => {
                     gross += childSheet.gross
@@ -70,18 +72,20 @@ function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], ba
 
 function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Balance[], idParent?: string | null): SheetLiability[] {
     return sheets
-        .filter((sheet) => sheet.idSheetParent === idParent)
+        .filter((sheet) => sheet.idParent === idParent)
         .map((sheet) => {
             const childrenSheets = groupSheetsAssets(sheets, balance, sheet.id)
 
             let net = 0
 
             if (childrenSheets.length === 0) {
-                balance
-                    .filter((_balance) => _balance.account.idSheet === sheet.id)
-                    .forEach((_balance) => {
-                        net += _balance.balance.credit
-                    })
+                sheet.accountSheets.forEach((accountSheet) => {
+                    balance
+                        .filter((_balance) => _balance.account.id === accountSheet.idAccount)
+                        .forEach((_balance) => {
+                            net += (accountSheet.flow === "credit" ? _balance.balance.credit : _balance.balance.debit)
+                        })
+                })
             } else {
                 childrenSheets.forEach((childSheet) => {
                     net += childSheet.net

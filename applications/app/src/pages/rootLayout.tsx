@@ -8,9 +8,9 @@ export function RootLayout() {
 
     const matchWithTitle = [...router.state.matches]
         .reverse()
-        .find((d) => d.context.title)
+        .find((d) => d.context?.title)
 
-    const title = matchWithTitle?.context.title || 'Coulba'
+    const title = matchWithTitle?.context?.title || 'Coulba'
 
     useEffect(() => { document.title = title }, [title])
 

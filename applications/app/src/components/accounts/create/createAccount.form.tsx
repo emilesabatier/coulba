@@ -85,7 +85,7 @@ export function CreateAccountForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idAccountParent"
+                        name="idParent"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

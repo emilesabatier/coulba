@@ -28,8 +28,8 @@ export function CreateJournalForm() {
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(journalsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/journaux" })
                         toast({ title: "Nouveau journal ajouté", variant: "success" })
                         return true

@@ -27,8 +27,8 @@ export function DeleteSheet(props: DeleteSheet) {
             description="Attention, cela supprimera toutes les données et les sous-lignes associées."
             onSubmit={async () => {
                 mutation.mutate({ params: { idSheet: props.sheet.id } }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(sheetsOptions.queryKey, (oldData) => oldData?.filter((sheet) => sheet.id !== newData?.id))
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         toast({ title: "Ligne supprimée", variant: "success" })
                         return true
                     }

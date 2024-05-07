@@ -22,7 +22,7 @@ type GroupedSheet = {
 function groupSheets(sheets: v.Output<typeof auth.sheets.get.return>[], idParent?: string | null) {
     if (sheets.length === 0) return []
     return sheets
-        .filter((sheet) => sheet.idSheetParent === idParent)
+        .filter((sheet) => sheet.idParent === idParent)
         .map((sheet) => {
             const subSheets = groupSheets(sheets, sheet.id) as GroupedSheet[]
             return ({
@@ -73,7 +73,7 @@ export function SheetsList() {
             </div>
             <div className="p-4 flex flex-col justify-start items-stretch gap-2">
                 <span className="uppercase text-neutral/75">Passif</span>
-                <Accordion type="multiple" className="p-4">
+                <Accordion type="multiple">
                     {
                         (groupedSheetsLiabilities.length === 0) ? (<FormatNull />) : groupedSheetsLiabilities.map((groupedSheet) => (
                             <SheetItem

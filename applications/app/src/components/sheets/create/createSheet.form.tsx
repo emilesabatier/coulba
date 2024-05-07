@@ -29,8 +29,8 @@ export function CreateSheetForm() {
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(sheetsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/bilan" })
                         toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
                         return true
@@ -84,7 +84,7 @@ export function CreateSheetForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idSheetParent"
+                        name="idParent"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

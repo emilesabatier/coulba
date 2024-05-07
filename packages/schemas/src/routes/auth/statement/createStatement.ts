@@ -4,7 +4,7 @@ import { statementSchema } from "../../../schemas/statement/statement.schema.js"
 
 // Input
 export const createStatementBody = v.object({
-    idStatementParent: v.optional(statementSchema.entries.idStatementParent),
+    idParent: statementSchema.entries.idParent,
     number: statementSchema.entries.number,
     label: statementSchema.entries.label
 })

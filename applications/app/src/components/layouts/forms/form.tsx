@@ -1,4 +1,5 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { FormRoot } from "@coulba/design/forms"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { IconChevronLeft } from "@tabler/icons-react"
 import { ReactElement } from "react"
@@ -47,22 +48,24 @@ export function Form<T extends v.ObjectSchema<v.ObjectEntries>>(props: Form<T>) 
     }
 
     return (
-        <form className="w-[768px] overflow-y-auto overflow-x-hidden flex flex-col justify-start items-stretch gap-4">
-            <div className="flex justify-start items-center gap-1">
-                <ButtonOutline
-                    onClick={() => props.onCancel()}
-                    icon={<IconChevronLeft />}
-                    text={props.cancelLabel}
-                />
-                <ButtonPlain
-                    onClick={() => onSubmit()}
-                    text={props.submitLabel}
-                    loader
-                />
-            </div>
-            <div className="flex flex-col justify-start items-stretch gap-4">
-                {props.children(form)}
-            </div>
-        </form>
+        <FormRoot {...form}>
+            <form className="w-[768px] overflow-y-auto overflow-x-hidden flex flex-col justify-start items-stretch gap-4">
+                <div className="flex justify-start items-center gap-1">
+                    <ButtonOutline
+                        onClick={() => props.onCancel()}
+                        icon={<IconChevronLeft />}
+                        text={props.cancelLabel}
+                    />
+                    <ButtonPlain
+                        onClick={() => onSubmit()}
+                        text={props.submitLabel}
+                        loader
+                    />
+                </div>
+                <div className="flex flex-col justify-start items-stretch gap-4">
+                    {props.children(form)}
+                </div>
+            </form>
+        </FormRoot>
     )
 }

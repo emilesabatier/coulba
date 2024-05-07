@@ -23,7 +23,7 @@ export const statementsRoute = new Hono<AuthEnv>()
                     id: generateId(),
                     idCompany: c.var.company.id,
                     idYear: c.var.currentYear.id,
-                    idStatementParent: body.idStatementParent,
+                    idParent: body.idParent,
                     label: body.label,
                     number: body.number,
                     lastUpdatedBy: c.var.user.id,
@@ -71,7 +71,7 @@ export const statementsRoute = new Hono<AuthEnv>()
             const [updateStatement] = await db
                 .update(statements)
                 .set({
-                    idStatementParent: body.idStatementParent,
+                    idParent: body.idParent,
                     label: body.label,
                     number: body.number,
                     lastUpdatedOn: new Date().toISOString(),

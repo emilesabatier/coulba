@@ -10,7 +10,7 @@ export const statementSchema = createSelectSchema(statements, {
     id: idSchema,
     idCompany: idSchema,
     idYear: idSchema,
-    idStatementParent: idSchema,
+    idParent: idSchema,
     number: integerSchema,
     label: requiredTextSchema,
     lastUpdatedOn: dateTimeSchema,

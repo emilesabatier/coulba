@@ -33,9 +33,8 @@ export function CreateTransactionForm() {
             submitLabel="Ajouter l'enregistrement"
             onSubmit={async (data) => {
                 mutation.mutate({ body: data }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(transactionsOptions.queryKey, (oldData) => oldData && data && [data, ...oldData])
-
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/enregistrements" })
                         toast({ title: "Nouvel enregistrement ajouté", variant: "success" })
 

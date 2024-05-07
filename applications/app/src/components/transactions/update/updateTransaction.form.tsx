@@ -9,7 +9,7 @@ import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { updateTransactionRoute } from "../../../routes/auth/app/transactions/updateTransaction.route"
 import { router } from "../../../routes/router"
-import { transactionOptions, transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
+import { transactionOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { updateTransaction } from "../../../services/api/auth/transactions/updateTransaction"
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
@@ -43,9 +43,9 @@ export function UpdateTransactionForm() {
             submitLabel="Modifier l'enregistrement"
             onSubmit={async (data) => {
                 mutation.mutate({ params: { idTransaction: idTransaction }, body: data }, {
-                    onSuccess: (data) => {
+                    onSuccess: () => {
                         if (!transaction.data) return null
-                        queryClient.setQueryData(transactionsOptions.queryKey, (oldData) => oldData && data && [data, ...oldData])
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/enregistrements/$idTransaction", params: { idTransaction: transaction.data.id } })
                         toast({ title: "Enregistrement mis à jour", variant: "success" })
                         return true

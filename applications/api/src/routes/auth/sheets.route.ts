@@ -1,9 +1,10 @@
 import { sheets } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
-import { and, eq } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
+import { sheetInclude } from "../../../../../packages/schemas/build/schemas/sheet/sheet.include.js"
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
@@ -23,7 +24,7 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     id: generateId(),
                     idCompany: c.var.company.id,
                     idYear: c.var.currentYear.id,
-                    idSheetParent: body.idSheetParent,
+                    idParent: body.idParent,
                     side: body.side,
                     label: body.label,
                     number: body.number,
@@ -31,6 +32,7 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     createdBy: c.var.user.id
                 })
                 .returning()
+
 
             return c.json(createSheet, 200)
         }
@@ -42,21 +44,24 @@ export const sheetsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idSheet) {
-                const readSheets = await db
-                    .select()
-                    .from(sheets)
-                    .where(eq(sheets.idCompany, c.var.user.idCompany))
+                const readSheets = await db.query.sheets.findMany({
+                    where: eq(sheets.idCompany, c.var.user.idCompany),
+                    columns: sheetInclude,
+                    with: {
+                        accountSheets: true
+                    }
+                })
 
                 return c.json(readSheets, 200)
             }
 
-            const [readSheet] = await db
-                .select()
-                .from(sheets)
-                .where(and(
-                    eq(sheets.idCompany, c.var.user.idCompany),
-                    eq(sheets.id, params.idSheet)
-                ))
+            const readSheet = await db.query.sheets.findFirst({
+                where: eq(sheets.idCompany, c.var.user.idCompany),
+                columns: sheetInclude,
+                with: {
+                    accountSheets: true
+                }
+            })
 
             return c.json(readSheet, 200)
         }
@@ -72,7 +77,8 @@ export const sheetsRoute = new Hono<AuthEnv>()
             const [updateSheet] = await db
                 .update(sheets)
                 .set({
-                    idSheetParent: body.idSheetParent,
+                    idParent: body.idParent,
+                    side: body.side,
                     label: body.label,
                     number: body.number,
                     lastUpdatedOn: new Date().toISOString(),

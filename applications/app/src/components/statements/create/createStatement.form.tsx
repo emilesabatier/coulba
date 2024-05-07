@@ -29,8 +29,8 @@ export function CreateStatementForm() {
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(statementsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/compte-de-resultat" })
                         toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
                         return true
@@ -84,7 +84,7 @@ export function CreateStatementForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idStatementParent"
+                        name="idParent"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

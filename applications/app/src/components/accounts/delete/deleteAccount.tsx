@@ -4,9 +4,9 @@ import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { deleteAccount } from "../../../services/api/auth/accounts/deleteAccount"
 import { Delete } from "../../layouts/actions/delete"
-import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 
 
 type DeleteAccount = {
