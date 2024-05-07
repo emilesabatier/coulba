@@ -14,7 +14,7 @@ export const statements = pgTable(
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        idStatementParent: idColumn("id_statement_parent"),
+        idParent: idColumn("id_parent"),
         number: integer("number").notNull(),
         label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -23,6 +23,6 @@ export const statements = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.idStatementParent, t.number, t.idYear, t.idCompany)
+        uniqueConstraint: unique().on(t.idCompany, t.idYear, t.number)
     })
 )

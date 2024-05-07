@@ -39,8 +39,8 @@ export function UpdateJournalForm() {
                     params: { idJournal: idJournal },
                     body: data
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(journalsOptions.queryKey, (_data) => _data && data && [data, ..._data.filter((journal) => journal.id !== data.id)])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/journaux" })
                         toast({ title: "Journal mis à jour", variant: "success" })
                         return true

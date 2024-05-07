@@ -27,8 +27,8 @@ export function CreateYearForm() {
             submitLabel="Ajouter l'exercice"
             onSubmit={async (data) => {
                 mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(yearsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/exercices" })
                         toast({ title: "Nouvel exercice ajouté", variant: "success" })
                         return true

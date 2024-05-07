@@ -9,7 +9,7 @@ import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { updateAttachmentRoute } from "../../../routes/auth/app/attachments/updateAttachment.route"
 import { router } from "../../../routes/router"
-import { attachmentOptions, attachmentsOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
+import { attachmentOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
 import { updateAttachment } from "../../../services/api/auth/attachments/updateAttachment"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
@@ -46,8 +46,8 @@ export function UpdateAttachmentForm() {
                         label: data.label
                     }
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(attachmentsOptions.queryKey, (_data) => _data && data && [data, ..._data.filter((attachment) => attachment.id !== data.id)])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         if (!attachment.data) return null
                         router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: attachment.data.id } })
                         toast({ title: "Fichier mis à jour", variant: "success" })

@@ -1,4 +1,5 @@
 import * as v from "valibot"
+import { accountSheetSchema } from "../../../schemas/accountSheet/accountSheet.schema.js"
 import { sheetSchema } from "../../../schemas/sheet/sheet.schema.js"
 
 
@@ -8,4 +9,9 @@ export const readSheetParams = v.object({
 })
 
 // Output
-export const readSheetReturn = sheetSchema
+export const readSheetReturn = v.merge([
+    sheetSchema,
+    v.object({
+        accountSheets: v.array(accountSheetSchema)
+    })
+])

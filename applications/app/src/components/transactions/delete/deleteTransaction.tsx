@@ -28,8 +28,8 @@ export function DeleteTransaction(props: DeleteTransaction) {
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
                 mutation.mutate({ params: { idTransaction: props.transaction.id } }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(transactionsOptions.queryKey, (_data) => _data?.filter((transaction) => transaction.id !== data?.id))
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/enregistrements" })
                         toast({ title: "Enregistrement supprimé", variant: "success" })
                         return true

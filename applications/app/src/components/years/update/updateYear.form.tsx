@@ -39,8 +39,8 @@ export function UpdateYearForm() {
                     params: { idYear: idYear },
                     body: data
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(yearsOptions.queryKey, (_data) => _data && data && [data, ..._data.filter((year) => year.id !== data.id)])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/exercices" })
                         toast({ title: "Exercice mis à jour", variant: "success" })
                         return true

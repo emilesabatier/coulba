@@ -14,7 +14,7 @@ export const sheetSchema = createSelectSchema(sheets, {
     id: idSchema,
     idCompany: idSchema,
     idYear: idSchema,
-    idSheetParent: idSchema,
+    idParent: idSchema,
     side: sheetSideSchema,
     number: integerSchema,
     label: requiredTextSchema,

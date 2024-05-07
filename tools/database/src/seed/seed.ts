@@ -1,4 +1,4 @@
-import { accounts, companies, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
+import { accounts, accountSheets, companies, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName, randFullName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -6,10 +6,10 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { DefaultAccount, defaultAccounts } from './accounts'
+import { defaultAccounts } from './accounts'
 import { defaultRecords } from './records'
 import { DefaultSheet, defaultSheets } from './sheets'
-import { DefaultStatement, defaultStatements } from './statements'
+import { defaultStatements } from './statements'
 
 
 export function generateTemporaryPassword(): string {
@@ -21,72 +21,6 @@ export function generateTemporaryPassword(): string {
 
 const connection = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
 const db = drizzle(connection)
-
-function flatSheets(_sheets: DefaultSheet[], idCompany: string, idYear: string, idSheetParent?: string) {
-    const flatArray = _sheets.flatMap((_sheet) => {
-        const id = generateId()
-        return ([
-            {
-                id: id,
-                idCompany: idCompany,
-                idYear: idYear,
-                idSheetParent: idSheetParent,
-                side: _sheet.side,
-                number: _sheet.number,
-                label: _sheet.label,
-                accounts: _sheet.accounts
-            },
-            ...flatSheets(_sheet.sheets, idCompany, idYear, id)
-        ])
-    }) as (typeof sheets.$inferInsert & { accounts: number[] })[]
-    return flatArray as (typeof sheets.$inferInsert & { accounts: number[] })[]
-}
-
-function flatStatements(_statements: DefaultStatement[], idCompany: string, idYear: string, idStatementParent?: string) {
-    const flatArray = _statements.flatMap((_statement) => {
-        const id = generateId()
-        return ([
-            {
-                id: id,
-                idCompany: idCompany,
-                idYear: idYear,
-                idStatementParent: idStatementParent,
-                number: _statement.number,
-                label: _statement.label,
-                accounts: _statement.accounts
-            },
-            ...flatStatements(_statement.statements, idCompany, idYear, id)
-        ])
-    }) as (typeof statements.$inferInsert & { accounts: number[] })[]
-    return flatArray as (typeof statements.$inferInsert & { accounts: number[] })[]
-}
-
-
-function flatAccounts(newSheets: (typeof sheets.$inferInsert & { accounts: number[] })[], newStatements: (typeof statements.$inferInsert & { accounts: number[] })[], _accounts: DefaultAccount[], idCompany: string, idYear: string, idAccountParent?: string) {
-    const flatArray = _accounts.flatMap((_account) => {
-        const id = generateId()
-        const sheet = newSheets.find((_sheet) => _sheet.accounts.includes(_account.number))
-        const statement = newStatements.find((_statement) => _statement.accounts.includes(_account.number))
-
-        if (!sheet && _account.accounts.length === 0) console.log(_account.number)
-        return ([
-            {
-                id: id,
-                idCompany: idCompany,
-                idYear: idYear,
-                idSheet: sheet?.id,
-                flow: _account.flow,
-                isAllowance: _account.isAllowance,
-                idStatement: statement?.id,
-                idAccountParent: idAccountParent,
-                number: _account.number,
-                label: _account.label
-            },
-            ...flatAccounts(newSheets, newStatements, _account.accounts, idCompany, idYear, id)
-        ])
-    }) as (typeof accounts.$inferInsert)[]
-    return flatArray as (typeof accounts.$inferInsert)[]
-}
 
 
 async function seed() {
@@ -171,20 +105,92 @@ async function seed() {
 
             // Sheets
             console.log("Add sheets")
-            const newSheets: (typeof sheets.$inferInsert & { accounts: number[] })[] = flatSheets(defaultSheets, newCompany.id, idCurrentYear)
+            let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
+                id: generateId(),
+                idCompany: newCompany.id,
+                idYear: idCurrentYear,
+                side: _sheet.side,
+                number: _sheet.number,
+                label: _sheet.label,
+                numberParent: _sheet.numberParent,
+                accounts: _sheet.accounts
+            }))
+            newSheets = newSheets.map((_sheet) => {
+                const parent = newSheets.find((x) => (x.number === _sheet.numberParent) && (x.side === _sheet.side))
+
+                return ({
+                    ..._sheet,
+                    idParent: parent?.id
+                })
+            })
             await tx.insert(sheets).values(newSheets)
 
 
             // Accounts
             console.log("Add statements")
-            const newStatements: (typeof statements.$inferInsert & { accounts: number[] })[] = flatStatements(defaultStatements, newCompany.id, idCurrentYear)
+            let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
+                id: generateId(),
+                idCompany: newCompany.id,
+                idYear: idCurrentYear,
+                number: _statement.number,
+                label: _statement.label,
+                numberParent: _statement.numberParent,
+                accounts: _statement.accounts
+            }))
+            newStatements = newStatements.map((_statement) => {
+                const parent = newStatements.find((x) => x.number === _statement.numberParent)
+
+                return ({
+                    ..._statement,
+                    idParent: parent?.id
+                })
+            })
             await tx.insert(statements).values(newStatements)
 
 
             // Accounts
             console.log("Add accounts")
-            const newAccounts: (typeof accounts.$inferInsert)[] = flatAccounts(newSheets, newStatements, defaultAccounts, newCompany.id, idCurrentYear)
+            let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => {
+                const statement = newStatements.find((_statement) => _statement.accounts.toString().includes(_account.number.toString()))
+
+                return ({
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    idYear: idCurrentYear,
+                    idStatement: statement?.id,
+                    number: _account.number,
+                    system: _account.system,
+                    label: _account.label
+                })
+            })
+            newAccounts = newAccounts.map((_account) => {
+                const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
+
+                return ({
+                    ..._account,
+                    idParent: parent?.id
+                })
+            })
             await tx.insert(accounts).values(newAccounts)
+
+
+            // AccountSheets
+            const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
+            newSheets.forEach((_sheet) => {
+                _sheet.accounts.forEach((_account) => {
+                    const account = newAccounts.find((x) => x.number === _account.number)
+
+                    if (!account) throw new Error(`Erreur ${_sheet.number} ${_account.number}`)
+                    newAccountSheets.push({
+                        id: generateId(),
+                        idAccount: account.id,
+                        idSheet: _sheet.id,
+                        flow: _account.flow,
+                        isAllowance: _account.isAllowance
+                    })
+                })
+            })
+            await tx.insert(accountSheets).values(newAccountSheets)
 
 
             // Users

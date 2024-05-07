@@ -40,8 +40,8 @@ export function UpdateStatementForm() {
                     params: { idStatement: idStatement },
                     body: data
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(statementsOptions.queryKey, (_data) => _data && data && [..._data.filter((statement) => statement.id !== data.id), data])
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/compte-de-resultat" })
                         toast({ title: "Ligne mise à jour", variant: "success" })
                         return true
@@ -93,7 +93,7 @@ export function UpdateStatementForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idStatementParent"
+                        name="idParent"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

@@ -23,10 +23,11 @@ export const accountsRoute = new Hono<AuthEnv>()
                     id: generateId(),
                     idCompany: c.var.company.id,
                     idYear: c.var.currentYear.id,
-                    idSheet: body.idSheet,
-                    idAccountParent: body.idAccountParent,
+                    idStatement: body.idStatement,
+                    idParent: body.idParent,
                     label: body.label,
                     number: body.number,
+                    system: body.system,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })
@@ -72,10 +73,11 @@ export const accountsRoute = new Hono<AuthEnv>()
             const [updateAccount] = await db
                 .update(accounts)
                 .set({
-                    idSheet: body.idSheet,
-                    idAccountParent: body.idAccountParent,
+                    idStatement: body.idStatement,
+                    idParent: body.idParent,
                     label: body.label,
                     number: body.number,
+                    system: body.system,
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })

@@ -1,8 +1,9 @@
-import { sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { integer, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { sheetSides } from "../components/values/sheetSide.js"
+import { accountSheets } from "./accountSheets.model.js"
 import { companies } from "./companies.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
@@ -17,7 +18,7 @@ export const sheets = pgTable(
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        idSheetParent: idColumn("id_sheet_parent"),
+        idParent: idColumn("id_parent"),
         side: sheetSide("side").notNull(),
         number: integer("number").notNull(),
         label: text("label").notNull(),
@@ -27,6 +28,11 @@ export const sheets = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.idSheetParent, t.number, t.idYear, t.idCompany)
+        uniqueConstraint: unique().on(t.idCompany, t.idYear, t.side, t.number)
     })
 )
+
+// Relations
+export const sheetRelations = relations(sheets, ({ many }) => ({
+    accountSheets: many(accountSheets)
+}))

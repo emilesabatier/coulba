@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { deleteYear } from "../../../services/api/auth/years/deleteYear"
-import { Delete } from "../../layouts/actions/delete"
 import { yearsOptions } from "../../../services/api/auth/years/yearsOptions"
+import { Delete } from "../../layouts/actions/delete"
 
 
 type DeleteYear = {
@@ -27,8 +27,8 @@ export function DeleteYear(props: DeleteYear) {
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
                 mutation.mutate({ params: { idYear: props.year.id } }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(yearsOptions.queryKey, (_data) => _data?.filter((year) => year.id !== data?.id))
+                    onSuccess: () => {
+                        queryClient.invalidateQueries()
                         toast({ title: "Exercice supprimé", variant: "success" })
                         return true
                     }

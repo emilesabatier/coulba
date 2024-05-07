@@ -4,7832 +4,5233 @@ export type DefaultAccount = {
     number: number
     label: string
     system: "base" | "condensed" | "developed"
-    flow?: "debit" | "credit"
-    isAllowance?: boolean
-    accounts: DefaultAccount[]
 }
 
 export const defaultAccounts: DefaultAccount[] = [
     {
         number: 1,
-        label: "Comptes de capitaux",
         system: "condensed",
-        accounts: [
-            {
-                number: 10,
-                label: "Capital et réserves",
-                system: "base",
-                accounts: [
-                    {
-                        number: 101,
-                        label: "Capital",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1011,
-                                label: "Capital souscrit - non appelé",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1012,
-                                label: "Capital souscrit - appelé, non versé",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1013,
-                                label: "Capital souscrit - appelé, versé",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 10131,
-                                        label: "Capital non amorti",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 10132,
-                                        label: "Capital amorti",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 1018,
-                                label: "Capital souscrit soumis à des réglementations particulières",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 102,
-                        label: "Fonds fiduciaires",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 104,
-                        label: "Primes liées au capital social",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1041,
-                                label: "Primes d'émission",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1042,
-                                label: "Primes de fusion",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1043,
-                                label: "Primes d'apport",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1044,
-                                label: "Primes de conversion d'obligations en actions",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1045,
-                                label: "Bons de souscription d'actions",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 105,
-                        label: "Écarts de réévaluation",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1051,
-                                label: "Réserve spéciale de réévaluation",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1052,
-                                label: "Écart de réévaluation libre",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1053,
-                                label: "Réserve de réévaluation",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1055,
-                                label: "Écarts de réévaluation (autres opérations légales)",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1057,
-                                label: "Autres écarts de réévaluation en France",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1058,
-                                label: "Autres écarts de réévaluation à l'étranger",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 106,
-                        label: "Réserves",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 1061,
-                                label: "Réserve légale",
-                                system: "condensed",
-                                flow: "credit",
-                                accounts: [
-                                    {
-                                        number: 10611,
-                                        label: "Réserve légale proprement dite",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 10612,
-                                        label: "Plus-values nettes à long terme",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 1062,
-                                label: "Réserves indisponibles",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1063,
-                                label: "Réserves statutaires ou contractuelles",
-                                system: "condensed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1064,
-                                label: "Réserves réglementées",
-                                system: "condensed",
-                                flow: "credit",
-                                accounts: [
-                                    {
-                                        number: 10641,
-                                        label: "Plus-values nettes à long terme",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 10643,
-                                        label: "Réserves consécutives à l'octroi de subventions d'investissement",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 10648,
-                                        label: "Autres réserves réglementées",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 1068,
-                                label: "Autres réserves",
-                                system: "condensed",
-                                flow: "credit",
-                                accounts: [
-                                    {
-                                        number: 10681,
-                                        label: "Réserve de propre assureur",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 10688,
-                                        label: "Réserves diverses",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 107,
-                        label: "Écart d'équivalence",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 108,
-                        label: "Compte de l'exploitant",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 109,
-                        label: "Actionnaires : Capital souscrit - non appelé",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 11,
-                label: "Report à nouveau (solde créditeur ou débiteur)",
-                system: "base",
-                flow: "credit",
-                accounts: [
-                    {
-                        number: 110,
-                        label: "Report à nouveau (solde créditeur)",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 119,
-                        label: "Report à nouveau (solde débiteur)",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 12,
-                label: "Résultat de l'exercice (bénéfice ou perte)",
-                system: "condensed",
-                flow: "credit",
-                accounts: [
-                    {
-                        number: 120,
-                        label: "Résultat de l'exercice (bénéfice)",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 129,
-                        label: "Résultat de l'exercice (perte)",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 13,
-                label: "Subventions d'investissement",
-                system: "base",
-                accounts: [
-                    {
-                        number: 131,
-                        label: "Subventions d'équipement",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1311,
-                                label: "État",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1312,
-                                label: "Régions",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1313,
-                                label: "Départements",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1314,
-                                label: "Communes",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1315,
-                                label: "Collectivités publiques",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1316,
-                                label: "Entreprises publiques",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1317,
-                                label: "Entreprises et organismes privés",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1318,
-                                label: "Autres",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 138,
-                        label: "Autres subventions d'investissement (même ventilation que celle du compte 131)",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 139,
-                        label: "Subventions d'investissement inscrites au compte de résultat",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 1391,
-                                label: "Subventions d'équipement",
-                                system: "base",
-                                flow: "credit",
-                                accounts: [
-                                    {
-                                        number: 13911,
-                                        label: "État",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13912,
-                                        label: "Régions",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13913,
-                                        label: "Départements",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13914,
-                                        label: "Communes",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13915,
-                                        label: "Collectivités publiques",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13916,
-                                        label: "Entreprises publiques",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13917,
-                                        label: "Entreprises et organismes privés",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 13918,
-                                        label: "Autres",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 1398,
-                                label: "Autres subventions d'investissement (même ventilation que celle du compte 1391)",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 14,
-                label: "Provisions réglementées",
-                system: "base",
-                accounts: [
-                    {
-                        number: 142,
-                        label: "Provisions réglementées relatives aux immobilisations",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1423,
-                                label: "Provisions pour reconstitution des gisements miniers et pétroliers",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1424,
-                                label: "Provisions pour investissement (participation des salariés)",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 143,
-                        label: "Provisions réglementées relatives aux stocks",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1431,
-                                label: "Hausse des prix",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1432,
-                                label: "Fluctuation des cours",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 144,
-                        label: "Provisions réglementées relatives aux autres éléments de l'actif",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 145,
-                        label: "Amortissements dérogatoires",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 146,
-                        label: "Provision spéciale de réévaluation",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 147,
-                        label: "Plus-values réinvesties",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 148,
-                        label: "Autres provisions réglementées",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 15,
-                label: "Provisions pour risques et charges",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 151,
-                        label: "Provisions pour risques",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1511,
-                                label: "Provisions pour litiges",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1512,
-                                label: "Provisions pour garanties données aux clients",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1513,
-                                label: "Provisions pour pertes sur marchés à terme",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1514,
-                                label: "Provisions pour amendes et pénalités",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1515,
-                                label: "Provisions pour pertes de change",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1516,
-                                label: "Provisions pour pertes sur contrats",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1518,
-                                label: "Autres provisions pour risques",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 153,
-                        label: "Provisions pour pensions et obligations similaires",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 154,
-                        label: "Provisions pour restructurations",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 155,
-                        label: "Provisions pour impôts",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 156,
-                        label: "Provisions pour renouvellement des immobilisations (entreprises concessionnaires)",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 157,
-                        label: "Provisions pour charges à répartir sur plusieurs exercices",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1572,
-                                label: "Provisions pour gros entretien ou grandes révisions",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 158,
-                        label: "Autres provisions pour charges",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1581,
-                                label: "Provisions pour remises en état",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 16,
-                label: "Emprunts et dettes assimilées",
-                system: "condensed",
-                flow: "credit",
-                accounts: [
-                    {
-                        number: 161,
-                        label: "Emprunts obligataires convertibles",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 162,
-                        label: "Obligations représentatives de passifs nets remis en fiducie",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 163,
-                        label: "Autres emprunts obligataires",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 164,
-                        label: "Émprunts auprès des établissements de crédit",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 165,
-                        label: "Dépôts et cautionnements reçus",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1651,
-                                label: "Dépôts",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1655,
-                                label: "Cautionnements",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 166,
-                        label: "Participation des salariés aux résultats",
-                        system: "developed",
-                        accounts: [
-                            {
-                                number: 1661,
-                                label: "Comptes bloqués",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1662,
-                                label: "Fonds de participation",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 167,
-                        label: "Emprunts et dettes assortis de conditions particulières",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 1671,
-                                label: "Émissions de titres participatifs",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1674,
-                                label: "Avances conditionnées de l'État",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1675,
-                                label: "Emprunts participatifs",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 168,
-                        label: "Autres emprunts et dettes assimilées",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1681,
-                                label: "Autres emprunts",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1685,
-                                label: "Rentes viagères capitalisées",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1687,
-                                label: "Autres dettes",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1688,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 16881,
-                                        label: "Sur emprunts obligataires convertibles",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 16883,
-                                        label: "Sur autres emprunts obligataires",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 16884,
-                                        label: "Sur emprunts auprès des établissements de crédit",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 16885,
-                                        label: "Sur dépôts et cautionnements reçus",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 16886,
-                                        label: "Sur participation des salariés aux résultats",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 16887,
-                                        label: "Sur emprunts et dettes assortis de conditions particulières",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 16888,
-                                        label: "Sur autres emprunts et dettes assimilées",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 169,
-                        label: "Primes de remboursement des obligations",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 17,
-                label: "Dettes rattachées à des participations",
-                system: "base",
-                accounts: [
-                    {
-                        number: 171,
-                        label: "Dettes rattachées à des participations (groupe)",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 174,
-                        label: "Dettes rattachées à des participations (hors groupe)",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 178,
-                        label: "Dettes rattachées à des sociétés en participation",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 1781,
-                                label: "Principal",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 1788,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 18,
-                label: "Comptes de liaison des établissements et sociétés en participation",
-                system: "base",
-                flow: "credit",
-                accounts: [
-                    {
-                        number: 181,
-                        label: "Comptes de liaison des établissements",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 186,
-                        label: "Biens et prestations de services échangés entre établissements (charges)",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 187,
-                        label: "Biens et prestations de services échangés entre établissements (produits)",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 188,
-                        label: "Comptes de liaison des sociétés en participation",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            }
-        ]
+        label: "Comptes de capitaux"
+    },
+    {
+        number: 10,
+        system: "base",
+        label: "Capital et réserves"
+    },
+    {
+        number: 101,
+        system: "condensed",
+        label: "Capital"
+    },
+    {
+        number: 1011,
+        system: "developed",
+        label: "Capital souscrit - non appelé"
+    },
+    {
+        number: 1012,
+        system: "developed",
+        label: "Capital souscrit - appelé, non versé"
+    },
+    {
+        number: 1013,
+        system: "developed",
+        label: "Capital souscrit - appelé, versé"
+    },
+    {
+        number: 10131,
+        system: "developed",
+        label: "Capital non amorti"
+    },
+    {
+        number: 10132,
+        system: "developed",
+        label: "Capital amorti"
+    },
+    {
+        number: 1018,
+        system: "developed",
+        label: "Capital souscrit soumis à des réglementations particulières"
+    },
+    {
+        number: 102,
+        system: "base",
+        label: "Fonds fiduciaires"
+    },
+    {
+        number: 104,
+        system: "base",
+        label: "Primes liées au capital social"
+    },
+    {
+        number: 1041,
+        system: "developed",
+        label: "Primes d'émission"
+    },
+    {
+        number: 1042,
+        system: "developed",
+        label: "Primes de fusion"
+    },
+    {
+        number: 1043,
+        system: "developed",
+        label: "Primes d'apport"
+    },
+    {
+        number: 1044,
+        system: "developed",
+        label: "Primes de conversion d'obligations en actions"
+    },
+    {
+        number: 1045,
+        system: "developed",
+        label: "Bons de souscription d'actions"
+    },
+    {
+        number: 105,
+        system: "condensed",
+        label: "Écarts de réévaluation"
+    },
+    {
+        number: 1051,
+        system: "developed",
+        label: "Réserve spéciale de réévaluation"
+    },
+    {
+        number: 1052,
+        system: "developed",
+        label: "Écart de réévaluation libre"
+    },
+    {
+        number: 1053,
+        system: "developed",
+        label: "Réserve de réévaluation"
+    },
+    {
+        number: 1055,
+        system: "developed",
+        label: "Écarts de réévaluation (autres opérations légales)"
+    },
+    {
+        number: 1057,
+        system: "developed",
+        label: "Autres écarts de réévaluation en France"
+    },
+    {
+        number: 1058,
+        system: "developed",
+        label: "Autres écarts de réévaluation à l'étranger"
+    },
+    {
+        number: 106,
+        system: "base",
+        label: "Réserves"
+    },
+    {
+        number: 1061,
+        system: "condensed",
+        label: "Réserve légale"
+    },
+    {
+        number: 10611,
+        system: "developed",
+        label: "Réserve légale proprement dite"
+    },
+    {
+        number: 10612,
+        system: "developed",
+        label: "Plus-values nettes à long terme"
+    },
+    {
+        number: 1062,
+        system: "base",
+        label: "Réserves indisponibles"
+    },
+    {
+        number: 1063,
+        system: "condensed",
+        label: "Réserves statutaires ou contractuelles"
+    },
+    {
+        number: 1064,
+        system: "condensed",
+        label: "Réserves réglementées"
+    },
+    {
+        number: 10641,
+        system: "developed",
+        label: "Plus-values nettes à long terme"
+    },
+    {
+        number: 10643,
+        system: "developed",
+        label: "Réserves consécutives à l'octroi de subventions d'investissement"
+    },
+    {
+        number: 10648,
+        system: "developed",
+        label: "Autres réserves réglementées"
+    },
+    {
+        number: 1068,
+        system: "condensed",
+        label: "Autres réserves"
+    },
+    {
+        number: 10681,
+        system: "developed",
+        label: "Réserve de propre assureur"
+    },
+    {
+        number: 10688,
+        system: "developed",
+        label: "Réserves diverses"
+    },
+    {
+        number: 107,
+        system: "base",
+        label: "Écart d'équivalence"
+    },
+    {
+        number: 108,
+        system: "condensed",
+        label: "Compte de l'exploitant"
+    },
+    {
+        number: 109,
+        system: "base",
+        label: "Actionnaires : Capital souscrit - non appelé"
+    },
+    {
+        number: 11,
+        system: "base",
+        label: "Report à nouveau (solde créditeur ou débiteur)"
+    },
+    {
+        number: 110,
+        system: "developed",
+        label: "Report à nouveau (solde créditeur)"
+    },
+    {
+        number: 119,
+        system: "developed",
+        label: "Report à nouveau (solde débiteur)"
+    },
+    {
+        number: 12,
+        system: "condensed",
+        label: "Résultat de l'exercice (bénéfice ou perte)"
+    },
+    {
+        number: 120,
+        system: "developed",
+        label: "Résultat de l'exercice (bénéfice)"
+    },
+    {
+        number: 129,
+        system: "developed",
+        label: "Résultat de l'exercice (perte)"
+    },
+    {
+        number: 13,
+        system: "base",
+        label: "Subventions d'investissement"
+    },
+    {
+        number: 131,
+        system: "base",
+        label: "Subventions d'équipement"
+    },
+    {
+        number: 1311,
+        system: "developed",
+        label: "État"
+    },
+    {
+        number: 1312,
+        system: "developed",
+        label: "Régions"
+    },
+    {
+        number: 1313,
+        system: "developed",
+        label: "Départements"
+    },
+    {
+        number: 1314,
+        system: "developed",
+        label: "Communes"
+    },
+    {
+        number: 1315,
+        system: "developed",
+        label: "Collectivités publiques"
+    },
+    {
+        number: 1316,
+        system: "developed",
+        label: "Entreprises publiques"
+    },
+    {
+        number: 1317,
+        system: "developed",
+        label: "Entreprises et organismes privés"
+    },
+    {
+        number: 1318,
+        system: "developed",
+        label: "Autres"
+    },
+    {
+        number: 138,
+        system: "base",
+        label: "Autres subventions d'investissement (même ventilation que celle du compte 131)"
+    },
+    {
+        number: 139,
+        system: "base",
+        label: "Subventions d'investissement inscrites au compte de résultat"
+    },
+    {
+        number: 1391,
+        system: "base",
+        label: "Subventions d'équipement"
+    },
+    {
+        number: 13911,
+        system: "developed",
+        label: "État"
+    },
+    {
+        number: 13912,
+        system: "developed",
+        label: "Régions"
+    },
+    {
+        number: 13913,
+        system: "developed",
+        label: "Départements"
+    },
+    {
+        number: 13914,
+        system: "developed",
+        label: "Communes"
+    },
+    {
+        number: 13915,
+        system: "developed",
+        label: "Collectivités publiques"
+    },
+    {
+        number: 13916,
+        system: "developed",
+        label: "Entreprises publiques"
+    },
+    {
+        number: 13917,
+        system: "developed",
+        label: "Entreprises et organismes privés"
+    },
+    {
+        number: 13918,
+        system: "developed",
+        label: "Autres"
+    },
+    {
+        number: 1398,
+        system: "base",
+        label: "Autres subventions d'investissement (même ventilation que celle du compte 1391)"
+    },
+    {
+        number: 14,
+        system: "base",
+        label: "Provisions réglementées"
+    },
+    {
+        number: 142,
+        system: "base",
+        label: "Provisions réglementées relatives aux immobilisations"
+    },
+    {
+        number: 1423,
+        system: "developed",
+        label: "Provisions pour reconstitution des gisements miniers et pétroliers"
+    },
+    {
+        number: 1424,
+        system: "developed",
+        label: "Provisions pour investissement (participation des salariés)"
+    },
+    {
+        number: 143,
+        system: "base",
+        label: "Provisions réglementées relatives aux stocks"
+    },
+    {
+        number: 1431,
+        system: "developed",
+        label: "Hausse des prix"
+    },
+    {
+        number: 1432,
+        system: "developed",
+        label: "Fluctuation des cours"
+    },
+    {
+        number: 144,
+        system: "base",
+        label: "Provisions réglementées relatives aux autres éléments de l'actif"
+    },
+    {
+        number: 145,
+        system: "condensed",
+        label: "Amortissements dérogatoires"
+    },
+    {
+        number: 146,
+        system: "condensed",
+        label: "Provision spéciale de réévaluation"
+    },
+    {
+        number: 147,
+        system: "condensed",
+        label: "Plus-values réinvesties"
+    },
+    {
+        number: 148,
+        system: "condensed",
+        label: "Autres provisions réglementées"
+    },
+    {
+        number: 15,
+        system: "condensed",
+        label: "Provisions pour risques et charges"
+    },
+    {
+        number: 151,
+        system: "base",
+        label: "Provisions pour risques"
+    },
+    {
+        number: 1511,
+        system: "developed",
+        label: "Provisions pour litiges"
+    },
+    {
+        number: 1512,
+        system: "developed",
+        label: "Provisions pour garanties données aux clients"
+    },
+    {
+        number: 1513,
+        system: "developed",
+        label: "Provisions pour pertes sur marchés à terme"
+    },
+    {
+        number: 1514,
+        system: "developed",
+        label: "Provisions pour amendes et pénalités"
+    },
+    {
+        number: 1515,
+        system: "developed",
+        label: "Provisions pour pertes de change"
+    },
+    {
+        number: 1516,
+        system: "developed",
+        label: "Provisions pour pertes sur contrats"
+    },
+    {
+        number: 1518,
+        system: "developed",
+        label: "Autres provisions pour risques"
+    },
+    {
+        number: 153,
+        system: "base",
+        label: "Provisions pour pensions et obligations similaires"
+    },
+    {
+        number: 154,
+        system: "base",
+        label: "Provisions pour restructurations"
+    },
+    {
+        number: 155,
+        system: "base",
+        label: "Provisions pour impôts"
+    },
+    {
+        number: 156,
+        system: "base",
+        label: "Provisions pour renouvellement des immobilisations (entreprises concessionnaires)"
+    },
+    {
+        number: 157,
+        system: "base",
+        label: "Provisions pour charges à répartir sur plusieurs exercices"
+    },
+    {
+        number: 1572,
+        system: "developed",
+        label: "Provisions pour gros entretien ou grandes révisions"
+    },
+    {
+        number: 158,
+        system: "base",
+        label: "Autres provisions pour charges"
+    },
+    {
+        number: 1581,
+        system: "developed",
+        label: "Provisions pour remises en état"
+    },
+    {
+        number: 16,
+        system: "condensed",
+        label: "Emprunts et dettes assimilées"
+    },
+    {
+        number: 161,
+        system: "base",
+        label: "Emprunts obligataires convertibles"
+    },
+    {
+        number: 162,
+        system: "base",
+        label: "Obligations représentatives de passifs nets remis en fiducie"
+    },
+    {
+        number: 163,
+        system: "base",
+        label: "Autres emprunts obligataires"
+    },
+    {
+        number: 164,
+        system: "base",
+        label: "Émprunts auprès des établissements de crédit"
+    },
+    {
+        number: 165,
+        system: "base",
+        label: "Dépôts et cautionnements reçus"
+    },
+    {
+        number: 1651,
+        system: "developed",
+        label: "Dépôts"
+    },
+    {
+        number: 1655,
+        system: "developed",
+        label: "Cautionnements"
+    },
+    {
+        number: 166,
+        system: "developed",
+        label: "Participation des salariés aux résultats"
+    },
+    {
+        number: 1661,
+        system: "developed",
+        label: "Comptes bloqués"
+    },
+    {
+        number: 1662,
+        system: "developed",
+        label: "Fonds de participation"
+    },
+    {
+        number: 167,
+        system: "base",
+        label: "Emprunts et dettes assortis de conditions particulières"
+    },
+    {
+        number: 1671,
+        system: "base",
+        label: "Émissions de titres participatifs"
+    },
+    {
+        number: 1674,
+        system: "base",
+        label: "Avances conditionnées de l'État"
+    },
+    {
+        number: 1675,
+        system: "base",
+        label: "Emprunts participatifs"
+    },
+    {
+        number: 168,
+        system: "base",
+        label: "Autres emprunts et dettes assimilées"
+    },
+    {
+        number: 1681,
+        system: "developed",
+        label: "Autres emprunts"
+    },
+    {
+        number: 1685,
+        system: "developed",
+        label: "Rentes viagères capitalisées"
+    },
+    {
+        number: 1687,
+        system: "developed",
+        label: "Autres dettes"
+    },
+    {
+        number: 1688,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 16881,
+        system: "developed",
+        label: "Sur emprunts obligataires convertibles"
+    },
+    {
+        number: 16883,
+        system: "developed",
+        label: "Sur autres emprunts obligataires"
+    },
+    {
+        number: 16884,
+        system: "developed",
+        label: "Sur emprunts auprès des établissements de crédit"
+    },
+    {
+        number: 16885,
+        system: "developed",
+        label: "Sur dépôts et cautionnements reçus"
+    },
+    {
+        number: 16886,
+        system: "developed",
+        label: "Sur participation des salariés aux résultats"
+    },
+    {
+        number: 16887,
+        system: "developed",
+        label: "Sur emprunts et dettes assortis de conditions particulières"
+    },
+    {
+        number: 16888,
+        system: "developed",
+        label: "Sur autres emprunts et dettes assimilées"
+    },
+    {
+        number: 169,
+        system: "base",
+        label: "Primes de remboursement des obligations"
+    },
+    {
+        number: 17,
+        system: "base",
+        label: "Dettes rattachées à des participations"
+    },
+    {
+        number: 171,
+        system: "base",
+        label: "Dettes rattachées à des participations (groupe)"
+    },
+    {
+        number: 174,
+        system: "base",
+        label: "Dettes rattachées à des participations (hors groupe)"
+    },
+    {
+        number: 178,
+        system: "base",
+        label: "Dettes rattachées à des sociétés en participation"
+    },
+    {
+        number: 1781,
+        system: "developed",
+        label: "Principal"
+    },
+    {
+        number: 1788,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 18,
+        system: "base",
+        label: "Comptes de liaison des établissements et sociétés en participation"
+    },
+    {
+        number: 181,
+        system: "developed",
+        label: "Comptes de liaison des établissements"
+    },
+    {
+        number: 186,
+        system: "developed",
+        label: "Biens et prestations de services échangés entre établissements (charges)"
+    },
+    {
+        number: 187,
+        system: "developed",
+        label: "Biens et prestations de services échangés entre établissements (produits)"
+    },
+    {
+        number: 188,
+        system: "developed",
+        label: "Comptes de liaison des sociétés en participation"
     },
     {
         number: 2,
-        label: "Comptes d'immobilisations",
         system: "condensed",
-        accounts: [
-            {
-                number: 20,
-                label: "Immobilisations incorporelles",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 201,
-                        label: "Frais d'établissement",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 2011,
-                                label: "Frais de constitution",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2012,
-                                label: "Frais de premier établissement",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 20121,
-                                        label: "Frais de prospection",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 20122,
-                                        label: "Frais de publicité",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 2013,
-                                label: "Frais d'augmentation de capital et d'opérations diverses (fusions, scissions, transformations)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 203,
-                        label: "Frais de recherche et de développement",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 205,
-                        label: "Concessions et droits similaires, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 206,
-                        label: "Droit au bail",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 207,
-                        label: "Fonds commercial",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 208,
-                        label: "Autres immobilisations incorporelles",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 2081,
-                                label: "Mali de fusion sur actifs incorporels",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 21,
-                label: "Immobilisations corporelles",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 211,
-                        label: "Terrains",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2111,
-                                label: "Terrains nus",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2112,
-                                label: "Terrains aménagés",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2113,
-                                label: "Sous-sols et sursols",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2114,
-                                label: "Terrains de de carrières (tréfonds)",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2115,
-                                label: "Terrains bâtis",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 21151,
-                                        label: "Ensembles immobiliers industriels (A, B, ...)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21155,
-                                        label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21158,
-                                        label: "Autres ensembles immobiliers",
-                                        system: "developed",
-                                        accounts: [
-                                            {
-                                                number: 211581,
-                                                label: "affectés aux opérations professionnelles (A, B, ...)",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            },
-                                            {
-                                                number: 211588,
-                                                label: "affectés aux opérations non professionnelles (A, B, ...)",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                number: 2116,
-                                label: "Compte d'ordre sur immobilisations",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 212,
-                        label: "Agencements et aménagements de terrains (même ventilation que celle du compte 211)",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 213,
-                        label: "Constructions",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2131,
-                                label: "Bâtiments",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 21311,
-                                        label: "Ensembles immobiliers industriels (A, B, ...)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21315,
-                                        label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21318,
-                                        label: "Autres ensembles immobiliers",
-                                        system: "developed",
-                                        accounts: [
-                                            {
-                                                number: 213181,
-                                                label: "affectés aux opérations professionnelles (A, B, ...)",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            },
-                                            {
-                                                number: 213188,
-                                                label: "affectés aux opérations non professionnelles (A, B, ...)",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                number: 2135,
-                                label: "Installations générales - agencements - aménagements des constructions",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 21351,
-                                        label: "Ensembles immobiliers industriels (A, B, ...)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21355,
-                                        label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21358,
-                                        label: "Autres ensembles immobiliers",
-                                        system: "developed",
-                                        accounts: [
-                                            {
-                                                number: 213581,
-                                                label: "affectés aux opérations professionnelles (A, B)",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            },
-                                            {
-                                                number: 213588,
-                                                label: "affectés aux opérations non professionnelles (A, B)",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                number: 2138,
-                                label: "Ouvrages d'infrastructure",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 21381,
-                                        label: "Voies de terre",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21382,
-                                        label: "Voies de fer",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21383,
-                                        label: "Voies d'eau",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21384,
-                                        label: "Barrages",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21385,
-                                        label: "Pistes d'aérodromes",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 214,
-                        label: "Constructions sur sol d'autrui (même ventilation que celle du compte 213)",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 215,
-                        label: "Installations techniques, matériels et outillage industriels",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2151,
-                                label: "Installations complexes spécialisées",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 21511,
-                                        label: "sur sol propre",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21514,
-                                        label: "sur sol d'autrui",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 2153,
-                                label: "Installations à caractère spécifique",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 21531,
-                                        label: "sur sol propre",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 21534,
-                                        label: "sur sol d'autrui",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 2154,
-                                label: "Matériel industriel",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2155,
-                                label: "Outillage industriel",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2157,
-                                label: "Agencements et aménagements du matériel et outillage industriels",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 218,
-                        label: "Autres immobilisations corporelles",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2181,
-                                label: "Installations générales, agencements, aménagements divers",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2182,
-                                label: "Matériel de transport",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2183,
-                                label: "Matériel de bureau et matériel informatique",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2184,
-                                label: "Mobilier",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2185,
-                                label: "Cheptel",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2186,
-                                label: "Emballages récupérables",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2187,
-                                label: "Mali de fusions sur actifs corporels",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 22,
-                label: "Immobilisations mises en concession",
-                system: "base",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 23,
-                label: "Immobilisations en cours",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 231,
-                        label: "Immobilisations corporelles en cours",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2312,
-                                label: "Terrains",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2313,
-                                label: "Constructions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2315,
-                                label: "Installations techniques, matériel et outillage industriels",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2318,
-                                label: "Autres immobilisations corporelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 232,
-                        label: "Immobilisations incorporelles en cours",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 237,
-                        label: "Avances et acomptes versés sur immobilisations incorporelles",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 238,
-                        label: "Avances et acomptes versés sur commandes d'immobilisations corporelles",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2382,
-                                label: "Terrains",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2383,
-                                label: "Constructions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2385,
-                                label: "Installations techniques, matériel et outillage industriels",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2388,
-                                label: "Autres immobilisations corporelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 25,
-                label: "Parts dans des entreprises liées et créances sur des entreprises liées",
-                system: "base",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 26,
-                label: "Participations et créances rattachées à des participations",
-                system: "base",
-                accounts: [
-                    {
-                        number: 261,
-                        label: "Titres de participation",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2611,
-                                label: "Actions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2618,
-                                label: "Autres titres",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 266,
-                        label: "Autres formes de participation",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2661,
-                                label: "Droits représentatifs d'actifs nets remis en fiducie",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 267,
-                        label: "Créances rattachées à des participations",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2671,
-                                label: "Créances rattachées à des participations (groupe)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2674,
-                                label: "Créances rattachées à des participations (hors groupe)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2675,
-                                label: "Versements représentatifs d'apports non capitalisés (appel de fonds)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2676,
-                                label: "Avances consolidables",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2677,
-                                label: "Autres créances rattachées à des participations",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2678,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 268,
-                        label: "Créances rattachées à des sociétés en participation",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2681,
-                                label: "Principal",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2688,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 269,
-                        label: "Versements restant à effectuer sur titres de participation non libérés",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 27,
-                label: "Autres immobilisations financières",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 271,
-                        label: "Titres immobilisés autres que les titres immobilisés de l'activité de portefeuille (droit de propriété)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2711,
-                                label: "Actions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2718,
-                                label: "Autres titres",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 272,
-                        label: "Titres immobilisés (droit de créance)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2721,
-                                label: "Obligations",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2722,
-                                label: "Bons",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 273,
-                        label: "Titres immobilisés de l'activité de portefeuille",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 274,
-                        label: "Prêts",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2741,
-                                label: "Prêts participatifs",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2742,
-                                label: "Prêts aux associés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2743,
-                                label: "Prêts au personnel",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2748,
-                                label: "Autres prêts",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 275,
-                        label: "Dépôts et cautionnements versés",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2751,
-                                label: "Dépôts",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2755,
-                                label: "Cautionnements",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 276,
-                        label: "Autres créances immobilisées",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2761,
-                                label: "Créances diverses",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2768,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 27682,
-                                        label: "sur titres immobilisés (droit de créance)",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 27684,
-                                        label: "sur prêts",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 27685,
-                                        label: "sur dépôts et cautionnements",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 27688,
-                                        label: "sur créances diverses",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 277,
-                        label: "Actions propres ou parts propres",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2771,
-                                label: "Actions propres ou parts propres",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2772,
-                                label: "Actions propres ou parts propres en voie d'annulation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 278,
-                        label: "Mali de fusion sur actifs financiers",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 279,
-                        label: "Versements restant à effectuer sur titres immobilisés non libérés",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 28,
-                label: "Amortissements des immobilisations",
-                system: "base",
-                accounts: [
-                    {
-                        number: 280,
-                        label: "Amortissements des immobilisations incorporelles",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 2801,
-                                label: "Frais d'établissement (même ventilation que celle du compte 201)",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2803,
-                                label: "Frais de recherche et de développement",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2805,
-                                label: "Concessions et droits similaires, brevets, licences, logiciels, droits et valeurs similaires",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2807,
-                                label: "Fonds commercial",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 2808,
-                                label: "Autres immobilisations incorporelles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 28081,
-                                        label: "Amortissements du mali de fusion sur actifs incorporels",
-                                        system: "base",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 281,
-                        label: "Amortissements des immobilisations corporelles",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 2812,
-                                label: "Agencements, aménagements de terrains (même ventilation que celle du compte 212)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2813,
-                                label: "Constructions (même ventilation que celle du compte 213)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2814,
-                                label: "Constructions sur sol d'autrui (même ventilation que celle du compte 214)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2815,
-                                label: "Installations, matériel et outillage industriels (même ventilation que celle du compte 215)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2818,
-                                label: "Autres immobilisations corporelles (même ventilation que celle du compte 218)",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 28183,
-                                        label: "Amortissements du matériel de bureau et du matériel informatique",
-                                        system: "developed",
-                                        flow: "credit",
-                                        isAllowance: true,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 28187,
-                                        label: "Amortissement du mali de fusion sur actifs corporels",
-                                        system: "base",
-                                        flow: "credit",
-                                        isAllowance: true,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 282,
-                        label: "Amortissements des immobilisations mises en concession",
-                        system: "base",
-                        flow: "credit",
-                        isAllowance: true,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 29,
-                label: "Dépréciations des immobilisations",
-                system: "base",
-                accounts: [
-                    {
-                        number: 290,
-                        label: "Dépréciations des immobilisations incorporelles",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 2905,
-                                label: "Marques, procédés, droits et valeurs similaires",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2906,
-                                label: "Droit au bail",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2907,
-                                label: "Fonds commercial",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2908,
-                                label: "Autres immobilisations incorporelles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 29081,
-                                        label: "Dépréciation du mali de fusion sur actifs incorporels",
-                                        system: "base",
-                                        flow: "credit",
-                                        isAllowance: true,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 291,
-                        label: "Dépréciations des immobilisations corporelles (même ventilation que celle du compte 21)",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 29187,
-                                label: "Dépréciation du mali de fusion sur actifs corporels",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 292,
-                        label: "Dépréciations des immobilisations mises en concession",
-                        system: "base",
-                        flow: "credit",
-                        isAllowance: true,
-                        accounts: []
-                    },
-                    {
-                        number: 293,
-                        label: "Dépréciations des immobilisations en cours",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2931,
-                                label: "Immobilisations corporelles en cours",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2932,
-                                label: "Immobilisations incorporelles en cours",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 296,
-                        label: "Dépréciations des participations et créances rattachées à des participations",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 2961,
-                                label: "Titres de participation",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2966,
-                                label: "Autres formes de participation",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2967,
-                                label: "Créances rattachées à des participations (même ventilation que celle du compte 267)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2968,
-                                label: "Créances rattachées à des sociétés en participation (même ventilation que celle du compte 268)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 297,
-                        label: "Dépréciations des autres immobilisations financières",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 2971,
-                                label: "Titres immobilisés autres que les titres immobilisés de l'activité de portefeuille, droit de propriété (même ventilation que celle du compte 271)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2972,
-                                label: "Droit de créance (même ventilation que celle du compte 272)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2973,
-                                label: "Titres immobilisés de l'activité de portefeuille",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2974,
-                                label: "Prêts (même ventilation que celle du compte 274)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2975,
-                                label: "Dépôts et cautionnements versés (même ventilation que celle du compte 275)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2976,
-                                label: "Autres créances immobilisées (même ventilation que celle du compte 276)",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 2978,
-                                label: "Dépréciation du mali de fusion sur actifs financiers",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 29787,
-                                        label: "Dépréciation du mali de fusion sur actifs financiers",
-                                        system: "base",
-                                        flow: "credit",
-                                        isAllowance: true,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        label: "Comptes d'immobilisations"
+    },
+    {
+        number: 20,
+        system: "condensed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 201,
+        system: "condensed",
+        label: "Frais d'établissement"
+    },
+    {
+        number: 2011,
+        system: "developed",
+        label: "Frais de constitution"
+    },
+    {
+        number: 2012,
+        system: "developed",
+        label: "Frais de premier établissement"
+    },
+    {
+        number: 20121,
+        system: "developed",
+        label: "Frais de prospection"
+    },
+    {
+        number: 20122,
+        system: "developed",
+        label: "Frais de publicité"
+    },
+    {
+        number: 2013,
+        system: "developed",
+        label: "Frais d'augmentation de capital et d'opérations diverses (fusions, scissions, transformations)"
+    },
+    {
+        number: 203,
+        system: "base",
+        label: "Frais de recherche et de développement"
+    },
+    {
+        number: 205,
+        system: "base",
+        label: "Concessions et droits similaires, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires"
+    },
+    {
+        number: 206,
+        system: "condensed",
+        label: "Droit au bail"
+    },
+    {
+        number: 207,
+        system: "condensed",
+        label: "Fonds commercial"
+    },
+    {
+        number: 208,
+        system: "condensed",
+        label: "Autres immobilisations incorporelles"
+    },
+    {
+        number: 2081,
+        system: "base",
+        label: "Mali de fusion sur actifs incorporels"
+    },
+    {
+        number: 21,
+        system: "condensed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 211,
+        system: "base",
+        label: "Terrains"
+    },
+    {
+        number: 2111,
+        system: "base",
+        label: "Terrains nus"
+    },
+    {
+        number: 2112,
+        system: "base",
+        label: "Terrains aménagés"
+    },
+    {
+        number: 2113,
+        system: "base",
+        label: "Sous-sols et sursols"
+    },
+    {
+        number: 2114,
+        system: "base",
+        label: "Terrains de de carrières (tréfonds)"
+    },
+    {
+        number: 2115,
+        system: "base",
+        label: "Terrains bâtis"
+    },
+    {
+        number: 21151,
+        system: "developed",
+        label: "Ensembles immobiliers industriels (A, B, ...)"
+    },
+    {
+        number: 21155,
+        system: "developed",
+        label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)"
+    },
+    {
+        number: 21158,
+        system: "developed",
+        label: "Autres ensembles immobiliers"
+    },
+    {
+        number: 211581,
+        system: "developed",
+        label: "affectés aux opérations professionnelles (A, B, ...)"
+    },
+    {
+        number: 211588,
+        system: "developed",
+        label: "affectés aux opérations non professionnelles (A, B, ...)"
+    },
+    {
+        number: 2116,
+        system: "base",
+        label: "Compte d'ordre sur immobilisations"
+    },
+    {
+        number: 212,
+        system: "base",
+        label: "Agencements et aménagements de terrains (même ventilation que celle du compte 211)"
+    },
+    {
+        number: 213,
+        system: "base",
+        label: "Constructions"
+    },
+    {
+        number: 2131,
+        system: "base",
+        label: "Bâtiments"
+    },
+    {
+        number: 21311,
+        system: "developed",
+        label: "Ensembles immobiliers industriels (A, B, ...)"
+    },
+    {
+        number: 21315,
+        system: "developed",
+        label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)"
+    },
+    {
+        number: 21318,
+        system: "developed",
+        label: "Autres ensembles immobiliers"
+    },
+    {
+        number: 213181,
+        system: "developed",
+        label: "affectés aux opérations professionnelles (A, B, ...)"
+    },
+    {
+        number: 213188,
+        system: "developed",
+        label: "affectés aux opérations non professionnelles (A, B, ...)"
+    },
+    {
+        number: 2135,
+        system: "base",
+        label: "Installations générales - agencements - aménagements des constructions"
+    },
+    {
+        number: 21351,
+        system: "developed",
+        label: "Ensembles immobiliers industriels (A, B, ...)"
+    },
+    {
+        number: 21355,
+        system: "developed",
+        label: "Ensembles immobiliers administratifs et commerciaux (A, B, ...)"
+    },
+    {
+        number: 21358,
+        system: "developed",
+        label: "Autres ensembles immobiliers"
+    },
+    {
+        number: 213581,
+        system: "developed",
+        label: "affectés aux opérations professionnelles (A, B)"
+    },
+    {
+        number: 213588,
+        system: "developed",
+        label: "affectés aux opérations non professionnelles (A, B)"
+    },
+    {
+        number: 2138,
+        system: "base",
+        label: "Ouvrages d'infrastructure"
+    },
+    {
+        number: 21381,
+        system: "developed",
+        label: "Voies de terre"
+    },
+    {
+        number: 21382,
+        system: "developed",
+        label: "Voies de fer"
+    },
+    {
+        number: 21383,
+        system: "developed",
+        label: "Voies d'eau"
+    },
+    {
+        number: 21384,
+        system: "developed",
+        label: "Barrages"
+    },
+    {
+        number: 21385,
+        system: "developed",
+        label: "Pistes d'aérodromes"
+    },
+    {
+        number: 214,
+        system: "base",
+        label: "Constructions sur sol d'autrui (même ventilation que celle du compte 213)"
+    },
+    {
+        number: 215,
+        system: "base",
+        label: "Installations techniques, matériels et outillage industriels"
+    },
+    {
+        number: 2151,
+        system: "base",
+        label: "Installations complexes spécialisées"
+    },
+    {
+        number: 21511,
+        system: "developed",
+        label: "sur sol propre"
+    },
+    {
+        number: 21514,
+        system: "developed",
+        label: "sur sol d'autrui"
+    },
+    {
+        number: 2153,
+        system: "base",
+        label: "Installations à caractère spécifique"
+    },
+    {
+        number: 21531,
+        system: "developed",
+        label: "sur sol propre"
+    },
+    {
+        number: 21534,
+        system: "developed",
+        label: "sur sol d'autrui"
+    },
+    {
+        number: 2154,
+        system: "base",
+        label: "Matériel industriel"
+    },
+    {
+        number: 2155,
+        system: "base",
+        label: "Outillage industriel"
+    },
+    {
+        number: 2157,
+        system: "base",
+        label: "Agencements et aménagements du matériel et outillage industriels"
+    },
+    {
+        number: 218,
+        system: "base",
+        label: "Autres immobilisations corporelles"
+    },
+    {
+        number: 2181,
+        system: "base",
+        label: "Installations générales, agencements, aménagements divers"
+    },
+    {
+        number: 2182,
+        system: "base",
+        label: "Matériel de transport"
+    },
+    {
+        number: 2183,
+        system: "base",
+        label: "Matériel de bureau et matériel informatique"
+    },
+    {
+        number: 2184,
+        system: "base",
+        label: "Mobilier"
+    },
+    {
+        number: 2185,
+        system: "base",
+        label: "Cheptel"
+    },
+    {
+        number: 2186,
+        system: "base",
+        label: "Emballages récupérables"
+    },
+    {
+        number: 2187,
+        system: "base",
+        label: "Mali de fusions sur actifs corporels"
+    },
+    {
+        number: 22,
+        system: "base",
+        label: "Immobilisations mises en concession"
+    },
+    {
+        number: 23,
+        system: "condensed",
+        label: "Immobilisations en cours"
+    },
+    {
+        number: 231,
+        system: "base",
+        label: "Immobilisations corporelles en cours"
+    },
+    {
+        number: 2312,
+        system: "developed",
+        label: "Terrains"
+    },
+    {
+        number: 2313,
+        system: "developed",
+        label: "Constructions"
+    },
+    {
+        number: 2315,
+        system: "developed",
+        label: "Installations techniques, matériel et outillage industriels"
+    },
+    {
+        number: 2318,
+        system: "developed",
+        label: "Autres immobilisations corporelles"
+    },
+    {
+        number: 232,
+        system: "base",
+        label: "Immobilisations incorporelles en cours"
+    },
+    {
+        number: 237,
+        system: "base",
+        label: "Avances et acomptes versés sur immobilisations incorporelles"
+    },
+    {
+        number: 238,
+        system: "base",
+        label: "Avances et acomptes versés sur commandes d'immobilisations corporelles"
+    },
+    {
+        number: 2382,
+        system: "developed",
+        label: "Terrains"
+    },
+    {
+        number: 2383,
+        system: "developed",
+        label: "Constructions"
+    },
+    {
+        number: 2385,
+        system: "developed",
+        label: "Installations techniques, matériel et outillage industriels"
+    },
+    {
+        number: 2388,
+        system: "developed",
+        label: "Autres immobilisations corporelles"
+    },
+    {
+        number: 25,
+        system: "base",
+        label: "Parts dans des entreprises liées et créances sur des entreprises liées"
+    },
+    {
+        number: 26,
+        system: "base",
+        label: "Participations et créances rattachées à des participations"
+    },
+    {
+        number: 261,
+        system: "base",
+        label: "Titres de participation"
+    },
+    {
+        number: 2611,
+        system: "developed",
+        label: "Actions"
+    },
+    {
+        number: 2618,
+        system: "developed",
+        label: "Autres titres"
+    },
+    {
+        number: 266,
+        system: "base",
+        label: "Autres formes de participation"
+    },
+    {
+        number: 2661,
+        system: "developed",
+        label: "Droits représentatifs d'actifs nets remis en fiducie"
+    },
+    {
+        number: 267,
+        system: "base",
+        label: "Créances rattachées à des participations"
+    },
+    {
+        number: 2671,
+        system: "developed",
+        label: "Créances rattachées à des participations (groupe)"
+    },
+    {
+        number: 2674,
+        system: "developed",
+        label: "Créances rattachées à des participations (hors groupe)"
+    },
+    {
+        number: 2675,
+        system: "developed",
+        label: "Versements représentatifs d'apports non capitalisés (appel de fonds)"
+    },
+    {
+        number: 2676,
+        system: "developed",
+        label: "Avances consolidables"
+    },
+    {
+        number: 2677,
+        system: "developed",
+        label: "Autres créances rattachées à des participations"
+    },
+    {
+        number: 2678,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 268,
+        system: "base",
+        label: "Créances rattachées à des sociétés en participation"
+    },
+    {
+        number: 2681,
+        system: "developed",
+        label: "Principal"
+    },
+    {
+        number: 2688,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 269,
+        system: "base",
+        label: "Versements restant à effectuer sur titres de participation non libérés"
+    },
+    {
+        number: 27,
+        system: "condensed",
+        label: "Autres immobilisations financières"
+    },
+    {
+        number: 271,
+        system: "base",
+        label: "Titres immobilisés autres que les titres immobilisés de l'activité de portefeuille (droit de propriété)"
+    },
+    {
+        number: 2711,
+        system: "developed",
+        label: "Actions"
+    },
+    {
+        number: 2718,
+        system: "developed",
+        label: "Autres titres"
+    },
+    {
+        number: 272,
+        system: "base",
+        label: "Titres immobilisés (droit de créance)"
+    },
+    {
+        number: 2721,
+        system: "developed",
+        label: "Obligations"
+    },
+    {
+        number: 2722,
+        system: "developed",
+        label: "Bons"
+    },
+    {
+        number: 273,
+        system: "base",
+        label: "Titres immobilisés de l'activité de portefeuille"
+    },
+    {
+        number: 274,
+        system: "base",
+        label: "Prêts"
+    },
+    {
+        number: 2741,
+        system: "developed",
+        label: "Prêts participatifs"
+    },
+    {
+        number: 2742,
+        system: "developed",
+        label: "Prêts aux associés"
+    },
+    {
+        number: 2743,
+        system: "developed",
+        label: "Prêts au personnel"
+    },
+    {
+        number: 2748,
+        system: "developed",
+        label: "Autres prêts"
+    },
+    {
+        number: 275,
+        system: "base",
+        label: "Dépôts et cautionnements versés"
+    },
+    {
+        number: 2751,
+        system: "developed",
+        label: "Dépôts"
+    },
+    {
+        number: 2755,
+        system: "developed",
+        label: "Cautionnements"
+    },
+    {
+        number: 276,
+        system: "base",
+        label: "Autres créances immobilisées"
+    },
+    {
+        number: 2761,
+        system: "developed",
+        label: "Créances diverses"
+    },
+    {
+        number: 2768,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 27682,
+        system: "developed",
+        label: "sur titres immobilisés (droit de créance)"
+    },
+    {
+        number: 27684,
+        system: "developed",
+        label: "sur prêts"
+    },
+    {
+        number: 27685,
+        system: "developed",
+        label: "sur dépôts et cautionnements"
+    },
+    {
+        number: 27688,
+        system: "developed",
+        label: "sur créances diverses"
+    },
+    {
+        number: 277,
+        system: "base",
+        label: "Actions propres ou parts propres"
+    },
+    {
+        number: 2771,
+        system: "developed",
+        label: "Actions propres ou parts propres"
+    },
+    {
+        number: 2772,
+        system: "developed",
+        label: "Actions propres ou parts propres en voie d'annulation"
+    },
+    {
+        number: 278,
+        system: "base",
+        label: "Mali de fusion sur actifs financiers"
+    },
+    {
+        number: 279,
+        system: "base",
+        label: "Versements restant à effectuer sur titres immobilisés non libérés"
+    },
+    {
+        number: 28,
+        system: "base",
+        label: "Amortissements des immobilisations"
+    },
+    {
+        number: 280,
+        system: "condensed",
+        label: "Amortissements des immobilisations incorporelles"
+    },
+    {
+        number: 2801,
+        system: "base",
+        label: "Frais d'établissement (même ventilation que celle du compte 201)"
+    },
+    {
+        number: 2803,
+        system: "base",
+        label: "Frais de recherche et de développement"
+    },
+    {
+        number: 2805,
+        system: "base",
+        label: "Concessions et droits similaires, brevets, licences, logiciels, droits et valeurs similaires"
+    },
+    {
+        number: 2807,
+        system: "base",
+        label: "Fonds commercial"
+    },
+    {
+        number: 2808,
+        system: "base",
+        label: "Autres immobilisations incorporelles"
+    },
+    {
+        number: 28081,
+        system: "base",
+        label: "Amortissements du mali de fusion sur actifs incorporels"
+    },
+    {
+        number: 281,
+        system: "condensed",
+        label: "Amortissements des immobilisations corporelles"
+    },
+    {
+        number: 2812,
+        system: "base",
+        label: "Agencements, aménagements de terrains (même ventilation que celle du compte 212)"
+    },
+    {
+        number: 2813,
+        system: "base",
+        label: "Constructions (même ventilation que celle du compte 213)"
+    },
+    {
+        number: 2814,
+        system: "base",
+        label: "Constructions sur sol d'autrui (même ventilation que celle du compte 214)"
+    },
+    {
+        number: 2815,
+        system: "base",
+        label: "Installations, matériel et outillage industriels (même ventilation que celle du compte 215)"
+    },
+    {
+        number: 2818,
+        system: "base",
+        label: "Autres immobilisations corporelles (même ventilation que celle du compte 218)"
+    },
+    {
+        number: 28181,
+        system: "developed",
+        label: "Amortissements des installations et agencements"
+    },
+    {
+        number: 28182,
+        system: "developed",
+        label: "Amortissements du matériel de transport"
+    },
+    {
+        number: 28183,
+        system: "developed",
+        label: "Amortissements du matériel de bureau et du matériel informatique"
+    },
+    {
+        number: 28187,
+        system: "base",
+        label: "Amortissement du mali de fusion sur actifs corporels"
+    },
+    {
+        number: 282,
+        system: "base",
+        label: "Amortissements des immobilisations mises en concession"
+    },
+    {
+        number: 29,
+        system: "base",
+        label: "Dépréciations des immobilisations"
+    },
+    {
+        number: 290,
+        system: "condensed",
+        label: "Dépréciations des immobilisations incorporelles"
+    },
+    {
+        number: 2905,
+        system: "base",
+        label: "Marques, procédés, droits et valeurs similaires"
+    },
+    {
+        number: 2906,
+        system: "base",
+        label: "Droit au bail"
+    },
+    {
+        number: 2907,
+        system: "base",
+        label: "Fonds commercial"
+    },
+    {
+        number: 2908,
+        system: "base",
+        label: "Autres immobilisations incorporelles"
+    },
+    {
+        number: 29081,
+        system: "base",
+        label: "Dépréciation du mali de fusion sur actifs incorporels"
+    },
+    {
+        number: 291,
+        system: "condensed",
+        label: "Dépréciations des immobilisations corporelles (même ventilation que celle du compte 21)"
+    },
+    {
+        number: 29187,
+        system: "base",
+        label: "Dépréciation du mali de fusion sur actifs corporels"
+    },
+    {
+        number: 292,
+        system: "base",
+        label: "Dépréciations des immobilisations mises en concession"
+    },
+    {
+        number: 293,
+        system: "base",
+        label: "Dépréciations des immobilisations en cours"
+    },
+    {
+        number: 2931,
+        system: "base",
+        label: "Immobilisations corporelles en cours"
+    },
+    {
+        number: 2932,
+        system: "base",
+        label: "Immobilisations incorporelles en cours"
+    },
+    {
+        number: 296,
+        system: "base",
+        label: "Dépréciations des participations et créances rattachées à des participations"
+    },
+    {
+        number: 2961,
+        system: "base",
+        label: "Titres de participation"
+    },
+    {
+        number: 2966,
+        system: "base",
+        label: "Autres formes de participation"
+    },
+    {
+        number: 2967,
+        system: "base",
+        label: "Créances rattachées à des participations (même ventilation que celle du compte 267)"
+    },
+    {
+        number: 2968,
+        system: "base",
+        label: "Créances rattachées à des sociétés en participation (même ventilation que celle du compte 268)"
+    },
+    {
+        number: 297,
+        system: "condensed",
+        label: "Dépréciations des autres immobilisations financières"
+    },
+    {
+        number: 2971,
+        system: "base",
+        label: "Titres immobilisés autres que les titres immobilisés de l'activité de portefeuille, droit de propriété (même ventilation que celle du compte 271)"
+    },
+    {
+        number: 2972,
+        system: "base",
+        label: "Droit de créance (même ventilation que celle du compte 272)"
+    },
+    {
+        number: 2973,
+        system: "base",
+        label: "Titres immobilisés de l'activité de portefeuille"
+    },
+    {
+        number: 2974,
+        system: "base",
+        label: "Prêts (même ventilation que celle du compte 274)"
+    },
+    {
+        number: 2975,
+        system: "base",
+        label: "Dépôts et cautionnements versés (même ventilation que celle du compte 275)"
+    },
+    {
+        number: 2976,
+        system: "base",
+        label: "Autres créances immobilisées (même ventilation que celle du compte 276)"
+    },
+    {
+        number: 2978,
+        system: "base",
+        label: "Dépréciation du mali de fusion sur actifs financiers"
+    },
+    {
+        number: 29787,
+        system: "base",
+        label: "Dépréciation du mali de fusion sur actifs financiers"
     },
     {
         number: 3,
-        label: "Comptes de stocks et en-cours",
         system: "condensed",
-        accounts: [
-            {
-                number: 31,
-                label: "Matières premières et fournitures",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 311,
-                        label: "Matières (ou groupe) A",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 312,
-                        label: "Matières (ou groupe) B",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 317,
-                        label: "Fournitures A, B, C, ...",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 32,
-                label: "Autres approvisionnements",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 321,
-                        label: "Matières consommables",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3211,
-                                label: "Matières (ou groupe) C",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3212,
-                                label: "Matières (ou groupe) D",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 322,
-                        label: "Fournitures consommables",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3221,
-                                label: "Combustibles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3222,
-                                label: "Produits d'entretien",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3223,
-                                label: "Fournitures d'atelier et d'usine",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3224,
-                                label: "Fournitures de magasin",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3225,
-                                label: "Fournitures de bureau",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 326,
-                        label: "Emballages",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3261,
-                                label: "Emballages perdus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3265,
-                                label: "Emballages récupérables non identifiables",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3267,
-                                label: "Emballages à usage mixte",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 33,
-                label: "En-cours de production de biens",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 331,
-                        label: "Produits en cours",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3311,
-                                label: "Produits en cours P1",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3312,
-                                label: "Produits en cours P2",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 335,
-                        label: "Travaux en cours",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3351,
-                                label: "Travaux en cours T1",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3352,
-                                label: "Travaux en cours T2",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 34,
-                label: "En-cours de production de services",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 341,
-                        label: "Études en cours",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3411,
-                                label: "Études en cours E1",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3412,
-                                label: "Études en cours E2",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 345,
-                        label: "Prestations de services en cours",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3451,
-                                label: "Prestations de services S1",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3452,
-                                label: "Prestations de services S2",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 35,
-                label: "Stocks de produits",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 351,
-                        label: "Produits intermédiaires",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3511,
-                                label: "Produits intermédiaires (ou groupe) A",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3512,
-                                label: "Produits intermédiaires (ou groupe) B",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 355,
-                        label: "Produits finis",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3551,
-                                label: "Produits finis (ou groupe) A",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3552,
-                                label: "Produits finis (ou groupe) B",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 358,
-                        label: "Produits résiduels (ou matières de récupération)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 3581,
-                                label: "Déchets",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3585,
-                                label: "Rebuts",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 3586,
-                                label: "Matières de récupération",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 36,
-                label: "Stocks provenant d'immobilisations",
-                system: "base",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 37,
-                label: "Stocks de marchandises",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 371,
-                        label: "Marchandises (ou groupe) A",
-                        system: "developed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 372,
-                        label: "Marchandises (ou groupe) B",
-                        system: "developed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 38,
-                label: "Stocks en voie d'acheminement, mis en dépôt ou donnés en consignation",
-                system: "base",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 39,
-                label: "Dépréciations des stocks et en-cours",
-                system: "base",
-                accounts: [
-                    {
-                        number: 391,
-                        label: "Dépréciations des matières premières (et fournitures)",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 3911,
-                                label: "Matières (ou groupe) A",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3912,
-                                label: "Matières (ou groupe) B",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3917,
-                                label: "Fournitures A, B, C, ...",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 392,
-                        label: "Dépréciations des autres approvisionnements",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 3921,
-                                label: "Matières consommables (même ventilation que celle du compte 321)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3922,
-                                label: "Fournitures consommables (même ventilation que celle du compte 322)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3926,
-                                label: "Emballages (même ventilation que celle du compte 326)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 393,
-                        label: "Dépréciations des en-cours de production de biens",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 3931,
-                                label: "Produits en cours (même ventilation que celle du compte 331)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3935,
-                                label: "Travaux en cours (même ventilation que celle du compte 335)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 394,
-                        label: "Dépréciations des en-cours de production de services",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 3941,
-                                label: "Études en cours (même ventilation que celle du compte 341)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3945,
-                                label: "Prestations de services en cours (même ventilation que celle du compte 345)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 395,
-                        label: "Dépréciations des stocks de produits",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 3951,
-                                label: "Produits intermédiaires (même ventilation que celle du compte 351)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3955,
-                                label: "Produits finis (même ventilation que celle du compte 355)",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 397,
-                        label: "Dépréciations des stocks de marchandises",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 3971,
-                                label: "Marchandise (ou groupe) A",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 3972,
-                                label: "Marchandise (ou groupe) B",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        label: "Comptes de stocks et en-cours"
+    },
+    {
+        number: 31,
+        system: "condensed",
+        label: "Matières premières et fournitures"
+    },
+    {
+        number: 311,
+        system: "base",
+        label: "Matières (ou groupe) A"
+    },
+    {
+        number: 312,
+        system: "base",
+        label: "Matières (ou groupe) B"
+    },
+    {
+        number: 317,
+        system: "base",
+        label: "Fournitures A, B, C, ..."
+    },
+    {
+        number: 32,
+        system: "condensed",
+        label: "Autres approvisionnements"
+    },
+    {
+        number: 321,
+        system: "base",
+        label: "Matières consommables"
+    },
+    {
+        number: 3211,
+        system: "developed",
+        label: "Matières (ou groupe) C"
+    },
+    {
+        number: 3212,
+        system: "developed",
+        label: "Matières (ou groupe) D"
+    },
+    {
+        number: 322,
+        system: "base",
+        label: "Fournitures consommables"
+    },
+    {
+        number: 3221,
+        system: "developed",
+        label: "Combustibles"
+    },
+    {
+        number: 3222,
+        system: "developed",
+        label: "Produits d'entretien"
+    },
+    {
+        number: 3223,
+        system: "developed",
+        label: "Fournitures d'atelier et d'usine"
+    },
+    {
+        number: 3224,
+        system: "developed",
+        label: "Fournitures de magasin"
+    },
+    {
+        number: 3225,
+        system: "developed",
+        label: "Fournitures de bureau"
+    },
+    {
+        number: 326,
+        system: "base",
+        label: "Emballages"
+    },
+    {
+        number: 3261,
+        system: "developed",
+        label: "Emballages perdus"
+    },
+    {
+        number: 3265,
+        system: "developed",
+        label: "Emballages récupérables non identifiables"
+    },
+    {
+        number: 3267,
+        system: "developed",
+        label: "Emballages à usage mixte"
+    },
+    {
+        number: 33,
+        system: "condensed",
+        label: "En-cours de production de biens"
+    },
+    {
+        number: 331,
+        system: "base",
+        label: "Produits en cours"
+    },
+    {
+        number: 3311,
+        system: "developed",
+        label: "Produits en cours P1"
+    },
+    {
+        number: 3312,
+        system: "developed",
+        label: "Produits en cours P2"
+    },
+    {
+        number: 335,
+        system: "base",
+        label: "Travaux en cours"
+    },
+    {
+        number: 3351,
+        system: "developed",
+        label: "Travaux en cours T1"
+    },
+    {
+        number: 3352,
+        system: "developed",
+        label: "Travaux en cours T2"
+    },
+    {
+        number: 34,
+        system: "condensed",
+        label: "En-cours de production de services"
+    },
+    {
+        number: 341,
+        system: "base",
+        label: "Études en cours"
+    },
+    {
+        number: 3411,
+        system: "developed",
+        label: "Études en cours E1"
+    },
+    {
+        number: 3412,
+        system: "developed",
+        label: "Études en cours E2"
+    },
+    {
+        number: 345,
+        system: "base",
+        label: "Prestations de services en cours"
+    },
+    {
+        number: 3451,
+        system: "developed",
+        label: "Prestations de services S1"
+    },
+    {
+        number: 3452,
+        system: "developed",
+        label: "Prestations de services S2"
+    },
+    {
+        number: 35,
+        system: "condensed",
+        label: "Stocks de produits"
+    },
+    {
+        number: 351,
+        system: "base",
+        label: "Produits intermédiaires"
+    },
+    {
+        number: 3511,
+        system: "developed",
+        label: "Produits intermédiaires (ou groupe) A"
+    },
+    {
+        number: 3512,
+        system: "developed",
+        label: "Produits intermédiaires (ou groupe) B"
+    },
+    {
+        number: 355,
+        system: "base",
+        label: "Produits finis"
+    },
+    {
+        number: 3551,
+        system: "developed",
+        label: "Produits finis (ou groupe) A"
+    },
+    {
+        number: 3552,
+        system: "developed",
+        label: "Produits finis (ou groupe) B"
+    },
+    {
+        number: 358,
+        system: "base",
+        label: "Produits résiduels (ou matières de récupération)"
+    },
+    {
+        number: 3581,
+        system: "developed",
+        label: "Déchets"
+    },
+    {
+        number: 3585,
+        system: "developed",
+        label: "Rebuts"
+    },
+    {
+        number: 3586,
+        system: "developed",
+        label: "Matières de récupération"
+    },
+    {
+        number: 36,
+        system: "base",
+        label: "Stocks provenant d'immobilisations"
+    },
+    {
+        number: 37,
+        system: "condensed",
+        label: "Stocks de marchandises"
+    },
+    {
+        number: 371,
+        system: "developed",
+        label: "Marchandises (ou groupe) A"
+    },
+    {
+        number: 372,
+        system: "developed",
+        label: "Marchandises (ou groupe) B"
+    },
+    {
+        number: 38,
+        system: "base",
+        label: "Stocks en voie d'acheminement, mis en dépôt ou donnés en consignation"
+    },
+    {
+        number: 39,
+        system: "base",
+        label: "Dépréciations des stocks et en-cours"
+    },
+    {
+        number: 391,
+        system: "condensed",
+        label: "Dépréciations des matières premières (et fournitures)"
+    },
+    {
+        number: 3911,
+        system: "developed",
+        label: "Matières (ou groupe) A"
+    },
+    {
+        number: 3912,
+        system: "developed",
+        label: "Matières (ou groupe) B"
+    },
+    {
+        number: 3917,
+        system: "developed",
+        label: "Fournitures A, B, C, ..."
+    },
+    {
+        number: 392,
+        system: "condensed",
+        label: "Dépréciations des autres approvisionnements"
+    },
+    {
+        number: 3921,
+        system: "developed",
+        label: "Matières consommables (même ventilation que celle du compte 321)"
+    },
+    {
+        number: 3922,
+        system: "developed",
+        label: "Fournitures consommables (même ventilation que celle du compte 322)"
+    },
+    {
+        number: 3926,
+        system: "developed",
+        label: "Emballages (même ventilation que celle du compte 326)"
+    },
+    {
+        number: 393,
+        system: "condensed",
+        label: "Dépréciations des en-cours de production de biens"
+    },
+    {
+        number: 3931,
+        system: "developed",
+        label: "Produits en cours (même ventilation que celle du compte 331)"
+    },
+    {
+        number: 3935,
+        system: "developed",
+        label: "Travaux en cours (même ventilation que celle du compte 335)"
+    },
+    {
+        number: 394,
+        system: "condensed",
+        label: "Dépréciations des en-cours de production de services"
+    },
+    {
+        number: 3941,
+        system: "developed",
+        label: "Études en cours (même ventilation que celle du compte 341)"
+    },
+    {
+        number: 3945,
+        system: "developed",
+        label: "Prestations de services en cours (même ventilation que celle du compte 345)"
+    },
+    {
+        number: 395,
+        system: "condensed",
+        label: "Dépréciations des stocks de produits"
+    },
+    {
+        number: 3951,
+        system: "developed",
+        label: "Produits intermédiaires (même ventilation que celle du compte 351)"
+    },
+    {
+        number: 3955,
+        system: "developed",
+        label: "Produits finis (même ventilation que celle du compte 355)"
+    },
+    {
+        number: 397,
+        system: "condensed",
+        label: "Dépréciations des stocks de marchandises"
+    },
+    {
+        number: 3971,
+        system: "developed",
+        label: "Marchandise (ou groupe) A"
+    },
+    {
+        number: 3972,
+        system: "developed",
+        label: "Marchandise (ou groupe) B"
     },
     {
         number: 4,
-        label: "Comptes de tiers",
         system: "condensed",
-        accounts: [
-            {
-                number: 40,
-                label: "Fournisseurs et comptes rattachés",
-                system: "base",
-                accounts: [
-                    {
-                        number: 400,
-                        label: "Fournisseurs et comptes rattachés",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 401,
-                        label: "Fournisseurs",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4011,
-                                label: "Fournisseurs - Achats de biens et prestations de services",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4017,
-                                label: "Fournisseurs - Retenues de garantie",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 403,
-                        label: "Fournisseurs - Effets à payer",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 404,
-                        label: "Fournisseurs d'immobilisations",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4041,
-                                label: "Fournisseurs - Achats d'immobilisations",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4047,
-                                label: "Fournisseurs d'immobilisations - Retenues de garantie",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 405,
-                        label: "Fournisseurs d'immobilisations - Effets à payer",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 408,
-                        label: "Fournisseurs - Factures non parvenues",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4081,
-                                label: "Fournisseurs",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4084,
-                                label: "Fournisseurs d'immobilisations",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4088,
-                                label: "Fournisseurs - Intérêts courus",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 409,
-                        label: "Fournisseurs débiteurs",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 4091,
-                                label: "Fournisseurs - Avances et acomptes versés sur commandes",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4096,
-                                label: "Fournisseurs - Créances pour emballages et matériel à rendre",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4097,
-                                label: "Fournisseurs - Autres avoirs",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 40971,
-                                        label: "Fournisseurs d'exploitation",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 40974,
-                                        label: "Fournisseurs d'immobilisations",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4098,
-                                label: "Rabais, remises, ristournes à obtenir et autres avoirs non encore reçus",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 41,
-                label: "Clients et comptes rattachés",
-                system: "base",
-                accounts: [
-                    {
-                        number: 410,
-                        label: "Clients et comptes rattachés",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 411,
-                        label: "Clients",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4111,
-                                label: "Clients - Ventes de biens ou de prestations de services",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4117,
-                                label: "Clients - Retenues de garantie",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 413,
-                        label: "Clients - Effets à recevoir",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 416,
-                        label: "Clients douteux ou litigieux",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 418,
-                        label: "Clients - Produits non encore facturés",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4181,
-                                label: "Clients - Factures à établir",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4188,
-                                label: "Clients - Intérêts courus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 419,
-                        label: "Clients créditeurs",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4191,
-                                label: "Clients - Avances et acomptes reçus sur commandes",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4196,
-                                label: "Clients - Dettes sur emballages et matériels consignés",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4197,
-                                label: "Clients - Autres avoirs",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4198,
-                                label: "Rabais, remises, ristournes à accorder et autres avoirs à établir",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 42,
-                label: "Personnel et comptes rattachés",
-                system: "base",
-                accounts: [
-                    {
-                        number: 421,
-                        label: "Personnel - Rémunérations dues",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 422,
-                        label: "Comités d'entreprises, d'établissement, ...",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 424,
-                        label: "Participation des salariés aux résultats",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4246,
-                                label: "Réserve spéciale",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4248,
-                                label: "Comptes courants",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 425,
-                        label: "Personnel - Avances et acomptes",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 426,
-                        label: "Personnel - Dépôts",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 427,
-                        label: "Personnel - Oppositions",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 428,
-                        label: "Personnel - Charges à payer et produits à recevoir",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4282,
-                                label: "Dettes provisionnées pour congés à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4284,
-                                label: "Dettes provisionnées pour participation des salariés aux résultats",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4286,
-                                label: "Autres charges à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4287,
-                                label: "Produits à recevoir",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 43,
-                label: "Sécurité sociale et autres organismes sociaux",
-                system: "condensed",
-                flow: "credit",
-                accounts: [
-                    {
-                        number: 431,
-                        label: "Sécurité sociale",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 437,
-                        label: "Autres organismes sociaux",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 438,
-                        label: "Organismes sociaux - Charges à payer et produits à recevoir",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4382,
-                                label: "Charges sociales sur congés à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4386,
-                                label: "Autres charges à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4387,
-                                label: "Produits à recevoir",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 44,
-                label: "État et autres collectivités publiques",
-                system: "base",
-                accounts: [
-                    {
-                        number: 441,
-                        label: "État - Subventions à recevoir",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4411,
-                                label: "Subventions d'investissement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4417,
-                                label: "Subventions d'exploitation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4418,
-                                label: "Subventions d'équilibre",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4419,
-                                label: "Avances sur subventions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 442,
-                        label: "Contributions, impôts et taxes recouvrés pour le compte de l'État",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4421,
-                                label: "Prélèvements à la source (Impôt sur le revenu)",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4422,
-                                label: "Prélèvements forfaitaires non libératoires",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4423,
-                                label: "Retenues et prélèvements sur les distributions",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4424,
-                                label: "Obligataires",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4425,
-                                label: "Associés",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 443,
-                        label: "Opérations particulières avec l'État, les collectivités publiques, les organismes internationaux",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4431,
-                                label: "Créances sur l'État résultant de la suppression de la règle du décalage d'un mois en matière de TVA",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4438,
-                                label: "Intérêts courus sur créances figurant au 4431",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 444,
-                        label: "État - Impôts sur les bénéfices",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 445,
-                        label: "État - Taxes sur le chiffre d'affaires",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4452,
-                                label: "TVA due intracommunautaire",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4453,
-                                label: "TVA due extracommunautaire",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4455,
-                                label: "Taxes sur le chiffre d'affaires à décaisser",
-                                system: "base",
-                                flow: "credit",
-                                accounts: [
-                                    {
-                                        number: 44551,
-                                        label: "TVA à décaisser",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44558,
-                                        label: "Taxes assimilées à la TVA",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4456,
-                                label: "Taxes sur le chiffre d'affaires déductibles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 44562,
-                                        label: "TVA sur immobilisations",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44563,
-                                        label: "TVA transférée par d'autres entreprises",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44566,
-                                        label: "TVA sur autres biens et services",
-                                        system: "developed",
-                                        accounts: [
-                                            {
-                                                number: 445662,
-                                                label: "TVA déductible intracommunautaire",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            },
-                                            {
-                                                number: 445663,
-                                                label: "TVA déductible extracommunautaire",
-                                                system: "developed",
-                                                flow: "debit",
-                                                isAllowance: false,
-                                                accounts: []
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        number: 44567,
-                                        label: "Crédit de TVA à reporter",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44568,
-                                        label: "Taxes assimilées à la TVA",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4457,
-                                label: "Taxes sur le chiffre d'affaires collectées par l'entreprise",
-                                system: "base",
-                                flow: "credit",
-                                accounts: [
-                                    {
-                                        number: 44571,
-                                        label: "TVA collectée",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44578,
-                                        label: "Taxes assimilées à la TVA",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4458,
-                                label: "Taxes sur le chiffre d'affaires à régulariser ou en attente",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 44581,
-                                        label: "Acomptes - Régime simplifié d'imposition",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44582,
-                                        label: "Acomptes - Régime de forfait",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44583,
-                                        label: "Remboursement de taxes sur le chiffre d'affaires demandé",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44584,
-                                        label: "TVA récupérée d'avance",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44586,
-                                        label: "Taxes sur le chiffre d'affaires sur factures non parvenues",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 44587,
-                                        label: "Taxes sur le chiffre d'affaires sur factures à établir",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 446,
-                        label: "Obligations cautionnées",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 447,
-                        label: "Autres impôts, taxes et versements assimilés",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 448,
-                        label: "État - Charges à payer et produits à recevoir",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4482,
-                                label: "Charges fiscales sur congés à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4486,
-                                label: "Charges à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4487,
-                                label: "Produits à recevoir",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 449,
-                        label: "Quotas d'émission à acquérir",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 45,
-                label: "Groupe et associés",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 451,
-                        label: "Groupe",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 455,
-                        label: "Associés - Comptes courants",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 4551,
-                                label: "Principal",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4558,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 456,
-                        label: "Associés - Opérations sur le capital",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4561,
-                                label: "Associés - Comptes d'apport en société",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 45611,
-                                        label: "Apports en nature",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 45615,
-                                        label: "Apports en numéraire",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4562,
-                                label: "Apporteurs - Capital appelé, non versé",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 45621,
-                                        label: "Actionnaires - Capital souscrit et appelé, non versé",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 45625,
-                                        label: "Associés - Capital appelé, non versé",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4563,
-                                label: "Associés - Versements reçus sur augmentation de capital",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4564,
-                                label: "Associés - Versements anticipés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4566,
-                                label: "Actionnaires défaillants",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4567,
-                                label: "Associés - Capital à rembourser",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 457,
-                        label: "Associés - Dividendes à payer",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 458,
-                        label: "Associés - Opérations faites en commun et en GIE",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4581,
-                                label: "Opérations courantes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4588,
-                                label: "Intérêts courus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 46,
-                label: "Débiteurs divers et créditeurs divers",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 462,
-                        label: "Créances sur cessions d'immobilisations",
-                        system: "developed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 464,
-                        label: "Dettes sur acquisitions de valeurs mobilières de placement",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 465,
-                        label: "Créances sur cessions de valeurs mobilières de placement",
-                        system: "developed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 467,
-                        label: "Autres comptes débiteurs ou créditeurs",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 468,
-                        label: "Divers - Charges à payer et produits à recevoir",
-                        system: "developed",
-                        accounts: [
-                            {
-                                number: 4686,
-                                label: "Charges à payer",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4687,
-                                label: "Produits à recevoir",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 47,
-                label: "Comptes transitoires ou d'attente",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 471,
-                        label: "Comptes d'attente",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 472,
-                        label: "Comptes d'attente",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 473,
-                        label: "Comptes d'attente",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 474,
-                        label: "Différences d'évaluation de jetons sur des passifs",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4746,
-                                label: "Différence d'évaluation de jetons sur des passifs - Actif",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4747,
-                                label: "Différence d'évaluation de jetons sur des passifs - Passif",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 475,
-                        label: "Comptes d'attente",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 476,
-                        label: "Différence de conversion - Actif",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4761,
-                                label: "Diminution des créances",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4762,
-                                label: "Augmentation des dettes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4768,
-                                label: "Différences compensées par couverture de change",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 477,
-                        label: "Différences de conversion - Passif",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4771,
-                                label: "Augmentation des créances",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4772,
-                                label: "Diminution des dettes",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 4778,
-                                label: "Différences compensées par couverture de change",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 478,
-                        label: "Autres comptes transitoires",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4786,
-                                label: "Différences d'évaluation - Actif",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 47861,
-                                        label: "Différences d'évaluation sur instruments financier à terme - Actif",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 47862,
-                                        label: "Différences d'évaluation sur jetons détenus - Actif",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 4787,
-                                label: "Différences d'évaluation - Passif",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 47871,
-                                        label: "Différences d'évaluation sur instruments financier à terme - Passif",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 47872,
-                                        label: "Différences d'évaluation sur jetons détenus - Passif",
-                                        system: "developed",
-                                        flow: "credit",
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 48,
-                label: "Comptes de régularisation",
-                system: "base",
-                accounts: [
-                    {
-                        number: 481,
-                        label: "Charges à répartir sur plusieurs exercices",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 4811,
-                                label: "Charges différées",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4812,
-                                label: "Frais d'acquisition des immobilisations",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4816,
-                                label: "Frais d'émission des emprunts",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4818,
-                                label: "Charges à étaler",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 486,
-                        label: "Charges constatées d'avance",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 487,
-                        label: "Produits constatés d'avance",
-                        system: "condensed",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 4871,
-                                label: "Produits constatés d'avance sur jetons émis",
-                                system: "base",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 488,
-                        label: "Comptes de répartition périodique des charges et des produits",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4886,
-                                label: "Charges",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 4887,
-                                label: "Produits",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 489,
-                        label: "Quotas d'émission alloués par l'État",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 49,
-                label: "Dépréciations des comptes de tiers",
-                system: "base",
-                accounts: [
-                    {
-                        number: 491,
-                        label: "Dépréciations des comptes de clients",
-                        system: "condensed",
-                        flow: "credit",
-                        isAllowance: true,
-                        accounts: []
-                    },
-                    {
-                        number: 495,
-                        label: "Dépréciations des comptes du groupe et des associés",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 4951,
-                                label: "Comptes du groupe",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 4955,
-                                label: "Comptes courants des associés",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 4958,
-                                label: "Opérations faites en commun et en GIE",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 496,
-                        label: "Dépréciations des comptes de débiteurs divers",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 4962,
-                                label: "Créances sur cessions d'immobilisations",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 4965,
-                                label: "Créances sur cessions de valeurs mobilières de placement",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 4967,
-                                label: "Autres comptes débiteurs",
-                                system: "developed",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        label: "Comptes de tiers"
+    },
+    {
+        number: 40,
+        system: "condensed",
+        label: "Fournisseurs et comptes rattachés"
+    },
+    {
+        number: 401,
+        system: "base",
+        label: "Fournisseurs"
+    },
+    {
+        number: 4011,
+        system: "developed",
+        label: "Fournisseurs - Achats de biens et prestations de services"
+    },
+    {
+        number: 4017,
+        system: "developed",
+        label: "Fournisseurs - Retenues de garantie"
+    },
+    {
+        number: 403,
+        system: "base",
+        label: "Fournisseurs - Effets à payer"
+    },
+    {
+        number: 404,
+        system: "base",
+        label: "Fournisseurs d'immobilisations"
+    },
+    {
+        number: 4041,
+        system: "developed",
+        label: "Fournisseurs - Achats d'immobilisations"
+    },
+    {
+        number: 4047,
+        system: "developed",
+        label: "Fournisseurs d'immobilisations - Retenues de garantie"
+    },
+    {
+        number: 405,
+        system: "base",
+        label: "Fournisseurs d'immobilisations - Effets à payer"
+    },
+    {
+        number: 408,
+        system: "base",
+        label: "Fournisseurs - Factures non parvenues"
+    },
+    {
+        number: 4081,
+        system: "developed",
+        label: "Fournisseurs"
+    },
+    {
+        number: 4084,
+        system: "developed",
+        label: "Fournisseurs d'immobilisations"
+    },
+    {
+        number: 4088,
+        system: "developed",
+        label: "Fournisseurs - Intérêts courus"
+    },
+    {
+        number: 409,
+        system: "condensed",
+        label: "Fournisseurs débiteurs"
+    },
+    {
+        number: 4091,
+        system: "base",
+        label: "Fournisseurs - Avances et acomptes versés sur commandes"
+    },
+    {
+        number: 4096,
+        system: "base",
+        label: "Fournisseurs - Créances pour emballages et matériel à rendre"
+    },
+    {
+        number: 4097,
+        system: "base",
+        label: "Fournisseurs - Autres avoirs"
+    },
+    {
+        number: 40971,
+        system: "developed",
+        label: "Fournisseurs d'exploitation"
+    },
+    {
+        number: 40974,
+        system: "developed",
+        label: "Fournisseurs d'immobilisations"
+    },
+    {
+        number: 4098,
+        system: "base",
+        label: "Rabais, remises, ristournes à obtenir et autres avoirs non encore reçus"
+    },
+    {
+        number: 41,
+        system: "base",
+        label: "Clients et comptes rattachés"
+    },
+    {
+        number: 410,
+        system: "condensed",
+        label: "Clients et comptes rattachés"
+    },
+    {
+        number: 411,
+        system: "base",
+        label: "Clients"
+    },
+    {
+        number: 4111,
+        system: "developed",
+        label: "Clients - Ventes de biens ou de prestations de services"
+    },
+    {
+        number: 4117,
+        system: "developed",
+        label: "Clients - Retenues de garantie"
+    },
+    {
+        number: 413,
+        system: "base",
+        label: "Clients - Effets à recevoir"
+    },
+    {
+        number: 416,
+        system: "base",
+        label: "Clients douteux ou litigieux"
+    },
+    {
+        number: 418,
+        system: "base",
+        label: "Clients - Produits non encore facturés"
+    },
+    {
+        number: 4181,
+        system: "developed",
+        label: "Clients - Factures à établir"
+    },
+    {
+        number: 4188,
+        system: "developed",
+        label: "Clients - Intérêts courus"
+    },
+    {
+        number: 419,
+        system: "condensed",
+        label: "Clients créditeurs"
+    },
+    {
+        number: 4191,
+        system: "base",
+        label: "Clients - Avances et acomptes reçus sur commandes"
+    },
+    {
+        number: 4196,
+        system: "base",
+        label: "Clients - Dettes sur emballages et matériels consignés"
+    },
+    {
+        number: 4197,
+        system: "base",
+        label: "Clients - Autres avoirs"
+    },
+    {
+        number: 4198,
+        system: "base",
+        label: "Rabais, remises, ristournes à accorder et autres avoirs à établir"
+    },
+    {
+        number: 42,
+        system: "base",
+        label: "Personnel et comptes rattachés"
+    },
+    {
+        number: 421,
+        system: "condensed",
+        label: "Personnel - Rémunérations dues"
+    },
+    {
+        number: 422,
+        system: "base",
+        label: "Comités d'entreprises, d'établissement, ..."
+    },
+    {
+        number: 424,
+        system: "base",
+        label: "Participation des salariés aux résultats"
+    },
+    {
+        number: 4246,
+        system: "developed",
+        label: "Réserve spéciale"
+    },
+    {
+        number: 4248,
+        system: "developed",
+        label: "Comptes courants"
+    },
+    {
+        number: 425,
+        system: "base",
+        label: "Personnel - Avances et acomptes"
+    },
+    {
+        number: 426,
+        system: "base",
+        label: "Personnel - Dépôts"
+    },
+    {
+        number: 427,
+        system: "base",
+        label: "Personnel - Oppositions"
+    },
+    {
+        number: 428,
+        system: "condensed",
+        label: "Personnel - Charges à payer et produits à recevoir"
+    },
+    {
+        number: 4282,
+        system: "developed",
+        label: "Dettes provisionnées pour congés à payer"
+    },
+    {
+        number: 4284,
+        system: "developed",
+        label: "Dettes provisionnées pour participation des salariés aux résultats"
+    },
+    {
+        number: 4286,
+        system: "developed",
+        label: "Autres charges à payer"
+    },
+    {
+        number: 4287,
+        system: "developed",
+        label: "Produits à recevoir"
+    },
+    {
+        number: 43,
+        system: "condensed",
+        label: "Sécurité sociale et autres organismes sociaux"
+    },
+    {
+        number: 431,
+        system: "base",
+        label: "Sécurité sociale"
+    },
+    {
+        number: 437,
+        system: "base",
+        label: "Autres organismes sociaux"
+    },
+    {
+        number: 438,
+        system: "base",
+        label: "Organismes sociaux - Charges à payer et produits à recevoir"
+    },
+    {
+        number: 4382,
+        system: "developed",
+        label: "Charges sociales sur congés à payer"
+    },
+    {
+        number: 4386,
+        system: "developed",
+        label: "Autres charges à payer"
+    },
+    {
+        number: 4387,
+        system: "developed",
+        label: "Produits à recevoir"
+    },
+    {
+        number: 44,
+        system: "base",
+        label: "État et autres collectivités publiques"
+    },
+    {
+        number: 441,
+        system: "base",
+        label: "État - Subventions à recevoir"
+    },
+    {
+        number: 4411,
+        system: "developed",
+        label: "Subventions d'investissement"
+    },
+    {
+        number: 4417,
+        system: "developed",
+        label: "Subventions d'exploitation"
+    },
+    {
+        number: 4418,
+        system: "developed",
+        label: "Subventions d'équilibre"
+    },
+    {
+        number: 4419,
+        system: "developed",
+        label: "Avances sur subventions"
+    },
+    {
+        number: 442,
+        system: "base",
+        label: "Contributions, impôts et taxes recouvrés pour le compte de l'État"
+    },
+    {
+        number: 4421,
+        system: "base",
+        label: "Prélèvements à la source (Impôt sur le revenu)"
+    },
+    {
+        number: 4422,
+        system: "base",
+        label: "Prélèvements forfaitaires non libératoires"
+    },
+    {
+        number: 4423,
+        system: "base",
+        label: "Retenues et prélèvements sur les distributions"
+    },
+    {
+        number: 4424,
+        system: "developed",
+        label: "Obligataires"
+    },
+    {
+        number: 4425,
+        system: "developed",
+        label: "Associés"
+    },
+    {
+        number: 443,
+        system: "base",
+        label: "Opérations particulières avec l'État, les collectivités publiques, les organismes internationaux"
+    },
+    {
+        number: 4431,
+        system: "base",
+        label: "Créances sur l'État résultant de la suppression de la règle du décalage d'un mois en matière de TVA"
+    },
+    {
+        number: 4438,
+        system: "base",
+        label: "Intérêts courus sur créances figurant au 4431"
+    },
+    {
+        number: 444,
+        system: "condensed",
+        label: "État - Impôts sur les bénéfices"
+    },
+    {
+        number: 445,
+        system: "condensed",
+        label: "État - Taxes sur le chiffre d'affaires"
+    },
+    {
+        number: 4452,
+        system: "base",
+        label: "TVA due intracommunautaire"
+    },
+    {
+        number: 4453,
+        system: "base",
+        label: "TVA due extracommunautaire"
+    },
+    {
+        number: 4455,
+        system: "base",
+        label: "Taxes sur le chiffre d'affaires à décaisser"
+    },
+    {
+        number: 44551,
+        system: "developed",
+        label: "TVA à décaisser"
+    },
+    {
+        number: 44558,
+        system: "developed",
+        label: "Taxes assimilées à la TVA"
+    },
+    {
+        number: 4456,
+        system: "base",
+        label: "Taxes sur le chiffre d'affaires déductibles"
+    },
+    {
+        number: 44562,
+        system: "developed",
+        label: "TVA sur immobilisations"
+    },
+    {
+        number: 44563,
+        system: "developed",
+        label: "TVA transférée par d'autres entreprises"
+    },
+    {
+        number: 44566,
+        system: "developed",
+        label: "TVA sur autres biens et services"
+    },
+    {
+        number: 445662,
+        system: "developed",
+        label: "TVA déductible intracommunautaire"
+    },
+    {
+        number: 445663,
+        system: "developed",
+        label: "TVA déductible extracommunautaire"
+    },
+    {
+        number: 44567,
+        system: "developed",
+        label: "Crédit de TVA à reporter"
+    },
+    {
+        number: 44568,
+        system: "developed",
+        label: "Taxes assimilées à la TVA"
+    },
+    {
+        number: 4457,
+        system: "base",
+        label: "Taxes sur le chiffre d'affaires collectées par l'entreprise"
+    },
+    {
+        number: 44571,
+        system: "developed",
+        label: "TVA collectée"
+    },
+    {
+        number: 44578,
+        system: "developed",
+        label: "Taxes assimilées à la TVA"
+    },
+    {
+        number: 4458,
+        system: "base",
+        label: "Taxes sur le chiffre d'affaires à régulariser ou en attente"
+    },
+    {
+        number: 44581,
+        system: "developed",
+        label: "Acomptes - Régime simplifié d'imposition"
+    },
+    {
+        number: 44582,
+        system: "developed",
+        label: "Acomptes - Régime de forfait"
+    },
+    {
+        number: 44583,
+        system: "developed",
+        label: "Remboursement de taxes sur le chiffre d'affaires demandé"
+    },
+    {
+        number: 44584,
+        system: "developed",
+        label: "TVA récupérée d'avance"
+    },
+    {
+        number: 44586,
+        system: "developed",
+        label: "Taxes sur le chiffre d'affaires sur factures non parvenues"
+    },
+    {
+        number: 44587,
+        system: "developed",
+        label: "Taxes sur le chiffre d'affaires sur factures à établir"
+    },
+    {
+        number: 446,
+        system: "base",
+        label: "Obligations cautionnées"
+    },
+    {
+        number: 447,
+        system: "condensed",
+        label: "Autres impôts, taxes et versements assimilés"
+    },
+    {
+        number: 448,
+        system: "base",
+        label: "État - Charges à payer et produits à recevoir"
+    },
+    {
+        number: 4482,
+        system: "developed",
+        label: "Charges fiscales sur congés à payer"
+    },
+    {
+        number: 4486,
+        system: "developed",
+        label: "Charges à payer"
+    },
+    {
+        number: 4487,
+        system: "developed",
+        label: "Produits à recevoir"
+    },
+    {
+        number: 449,
+        system: "base",
+        label: "Quotas d'émission à acquérir"
+    },
+    {
+        number: 45,
+        system: "condensed",
+        label: "Groupe et associés"
+    },
+    {
+        number: 451,
+        system: "base",
+        label: "Groupe"
+    },
+    {
+        number: 455,
+        system: "condensed",
+        label: "Associés - Comptes courants"
+    },
+    {
+        number: 4551,
+        system: "developed",
+        label: "Principal"
+    },
+    {
+        number: 4558,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 456,
+        system: "base",
+        label: "Associés - Opérations sur le capital"
+    },
+    {
+        number: 4561,
+        system: "developed",
+        label: "Associés - Comptes d'apport en société"
+    },
+    {
+        number: 45611,
+        system: "developed",
+        label: "Apports en nature"
+    },
+    {
+        number: 45615,
+        system: "developed",
+        label: "Apports en numéraire"
+    },
+    {
+        number: 4562,
+        system: "developed",
+        label: "Apporteurs - Capital appelé, non versé"
+    },
+    {
+        number: 45621,
+        system: "developed",
+        label: "Actionnaires - Capital souscrit et appelé, non versé"
+    },
+    {
+        number: 45625,
+        system: "developed",
+        label: "Associés - Capital appelé, non versé"
+    },
+    {
+        number: 4563,
+        system: "developed",
+        label: "Associés - Versements reçus sur augmentation de capital"
+    },
+    {
+        number: 4564,
+        system: "developed",
+        label: "Associés - Versements anticipés"
+    },
+    {
+        number: 4566,
+        system: "developed",
+        label: "Actionnaires défaillants"
+    },
+    {
+        number: 4567,
+        system: "developed",
+        label: "Associés - Capital à rembourser"
+    },
+    {
+        number: 457,
+        system: "base",
+        label: "Associés - Dividendes à payer"
+    },
+    {
+        number: 458,
+        system: "base",
+        label: "Associés - Opérations faites en commun et en GIE"
+    },
+    {
+        number: 4581,
+        system: "developed",
+        label: "Opérations courantes"
+    },
+    {
+        number: 4588,
+        system: "developed",
+        label: "Intérêts courus"
+    },
+    {
+        number: 46,
+        system: "condensed",
+        label: "Débiteurs divers et créditeurs divers"
+    },
+    {
+        number: 462,
+        system: "developed",
+        label: "Créances sur cessions d'immobilisations"
+    },
+    {
+        number: 464,
+        system: "developed",
+        label: "Dettes sur acquisitions de valeurs mobilières de placement"
+    },
+    {
+        number: 465,
+        system: "developed",
+        label: "Créances sur cessions de valeurs mobilières de placement"
+    },
+    {
+        number: 467,
+        system: "developed",
+        label: "Autres comptes débiteurs ou créditeurs"
+    },
+    {
+        number: 468,
+        system: "developed",
+        label: "Divers - Charges à payer et produits à recevoir"
+    },
+    {
+        number: 4686,
+        system: "developed",
+        label: "Charges à payer"
+    },
+    {
+        number: 4687,
+        system: "developed",
+        label: "Produits à recevoir"
+    },
+    {
+        number: 47,
+        system: "condensed",
+        label: "Comptes transitoires ou d'attente"
+    },
+    {
+        number: 471,
+        system: "base",
+        label: "Comptes d'attente"
+    },
+    {
+        number: 472,
+        system: "base",
+        label: "Comptes d'attente"
+    },
+    {
+        number: 473,
+        system: "base",
+        label: "Comptes d'attente"
+    },
+    {
+        number: 474,
+        system: "base",
+        label: "Différences d'évaluation de jetons sur des passifs"
+    },
+    {
+        number: 4746,
+        system: "developed",
+        label: "Différence d'évaluation de jetons sur des passifs - Actif"
+    },
+    {
+        number: 4747,
+        system: "developed",
+        label: "Différence d'évaluation de jetons sur des passifs - Passif"
+    },
+    {
+        number: 475,
+        system: "base",
+        label: "Comptes d'attente"
+    },
+    {
+        number: 476,
+        system: "base",
+        label: "Différence de conversion - Actif"
+    },
+    {
+        number: 4761,
+        system: "developed",
+        label: "Diminution des créances"
+    },
+    {
+        number: 4762,
+        system: "developed",
+        label: "Augmentation des dettes"
+    },
+    {
+        number: 4768,
+        system: "developed",
+        label: "Différences compensées par couverture de change"
+    },
+    {
+        number: 477,
+        system: "base",
+        label: "Différences de conversion - Passif"
+    },
+    {
+        number: 4771,
+        system: "developed",
+        label: "Augmentation des créances"
+    },
+    {
+        number: 4772,
+        system: "developed",
+        label: "Diminution des dettes"
+    },
+    {
+        number: 4778,
+        system: "developed",
+        label: "Différences compensées par couverture de change"
+    },
+    {
+        number: 478,
+        system: "base",
+        label: "Autres comptes transitoires"
+    },
+    {
+        number: 4786,
+        system: "developed",
+        label: "Différences d'évaluation - Actif"
+    },
+    {
+        number: 47861,
+        system: "developed",
+        label: "Différences d'évaluation sur instruments financier à terme - Actif"
+    },
+    {
+        number: 47862,
+        system: "developed",
+        label: "Différences d'évaluation sur jetons détenus - Actif"
+    },
+    {
+        number: 4787,
+        system: "developed",
+        label: "Différences d'évaluation - Passif"
+    },
+    {
+        number: 47871,
+        system: "developed",
+        label: "Différences d'évaluation sur instruments financier à terme - Passif"
+    },
+    {
+        number: 47872,
+        system: "developed",
+        label: "Différences d'évaluation sur jetons détenus - Passif"
+    },
+    {
+        number: 48,
+        system: "base",
+        label: "Comptes de régularisation"
+    },
+    {
+        number: 481,
+        system: "condensed",
+        label: "Charges à répartir sur plusieurs exercices"
+    },
+    {
+        number: 4811,
+        system: "developed",
+        label: "Charges différées"
+    },
+    {
+        number: 4812,
+        system: "developed",
+        label: "Frais d'acquisition des immobilisations"
+    },
+    {
+        number: 4816,
+        system: "developed",
+        label: "Frais d'émission des emprunts"
+    },
+    {
+        number: 4818,
+        system: "developed",
+        label: "Charges à étaler"
+    },
+    {
+        number: 486,
+        system: "condensed",
+        label: "Charges constatées d'avance"
+    },
+    {
+        number: 487,
+        system: "condensed",
+        label: "Produits constatés d'avance"
+    },
+    {
+        number: 4871,
+        system: "base",
+        label: "Produits constatés d'avance sur jetons émis"
+    },
+    {
+        number: 488,
+        system: "base",
+        label: "Comptes de répartition périodique des charges et des produits"
+    },
+    {
+        number: 4886,
+        system: "developed",
+        label: "Charges"
+    },
+    {
+        number: 4887,
+        system: "developed",
+        label: "Produits"
+    },
+    {
+        number: 489,
+        system: "base",
+        label: "Quotas d'émission alloués par l'État"
+    },
+    {
+        number: 49,
+        system: "base",
+        label: "Dépréciations des comptes de tiers"
+    },
+    {
+        number: 491,
+        system: "condensed",
+        label: "Dépréciations des comptes de clients"
+    },
+    {
+        number: 495,
+        system: "base",
+        label: "Dépréciations des comptes du groupe et des associés"
+    },
+    {
+        number: 4951,
+        system: "base",
+        label: "Comptes du groupe"
+    },
+    {
+        number: 4955,
+        system: "base",
+        label: "Comptes courants des associés"
+    },
+    {
+        number: 4958,
+        system: "base",
+        label: "Opérations faites en commun et en GIE"
+    },
+    {
+        number: 496,
+        system: "condensed",
+        label: "Dépréciations des comptes de débiteurs divers"
+    },
+    {
+        number: 4962,
+        system: "developed",
+        label: "Créances sur cessions d'immobilisations"
+    },
+    {
+        number: 4965,
+        system: "developed",
+        label: "Créances sur cessions de valeurs mobilières de placement"
+    },
+    {
+        number: 4967,
+        system: "developed",
+        label: "Autres comptes débiteurs"
     },
     {
         number: 5,
-        label: "Comptes financiers",
         system: "condensed",
-        accounts: [
-            {
-                number: 50,
-                label: "Valeurs mobilières de placement",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 501,
-                        label: "Parts dans des entreprises liées",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 502,
-                        label: "Actions propres",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5021,
-                                label: "Actions destinées à être attribuées aux employés et affectées à des plans déterminés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5022,
-                                label: "Actions disponibles pour être attribuées aux employés ou pour la régularisation des cours de bourse",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 503,
-                        label: "Actions",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5031,
-                                label: "Titres cotés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5035,
-                                label: "Titres non cotés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 504,
-                        label: "Autres titres conférant un droit de propriété",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 505,
-                        label: "Obligations et bons émis par la société et rachetés par elle",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 506,
-                        label: "Obligations",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5061,
-                                label: "Titres cotés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5065,
-                                label: "Titres non cotés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 507,
-                        label: "Bons du Trésor et bons de caisse à court terme",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 508,
-                        label: "Autres valeurs mobilières de placement et autres créances assimilées",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5081,
-                                label: "Autres valeurs mobilières",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5082,
-                                label: "Bons de souscription",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5088,
-                                label: "Intérêts courus sur obligations, bons et valeurs assimilés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 509,
-                        label: "Versements restant à effectuer sur valeurs mobilières de placement non libérées",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 51,
-                label: "Banques, établissements financiers et assimilés",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 511,
-                        label: "Valeurs à l'encaissement",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5111,
-                                label: "Coupons échus à l'encaissement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5112,
-                                label: "Chèques à encaisser",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5113,
-                                label: "Effets à l'encaissement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5114,
-                                label: "Effets à l'escompte",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 512,
-                        label: "Banques",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 5121,
-                                label: "Comptes en monnaie nationale",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 5124,
-                                label: "Comptes en devises",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 514,
-                        label: "Chèques postaux",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 515,
-                        label: "Caisses du Trésor et des établissements publics",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 516,
-                        label: "Sociétés de bourse",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 517,
-                        label: "Autres organismes financiers",
-                        system: "base",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 518,
-                        label: "Intérêts courus",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5181,
-                                label: "Intérêts courus à payer",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5188,
-                                label: "Intérêts courus à recevoir",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 519,
-                        label: "Concours bancaires courants",
-                        system: "base",
-                        flow: "credit",
-                        accounts: [
-                            {
-                                number: 5191,
-                                label: "Crédit de mobilisation de créances commerciales",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 5193,
-                                label: "Mobilisation de créances nées à l'étranger",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            },
-                            {
-                                number: 5198,
-                                label: "Intérêts courus sur concours bancaires courants",
-                                system: "developed",
-                                flow: "credit",
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 52,
-                label: "Instruments financiers à terme et jetons détenus",
-                system: "base",
-                flow: "credit",
-                accounts: [
-                    {
-                        number: 521,
-                        label: "Instruments financiers à terme",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 522,
-                        label: "Jetons détenus",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 523,
-                        label: "Jetons auto-détenus",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    },
-                    {
-                        number: 524,
-                        label: "Jetons empruntés",
-                        system: "developed",
-                        flow: "credit",
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 53,
-                label: "Caisse",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 531,
-                        label: "Caisse siège social",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 5311,
-                                label: "Caisse en monnaie nationale",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 5314,
-                                label: "Caisse en devises",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 532,
-                        label: "Caisse succursale (ou usine) A",
-                        system: "developed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 533,
-                        label: "Caisse succursale (ou usine) B",
-                        system: "developed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 54,
-                label: "Régies d'avance et accréditifs",
-                system: "condensed",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 58,
-                label: "Virements internes",
-                system: "condensed",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 59,
-                label: "Dépréciations des comptes financiers",
-                system: "base",
-                accounts: [
-                    {
-                        number: 590,
-                        label: "Dépréciations des valeurs mobilières de placement",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 5903,
-                                label: "Actions",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 5904,
-                                label: "Autres titres conférant un droit de propriété",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 5906,
-                                label: "Obligations",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            },
-                            {
-                                number: 5908,
-                                label: "Autres valeurs mobilières de placement et créances assimilées",
-                                system: "base",
-                                flow: "credit",
-                                isAllowance: true,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        label: "Comptes financiers"
+    },
+    {
+        number: 50,
+        system: "condensed",
+        label: "Valeurs mobilières de placement"
+    },
+    {
+        number: 501,
+        system: "base",
+        label: "Parts dans des entreprises liées"
+    },
+    {
+        number: 502,
+        system: "base",
+        label: "Actions propres"
+    },
+    {
+        number: 5021,
+        system: "developed",
+        label: "Actions destinées à être attribuées aux employés et affectées à des plans déterminés"
+    },
+    {
+        number: 5022,
+        system: "developed",
+        label: "Actions disponibles pour être attribuées aux employés ou pour la régularisation des cours de bourse"
+    },
+    {
+        number: 503,
+        system: "base",
+        label: "Actions"
+    },
+    {
+        number: 5031,
+        system: "developed",
+        label: "Titres cotés"
+    },
+    {
+        number: 5035,
+        system: "developed",
+        label: "Titres non cotés"
+    },
+    {
+        number: 504,
+        system: "base",
+        label: "Autres titres conférant un droit de propriété"
+    },
+    {
+        number: 505,
+        system: "base",
+        label: "Obligations et bons émis par la société et rachetés par elle"
+    },
+    {
+        number: 506,
+        system: "base",
+        label: "Obligations"
+    },
+    {
+        number: 5061,
+        system: "developed",
+        label: "Titres cotés"
+    },
+    {
+        number: 5065,
+        system: "developed",
+        label: "Titres non cotés"
+    },
+    {
+        number: 507,
+        system: "base",
+        label: "Bons du Trésor et bons de caisse à court terme"
+    },
+    {
+        number: 508,
+        system: "base",
+        label: "Autres valeurs mobilières de placement et autres créances assimilées"
+    },
+    {
+        number: 5081,
+        system: "developed",
+        label: "Autres valeurs mobilières"
+    },
+    {
+        number: 5082,
+        system: "developed",
+        label: "Bons de souscription"
+    },
+    {
+        number: 5088,
+        system: "developed",
+        label: "Intérêts courus sur obligations, bons et valeurs assimilés"
+    },
+    {
+        number: 509,
+        system: "base",
+        label: "Versements restant à effectuer sur valeurs mobilières de placement non libérées"
+    },
+    {
+        number: 51,
+        system: "condensed",
+        label: "Banques, établissements financiers et assimilés"
+    },
+    {
+        number: 511,
+        system: "base",
+        label: "Valeurs à l'encaissement"
+    },
+    {
+        number: 5111,
+        system: "developed",
+        label: "Coupons échus à l'encaissement"
+    },
+    {
+        number: 5112,
+        system: "developed",
+        label: "Chèques à encaisser"
+    },
+    {
+        number: 5113,
+        system: "developed",
+        label: "Effets à l'encaissement"
+    },
+    {
+        number: 5114,
+        system: "developed",
+        label: "Effets à l'escompte"
+    },
+    {
+        number: 512,
+        system: "base",
+        label: "Banques"
+    },
+    {
+        number: 5121,
+        system: "developed",
+        label: "Comptes en monnaie nationale"
+    },
+    {
+        number: 5124,
+        system: "developed",
+        label: "Comptes en devises"
+    },
+    {
+        number: 514,
+        system: "base",
+        label: "Chèques postaux"
+    },
+    {
+        number: 515,
+        system: "base",
+        label: "Caisses du Trésor et des établissements publics"
+    },
+    {
+        number: 516,
+        system: "base",
+        label: "Sociétés de bourse"
+    },
+    {
+        number: 517,
+        system: "base",
+        label: "Autres organismes financiers"
+    },
+    {
+        number: 518,
+        system: "base",
+        label: "Intérêts courus"
+    },
+    {
+        number: 5181,
+        system: "developed",
+        label: "Intérêts courus à payer"
+    },
+    {
+        number: 5188,
+        system: "developed",
+        label: "Intérêts courus à recevoir"
+    },
+    {
+        number: 519,
+        system: "base",
+        label: "Concours bancaires courants"
+    },
+    {
+        number: 5191,
+        system: "developed",
+        label: "Crédit de mobilisation de créances commerciales"
+    },
+    {
+        number: 5193,
+        system: "developed",
+        label: "Mobilisation de créances nées à l'étranger"
+    },
+    {
+        number: 5198,
+        system: "developed",
+        label: "Intérêts courus sur concours bancaires courants"
+    },
+    {
+        number: 52,
+        system: "base",
+        label: "Instruments financiers à terme et jetons détenus"
+    },
+    {
+        number: 521,
+        system: "developed",
+        label: "Instruments financiers à terme"
+    },
+    {
+        number: 522,
+        system: "developed",
+        label: "Jetons détenus"
+    },
+    {
+        number: 523,
+        system: "developed",
+        label: "Jetons auto-détenus"
+    },
+    {
+        number: 524,
+        system: "developed",
+        label: "Jetons empruntés"
+    },
+    {
+        number: 53,
+        system: "condensed",
+        label: "Caisse"
+    },
+    {
+        number: 531,
+        system: "base",
+        label: "Caisse siège social"
+    },
+    {
+        number: 5311,
+        system: "developed",
+        label: "Caisse en monnaie nationale"
+    },
+    {
+        number: 5314,
+        system: "developed",
+        label: "Caisse en devises"
+    },
+    {
+        number: 532,
+        system: "developed",
+        label: "Caisse succursale (ou usine) A"
+    },
+    {
+        number: 533,
+        system: "developed",
+        label: "Caisse succursale (ou usine) B"
+    },
+    {
+        number: 54,
+        system: "condensed",
+        label: "Régies d'avance et accréditifs"
+    },
+    {
+        number: 58,
+        system: "condensed",
+        label: "Virements internes"
+    },
+    {
+        number: 59,
+        system: "base",
+        label: "Dépréciations des comptes financiers"
+    },
+    {
+        number: 590,
+        system: "condensed",
+        label: "Dépréciations des valeurs mobilières de placement"
+    },
+    {
+        number: 5903,
+        system: "base",
+        label: "Actions"
+    },
+    {
+        number: 5904,
+        system: "base",
+        label: "Autres titres conférant un droit de propriété"
+    },
+    {
+        number: 5906,
+        system: "base",
+        label: "Obligations"
+    },
+    {
+        number: 5908,
+        system: "base",
+        label: "Autres valeurs mobilières de placement et créances assimilées"
     },
     {
         number: 6,
-        label: "Comptes de charges",
         system: "condensed",
-        accounts: [
-            {
-                number: 60,
-                label: "Achats (sauf 603)",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 601,
-                        label: "Achats stockés - Matières premières (et fournitures)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6011,
-                                label: "Matières (ou groupe) A",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6012,
-                                label: "Matières (ou groupe) B",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6017,
-                                label: "Fournitures A, B, C, ...",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 602,
-                        label: "Achats stockés - Autres approvisionnements",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6021,
-                                label: "Matières consommables",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 60211,
-                                        label: "Matières (ou groupe) C",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60212,
-                                        label: "Matières (ou groupe) D",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6022,
-                                label: "Fournitures consommables",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 60221,
-                                        label: "Combustibles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60222,
-                                        label: "Produits d'entretien",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60223,
-                                        label: "Fournitures d'atelier et d'usine",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60224,
-                                        label: "Fournitures de magasin",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60225,
-                                        label: "Fourniture de bureau",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6026,
-                                label: "Emballages",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 60261,
-                                        label: "Emballages perdus",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60265,
-                                        label: "Emballages récupérables non identifiables",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 60267,
-                                        label: "Emballages à usage mixte",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 603,
-                        label: "Variations des stocks (approvisionnements et marchandises)",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6031,
-                                label: "Variation des stocks de matières premières (et fournitures)",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6032,
-                                label: "Variation des stocks des autres approvisionnements",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6037,
-                                label: "Variation des stocks de marchandises",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 604,
-                        label: "Achats d'études et prestations de services",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 605,
-                        label: "Achats de matériel, équipements et travaux",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 606,
-                        label: "Achats non stockés de matière et fournitures",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6061,
-                                label: "Fournitures non stockables (eau, énergie, ...)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6063,
-                                label: "Fournitures d'entretien et de petit équipement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6064,
-                                label: "Fournitures administratives",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6068,
-                                label: "Autres matières et fournitures",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 607,
-                        label: "Achats de marchandises",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6071,
-                                label: "Marchandise (ou groupe) A",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6072,
-                                label: "Marchandise (ou groupe) B",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 608,
-                        label: "Récapitulation des frais accessoires incorporés aux achats",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 609,
-                        label: "Rabais, remises et ristournes obtenus sur achats",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6091,
-                                label: "de matières premières (et fournitures)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6092,
-                                label: "d'autres approvisionnements stockés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6094,
-                                label: "d'études et prestations de services",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6095,
-                                label: "de matériel, équipements et travaux",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6096,
-                                label: "d'approvisionnements non stockés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6097,
-                                label: "de marchandises",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6098,
-                                label: "Rabais, remises et ristournes non affectés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 61,
-                label: "Services extérieurs",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 611,
-                        label: "Sous-traitance générale",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 612,
-                        label: "Redevances de crédit-bail",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6122,
-                                label: "Crédit-bail mobilier",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6125,
-                                label: "Crédit-bail immobilier",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 613,
-                        label: "Locations",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6132,
-                                label: "Locations immobilières",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6135,
-                                label: "Locations mobilières",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6136,
-                                label: "Malis sur emballages",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 614,
-                        label: "Charges locatives et de copropriété",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 615,
-                        label: "Entretien et réparations",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6152,
-                                label: "sur biens immobiliers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6155,
-                                label: "sur biens mobiliers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6156,
-                                label: "Maintenance",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 616,
-                        label: "Primes d'assurances",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6161,
-                                label: "Multirisques",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6162,
-                                label: "Assurance obligatoire dommage construction",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6163,
-                                label: "Assurance transport",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 61636,
-                                        label: "sur achats",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 61637,
-                                        label: "sur ventes",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 61638,
-                                        label: "sur autres biens",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6164,
-                                label: "Risques d'exploitation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6165,
-                                label: "Insolvabilité clients",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 617,
-                        label: "Études et recherches",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 618,
-                        label: "Divers",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6181,
-                                label: "Documentation générale",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6183,
-                                label: "Documentation technique",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6185,
-                                label: "Frais de colloques, séminaires, conférences",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 619,
-                        label: "Rabais, remises et ristournes obtenus sur services extérieurs",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 62,
-                label: "Autres services extérieurs",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 621,
-                        label: "Personnel extérieur à l'entreprise",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6211,
-                                label: "Personnel intérimaire",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6214,
-                                label: "Personnel détaché ou prêté à l'entreprise",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 622,
-                        label: "Rémunérations d'intermédiaires et honoraires",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6221,
-                                label: "Commissions et courtages sur achats",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6222,
-                                label: "Commissions et courtages sur ventes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6224,
-                                label: "Rémunérations des transitaires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6225,
-                                label: "Rémunérations d'affacturage",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6226,
-                                label: "Honoraires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6227,
-                                label: "Frais d'actes et de contentieux",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6228,
-                                label: "Divers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 623,
-                        label: "Publicité, publications, relations publiques",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6231,
-                                label: "Annonces et insertions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6232,
-                                label: "Échantillons",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6233,
-                                label: "Foires et expositions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6234,
-                                label: "Cadeaux à la clientèle",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6235,
-                                label: "Primes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6236,
-                                label: "Catalogues et imprimés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6237,
-                                label: "Publications",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6238,
-                                label: "Divers (pourboires, dons courants, ...)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 624,
-                        label: "Transports de biens et transports collectifs du personnel",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6241,
-                                label: "Transports sur achats",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6242,
-                                label: "Transports sur ventes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6243,
-                                label: "Transports entre établissements ou chantiers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6244,
-                                label: "Transports administratifs",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6247,
-                                label: "Transports collectifs du personnel",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6248,
-                                label: "Divers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 625,
-                        label: "Déplacements, missions et réceptions",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6251,
-                                label: "Voyages et déplacements",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6255,
-                                label: "Frais de déménagement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6256,
-                                label: "Missions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6257,
-                                label: "Réceptions",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 626,
-                        label: "Frais postaux et de télécommunications",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 627,
-                        label: "Services bancaires et assimilés",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6271,
-                                label: "Frais sur titres (achat, vente, garde)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6272,
-                                label: "Commissions et frais sur émission d'emprunts",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6275,
-                                label: "Frais sur effets",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6276,
-                                label: "Location de coffres",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6278,
-                                label: "Autres frais et commissions sur prestations de services",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 628,
-                        label: "Divers",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6281,
-                                label: "Concours divers (cotisations, ...)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6284,
-                                label: "Frais de recrutement de personnel",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 629,
-                        label: "Rabais, remises et ristournes obtenus sur autres services extérieurs",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 63,
-                label: "Impôts, taxes et versements assimilés",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 631,
-                        label: "Impôts, taxes et versements assimilés sur rémunérations (administrations des impôts)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6311,
-                                label: "Taxe sur les salaires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6312,
-                                label: "Taxe d'apprentissage",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6313,
-                                label: "Participation des employeurs à la formation professionnelle continue",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6314,
-                                label: "Cotisation pour défaut d'investissement obligatoire dans la construction",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6318,
-                                label: "Autres",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 633,
-                        label: "Impôts, taxes et versements assimilés sur rémunérations (autres organismes)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6331,
-                                label: "Versement de transport",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6332,
-                                label: "Allocations logement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6333,
-                                label: "Contribution unique des employeurs à la formation professionnelle",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6334,
-                                label: "Participation des employeurs à l'effort de construction",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6335,
-                                label: "Versements libératoires ouvrant droit à l'exonération de la taxe d'apprentissage",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6338,
-                                label: "Autres",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 635,
-                        label: "Autres impôts, taxes et versements assimilés (administrations des impôts)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6351,
-                                label: "Impôts directs (sauf impôts sur les bénéfices)",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 63511,
-                                        label: "Contribution économique territoriale",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 63512,
-                                        label: "Taxes foncières",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 63513,
-                                        label: "Autres impôts locaux",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 63514,
-                                        label: "Taxe sur les véhicules des sociétés",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6352,
-                                label: "Taxe sur le chiffre d'affaires non récupérables",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6353,
-                                label: "Impôts indirects",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6354,
-                                label: "Droits d'enregistrement et de timbre",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 63541,
-                                        label: "Droits de mutation",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6358,
-                                label: "Autres droits",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 637,
-                        label: "Autres impôts, taxes et versements assimilés (autres organismes)",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6371,
-                                label: "Contribution sociale de solidarité à la charge des sociétés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6372,
-                                label: "Taxes perçues par les organismes publics internationaux",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6374,
-                                label: "Impôts et taxes exigibles à l'Étranger",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6378,
-                                label: "Taxes diverses",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 64,
-                label: "Charges de personnel",
-                system: "base",
-                accounts: [
-                    {
-                        number: 641,
-                        label: "Rémunérations du personnel",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6411,
-                                label: "Salaires, appointements",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6412,
-                                label: "Congés payés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6413,
-                                label: "Primes et gratifications",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6414,
-                                label: "Indemnités et avantages divers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6415,
-                                label: "Supplément familial",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 644,
-                        label: "Rémunération du travail de l'exploitant",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 645,
-                        label: "Charges de sécurité sociale et de prévoyance",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6451,
-                                label: "Cotisations à l'URSSAF",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6452,
-                                label: "Cotisations aux mutuelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6453,
-                                label: "Cotisations aux caisses de retraites",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6454,
-                                label: "Cotisations aux ASSEDIC",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6458,
-                                label: "Cotisations aux autres organismes sociaux",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 646,
-                        label: "Cotisations sociales personnelles de l'exploitant",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 647,
-                        label: "Autres charges sociales",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6471,
-                                label: "Prestations directes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6472,
-                                label: "Versements aux comités d'entreprise et d'établissement",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6473,
-                                label: "Versements aux comités d'hygiène et de sécurité",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6474,
-                                label: "Versements aux autres œuvres sociales",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6475,
-                                label: "Médecine du travail, pharmacie",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 648,
-                        label: "Autres charges de personnel",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 65,
-                label: "Autres charges de gestion courante",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 651,
-                        label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6511,
-                                label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6516,
-                                label: "Droits d'auteur et de reproduction",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6518,
-                                label: "Autres droits et valeurs similaires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 653,
-                        label: "Jetons de présence",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 654,
-                        label: "Pertes sur créances irrécouvrables",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6541,
-                                label: "Créances de l'exercice",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6544,
-                                label: "Créances des exercices antérieurs",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 655,
-                        label: "Quote-part de résultat sur opérations faites en commun",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6551,
-                                label: "Quote-part de bénéfice transférée (comptabilité du gérant)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6555,
-                                label: "Quote-part de perte supportée (comptabilité des associés non gérants)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 656,
-                        label: "Pertes de change sur créances commerciales",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 658,
-                        label: "Charges diverses de gestion courante",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 66,
-                label: "Charges financières",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 661,
-                        label: "Charges d'intérêts",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6611,
-                                label: "Intérêts des emprunts et dettes",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 66116,
-                                        label: "des emprunts et dettes assimilées",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 66117,
-                                        label: "des dettes rattachées à des participations",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6612,
-                                label: "Charges de la fiducie, résultat de la période",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6615,
-                                label: "Intérêts des comptes courants et des dépôts créditeurs",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6616,
-                                label: "Intérêts bancaires et sur opérations de financement (escompte, ...)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6617,
-                                label: "Intérêts des obligations cautionnées",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6618,
-                                label: "Intérêts des autres dettes",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 66181,
-                                        label: "des dettes commerciales",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 66188,
-                                        label: "des dettes diverses",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 664,
-                        label: "Pertes sur créances liées à des participations",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 665,
-                        label: "Escomptes accordés",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 666,
-                        label: "Pertes de change financières",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 667,
-                        label: "Charges nettes sur cessions de valeurs mobilières de placement",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 668,
-                        label: "Autres charges financières",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 67,
-                label: "Charges exceptionnelles",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 671,
-                        label: "Charges exceptionnelles sur opérations de gestion",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6711,
-                                label: "Pénalités sur marchés (et dédits payés sur achats et ventes)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6712,
-                                label: "Pénalités, amendes fiscales et pénales",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6713,
-                                label: "Dons, libéralités",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6714,
-                                label: "Créances devenues irrécouvrables dans l'exercice",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6715,
-                                label: "Subventions accordées",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6717,
-                                label: "Rappel d'impôts (autres qu'impôts sur les bénéfices)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6718,
-                                label: "Autres charges exceptionnelles sur opérations de gestion",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 672,
-                        label: "(Compte à la disposition des entités pour enregistrer, en cours d'exercice, les charges sur exercices antérieurs)",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 674,
-                        label: "Opérations de constitution ou liquidation des fiducies",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6741,
-                                label: "Opérations liées à la constitution de fiducie - Transfert des éléments",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6742,
-                                label: "Opérations liées à la liquidation de la fiducie",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 675,
-                        label: "Valeurs comptables des éléments d'actif cédés",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6751,
-                                label: "Immobilisations incorporelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6752,
-                                label: "Immobilisations corporelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6756,
-                                label: "Immobilisations financières",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6758,
-                                label: "Autres éléments d'actif",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 678,
-                        label: "Autres charges exceptionnelles",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6781,
-                                label: "Malis provenant de clauses d'indexation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6782,
-                                label: "Lots",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6783,
-                                label: "Malis provenant du rachat par l'entreprise d'actions et obligations émises par elle-même",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6788,
-                                label: "Charges exceptionnelles diverses",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 68,
-                label: "Dotations aux amortissements, aux dépréciations et aux provisions",
-                system: "base",
-                accounts: [
-                    {
-                        number: 681,
-                        label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges d'exploitation",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6811,
-                                label: "Dotations aux amortissements sur immobilisations incorporelles et corporelles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 68111,
-                                        label: "Immobilisations incorporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 68112,
-                                        label: "Immobilisations corporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6812,
-                                label: "Dotations aux amortissements des charges d'exploitation à répartir",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6815,
-                                label: "Dotations aux provisions d'exploitation",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6816,
-                                label: "Dotations pour dépréciations des immobilisations incorporelles et corporelles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 68161,
-                                        label: "Immobilisations incorporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 68162,
-                                        label: "Immobilisations corporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6817,
-                                label: "Dotations pour dépréciations des actifs circulants",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 68173,
-                                        label: "Stocks et en-cours",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 68174,
-                                        label: "Créances",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 686,
-                        label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges financières",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6861,
-                                label: "Dotations aux amortissements des primes de remboursement des obligations",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6865,
-                                label: "Dotations aux provisions financières",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6866,
-                                label: "Dotations pour dépréciations des éléments financiers",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 68662,
-                                        label: "Immobilisations financières",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 68665,
-                                        label: "Valeurs mobilières de placement",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6868,
-                                label: "Autres dotations",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 687,
-                        label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges exceptionnelles",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6871,
-                                label: "Dotations aux amortissements exceptionnels des immobilisations",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6872,
-                                label: "Dotations aux provisions réglementées (immobilisations)",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 68725,
-                                        label: "Amortissements dérogatoires",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 6873,
-                                label: "Dotations aux provisions réglementées (stocks)",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6874,
-                                label: "Dotations aux autres provisions réglementées",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6875,
-                                label: "Dotations aux provisions exceptionnelles",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6876,
-                                label: "Dotations pour dépréciations exceptionnelles",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 69,
-                label: "Participation des salariés - Impôts sur les bénéfices et assimilés",
-                system: "base",
-                accounts: [
-                    {
-                        number: 691,
-                        label: "Participation des salariés aux résultats",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 695,
-                        label: "Impôts sur les bénéfices",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 6951,
-                                label: "Impôts dus en France",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6952,
-                                label: "Contribution additionnelle à l'impôt sur les bénéfices",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6954,
-                                label: "Impôts dus à l'étranger",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 696,
-                        label: "Suppléments d'impôt sur les sociétés liés aux distributions",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 698,
-                        label: "Intégration fiscale",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 6981,
-                                label: "Intégration fiscale - Charges",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 6989,
-                                label: "Intégration fiscale - Produits",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 699,
-                        label: "Produits - Reports en arrière des déficits",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            }
-        ]
+        label: "Comptes de charges"
+    },
+    {
+        number: 60,
+        system: "condensed",
+        label: "Achats (sauf 603)"
+    },
+    {
+        number: 601,
+        system: "base",
+
+        label: "Achats stockés - Matières premières (et fournitures)"
+    },
+    {
+        number: 6011,
+        system: "developed",
+        label: "Matières (ou groupe) A"
+    },
+    {
+        number: 6012,
+        system: "developed",
+        label: "Matières (ou groupe) B"
+    },
+    {
+        number: 6017,
+        system: "developed",
+        label: "Fournitures A, B, C, ..."
+    },
+    {
+        number: 602,
+        system: "base",
+
+        label: "Achats stockés - Autres approvisionnements"
+    },
+    {
+        number: 6021,
+        system: "base",
+
+        label: "Matières consommables"
+    },
+    {
+        number: 60211,
+        system: "developed",
+        label: "Matières (ou groupe) C"
+    },
+    {
+        number: 60212,
+        system: "developed",
+        label: "Matières (ou groupe) D"
+    },
+    {
+        number: 6022,
+        system: "base",
+
+        label: "Fournitures consommables"
+    },
+    {
+        number: 60221,
+        system: "developed",
+        label: "Combustibles"
+    },
+    {
+        number: 60222,
+        system: "developed",
+        label: "Produits d'entretien"
+    },
+    {
+        number: 60223,
+        system: "developed",
+        label: "Fournitures d'atelier et d'usine"
+    },
+    {
+        number: 60224,
+        system: "developed",
+        label: "Fournitures de magasin"
+    },
+    {
+        number: 60225,
+        system: "developed",
+        label: "Fourniture de bureau"
+    },
+    {
+        number: 6026,
+        system: "base",
+
+        label: "Emballages"
+    },
+    {
+        number: 60261,
+        system: "developed",
+        label: "Emballages perdus"
+    },
+    {
+        number: 60265,
+        system: "developed",
+        label: "Emballages récupérables non identifiables"
+    },
+    {
+        number: 60267,
+        system: "developed",
+        label: "Emballages à usage mixte"
+    },
+    {
+        number: 603,
+        system: "condensed",
+        label: "Variations des stocks (approvisionnements et marchandises)"
+    },
+    {
+        number: 6031,
+        system: "base",
+        label: "Variation des stocks de matières premières (et fournitures)"
+    },
+    {
+        number: 6032,
+        system: "base",
+        label: "Variation des stocks des autres approvisionnements"
+    },
+    {
+        number: 6037,
+        system: "base",
+        label: "Variation des stocks de marchandises"
+    },
+    {
+        number: 604,
+        system: "base",
+        label: "Achats d'études et prestations de services"
+    },
+    {
+        number: 605,
+        system: "base",
+        label: "Achats de matériel, équipements et travaux"
+    },
+    {
+        number: 606,
+        system: "base",
+
+        label: "Achats non stockés de matière et fournitures"
+    },
+    {
+        number: 6061,
+        system: "developed",
+        label: "Fournitures non stockables (eau, énergie, ...)"
+    },
+    {
+        number: 6063,
+        system: "developed",
+        label: "Fournitures d'entretien et de petit équipement"
+    },
+    {
+        number: 6064,
+        system: "developed",
+        label: "Fournitures administratives"
+    },
+    {
+        number: 6068,
+        system: "developed",
+        label: "Autres matières et fournitures"
+    },
+    {
+        number: 607,
+        system: "base",
+
+        label: "Achats de marchandises"
+    },
+    {
+        number: 6071,
+        system: "developed",
+        label: "Marchandise (ou groupe) A"
+    },
+    {
+        number: 6072,
+        system: "developed",
+        label: "Marchandise (ou groupe) B"
+    },
+    {
+        number: 608,
+        system: "base",
+        label: "Récapitulation des frais accessoires incorporés aux achats"
+    },
+    {
+        number: 609,
+        system: "base",
+        label: "Rabais, remises et ristournes obtenus sur achats"
+    },
+    {
+        number: 6091,
+        system: "developed",
+        label: "de matières premières (et fournitures)"
+    },
+    {
+        number: 6092,
+        system: "developed",
+        label: "d'autres approvisionnements stockés"
+    },
+    {
+        number: 6094,
+        system: "developed",
+        label: "d'études et prestations de services"
+    },
+    {
+        number: 6095,
+        system: "developed",
+        label: "de matériel, équipements et travaux"
+    },
+    {
+        number: 6096,
+        system: "developed",
+        label: "d'approvisionnements non stockés"
+    },
+    {
+        number: 6097,
+        system: "developed",
+        label: "de marchandises"
+    },
+    {
+        number: 6098,
+        system: "developed",
+        label: "Rabais, remises et ristournes non affectés"
+    },
+    {
+        number: 61,
+        system: "condensed",
+
+        label: "Services extérieurs"
+    },
+    {
+        number: 611,
+        system: "base",
+        label: "Sous-traitance générale"
+    },
+    {
+        number: 612,
+        system: "base",
+
+        label: "Redevances de crédit-bail"
+    },
+    {
+        number: 6122,
+        system: "base",
+        label: "Crédit-bail mobilier"
+    },
+    {
+        number: 6125,
+        system: "base",
+        label: "Crédit-bail immobilier"
+    },
+    {
+        number: 613,
+        system: "base",
+
+        label: "Locations"
+    },
+    {
+        number: 6132,
+        system: "developed",
+        label: "Locations immobilières"
+    },
+    {
+        number: 6135,
+        system: "developed",
+        label: "Locations mobilières"
+    },
+    {
+        number: 6136,
+        system: "developed",
+        label: "Malis sur emballages"
+    },
+    {
+        number: 614,
+        system: "base",
+        label: "Charges locatives et de copropriété"
+    },
+    {
+        number: 615,
+        system: "base",
+
+        label: "Entretien et réparations"
+    },
+    {
+        number: 6152,
+        system: "developed",
+        label: "sur biens immobiliers"
+    },
+    {
+        number: 6155,
+        system: "developed",
+        label: "sur biens mobiliers"
+    },
+    {
+        number: 6156,
+        system: "developed",
+        label: "Maintenance"
+    },
+    {
+        number: 616,
+        system: "base",
+
+        label: "Primes d'assurances"
+    },
+    {
+        number: 6161,
+        system: "developed",
+        label: "Multirisques"
+    },
+    {
+        number: 6162,
+        system: "developed",
+        label: "Assurance obligatoire dommage construction"
+    },
+    {
+        number: 6163,
+        system: "developed",
+
+        label: "Assurance transport"
+    },
+    {
+        number: 61636,
+        system: "developed",
+        label: "sur achats"
+    },
+    {
+        number: 61637,
+        system: "developed",
+        label: "sur ventes"
+    },
+    {
+        number: 61638,
+        system: "developed",
+        label: "sur autres biens"
+    },
+    {
+        number: 6164,
+        system: "developed",
+        label: "Risques d'exploitation"
+    },
+    {
+        number: 6165,
+        system: "developed",
+        label: "Insolvabilité clients"
+    },
+    {
+        number: 617,
+        system: "base",
+        label: "Études et recherches"
+    },
+    {
+        number: 618,
+        system: "base",
+
+        label: "Divers"
+    },
+    {
+        number: 6181,
+        system: "developed",
+        label: "Documentation générale"
+    },
+    {
+        number: 6183,
+        system: "developed",
+        label: "Documentation technique"
+    },
+    {
+        number: 6185,
+        system: "developed",
+        label: "Frais de colloques, séminaires, conférences"
+    },
+    {
+        number: 619,
+        system: "base",
+        label: "Rabais, remises et ristournes obtenus sur services extérieurs"
+    },
+    {
+        number: 62,
+        system: "condensed",
+
+        label: "Autres services extérieurs"
+    },
+    {
+        number: 621,
+        system: "base",
+
+        label: "Personnel extérieur à l'entreprise"
+    },
+    {
+        number: 6211,
+        system: "developed",
+        label: "Personnel intérimaire"
+    },
+    {
+        number: 6214,
+        system: "developed",
+        label: "Personnel détaché ou prêté à l'entreprise"
+    },
+    {
+        number: 622,
+        system: "base",
+
+        label: "Rémunérations d'intermédiaires et honoraires"
+    },
+    {
+        number: 6221,
+        system: "developed",
+        label: "Commissions et courtages sur achats"
+    },
+    {
+        number: 6222,
+        system: "developed",
+        label: "Commissions et courtages sur ventes"
+    },
+    {
+        number: 6224,
+        system: "developed",
+        label: "Rémunérations des transitaires"
+    },
+    {
+        number: 6225,
+        system: "developed",
+        label: "Rémunérations d'affacturage"
+    },
+    {
+        number: 6226,
+        system: "developed",
+        label: "Honoraires"
+    },
+    {
+        number: 6227,
+        system: "developed",
+        label: "Frais d'actes et de contentieux"
+    },
+    {
+        number: 6228,
+        system: "developed",
+        label: "Divers"
+    },
+    {
+        number: 623,
+        system: "base",
+
+        label: "Publicité, publications, relations publiques"
+    },
+    {
+        number: 6231,
+        system: "developed",
+        label: "Annonces et insertions"
+    },
+    {
+        number: 6232,
+        system: "developed",
+        label: "Échantillons"
+    },
+    {
+        number: 6233,
+        system: "developed",
+        label: "Foires et expositions"
+    },
+    {
+        number: 6234,
+        system: "developed",
+        label: "Cadeaux à la clientèle"
+    },
+    {
+        number: 6235,
+        system: "developed",
+        label: "Primes"
+    },
+    {
+        number: 6236,
+        system: "developed",
+        label: "Catalogues et imprimés"
+    },
+    {
+        number: 6237,
+        system: "developed",
+        label: "Publications"
+    },
+    {
+        number: 6238,
+        system: "developed",
+        label: "Divers (pourboires, dons courants, ...)"
+    },
+    {
+        number: 624,
+        system: "base",
+
+        label: "Transports de biens et transports collectifs du personnel"
+    },
+    {
+        number: 6241,
+        system: "developed",
+        label: "Transports sur achats"
+    },
+    {
+        number: 6242,
+        system: "developed",
+        label: "Transports sur ventes"
+    },
+    {
+        number: 6243,
+        system: "developed",
+        label: "Transports entre établissements ou chantiers"
+    },
+    {
+        number: 6244,
+        system: "developed",
+        label: "Transports administratifs"
+    },
+    {
+        number: 6247,
+        system: "developed",
+        label: "Transports collectifs du personnel"
+    },
+    {
+        number: 6248,
+        system: "developed",
+        label: "Divers"
+    },
+    {
+        number: 625,
+        system: "base",
+
+        label: "Déplacements, missions et réceptions"
+    },
+    {
+        number: 6251,
+        system: "developed",
+        label: "Voyages et déplacements"
+    },
+    {
+        number: 6255,
+        system: "developed",
+        label: "Frais de déménagement"
+    },
+    {
+        number: 6256,
+        system: "developed",
+        label: "Missions"
+    },
+    {
+        number: 6257,
+        system: "developed",
+        label: "Réceptions"
+    },
+    {
+        number: 626,
+        system: "base",
+        label: "Frais postaux et de télécommunications"
+    },
+    {
+        number: 627,
+        system: "base",
+
+        label: "Services bancaires et assimilés"
+    },
+    {
+        number: 6271,
+        system: "developed",
+        label: "Frais sur titres (achat, vente, garde)"
+    },
+    {
+        number: 6272,
+        system: "developed",
+        label: "Commissions et frais sur émission d'emprunts"
+    },
+    {
+        number: 6275,
+        system: "developed",
+        label: "Frais sur effets"
+    },
+    {
+        number: 6276,
+        system: "developed",
+        label: "Location de coffres"
+    },
+    {
+        number: 6278,
+        system: "developed",
+        label: "Autres frais et commissions sur prestations de services"
+    },
+    {
+        number: 628,
+        system: "base",
+
+        label: "Divers"
+    },
+    {
+        number: 6281,
+        system: "developed",
+        label: "Concours divers (cotisations, ...)"
+    },
+    {
+        number: 6284,
+        system: "developed",
+        label: "Frais de recrutement de personnel"
+    },
+    {
+        number: 629,
+        system: "base",
+        label: "Rabais, remises et ristournes obtenus sur autres services extérieurs"
+    },
+    {
+        number: 63,
+        system: "condensed",
+
+        label: "Impôts, taxes et versements assimilés"
+    },
+    {
+        number: 631,
+        system: "base",
+
+        label: "Impôts, taxes et versements assimilés sur rémunérations (administrations des impôts)"
+    },
+    {
+        number: 6311,
+        system: "developed",
+        label: "Taxe sur les salaires"
+    },
+    {
+        number: 6312,
+        system: "developed",
+        label: "Taxe d'apprentissage"
+    },
+    {
+        number: 6313,
+        system: "developed",
+        label: "Participation des employeurs à la formation professionnelle continue"
+    },
+    {
+        number: 6314,
+        system: "developed",
+        label: "Cotisation pour défaut d'investissement obligatoire dans la construction"
+    },
+    {
+        number: 6318,
+        system: "developed",
+        label: "Autres"
+    },
+    {
+        number: 633,
+        system: "base",
+
+        label: "Impôts, taxes et versements assimilés sur rémunérations (autres organismes)"
+    },
+    {
+        number: 6331,
+        system: "developed",
+        label: "Versement de transport"
+    },
+    {
+        number: 6332,
+        system: "developed",
+        label: "Allocations logement"
+    },
+    {
+        number: 6333,
+        system: "developed",
+        label: "Contribution unique des employeurs à la formation professionnelle"
+    },
+    {
+        number: 6334,
+        system: "developed",
+        label: "Participation des employeurs à l'effort de construction"
+    },
+    {
+        number: 6335,
+        system: "developed",
+        label: "Versements libératoires ouvrant droit à l'exonération de la taxe d'apprentissage"
+    },
+    {
+        number: 6338,
+        system: "developed",
+        label: "Autres"
+    },
+    {
+        number: 635,
+        system: "base",
+
+        label: "Autres impôts, taxes et versements assimilés (administrations des impôts)"
+    },
+    {
+        number: 6351,
+        system: "developed",
+
+        label: "Impôts directs (sauf impôts sur les bénéfices)"
+    },
+    {
+        number: 63511,
+        system: "developed",
+        label: "Contribution économique territoriale"
+    },
+    {
+        number: 63512,
+        system: "developed",
+        label: "Taxes foncières"
+    },
+    {
+        number: 63513,
+        system: "developed",
+        label: "Autres impôts locaux"
+    },
+    {
+        number: 63514,
+        system: "developed",
+        label: "Taxe sur les véhicules des sociétés"
+    },
+    {
+        number: 6352,
+        system: "developed",
+        label: "Taxe sur le chiffre d'affaires non récupérables"
+    },
+    {
+        number: 6353,
+        system: "developed",
+        label: "Impôts indirects"
+    },
+    {
+        number: 6354,
+        system: "developed",
+
+        label: "Droits d'enregistrement et de timbre"
+    },
+    {
+        number: 63541,
+        system: "developed",
+        label: "Droits de mutation"
+    },
+    {
+        number: 6358,
+        system: "base",
+        label: "Autres droits"
+    },
+    {
+        number: 637,
+        system: "base",
+
+        label: "Autres impôts, taxes et versements assimilés (autres organismes)"
+    },
+    {
+        number: 6371,
+        system: "developed",
+        label: "Contribution sociale de solidarité à la charge des sociétés"
+    },
+    {
+        number: 6372,
+        system: "developed",
+        label: "Taxes perçues par les organismes publics internationaux"
+    },
+    {
+        number: 6374,
+        system: "developed",
+        label: "Impôts et taxes exigibles à l'Étranger"
+    },
+    {
+        number: 6378,
+        system: "developed",
+        label: "Taxes diverses"
+    },
+    {
+        number: 64,
+        system: "base",
+        label: "Charges de personnel"
+    },
+    {
+        number: 641,
+        system: "condensed",
+
+        label: "Rémunérations du personnel"
+    },
+    {
+        number: 6411,
+        system: "developed",
+        label: "Salaires, appointements"
+    },
+    {
+        number: 6412,
+        system: "developed",
+        label: "Congés payés"
+    },
+    {
+        number: 6413,
+        system: "developed",
+        label: "Primes et gratifications"
+    },
+    {
+        number: 6414,
+        system: "developed",
+        label: "Indemnités et avantages divers"
+    },
+    {
+        number: 6415,
+        system: "developed",
+        label: "Supplément familial"
+    },
+    {
+        number: 644,
+        system: "condensed",
+        label: "Rémunération du travail de l'exploitant"
+    },
+    {
+        number: 645,
+        system: "condensed",
+
+        label: "Charges de sécurité sociale et de prévoyance"
+    },
+    {
+        number: 6451,
+        system: "developed",
+        label: "Cotisations à l'URSSAF"
+    },
+    {
+        number: 6452,
+        system: "developed",
+        label: "Cotisations aux mutuelles"
+    },
+    {
+        number: 6453,
+        system: "developed",
+        label: "Cotisations aux caisses de retraites"
+    },
+    {
+        number: 6454,
+        system: "developed",
+        label: "Cotisations aux ASSEDIC"
+    },
+    {
+        number: 6458,
+        system: "developed",
+        label: "Cotisations aux autres organismes sociaux"
+    },
+    {
+        number: 646,
+        system: "condensed",
+        label: "Cotisations sociales personnelles de l'exploitant"
+    },
+    {
+        number: 647,
+        system: "base",
+
+        label: "Autres charges sociales"
+    },
+    {
+        number: 6471,
+        system: "developed",
+        label: "Prestations directes"
+    },
+    {
+        number: 6472,
+        system: "developed",
+        label: "Versements aux comités d'entreprise et d'établissement"
+    },
+    {
+        number: 6473,
+        system: "developed",
+        label: "Versements aux comités d'hygiène et de sécurité"
+    },
+    {
+        number: 6474,
+        system: "developed",
+        label: "Versements aux autres œuvres sociales"
+    },
+    {
+        number: 6475,
+        system: "developed",
+        label: "Médecine du travail, pharmacie"
+    },
+    {
+        number: 648,
+        system: "base",
+        label: "Autres charges de personnel"
+    },
+    {
+        number: 65,
+        system: "condensed",
+        label: "Autres charges de gestion courante"
+    },
+    {
+        number: 651,
+        system: "base",
+
+        label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires"
+    },
+    {
+        number: 6511,
+        system: "developed",
+        label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels"
+    },
+    {
+        number: 6516,
+        system: "developed",
+        label: "Droits d'auteur et de reproduction"
+    },
+    {
+        number: 6518,
+        system: "developed",
+        label: "Autres droits et valeurs similaires"
+    },
+    {
+        number: 653,
+        system: "base",
+        label: "Jetons de présence"
+    },
+    {
+        number: 654,
+        system: "base",
+
+        label: "Pertes sur créances irrécouvrables"
+    },
+    {
+        number: 6541,
+        system: "developed",
+        label: "Créances de l'exercice"
+    },
+    {
+        number: 6544,
+        system: "developed",
+        label: "Créances des exercices antérieurs"
+    },
+    {
+        number: 655,
+        system: "base",
+
+        label: "Quote-part de résultat sur opérations faites en commun"
+    },
+    {
+        number: 6551,
+        system: "developed",
+        label: "Quote-part de bénéfice transférée (comptabilité du gérant)"
+    },
+    {
+        number: 6555,
+        system: "developed",
+        label: "Quote-part de perte supportée (comptabilité des associés non gérants)"
+    },
+    {
+        number: 656,
+        system: "base",
+        label: "Pertes de change sur créances commerciales"
+    },
+    {
+        number: 658,
+        system: "base",
+        label: "Charges diverses de gestion courante"
+    },
+    {
+        number: 66,
+        system: "condensed",
+        label: "Charges financières"
+    },
+    {
+        number: 661,
+        system: "base",
+
+        label: "Charges d'intérêts"
+    },
+    {
+        number: 6611,
+        system: "developed",
+
+        label: "Intérêts des emprunts et dettes"
+    },
+    {
+        number: 66116,
+        system: "developed",
+        label: "des emprunts et dettes assimilées"
+    },
+    {
+        number: 66117,
+        system: "developed",
+        label: "des dettes rattachées à des participations"
+    },
+    {
+        number: 6612,
+        system: "developed",
+        label: "Charges de la fiducie, résultat de la période"
+    },
+    {
+        number: 6615,
+        system: "developed",
+        label: "Intérêts des comptes courants et des dépôts créditeurs"
+    },
+    {
+        number: 6616,
+        system: "developed",
+        label: "Intérêts bancaires et sur opérations de financement (escompte, ...)"
+    },
+    {
+        number: 6617,
+        system: "developed",
+        label: "Intérêts des obligations cautionnées"
+    },
+    {
+        number: 6618,
+        system: "developed",
+
+        label: "Intérêts des autres dettes"
+    },
+    {
+        number: 66181,
+        system: "developed",
+        label: "des dettes commerciales"
+    },
+    {
+        number: 66188,
+        system: "developed",
+        label: "des dettes diverses"
+    },
+    {
+        number: 664,
+        system: "base",
+        label: "Pertes sur créances liées à des participations"
+    },
+    {
+        number: 665,
+        system: "base",
+        label: "Escomptes accordés"
+    },
+    {
+        number: 666,
+        system: "base",
+        label: "Pertes de change financières"
+    },
+    {
+        number: 667,
+        system: "base",
+        label: "Charges nettes sur cessions de valeurs mobilières de placement"
+    },
+    {
+        number: 668,
+        system: "base",
+        label: "Autres charges financières"
+    },
+    {
+        number: 67,
+        system: "condensed",
+        label: "Charges exceptionnelles"
+    },
+    {
+        number: 671,
+        system: "base",
+
+        label: "Charges exceptionnelles sur opérations de gestion"
+    },
+    {
+        number: 6711,
+        system: "developed",
+        label: "Pénalités sur marchés (et dédits payés sur achats et ventes)"
+    },
+    {
+        number: 6712,
+        system: "developed",
+        label: "Pénalités, amendes fiscales et pénales"
+    },
+    {
+        number: 6713,
+        system: "developed",
+        label: "Dons, libéralités"
+    },
+    {
+        number: 6714,
+        system: "developed",
+        label: "Créances devenues irrécouvrables dans l'exercice"
+    },
+    {
+        number: 6715,
+        system: "developed",
+        label: "Subventions accordées"
+    },
+    {
+        number: 6717,
+        system: "developed",
+        label: "Rappel d'impôts (autres qu'impôts sur les bénéfices)"
+    },
+    {
+        number: 6718,
+        system: "developed",
+        label: "Autres charges exceptionnelles sur opérations de gestion"
+    },
+    {
+        number: 672,
+        system: "base",
+        label: "(Compte à la disposition des entités pour enregistrer, en cours d'exercice, les charges sur exercices antérieurs)"
+    },
+    {
+        number: 674,
+        system: "base",
+        label: "Opérations de constitution ou liquidation des fiducies"
+    },
+    {
+        number: 6741,
+        system: "developed",
+        label: "Opérations liées à la constitution de fiducie - Transfert des éléments"
+    },
+    {
+        number: 6742,
+        system: "developed",
+        label: "Opérations liées à la liquidation de la fiducie"
+    },
+    {
+        number: 675,
+        system: "base",
+
+        label: "Valeurs comptables des éléments d'actif cédés"
+    },
+    {
+        number: 6751,
+        system: "developed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 6752,
+        system: "developed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 6756,
+        system: "developed",
+        label: "Immobilisations financières"
+    },
+    {
+        number: 6758,
+        system: "developed",
+        label: "Autres éléments d'actif"
+    },
+    {
+        number: 678,
+        system: "base",
+
+        label: "Autres charges exceptionnelles"
+    },
+    {
+        number: 6781,
+        system: "developed",
+        label: "Malis provenant de clauses d'indexation"
+    },
+    {
+        number: 6782,
+        system: "developed",
+        label: "Lots"
+    },
+    {
+        number: 6783,
+        system: "developed",
+        label: "Malis provenant du rachat par l'entreprise d'actions et obligations émises par elle-même"
+    },
+    {
+        number: 6788,
+        system: "developed",
+        label: "Charges exceptionnelles diverses"
+    },
+    {
+        number: 68,
+        system: "base",
+        label: "Dotations aux amortissements, aux dépréciations et aux provisions"
+    },
+    {
+        number: 681,
+        system: "condensed",
+        label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges d'exploitation"
+    },
+    {
+        number: 6811,
+        system: "base",
+
+        label: "Dotations aux amortissements sur immobilisations incorporelles et corporelles"
+    },
+    {
+        number: 68111,
+        system: "developed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 68112,
+        system: "developed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 6812,
+        system: "base",
+        label: "Dotations aux amortissements des charges d'exploitation à répartir"
+    },
+    {
+        number: 6815,
+        system: "base",
+        label: "Dotations aux provisions d'exploitation"
+    },
+    {
+        number: 6816,
+        system: "base",
+
+        label: "Dotations pour dépréciations des immobilisations incorporelles et corporelles"
+    },
+    {
+        number: 68161,
+        system: "developed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 68162,
+        system: "developed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 6817,
+        system: "base",
+
+        label: "Dotations pour dépréciations des actifs circulants"
+    },
+    {
+        number: 68173,
+        system: "developed",
+        label: "Stocks et en-cours"
+    },
+    {
+        number: 68174,
+        system: "developed",
+        label: "Créances"
+    },
+    {
+        number: 686,
+        system: "condensed",
+
+        label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges financières"
+    },
+    {
+        number: 6861,
+        system: "base",
+        label: "Dotations aux amortissements des primes de remboursement des obligations"
+    },
+    {
+        number: 6865,
+        system: "base",
+        label: "Dotations aux provisions financières"
+    },
+    {
+        number: 6866,
+        system: "base",
+
+        label: "Dotations pour dépréciations des éléments financiers"
+    },
+    {
+        number: 68662,
+        system: "developed",
+        label: "Immobilisations financières"
+    },
+    {
+        number: 68665,
+        system: "developed",
+        label: "Valeurs mobilières de placement"
+    },
+    {
+        number: 6868,
+        system: "base",
+        label: "Autres dotations"
+    },
+    {
+        number: 687,
+        system: "condensed",
+
+        label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges exceptionnelles"
+    },
+    {
+        number: 6871,
+        system: "base",
+        label: "Dotations aux amortissements exceptionnels des immobilisations"
+    },
+    {
+        number: 6872,
+        system: "base",
+
+        label: "Dotations aux provisions réglementées (immobilisations)"
+    },
+    {
+        number: 68725,
+        system: "developed",
+        label: "Amortissements dérogatoires"
+    },
+    {
+        number: 6873,
+        system: "base",
+        label: "Dotations aux provisions réglementées (stocks)"
+    },
+    {
+        number: 6874,
+        system: "base",
+        label: "Dotations aux autres provisions réglementées"
+    },
+    {
+        number: 6875,
+        system: "base",
+        label: "Dotations aux provisions exceptionnelles"
+    },
+    {
+        number: 6876,
+        system: "base",
+        label: "Dotations pour dépréciations exceptionnelles"
+    },
+    {
+        number: 69,
+        system: "base",
+        label: "Participation des salariés - Impôts sur les bénéfices et assimilés"
+    },
+    {
+        number: 691,
+        system: "condensed",
+        label: "Participation des salariés aux résultats"
+    },
+    {
+        number: 695,
+        system: "condensed",
+
+        label: "Impôts sur les bénéfices"
+    },
+    {
+        number: 6951,
+        system: "developed",
+        label: "Impôts dus en France"
+    },
+    {
+        number: 6952,
+        system: "developed",
+        label: "Contribution additionnelle à l'impôt sur les bénéfices"
+    },
+    {
+        number: 6954,
+        system: "developed",
+        label: "Impôts dus à l'étranger"
+    },
+    {
+        number: 696,
+        system: "base",
+        label: "Suppléments d'impôt sur les sociétés liés aux distributions"
+    },
+    {
+        number: 698,
+        system: "base",
+
+        label: "Intégration fiscale"
+    },
+    {
+        number: 6981,
+        system: "base",
+        label: "Intégration fiscale - Charges"
+    },
+    {
+        number: 6989,
+        system: "base",
+        label: "Intégration fiscale - Produits"
+    },
+    {
+        number: 699,
+        system: "condensed",
+        label: "Produits - Reports en arrière des déficits"
     },
     {
         number: 7,
-        label: "Comptes de produits",
         system: "condensed",
-        accounts: [
-            {
-                number: 70,
-                label: "Ventes de produits fabriqués, prestations de services, marchandises",
-                system: "base",
-                accounts: [
-                    {
-                        number: 701,
-                        label: "Ventes de produits finis",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7011,
-                                label: "Produits finis (ou groupe) A",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7012,
-                                label: "Produits finis (ou groupe) B",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 702,
-                        label: "Ventes de produits intermédiaires",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 703,
-                        label: "Ventes de produits résiduels",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 704,
-                        label: "Travaux",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7041,
-                                label: "Travaux de catégorie (ou activité) A",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7042,
-                                label: "Travaux de catégorie (ou activité) B",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 705,
-                        label: "Études",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 706,
-                        label: "Prestations de services",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 707,
-                        label: "Ventes de marchandises",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7071,
-                                label: "Marchandises (ou groupe) A",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7072,
-                                label: "Marchandises (ou groupe) B",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 708,
-                        label: "Produits des activités annexes",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7081,
-                                label: "Produits des services exploités dans l'intérêt du personnel",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7082,
-                                label: "Commissions et courtages",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7083,
-                                label: "Locations diverses",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7084,
-                                label: "Mise à disposition de personnel facturée",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7085,
-                                label: "Ports et frais accessoires facturés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7086,
-                                label: "Bonis sur reprises d'emballages consignés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7087,
-                                label: "Bonifications obtenues des clients et primes sur ventes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7088,
-                                label: "Autres produits d'activités annexes (cessions d'approvisionnements, ...)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 709,
-                        label: "Rabais, remises et ristournes accordés par l'entreprise",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7091,
-                                label: "sur ventes de produits finis",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7092,
-                                label: "sur ventes de produits intermédiaires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7094,
-                                label: "sur travaux",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7095,
-                                label: "sur études",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7096,
-                                label: "sur prestations de services",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7097,
-                                label: "sur ventes de marchandises",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7098,
-                                label: "sur produits des activités annexes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 71,
-                label: "Production stockée (ou déstockage)",
-                system: "base",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 713,
-                label: "Variation des stocks (en-cours de production, produits)",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 7133,
-                        label: "Variation des en-cours de production de biens",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 71331,
-                                label: "Produits en cours",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 71335,
-                                label: "Travaux en cours",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 7134,
-                        label: "Variation des en-cours de production de services",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 71341,
-                                label: "Études en cours",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 71345,
-                                label: "Prestations de services en cours",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 7135,
-                        label: "Variation des stocks de produits",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 71351,
-                                label: "Produits intermédiaires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 71355,
-                                label: "Produits finis",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 71358,
-                                label: "Produits résiduels",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 72,
-                label: "Production immobilisée",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 721,
-                        label: "Immobilisations incorporelles",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 722,
-                        label: "Immobilisations corporelles",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 74,
-                label: "Subventions d'exploitation",
-                system: "condensed",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 75,
-                label: "Autres produits de gestion courante",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 751,
-                        label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7511,
-                                label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7516,
-                                label: "Droits d'auteur et de reproduction",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7518,
-                                label: "Autres droits et valeurs similaires",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 752,
-                        label: "Revenus des immeubles non affectés à des activités professionnelles",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 753,
-                        label: "Jetons de présence et rémunérations d'administrateurs, gérants",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 754,
-                        label: "Ristournes perçues des coopératives (provenant des excédents)",
-                        system: "condensed",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 755,
-                        label: "Quote-parts de résultat sur opérations faites en commun",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7551,
-                                label: "Quote-part de perte transférée (comptabilité du gérant)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7555,
-                                label: "Quote-part de bénéfice attribuée (comptabilité des associés non-gérants)",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 756,
-                        label: "Gains de change sur créances commerciales",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 758,
-                        label: "Produits divers de gestion courante",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 76,
-                label: "Produits financiers",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 761,
-                        label: "Produits de participations",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7611,
-                                label: "Revenus des titres de participation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7612,
-                                label: "Produits de la fiducie, résultat de la période",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7616,
-                                label: "Revenus sur autres formes de participation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7617,
-                                label: "Revenus des créances rattachées à des participations",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 762,
-                        label: "Produits des autres immobilisations financières",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7621,
-                                label: "Revenus des titres immobilisés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7626,
-                                label: "Revenus des prêts",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7627,
-                                label: "Revenus des créances immobilisées",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 763,
-                        label: "Revenus des autres créances",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7631,
-                                label: "Revenus des créances commerciales",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7638,
-                                label: "Revenus des créances diverses",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 764,
-                        label: "Revenus des valeurs mobilières de placement",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 765,
-                        label: "Escomptes obtenus",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 766,
-                        label: "Gains de change financiers",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 767,
-                        label: "Produits nets sur cessions de valeurs mobilières de placement",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 768,
-                        label: "Autres produits financiers",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            },
-            {
-                number: 77,
-                label: "Produits exceptionnels",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 771,
-                        label: "Produits exceptionnels sur opérations de gestion",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7711,
-                                label: "Dédits et pénalités perçus sur achats et sur ventes",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7713,
-                                label: "Libéralités reçues",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7714,
-                                label: "Rentrées sur créances amorties",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7715,
-                                label: "Subventions d'équilibre",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7717,
-                                label: "Dégrèvements d'impôts autres qu'impôts sur les bénéfices",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7718,
-                                label: "Autres produits exceptionnels sur opérations de gestion",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 772,
-                        label: "(Compte à la disposition des entités pour enregistrer, en cours d'exercice, les produits sur exercices antérieurs)",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 774,
-                        label: "Opérations de constitution ou liquidation des fiducies",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7741,
-                                label: "Opérations liées à la constitution de fiducie - Transfert des éléments",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7742,
-                                label: "Opérations liées à la liquidation de la fiducie",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 775,
-                        label: "Produits des cessions d'éléments d'actif",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7751,
-                                label: "Immobilisations incorporelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7752,
-                                label: "Immobilisations corporelles",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7756,
-                                label: "Immobilisations financières",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7758,
-                                label: "Autres éléments d'actif",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 777,
-                        label: "Quote-part des subventions d'investissement virée au résultat de l'exercice",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 778,
-                        label: "Autres produits exceptionnels",
-                        system: "base",
-                        accounts: [
-                            {
-                                number: 7781,
-                                label: "Bonis provenant de clauses d'indexation",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7782,
-                                label: "Lots",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7783,
-                                label: "Bonis provenant du rachat par l'entreprise d'actions et d'obligations émises par elle-même",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7788,
-                                label: "Produits exceptionnels divers",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 78,
-                label: "Reprises sur amortissements, dépréciations et provisions",
-                system: "base",
-                accounts: [
-                    {
-                        number: 781,
-                        label: "Reprises sur amortissements, dépréciations et provisions (à inscrire dans les produits d'exploitation)",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7811,
-                                label: "Reprises sur amortissements des immobilisations incorporelles et corporelles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 78111,
-                                        label: "Immobilisations incorporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 78112,
-                                        label: "Immobilisations corporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 7815,
-                                label: "Reprises sur provisions d'exploitation",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7816,
-                                label: "Reprises sur dépréciations des immobilisations incorporelles et corporelles",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 78161,
-                                        label: "Immobilisations incorporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 78162,
-                                        label: "Immobilisations corporelles",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 7817,
-                                label: "Reprises sur dépréciations des actifs circulants",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 78173,
-                                        label: "Stocks et en-cours",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 78174,
-                                        label: "Créances",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 786,
-                        label: "Reprises sur provisions pour risques et dépréciations (à inscrire dans les produits financiers)",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7865,
-                                label: "Reprises sur provisions financières",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7866,
-                                label: "Reprises sur dépréciations des éléments financiers",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 78662,
-                                        label: "Immobilisations financières",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 78665,
-                                        label: "Valeurs mobilières de placements",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        number: 787,
-                        label: "Reprises sur provisions et dépréciations (à inscrire dans les produits exceptionnels)",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 7872,
-                                label: "Reprises sur provisions réglementées (immobilisations)",
-                                system: "base",
-                                accounts: [
-                                    {
-                                        number: 78725,
-                                        label: "Amortissements dérogatoires",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 78726,
-                                        label: "Provision spéciale de réévaluation",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 78727,
-                                        label: "Plus-values réinvesties",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 7873,
-                                label: "Reprises sur provisions réglementées (stocks)",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7874,
-                                label: "Reprises sur autres provisions réglementées",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7875,
-                                label: "Reprises sur provisions exceptionnelles",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 7876,
-                                label: "Reprises sur dépréciations exceptionnelles",
-                                system: "base",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 79,
-                label: "Transferts de charges",
-                system: "condensed",
-                accounts: [
-                    {
-                        number: 791,
-                        label: "Transferts de charges d'exploitation",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 796,
-                        label: "Transferts de charges financières",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 797,
-                        label: "Transferts de charges exceptionnelles",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            }
-        ]
+        label: "Comptes de produits"
+    },
+    {
+        number: 70,
+        system: "base",
+        label: "Ventes de produits fabriqués, prestations de services, marchandises"
+    },
+    {
+        number: 701,
+        system: "condensed",
+
+        label: "Ventes de produits finis"
+    },
+    {
+        number: 7011,
+        system: "developed",
+        label: "Produits finis (ou groupe) A"
+    },
+    {
+        number: 7012,
+        system: "developed",
+        label: "Produits finis (ou groupe) B"
+    },
+    {
+        number: 702,
+        system: "base",
+        label: "Ventes de produits intermédiaires"
+    },
+    {
+        number: 703,
+        system: "base",
+        label: "Ventes de produits résiduels"
+    },
+    {
+        number: 704,
+        system: "base",
+
+        label: "Travaux"
+    },
+    {
+        number: 7041,
+        system: "base",
+        label: "Travaux de catégorie (ou activité) A"
+    },
+    {
+        number: 7042,
+        system: "base",
+        label: "Travaux de catégorie (ou activité) B"
+    },
+    {
+        number: 705,
+        system: "base",
+        label: "Études"
+    },
+    {
+        number: 706,
+        system: "condensed",
+        label: "Prestations de services"
+    },
+    {
+        number: 707,
+        system: "condensed",
+
+        label: "Ventes de marchandises"
+    },
+    {
+        number: 7071,
+        system: "developed",
+        label: "Marchandises (ou groupe) A"
+    },
+    {
+        number: 7072,
+        system: "developed",
+        label: "Marchandises (ou groupe) B"
+    },
+    {
+        number: 708,
+        system: "condensed",
+
+        label: "Produits des activités annexes"
+    },
+    {
+        number: 7081,
+        system: "developed",
+        label: "Produits des services exploités dans l'intérêt du personnel"
+    },
+    {
+        number: 7082,
+        system: "developed",
+        label: "Commissions et courtages"
+    },
+    {
+        number: 7083,
+        system: "developed",
+        label: "Locations diverses"
+    },
+    {
+        number: 7084,
+        system: "developed",
+        label: "Mise à disposition de personnel facturée"
+    },
+    {
+        number: 7085,
+        system: "developed",
+        label: "Ports et frais accessoires facturés"
+    },
+    {
+        number: 7086,
+        system: "developed",
+        label: "Bonis sur reprises d'emballages consignés"
+    },
+    {
+        number: 7087,
+        system: "developed",
+        label: "Bonifications obtenues des clients et primes sur ventes"
+    },
+    {
+        number: 7088,
+        system: "developed",
+        label: "Autres produits d'activités annexes (cessions d'approvisionnements, ...)"
+    },
+    {
+        number: 709,
+        system: "condensed",
+        label: "Rabais, remises et ristournes accordés par l'entreprise"
+    },
+    {
+        number: 7091,
+        system: "developed",
+        label: "sur ventes de produits finis"
+    },
+    {
+        number: 7092,
+        system: "developed",
+        label: "sur ventes de produits intermédiaires"
+    },
+    {
+        number: 7094,
+        system: "developed",
+        label: "sur travaux"
+    },
+    {
+        number: 7095,
+        system: "developed",
+        label: "sur études"
+    },
+    {
+        number: 7096,
+        system: "developed",
+        label: "sur prestations de services"
+    },
+    {
+        number: 7097,
+        system: "developed",
+        label: "sur ventes de marchandises"
+    },
+    {
+        number: 7098,
+        system: "developed",
+        label: "sur produits des activités annexes"
+    },
+    {
+        number: 71,
+        system: "base",
+        label: "Production stockée (ou déstockage)"
+    },
+    {
+        number: 713,
+        system: "condensed",
+
+        label: "Variation des stocks (en-cours de production, produits)"
+    },
+    {
+        number: 7133,
+        system: "base",
+
+        label: "Variation des en-cours de production de biens"
+    },
+    {
+        number: 71331,
+        system: "developed",
+        label: "Produits en cours"
+    },
+    {
+        number: 71335,
+        system: "developed",
+        label: "Travaux en cours"
+    },
+    {
+        number: 7134,
+        system: "base",
+
+        label: "Variation des en-cours de production de services"
+    },
+    {
+        number: 71341,
+        system: "developed",
+        label: "Études en cours"
+    },
+    {
+        number: 71345,
+        system: "developed",
+        label: "Prestations de services en cours"
+    },
+    {
+        number: 7135,
+        system: "base",
+
+        label: "Variation des stocks de produits"
+    },
+    {
+        number: 71351,
+        system: "developed",
+        label: "Produits intermédiaires"
+    },
+    {
+        number: 71355,
+        system: "developed",
+        label: "Produits finis"
+    },
+    {
+        number: 71358,
+        system: "developed",
+        label: "Produits résiduels"
+    },
+    {
+        number: 72,
+        system: "condensed",
+
+        label: "Production immobilisée"
+    },
+    {
+        number: 721,
+        system: "base",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 722,
+        system: "base",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 74,
+        system: "condensed",
+        label: "Subventions d'exploitation"
+    },
+    {
+        number: 75,
+        system: "condensed",
+
+        label: "Autres produits de gestion courante"
+    },
+    {
+        number: 751,
+        system: "base",
+
+        label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires"
+    },
+    {
+        number: 7511,
+        system: "developed",
+        label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels"
+    },
+    {
+        number: 7516,
+        system: "developed",
+        label: "Droits d'auteur et de reproduction"
+    },
+    {
+        number: 7518,
+        system: "developed",
+        label: "Autres droits et valeurs similaires"
+    },
+    {
+        number: 752,
+        system: "base",
+        label: "Revenus des immeubles non affectés à des activités professionnelles"
+    },
+    {
+        number: 753,
+        system: "condensed",
+        label: "Jetons de présence et rémunérations d'administrateurs, gérants"
+    },
+    {
+        number: 754,
+        system: "condensed",
+        label: "Ristournes perçues des coopératives (provenant des excédents)"
+    },
+    {
+        number: 755,
+        system: "condensed",
+
+        label: "Quote-parts de résultat sur opérations faites en commun"
+    },
+    {
+        number: 7551,
+        system: "developed",
+        label: "Quote-part de perte transférée (comptabilité du gérant)"
+    },
+    {
+        number: 7555,
+        system: "developed",
+        label: "Quote-part de bénéfice attribuée (comptabilité des associés non-gérants)"
+    },
+    {
+        number: 756,
+        system: "base",
+        label: "Gains de change sur créances commerciales"
+    },
+    {
+        number: 758,
+        system: "base",
+        label: "Produits divers de gestion courante"
+    },
+    {
+        number: 76,
+        system: "condensed",
+        label: "Produits financiers"
+    },
+    {
+        number: 761,
+        system: "base",
+
+        label: "Produits de participations"
+    },
+    {
+        number: 7611,
+        system: "developed",
+        label: "Revenus des titres de participation"
+    },
+    {
+        number: 7612,
+        system: "developed",
+        label: "Produits de la fiducie, résultat de la période"
+    },
+    {
+        number: 7616,
+        system: "developed",
+        label: "Revenus sur autres formes de participation"
+    },
+    {
+        number: 7617,
+        system: "developed",
+        label: "Revenus des créances rattachées à des participations"
+    },
+    {
+        number: 762,
+        system: "base",
+
+        label: "Produits des autres immobilisations financières"
+    },
+    {
+        number: 7621,
+        system: "developed",
+        label: "Revenus des titres immobilisés"
+    },
+    {
+        number: 7626,
+        system: "developed",
+        label: "Revenus des prêts"
+    },
+    {
+        number: 7627,
+        system: "developed",
+        label: "Revenus des créances immobilisées"
+    },
+    {
+        number: 763,
+        system: "base",
+
+        label: "Revenus des autres créances"
+    },
+    {
+        number: 7631,
+        system: "developed",
+        label: "Revenus des créances commerciales"
+    },
+    {
+        number: 7638,
+        system: "developed",
+        label: "Revenus des créances diverses"
+    },
+    {
+        number: 764,
+        system: "base",
+        label: "Revenus des valeurs mobilières de placement"
+    },
+    {
+        number: 765,
+        system: "base",
+        label: "Escomptes obtenus"
+    },
+    {
+        number: 766,
+        system: "base",
+        label: "Gains de change financiers"
+    },
+    {
+        number: 767,
+        system: "base",
+        label: "Produits nets sur cessions de valeurs mobilières de placement"
+    },
+    {
+        number: 768,
+        system: "base",
+        label: "Autres produits financiers"
+    },
+    {
+        number: 77,
+        system: "condensed",
+        label: "Produits exceptionnels"
+    },
+    {
+        number: 771,
+        system: "base",
+
+        label: "Produits exceptionnels sur opérations de gestion"
+    },
+    {
+        number: 7711,
+        system: "developed",
+        label: "Dédits et pénalités perçus sur achats et sur ventes"
+    },
+    {
+        number: 7713,
+        system: "developed",
+        label: "Libéralités reçues"
+    },
+    {
+        number: 7714,
+        system: "developed",
+        label: "Rentrées sur créances amorties"
+    },
+    {
+        number: 7715,
+        system: "developed",
+        label: "Subventions d'équilibre"
+    },
+    {
+        number: 7717,
+        system: "developed",
+        label: "Dégrèvements d'impôts autres qu'impôts sur les bénéfices"
+    },
+    {
+        number: 7718,
+        system: "developed",
+        label: "Autres produits exceptionnels sur opérations de gestion"
+    },
+    {
+        number: 772,
+        system: "base",
+        label: "(Compte à la disposition des entités pour enregistrer, en cours d'exercice, les produits sur exercices antérieurs)"
+    },
+    {
+        number: 774,
+        system: "base",
+        label: "Opérations de constitution ou liquidation des fiducies"
+    },
+    {
+        number: 7741,
+        system: "developed",
+        label: "Opérations liées à la constitution de fiducie - Transfert des éléments"
+    },
+    {
+        number: 7742,
+        system: "developed",
+        label: "Opérations liées à la liquidation de la fiducie"
+    },
+    {
+        number: 775,
+        system: "base",
+
+        label: "Produits des cessions d'éléments d'actif"
+    },
+    {
+        number: 7751,
+        system: "developed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 7752,
+        system: "developed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 7756,
+        system: "developed",
+        label: "Immobilisations financières"
+    },
+    {
+        number: 7758,
+        system: "developed",
+        label: "Autres éléments d'actif"
+    },
+    {
+        number: 777,
+        system: "base",
+        label: "Quote-part des subventions d'investissement virée au résultat de l'exercice"
+    },
+    {
+        number: 778,
+        system: "base",
+
+        label: "Autres produits exceptionnels"
+    },
+    {
+        number: 7781,
+        system: "developed",
+        label: "Bonis provenant de clauses d'indexation"
+    },
+    {
+        number: 7782,
+        system: "developed",
+        label: "Lots"
+    },
+    {
+        number: 7783,
+        system: "developed",
+        label: "Bonis provenant du rachat par l'entreprise d'actions et d'obligations émises par elle-même"
+    },
+    {
+        number: 7788,
+        system: "developed",
+        label: "Produits exceptionnels divers"
+    },
+    {
+        number: 78,
+        system: "base",
+        label: "Reprises sur amortissements, dépréciations et provisions"
+    },
+    {
+        number: 781,
+        system: "condensed",
+
+        label: "Reprises sur amortissements, dépréciations et provisions (à inscrire dans les produits d'exploitation)"
+    },
+    {
+        number: 7811,
+        system: "base",
+
+        label: "Reprises sur amortissements des immobilisations incorporelles et corporelles"
+    },
+    {
+        number: 78111,
+        system: "developed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 78112,
+        system: "developed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 7815,
+        system: "base",
+        label: "Reprises sur provisions d'exploitation"
+    },
+    {
+        number: 7816,
+        system: "base",
+
+        label: "Reprises sur dépréciations des immobilisations incorporelles et corporelles"
+    },
+    {
+        number: 78161,
+        system: "developed",
+        label: "Immobilisations incorporelles"
+    },
+    {
+        number: 78162,
+        system: "developed",
+        label: "Immobilisations corporelles"
+    },
+    {
+        number: 7817,
+        system: "base",
+
+        label: "Reprises sur dépréciations des actifs circulants"
+    },
+    {
+        number: 78173,
+        system: "developed",
+        label: "Stocks et en-cours"
+    },
+    {
+        number: 78174,
+        system: "developed",
+        label: "Créances"
+    },
+    {
+        number: 786,
+        system: "condensed",
+
+        label: "Reprises sur provisions pour risques et dépréciations (à inscrire dans les produits financiers)"
+    },
+    {
+        number: 7865,
+        system: "base",
+        label: "Reprises sur provisions financières"
+    },
+    {
+        number: 7866,
+        system: "base",
+
+        label: "Reprises sur dépréciations des éléments financiers"
+    },
+    {
+        number: 78662,
+        system: "developed",
+        label: "Immobilisations financières"
+    },
+    {
+        number: 78665,
+        system: "developed",
+        label: "Valeurs mobilières de placements"
+    },
+    {
+        number: 787,
+        system: "condensed",
+
+        label: "Reprises sur provisions et dépréciations (à inscrire dans les produits exceptionnels)"
+    },
+    {
+        number: 7872,
+        system: "base",
+
+        label: "Reprises sur provisions réglementées (immobilisations)"
+    },
+    {
+        number: 78725,
+        system: "developed",
+        label: "Amortissements dérogatoires"
+    },
+    {
+        number: 78726,
+        system: "developed",
+        label: "Provision spéciale de réévaluation"
+    },
+    {
+        number: 78727,
+        system: "developed",
+        label: "Plus-values réinvesties"
+    },
+    {
+        number: 7873,
+        system: "base",
+        label: "Reprises sur provisions réglementées (stocks)"
+    },
+    {
+        number: 7874,
+        system: "base",
+        label: "Reprises sur autres provisions réglementées"
+    },
+    {
+        number: 7875,
+        system: "base",
+        label: "Reprises sur provisions exceptionnelles"
+    },
+    {
+        number: 7876,
+        system: "base",
+        label: "Reprises sur dépréciations exceptionnelles"
+    },
+    {
+        number: 79,
+        system: "condensed",
+        label: "Transferts de charges"
+    },
+    {
+        number: 791,
+        system: "base",
+        label: "Transferts de charges d'exploitation"
+    },
+    {
+        number: 796,
+        system: "base",
+        label: "Transferts de charges financières"
+    },
+    {
+        number: 797,
+        system: "base",
+        label: "Transferts de charges exceptionnelles"
     },
     {
         number: 8,
-        label: "Comptes spéciaux",
         system: "condensed",
-        accounts: [
-            {
-                number: 80,
-                label: "Engagements",
-                system: "base",
-                accounts: [
-                    {
-                        number: 801,
-                        label: "Engagements donnés par l'entité",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 8011,
-                                label: "Avals, cautions, garanties",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 8014,
-                                label: "Effets circulant sous l'endos de l'entité",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 8016,
-                                label: "Redevances crédit-bail restant à courir",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 80161,
-                                        label: "Crédit-bail mobilier",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 80165,
-                                        label: "Crédit-bail immobilier",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 8018,
-                                label: "Autres engagements donnés",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 802,
-                        label: "Engagements reçus par l'entité",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 8021,
-                                label: "Avals, cautions, garanties",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 8024,
-                                label: "Créances escomptées non échues",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 8026,
-                                label: "Engagements reçus pour utilisation en crédit-bail",
-                                system: "developed",
-                                accounts: [
-                                    {
-                                        number: 80261,
-                                        label: "Crédit-bail mobilier",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    },
-                                    {
-                                        number: 80265,
-                                        label: "Crédit-bail immobilier",
-                                        system: "developed",
-                                        flow: "debit",
-                                        isAllowance: false,
-                                        accounts: []
-                                    }
-                                ]
-                            },
-                            {
-                                number: 8028,
-                                label: "Autres engagements reçus",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    },
-                    {
-                        number: 809,
-                        label: "Contrepartie des engagements",
-                        system: "condensed",
-                        accounts: [
-                            {
-                                number: 8091,
-                                label: "Contrepartie 801",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            },
-                            {
-                                number: 8092,
-                                label: "Contrepartie 802",
-                                system: "developed",
-                                flow: "debit",
-                                isAllowance: false,
-                                accounts: []
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                number: 88,
-                label: "Résultat en instance d'affectation",
-                system: "base",
-                flow: "debit",
-                isAllowance: false,
-                accounts: []
-            },
-            {
-                number: 89,
-                label: "Bilan",
-                system: "base",
-                accounts: [
-                    {
-                        number: 890,
-                        label: "Bilan d'ouverture",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    },
-                    {
-                        number: 891,
-                        label: "Bilan de clôture",
-                        system: "base",
-                        flow: "debit",
-                        isAllowance: false,
-                        accounts: []
-                    }
-                ]
-            }
-        ]
+        label: "Comptes spéciaux"
+    },
+    {
+        number: 80,
+        system: "base",
+        label: "Engagements"
+    },
+    {
+        number: 801,
+        system: "condensed",
+        label: "Engagements donnés par l'entité"
+    },
+    {
+        number: 8011,
+        system: "developed",
+        label: "Avals, cautions, garanties"
+    },
+    {
+        number: 8014,
+        system: "developed",
+        label: "Effets circulant sous l'endos de l'entité"
+    },
+    {
+        number: 8016,
+        system: "developed",
+        label: "Redevances crédit-bail restant à courir"
+    },
+    {
+        number: 80161,
+        system: "developed",
+        label: "Crédit-bail mobilier"
+    },
+    {
+        number: 80165,
+        system: "developed",
+        label: "Crédit-bail immobilier"
+    },
+    {
+        number: 8018,
+        system: "developed",
+        label: "Autres engagements donnés"
+    },
+    {
+        number: 802,
+        system: "condensed",
+        label: "Engagements reçus par l'entité"
+    },
+    {
+        number: 8021,
+        system: "developed",
+        label: "Avals, cautions, garanties"
+    },
+    {
+        number: 8024,
+        system: "developed",
+        label: "Créances escomptées non échues"
+    },
+    {
+        number: 8026,
+        system: "developed",
+        label: "Engagements reçus pour utilisation en crédit-bail"
+    },
+    {
+        number: 80261,
+        system: "developed",
+        label: "Crédit-bail mobilier"
+    },
+    {
+        number: 80265,
+        system: "developed",
+        label: "Crédit-bail immobilier"
+    },
+    {
+        number: 8028,
+        system: "developed",
+        label: "Autres engagements reçus"
+    },
+    {
+        number: 809,
+        system: "condensed",
+        label: "Contrepartie des engagements"
+    },
+    {
+        number: 8091,
+        system: "developed",
+        label: "Contrepartie 801"
+    },
+    {
+        number: 8092,
+        system: "developed",
+        label: "Contrepartie 802"
+    },
+    {
+        number: 88,
+        system: "base",
+        label: "Résultat en instance d'affectation"
+    },
+    {
+        number: 89,
+        system: "base",
+        label: "Bilan"
+    },
+    {
+        number: 890,
+        system: "base",
+        label: "Bilan d'ouverture"
+    },
+    {
+        number: 891,
+        system: "base",
+        label: "Bilan de clôture"
     }
 ]

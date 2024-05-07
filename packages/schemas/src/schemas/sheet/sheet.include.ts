@@ -3,7 +3,7 @@ export const sheetInclude = {
     id: true,
     idCompany: true,
     idYear: true,
-    idSheetParent: true,
+    idParent: true,
     side: true,
     number: true,
     label: true,

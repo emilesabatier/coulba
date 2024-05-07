@@ -95,7 +95,7 @@ export function UpdateAccountForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idAccountParent"
+                        name="idParent"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
