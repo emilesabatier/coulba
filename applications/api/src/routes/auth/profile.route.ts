@@ -98,7 +98,6 @@ export const profileRoute = new Hono<AuthEnv>()
         async (c) => {
             const body = c.req.valid('json')
 
-
             const newPasswordHash = pbkdf2Sync(body.password, c.var.user.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
 
             const [updateUser] = await db

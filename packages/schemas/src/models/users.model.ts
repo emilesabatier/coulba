@@ -23,7 +23,7 @@ export const users = pgTable(
         passwordSalt: text("password_salt").notNull(),
         isActive: boolean("is_active").notNull(),
         invitationToken: text("invitation_token"),
-        isInvitationValidated: boolean("is_invitation_validated"),
+        isInvitationValidated: boolean("is_invitation_validated").default(false).notNull(),
         invitationTokenExpiresOn: dateTimeColumn("invitation_token_expires_on"),
         invitationLastSentOn: dateTimeColumn("invitation_last_sent_on"),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

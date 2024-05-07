@@ -78,7 +78,6 @@ const routeTree = rootLayout.addChildren([
     ]),
 
     sharedLayout.addChildren([
-        activationRoute,
         validateInvitationRoute
     ]),
 
@@ -174,6 +173,9 @@ export const router = createRouter({
     context: {
         title: undefined,
         session: {
+            isLoading: false,
+            mutate: async () => { },
+            profile: undefined,
             isSignedIn: undefined
         }
     }

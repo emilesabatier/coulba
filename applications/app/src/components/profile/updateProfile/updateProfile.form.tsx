@@ -14,11 +14,11 @@ export function UpdateProfileForm() {
     const session = useSession()
 
     if (session.isLoading) return <CircularLoader />
-    if (!session.user) return null
+    if (!session.profile) return null
     return (
         <Form
             validationSchema={auth.profile.put.body}
-            defaultValues={session.user}
+            defaultValues={session.profile}
             cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier"

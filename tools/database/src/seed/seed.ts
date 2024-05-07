@@ -209,7 +209,8 @@ async function seed() {
                 surname: randFullName(),
                 passwordHash: passwordHash,
                 passwordSalt: passwordSalt,
-                invitationToken: invitationToken
+                invitationToken: invitationToken,
+                isInvitationValidated: false
             }
             await tx.insert(users).values(adminUser)
 

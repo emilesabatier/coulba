@@ -1,18 +1,15 @@
 
 
 import { Toaster } from "@coulba/design/overlays"
-import { Fragment, ReactNode } from "react"
+import { Fragment } from "react"
+import { Router } from "../routes/router.provider"
 import { CompanyProvider } from "./company/company.provider"
 import { CurrentYearProvider } from "./currentYear/currentYear.provider"
 import { SessionProvider } from "./session/session.provider"
 import { StateProvider } from "./state/state.context"
 
 
-type Providers = {
-    children: ReactNode
-}
-
-export function Providers(props: Providers) {
+export function Providers() {
     return (
         <Fragment>
             <Toaster />
@@ -20,7 +17,7 @@ export function Providers(props: Providers) {
                 <CompanyProvider>
                     <CurrentYearProvider>
                         <StateProvider>
-                            {props.children}
+                            <Router />
                         </StateProvider>
                     </CurrentYearProvider>
                 </CompanyProvider>

@@ -13,7 +13,7 @@ export function ProfileContent() {
     const session = useSession()
 
     if (session.isLoading) return <CircularLoader />
-    if (!session.user) return null
+    if (!session.profile) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
             <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
@@ -42,13 +42,13 @@ export function ProfileContent() {
             </div>
             <DataBlock.Root className="border-0">
                 <DataBlock.Item label="Prénom">
-                    <FormatText text={session.user.forename} />
+                    <FormatText text={session.profile.forename} />
                 </DataBlock.Item>
                 <DataBlock.Item label="Nom">
-                    <FormatText text={session.user.surname} />
+                    <FormatText text={session.profile.surname} />
                 </DataBlock.Item>
                 <DataBlock.Item label="Email">
-                    <FormatLink text={session.user.email} />
+                    <FormatLink text={session.profile.email} />
                 </DataBlock.Item>
             </DataBlock.Root>
         </div>

@@ -9,7 +9,7 @@ export function Router() {
         <RouterProvider
             router={router}
             context={{
-                session: session,
+                session: session
             }}
         />
     )
