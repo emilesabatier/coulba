@@ -7,7 +7,6 @@ RUN npm install -g pnpm
 # Build the monorepo
 FROM base AS build
 WORKDIR /root
-COPY .cert .cert
 COPY package.json package.json
 COPY pnpm-workspace.yaml pnpm-workspace.yaml
 COPY turbo.json turbo.json
