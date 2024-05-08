@@ -4,11 +4,11 @@ import { generateId } from "@coulba/schemas/services"
 import { eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
-import { sheetInclude } from "../../../../../packages/schemas/build/schemas/sheet/sheet.include.js"
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { sheetInclude } from "@coulba/schemas/schemas"
 
 
 export const sheetsRoute = new Hono<AuthEnv>()
