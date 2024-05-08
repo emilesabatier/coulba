@@ -2,6 +2,18 @@
 FROM node:20-alpine AS base
 RUN npm install -g pnpm
 
+
+# Define build arguments for environment variables
+ARG VITE_PUBLIC_API_BASE
+ARG VITE_PUBLIC_APP_BASE
+ARG VITE_PUBLIC_WEBSITE_BASE
+
+
+# Set environment variables during the build process
+ENV VITE_PUBLIC_API_BASE=$VITE_PUBLIC_API_BASE
+ENV VITE_PUBLIC_APP_BASE=$VITE_PUBLIC_APP_BASE
+ENV VITE_PUBLIC_WEBSITE_BASE=$VITE_PUBLIC_WEBSITE_BASE
+
 # LABEL org.opencontainers.image.source=https://github.com/emilesabatier/coulba
 
 # Build the monorepo
