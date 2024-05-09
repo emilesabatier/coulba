@@ -1,14 +1,14 @@
 import { sheets } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
+import { sheetInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
-import { sheetInclude } from "@coulba/schemas/schemas"
 
 
 export const sheetsRoute = new Hono<AuthEnv>()
@@ -56,7 +56,10 @@ export const sheetsRoute = new Hono<AuthEnv>()
             }
 
             const readSheet = await db.query.sheets.findFirst({
-                where: eq(sheets.idCompany, c.var.user.idCompany),
+                where: and(
+                    eq(sheets.id, params.idSheet),
+                    eq(sheets.idCompany, c.var.user.idCompany)
+                ),
                 columns: sheetInclude,
                 with: {
                     accountSheets: true

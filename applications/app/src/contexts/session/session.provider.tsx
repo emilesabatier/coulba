@@ -23,16 +23,17 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
             return
         }
 
-        if (!response.isInvitationValidated && router.parseLocation().pathname !== "/activation") {
-            setIsLoading(false)
-            router.navigate({ to: "/activation" })
-            window.location.reload()
-        }
-        if (response.isInvitationValidated && router.parseLocation().pathname === "/activation") {
-            setIsLoading(false)
-            router.navigate({ to: "/" })
-            window.location.reload()
-        }
+        console.log(router.parseLocation().pathname)
+        // if (!response.isInvitationValidated && router.parseLocation().pathname !== "/activation") {
+        //     setIsLoading(false)
+        //     router.navigate({ to: "/activation" })
+        //     window.location.reload()
+        // }
+        // if (response.isInvitationValidated && router.parseLocation().pathname === "/activation") {
+        //     setIsLoading(false)
+        //     router.navigate({ to: "/" })
+        //     window.location.reload()
+        // }
 
         setProfile(response)
         setIsLoading(false)

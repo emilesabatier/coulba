@@ -1,4 +1,4 @@
-import { accounts, accountSheets, companies, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
+import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName, randFullName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -7,6 +7,7 @@ import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
 import { defaultAccounts } from './accounts'
+import { DefaultComputation, defaultComputations } from './computations'
 import { defaultRecords } from './records'
 import { DefaultSheet, defaultSheets } from './sheets'
 import { defaultStatements } from './statements'
@@ -126,7 +127,7 @@ async function seed() {
             await tx.insert(sheets).values(newSheets)
 
 
-            // Accounts
+            // Statements
             console.log("Add statements")
             let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
                 id: generateId(),
@@ -147,6 +148,39 @@ async function seed() {
             })
             await tx.insert(statements).values(newStatements)
 
+
+            // Computations
+            console.log("Add computations")
+            const newComputations: (typeof computations.$inferInsert & { statements: DefaultComputation["statements"][number][] })[] = defaultComputations.map((_computation) => {
+                return ({
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    idYear: idCurrentYear,
+                    number: _computation.number,
+                    label: _computation.label,
+                    statements: _computation.statements
+                })
+            })
+            await tx.insert(computations).values(newComputations)
+
+
+            // ComputationStatements
+            console.log("Add computationStatements")
+            const newComputationStatements: Array<(typeof computationStatements.$inferInsert)> = []
+            newComputations.forEach((_computation) => {
+                _computation.statements.forEach((_statement) => {
+                    const statement = newStatements.find((x) => x.number === _statement.number)
+
+                    if (!statement) throw new Error(`Erreur ${_computation.number} ${_statement.number}`)
+                    newComputationStatements.push({
+                        id: generateId(),
+                        idComputation: _computation.id,
+                        idStatement: statement.id,
+                        operation: _statement.operation
+                    })
+                })
+            })
+            await tx.insert(computationStatements).values(newComputationStatements)
 
             // Accounts
             console.log("Add accounts")
@@ -175,6 +209,7 @@ async function seed() {
 
 
             // AccountSheets
+            console.log("Add accountSheets")
             const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
             newSheets.forEach((_sheet) => {
                 _sheet.accounts.forEach((_account) => {

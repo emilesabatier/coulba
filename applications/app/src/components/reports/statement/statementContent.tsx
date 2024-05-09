@@ -57,7 +57,7 @@ export function StatementContent() {
 
     const balance = getBalance(records.data ?? [], accounts.data ?? [])
 
-    const statementData = groupStatement(statements.data ?? [], balance, null)
+    const sortedStatements = groupStatement(statements.data ?? [], balance, null)
         .sort((a, b) => a.number - b.number)
 
 
@@ -67,7 +67,7 @@ export function StatementContent() {
     if (!records.data || !accounts.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
-            <StatementTable statement={statementData} />
+            <StatementTable statements={sortedStatements} />
         </div>
     )
 }

@@ -25,6 +25,9 @@ import { createSheetRoute } from './auth/app/configuration/sheets/createSheet.ro
 import { sheetsLayout } from './auth/app/configuration/sheets/sheets.layout'
 import { sheetsRoute } from './auth/app/configuration/sheets/sheets.route'
 import { updateSheetRoute } from './auth/app/configuration/sheets/updateSheet.route'
+import { computationsLayout } from './auth/app/configuration/statements/computations/computations.layout'
+import { createComputationRoute } from './auth/app/configuration/statements/computations/createComputation.route'
+import { updateComputationRoute } from './auth/app/configuration/statements/computations/updateComputation.route'
 import { createStatementRoute } from './auth/app/configuration/statements/createStatement.route'
 import { statementsLayout } from './auth/app/configuration/statements/statements.layout'
 import { statementsRoute } from './auth/app/configuration/statements/statements.route'
@@ -146,7 +149,11 @@ const routeTree = rootLayout.addChildren([
                 statementsLayout.addChildren([
                     statementsRoute,
                     createStatementRoute,
-                    updateStatementRoute
+                    updateStatementRoute,
+                    computationsLayout.addChildren([
+                        createComputationRoute,
+                        updateComputationRoute
+                    ])
                 ])
             ]),
 

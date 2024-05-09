@@ -12,6 +12,7 @@ import { statementsRoute } from './auth/statements.route.js'
 import { transactionsRoute } from './auth/transactions.route.js'
 import { usersRoute } from './auth/users.route.js'
 import { yearsRoute } from './auth/years.route.js'
+import { computationsRoute } from './auth/computations.route.js'
 
 
 export const authRoute = new Hono()
@@ -24,6 +25,7 @@ export const authRoute = new Hono()
     .route('/accounts', accountsRoute)
     .route('/sheets', sheetsRoute)
     .route('/statements', statementsRoute)
+    .route('/computations', computationsRoute)
     .route('/years', yearsRoute)
     .route('/journals', journalsRoute)
     .route('/services', servicesRoute)
