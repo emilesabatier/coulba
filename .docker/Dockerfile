@@ -29,19 +29,19 @@ COPY ./.docker/.dockerignore ./.docker/.dockerignore
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm install
 RUN pnpm run build
-RUN pnpm deploy --filter="website" --prod /build/website
-RUN pnpm deploy --filter="app" --prod /build/app
-RUN pnpm deploy --filter="api" --prod /build/api
+RUN pnpm deploy --filter="website" --prod /website
+RUN pnpm deploy --filter="app" --prod /app
+RUN pnpm deploy --filter="api" --prod /api
 
 # Start api
 FROM base AS api
-COPY --from=build /build/api /build/api
-WORKDIR /build/api
+COPY --from=build /api /api
+WORKDIR /api
 CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
 FROM httpd:2.4 AS app
-COPY --from=build /build/app /usr/local/apache2/htdocs/
+COPY --from=build /app/build /usr/local/apache2/htdocs/
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
@@ -49,7 +49,7 @@ COPY --from=build /build/app /usr/local/apache2/htdocs/
 
 # Start website
 FROM httpd:2.4 AS website
-COPY --from=build /build/website /usr/local/apache2/htdocs/
+COPY --from=build /website/build /usr/local/apache2/htdocs/
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
