@@ -40,16 +40,20 @@ WORKDIR /api
 CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
-FROM httpd:2.4 AS app
-COPY --from=build /app/build /usr/local/apache2/htdocs/
+FROM nginx:alpine as app
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 3101
+CMD ["nginx", "-g", "daemon off;"]
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
 # CMD [ "pnpm", "--filter=app", "start"]
 
 # Start website
-FROM httpd:2.4 AS website
-COPY --from=build /website/build /usr/local/apache2/htdocs/
+FROM nginx:alpine as website
+COPY --from=build /website/build /usr/share/nginx/html
+EXPOSE 3102
+CMD ["nginx", "-g", "daemon off;"]
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
