@@ -39,18 +39,16 @@ WORKDIR /build/api
 CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
-FROM nginx:alpine
+FROM nginx:alpine AS app
 COPY --from=build /build/app /build/app
-WORKDIR /build/app
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
 # CMD [ "pnpm", "--filter=app", "start"]
 
 # Start website
-FROM nginx:alpine
+FROM nginx:alpine as website
 COPY --from=build /build/website /build/website
-WORKDIR /build/website
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
