@@ -8,7 +8,7 @@ import { TextSection } from "../components/layout/text/textSection"
 
 export function TermsPage() {
 
-    useEffect(() => { document.title = "Conditions d'utilisation | Coulba" }, [])
+    useEffect(() => { document.title = "Conditions d'utilisation" }, [])
 
     return (
         <Main.Root>

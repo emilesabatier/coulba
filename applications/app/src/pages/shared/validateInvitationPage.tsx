@@ -9,7 +9,7 @@ import { validateInvitation } from "../../services/api/shared/users/validateInvi
 
 export function ValidateInvitationPage() {
 
-    useEffect(() => { document.title = "Invitation | Coulba" }, [])
+    useEffect(() => { document.title = "Invitation" }, [])
     const search = useSearch({ from: validateInvitationRoute.id })
 
     useEffect(() => {

@@ -5,7 +5,7 @@ import { ResetPasswordForm } from "../../components/signIn/resetPassword.form"
 
 export function ResetPasswordPage() {
 
-    useEffect(() => { document.title = "Mot de passe oublié | Coulba" }, [])
+    useEffect(() => { document.title = "Mot de passe oublié" }, [])
 
     return (
         <div id="resetPassword" className="w-full h-full grid">

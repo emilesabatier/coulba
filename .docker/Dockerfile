@@ -24,6 +24,7 @@ COPY pnpm-workspace.yaml pnpm-workspace.yaml
 COPY turbo.json turbo.json
 COPY ./applications ./applications
 COPY ./packages ./packages
+COPY ./.docker/.dockerignore ./.docker/.dockerignore
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm install
@@ -39,20 +40,18 @@ WORKDIR /build/api
 CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
-FROM busybox:1.36 AS app
-COPY --from=build /build/app /build/app
-WORKDIR /build/app
-CMD ["busybox", "httpd", "-f", "-v", "-p", "3101"]
+FROM nginx:alpine as app
+COPY --from=build /build/app ./usr/share/nginx/html/build/app
+EXPOSE 3101
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
 # CMD [ "pnpm", "--filter=app", "start"]
 
 # Start website
-FROM busybox:1.36 AS website
-COPY --from=build /build/app /build/app
-WORKDIR /build/app
-CMD ["busybox", "httpd", "-f", "-v", "-p", "3102"]
+FROM nginx:alpine as website
+COPY --from=build /build/website ./usr/share/nginx/html/build/website
+EXPOSE 3102
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
