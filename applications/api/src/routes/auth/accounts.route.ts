@@ -46,7 +46,10 @@ export const accountsRoute = new Hono<AuthEnv>()
                 const readAccounts = await db
                     .select()
                     .from(accounts)
-                    .where(eq(accounts.idCompany, c.var.user.idCompany))
+                    .where(and(
+                        eq(accounts.idCompany, c.var.user.idCompany),
+                        eq(accounts.idYear, c.var.currentYear.id)
+                    ))
 
                 return c.json(readAccounts, 200)
             }

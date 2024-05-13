@@ -4,12 +4,13 @@ import { defineConfig } from 'vite'
 
 export default defineConfig(() => {
     return {
+        base: "/",
         server: {
             port: 3102
         },
         plugins: [react()],
         build: {
-            
+
             outDir: './build',
             rollupOptions: {
                 output: {

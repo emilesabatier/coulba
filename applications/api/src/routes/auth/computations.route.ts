@@ -43,7 +43,10 @@ export const computationsRoute = new Hono<AuthEnv>()
 
             if (!params.idComputation) {
                 const readComputations = await db.query.computations.findMany({
-                    where: eq(computations.idCompany, c.var.user.idCompany),
+                    where: and(
+                        eq(computations.idCompany, c.var.user.idCompany),
+                        eq(computations.idYear, c.var.currentYear.id)
+                    ),
                     columns: computationInclude,
                     with: {
                         computationStatements: true

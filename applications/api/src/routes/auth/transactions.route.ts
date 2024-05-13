@@ -49,7 +49,10 @@ export const transactionsRoute = new Hono<AuthEnv>()
                 const readTransactions = await db
                     .select()
                     .from(transactions)
-                    .where(eq(transactions.idCompany, c.var.user.idCompany))
+                    .where(and(
+                        eq(transactions.idCompany, c.var.user.idCompany),
+                        eq(transactions.idYear, c.var.currentYear.id)
+                    ))
 
                 return c.json(readTransactions, 200)
             }

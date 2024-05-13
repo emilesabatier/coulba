@@ -45,7 +45,10 @@ export const sheetsRoute = new Hono<AuthEnv>()
 
             if (!params.idSheet) {
                 const readSheets = await db.query.sheets.findMany({
-                    where: eq(sheets.idCompany, c.var.user.idCompany),
+                    where: and(
+                        eq(sheets.idCompany, c.var.user.idCompany),
+                        eq(sheets.idYear, c.var.currentYear.id)
+                    ),
                     columns: sheetInclude,
                     with: {
                         accountSheets: true
