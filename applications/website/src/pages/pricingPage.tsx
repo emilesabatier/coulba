@@ -6,7 +6,7 @@ import { Main } from "../components/layout/main/main"
 
 export function PricingPage() {
 
-    useEffect(() => { document.title = "Tarif | Coulba" }, [])
+    useEffect(() => { document.title = "Tarif" }, [])
 
     return (
         <Main.Root>

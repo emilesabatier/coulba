@@ -7,7 +7,7 @@ import { Text } from "../components/layout/text/text"
 
 export function LegalPage() {
 
-    useEffect(() => { document.title = "Mentions légales | Coulba" }, [])
+    useEffect(() => { document.title = "Mentions légales" }, [])
 
     return (
         <Main.Root>

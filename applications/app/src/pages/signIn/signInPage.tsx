@@ -7,7 +7,7 @@ import { SignInForm } from "../../components/signIn/signIn.form"
 
 export function SignInPage() {
 
-    useEffect(() => { document.title = "Connexion | Coulba" }, [])
+    useEffect(() => { document.title = "Connexion" }, [])
 
     return (
         <div id="signin" className="w-full h-full grid grid-cols-2">

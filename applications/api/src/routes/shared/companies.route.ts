@@ -231,7 +231,7 @@ export const companiesRoute = new Hono()
 
             await sendEmail({
                 to: body.user.email,
-                subject: "Valider votre adresse email | Coulba",
+                subject: "Valider votre adresse email",
                 html: signUpTemplate()
             })
 

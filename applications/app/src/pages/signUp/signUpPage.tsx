@@ -5,7 +5,7 @@ import { SignUpForm } from "../../components/signUp/signUp.form"
 
 export function SignUpPage() {
 
-    useEffect(() => { document.title = "Inscription | Coulba" }, [])
+    useEffect(() => { document.title = "Inscription" }, [])
 
     return (
         <div id="signup" className="w-full h-full grid">
