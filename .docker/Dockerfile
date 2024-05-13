@@ -41,8 +41,9 @@ CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
 FROM nginx:alpine as app
-COPY --from=build /build/app ./usr/share/nginx/html/build/app
+COPY --from=build /build/app /usr/share/nginx/html
 EXPOSE 3101
+CMD ["nginx", "-g", "daemon off;"]
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
@@ -50,8 +51,9 @@ EXPOSE 3101
 
 # Start website
 FROM nginx:alpine as website
-COPY --from=build /build/website ./usr/share/nginx/html/build/website
+COPY --from=build /build/website /usr/share/nginx/html
 EXPOSE 3102
+CMD ["nginx", "-g", "daemon off;"]
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
