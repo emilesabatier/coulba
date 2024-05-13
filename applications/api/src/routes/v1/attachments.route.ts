@@ -46,6 +46,7 @@ export const attachmentsRoute = new Hono<V1Env>()
                     idYear: c.var.currentYear.id,
                     reference: body.reference,
                     label: body.label,
+                    date: body.date,
                     storageKey: key,
                     type: type,
                     size: size

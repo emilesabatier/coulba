@@ -1,3 +1,4 @@
+import { ComputationsList } from "../../../../components/computations/computationsList"
 import { Main } from "../../../../components/layouts/main/main"
 import { StatementsList } from "../../../../components/statements/statementsList"
 import { useCurrentYear } from "../../../../contexts/currentYear/useCurrentYear"
@@ -15,6 +16,7 @@ export function StatementsPage() {
             />
             <Main.Content>
                 <StatementsList />
+                <ComputationsList />
             </Main.Content>
         </Main.Root>
     )

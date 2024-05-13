@@ -25,6 +25,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                     idYear: c.var.currentYear.id,
                     reference: body.reference,
                     label: body.label,
+                    date: body.date,
                     storageKey: body.storageKey,
                     type: body.type,
                     size: body.size,
@@ -72,6 +73,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                 .set({
                     reference: body.reference,
                     label: body.label,
+                    date: body.date,
                     // storageKey: body.storageKey,
                     // type: body.type,
                     // size: body.size,

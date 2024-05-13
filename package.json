@@ -1,6 +1,6 @@
 {
     "name": "coulba",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "private": true,
     "description": "",
     "scripts": {
@@ -17,6 +17,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "knip": "5.15.1",
         "turbo": "1.11.2"
     },
     "browserslist": [

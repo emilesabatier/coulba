@@ -14,7 +14,6 @@
     },
     "devDependencies": {
         "@types/node": "20.12.8",
-        "drizzle-kit": "0.20.17",
         "typescript": "5.4.5"
     },
     "exports": {

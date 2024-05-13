@@ -2,7 +2,7 @@ import { auth } from "@coulba/schemas/routes"
 import * as v from "valibot"
 
 
-export function getBalanceEntry(debitAcc: number, creditAcc: number, debitNew: number, creditNew: number) {
+function getBalanceEntry(debitAcc: number, creditAcc: number, debitNew: number, creditNew: number) {
     if (debitNew > 0) {
         if (debitAcc > 0) return {
             debit: debitAcc + debitNew,

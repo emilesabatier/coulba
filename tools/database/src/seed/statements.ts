@@ -202,78 +202,72 @@ export const defaultStatements: DefaultStatement[] = [
     },
     {
         number: 5,
-        label: "Quotes-part de résultat sur opérations faites en commun",
+        label: "Quotes-part de résultat sur opérations faites en commun (Bénéfice transféré et perte supportée)",
         numberParent: undefined,
-        accounts: []
-    },
-    {
-        number: 51,
-        label: "Bénéfice transféré et perte supportée",
-        numberParent: 5,
         accounts: [755]
     },
     {
-        number: 52,
-        label: "Perte transférée et bénéfice attribué",
-        numberParent: 5,
+        number: 6,
+        label: "Quotes-part de résultat sur opérations faites en commun (Perte transférée et bénéfice attribué)",
+        numberParent: undefined,
         accounts: [655, 6551, 6555]
     },
     {
-        number: 6,
-        label: "Produits exceptionnels",
-        numberParent: undefined,
-        accounts: []
-    },
-    {
-        number: 61,
-        label: "Sur opérations de gestion",
-        numberParent: 6,
-        accounts: [771, 7711, 7713, 7714, 7715, 7717, 7718]
-    },
-    {
-        number: 62,
-        label: "Sur opérations de capital",
-        numberParent: 6,
-        accounts: [775, 7751, 7752, 7756, 7758, 777, 778, 7781, 7782, 7783, 7788]
-    },
-    {
-        number: 63,
-        label: "Reprises sur provisions et transferts de charges",
-        numberParent: 6,
-        accounts: [787, 7872, 78725, 78726, 78727, 7873, 7874, 7875, 7876, 797]
-    },
-    {
         number: 7,
-        label: "Charges exceptionnelles",
+        label: "Produits exceptionnels",
         numberParent: undefined,
         accounts: []
     },
     {
         number: 71,
         label: "Sur opérations de gestion",
+        numberParent: 6,
+        accounts: [771, 7711, 7713, 7714, 7715, 7717, 7718]
+    },
+    {
+        number: 72,
+        label: "Sur opérations de capital",
+        numberParent: 6,
+        accounts: [775, 7751, 7752, 7756, 7758, 777, 778, 7781, 7782, 7783, 7788]
+    },
+    {
+        number: 73,
+        label: "Reprises sur provisions et transferts de charges",
+        numberParent: 6,
+        accounts: [787, 7872, 78725, 78726, 78727, 7873, 7874, 7875, 7876, 797]
+    },
+    {
+        number: 8,
+        label: "Charges exceptionnelles",
+        numberParent: undefined,
+        accounts: []
+    },
+    {
+        number: 81,
+        label: "Sur opérations de gestion",
         numberParent: 7,
         accounts: [671, 6711, 6712, 6713, 6714, 6715, 6717, 6718]
     },
     {
-        number: 72,
+        number: 82,
         label: "Sur opérations de capital",
         numberParent: 7,
         accounts: [675, 6751, 6752, 6756, 6758, 678, 6781, 6782, 6783, 6788]
     },
     {
-        number: 73,
+        number: 83,
         label: "Dotations aux amortissements et aux provisions",
         numberParent: 7,
         accounts: [687, 6871, 6872, 68725, 6873, 6874, 6875, 6876]
     },
     {
-        number: 8,
+        number: 9,
         label: "Participation des salariés aux résultats de l'entreprise",
         numberParent: undefined,
         accounts: [691]
     },
     {
-        number: 9,
+        number: 10,
         label: "Impôts sur les bénéfices",
         numberParent: undefined,
         accounts: [695, 6951, 6952, 6954, 696, 698, 6981, 6989, 699]

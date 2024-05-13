@@ -1,8 +1,9 @@
-import { sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { integer, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { companies } from "./companies.model.js"
+import { computationStatements } from "./computationStatements.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
 
@@ -26,3 +27,8 @@ export const statements = pgTable(
         uniqueConstraint: unique().on(t.idCompany, t.idYear, t.number)
     })
 )
+
+// Relations
+export const statementRelations = relations(statements, ({ many }) => ({
+    computationStatements: many(computationStatements)
+}))

@@ -534,36 +534,29 @@ export const defaultStatements: DefaultStatement[] = [
     },
     {
         number: 5,
-        label: "Quotes-part de résultat sur opérations faites en commun",
-        accounts: [],
-        statements: [
-            {
-                number: 51,
-                label: "Bénéfice transféré et perte supportée",
-                accounts: [
-                    755
-                ],
-                statements: []
-            },
-            {
-                number: 52,
-                label: "Perte transférée et bénéfice attribué",
-                accounts: [
-                    655,
-                    6551,
-                    6555
-                ],
-                statements: []
-            },
-        ]
+        label: "Quotes-part de résultat sur opérations faites en commun (Bénéfice transféré et perte supportée)",
+        accounts: [
+            755
+        ],
+        statements: []
     },
     {
         number: 6,
+        label: "Quotes-part de résultat sur opérations faites en commun (Perte transférée et bénéfice attribué)",
+        accounts: [
+            655,
+            6551,
+            6555
+        ],
+        statements: []
+    },
+    {
+        number: 7,
         label: "Produits exceptionnels",
         accounts: [],
         statements: [
             {
-                number: 61,
+                number: 71,
                 label: "Sur opérations de gestion",
                 accounts: [
                     771,
@@ -577,7 +570,7 @@ export const defaultStatements: DefaultStatement[] = [
                 statements: []
             },
             {
-                number: 62,
+                number: 72,
                 label: "Sur opérations de capital",
                 accounts: [
                     775,
@@ -595,7 +588,7 @@ export const defaultStatements: DefaultStatement[] = [
                 statements: []
             },
             {
-                number: 63,
+                number: 73,
                 label: "Reprises sur provisions et transferts de charges",
                 accounts: [
                     787,
@@ -614,12 +607,12 @@ export const defaultStatements: DefaultStatement[] = [
         ]
     },
     {
-        number: 7,
+        number: 8,
         label: "Charges exceptionnelles",
         accounts: [],
         statements: [
             {
-                number: 71,
+                number: 81,
                 label: "Sur opérations de gestion",
                 accounts: [
                     671,
@@ -634,7 +627,7 @@ export const defaultStatements: DefaultStatement[] = [
                 statements: []
             },
             {
-                number: 72,
+                number: 82,
                 label: "Sur opérations de capital",
                 accounts: [
                     675,
@@ -651,7 +644,7 @@ export const defaultStatements: DefaultStatement[] = [
                 statements: []
             },
             {
-                number: 73,
+                number: 83,
                 label: "Dotations aux amortissements et aux provisions",
                 accounts: [
                     687,
@@ -668,7 +661,7 @@ export const defaultStatements: DefaultStatement[] = [
         ]
     },
     {
-        number: 8,
+        number: 9,
         label: "Participation des salariés aux résultats de l'entreprise",
         accounts: [
             691
@@ -676,7 +669,7 @@ export const defaultStatements: DefaultStatement[] = [
         statements: []
     },
     {
-        number: 9,
+        number: 10,
         label: "Impôts sur les bénéfices",
         accounts: [
             695,

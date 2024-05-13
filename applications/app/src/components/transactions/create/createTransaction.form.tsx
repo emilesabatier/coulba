@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputDateTime, InputPrice, InputText } from "@coulba/design/inputs"
+import { InputDate, InputPrice, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -80,7 +80,7 @@ export function CreateTransactionForm() {
                                         isRequired
                                     />
                                     <FormControl>
-                                        <InputDateTime
+                                        <InputDate
                                             value={field.value}
                                             onChange={field.onChange}
                                         />

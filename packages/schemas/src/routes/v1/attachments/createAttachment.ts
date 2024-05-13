@@ -7,6 +7,7 @@ import { attachmentSchema } from "../../../schemas/attachment/attachment.schema.
 export const createAttachmentBody = v.object({
     reference: attachmentSchema.entries.reference,
     label: v.optional(attachmentSchema.entries.label),
+    date: attachmentSchema.entries.date,
     file: fileSchema
 })
 

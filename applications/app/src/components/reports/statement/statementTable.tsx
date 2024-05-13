@@ -7,7 +7,7 @@ import { Statement } from "./statementContent"
 
 
 type StatementTable = {
-    statement: Statement[]
+    statements: Statement[]
 }
 
 export function StatementTable(props: StatementTable) {
@@ -24,7 +24,7 @@ export function StatementTable(props: StatementTable) {
                         </Table.Header.Row>
                     </Table.Header.Root>
                     <Table.Body.Root>
-                        <StatementBody statement={props.statement} displayNumber={true} increment={0} />
+                        <StatementBody statements={props.statements} displayNumber={true} increment={0} />
                     </Table.Body.Root>
                 </Table.Root>
             </div>
@@ -34,7 +34,7 @@ export function StatementTable(props: StatementTable) {
 
 
 type StatementBody = {
-    statement: Statement[]
+    statements: Statement[]
     increment: number
     displayNumber?: boolean
 }
@@ -43,7 +43,7 @@ function StatementBody(props: StatementBody) {
     return (
         <Fragment>
             {
-                props.statement.map((entry) => {
+                props.statements.map((entry) => {
                     const label = !props.displayNumber ? entry.label : `${toRoman(entry.number)} ${entry.label}`
                     return (
                         <Fragment>
@@ -67,7 +67,7 @@ function StatementBody(props: StatementBody) {
                                     <FormatPrice price={entry.net} />
                                 </Table.Body.Cell>
                             </Table.Body.Row>
-                            <StatementBody statement={entry.statements} increment={props.increment + 1} />
+                            <StatementBody statements={entry.statements} increment={props.increment + 1} />
                         </Fragment>
                     )
                 })

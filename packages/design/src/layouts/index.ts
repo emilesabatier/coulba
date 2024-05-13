@@ -1,5 +1,4 @@
 export { Badge } from "./badge"
-export { Card } from "./card"
 export { Chip } from "./chip"
 export { CircularLoader } from "./loaders/circularLoader"
 export { LinearLoader } from "./loaders/linearLoader"
@@ -13,3 +12,4 @@ export * from "./table/filterComponents"
 export * from "./table/filters"
 export * from "./table/table"
 export * from "./table/tableData"
+

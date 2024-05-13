@@ -2,7 +2,6 @@ import { Main } from "../../../../components/layouts/main/main"
 import { CreateStatementForm } from "../../../../components/statements/create/createStatement.form"
 
 
-
 export function CreateStatementPage() {
     return (
         <Main.Root>

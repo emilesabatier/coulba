@@ -32,7 +32,7 @@ export function ValidateInvitationPage() {
             return
         }
 
-        toast({ title: "Invitation valide", variant: "success" })
+        toast({ title: "Invitation validée", description: "Veuillez vous connecter", variant: "success" })
         setLoading(false)
         router.navigate({ to: "/" })
     }

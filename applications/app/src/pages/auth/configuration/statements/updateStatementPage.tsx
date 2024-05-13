@@ -2,7 +2,6 @@ import { Main } from "../../../../components/layouts/main/main"
 import { UpdateStatementForm } from "../../../../components/statements/update/updateStatement.form"
 
 
-
 export function UpdateStatementPage() {
     return (
         <Main.Root>

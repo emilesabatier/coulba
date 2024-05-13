@@ -1,5 +1,5 @@
 import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
-import { FormatDateTime, FormatFileSize, FormatNull, FormatText } from "@coulba/design/formats"
+import { FormatDate, FormatDateTime, FormatFileSize, FormatNull, FormatText } from "@coulba/design/formats"
 import { InputDebounced, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { auth } from "@coulba/schemas/routes"
@@ -34,15 +34,21 @@ export function AttachmentsTable() {
 
     const columns: ColumnDef<v.Output<typeof auth.attachments.get.return>>[] = [
         {
+            accessorKey: 'reference',
+            header: 'Référence',
+            cell: ({ row }) => (<FormatText text={row.original.reference} />),
+            filterFn: 'includesString'
+        },
+        {
             accessorKey: 'label',
             header: "Libellé",
             cell: ({ row }) => (!row.original.label ? <FormatNull /> : <FormatText text={row.original.label} />),
             filterFn: 'includesString'
         },
         {
-            accessorKey: 'reference',
-            header: 'Référence',
-            cell: ({ row }) => (<FormatText text={row.original.reference} />),
+            accessorKey: 'date',
+            header: "Date",
+            cell: ({ row }) => (<FormatDate isoDate={row.original.label} />),
             filterFn: 'includesString'
         },
         {

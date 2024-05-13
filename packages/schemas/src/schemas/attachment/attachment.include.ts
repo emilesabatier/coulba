@@ -5,6 +5,7 @@ export const attachmentInclude = {
     idYear: true,
     reference: true,
     label: true,
+    date: true,
     storageKey: true,
     type: true,
     size: true,
