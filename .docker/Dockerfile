@@ -1,6 +1,6 @@
 # Use an official Node.js image to build our image from
 FROM node:20-alpine AS base
-RUN npm install -g pnpm
+RUN corepack enable
 
 
 # Define build arguments for environment variables
@@ -40,20 +40,16 @@ WORKDIR /build/api
 CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
-FROM nginx:alpine as app
-COPY --from=build /build/app /usr/share/nginx/html
-EXPOSE 3101
-CMD ["nginx", "-g", "daemon off;"]
+FROM httpd:2.4 AS app
+COPY --from=build /build/app /usr/local/apache2/htdocs/
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
 # CMD [ "pnpm", "--filter=app", "start"]
 
 # Start website
-FROM nginx:alpine as website
-COPY --from=build /build/website /usr/share/nginx/html
-EXPOSE 3102
-CMD ["nginx", "-g", "daemon off;"]
+FROM httpd:2.4 AS website
+COPY --from=build /build/website /usr/local/apache2/htdocs/
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
