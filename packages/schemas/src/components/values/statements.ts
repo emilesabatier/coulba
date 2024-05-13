@@ -221,19 +221,19 @@ export const defaultStatements: DefaultStatement[] = [
     {
         number: 71,
         label: "Sur opérations de gestion",
-        numberParent: 6,
+        numberParent: 7,
         accounts: [771, 7711, 7713, 7714, 7715, 7717, 7718]
     },
     {
         number: 72,
         label: "Sur opérations de capital",
-        numberParent: 6,
+        numberParent: 7,
         accounts: [775, 7751, 7752, 7756, 7758, 777, 778, 7781, 7782, 7783, 7788]
     },
     {
         number: 73,
         label: "Reprises sur provisions et transferts de charges",
-        numberParent: 6,
+        numberParent: 7,
         accounts: [787, 7872, 78725, 78726, 78727, 7873, 7874, 7875, 7876, 797]
     },
     {
@@ -245,19 +245,19 @@ export const defaultStatements: DefaultStatement[] = [
     {
         number: 81,
         label: "Sur opérations de gestion",
-        numberParent: 7,
+        numberParent: 8,
         accounts: [671, 6711, 6712, 6713, 6714, 6715, 6717, 6718]
     },
     {
         number: 82,
         label: "Sur opérations de capital",
-        numberParent: 7,
+        numberParent: 8,
         accounts: [675, 6751, 6752, 6756, 6758, 678, 6781, 6782, 6783, 6788]
     },
     {
         number: 83,
         label: "Dotations aux amortissements et aux provisions",
-        numberParent: 7,
+        numberParent: 8,
         accounts: [687, 6871, 6872, 68725, 6873, 6874, 6875, 6876]
     },
     {

@@ -1,12 +1,14 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@coulba/design/forms"
 import { InputPassword, InputSiren, InputText } from "@coulba/design/inputs"
+import { toast } from "@coulba/design/overlays"
 import { shared } from "@coulba/schemas/routes"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { IconArrowLeft } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import { useForm } from "react-hook-form"
 import * as v from "valibot"
+import { router } from "../../routes/router"
 import { createCompany } from "../../services/api/shared/companies/createCompany"
 
 
@@ -22,16 +24,21 @@ export function SignUpForm() {
         const triggerResponse = await form.trigger()
         if (!triggerResponse) return
 
-        await createCompany({
+        const response = await createCompany({
             body: form.getValues()
         })
+        if (!response) return
+
+        toast({ title: "Inscription réussie", variant: "success" })
+        router.navigate({ from: "/inscription", to: "/" })
+        window.location.reload()
     }
 
     return (
         <FormRoot {...form}>
-            <form className="w-full grid grid-cols-2 grid-rows-[auto_max-content] gap-x-2 gap-y-4">
-                <div className="flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
-                    <h2 className="text-xl text-neutral/75">Informations sur la société</h2>
+            <form className="w-full flex flex-col justify-start items-center gap-x-2 gap-y-4">
+                <div className="w-full flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
+                    <h2 className="text-lg text-neutral/50 uppercase">Informations sur la société</h2>
                     <div className="flex flex-col justify-start items-stretch gap-2">
                         <FormField
                             control={form.control}
@@ -113,8 +120,8 @@ export function SignUpForm() {
                         />
                     </div>
                 </div>
-                <div className="flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
-                    <h2 className="text-xl text-neutral/75">Information sur le compte de connexion</h2>
+                <div className="w-full flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
+                    <h2 className="text-lg text-neutral/50 uppercase">Information sur le compte de connexion</h2>
                     <div className="flex flex-col justify-start items-stretch gap-2">
                         <div className="flex justify-center items-stretch gap-1">
                             <FormField
@@ -127,7 +134,7 @@ export function SignUpForm() {
                                             isRequired
                                         />
                                         <FormControl>
-                                            <InputSiren
+                                            <InputText
                                                 value={field.value}
                                                 onChange={field.onChange}
                                                 autoFocus
@@ -147,7 +154,7 @@ export function SignUpForm() {
                                             isRequired
                                         />
                                         <FormControl>
-                                            <InputSiren
+                                            <InputText
                                                 value={field.value}
                                                 onChange={field.onChange}
                                             />
@@ -159,7 +166,7 @@ export function SignUpForm() {
                         </div>
                         <FormField
                             control={form.control}
-                            name="email"
+                            name="user.email"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel
@@ -217,7 +224,7 @@ export function SignUpForm() {
                         />
                     </div>
                 </div>
-                <div className="flex justify-start items-center gap-1">
+                <div className="w-full flex justify-start items-center gap-1">
                     <Link to="/connexion">
                         <ButtonOutline
                             icon={<IconArrowLeft />}
@@ -225,8 +232,6 @@ export function SignUpForm() {
                             className="border-dashed"
                         />
                     </Link>
-                </div>
-                <div className="flex justify-end items-center gap-1">
                     <ButtonPlain
                         onClick={() => onSubmit()}
                         text="Créer mon compte"

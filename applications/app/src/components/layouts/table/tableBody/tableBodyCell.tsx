@@ -14,7 +14,7 @@ export function TableBodyCell(props: TableBodyCell) {
     return (
         <td
             className={cn(
-                "w-fit p-2",
+                "w-fit p-2 align-middle",
                 props.className
             )}
             colSpan={props.colSpan}

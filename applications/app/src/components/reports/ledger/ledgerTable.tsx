@@ -1,4 +1,4 @@
-import { FormatDate, FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatDate, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { Fragment } from "react"
 import { Table } from "../../layouts/table/table"
 import { Ledger } from "./ledgerContent"
@@ -34,46 +34,54 @@ export function LedgerTable(props: LedgerTable) {
                     </Table.Header.Root>
                     <Fragment>
                         {
-                            props.ledger.map((entry) => {
-                                return (
-                                    <Table.Body.Root key={entry.key} className="border-y border-neutral/10 last:border-b-0">
-                                        <Table.Body.Row className="border-neutral/10 bg-neutral/5">
-                                            <Table.Body.Cell colSpan={3}>
-                                                <FormatText text={entry.label} />
-                                            </Table.Body.Cell>
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={entry.debit} />
-                                            </Table.Body.Cell>
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={entry.credit} />
-                                            </Table.Body.Cell>
-                                        </Table.Body.Row>
-                                        <Fragment>
-                                            {
-                                                entry.records.map((record) => {
-                                                    return (
-                                                        <Table.Body.Row key={record.key}>
-                                                            <Table.Body.Cell />
-                                                            <Table.Body.Cell>
-                                                                <FormatDate isoDate={record.date} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell>
-                                                                <FormatText text={record.label} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                                <FormatPrice price={record.debit} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                                <FormatPrice price={record.credit} />
-                                                            </Table.Body.Cell>
-                                                        </Table.Body.Row>
-                                                    )
-                                                })
-                                            }
-                                        </Fragment>
-                                    </Table.Body.Root>
+                            props.ledger.length > 0 ?
+                                props.ledger.map((entry) => {
+                                    return (
+                                        <Table.Body.Root key={entry.key} className="border-y border-neutral/10 last:border-b-0">
+                                            <Table.Body.Row className="border-neutral/10 bg-neutral/5">
+                                                <Table.Body.Cell colSpan={3}>
+                                                    <FormatText text={entry.label} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                    <FormatPrice price={entry.debit} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                    <FormatPrice price={entry.credit} />
+                                                </Table.Body.Cell>
+                                            </Table.Body.Row>
+                                            <Fragment>
+                                                {
+                                                    entry.records.map((record) => {
+                                                        return (
+                                                            <Table.Body.Row key={record.key}>
+                                                                <Table.Body.Cell />
+                                                                <Table.Body.Cell>
+                                                                    <FormatDate isoDate={record.date} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell>
+                                                                    <FormatText text={record.label} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={record.debit} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={record.credit} />
+                                                                </Table.Body.Cell>
+                                                            </Table.Body.Row>
+                                                        )
+                                                    })
+                                                }
+                                            </Fragment>
+                                        </Table.Body.Root>
+                                    )
+                                })
+                                : (
+                                    <Table.Body.Row>
+                                        <Table.Body.Cell>
+                                            <FormatNull className="" />
+                                        </Table.Body.Cell>
+                                    </Table.Body.Row>
                                 )
-                            })
                         }
                     </Fragment>
                 </Table.Root>

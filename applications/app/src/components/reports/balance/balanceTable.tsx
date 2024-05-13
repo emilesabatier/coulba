@@ -1,4 +1,4 @@
-import { FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { Balance } from "../../../services/reports/getBalance"
 import { formatAccount } from "../../accounts/format/formatAccount"
 import { Table } from "../../layouts/table/table"
@@ -34,27 +34,35 @@ export function BalanceTable(props: BalanceTable) {
                     </Table.Header.Root>
                     <Table.Body.Root>
                         {
-                            props.balance.map((entry) => {
-                                return (
-                                    <Table.Body.Row key={entry.account.id} className="border-neutral/5">
+                            props.balance.length > 0 ?
+                                props.balance.map((entry) => {
+                                    return (
+                                        <Table.Body.Row key={entry.account.id} className="border-neutral/5">
+                                            <Table.Body.Cell>
+                                                <FormatText text={formatAccount(entry.account)} />
+                                            </Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.sum.debit} />
+                                            </Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.sum.credit} />
+                                            </Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.balance.debit} />
+                                            </Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.balance.credit} />
+                                            </Table.Body.Cell>
+                                        </Table.Body.Row>
+                                    )
+                                })
+                                : (
+                                    <Table.Body.Row>
                                         <Table.Body.Cell>
-                                            <FormatText text={formatAccount(entry.account)} />
-                                        </Table.Body.Cell>
-                                        <Table.Body.Cell className="w-[1%]" align="right">
-                                            <FormatPrice price={entry.sum.debit} />
-                                        </Table.Body.Cell>
-                                        <Table.Body.Cell className="w-[1%]" align="right">
-                                            <FormatPrice price={entry.sum.credit} />
-                                        </Table.Body.Cell>
-                                        <Table.Body.Cell className="w-[1%]" align="right">
-                                            <FormatPrice price={entry.balance.debit} />
-                                        </Table.Body.Cell>
-                                        <Table.Body.Cell className="w-[1%]" align="right">
-                                            <FormatPrice price={entry.balance.credit} />
+                                            <FormatNull className="" />
                                         </Table.Body.Cell>
                                     </Table.Body.Row>
                                 )
-                            })
                         }
                     </Table.Body.Root>
                 </Table.Root>

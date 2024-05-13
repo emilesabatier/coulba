@@ -84,11 +84,11 @@ export const menuItems: MenuItem[] = [
                 path: "/configuration/utilisateurs",
                 label: "Utilisateurs"
             },
-            {
-                basePath: "/configuration/abonnement",
-                path: "/configuration/abonnement",
-                label: "Abonnement"
-            },
+            // {
+            //     basePath: "/configuration/abonnement",
+            //     path: "/configuration/abonnement",
+            //     label: "Abonnement"
+            // },
             {
                 basePath: "/configuration/api",
                 path: "/configuration/api",

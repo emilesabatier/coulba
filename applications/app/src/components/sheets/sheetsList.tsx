@@ -110,12 +110,12 @@ function SheetItem(props: SheetItem) {
         >
             <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
                 <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-center gap-2 p-2">
+                    <div className="flex justify-start items-start gap-2 p-2">
                         <h2 className="font-bold">{props.groupedSheet.sheet.number}</h2>
-                        <span className="text-neutral/75">{props.groupedSheet.sheet.label}</span>
+                        <span className="text-neutral/75 text-left">{props.groupedSheet.sheet.label}</span>
                     </div>
                     <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50",
+                        "stroke-neutral/50 shrink-0",
                         hasSubSheets ? undefined : "opacity-0"
                     )} />
                 </AccordionTrigger>

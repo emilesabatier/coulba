@@ -128,50 +128,52 @@ export function TransactionsTable(props: TransactionsTable) {
                     />
                 </InputDebounced>
             </div>
-            <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-                <table className="w-full h-full border-collapse">
-                    <thead className="w-full border-b border-neutral/10">
-                        <tr className="w-full">
-                            {table.getFlatHeaders().map((header) => {
+            <div className="w-full h-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
+                <div className="w-full h-full overflow-auto">
+                    <table className="w-full h-full border-collapse">
+                        <thead className="w-full border-b border-neutral/10">
+                            <tr className="w-full">
+                                {table.getFlatHeaders().map((header) => {
+                                    return (
+                                        <th key={header.id} colSpan={header.colSpan} className="w-fit p-2">
+                                            {header.isPlaceholder ? null : (
+                                                <div className="flex justify-start items-center p-2">
+                                                    <span className="text-neutral/75 text-sm">
+                                                        {flexRender(
+                                                            header.column.columnDef.header,
+                                                            header.getContext()
+                                                        )}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </th>
+                                    )
+                                })}
+                            </tr>
+                        </thead>
+                        <tbody className="w-full">
+                            {table.getRowModel().rows.length > 0 ? null : <tr><td><FormatNull className="p-2" /></td></tr>}
+                            {table.getRowModel().rows.map((row) => {
                                 return (
-                                    <th key={header.id} colSpan={header.colSpan} className="w-fit p-2">
-                                        {header.isPlaceholder ? null : (
-                                            <div className="flex justify-start items-center p-2">
-                                                <span className="text-neutral/75 text-sm">
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                </span>
-                                            </div>
-                                        )}
-                                    </th>
+                                    <tr className="w-full border-b border-neutral/5 last:border-b-0">
+                                        {row.getVisibleCells().map(cell => {
+                                            return (
+                                                <td key={cell.id} className="w-fit p-2 last:w-[1%]">
+                                                    <div className="flex justify-start items-center p-2">
+                                                        {flexRender(
+                                                            cell.column.columnDef.cell,
+                                                            cell.getContext()
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            )
+                                        })}
+                                    </tr>
                                 )
                             })}
-                        </tr>
-                    </thead>
-                    <tbody className="w-full">
-                        {table.getRowModel().rows.length > 0 ? null : <tr><td><FormatNull className="p-2" /></td></tr>}
-                        {table.getRowModel().rows.map((row) => {
-                            return (
-                                <tr className="w-full border-b border-neutral/5 last:border-b-0">
-                                    {row.getVisibleCells().map(cell => {
-                                        return (
-                                            <td key={cell.id} className="w-fit p-2 last:w-[1%]">
-                                                <div className="flex justify-start items-center p-2">
-                                                    {flexRender(
-                                                        cell.column.columnDef.cell,
-                                                        cell.getContext()
-                                                    )}
-                                                </div>
-                                            </td>
-                                        )
-                                    })}
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <div className="w-full flex justify-end items-center gap-2 p-4 border-t border-neutral/10">
                     <div className="flex justify-start items-center gap-1 md:gap-2">
                         <ButtonGhost

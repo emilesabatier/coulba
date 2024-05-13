@@ -56,8 +56,8 @@ export function ApiContent() {
                 <p>
                     La clé doit être ajoutée dans l'url à chaque requête, sous la forme <code className="rounded-sm bg-neutral/5 p-1">.../transactions?key=abcdef12345</code>
                 </p>
-                <p>
-                    Pour plus de détails sur la manière de communiquer avec l'API, rendez-vous sur le site de la <a href="https://documentation.coulba.fr/api" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">documentation</a>.
+                <p className="italic">
+                    Documentation à venir.
                 </p>
             </div>
         </div>

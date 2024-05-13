@@ -185,7 +185,8 @@ export const router = createRouter({
             profile: undefined,
             isSignedIn: undefined
         }
-    }
+    },
+    notFoundMode: "root"
 })
 
 

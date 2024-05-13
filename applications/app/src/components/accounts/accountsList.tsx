@@ -88,12 +88,12 @@ function AccountItem(props: AccountItem) {
         >
             <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
                 <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-center gap-2 p-2">
+                    <div className="flex justify-start items-start gap-2 p-2">
                         <h2 className="font-bold">{props.groupedAccount.account.number}</h2>
-                        <span className="text-neutral/75">{props.groupedAccount.account.label}</span>
+                        <span className="text-neutral/75 text-left">{props.groupedAccount.account.label}</span>
                     </div>
                     <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50",
+                        "stroke-neutral/50 shrink-0",
                         hasSubAccounts ? undefined : "opacity-0"
                     )} />
                 </AccordionTrigger>
