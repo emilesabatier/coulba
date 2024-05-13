@@ -1,3 +1,4 @@
+import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
 import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName, randFullName } from '@ngneat/falso'
@@ -6,11 +7,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultAccounts } from './accounts'
-import { DefaultComputation, defaultComputations } from './computations'
 import { defaultRecords } from './records'
-import { DefaultSheet, defaultSheets } from './sheets'
-import { defaultStatements } from './statements'
 
 
 export function generateTemporaryPassword(): string {

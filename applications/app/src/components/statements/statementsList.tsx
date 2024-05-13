@@ -88,12 +88,12 @@ function StatementItem(props: StatementItem) {
         >
             <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
                 <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-center gap-2 p-2">
+                    <div className="flex justify-start items-start gap-2 p-2">
                         <h2 className="font-bold">{props.groupedStatement.statement.number}</h2>
-                        <span className="text-neutral/75">{props.groupedStatement.statement.label}</span>
+                        <span className="text-neutral/75 text-left">{props.groupedStatement.statement.label}</span>
                     </div>
                     <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50",
+                        "stroke-neutral/50 shrink-0",
                         hasSubStatements ? undefined : "opacity-0"
                     )} />
                 </AccordionTrigger>

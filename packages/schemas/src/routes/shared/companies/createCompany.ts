@@ -21,4 +21,4 @@ export const createCompanyBody = v.object({
 
 
 // Output
-export const createCompanyReturn = companySchema
+export const createCompanyReturn = v.object({})
