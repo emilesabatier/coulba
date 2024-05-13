@@ -1,7 +1,7 @@
 import { ValidRoutes } from "../../../routes/router"
 
 
-export type SubMenuItem = {
+type SubMenuItem = {
     basePath: ValidRoutes
     path: ValidRoutes
     label: string

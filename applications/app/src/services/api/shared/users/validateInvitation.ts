@@ -3,7 +3,7 @@ import * as v from "valibot"
 import { patchAPI } from "../../fetch/patchAPI"
 
 
-export type ValidateInvitation = {
+type ValidateInvitation = {
     body: v.Output<typeof shared.users.patch.validateInvitation.body>
 }
 
