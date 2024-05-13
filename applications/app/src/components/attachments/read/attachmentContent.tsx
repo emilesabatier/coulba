@@ -1,5 +1,5 @@
 import { ButtonOutline } from "@coulba/design/buttons"
-import { FormatDateTime, FormatFileSize, FormatNull, FormatText } from "@coulba/design/formats"
+import { FormatDate, FormatDateTime, FormatFileSize, FormatNull, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
@@ -51,11 +51,14 @@ export function AttachmentContent() {
                     <Section.Header title="Informations" />
                     <Section.Content>
                         <DataBlock.Root>
+                            <DataBlock.Item label="Référence">
+                                <FormatText text={attachment.data.reference} />
+                            </DataBlock.Item>
                             <DataBlock.Item label="Libellé">
                                 <FormatText text={attachment.data.label} />
                             </DataBlock.Item>
-                            <DataBlock.Item label="Référence">
-                                <FormatText text={attachment.data.reference} />
+                            <DataBlock.Item label="Date">
+                                <FormatDate isoDate={attachment.data.date} />
                             </DataBlock.Item>
                             <DataBlock.Item label="Type">
                                 <FormatText text={attachment.data.type.split("/").at(1)} />
@@ -89,10 +92,11 @@ export function AttachmentContent() {
             <Section.Root>
                 <Section.Header title="Aperçu du fichier" />
                 <Section.Content>
-                    <iframe
+                    <embed
                         title={attachment.data.reference}
                         className="w-full min-h-[768px] h-full rounded-md border border-neutral/20"
                         src={urlFile}
+                        type={attachment.data.type}
                     />
                 </Section.Content>
             </Section.Root>

@@ -12,6 +12,7 @@ import {
 import { useMemo, useState } from "react"
 import * as v from "valibot"
 import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithFetch"
+import { FormatAttachmentWithFetch } from "../../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../../journals/format/formatJournalWithFetch"
 
 
@@ -46,6 +47,13 @@ export function RecordsTable(props: RecordsTable) {
             accessorKey: 'idAccount',
             header: 'Compte',
             cell: ({ row }) => (<FormatAccountWithFetch idAccount={row.original.idAccount} />),
+            filterFn: 'includesString',
+            maxSize: 300
+        },
+        {
+            accessorKey: 'idAttachment',
+            header: 'Pièce justificative',
+            cell: ({ row }) => (!row.original.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={row.original.idAttachment} />),
             filterFn: 'includesString'
         },
         {
@@ -131,7 +139,7 @@ export function RecordsTable(props: RecordsTable) {
                                 <tr className="w-full border-b border-neutral/5 last:border-b-0">
                                     {row.getVisibleCells().map(cell => {
                                         return (
-                                            <td key={cell.id} className="w-fit p-2 last:w-[1%]">
+                                            <td key={cell.id} className="w-fit max-w-[400px] p-2 last:w-[1%]">
                                                 <div className="flex justify-start items-center p-2">
                                                     {flexRender(
                                                         cell.column.columnDef.cell,

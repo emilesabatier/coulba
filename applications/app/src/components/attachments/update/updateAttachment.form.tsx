@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputText } from "@coulba/design/inputs"
+import { InputDate, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -43,7 +43,8 @@ export function UpdateAttachmentForm() {
                     params: { idAttachment: idAttachment },
                     body: {
                         reference: data.reference,
-                        label: data.label
+                        label: data.label,
+                        date: data.date
                     }
                 }, {
                     onSuccess: () => {
@@ -91,6 +92,26 @@ export function UpdateAttachmentForm() {
                                 />
                                 <FormControl>
                                     <InputText
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="date"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Date"
+                                    tooltip="La date d'émission du document."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputDate
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

@@ -13,6 +13,7 @@ export const attachmentSchema = createSelectSchema(attachments, {
     idYear: idSchema,
     reference: requiredTextSchema,
     label: textSchema,
+    date: dateTimeSchema,
     storageKey: requiredTextSchema,
     type: requiredTextSchema,
     size: integerSchema,

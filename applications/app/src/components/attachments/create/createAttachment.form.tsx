@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputFile, InputText } from "@coulba/design/inputs"
+import { InputDate, InputFile, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { fileSchema } from "@coulba/schemas/components"
 import { auth } from "@coulba/schemas/routes"
@@ -23,8 +23,10 @@ export function CreateAttachmentForm() {
 
     return (
         <Form
-            validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label"]), v.object({ file: fileSchema })])}
-            defaultValues={{}}
+            validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: fileSchema })])}
+            defaultValues={{
+                date: new Date().toISOString()
+            }}
             cancelLabel="Retour aux fichiers"
             onCancel={() => router.navigate({ to: "/fichiers" })}
             submitLabel="Ajouter le fichier"
@@ -57,6 +59,7 @@ export function CreateAttachmentForm() {
                     body: {
                         reference: data.reference,
                         label: data.label,
+                        date: data.date,
                         storageKey: signedUrlResponse.key,
                         type: data.file.type,
                         size: data.file.size
@@ -127,6 +130,26 @@ export function CreateAttachmentForm() {
                                 />
                                 <FormControl>
                                     <InputText
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="date"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Date"
+                                    tooltip="La date d'émission du document."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputDate
                                         value={field.value}
                                         onChange={field.onChange}
                                     />
