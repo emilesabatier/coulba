@@ -40,7 +40,8 @@ CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
 FROM nginx:alpine
-COPY --from=build /build/app /usr/share/nginx/html/build/app
+COPY --from=build /build/app /build/app
+WORKDIR /build/app
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
@@ -48,7 +49,8 @@ COPY --from=build /build/app /usr/share/nginx/html/build/app
 
 # Start website
 FROM nginx:alpine
-COPY --from=build /build/website /usr/share/nginx/html/build/website
+COPY --from=build /build/website /build/website
+WORKDIR /build/website
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
