@@ -8,7 +8,7 @@ export const signInLayout = createRoute({
     path: '/connexion',
     pendingComponent: () => <CircularLoader />,
     beforeLoad: async ({ context }) => {
-        if (context.session.isSignedIn) {
+        if (context.session && context.session.isSignedIn) {
             throw redirect({
                 to: '/'
             })

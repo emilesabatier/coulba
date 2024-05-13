@@ -23,17 +23,16 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
             return
         }
 
-        console.log(router.parseLocation().pathname)
-        // if (!response.isInvitationValidated && router.parseLocation().pathname !== "/activation") {
-        //     setIsLoading(false)
-        //     router.navigate({ to: "/activation" })
-        //     window.location.reload()
-        // }
-        // if (response.isInvitationValidated && router.parseLocation().pathname === "/activation") {
-        //     setIsLoading(false)
-        //     router.navigate({ to: "/" })
-        //     window.location.reload()
-        // }
+        if (router.state.location.pathname !== "/activation" && !response.isInvitationValidated) {
+            setIsLoading(false)
+            router.invalidate()
+            router.navigate({ from: router.state.location.pathname, to: "/activation" })
+        }
+        if (router.state.location.pathname === "/activation" && response.isInvitationValidated) {
+            setIsLoading(false)
+            router.invalidate()
+            router.navigate({ from: "/activation", to: "/" })
+        }
 
         setProfile(response)
         setIsLoading(false)
@@ -54,7 +53,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
 
             toast({ title: "Connexion réussie.", variant: "success" })
 
-            router.navigate({ to: "/" })
+            router.navigate({ from: "/connexion", to: "/" })
             window.location.reload()
         }
     }
@@ -66,7 +65,7 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
         setIsSignedIn(false)
 
         toast({ title: "Déconnexion réussie.", variant: "success" })
-        router.navigate({ to: "/connexion" })
+        router.navigate({ from: router.state.location.pathname, to: "/connexion" })
         window.location.reload()
     }
 
