@@ -28,16 +28,16 @@ export const sessionsRoute = new Hono()
                         eq(users.isActive, true)
                     )
                 )
-            if (!readUser) throw new HTTPException(401, { message: "Connexion impossible" })
+            if (!readUser) throw new HTTPException(401, { message: "User not found" })
 
             const submittedPasswordHash = pbkdf2Sync(body.password, readUser.passwordSalt, 128000, 64, `sha512`).toString(`hex`)
-            if ((submittedPasswordHash !== readUser.passwordHash)) throw new HTTPException(401, { message: "Connexion impossible" })
+            if ((submittedPasswordHash !== readUser.passwordHash)) throw new HTTPException(401, { message: "Wrong password" })
 
 
             const currentDate = new Date()
             const sessionLifetime = Number(env()?.SESSION_LIFETIME)
             const cookiesKey = env()?.COOKIES_KEY
-            if (!sessionLifetime || !cookiesKey) throw new HTTPException(401, { message: "Connexion impossible" })
+            if (!sessionLifetime || !cookiesKey) throw new HTTPException(500, { message: "Env variables not init" })
 
             const expirationDate = new Date(currentDate.getTime() + 1000 * sessionLifetime)
             const [createSession] = await db
