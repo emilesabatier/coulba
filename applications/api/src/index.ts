@@ -28,7 +28,7 @@ app.use('/shared/*', cors(corsConfig))
 
 
 app.onError((error, c) => {
-    if (env()?.ENV !== "production") console.log(error)
+    console.log(error)
     if (error instanceof HTTPException) {
         if (error.status === 401) {
             // deleteCookie(c, "is_signed_in", {

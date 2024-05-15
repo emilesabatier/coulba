@@ -12,7 +12,7 @@ import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
-import { invitationTemplate } from "../../services/email/templates/invitationTemplate.js"
+import { invitationTemplate } from "../../services/email/templates/invitation.js"
 
 
 export const usersRoute = new Hono<AuthEnv>()

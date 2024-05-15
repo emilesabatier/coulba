@@ -1,12 +1,14 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormControl, FormError, FormField, FormItem, FormRoot } from "@coulba/design/forms"
 import { InputText } from "@coulba/design/inputs"
+import { toast } from "@coulba/design/overlays"
 import { shared } from "@coulba/schemas/routes"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { IconArrowLeft } from "@tabler/icons-react"
 import { Link } from "@tanstack/react-router"
 import { useForm } from "react-hook-form"
 import * as v from "valibot"
+import { router } from "../../routes/router"
 import { resetPassword } from "../../services/api/shared/users/resetPassword"
 
 
@@ -26,6 +28,9 @@ export function ResetPasswordForm() {
         await resetPassword({
             body: form.getValues()
         })
+
+        toast({ title: "Email envoyé à l'adresse spécifiée (si elle existe)", variant: "success" })
+        router.navigate({ from: "/connexion/identifiants", to: "/connexion" })
     }
 
     return (
