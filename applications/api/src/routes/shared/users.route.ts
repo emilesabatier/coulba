@@ -1,7 +1,7 @@
 import { sessions, users } from '@coulba/schemas/models'
 import { shared } from '@coulba/schemas/routes'
 import { generateId } from '@coulba/schemas/services'
-import { and, eq } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { setCookie, setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
@@ -45,7 +45,7 @@ export const usersRoute = new Hono()
                 to: updateUser.email,
                 subject: "Réinitialisation du mot de passe",
                 html: resetPasswordTemplate({
-                    to: `${updateUser.forename}`,
+                    to: `${updateUser.alias ?? updateUser.email}`,
                     urlInvitation: `${urlApp}/services/invitation?id=${updateUser.id}&token=${updateUser.invitationToken}`
                 })
             })
@@ -105,3 +105,29 @@ export const usersRoute = new Hono()
             return c.json(createSession, 200)
         }
     )
+    .patch(
+        '/validate-email',
+        validator("json", bodyValidator(shared.users.patch.validateEmail.body)),
+        async (c) => {
+            const body = c.req.valid('json')
+
+            await db
+                .update(users)
+                .set({
+                    email: sql`${users.emailToValidate}`,
+                    isEmailValidated: true,
+                    emailToValidate: null,
+                    emailToken: null,
+                    emailTokenExpiresOn: null,
+                    lastUpdatedBy: null,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(and(
+                    eq(users.id, body.id),
+                    eq(users.emailToken, body.emailToken)
+                ))
+
+            return c.json({}, 200)
+        }
+    )
+

@@ -21,7 +21,7 @@ export function UpdateProfileEmailForm() {
                 if (!response) return false
 
                 router.navigate({ to: "/profil" })
-                toast({ title: "Email mis à jour", variant: "success" })
+                toast({ title: "Un email de validation a été envoyé à la nouvelle adresse", variant: "success" })
 
                 return true
             }}

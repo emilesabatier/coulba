@@ -8,8 +8,7 @@ export const updateUserParams = v.object({
 })
 
 export const updateUserBody = v.partial(v.object({
-    forename: userSchema.entries.forename,
-    surname: userSchema.entries.surname,
+    alias: userSchema.entries.alias,
     email: userSchema.entries.email,
     isAdmin: userSchema.entries.isAdmin,
 }))

@@ -10,10 +10,9 @@ export const companies = pgTable(
     "companies",
     {
         id: idColumn("id").primaryKey(),
-        siren: text("siren").unique(),
+        siren: text("siren"),
         name: text("name"),
-        address: text("address"),
-        email: text("email").notNull(),
+        email: text("email"),
         apiKeyHash: text("api_key_hash").unique(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         createdOn: dateTimeColumn("created_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

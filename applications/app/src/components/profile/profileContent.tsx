@@ -41,11 +41,8 @@ export function ProfileContent() {
                 </div>
             </div>
             <DataBlock.Root className="border-0">
-                <DataBlock.Item label="Prénom">
-                    <FormatText text={session.profile.forename} />
-                </DataBlock.Item>
-                <DataBlock.Item label="Nom">
-                    <FormatText text={session.profile.surname} />
+                <DataBlock.Item label="Pseudonyme">
+                    <FormatText text={session.profile.alias} />
                 </DataBlock.Item>
                 <DataBlock.Item label="Email">
                     <FormatLink text={session.profile.email} />

@@ -30,9 +30,6 @@ export function CompanyContent() {
                 <DataBlock.Item label="Nom">
                     <FormatText text={company.data.name} />
                 </DataBlock.Item>
-                <DataBlock.Item label="Adresse">
-                    <FormatText text={company.data.address} />
-                </DataBlock.Item>
                 <DataBlock.Item label="Email">
                     <FormatLink text={company.data.email} />
                 </DataBlock.Item>

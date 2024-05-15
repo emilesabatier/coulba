@@ -1,6 +1,6 @@
 
 
-type Invitation = {
+type ValidateInvitation = {
     from: string
     to: string
     urlInvitation: string
@@ -8,7 +8,7 @@ type Invitation = {
     urlDocumentation: string
 }
 
-function Invitation(props: Invitation) {
+function ValidateInvitation(props: ValidateInvitation) {
     return (
         <html lang="fr">
             <body>
@@ -29,6 +29,6 @@ function Invitation(props: Invitation) {
     )
 }
 
-export function invitationTemplate(props: Invitation) {
-    return (<Invitation {...props} />).toString()
+export function validateInvitationTemplate(props: ValidateInvitation) {
+    return (<ValidateInvitation {...props} />).toString()
 }

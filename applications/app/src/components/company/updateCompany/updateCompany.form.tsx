@@ -76,25 +76,6 @@ export function UpdateCompanyForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="address"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel
-                                    label="Adresse"
-                                    tooltip="Du siège social ou autre."
-                                />
-                                <FormControl>
-                                    <InputText
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormError />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
                         name="email"
                         render={({ field }) => (
                             <FormItem>

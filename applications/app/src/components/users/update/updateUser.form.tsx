@@ -53,12 +53,12 @@ export function UpdateUserForm() {
                 <Fragment>
                     <FormField
                         control={form.control}
-                        name="surname"
+                        name="alias"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Nom"
-                                    tooltip="Le nom de la personne qui aura l'accès."
+                                    label="Pseudonyme"
+                                    tooltip="Le peusdonyme de la personne qui aura l'accès."
                                     isRequired
                                 />
                                 <FormControl>
@@ -66,26 +66,6 @@ export function UpdateUserForm() {
                                         value={field.value}
                                         onChange={field.onChange}
                                         autoFocus
-                                    />
-                                </FormControl>
-                                <FormError />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="forename"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel
-                                    label="Prénom"
-                                    tooltip="Le prénom de la personne qui aura l'accès."
-                                    isRequired
-                                />
-                                <FormControl>
-                                    <InputText
-                                        value={field.value}
-                                        onChange={field.onChange}
                                     />
                                 </FormControl>
                                 <FormError />

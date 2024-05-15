@@ -12,7 +12,7 @@ import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
-import { invitationTemplate } from "../../services/email/templates/invitation.js"
+import { validateInvitationTemplate } from "../../services/email/templates/validateInvitation.js"
 
 
 export const usersRoute = new Hono<AuthEnv>()
@@ -28,8 +28,7 @@ export const usersRoute = new Hono<AuthEnv>()
                     id: generateId(),
                     idCompany: c.var.user.idCompany,
                     isAdmin: body.isAdmin,
-                    forename: body.forename,
-                    surname: body.surname,
+                    alias: body.alias,
                     email: body.email,
                     isEmailValidated: false,
                     isActive: true,
@@ -77,8 +76,7 @@ export const usersRoute = new Hono<AuthEnv>()
             const [updateUser] = await db
                 .update(users)
                 .set({
-                    forename: body.forename,
-                    surname: body.surname,
+                    alias: body.alias,
                     email: body.email,
                     isAdmin: body.isAdmin,
                     lastUpdatedBy: c.var.user.id,
@@ -134,9 +132,9 @@ export const usersRoute = new Hono<AuthEnv>()
             await sendEmail({
                 to: updateUser.email,
                 subject: "Invitation à collaborer sur Coulba",
-                html: invitationTemplate({
-                    from: `${c.var.user.forename} ${c.var.user.surname}`,
-                    to: `${updateUser.forename}`,
+                html: validateInvitationTemplate({
+                    from: `${c.var.user.alias ?? c.var.user.email}`,
+                    to: `${updateUser.alias ?? updateUser.email}`,
                     urlInvitation: `${urlApp}/services/invitation?id=${updateUser.id}&token=${updateUser.invitationToken}`,
                     urlWebsite: urlWebsite,
                     urlDocumentation: "https://documentation.coulba.fr"

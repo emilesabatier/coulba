@@ -4,8 +4,7 @@ import { userSchema } from "../../../schemas/user/user.schema.js"
 
 // Input
 export const updateProfileBody = v.partial(v.object({
-    forename: userSchema.entries.forename,
-    surname: userSchema.entries.surname
+    alias: userSchema.entries.alias
 }))
 
 

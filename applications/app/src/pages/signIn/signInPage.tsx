@@ -11,7 +11,7 @@ export function SignInPage() {
 
     return (
         <div id="signin" className="w-full h-full grid grid-cols-2">
-            <div className="w-full bg-white border-y flex justify-center items-center border-r border-neutral/20">
+            <div className="w-full bg-white flex justify-center items-center border-r border-neutral/20">
                 <div className="min-w-[300px] w-full max-w-[50%] flex justify-center items-center">
                     <div className="flex flex-col justify-start items-start gap-8">
                         <Logo />

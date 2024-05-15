@@ -6,10 +6,12 @@ import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from "hono/validator"
 import { db } from "../../clients/db.js"
+import { env } from "../../env.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
 import { supportTemplate } from "../../services/email/templates/support.js"
+import { validateEmailTemplate } from "../../services/email/templates/validateEmail.js"
 
 
 export const profileRoute = new Hono<AuthEnv>()
@@ -33,8 +35,7 @@ export const profileRoute = new Hono<AuthEnv>()
             const [updateUser] = await db
                 .update(users)
                 .set({
-                    forename: body.forename,
-                    surname: body.surname,
+                    alias: body.alias,
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
@@ -56,6 +57,7 @@ export const profileRoute = new Hono<AuthEnv>()
             const [updateUser] = await db
                 .update(users)
                 .set({
+                    isEmailValidated: false,
                     emailToValidate: body.emailToValidate,
                     emailToken: randomBytes(128).toString('hex'),
                     emailTokenExpiresOn: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString(),
@@ -64,6 +66,18 @@ export const profileRoute = new Hono<AuthEnv>()
                 })
                 .where(eq(users.id, c.var.user.id))
                 .returning()
+
+            const urlApp = env()?.APP_BASE_URL
+            if (!urlApp) throw new HTTPException(500)
+
+            await sendEmail({
+                to: updateUser.email,
+                subject: "Valider votre email",
+                html: validateEmailTemplate({
+                    to: `${updateUser.alias ?? updateUser.email}`,
+                    url: `${urlApp}/services/email?id=${updateUser.id}&token=${updateUser.emailToken}`,
+                })
+            })
 
             return c.json(updateUser, 200)
         }
