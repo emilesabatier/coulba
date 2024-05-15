@@ -1,5 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
+import { deleteCookie } from 'hono/cookie'
 import { cors } from 'hono/cors'
 import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
@@ -28,13 +29,11 @@ app.use('/shared/*', cors(corsConfig))
 
 
 app.onError((error, c) => {
-    if (env()?.ENV !== "production") console.log(error)
+    console.log(error)
     if (error instanceof HTTPException) {
         if (error.status === 401) {
-            // deleteCookie(c, "is_signed_in", {
-            //     maxAge: 0,
-            //     domain: env()?.COOKIES_DOMAIN
-            // })
+            deleteCookie(c, "id_session")
+            deleteCookie(c, "is_signed_in")
             return c.text("Erreur interne", 401)
         }
         return error.getResponse()

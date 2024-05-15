@@ -1,6 +1,6 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@coulba/design/forms"
-import { InputPassword, InputSiren, InputText } from "@coulba/design/inputs"
+import { InputPassword, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { shared } from "@coulba/schemas/routes"
 import { valibotResolver } from "@hookform/resolvers/valibot"
@@ -38,36 +38,14 @@ export function SignUpForm() {
         <FormRoot {...form}>
             <form className="w-full flex flex-col justify-start items-center gap-x-2 gap-y-4">
                 <div className="w-full flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
-                    <h2 className="text-lg text-neutral/50 uppercase">Informations sur la société</h2>
                     <div className="flex flex-col justify-start items-stretch gap-2">
                         <FormField
                             control={form.control}
-                            name="siren"
+                            name="user.alias"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel
-                                        label="SIREN"
-                                        isRequired
-                                    />
-                                    <FormControl>
-                                        <InputSiren
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            autoFocus
-                                        />
-                                    </FormControl>
-                                    <FormError />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel
-                                        label="Nom"
-                                        isRequired
+                                        label="Pseudonyme"
                                     />
                                     <FormControl>
                                         <InputText
@@ -79,91 +57,6 @@ export function SignUpForm() {
                                 </FormItem>
                             )}
                         />
-                        <FormField
-                            control={form.control}
-                            name="address"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel
-                                        label="Adresse"
-                                        isRequired
-                                    />
-                                    <FormControl>
-                                        <InputText
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormError />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel
-                                        label="Email"
-                                        isRequired
-                                    />
-                                    <FormControl>
-                                        <InputText
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                            inputMode="email"
-                                        />
-                                    </FormControl>
-                                    <FormError />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
-                </div>
-                <div className="w-full flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
-                    <h2 className="text-lg text-neutral/50 uppercase">Information sur le compte de connexion</h2>
-                    <div className="flex flex-col justify-start items-stretch gap-2">
-                        <div className="flex justify-center items-stretch gap-1">
-                            <FormField
-                                control={form.control}
-                                name="user.surname"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel
-                                            label="Nom"
-                                            isRequired
-                                        />
-                                        <FormControl>
-                                            <InputText
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                                autoFocus
-                                            />
-                                        </FormControl>
-                                        <FormError />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="user.forename"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel
-                                            label="Prénom"
-                                            isRequired
-                                        />
-                                        <FormControl>
-                                            <InputText
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                            />
-                                        </FormControl>
-                                        <FormError />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
                         <FormField
                             control={form.control}
                             name="user.email"
@@ -234,6 +127,7 @@ export function SignUpForm() {
                     </Link>
                     <ButtonPlain
                         onClick={() => onSubmit()}
+                        loader={true}
                         text="Créer mon compte"
                         className="w-full justify-center"
                     />

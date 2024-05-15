@@ -3,6 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
 import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { Balance, getBalance } from "../../../services/reports/getBalance"
@@ -12,7 +13,7 @@ import { StatementTable } from "./statementTable"
 
 
 export type Statement = {
-    key: string
+    id: string
     number: number
     label: string
     net: number
@@ -41,7 +42,7 @@ function groupStatement(statements: v.Output<typeof auth.statements.get.return>[
             }
 
             return ({
-                key: statement.id,
+                id: statement.id,
                 number: statement.number,
                 label: statement.label,
                 net: net,
@@ -52,12 +53,16 @@ function groupStatement(statements: v.Output<typeof auth.statements.get.return>[
 
 export function StatementContent() {
     const statements = useQuery(statementsOptions)
+    const computations = useQuery(computationsOptions)
     const records = useQuery(recordsOptions)
     const accounts = useQuery(accountsOptions)
 
     const balance = getBalance(records.data ?? [], accounts.data ?? [])
 
     const sortedStatements = groupStatement(statements.data ?? [], balance, null)
+        .sort((a, b) => a.number - b.number)
+
+    const sortedComputations = (computations.data ?? [])
         .sort((a, b) => a.number - b.number)
 
 
@@ -67,7 +72,10 @@ export function StatementContent() {
     if (!records.data || !accounts.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
-            <StatementTable statements={sortedStatements} />
+            <StatementTable
+                statements={sortedStatements}
+                computations={sortedComputations}
+            />
         </div>
     )
 }

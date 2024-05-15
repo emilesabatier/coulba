@@ -11,7 +11,7 @@ import { db } from "../../clients/db.js"
 import { env } from "../../env.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
-import { signUpTemplate } from "../../services/email/templates/signUp.js"
+import { validateEmailTemplate } from "../../services/email/templates/validateEmail.js"
 
 
 export const companiesRoute = new Hono()
@@ -32,10 +32,9 @@ export const companiesRoute = new Hono()
                     .insert(companies)
                     .values({
                         id: idCompany,
-                        siren: body.siren,
-                        name: body.name,
-                        address: body.address,
-                        email: body.email
+                        siren: null,
+                        name: null,
+                        email: null
                     })
 
                 // Add year
@@ -213,8 +212,7 @@ export const companiesRoute = new Hono()
                         id: generateId(),
                         idCompany: idCompany,
                         isAdmin: true,
-                        forename: body.user.forename,
-                        surname: body.user.surname,
+                        alias: body.user.alias,
                         email: body.user.email,
                         isEmailValidated: false,
                         emailToValidate: body.user.email,
@@ -229,12 +227,17 @@ export const companiesRoute = new Hono()
 
             })
 
-            await sendEmail({
-                to: body.user.email,
-                subject: "Valider votre adresse email",
-                html: signUpTemplate()
-            })
+            const urlApp = env()?.APP_BASE_URL
+            if (!urlApp) throw new HTTPException(500)
 
+            await sendEmail({
+                to: userResponse.email,
+                subject: "Valider votre email",
+                html: validateEmailTemplate({
+                    to: `${userResponse.alias ?? userResponse.email}`,
+                    url: `${urlApp}/services/email?id=${userResponse.id}&token=${userResponse.emailToken}`,
+                })
+            })
 
             // Set up session cookies
             const currentDate = new Date()

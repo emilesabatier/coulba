@@ -6,14 +6,14 @@ import { FormatNull } from "../null/formatNull"
 
 
 type FormatLinkProps = {
-    text: string | null
+    text: string | null | undefined
     className?: ComponentProps<'span'>['className']
 }
 
 export function FormatLink(props: FormatLinkProps) {
     if (!props.text) return <FormatNull />
 
-    const copyContent = (toCopy: string | null) => {
+    const copyContent = (toCopy: string | null | undefined) => {
         toast({ title: "Contenu copié dans le presse-papier.", variant: "information" })
         return navigator.clipboard.writeText(!toCopy ? "" : toCopy)
     }

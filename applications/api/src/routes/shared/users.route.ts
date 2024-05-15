@@ -1,7 +1,7 @@
 import { sessions, users } from '@coulba/schemas/models'
 import { shared } from '@coulba/schemas/routes'
 import { generateId } from '@coulba/schemas/services'
-import { and, eq } from 'drizzle-orm'
+import { and, eq, sql } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { setCookie, setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
@@ -9,6 +9,8 @@ import { validator } from 'hono/validator'
 import { db } from '../../clients/db.js'
 import { env } from '../../env.js'
 import { bodyValidator } from '../../middlewares/bodyValidator.js'
+import { sendEmail } from '../../services/email/sendEmail.js'
+import { resetPasswordTemplate } from '../../services/email/templates/resetPassword.js'
 
 
 export const usersRoute = new Hono()
@@ -18,10 +20,14 @@ export const usersRoute = new Hono()
         async (c) => {
             const body = c.req.valid('json')
 
+            const invitationToken = generateId()
             const [updateUser] = await db
                 .update(users)
                 .set({
-                    // isActivated: false,
+                    isInvitationValidated: false,
+                    invitationToken: invitationToken,
+                    invitationLastSentOn: new Date().toISOString(),
+                    invitationTokenExpiresOn: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString(),
                     lastUpdatedBy: null,
                     lastUpdatedOn: new Date().toISOString()
                 })
@@ -31,11 +37,23 @@ export const usersRoute = new Hono()
             if (!updateUser) throw new HTTPException(200, { message: "" })
 
 
+            const urlWebsite = env()?.WEBSITE_BASE_URL
+            const urlApp = env()?.APP_BASE_URL
+            if (!urlWebsite || !urlApp) throw new HTTPException(500)
+
+            await sendEmail({
+                to: updateUser.email,
+                subject: "Réinitialisation du mot de passe",
+                html: resetPasswordTemplate({
+                    to: `${updateUser.alias ?? updateUser.email}`,
+                    urlInvitation: `${urlApp}/services/invitation?id=${updateUser.id}&token=${updateUser.invitationToken}`
+                })
+            })
             // const passwordSalt = randomBytes(16).toString('hex')
             // const passwordHash = pbkdf2Sync(body.user.password, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
 
 
-            return c.json(updateUser, 200)
+            return c.json({}, 200)
         }
     )
     .patch(
@@ -87,3 +105,29 @@ export const usersRoute = new Hono()
             return c.json(createSession, 200)
         }
     )
+    .patch(
+        '/validate-email',
+        validator("json", bodyValidator(shared.users.patch.validateEmail.body)),
+        async (c) => {
+            const body = c.req.valid('json')
+
+            await db
+                .update(users)
+                .set({
+                    email: sql`${users.emailToValidate}`,
+                    isEmailValidated: true,
+                    emailToValidate: null,
+                    emailToken: null,
+                    emailTokenExpiresOn: null,
+                    lastUpdatedBy: null,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(and(
+                    eq(users.id, body.id),
+                    eq(users.emailToken, body.emailToken)
+                ))
+
+            return c.json({}, 200)
+        }
+    )
+

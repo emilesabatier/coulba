@@ -3,5 +3,5 @@ import * as v from "valibot"
 
 
 export function formatUser(user: v.Output<typeof auth.users.get.return>) {
-    return `${user.forename} ${user.surname}`
+    return `${user.alias ?? user.email}`
 }

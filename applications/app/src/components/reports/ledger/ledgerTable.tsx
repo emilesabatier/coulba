@@ -76,11 +76,13 @@ export function LedgerTable(props: LedgerTable) {
                                     )
                                 })
                                 : (
-                                    <Table.Body.Row>
-                                        <Table.Body.Cell>
-                                            <FormatNull className="" />
-                                        </Table.Body.Cell>
-                                    </Table.Body.Row>
+                                    <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
+                                        <Table.Body.Row>
+                                            <Table.Body.Cell>
+                                                <FormatNull className="" />
+                                            </Table.Body.Cell>
+                                        </Table.Body.Row>
+                                    </Table.Body.Root>
                                 )
                         }
                     </Fragment>

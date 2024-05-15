@@ -1,7 +1,7 @@
 import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
 import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
-import { randFirstName, randFullName } from '@ngneat/falso'
+import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
 import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
@@ -30,10 +30,9 @@ async function seed() {
             console.log("Add company")
             const newCompany: (typeof companies.$inferInsert) = {
                 id: generateId(),
-                siren: "123123123",
-                name: "MaSociétéDémo",
-                address: "13 rue des grands champs, 75000 Paris",
-                email: "demo@coulba.fr"
+                siren: null,
+                name: null,
+                email: null
             }
             await tx.insert(companies).values(newCompany)
 
@@ -182,7 +181,7 @@ async function seed() {
             // Accounts
             console.log("Add accounts")
             let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => {
-                const statement = newStatements.find((_statement) => _statement.accounts.toString().includes(_account.number.toString()))
+                const statement = newStatements.find((_statement) => _statement.accounts.find(x => x.toString().startsWith(_account.number.toString())))
 
                 return ({
                     id: generateId(),
@@ -235,10 +234,9 @@ async function seed() {
                 idCompany: newCompany.id,
                 isAdmin: true,
                 isActive: true,
-                email: "demo@coulba.com",
+                email: "dev@emilesabatier.com",
                 isEmailValidated: false,
-                forename: randFirstName(),
-                surname: randFullName(),
+                alias: randFirstName(),
                 passwordHash: passwordHash,
                 passwordSalt: passwordSalt,
                 invitationToken: invitationToken,

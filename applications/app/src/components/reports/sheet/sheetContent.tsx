@@ -13,7 +13,7 @@ import { SheetLiabilitiesTable } from "./sheetLiabilitiesTable"
 
 
 export type SheetAsset = {
-    key: string
+    id: string
     number: number
     label: string
     gross: number
@@ -23,7 +23,7 @@ export type SheetAsset = {
 }
 
 export type SheetLiability = {
-    key: string
+    id: string
     number: number
     label: string
     net: number
@@ -59,7 +59,7 @@ function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], ba
             net = gross - allowance
 
             return ({
-                key: sheet.id,
+                id: sheet.id,
                 number: sheet.number,
                 label: sheet.label,
                 gross: gross,
@@ -93,7 +93,7 @@ function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[
             }
 
             return ({
-                key: sheet.id,
+                id: sheet.id,
                 number: sheet.number,
                 label: sheet.label,
                 net: net,

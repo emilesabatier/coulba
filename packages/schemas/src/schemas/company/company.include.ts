@@ -3,7 +3,6 @@ export const companyInclude = {
     id: true,
     siren: true,
     name: true,
-    address: true,
     email: true,
     lastUpdatedOn: true,
     createdOn: true,
@@ -11,4 +10,4 @@ export const companyInclude = {
 } as const
 
 
-export const companyIncludeKeys = ["id", "siren", "name", "address", "email", "lastUpdatedOn", "createdOn", "lastUpdatedBy"] as const
+export const companyIncludeKeys = ["id", "siren", "name", "email", "lastUpdatedOn", "createdOn", "lastUpdatedBy"] as const

@@ -5,7 +5,7 @@ import { userSchema } from "../../../schemas/user/user.schema.js"
 // Input
 export const validateEmailBody = v.object({
     id: userSchema.entries.id,
-    emailToken: userSchema.entries.emailToken
+    emailToken: v.nonNullable(userSchema.entries.emailToken)
 })
 
 

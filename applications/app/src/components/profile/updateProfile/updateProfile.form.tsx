@@ -37,34 +37,18 @@ export function UpdateProfileForm() {
                 <Fragment>
                     <FormField
                         control={form.control}
-                        name="forename"
+                        name="alias"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Prénom"
+                                    label="Pseudonyme"
+                                    isRequired
                                 />
                                 <FormControl>
                                     <InputText
                                         value={field.value}
                                         onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormError />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="surname"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel
-                                    label="Nom"
-                                />
-                                <FormControl>
-                                    <InputText
-                                        value={field.value}
-                                        onChange={field.onChange}
+                                        autoFocus
                                     />
                                 </FormControl>
                                 <FormError />

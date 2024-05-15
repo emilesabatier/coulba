@@ -3,26 +3,26 @@ import { toast } from "@coulba/design/overlays"
 import { useSearch } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 import { router } from "../../routes/router"
-import { validateInvitationRoute } from "../../routes/shared/validateInvitation.route"
-import { validateInvitation } from "../../services/api/shared/users/validateInvitation"
+import { validateEmailRoute } from "../../routes/shared/validateEmail.route"
+import { validateEmail } from "../../services/api/shared/users/validateEmail"
 
 
-export function ValidateInvitationPage() {
+export function ValidateEmailPage() {
 
-    const search = useSearch({ from: validateInvitationRoute.id })
+    const search = useSearch({ from: validateEmailRoute.id })
 
     useEffect(() => {
-        validateInvitationFn()
+        validateEmailFn()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const [loading, setLoading] = useState(true)
 
-    async function validateInvitationFn() {
-        const response = await validateInvitation({
+    async function validateEmailFn() {
+        const response = await validateEmail({
             body: {
                 id: search.id,
-                invitationToken: search.token
+                emailToken: search.token
             }
         })
         if (!response) {
@@ -31,7 +31,7 @@ export function ValidateInvitationPage() {
             return
         }
 
-        toast({ title: "Invitation validée", description: "Veuillez vous connecter", variant: "success" })
+        toast({ title: "Email validé ", variant: "success" })
         setLoading(false)
         router.navigate({ to: "/" })
     }

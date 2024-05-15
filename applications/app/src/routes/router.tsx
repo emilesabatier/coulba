@@ -64,6 +64,7 @@ import { updateTransactionRoute } from './auth/app/transactions/updateTransactio
 import { authLayout } from './auth/auth.layout'
 import { rootLayout } from './root.layout'
 import { sharedLayout } from './shared/shared.layout'
+import { validateEmailRoute } from './shared/validateEmail.route'
 import { validateInvitationRoute } from './shared/validateInvitation.route'
 import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
@@ -81,7 +82,8 @@ const routeTree = rootLayout.addChildren([
     ]),
 
     sharedLayout.addChildren([
-        validateInvitationRoute
+        validateInvitationRoute,
+        validateEmailRoute
     ]),
 
     authLayout.addChildren([

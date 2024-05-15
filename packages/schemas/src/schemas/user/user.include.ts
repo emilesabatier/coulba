@@ -4,8 +4,7 @@ export const userInclude = {
     id: true,
     idCompany: true,
     isAdmin: true,
-    forename: true,
-    surname: true,
+    alias: true,
     email: true,
     isEmailValidated: true,
     emailToValidate: true,
@@ -23,4 +22,4 @@ export const userInclude = {
 }
 
 
-export const userKeys = <const>["id", "idCompany", "isAdmin", "forename", "surname", "email", "isEmailValidated", "emailToValidate", "emailToken", "emailTokenExpiresOn", "invitationToken", "isInvitationValidated", "invitationTokenExpiresOn", "invitationLastSentOn", "isActive", "lastUpdatedOn", "createdOn", "lastUpdatedBy", "createdBy"]
+export const userKeys = <const>["id", "idCompany", "isAdmin", "alias", "email", "isEmailValidated", "emailToValidate", "emailToken", "emailTokenExpiresOn", "invitationToken", "isInvitationValidated", "invitationTokenExpiresOn", "invitationLastSentOn", "isActive", "lastUpdatedOn", "createdOn", "lastUpdatedBy", "createdBy"]
