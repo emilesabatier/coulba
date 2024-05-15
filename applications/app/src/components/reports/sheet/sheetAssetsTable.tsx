@@ -52,9 +52,8 @@ function SheetAssetBody(props: SheetAssetBody) {
                 props.sheet.map((entry) => {
                     const label = !props.displayNumber ? entry.label : `${toRoman(entry.number)} ${entry.label}`
                     return (
-                        <Fragment>
+                        <Fragment key={entry.id}>
                             <Table.Body.Row
-                                key={entry.key}
                                 className={cn(
                                     "",
                                     props.displayNumber ? "bg-neutral/5" : ""

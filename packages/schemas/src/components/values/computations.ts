@@ -131,6 +131,10 @@ export const defaultComputations: DefaultComputation[] = [
             {
                 number: 8,
                 operation: "plus"
+            },
+            {
+                number: 10,
+                operation: "plus"
             }
         ]
     },

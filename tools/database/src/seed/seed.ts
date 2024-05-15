@@ -181,7 +181,7 @@ async function seed() {
             // Accounts
             console.log("Add accounts")
             let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => {
-                const statement = newStatements.find((_statement) => _statement.accounts.toString().includes(_account.number.toString()))
+                const statement = newStatements.find((_statement) => _statement.accounts.find(x => x.toString().startsWith(_account.number.toString())))
 
                 return ({
                     id: generateId(),
