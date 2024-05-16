@@ -43,7 +43,6 @@ export function UpdateComputationForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/compte-de-resultat" })
                         toast({ title: "Opération mise à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true

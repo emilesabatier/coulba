@@ -30,7 +30,6 @@ export function DeleteSheet(props: DeleteSheet) {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         toast({ title: "Ligne supprimée", variant: "success" })
-                        return true
                     }
                 })
                 return true

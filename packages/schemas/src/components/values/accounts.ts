@@ -14,7 +14,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 10,
-        system: "base",
+        system: "condensed",
         label: "Capital et réserves"
     },
     {
@@ -344,7 +344,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 14,
-        system: "base",
+        system: "condensed",
         label: "Provisions réglementées"
     },
     {
@@ -1314,7 +1314,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 28,
-        system: "base",
+        system: "condensed",
         label: "Amortissements des immobilisations"
     },
     {
@@ -1409,7 +1409,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 29,
-        system: "base",
+        system: "condensed",
         label: "Dépréciations des immobilisations"
     },
     {
@@ -1789,7 +1789,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 39,
-        system: "base",
+        system: "condensed",
         label: "Dépréciations des stocks et en-cours"
     },
     {
@@ -1903,6 +1903,11 @@ export const defaultAccounts: DefaultAccount[] = [
         label: "Fournisseurs et comptes rattachés"
     },
     {
+        number: 400,
+        system: "condensed",
+        label: "Fournisseurs et comptes rattachés"
+    },
+    {
         number: 401,
         system: "base",
         label: "Fournisseurs"
@@ -1999,7 +2004,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 41,
-        system: "base",
+        system: "condensed",
         label: "Clients et comptes rattachés"
     },
     {
@@ -2074,7 +2079,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 42,
-        system: "base",
+        system: "condensed",
         label: "Personnel et comptes rattachés"
     },
     {
@@ -2179,7 +2184,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 44,
-        system: "base",
+        system: "condensed",
         label: "État et autres collectivités publiques"
     },
     {
@@ -2669,7 +2674,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 48,
-        system: "base",
+        system: "condensed",
         label: "Comptes de régularisation"
     },
     {
@@ -2734,7 +2739,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 49,
-        system: "base",
+        system: "condensed",
         label: "Dépréciations des comptes de tiers"
     },
     {
@@ -3049,7 +3054,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 59,
-        system: "base",
+        system: "condensed",
         label: "Dépréciations des comptes financiers"
     },
     {
@@ -3090,7 +3095,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 601,
         system: "base",
-
         label: "Achats stockés - Matières premières (et fournitures)"
     },
     {
@@ -3111,13 +3115,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 602,
         system: "base",
-
         label: "Achats stockés - Autres approvisionnements"
     },
     {
         number: 6021,
         system: "base",
-
         label: "Matières consommables"
     },
     {
@@ -3133,7 +3135,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6022,
         system: "base",
-
         label: "Fournitures consommables"
     },
     {
@@ -3164,7 +3165,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6026,
         system: "base",
-
         label: "Emballages"
     },
     {
@@ -3215,7 +3215,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 606,
         system: "base",
-
         label: "Achats non stockés de matière et fournitures"
     },
     {
@@ -3241,7 +3240,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 607,
         system: "base",
-
         label: "Achats de marchandises"
     },
     {
@@ -3302,7 +3300,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 61,
         system: "condensed",
-
         label: "Services extérieurs"
     },
     {
@@ -3313,7 +3310,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 612,
         system: "base",
-
         label: "Redevances de crédit-bail"
     },
     {
@@ -3329,7 +3325,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 613,
         system: "base",
-
         label: "Locations"
     },
     {
@@ -3355,7 +3350,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 615,
         system: "base",
-
         label: "Entretien et réparations"
     },
     {
@@ -3376,7 +3370,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 616,
         system: "base",
-
         label: "Primes d'assurances"
     },
     {
@@ -3392,7 +3385,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6163,
         system: "developed",
-
         label: "Assurance transport"
     },
     {
@@ -3428,7 +3420,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 618,
         system: "base",
-
         label: "Divers"
     },
     {
@@ -3454,13 +3445,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 62,
         system: "condensed",
-
         label: "Autres services extérieurs"
     },
     {
         number: 621,
         system: "base",
-
         label: "Personnel extérieur à l'entreprise"
     },
     {
@@ -3476,7 +3465,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 622,
         system: "base",
-
         label: "Rémunérations d'intermédiaires et honoraires"
     },
     {
@@ -3517,7 +3505,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 623,
         system: "base",
-
         label: "Publicité, publications, relations publiques"
     },
     {
@@ -3563,7 +3550,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 624,
         system: "base",
-
         label: "Transports de biens et transports collectifs du personnel"
     },
     {
@@ -3599,7 +3585,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 625,
         system: "base",
-
         label: "Déplacements, missions et réceptions"
     },
     {
@@ -3630,7 +3615,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 627,
         system: "base",
-
         label: "Services bancaires et assimilés"
     },
     {
@@ -3661,7 +3645,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 628,
         system: "base",
-
         label: "Divers"
     },
     {
@@ -3682,13 +3665,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 63,
         system: "condensed",
-
         label: "Impôts, taxes et versements assimilés"
     },
     {
         number: 631,
         system: "base",
-
         label: "Impôts, taxes et versements assimilés sur rémunérations (administrations des impôts)"
     },
     {
@@ -3719,7 +3700,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 633,
         system: "base",
-
         label: "Impôts, taxes et versements assimilés sur rémunérations (autres organismes)"
     },
     {
@@ -3755,13 +3735,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 635,
         system: "base",
-
         label: "Autres impôts, taxes et versements assimilés (administrations des impôts)"
     },
     {
         number: 6351,
         system: "developed",
-
         label: "Impôts directs (sauf impôts sur les bénéfices)"
     },
     {
@@ -3797,7 +3775,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6354,
         system: "developed",
-
         label: "Droits d'enregistrement et de timbre"
     },
     {
@@ -3813,7 +3790,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 637,
         system: "base",
-
         label: "Autres impôts, taxes et versements assimilés (autres organismes)"
     },
     {
@@ -3838,13 +3814,12 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 64,
-        system: "base",
+        system: "condensed",
         label: "Charges de personnel"
     },
     {
         number: 641,
         system: "condensed",
-
         label: "Rémunérations du personnel"
     },
     {
@@ -3880,7 +3855,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 645,
         system: "condensed",
-
         label: "Charges de sécurité sociale et de prévoyance"
     },
     {
@@ -3916,7 +3890,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 647,
         system: "base",
-
         label: "Autres charges sociales"
     },
     {
@@ -3957,7 +3930,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 651,
         system: "base",
-
         label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires"
     },
     {
@@ -3983,7 +3955,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 654,
         system: "base",
-
         label: "Pertes sur créances irrécouvrables"
     },
     {
@@ -3999,7 +3970,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 655,
         system: "base",
-
         label: "Quote-part de résultat sur opérations faites en commun"
     },
     {
@@ -4030,13 +4000,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 661,
         system: "base",
-
         label: "Charges d'intérêts"
     },
     {
         number: 6611,
         system: "developed",
-
         label: "Intérêts des emprunts et dettes"
     },
     {
@@ -4072,7 +4040,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6618,
         system: "developed",
-
         label: "Intérêts des autres dettes"
     },
     {
@@ -4118,7 +4085,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 671,
         system: "base",
-
         label: "Charges exceptionnelles sur opérations de gestion"
     },
     {
@@ -4179,7 +4145,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 675,
         system: "base",
-
         label: "Valeurs comptables des éléments d'actif cédés"
     },
     {
@@ -4205,7 +4170,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 678,
         system: "base",
-
         label: "Autres charges exceptionnelles"
     },
     {
@@ -4230,7 +4194,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 68,
-        system: "base",
+        system: "condensed",
         label: "Dotations aux amortissements, aux dépréciations et aux provisions"
     },
     {
@@ -4241,7 +4205,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6811,
         system: "base",
-
         label: "Dotations aux amortissements sur immobilisations incorporelles et corporelles"
     },
     {
@@ -4267,7 +4230,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6816,
         system: "base",
-
         label: "Dotations pour dépréciations des immobilisations incorporelles et corporelles"
     },
     {
@@ -4283,7 +4245,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6817,
         system: "base",
-
         label: "Dotations pour dépréciations des actifs circulants"
     },
     {
@@ -4299,7 +4260,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 686,
         system: "condensed",
-
         label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges financières"
     },
     {
@@ -4315,7 +4275,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6866,
         system: "base",
-
         label: "Dotations pour dépréciations des éléments financiers"
     },
     {
@@ -4336,7 +4295,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 687,
         system: "condensed",
-
         label: "Dotations aux amortissements, aux dépréciations et aux provisions - Charges exceptionnelles"
     },
     {
@@ -4347,7 +4305,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6872,
         system: "base",
-
         label: "Dotations aux provisions réglementées (immobilisations)"
     },
     {
@@ -4377,7 +4334,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 69,
-        system: "base",
+        system: "condensed",
         label: "Participation des salariés - Impôts sur les bénéfices et assimilés"
     },
     {
@@ -4388,7 +4345,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 695,
         system: "condensed",
-
         label: "Impôts sur les bénéfices"
     },
     {
@@ -4414,7 +4370,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 698,
         system: "base",
-
         label: "Intégration fiscale"
     },
     {
@@ -4439,13 +4394,12 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 70,
-        system: "base",
+        system: "condensed",
         label: "Ventes de produits fabriqués, prestations de services, marchandises"
     },
     {
         number: 701,
         system: "condensed",
-
         label: "Ventes de produits finis"
     },
     {
@@ -4471,7 +4425,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 704,
         system: "base",
-
         label: "Travaux"
     },
     {
@@ -4497,7 +4450,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 707,
         system: "condensed",
-
         label: "Ventes de marchandises"
     },
     {
@@ -4513,7 +4465,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 708,
         system: "condensed",
-
         label: "Produits des activités annexes"
     },
     {
@@ -4598,19 +4549,17 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 71,
-        system: "base",
+        system: "condensed",
         label: "Production stockée (ou déstockage)"
     },
     {
         number: 713,
         system: "condensed",
-
         label: "Variation des stocks (en-cours de production, produits)"
     },
     {
         number: 7133,
         system: "base",
-
         label: "Variation des en-cours de production de biens"
     },
     {
@@ -4626,7 +4575,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 7134,
         system: "base",
-
         label: "Variation des en-cours de production de services"
     },
     {
@@ -4642,7 +4590,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 7135,
         system: "base",
-
         label: "Variation des stocks de produits"
     },
     {
@@ -4663,7 +4610,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 72,
         system: "condensed",
-
         label: "Production immobilisée"
     },
     {
@@ -4684,13 +4630,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 75,
         system: "condensed",
-
         label: "Autres produits de gestion courante"
     },
     {
         number: 751,
         system: "base",
-
         label: "Redevances pour concessions, brevets, licences, marques, procédés, logiciels, droits et valeurs similaires"
     },
     {
@@ -4726,7 +4670,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 755,
         system: "condensed",
-
         label: "Quote-parts de résultat sur opérations faites en commun"
     },
     {
@@ -4757,7 +4700,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 761,
         system: "base",
-
         label: "Produits de participations"
     },
     {
@@ -4783,7 +4725,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 762,
         system: "base",
-
         label: "Produits des autres immobilisations financières"
     },
     {
@@ -4804,7 +4745,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 763,
         system: "base",
-
         label: "Revenus des autres créances"
     },
     {
@@ -4850,7 +4790,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 771,
         system: "base",
-
         label: "Produits exceptionnels sur opérations de gestion"
     },
     {
@@ -4906,7 +4845,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 775,
         system: "base",
-
         label: "Produits des cessions d'éléments d'actif"
     },
     {
@@ -4937,7 +4875,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 778,
         system: "base",
-
         label: "Autres produits exceptionnels"
     },
     {
@@ -4962,19 +4899,17 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 78,
-        system: "base",
+        system: "condensed",
         label: "Reprises sur amortissements, dépréciations et provisions"
     },
     {
         number: 781,
         system: "condensed",
-
         label: "Reprises sur amortissements, dépréciations et provisions (à inscrire dans les produits d'exploitation)"
     },
     {
         number: 7811,
         system: "base",
-
         label: "Reprises sur amortissements des immobilisations incorporelles et corporelles"
     },
     {
@@ -4995,7 +4930,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 7816,
         system: "base",
-
         label: "Reprises sur dépréciations des immobilisations incorporelles et corporelles"
     },
     {
@@ -5011,7 +4945,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 7817,
         system: "base",
-
         label: "Reprises sur dépréciations des actifs circulants"
     },
     {
@@ -5027,7 +4960,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 786,
         system: "condensed",
-
         label: "Reprises sur provisions pour risques et dépréciations (à inscrire dans les produits financiers)"
     },
     {
@@ -5038,7 +4970,6 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 7866,
         system: "base",
-
         label: "Reprises sur dépréciations des éléments financiers"
     },
     {
@@ -5054,13 +4985,11 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 787,
         system: "condensed",
-
         label: "Reprises sur provisions et dépréciations (à inscrire dans les produits exceptionnels)"
     },
     {
         number: 7872,
         system: "base",
-
         label: "Reprises sur provisions réglementées (immobilisations)"
     },
     {
@@ -5125,7 +5054,7 @@ export const defaultAccounts: DefaultAccount[] = [
     },
     {
         number: 80,
-        system: "base",
+        system: "condensed",
         label: "Engagements"
     },
     {

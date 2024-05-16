@@ -30,7 +30,6 @@ export function DeleteAccount(props: DeleteAccount) {
                     onSuccess: (newData) => {
                         queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData?.filter((account) => account.id !== newData?.id))
                         toast({ title: "Compte supprimé", variant: "success" })
-                        return true
                     }
                 })
                 return true

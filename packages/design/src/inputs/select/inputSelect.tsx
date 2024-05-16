@@ -93,19 +93,19 @@ export const InputSelect = forwardRef<ElementRef<typeof Button>, InputSelect>(
                                         }}
                                         className={cn(
                                             "h-[40px] relative flex justify-between overflow-hidden w-full cursor-default select-none items-center p-3 gap-3 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-                                            option.key === props.value ? "bg-primary/10" : "bg-none hover:bg-neutral/5"
+                                            option.key === props.value ? "bg-neutral/10" : "bg-none hover:bg-neutral/5"
                                         )}
                                     >
                                         <span
                                             className={cn(
-                                                option.key === props.value ? "text-primary" : ""
+                                                option.key === props.value ? "text-neutral" : ""
                                             )}
                                         >
                                             {option.label}
                                         </span>
                                         <IconCheck
                                             className={cn(
-                                                "h-4 w-4 stroke-primary",
+                                                "h-4 w-4 stroke-neutral",
                                                 currentOption?.key === option.key ? "opacity-100" : "opacity-0"
                                             )}
                                         />

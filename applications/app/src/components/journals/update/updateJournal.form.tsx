@@ -43,7 +43,6 @@ export function UpdateJournalForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/journaux" })
                         toast({ title: "Journal mis à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true

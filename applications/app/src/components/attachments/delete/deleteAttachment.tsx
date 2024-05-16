@@ -42,11 +42,10 @@ export function DeleteAttachment(props: DeleteAttachment) {
                 if (!uploadPhotoResponse?.ok) return false
 
                 mutation.mutate({ params: { idAttachment: props.attachment.id } }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(attachmentsOptions.queryKey, (_data) => _data?.filter((attachment) => attachment.id !== data?.id))
+                    onSuccess: (newData) => {
+                        queryClient.setQueryData(attachmentsOptions.queryKey, (oldData) => oldData?.filter((attachment) => attachment.id !== newData?.id))
                         router.navigate({ to: "/fichiers" })
                         toast({ title: "Fichier supprimé", variant: "success" })
-                        return true
                     }
                 })
 

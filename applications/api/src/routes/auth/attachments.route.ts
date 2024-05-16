@@ -8,11 +8,13 @@ import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
 
 
 export const attachmentsRoute = new Hono<AuthEnv>()
     .post(
         '/',
+        checkCurrentYear,
         validator("json", bodyValidator(auth.attachments.post.body)),
         async (c) => {
             const body = c.req.valid('json')
@@ -65,6 +67,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idAttachment',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.attachments.put.params)),
         validator("json", bodyValidator(auth.attachments.put.body)),
         async (c) => {
@@ -91,6 +94,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idAttachment',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.attachments.put.params)),
         async (c) => {
             const params = c.req.valid('param')

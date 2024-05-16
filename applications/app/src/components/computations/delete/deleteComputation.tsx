@@ -30,7 +30,6 @@ export function DeleteComputation(props: DeleteComputation) {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         toast({ title: "Opération supprimée", variant: "success" })
-                        return true
                     }
                 })
                 return true

@@ -32,7 +32,6 @@ export function CreateJournalForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/journaux" })
                         toast({ title: "Nouveau journal ajouté", variant: "success" })
-                        return true
                     }
                 })
 

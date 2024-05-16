@@ -1,3 +1,4 @@
+import { closeYearParams, closeYearReturn } from "./closeYear.js"
 import { createYearBody, createYearReturn } from "./createYear.js"
 import { deleteYearParams, deleteYearReturn } from "./deleteYear.js"
 import { readYearParams, readYearReturn } from "./readYear.js"
@@ -27,6 +28,10 @@ export const years = {
         switch: {
             params: switchYearParams,
             return: switchYearReturn
+        },
+        close: {
+            params: closeYearParams,
+            return: closeYearReturn
         }
     }
 }

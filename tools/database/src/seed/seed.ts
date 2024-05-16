@@ -47,23 +47,8 @@ async function seed() {
                     isSelected: true,
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
-                    endingOn: new Date(2024, 11, 31, 23, 99, 99).toISOString()
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    isSelected: false,
-                    label: "Exercice 2023",
-                    startingOn: new Date(2023, 0, 1, 0, 0).toISOString(),
-                    endingOn: new Date(2023, 11, 31, 23, 99, 99).toISOString()
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    isSelected: false,
-                    label: "Exercice 2022",
-                    startingOn: new Date(2022, 0, 1, 0, 0).toISOString(),
-                    endingOn: new Date(2022, 11, 31, 23, 99, 99).toISOString()
+                    endingOn: new Date(2024, 11, 31, 12, 0, 0).toISOString(),
+                    system: "developed"
                 }
             ]
             await tx.insert(years).values(newYears)

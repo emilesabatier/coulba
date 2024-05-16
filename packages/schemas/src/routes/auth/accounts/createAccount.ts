@@ -9,12 +9,11 @@ export const createAccountBody = v.object({
     idParent: accountSchema.entries.idParent,
     number: accountSchema.entries.number,
     label: accountSchema.entries.label,
-    system: accountSchema.entries.system,
-    accountSheets: v.array(v.object({
+    accountSheets: v.nullish(v.array(v.object({
         idSheet: accountSheetSchema.entries.idSheet,
         flow: accountSheetSchema.entries.flow,
         isAllowance: accountSheetSchema.entries.isAllowance,
-    }))
+    })))
 })
 
 

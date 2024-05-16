@@ -30,7 +30,6 @@ export function DeleteUser(props: DeleteUser) {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         toast({ title: "Accès utilisateur supprimé", variant: "success" })
-                        return true
                     }
                 })
                 return true

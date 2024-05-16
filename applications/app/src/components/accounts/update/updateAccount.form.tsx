@@ -13,6 +13,7 @@ import { accountOptions, accountsOptions } from "../../../services/api/auth/acco
 import { updateAccount } from "../../../services/api/auth/accounts/updateAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
+import { StatementCombobox } from "../../statements/statementCombobox"
 import { AccountCombobox } from "../accountCombobox"
 
 
@@ -40,11 +41,10 @@ export function UpdateAccountForm() {
                     params: { idAccount: idAccount },
                     body: data
                 }, {
-                    onSuccess: (data) => {
-                        queryClient.setQueryData(accountsOptions.queryKey, (_data) => _data && data && [..._data.filter((account) => account.id !== data.id), data])
+                    onSuccess: (newData) => {
+                        queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData && newData && [...oldData.filter((account) => account.id !== newData.id), newData])
                         router.navigate({ to: "/configuration/comptes" })
                         toast({ title: "Compte mis à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true
@@ -104,6 +104,25 @@ export function UpdateAccountForm() {
                                 />
                                 <FormControl>
                                     <AccountCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="idStatement"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Ligne du compte de résultat"
+                                    tooltip="La ligne du compte de résultat sur laquelle la balance du compte est ajoutée."
+                                />
+                                <FormControl>
+                                    <StatementCombobox
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

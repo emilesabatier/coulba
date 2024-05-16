@@ -24,9 +24,7 @@ export function CreateAttachmentForm() {
     return (
         <Form
             validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: fileSchema })])}
-            defaultValues={{
-                date: new Date().toISOString()
-            }}
+            defaultValues={{}}
             cancelLabel="Retour aux fichiers"
             onCancel={() => router.navigate({ to: "/fichiers" })}
             submitLabel="Ajouter le fichier"
@@ -69,7 +67,6 @@ export function CreateAttachmentForm() {
                         queryClient.setQueryData(attachmentsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
                         router.navigate({ to: "/fichiers" })
                         toast({ title: "Nouveau fichier ajouté", variant: "success" })
-                        return true
                     }
                 })
 

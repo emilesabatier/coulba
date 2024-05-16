@@ -47,12 +47,10 @@ export function UpdateAttachmentForm() {
                         date: data.date
                     }
                 }, {
-                    onSuccess: () => {
+                    onSuccess: (newData) => {
                         queryClient.invalidateQueries()
-                        if (!attachment.data) return null
-                        router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: attachment.data.id } })
+                        router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: newData.id } })
                         toast({ title: "Fichier mis à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true

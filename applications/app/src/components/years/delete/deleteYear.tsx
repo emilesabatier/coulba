@@ -30,7 +30,6 @@ export function DeleteYear(props: DeleteYear) {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         toast({ title: "Exercice supprimé", variant: "success" })
-                        return true
                     }
                 })
                 return true

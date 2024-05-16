@@ -32,7 +32,6 @@ export function CreateComputationForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/compte-de-resultat" })
                         toast({ title: "Nouvelle opération ajoutée", variant: "success" })
-                        return true
                     }
                 })
 

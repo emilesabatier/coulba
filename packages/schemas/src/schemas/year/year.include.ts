@@ -2,10 +2,13 @@
 export const yearInclude = {
     id: true,
     idCompany: true,
+    idPreviousYear: true,
+    isClosed: true,
     isSelected: true,
     label: true,
     startingOn: true,
     endingOn: true,
+    system: true,
     lastUpdatedOn: true,
     createdOn: true,
     lastUpdatedBy: true,

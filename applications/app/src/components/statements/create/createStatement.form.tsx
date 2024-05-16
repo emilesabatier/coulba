@@ -33,7 +33,6 @@ export function CreateStatementForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/compte-de-resultat" })
                         toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
-                        return true
                     }
                 })
 
