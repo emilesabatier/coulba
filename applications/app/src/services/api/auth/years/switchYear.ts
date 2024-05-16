@@ -9,7 +9,7 @@ type SwitchYear = {
 
 export function switchYear(props: SwitchYear) {
     return patchAPI({
-        path: `/auth/years/switch/${props.params.idYear}`,
+        path: `/auth/years/${props.params.idYear}/switch`,
         schema: auth.years.patch.switch.return,
         message: "Erreur avec le changement d'exercice fiscal"
     })

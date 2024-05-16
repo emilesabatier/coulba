@@ -13,6 +13,7 @@ import { updateYear } from "../../../services/api/auth/years/updateYear"
 import { yearOptions, yearsOptions } from "../../../services/api/auth/years/yearsOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
+import { YearCombobox } from "../input/yearCombobox"
 
 
 export function UpdateYearForm() {
@@ -43,7 +44,6 @@ export function UpdateYearForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/exercices" })
                         toast({ title: "Exercice mis à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true
@@ -104,6 +104,26 @@ export function UpdateYearForm() {
                                 />
                                 <FormControl>
                                     <InputDate
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="idPreviousYear"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Exercice précédent"
+                                    tooltip="L'exercice qui précède chronologiquement."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <YearCombobox
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

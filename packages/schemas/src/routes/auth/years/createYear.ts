@@ -4,6 +4,7 @@ import { yearSchema } from "../../../schemas/year/year.schema.js"
 
 // Input
 export const createYearBody = v.object({
+    idPreviousYear: yearSchema.entries.idPreviousYear,
     label: yearSchema.entries.label,
     startingOn: yearSchema.entries.startingOn,
     endingOn: yearSchema.entries.endingOn,

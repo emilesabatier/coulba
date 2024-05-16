@@ -44,7 +44,6 @@ export function UpdateSheetForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/bilan" })
                         toast({ title: "Ligne mise à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true

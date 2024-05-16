@@ -30,7 +30,6 @@ export function CreateUserForm() {
 
                 mutation.mutate({ body: data }, {
                     onSuccess: async (newData) => {
-                        if (!newData) return false
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/utilisateurs" })
                         toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })

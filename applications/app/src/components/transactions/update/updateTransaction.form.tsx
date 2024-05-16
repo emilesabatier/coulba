@@ -43,12 +43,10 @@ export function UpdateTransactionForm() {
             submitLabel="Modifier l'enregistrement"
             onSubmit={async (data) => {
                 mutation.mutate({ params: { idTransaction: idTransaction }, body: data }, {
-                    onSuccess: () => {
-                        if (!transaction.data) return null
+                    onSuccess: (newData) => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/enregistrements/$idTransaction", params: { idTransaction: transaction.data.id } })
+                        router.navigate({ to: "/enregistrements/$idTransaction", params: { idTransaction: newData.id } })
                         toast({ title: "Enregistrement mis à jour", variant: "success" })
-                        return true
                     }
                 })
 

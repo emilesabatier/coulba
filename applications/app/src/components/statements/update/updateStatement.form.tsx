@@ -44,7 +44,6 @@ export function UpdateStatementForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/compte-de-resultat" })
                         toast({ title: "Ligne mise à jour", variant: "success" })
-                        return true
                     }
                 })
                 return true

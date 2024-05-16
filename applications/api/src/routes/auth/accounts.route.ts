@@ -7,12 +7,14 @@ import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
+import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
 
 
 export const accountsRoute = new Hono<AuthEnv>()
     .post(
         '/',
+        checkCurrentYear,
         validator("json", bodyValidator(auth.accounts.post.body)),
         async (c) => {
             const body = c.req.valid('json')
@@ -27,7 +29,7 @@ export const accountsRoute = new Hono<AuthEnv>()
                     idParent: body.idParent,
                     label: body.label,
                     number: body.number,
-                    system: body.system,
+                    system: c.var.currentYear.system,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })
@@ -67,6 +69,7 @@ export const accountsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idAccount',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.accounts.put.params)),
         validator("json", bodyValidator(auth.accounts.put.body)),
         async (c) => {
@@ -92,6 +95,7 @@ export const accountsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idAccount',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.accounts.put.params)),
         async (c) => {
             const params = c.req.valid('param')

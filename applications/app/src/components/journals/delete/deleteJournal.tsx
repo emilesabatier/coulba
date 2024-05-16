@@ -30,7 +30,6 @@ export function DeleteJournal(props: DeleteJournal) {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         toast({ title: "Journal supprimé", variant: "success" })
-                        return true
                     }
                 })
                 return true

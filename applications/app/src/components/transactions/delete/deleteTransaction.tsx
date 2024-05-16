@@ -32,7 +32,6 @@ export function DeleteTransaction(props: DeleteTransaction) {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/enregistrements" })
                         toast({ title: "Enregistrement supprimé", variant: "success" })
-                        return true
                     }
                 })
 

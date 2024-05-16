@@ -8,8 +8,9 @@ import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { createYear } from "../../../services/api/auth/years/createYear"
 import { yearsOptions } from "../../../services/api/auth/years/yearsOptions"
-import { Form } from "../../layouts/forms/form"
 import { systemOptions } from "../../accounts/systemOptions"
+import { Form } from "../../layouts/forms/form"
+import { YearCombobox } from "../input/yearCombobox"
 
 
 export function CreateYearForm() {
@@ -32,7 +33,6 @@ export function CreateYearForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/exercices" })
                         toast({ title: "Nouvel exercice ajouté", variant: "success" })
-                        return true
                     }
                 })
 
@@ -102,7 +102,7 @@ export function CreateYearForm() {
                             </FormItem>
                         )}
                     />
-                     <FormField
+                    <FormField
                         control={form.control}
                         name="system"
                         render={({ field }) => (
@@ -117,6 +117,26 @@ export function CreateYearForm() {
                                         value={field.value}
                                         onChange={field.onChange}
                                         options={systemOptions}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="idPreviousYear"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Exercice précédent"
+                                    tooltip="L'exercice qui précède chronologiquement."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <YearCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
                                     />
                                 </FormControl>
                                 <FormError />

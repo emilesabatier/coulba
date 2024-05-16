@@ -8,11 +8,13 @@ import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
 
 
 export const transactionsRoute = new Hono<AuthEnv>()
     .post(
         '/',
+        checkCurrentYear,
         validator("json", bodyValidator(auth.transactions.post.body)),
         async (c) => {
             const body = c.req.valid('json')
@@ -67,6 +69,7 @@ export const transactionsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idTransaction',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.transactions.put.params)),
         validator("json", bodyValidator(auth.transactions.put.body)),
         async (c) => {
@@ -97,6 +100,7 @@ export const transactionsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idTransaction',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.transactions.put.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -114,6 +118,7 @@ export const transactionsRoute = new Hono<AuthEnv>()
     )
     .patch(
         '/:idTransaction/validate',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.transactions.patch.validate.params)),
         async (c) => {
             const params = c.req.valid('param')

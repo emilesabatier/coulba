@@ -67,7 +67,6 @@ export function CreateAttachmentForm() {
                         queryClient.setQueryData(attachmentsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
                         router.navigate({ to: "/fichiers" })
                         toast({ title: "Nouveau fichier ajouté", variant: "success" })
-                        return true
                     }
                 })
 

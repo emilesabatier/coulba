@@ -34,7 +34,6 @@ export function ValidateTransaction(props: ValidateTransaction) {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/enregistrements" })
                         toast({ title: "Enregistrement validé", variant: "success" })
-                        return true
                     }
                 })
 

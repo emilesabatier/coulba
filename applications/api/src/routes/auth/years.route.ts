@@ -1,14 +1,14 @@
+import { DefaultComputation, DefaultSheet, defaultAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
 import { accountSheets, accounts, computationStatements, computations, sheets, statements, years } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
-import { DefaultComputation, DefaultSheet, defaultAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
 
 
 export const yearsRoute = new Hono<AuthEnv>()
@@ -22,6 +22,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .insert(years)
                 .values({
                     id: generateId(),
+                    idPreviousYear: body.idPreviousYear,
                     isSelected: false,
                     idCompany: c.var.company.id,
                     label: body.label,
@@ -33,8 +34,8 @@ export const yearsRoute = new Hono<AuthEnv>()
                 })
                 .returning()
 
-                // Generate data
-                await db.transaction(async (tx) => {
+            // Generate data
+            await db.transaction(async (tx) => {
 
                 // Add sheets
                 let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
@@ -200,6 +201,7 @@ export const yearsRoute = new Hono<AuthEnv>()
             const [updateYear] = await db
                 .update(years)
                 .set({
+                    idPreviousYear: body.idPreviousYear,
                     isSelected: body.isSelected,
                     label: body.label,
                     startingOn: body.startingOn,
@@ -228,7 +230,7 @@ export const yearsRoute = new Hono<AuthEnv>()
         }
     )
     .patch(
-        '/switch/:idYear',
+        '/:idYear/switch',
         validator("param", paramsValidator(auth.years.patch.switch.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -240,7 +242,10 @@ export const yearsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(years.idCompany, c.var.company.id))
+                .where(and(
+                    eq(years.idCompany, c.var.company.id),
+                    eq(years.id, c.var.currentYear.id)
+                ))
 
             const [updateYear] = await db
                 .update(years)
@@ -249,7 +254,32 @@ export const yearsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(years.id, params.idYear))
+                .where(and(
+                    eq(years.idCompany, c.var.company.id),
+                    eq(years.id, params.idYear)
+                ))
+                .returning()
+
+            return c.json(updateYear, 200)
+        }
+    )
+    .patch(
+        '/:idYear/close',
+        validator("param", paramsValidator(auth.years.patch.close.params)),
+        async (c) => {
+            const params = c.req.valid('param')
+
+            const [updateYear] = await db
+                .update(years)
+                .set({
+                    isClosed: true,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(and(
+                    eq(years.idCompany, c.var.company.id),
+                    eq(years.id, params.idYear)
+                ))
                 .returning()
 
             return c.json(updateYear, 200)

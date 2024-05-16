@@ -1,4 +1,6 @@
 import { Main } from "../../../components/layouts/main/main"
+import { CloseYear } from "../../../components/years/closeYear"
+import { DownloadDocuments } from "../../../components/years/downloadDocuments"
 
 
 export function ClosingPage() {
@@ -6,22 +8,12 @@ export function ClosingPage() {
         <Main.Root>
             <Main.Header
                 title="Clôture"
-                description="Vous pouvez sur cette page clôturer l'exercice fiscal en cours et générer la version finale des documents comptables nécessaires pour l'administration fiscale."
+                description="Vous pouvez sur cette page clôturer l'exercice fiscal en cours et générer la version finale des documents comptables."
             >
             </Main.Header>
             <Main.Content>
-                <div>
-                    <div>
-                        <p>
-                            Vous pouvez télécharger le Fichier des Écritures Comptables (FEC) en cliquant sur le bouton ci-contre. Le fichier est dans le format
-                        </p>
-                        {/* <CloseYear>
-                            <ButtonOutline
-                                text="Télécharger le fichier"
-                            />
-                        </CloseYear> */}
-                    </div>
-                </div>
+                <CloseYear />
+                <DownloadDocuments />
             </Main.Content>
         </Main.Root>
     )

@@ -33,7 +33,6 @@ export function CreateSheetForm() {
                         queryClient.invalidateQueries()
                         router.navigate({ to: "/configuration/bilan" })
                         toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
-                        return true
                     }
                 })
 
