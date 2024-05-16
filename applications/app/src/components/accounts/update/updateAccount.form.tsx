@@ -14,6 +14,7 @@ import { updateAccount } from "../../../services/api/auth/accounts/updateAccount
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { AccountCombobox } from "../accountCombobox"
+import { StatementCombobox } from "../../statements/statementCombobox"
 
 
 export function UpdateAccountForm() {
@@ -104,6 +105,25 @@ export function UpdateAccountForm() {
                                 />
                                 <FormControl>
                                     <AccountCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                        <FormField
+                        control={form.control}
+                        name="idStatement"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Ligne du compte de résultat"
+                                    tooltip="La ligne du compte de résultat sur laquelle la balance du compte est ajoutée."
+                                />
+                                <FormControl>
+                                    <StatementCombobox
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

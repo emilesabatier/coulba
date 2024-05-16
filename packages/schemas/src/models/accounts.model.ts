@@ -11,15 +11,15 @@ import { years } from "./years.model.js"
 
 
 // Model
-export const accountSystem = pgEnum("system", systems)
+export const accountSystem = pgEnum("account_system", systems)
 
 export const accounts = pgTable(
-    "accounts",
+    "accounts", 
     {
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "restrict", onUpdate: "cascade" }),
+        idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "set null", onUpdate: "cascade" }),
         idParent: idColumn("id_parent"),
         number: integer("number").notNull(),
         label: text("label").notNull(),

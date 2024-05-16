@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -10,6 +10,8 @@ import { accountsOptions } from "../../../services/api/auth/accounts/accountsOpt
 import { createAccount } from "../../../services/api/auth/accounts/createAccount"
 import { Form } from "../../layouts/forms/form"
 import { AccountCombobox } from "../accountCombobox"
+import { StatementCombobox } from "../../statements/statementCombobox"
+import { systemOptions } from "../systemOptions"
 
 
 export function CreateAccountForm() {
@@ -85,6 +87,27 @@ export function CreateAccountForm() {
                     />
                     <FormField
                         control={form.control}
+                        name="system"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Système"
+                                    tooltip="Le système dans lequel s'inscrit le compte: abrégé, de base ou développé."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={systemOptions}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="idParent"
                         render={({ field }) => (
                             <FormItem>
@@ -94,6 +117,25 @@ export function CreateAccountForm() {
                                 />
                                 <FormControl>
                                     <AccountCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="idStatement"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Ligne du compte de résultat"
+                                    tooltip="La ligne du compte de résultat sur laquelle la balance du compte est ajoutée."
+                                />
+                                <FormControl>
+                                    <StatementCombobox
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

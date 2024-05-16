@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputDate, InputText } from "@coulba/design/inputs"
+import { InputDate, InputSelect, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -9,6 +9,7 @@ import { router } from "../../../routes/router"
 import { createYear } from "../../../services/api/auth/years/createYear"
 import { yearsOptions } from "../../../services/api/auth/years/yearsOptions"
 import { Form } from "../../layouts/forms/form"
+import { systemOptions } from "../../accounts/systemOptions"
 
 
 export function CreateYearForm() {
@@ -95,6 +96,27 @@ export function CreateYearForm() {
                                     <InputDate
                                         value={field.value}
                                         onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                     <FormField
+                        control={form.control}
+                        name="system"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Système"
+                                    tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={systemOptions}
                                     />
                                 </FormControl>
                                 <FormError />

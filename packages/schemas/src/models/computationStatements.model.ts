@@ -15,8 +15,8 @@ export const computationStatements = pgTable(
     "computation_statements",
     {
         id: idColumn("id").primaryKey(),
-        idComputation: idColumn("id_computation").references(() => computations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idComputation: idColumn("id_computation").references(() => computations.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
+        idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         operation: computationStatementOperation("operation").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         createdOn: dateTimeColumn("created_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

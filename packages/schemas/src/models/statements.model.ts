@@ -14,7 +14,7 @@ export const statements = pgTable(
     {
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        idYear: idColumn("id_year").references(() => years.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idParent: idColumn("id_parent"),
         number: integer("number").notNull(),
         label: text("label").notNull(),

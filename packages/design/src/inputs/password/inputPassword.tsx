@@ -56,6 +56,7 @@ export const InputPassword = forwardRef<HTMLInputElement, InputPassword>(
                     icon={showPassword ? <IconEye /> : <IconEyeClosed />}
                     onClick={handleClickShowPassword}
                     className="border-neutral/20"
+                    tabIndex={-1}
                 />
             </div>
         )
