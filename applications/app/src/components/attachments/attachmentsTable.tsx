@@ -3,16 +3,14 @@ import { FormatDate, FormatDateTime, FormatFileSize, FormatNull, FormatText } fr
 import { InputDebounced, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronLeft, IconChevronRight, IconEye, IconPlus } from "@tabler/icons-react"
+import { IconEye, IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import {
     ColumnDef,
-    PaginationState,
     flexRender,
     getCoreRowModel,
     getExpandedRowModel,
     getFilteredRowModel,
-    getPaginationRowModel,
     useReactTable
 } from '@tanstack/react-table'
 import { useMemo, useState } from "react"
@@ -25,12 +23,10 @@ import { ReadAttachment } from "./read/readAttachment"
 
 export function AttachmentsTable() {
     const attachments = useQuery(attachmentsOptions)
-    const memoizedData = useMemo(() => attachments.data ?? [], [attachments.data])
+    const memoizedData = useMemo(() => (attachments.data ?? [])
+        .sort((a, b) => b.lastUpdatedOn.localeCompare(a.lastUpdatedOn))
+        , [attachments.data])
     const [globalFilter, setGlobalFilter] = useState("")
-    const [pagination, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
-    })
 
     const columns: ColumnDef<v.Output<typeof auth.attachments.get.return>>[] = [
         {
@@ -48,7 +44,7 @@ export function AttachmentsTable() {
         {
             accessorKey: 'date',
             header: "Date",
-            cell: ({ row }) => (<FormatDate isoDate={row.original.label} />),
+            cell: ({ row }) => (<FormatDate isoDate={row.original.date} />),
             filterFn: 'includesString'
         },
         {
@@ -91,12 +87,9 @@ export function AttachmentsTable() {
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getExpandedRowModel: getExpandedRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
         onGlobalFilterChange: setGlobalFilter,
-        onPaginationChange: setPagination,
         state: {
             globalFilter,
-            pagination,
         }
     })
 
@@ -124,67 +117,50 @@ export function AttachmentsTable() {
                 </InputDebounced>
             </div>
             <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-                <div className="w-full h-full overflow-auto">
-                    <table className="w-full h-full border-collapse">
-                        <thead className="w-full border-b border-neutral/10">
-                            <tr className="w-full">
-                                {table.getFlatHeaders().map((header) => {
-                                    return (
-                                        <th key={header.id} colSpan={header.colSpan} className="w-fit p-2">
-                                            {header.isPlaceholder ? null : (
-                                                <div className="flex justify-start items-center p-2">
-                                                    <span className="text-neutral/75 text-sm">
-                                                        {flexRender(
-                                                            header.column.columnDef.header,
-                                                            header.getContext()
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            )}
-                                        </th>
-                                    )
-                                })}
-                            </tr>
-                        </thead>
-                        <tbody className="w-full">
-                            {table.getRowModel().rows.length > 0 ? null : <tr><td><FormatNull className="p-2" /></td></tr>}
-                            {table.getRowModel().rows.map((row) => {
+                <table className="w-full h-full border-collapse">
+                    <thead className="w-full border-b border-neutral/10">
+                        <tr className="w-full">
+                            {table.getFlatHeaders().map((header) => {
                                 return (
-                                    <tr className="w-full border-b border-neutral/5 last:border-b-0">
-                                        {row.getVisibleCells().map(cell => {
-                                            return (
-                                                <td key={cell.id} className="w-fit p-2 last:w-[1%]">
-                                                    <div className="flex justify-start items-center p-2">
-                                                        {flexRender(
-                                                            cell.column.columnDef.cell,
-                                                            cell.getContext()
-                                                        )}
-                                                    </div>
-                                                </td>
-                                            )
-                                        })}
-                                    </tr>
+                                    <th key={header.id} colSpan={header.colSpan} className="w-fit p-2">
+                                        {header.isPlaceholder ? null : (
+                                            <div className="flex justify-start items-center p-2">
+                                                <span className="text-neutral/75 text-sm">
+                                                    {flexRender(
+                                                        header.column.columnDef.header,
+                                                        header.getContext()
+                                                    )}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </th>
                                 )
                             })}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="w-full flex justify-end items-center gap-2 p-4 border-t border-neutral/10">
-                    <div className="flex justify-start items-center gap-1 md:gap-2">
-                        <ButtonGhost
-                            icon={<IconChevronLeft />}
-                            onClick={() => table.previousPage()}
-                            disabled={!table.getCanPreviousPage()}
-                        />
-                        <ButtonGhost
-                            icon={<IconChevronRight />}
-                            onClick={() => table.nextPage()}
-                            disabled={!table.getCanNextPage()}
-                        />
-                    </div>
-                </div>
+                        </tr>
+                    </thead>
+                    <tbody className="w-full">
+                        {table.getRowModel().rows.length > 0 ? null : <tr><td><FormatNull className="p-2" /></td></tr>}
+                        {table.getRowModel().rows.map((row) => {
+                            return (
+                                <tr className="w-full border-b border-neutral/5 last:border-b-0">
+                                    {row.getVisibleCells().map(cell => {
+                                        return (
+                                            <td key={cell.id} className="w-fit p-2 last:w-[1%]">
+                                                <div className="flex justify-start items-center p-2">
+                                                    {flexRender(
+                                                        cell.column.columnDef.cell,
+                                                        cell.getContext()
+                                                    )}
+                                                </div>
+                                            </td>
+                                        )
+                                    })}
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
             </div>
-            {/* <div>{table.getRowModel().rows.length} Rows</div> */}
         </div>
     )
 }
