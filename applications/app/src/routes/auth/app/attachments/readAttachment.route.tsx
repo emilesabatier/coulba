@@ -1,10 +1,14 @@
 import { createRoute } from "@tanstack/react-router"
 import { ReadAttachmentPage } from "../../../../pages/auth/attachments/readAttachmentPage"
-import { attachmentsLayout } from "./attachments.layout"
+import { readAttachmentLayout } from "./readAttachment.layout"
 
 
 export const readAttachmentRoute = createRoute({
-    getParentRoute: () => attachmentsLayout,
-    path: '/$idAttachment',
+    getParentRoute: () => readAttachmentLayout,
+    beforeLoad: () => ({
+        title: undefined,
+        description: "Consulter les données du fichier."
+    }),
+    path: '/',
     component: () => <ReadAttachmentPage />
 })

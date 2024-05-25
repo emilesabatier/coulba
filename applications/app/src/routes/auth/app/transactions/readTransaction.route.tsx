@@ -1,10 +1,14 @@
 import { createRoute } from "@tanstack/react-router"
 import { ReadTransactionPage } from "../../../../pages/auth/transactions/readTransactionPage"
-import { transactionsLayout } from "./transactions.layout"
+import { readTransactionLayout } from "./readTransaction.layout"
 
 
 export const readTransactionRoute = createRoute({
-    getParentRoute: () => transactionsLayout,
-    path: '/$idTransaction',
+    getParentRoute: () => readTransactionLayout,
+    beforeLoad: () => ({
+        title: undefined,
+        description: "Consulter les données de l'enregistrement."
+    }),
+    path: '/',
     component: () => <ReadTransactionPage />
 })

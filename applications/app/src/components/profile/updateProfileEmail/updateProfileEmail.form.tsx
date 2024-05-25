@@ -13,7 +13,6 @@ export function UpdateProfileEmailForm() {
         <Form
             validationSchema={auth.profile.patch.updateEmail.body}
             defaultValues={{}}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier l'email"
             onSubmit={async (data) => {

@@ -5,6 +5,7 @@ import { IconCopy, IconReload } from "@tabler/icons-react"
 import { useState } from "react"
 import { useCompany } from "../../contexts/company/useCompany"
 import { generateApiKey } from "../../services/api/auth/companies/generateApiKey"
+import { Section } from "../layouts/section/section"
 
 
 export function ApiContent() {
@@ -30,13 +31,12 @@ export function ApiContent() {
     if (company.isLoading) return <CircularLoader />
     if (!company.data) return null
     return (
-        <div className="w-fit h-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
-            <div className="border-b border-neutral/10 p-4 flex justify-start items-center gap-4">
+        <Section.Root>
+            <Section.Item>
                 <ButtonOutline
                     icon={<IconReload />}
                     text="Générer une nouvelle clé"
                     onClick={generateKey}
-                    className="border-dashed"
                 />
                 {!apiKey ? null : (
                     <div className="flex justify-start items-center gap-2">
@@ -48,18 +48,22 @@ export function ApiContent() {
                         />
                     </div>
                 )}
-            </div>
-            <div className="max-w-[768px] flex flex-col justify-start items-start gap-2 p-4">
-                <p>
-                    La clé API n'est visible qu'au moment de la génération. Si vous l'avez perdue, générez une nouvelle clé, qui supprimera les accès de l'ancienne.
-                </p>
-                <p>
-                    La clé doit être ajoutée dans l'url à chaque requête, sous la forme <code className="rounded-sm bg-neutral/5 p-1">.../transactions?key=abcdef12345</code>
-                </p>
-                <p className="italic">
+            </Section.Item>
+            <Section.Item>
+                <div className="max-w-[768px] flex flex-col justify-start items-start gap-2">
+                    <p>
+                        La clé API n'est visible qu'au moment de la génération. Si vous l'avez perdue, générez une nouvelle clé, qui supprimera les accès de l'ancienne.
+                    </p>
+                    <p>
+                        La clé doit être ajoutée dans l'url à chaque requête, sous la forme <code className="rounded-sm bg-neutral/5 p-1">.../transactions?key=abcdef12345</code>
+                    </p>
+                </div>
+            </Section.Item>
+            <Section.Item>
+                <p className="italic text-neutral/50">
                     Documentation à venir.
                 </p>
-            </div>
-        </div>
+            </Section.Item>
+        </Section.Root>
     )
 }

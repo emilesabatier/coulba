@@ -31,7 +31,6 @@ export function UpdateJournalForm() {
         <Form
             validationSchema={auth.journals.put.body}
             defaultValues={journal.data}
-            cancelLabel="Retour aux journaux"
             onCancel={() => router.navigate({ to: "/configuration/journaux" })}
             submitLabel="Modifier le journal"
             onSubmit={async (data) => {

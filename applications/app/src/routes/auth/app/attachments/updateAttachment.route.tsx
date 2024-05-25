@@ -1,10 +1,14 @@
 import { createRoute } from "@tanstack/react-router"
 import { UpdateAttachmentPage } from "../../../../pages/auth/attachments/updateAttachmentPage"
-import { attachmentsLayout } from "./attachments.layout"
+import { readAttachmentLayout } from "./readAttachment.layout"
 
 
 export const updateAttachmentRoute = createRoute({
-    getParentRoute: () => attachmentsLayout,
-    path: '/$idAttachment/modifier',
+    getParentRoute: () => readAttachmentLayout,
+    beforeLoad: () => ({
+        title: "Modifier",
+        description: "Remplir le formulaire et valider pour modifier les données du fichier."
+    }),
+    path: '/modifier',
     component: () => <UpdateAttachmentPage />
 })

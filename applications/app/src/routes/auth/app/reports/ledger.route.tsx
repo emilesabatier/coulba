@@ -6,7 +6,8 @@ import { reportsLayout } from "./reports.layout"
 export const ledgerRoute = createRoute({
     getParentRoute: () => reportsLayout,
     beforeLoad: () => ({
-        title: "Grand livre"
+        title: "Grand livre",
+        description: "Le grand livre présente les mêmes données que celle du journal mais agrégées par compte."
     }),
     path: '/grand-livre',
     component: () => <LedgerPage />

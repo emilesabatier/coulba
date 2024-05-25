@@ -32,7 +32,6 @@ export function UpdateSheetForm() {
         <Form
             validationSchema={auth.sheets.put.body}
             defaultValues={sheet.data}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/bilan" })}
             submitLabel="Modifier la ligne"
             onSubmit={async (data) => {

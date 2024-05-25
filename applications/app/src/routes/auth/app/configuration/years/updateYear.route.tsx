@@ -5,6 +5,10 @@ import { yearsLayout } from "./years.layout"
 
 export const updateYearRoute = createRoute({
     getParentRoute: () => yearsLayout,
+    beforeLoad: () => ({
+        title: "Modifier",
+        description: "Remplir le formulaire et valider pour modifier les données de l'exercice."
+    }),
     path: '/$idYear/modifier',
     component: () => <UpdateYearPage />
 })

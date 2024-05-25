@@ -32,7 +32,6 @@ export function UpdateAttachmentForm() {
         <Form
             validationSchema={auth.attachments.put.body}
             defaultValues={attachment.data}
-            cancelLabel="Retour"
             onCancel={() => {
                 if (!attachment.data) return null
                 router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: attachment.data.id } })

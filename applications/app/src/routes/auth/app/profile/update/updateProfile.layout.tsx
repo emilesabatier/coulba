@@ -5,6 +5,10 @@ import { profileLayout } from "../profile.layout"
 
 export const updateProfileLayout = createRoute({
     getParentRoute: () => profileLayout,
+    beforeLoad: () => ({
+        title: "Modifier",
+        description: undefined
+    }),
     path: '/modifier',
     pendingComponent: () => <CircularLoader />,
     component: () => <Outlet />

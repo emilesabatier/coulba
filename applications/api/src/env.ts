@@ -2,7 +2,6 @@ import * as v from 'valibot'
 
 enum Env {
     development = 'development',
-    test = 'test',
     production = 'production'
 }
 

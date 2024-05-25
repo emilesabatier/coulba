@@ -35,7 +35,6 @@ export function UpdateTransactionForm() {
         <Form
             validationSchema={auth.transactions.post.body}
             defaultValues={transaction.data}
-            cancelLabel="Retour"
             onCancel={() => {
                 if (!transaction.data) return null
                 router.navigate({ to: "/enregistrements/$idTransaction", params: { idTransaction: transaction.data.id } })

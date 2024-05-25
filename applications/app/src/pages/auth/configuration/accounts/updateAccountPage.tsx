@@ -1,16 +1,11 @@
 import { UpdateAccountForm } from "../../../../components/accounts/update/updateAccount.form"
-import { Main } from "../../../../components/layouts/main/main"
-
+import { Main } from "../../../../components/layouts/main"
 
 
 export function UpdateAccountPage() {
     return (
-        <Main.Root>
-            <Main.Header
-                title="Modifier un compte"
-                description="Remplir le formulaire et valider pour modifier les données du compte."
-            />
+        <Main>
             <UpdateAccountForm />
-        </Main.Root>
+        </Main>
     )
 }

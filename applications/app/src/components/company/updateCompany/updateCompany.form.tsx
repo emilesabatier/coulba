@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputText } from "@coulba/design/inputs"
+import { InputSiren, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -19,7 +19,6 @@ export function UpdateCompanyForm() {
         <Form
             validationSchema={auth.companies.put.body}
             defaultValues={company.data}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/societe" })}
             submitLabel="Modifier les informations"
             onSubmit={async (data) => {
@@ -34,7 +33,7 @@ export function UpdateCompanyForm() {
         >
             {(form) => (
                 <Fragment>
-                    {/* <FormField
+                    <FormField
                         control={form.control}
                         name="siren"
                         render={({ field }) => (
@@ -54,7 +53,7 @@ export function UpdateCompanyForm() {
                                 <FormError />
                             </FormItem>
                         )}
-                    /> */}
+                    />
                     <FormField
                         control={form.control}
                         name="name"

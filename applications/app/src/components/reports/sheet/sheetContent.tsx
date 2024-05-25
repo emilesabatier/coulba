@@ -8,6 +8,7 @@ import { recordsOptions } from "../../../services/api/auth/records/recordsOption
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { Balance, getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
+import { Section } from "../../layouts/section/section"
 import { SheetAssetsTable } from "./sheetAssetsTable"
 import { SheetLiabilitiesTable } from "./sheetLiabilitiesTable"
 
@@ -124,21 +125,23 @@ export function SheetContent() {
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!records.data || !accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
-            <div className="flex justify-center items-center gap-2">
-                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
-                    <span className="text-2xl text-neutral/50">Total actif</span>
+        <Section.Root>
+            <Section.Item>
+                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
+                    <span className="text-lg uppercase text-neutral/50">Total actif</span>
                     <span className="text-2xl">{formatPrice(totalSheetAsset)}</span>
                 </div>
-                <div className="w-full p-4 border border-neutral/20 rounded-md flex justify-start items-center gap-4">
-                    <span className="text-2xl text-neutral/50">Total passif</span>
+                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
+                    <span className="text-lg uppercase text-neutral/50">Total passif</span>
                     <span className="text-2xl">{formatPrice(totalSheetLiability)}</span>
                 </div>
-            </div>
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
-                <SheetAssetsTable sheet={sheetAssets} />
-                <SheetLiabilitiesTable sheet={sheetLiabilities} />
-            </div>
-        </div>
+            </Section.Item>
+            <Section.Item className="p-0">
+                <div className="grid grid-cols-1 xl:grid-cols-2">
+                    <SheetAssetsTable sheet={sheetAssets} />
+                    <SheetLiabilitiesTable sheet={sheetLiabilities} />
+                </div>
+            </Section.Item>
+        </Section.Root>
     )
 }

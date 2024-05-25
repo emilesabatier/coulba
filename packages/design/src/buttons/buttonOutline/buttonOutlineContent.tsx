@@ -17,7 +17,7 @@ export type ButtonOutlineContent = {
 export function ButtonOutlineContent(props: ButtonOutlineContent) {
     let variants = {
         "neutral": {
-            container: "border-neutral/50 hover:bg-neutral/5 group-focus:bg-neutral/5",
+            container: "border-neutral/25 hover:bg-neutral/5 group-focus:bg-neutral/5",
             loader: "fill-neutral",
             icon: "text-neutral",
             text: "text-neutral",

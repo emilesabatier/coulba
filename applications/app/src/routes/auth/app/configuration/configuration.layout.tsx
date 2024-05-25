@@ -5,6 +5,10 @@ import { appLayout } from "../../app.layout"
 
 export const configurationLayout = createRoute({
     getParentRoute: () => appLayout,
+    beforeLoad: () => ({
+        title: "Configuration",
+        description: undefined
+    }),
     path: '/configuration',
     pendingComponent: () => <CircularLoader />,
     component: () => <Outlet />

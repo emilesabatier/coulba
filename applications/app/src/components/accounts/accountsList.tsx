@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonOutline } from "@coulba/design/buttons"
+import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
@@ -9,6 +9,7 @@ import { ComponentProps } from "react"
 import * as v from "valibot"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
+import { Section } from "../layouts/section/section"
 import { CreateAccount } from "./create/createAccount"
 import { DeleteAccount } from "./delete/deleteAccount"
 import { UpdateAccount } from "./update/updateAccount"
@@ -42,28 +43,29 @@ export function AccountsList() {
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-            <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
+        <Section.Root>
+            <Section.Item>
                 <CreateAccount>
-                    <ButtonOutline
+                    <ButtonPlain
                         icon={<IconPlus />}
                         text="Ajouter un compte"
-                        className="border-dashed"
                     />
                 </CreateAccount>
-            </div>
-            <Accordion type="multiple" className="p-4">
-                {
-                    (groupedAccounts.length === 0) ? (<FormatNull />) : groupedAccounts.map((groupedAccount) => (
-                        <AccountItem
-                            key={groupedAccount.account.id}
-                            groupedAccount={groupedAccount}
-                            className="pl-0"
-                        />
-                    ))
-                }
-            </Accordion>
-        </div>
+            </Section.Item>
+            <Section.Item>
+                <Accordion type="multiple" className="w-full">
+                    {
+                        (groupedAccounts.length === 0) ? (<FormatNull />) : groupedAccounts.map((groupedAccount) => (
+                            <AccountItem
+                                key={groupedAccount.account.id}
+                                groupedAccount={groupedAccount}
+                                className="pl-0"
+                            />
+                        ))
+                    }
+                </Accordion>
+            </Section.Item>
+        </Section.Root>
     )
 }
 
@@ -86,7 +88,7 @@ function AccountItem(props: AccountItem) {
                 props.className
             )}
         >
-            <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
+            <div className="flex justify-between items-center gap-3 hover:bg-neutral/5 rounded-sm">
                 <AccordionTrigger className="w-full flex justify-start items-center ">
                     <div className="flex justify-start items-start gap-2 p-2">
                         <h2 className="font-bold">{props.groupedAccount.account.number}</h2>

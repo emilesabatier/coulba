@@ -32,7 +32,6 @@ export function UpdateStatementForm() {
         <Form
             validationSchema={auth.statements.put.body}
             defaultValues={statement.data}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
             submitLabel="Modifier la ligne"
             onSubmit={async (data) => {

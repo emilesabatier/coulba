@@ -31,7 +31,6 @@ export function UpdateComputationForm() {
         <Form
             validationSchema={auth.computations.put.body}
             defaultValues={computation.data}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
             submitLabel="Modifier l'opération"
             onSubmit={async (data) => {

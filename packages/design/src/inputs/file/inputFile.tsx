@@ -43,7 +43,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputFile>(
                 />
                 <Button
                     onClick={(_event) => { inputRef.current?.click() }}
-                    className="cursor-pointer w-full h-full p-2 md:p-4 flex justify-center items-center"
+                    className="cursor-pointer w-full h-full p-2 md:p-3 flex justify-center items-center"
                 >
                     <span className="text-neutral/75">
                         {props.value?.name ?? props.placeholder ?? "Glissez-déposez ou cliquez pour ajouter un fichier"}

@@ -1,10 +1,14 @@
 import { createRoute } from "@tanstack/react-router"
 import { UpdateTransactionPage } from "../../../../pages/auth/transactions/updateTransactionPage"
-import { transactionsLayout } from "./transactions.layout"
+import { readTransactionLayout } from "./readTransaction.layout"
 
 
 export const updateTransactionRoute = createRoute({
-    getParentRoute: () => transactionsLayout,
-    path: '/$idTransaction/modifier',
+    getParentRoute: () => readTransactionLayout,
+    beforeLoad: () => ({
+        title: "Modifier",
+        description: "Remplir le formulaire et valider pour modifier l'enregistrement comptable."
+    }),
+    path: '/modifier',
     component: () => <UpdateTransactionPage />
 })

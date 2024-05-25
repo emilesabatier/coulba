@@ -5,7 +5,8 @@ import { appLayout } from "../../app.layout"
 export const attachmentsLayout = createRoute({
     getParentRoute: () => appLayout,
     beforeLoad: () => ({
-        title: "Stockage de fichiers"
+        title: "Stockage de fichiers",
+        description: undefined
     }),
     path: '/fichiers',
     component: () => <Outlet />

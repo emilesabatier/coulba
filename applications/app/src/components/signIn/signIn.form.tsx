@@ -32,7 +32,7 @@ export function SignInForm() {
 
     return (
         <FormRoot {...form}>
-            <form className="flex flex-col justify-start items-stretch gap-4">
+            <form className="flex flex-col justify-start items-stretch gap-3">
                 <div className="flex flex-col justify-start items-stretch gap-2">
                     <FormField
                         control={form.control}

@@ -1,5 +1,5 @@
 import { ComputationsList } from "../../../../components/computations/computationsList"
-import { Main } from "../../../../components/layouts/main/main"
+import { Main } from "../../../../components/layouts/main"
 import { StatementsList } from "../../../../components/statements/statementsList"
 import { useCurrentYear } from "../../../../contexts/currentYear/useCurrentYear"
 
@@ -9,15 +9,9 @@ export function StatementsPage() {
 
     if (!currentYear.data) return null
     return (
-        <Main.Root>
-            <Main.Header
-                title="Modèle du compte de résultat"
-                description="Vous retrouvez sur cette page le modèle du compte de résultat de l'entreprise que vous pouvez modifier selon votre besoin. Veuillez à bien savoir ce que vous faites avant de supprimer des données."
-            />
-            <Main.Content>
-                <StatementsList />
-                <ComputationsList />
-            </Main.Content>
-        </Main.Root>
+        <Main>
+            <StatementsList />
+            <ComputationsList />
+        </Main>
     )
 }

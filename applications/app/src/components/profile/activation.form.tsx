@@ -38,7 +38,7 @@ export function ActivationForm() {
 
     return (
         <FormRoot {...form}>
-            <form className="min-w-[300px] w-full max-w-[50%] flex flex-col justify-start items-stretch gap-4">
+            <form className="min-w-[300px] w-full max-w-[50%] flex flex-col justify-start items-stretch gap-3">
                 <div>
                     <h1 className="text-2xl">Activer votre compte</h1>
                     <p className="text-neutral/75">Veuillez choisir un mot de passe et valider afin d'activer définitivement votre compte utilisateur.</p>

@@ -4,6 +4,10 @@ import { configurationLayout } from "./configuration.layout"
 
 export const configurationRoute = createRoute({
     getParentRoute: () => configurationLayout,
+    beforeLoad: () => ({
+        title: undefined,
+        description: undefined
+    }),
     path: '/',
     component: () => <Navigate to="/configuration/societe" />
 })

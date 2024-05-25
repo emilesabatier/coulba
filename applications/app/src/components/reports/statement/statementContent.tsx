@@ -71,11 +71,9 @@ export function StatementContent() {
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!records.data || !accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
-            <StatementTable
-                statements={sortedStatements}
-                computations={sortedComputations}
-            />
-        </div>
+        <StatementTable
+            statements={sortedStatements}
+            computations={sortedComputations}
+        />
     )
 }

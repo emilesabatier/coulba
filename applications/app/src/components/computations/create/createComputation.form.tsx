@@ -22,7 +22,6 @@ export function CreateComputationForm() {
         <Form
             validationSchema={auth.computations.post.body}
             defaultValues={{}}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
             submitLabel="Ajouter l'opération"
             onSubmit={async (data) => {

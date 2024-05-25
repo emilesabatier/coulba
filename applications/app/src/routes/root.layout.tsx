@@ -5,6 +5,7 @@ import { RootLayout } from "../pages/rootLayout"
 
 type MyRouterContext = {
     title?: string
+    description?: string
     session: {
         isLoading: SessionContext["isLoading"]
         mutate: SessionContext["mutate"]

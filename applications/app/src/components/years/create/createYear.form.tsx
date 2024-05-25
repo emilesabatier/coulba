@@ -24,7 +24,6 @@ export function CreateYearForm() {
         <Form
             validationSchema={auth.years.post.body}
             defaultValues={{}}
-            cancelLabel="Retour aux exercices"
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
             onSubmit={async (data) => {

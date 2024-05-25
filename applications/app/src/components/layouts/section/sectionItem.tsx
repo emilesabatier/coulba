@@ -2,16 +2,16 @@ import { cn } from "@coulba/design/services"
 import { ComponentProps, ReactElement } from "react"
 
 
-type PageContent = {
-    children: ReactElement
+type SectionItem = {
+    children: null | ReactElement | (null | ReactElement)[]
     className?: ComponentProps<'div'>['className']
 }
 
-export function PageContent(props: PageContent) {
+export function SectionItem(props: SectionItem) {
     return (
         <div
             className={cn(
-                "w-full max-w-full min-h-full h-full max-h-full overflow-auto",
+                "h-fit flex justify-between items-center gap-1.5 p-3 border-b border-neutral/10",
                 props.className
             )}
             children={props.children}

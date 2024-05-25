@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonOutline } from "@coulba/design/buttons"
+import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
@@ -9,6 +9,7 @@ import { ComponentProps } from "react"
 import * as v from "valibot"
 import { sheetsOptions } from "../../services/api/auth/sheets/sheetsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
+import { Section } from "../layouts/section/section"
 import { CreateSheet } from "./create/createSheet"
 import { DeleteSheet } from "./delete/deleteSheet"
 import { UpdateSheet } from "./update/updateSheet"
@@ -47,18 +48,19 @@ export function SheetsList() {
     if (sheets.isError) return <ErrorMessage message={sheets.error.message} />
     if (!sheets.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-            <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
+        <Section.Root>
+            <Section.Item>
                 <CreateSheet>
-                    <ButtonOutline
+                    <ButtonPlain
                         icon={<IconPlus />}
                         text="Ajouter une ligne"
-                        className="border-dashed"
                     />
                 </CreateSheet>
-            </div>
-            <div className="p-4 flex flex-col justify-start items-stretch gap-2">
-                <span className="uppercase text-neutral/75">Actif</span>
+            </Section.Item>
+            <Section.Item>
+                <Section.Title title="Actif" />
+            </Section.Item>
+            <Section.Item className="flex flex-col justify-start items-stretch gap-1.5">
                 <Accordion type="multiple">
                     {
                         (groupedSheetsAssets.length === 0) ? (<FormatNull />) : groupedSheetsAssets.map((groupedSheet) => (
@@ -70,9 +72,11 @@ export function SheetsList() {
                         ))
                     }
                 </Accordion>
-            </div>
-            <div className="p-4 flex flex-col justify-start items-stretch gap-2">
-                <span className="uppercase text-neutral/75">Passif</span>
+            </Section.Item>
+            <Section.Item>
+                <Section.Title title="Passif" />
+            </Section.Item>
+            <Section.Item className="flex flex-col justify-start items-stretch gap-1.5">
                 <Accordion type="multiple">
                     {
                         (groupedSheetsLiabilities.length === 0) ? (<FormatNull />) : groupedSheetsLiabilities.map((groupedSheet) => (
@@ -84,8 +88,8 @@ export function SheetsList() {
                         ))
                     }
                 </Accordion>
-            </div>
-        </div>
+            </Section.Item>
+        </Section.Root>
     )
 }
 
@@ -108,7 +112,7 @@ function SheetItem(props: SheetItem) {
                 props.className
             )}
         >
-            <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
+            <div className="flex justify-between items-center gap-3 hover:bg-neutral/5 rounded-sm">
                 <AccordionTrigger className="w-full flex justify-start items-center ">
                     <div className="flex justify-start items-start gap-2 p-2">
                         <h2 className="font-bold">{props.groupedSheet.sheet.number}</h2>

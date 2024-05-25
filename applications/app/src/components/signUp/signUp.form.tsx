@@ -37,7 +37,7 @@ export function SignUpForm() {
     return (
         <FormRoot {...form}>
             <form className="w-full flex flex-col justify-start items-center gap-x-2 gap-y-4">
-                <div className="w-full flex flex-col justify-start items-stretch gap-4 p-4 rounded-md border border-dashed border-neutral/20">
+                <div className="w-full flex flex-col justify-start items-stretch gap-3 p-3 rounded-md border border-dashed border-neutral/20">
                     <div className="flex flex-col justify-start items-stretch gap-2">
                         <FormField
                             control={form.control}

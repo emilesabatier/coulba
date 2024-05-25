@@ -35,7 +35,7 @@ export function ResetPasswordForm() {
 
     return (
         <FormRoot {...form}>
-            <form className="w-full flex flex-col justify-start items-stretch gap-4">
+            <form className="w-full flex flex-col justify-start items-stretch gap-3">
                 <div className="flex flex-col justify-start items-stretch gap-2">
                     <FormField
                         control={form.control}

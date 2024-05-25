@@ -10,7 +10,7 @@ type BalanceTable = {
 
 export function BalanceTable(props: BalanceTable) {
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
+        <div className="w-full h-full flex flex-col justify-start items-stretch">
             <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto">
                 <Table.Root>
                     <Table.Header.Root>

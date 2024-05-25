@@ -5,6 +5,10 @@ import { usersLayout } from "./users.layout"
 
 export const createUserRoute = createRoute({
     getParentRoute: () => usersLayout,
+    beforeLoad: () => ({
+        title: "Ajouter",
+        description: "Remplir le formulaire et valider pour ajouter un nouvel utilisateur."
+    }),
     path: '/ajouter',
     component: () => <CreateUserPage />
 })

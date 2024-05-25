@@ -119,7 +119,7 @@ export function TableData<T extends { id: string }>({ id, columns, data }: Table
     const { rows } = table.getRowModel()
 
     return (
-        <div id={id} className="w-full max-w-full h-full max-h-full grid grid-rows-[max-content_auto_max-content] gap-y-2 md:gap-y-4 overflow-hidden rounded-md bg-background/50 p-2 md:p-4">
+        <div id={id} className="w-full max-w-full h-full max-h-full grid grid-rows-[max-content_auto_max-content] gap-y-2 md:gap-y-4 overflow-hidden rounded-md bg-background/50 p-2 md:p-3">
             <div className="w-full flex justify-between items-end overflow-hidden gap-2">
                 <div className="inline-flex justify-start items-center gap-1">
                     <span className="font-bold text-sm">{data?.length}</span>
@@ -211,7 +211,7 @@ export function TableData<T extends { id: string }>({ id, columns, data }: Table
                         <div className="relative">
                             {
                                 rows.length === 0 ? (
-                                    <div className="p-2 md:p-4">
+                                    <div className="p-2 md:p-3">
                                         <FormatNull text="Aucune donnée." />
                                     </div>
                                 ) : null

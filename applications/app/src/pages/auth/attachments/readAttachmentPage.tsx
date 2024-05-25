@@ -1,15 +1,11 @@
 import { AttachmentContent } from "../../../components/attachments/read/attachmentContent"
-import { Main } from "../../../components/layouts/main/main"
+import { Main } from "../../../components/layouts/main"
 
 
 export function ReadAttachmentPage() {
     return (
-        <Main.Root>
-            <Main.Header
-                title="Consulter un fichier"
-                description="Consulter les données du fichier."
-            />
+        <Main>
             <AttachmentContent />
-        </Main.Root>
+        </Main>
     )
 }

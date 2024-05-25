@@ -12,7 +12,7 @@ type SheetAssetsTable = {
 
 export function SheetAssetsTable(props: SheetAssetsTable) {
     return (
-        <div className="w-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
+        <div className="w-full flex flex-col justify-start items-stretch border-r border-neutral/10">
             <div className="w-full flex flex-col justify-start items-stretch overflow-auto">
                 <Table.Root>
                     <Table.Header.Root>

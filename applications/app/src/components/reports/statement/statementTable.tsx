@@ -15,7 +15,7 @@ type StatementTable = {
 
 export function StatementTable(props: StatementTable) {
     return (
-        <div className="w-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
+        <div className="w-full flex flex-col justify-start items-stretch">
             <div className="w-full flex flex-col justify-start items-stretch overflow-auto">
                 <Table.Root>
                     <Table.Header.Root>

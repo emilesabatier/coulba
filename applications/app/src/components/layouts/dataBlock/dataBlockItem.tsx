@@ -12,8 +12,8 @@ type DataBlockItem = {
 export function DataBlockItem(props: DataBlockItem) {
     return (
         <Fragment>
-            <div className="flex justify-start items-center gap-2">
-                <span className="uppercase text-xs text-neutral/50">{props.label}</span>
+            <div className="w-[128px] flex justify-start items-start gap-2">
+                <span className="uppercase text-xs leading-6 text-neutral/50">{props.label}</span>
                 {
                     (!props.description) ? null : (
                         <TooltipProvider>
@@ -29,7 +29,7 @@ export function DataBlockItem(props: DataBlockItem) {
                     )
                 }
             </div>
-            <div className="max-w-full">
+            <div className="max-w-full flex justify-start items-start gap-2">
                 {
                     !(props.children instanceof String) ? props.children :
                         (

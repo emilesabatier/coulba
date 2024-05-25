@@ -1,16 +1,12 @@
-import { Main } from "../../../../components/layouts/main/main"
+import { Main } from "../../../../components/layouts/main"
 import { UpdateSheetForm } from "../../../../components/sheets/update/updateSheet.form"
 
 
 
 export function UpdateSheetPage() {
     return (
-        <Main.Root>
-            <Main.Header
-                title="Modifier une ligne du bilan"
-                description="Remplir le formulaire et valider pour modifier les données de la ligne du bilan."
-            />
+        <Main>
             <UpdateSheetForm />
-        </Main.Root>
+        </Main>
     )
 }

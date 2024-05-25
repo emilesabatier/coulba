@@ -9,7 +9,7 @@ export function HeroHeader() {
 
     return (
         <div className="w-full h-full flex flex-col justify-start items-center gap-8 py-16">
-            <div className="flex flex-col justify-start items-center gap-4">
+            <div className="flex flex-col justify-start items-center gap-3">
                 <div className="inline-flex flex-col justify-start items-center gap-2 max-w-[768px]">
                     <h1 className="leading-none text-[48px] text-center font-bold uppercase text-balance">
                         Reprendre la main sur sa comptabilité

@@ -5,7 +5,8 @@ import { configurationLayout } from "../configuration.layout"
 export const statementsLayout = createRoute({
     getParentRoute: () => configurationLayout,
     beforeLoad: () => ({
-        title: "Compte de résultat"
+        title: "Compte de résultat",
+        description: undefined
     }),
     path: '/compte-de-resultat',
     component: () => <Outlet />

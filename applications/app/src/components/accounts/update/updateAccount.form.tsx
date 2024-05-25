@@ -33,7 +33,6 @@ export function UpdateAccountForm() {
         <Form
             validationSchema={auth.accounts.put.body}
             defaultValues={account.data}
-            cancelLabel="Retour aux comptes"
             onCancel={() => router.navigate({ to: "/configuration/comptes" })}
             submitLabel="Modifier le compte"
             onSubmit={async (data) => {

@@ -44,7 +44,7 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
                                         <AccordionItem key={column.id} value={column.id}>
                                             <AccordionTrigger className="group">
                                                 <div className={cn(
-                                                    "w-full flex justify-between items-center gap-4 p-4 overflow-hidden",
+                                                    "w-full flex justify-between items-center gap-3 p-3 overflow-hidden",
                                                     "group-data-[state=open]:border-none group-data-[state=open]:border-neutral"
                                                 )}>
                                                     <div className="flex justify-start items-center gap-2">
@@ -62,7 +62,7 @@ export function ColumnFilter<T>({ table }: { table: Table<T> }) {
                                                 </div>
                                             </AccordionTrigger>
                                             <AccordionContent>
-                                                <div className="flex flex-col justify-start items-stretch gap-2 p-4">
+                                                <div className="flex flex-col justify-start items-stretch gap-2 p-3">
                                                     {(!column.columnDef.meta?.filterElement) ? null :
                                                         cloneElement(column.columnDef.meta.filterElement, { column })
                                                     }

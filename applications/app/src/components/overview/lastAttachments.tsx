@@ -23,7 +23,7 @@ export function LastAttachments() {
 
     return (
         <div className="w-full max-w-[400px] h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-            <div className="w-full flex justify-between items-center gap-4 p-4 border-b border-neutral/10">
+            <div className="w-full flex justify-between items-center gap-3 p-3 border-b border-neutral/10">
                 <h2 className="text-xl text-neutral/75">Derniers fichiers</h2>
                 <CreateAttachment>
                     <ButtonPlain
@@ -32,12 +32,12 @@ export function LastAttachments() {
                 </CreateAttachment>
             </div>
             <div className="flex flex-col justify-start items-stretch h-[300px] overflow-auto">
-                {lastAttachments.length > 0 ? null : <FormatNull text="Aucune donnée" className="w-full p-4" />}
+                {lastAttachments.length > 0 ? null : <FormatNull text="Aucune donnée" className="w-full p-3" />}
                 {lastAttachments.map((attachment) => {
                     return (
                         <div
                             key={attachment.id}
-                            className="flex justify-between items-center gap-4 p-4 border-b border-neutral/5 last:border-b-0"
+                            className="flex justify-between items-center gap-3 p-3 border-b border-neutral/5 last:border-b-0"
                         >
                             <span>{attachment.label}</span>
                             <FormatDateTime isoDate={attachment.createdOn} className="ml-auto" />
@@ -50,7 +50,7 @@ export function LastAttachments() {
                     )
                 })}
             </div>
-            <div className="w-full p-4 border-t border-neutral/10">
+            <div className="w-full p-3 border-t border-neutral/10">
                 <Link to="/fichiers">
                     <ButtonOutlineContent
                         text="Voir tous les fichiers"

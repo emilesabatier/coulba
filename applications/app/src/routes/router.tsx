@@ -4,6 +4,7 @@ import { appLayout } from './auth/app.layout'
 import { attachmentsLayout } from './auth/app/attachments/attachments.layout'
 import { attachmentsRoute } from './auth/app/attachments/attachments.route'
 import { createAttachmentRoute } from './auth/app/attachments/createAttachment.route'
+import { readAttachmentLayout } from './auth/app/attachments/readAttachment.layout'
 import { readAttachmentRoute } from './auth/app/attachments/readAttachment.route'
 import { updateAttachmentRoute } from './auth/app/attachments/updateAttachment.route'
 import { APIRoute } from './auth/app/configuration/API.route'
@@ -32,7 +33,6 @@ import { createStatementRoute } from './auth/app/configuration/statements/create
 import { statementsLayout } from './auth/app/configuration/statements/statements.layout'
 import { statementsRoute } from './auth/app/configuration/statements/statements.route'
 import { updateStatementRoute } from './auth/app/configuration/statements/updateStatement.route'
-import { subscriptionRoute } from './auth/app/configuration/subscription.route'
 import { createUserRoute } from './auth/app/configuration/users/createUser.route'
 import { updateUserRoute } from './auth/app/configuration/users/updateUser.route'
 import { usersLayout } from './auth/app/configuration/users/users.layout'
@@ -57,6 +57,7 @@ import { sheetRoute } from './auth/app/reports/sheet.route'
 import { statementRoute } from './auth/app/reports/statement.route'
 import { supportRoute } from './auth/app/support.route'
 import { createTransactionRoute } from './auth/app/transactions/createTransaction.route'
+import { readTransactionLayout } from './auth/app/transactions/readTransaction.layout'
 import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
 import { transactionsLayout } from './auth/app/transactions/transactions.layout'
 import { transactionsRoute } from './auth/app/transactions/transactions.route'
@@ -94,15 +95,19 @@ const routeTree = rootLayout.addChildren([
             transactionsLayout.addChildren([
                 transactionsRoute,
                 createTransactionRoute,
-                readTransactionRoute,
-                updateTransactionRoute
+                readTransactionLayout.addChildren([
+                    readTransactionRoute,
+                    updateTransactionRoute
+                ])
             ]),
 
             attachmentsLayout.addChildren([
                 attachmentsRoute,
                 createAttachmentRoute,
-                readAttachmentRoute,
-                updateAttachmentRoute
+                readAttachmentLayout.addChildren([
+                    readAttachmentRoute,
+                    updateAttachmentRoute
+                ])
             ]),
 
             reportsLayout.addChildren([
@@ -120,7 +125,6 @@ const routeTree = rootLayout.addChildren([
                     companyRoute,
                     updateCompanyRoute
                 ]),
-                subscriptionRoute,
                 usersLayout.addChildren([
                     usersRoute,
                     createUserRoute,
@@ -181,6 +185,7 @@ export const router = createRouter({
     routeTree,
     context: {
         title: undefined,
+        description: undefined,
         session: {
             isLoading: false,
             mutate: async () => { },

@@ -11,7 +11,7 @@ export function MainContent(props: MainContent) {
     return (
         <div
             className={cn(
-                "w-full min-h-full h-full max-h-full overflow-auto p-4 flex flex-col justify-start items-center",
+                "w-full min-h-full h-full max-h-full overflow-auto p-3 flex flex-col justify-start items-center",
                 props.className
             )}
             children={props.children}

@@ -32,6 +32,7 @@ export const companiesRoute = new Hono<AuthEnv>()
             const [updateCompany] = await db
                 .update(companies)
                 .set({
+                    siren: body.siren,
                     name: body.name,
                     email: body.email,
                     lastUpdatedBy: c.var.user.id,

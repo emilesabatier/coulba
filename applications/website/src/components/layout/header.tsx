@@ -28,8 +28,8 @@ export function Header() {
         </Fragment>
     )
     return (
-        <div className="w-full p-4 flex justify-center items-center">
-            <nav className="w-full max-w-[1280px] flex justify-between items-center gap-4 overflow-hidden">
+        <div className="w-full p-3 flex justify-center items-center">
+            <nav className="w-full max-w-[1280px] flex justify-between items-center gap-3 overflow-hidden">
                 <div className="relative w-fit flex justify-start items-center gap-2">
                     <Link to="/" className="w-fit flex justify-center items-center">
                         <Logo />
@@ -44,7 +44,7 @@ export function Header() {
                                 />
                             </PopoverTrigger>
                             <PopoverContent align="end">
-                                <div className="p-4 flex flex-col justify-start items-start">
+                                <div className="p-3 flex flex-col justify-start items-start">
                                     {menus}
                                 </div>
                             </PopoverContent>

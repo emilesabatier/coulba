@@ -1,10 +1,10 @@
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { formatAccount } from "../../accounts/format/formatAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { LedgerTable } from "./ledgerTable"
-import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 
 
 export type Ledger = {
@@ -63,7 +63,7 @@ export function LedgerContent() {
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!records.data || !accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4">
+        <div className="w-full h-full flex flex-col justify-start items-stretch gap-3">
             <LedgerTable ledger={ledger} />
         </div>
     )

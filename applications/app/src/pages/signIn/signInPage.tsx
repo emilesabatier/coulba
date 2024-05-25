@@ -27,7 +27,7 @@ export function SignInPage() {
             </div>
             <div className="bg-background flex justify-center items-center">
                 <div className="min-w-[300px] w-full max-w-[50%] flex flex-col justify-center items-center gap-2">
-                    <div className="w-full bg-white rounded-md p-4 border border-neutral/20 flex flex-col justify-start items-start gap-4">
+                    <div className="w-full bg-white rounded-md p-3 border border-neutral/20 flex flex-col justify-start items-start gap-3">
                         <div className="flex flex-col justify-start items-start">
                             <h2 className="text-2xl">Création d'un compte</h2>
                             <p className="text-neutral/75">Accès à la version beta</p>
@@ -40,7 +40,7 @@ export function SignInPage() {
                             <IconArrowRight size={16} />
                         </Link>
                     </div>
-                    <div className="w-full bg-white rounded-md p-4 border border-neutral/20 flex flex-col justify-start items-start gap-4">
+                    <div className="w-full bg-white rounded-md p-3 border border-neutral/20 flex flex-col justify-start items-start gap-3">
                         <div className="flex flex-col justify-start items-start">
                             <h2 className="text-2xl">Documentation</h2>
                             <p className="text-neutral/75">Collaborative et open source</p>
@@ -55,7 +55,7 @@ export function SignInPage() {
                             <IconExternalLink size={16} />
                         </a>
                     </div>
-                    <div className="w-full bg-white rounded-md p-4 border border-neutral/20 flex flex-col justify-start items-start gap-4">
+                    <div className="w-full bg-white rounded-md p-3 border border-neutral/20 flex flex-col justify-start items-start gap-3">
                         <div className="flex flex-col justify-start items-start">
                             <h2 className="text-2xl">Site internet</h2>
                             <p className="text-neutral/75">La page de présentation de l'application</p>

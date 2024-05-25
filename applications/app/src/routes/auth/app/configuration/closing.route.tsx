@@ -6,7 +6,8 @@ import { configurationLayout } from "./configuration.layout"
 export const closingRoute = createRoute({
     getParentRoute: () => configurationLayout,
     beforeLoad: () => ({
-        title: "Clôture"
+        title: "Clôture",
+        description: "Vous pouvez sur cette page clôturer l'exercice fiscal en cours et générer la version finale des documents comptables."
     }),
     path: '/cloture',
     component: () => <ClosingPage />

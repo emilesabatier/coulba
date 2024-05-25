@@ -26,14 +26,13 @@ export function CreateTransactionForm() {
         <Form
             validationSchema={auth.transactions.post.body}
             defaultValues={{}}
-            cancelLabel="Retour aux enregistrements"
             onCancel={() => router.navigate({ to: "/enregistrements" })}
             submitLabel="Ajouter l'enregistrement"
             onSubmit={async (data) => {
                 mutation.mutate({ body: data }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/enregistrements" })
+                        // router.navigate({ to: "/enregistrements" })
                         toast({ title: "Nouvel enregistrement ajouté", variant: "success" })
                     }
                 })
