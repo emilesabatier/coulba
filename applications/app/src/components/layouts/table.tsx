@@ -3,10 +3,12 @@ import { InputDebounced, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import {
     ColumnDef,
+    SortingState,
     flexRender,
     getCoreRowModel,
     getExpandedRowModel,
     getFilteredRowModel,
+    getSortedRowModel,
     useReactTable
 } from '@tanstack/react-table'
 import { ReactElement, useMemo, useState } from "react"
@@ -24,17 +26,25 @@ export function Table<T>(props: Table<T>) {
 
     const memoizedData = useMemo(() => props.data, [props.data])
     const [globalFilter, setGlobalFilter] = useState("")
+    const [sorting, setSorting] = useState<SortingState>([])
 
     const table = useReactTable<T>({
         data: memoizedData,
-        columns: props.columns,
+        columns: props.columns.map((column) => ({
+            ...column,
+            enableMultiSort: true
+        })),
         getRowCanExpand: () => true,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getExpandedRowModel: getExpandedRowModel(),
+        getSortedRowModel: getSortedRowModel(),
         onGlobalFilterChange: setGlobalFilter,
+        onSortingChange: setSorting,
+        enableMultiSort: true,
         state: {
             globalFilter,
+            sorting,
         }
     })
 
@@ -62,16 +72,22 @@ export function Table<T>(props: Table<T>) {
                             {table.getFlatHeaders().map((header) => {
                                 return (
                                     <th key={header.id} colSpan={header.colSpan} className="w-fit">
-                                        {header.isPlaceholder ? null : (
-                                            <div className="flex justify-start items-center p-3 border-b border-b-neutral/10 border-t-2 border-t-white">
-                                                <span className="text-neutral/75 text-sm after:content-['\200b'] whitespace-nowrap">
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                </span>
-                                            </div>
-                                        )}
+                                        {/* <Button
+                                            onClick={header.column.getToggleSortingHandler()}
+                                        > */}
+                                        <div className="flex justify-start items-center p-3 border-b border-b-neutral/10 border-t-2 border-t-white">
+                                            <span className="text-neutral/75 text-sm after:content-['\200b'] whitespace-nowrap">
+                                                {flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                            </span>
+                                            {/* {{
+                                                asc: 'up',
+                                                desc: 'down',
+                                            }[header.column.getIsSorted() as string] ?? null} */}
+                                        </div>
+                                        {/* </Button> */}
                                     </th>
                                 )
                             })}
