@@ -8,6 +8,6 @@ export function readTransactions() {
     return getAPI({
         path: `/auth/transactions`,
         schema: v.array(auth.transactions.get.return),
-        message: "Erreur avec la lecture des enregistrements"
+        message: "Erreur avec la lecture des opérations"
     })
 }

@@ -1,4 +1,4 @@
-import { transactions } from "../../models/transactions.model"
+import { transactions } from "../../models"
 import { transactionInclude } from "./transaction.include"
 
 

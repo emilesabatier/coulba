@@ -7,7 +7,7 @@ export const createTransactionRoute = createRoute({
     getParentRoute: () => transactionsLayout,
     beforeLoad: () => ({
         title: "Ajouter",
-        description: "Remplir le formulaire et valider pour ajouter un nouvel enregistrement comptable."
+        description: undefined
     }),
     path: '/ajouter',
     component: () => <CreateTransactionPage />

@@ -7,7 +7,7 @@ export const readTransactionRoute = createRoute({
     getParentRoute: () => readTransactionLayout,
     beforeLoad: () => ({
         title: undefined,
-        description: "Consulter les données de l'enregistrement."
+        description: undefined
     }),
     path: '/',
     component: () => <ReadTransactionPage />

@@ -7,6 +7,10 @@ import { authLayout } from "./auth.layout"
 export const appLayout = createRoute({
     getParentRoute: () => authLayout,
     id: 'appLayout',
+    beforeLoad: () => ({
+        title: undefined,
+        description: undefined
+    }),
     pendingComponent: () => <CircularLoader />,
     component: () => <AppLayout />
 })

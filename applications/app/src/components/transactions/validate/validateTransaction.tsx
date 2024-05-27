@@ -24,16 +24,19 @@ export function ValidateTransaction(props: ValidateTransaction) {
 
     return (
         <ConfirmDialog
-            title="Valider l'enregistrement ?"
-            description={"Attention, cette action est définitive, vous ne pourrez plus modifier les données."}
+            title="Valider l'opération ?"
+            description={"Attention, cette action est définitive et validera tous les enregistrements liés. Vous ne pourrez plus modifier les données."}
             submitLabel="Valider"
             color="success"
             onSubmit={async () => {
                 mutation.mutate({ params: { idTransaction: props.transaction.id } }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/enregistrements" })
-                        toast({ title: "Enregistrement validé", variant: "success" })
+                        router.navigate({
+                            to: "/operations/$idTransaction",
+                            params: { idTransaction: props.transaction.id }
+                        })
+                        toast({ title: "Opération validée", variant: "success" })
                     }
                 })
 

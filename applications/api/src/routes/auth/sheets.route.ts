@@ -60,8 +60,8 @@ export const sheetsRoute = new Hono<AuthEnv>()
 
             const readSheet = await db.query.sheets.findFirst({
                 where: and(
-                    eq(sheets.id, params.idSheet),
-                    eq(sheets.idCompany, c.var.user.idCompany)
+                    eq(sheets.idCompany, c.var.user.idCompany),
+                    eq(sheets.id, params.idSheet)
                 ),
                 columns: sheetInclude,
                 with: {
@@ -90,7 +90,10 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
-                .where(eq(sheets.id, params.idSheet))
+                .where(and(
+                    eq(sheets.idCompany, c.var.user.idCompany),
+                    eq(sheets.id, params.idSheet)
+                ))
                 .returning()
 
             return c.json(updateSheet, 200)
@@ -104,7 +107,10 @@ export const sheetsRoute = new Hono<AuthEnv>()
 
             const [deleteSheet] = await db
                 .delete(sheets)
-                .where(eq(sheets.id, params.idSheet))
+                .where(and(
+                    eq(sheets.idCompany, c.var.user.idCompany),
+                    eq(sheets.id, params.idSheet)
+                ))
                 .returning()
 
             return c.json(deleteSheet, 200)

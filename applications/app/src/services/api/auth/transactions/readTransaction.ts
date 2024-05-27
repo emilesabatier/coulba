@@ -10,12 +10,12 @@ type ReadTransaction = {
 
 export function readTransaction(props: ReadTransaction) {
     if (!props.params.idTransaction) {
-        toast({ title: "Identifiant de l'enregistrement manquant" })
+        toast({ title: "Identifiant de l'opération manquant" })
         return
     }
     return getAPI({
         path: `/auth/transactions/${props.params.idTransaction}`,
         schema: auth.transactions.get.return,
-        message: "Erreur avec la lecture de l'enregistrement"
+        message: "Erreur avec la lecture de l'opération"
     })
 }

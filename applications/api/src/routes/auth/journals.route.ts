@@ -1,7 +1,7 @@
 import { journals } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
-import { eq } from "drizzle-orm"
+import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
@@ -50,7 +50,10 @@ export const journalsRoute = new Hono<AuthEnv>()
             const [readJournal] = await db
                 .select()
                 .from(journals)
-                .where(eq(journals.id, params.idJournal))
+                .where(and(
+                    eq(journals.idCompany, c.var.user.idCompany),
+                    eq(journals.id, params.idJournal)
+                ))
 
             return c.json(readJournal, 200)
         }
@@ -71,7 +74,10 @@ export const journalsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(journals.id, params.idJournal))
+                .where(and(
+                    eq(journals.idCompany, c.var.user.idCompany),
+                    eq(journals.id, params.idJournal)
+                ))
                 .returning()
 
             return c.json(updateJournal, 200)
@@ -85,7 +91,10 @@ export const journalsRoute = new Hono<AuthEnv>()
 
             const [deleteJournal] = await db
                 .delete(journals)
-                .where(eq(journals.id, params.idJournal))
+                .where(and(
+                    eq(journals.idCompany, c.var.user.idCompany),
+                    eq(journals.id, params.idJournal)
+                ))
                 .returning()
 
             return c.json(deleteJournal, 200)

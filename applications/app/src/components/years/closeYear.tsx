@@ -16,7 +16,7 @@ export function CloseYear() {
             <Section.Item className="flex-col justify-start items-start gap-3">
                 <div className="flex flex-col justify-start items-start gap-1">
                     <Section.Title title="Figer les comptes" />
-                    <p className="text-neutral/75">Cela permet de clôturer l'exercice actuel et d'empêcher la saisie de nouvelles transactions.</p>
+                    <p className="text-neutral/75">Cela permet de clôturer l'exercice actuel et d'empêcher la saisie de nouvelles records.</p>
                     <div className="flex justify-start items-center gap-2">
                         <span>Exercice actuel figé ?</span>
                         <FormatBoolean boolean={currentYear.data.isClosed} />

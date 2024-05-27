@@ -58,8 +58,8 @@ export const computationsRoute = new Hono<AuthEnv>()
 
             const readComputation = await db.query.computations.findFirst({
                 where: and(
-                    eq(computations.id, params.idComputation),
-                    eq(computations.idCompany, c.var.user.idCompany)
+                    eq(computations.idCompany, c.var.user.idCompany),
+                    eq(computations.id, params.idComputation)
                 ),
                 columns: computationInclude,
                 with: {
@@ -86,7 +86,10 @@ export const computationsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
-                .where(eq(computations.id, params.idComputation))
+                .where(and(
+                    eq(computations.idCompany, c.var.user.idCompany),
+                    eq(computations.id, params.idComputation)
+                ))
                 .returning()
 
             return c.json(updateComputation, 200)
@@ -100,7 +103,10 @@ export const computationsRoute = new Hono<AuthEnv>()
 
             const [deleteComputation] = await db
                 .delete(computations)
-                .where(eq(computations.id, params.idComputation))
+                .where(and(
+                    eq(computations.idCompany, c.var.user.idCompany),
+                    eq(computations.id, params.idComputation)
+                ))
                 .returning()
 
             return c.json(deleteComputation, 200)

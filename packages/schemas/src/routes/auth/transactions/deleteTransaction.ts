@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { transactionSchema } from "../../../schemas/transaction/transaction.schema.js"
+import { transactionSchema } from "../../../schemas/transaction/transaction.schema"
 
 
 // Input

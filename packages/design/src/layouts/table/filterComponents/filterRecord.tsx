@@ -2,14 +2,14 @@ import { Column } from "@tanstack/react-table"
 import { InputCombobox, Option } from "../../../inputs"
 
 
-type Filtertransaction<T> = {
+type Filterrecord<T> = {
     column?: Column<T, Option>
     placeholder?: string
     options: Option[]
     format: (data: T) => string
 }
 
-export function Filtertransaction<T>(props: Filtertransaction<T>) {
+export function Filterrecord<T>(props: Filterrecord<T>) {
     const columnFilterValue = props.column?.getFilterValue()
     return (
         <InputCombobox

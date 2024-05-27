@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { transactionSchema } from "../../../schemas/transaction/transaction.schema.js"
+import { transactionSchema } from "../../../schemas/transaction/transaction.schema"
 
 
 // Input
@@ -9,4 +9,4 @@ export const validateTransactionParams = v.object({
 
 
 // Output
-export const validateTransactionReturn = transactionSchema
+export const validateTransactionReturn = v.object({})

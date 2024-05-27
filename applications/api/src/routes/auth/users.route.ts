@@ -60,7 +60,10 @@ export const usersRoute = new Hono<AuthEnv>()
             const [readUser] = await db
                 .select()
                 .from(users)
-                .where(eq(users.id, params.idUser))
+                .where(and(
+                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.id, params.idUser)
+                ))
 
             return c.json(readUser, 200)
         }
@@ -82,7 +85,10 @@ export const usersRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(users.id, params.idUser))
+                .where(and(
+                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.id, params.idUser)
+                ))
                 .returning()
 
             return c.json(updateUser, 200)
@@ -96,7 +102,10 @@ export const usersRoute = new Hono<AuthEnv>()
 
             const [deleteUser] = await db
                 .delete(users)
-                .where(eq(users.id, params.idUser))
+                .where(and(
+                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.id, params.idUser)
+                ))
                 .returning()
 
             return c.json(deleteUser, 200)
@@ -120,6 +129,7 @@ export const usersRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
+                    eq(users.idCompany, c.var.user.idCompany),
                     eq(users.id, params.idUser),
                     eq(users.isInvitationValidated, false)
                 ))

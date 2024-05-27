@@ -9,7 +9,7 @@ type CreateTransaction = {
 export function CreateTransaction(props: CreateTransaction) {
     return (
         <Link
-            to="/enregistrements/ajouter"
+            to="/operations/ajouter"
             children={props.children}
         />
     )

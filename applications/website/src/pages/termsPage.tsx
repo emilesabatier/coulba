@@ -222,9 +222,9 @@ export function TermsPage() {
                                 d’utiliser le logiciel Coulba ;
                                 de publier et de mettre à jour des informations sur ce logiciel ;
                                 de gérer ses interactions avec ses Contacts ;
-                                d'enregistrer des transactions comptables et de générer des documents liés à la comptabilité (facture, justificatifs de dons…) ;
+                                d'enregistrer des records comptables et de générer des documents liés à la comptabilité (facture, justificatifs de dons…) ;
                                 d'offrir divers services à ses Contacts ;
-                                de réaliser des transactions financières en ligne, y compris le paiement des adhésions.
+                                de réaliser des records financières en ligne, y compris le paiement des adhésions.
 
                                 Il est important de noter que la Société n'intervient ni en tant que partie prenante, ni en tant que bénéficiaire, ni comme garant dans tout accord éventuellement conclu entre le Client et un Tiers, incluant les Contacts, pendant l'utilisation des Services. Les accords contractuels entre le Client et les utilisateurs, y compris les Contacts et Tiers, doivent se conformer aux conditions générales établies par le Client lui-même.
                             </Text.Paragraph>
@@ -296,9 +296,9 @@ export function TermsPage() {
                                 5.4 Modalités de Paiement
                             </Text.SubTitle>
                             <Text.Paragraph>
-                                Le Client règlera les factures dues à la Société par carte bancaire. Une fois le moyen de paiement sélectionné par le Client enregistré, il sera utilisé pour l'ensemble des transactions concernant les factures émises par la Société.
+                                Le Client règlera les factures dues à la Société par carte bancaire. Une fois le moyen de paiement sélectionné par le Client enregistré, il sera utilisé pour l'ensemble des records concernant les factures émises par la Société.
 
-                                Pour toute transaction nécessitant une action de la part du service de facturation, la Société pourra appliquer au Client des frais fixes d'un montant de cinquante euros (50€) toutes taxes comprises (TTC). À titre illustratif, mais non exhaustif, ces frais pourront être facturés en cas de rejet de paiement par la banque du Client ou lors de l'émission d'un avoir.
+                                Pour toute record nécessitant une action de la part du service de facturation, la Société pourra appliquer au Client des frais fixes d'un montant de cinquante euros (50€) toutes taxes comprises (TTC). À titre illustratif, mais non exhaustif, ces frais pourront être facturés en cas de rejet de paiement par la banque du Client ou lors de l'émission d'un avoir.
                             </Text.Paragraph>
                         </TextSection>
                         <Text.Section>
@@ -484,7 +484,7 @@ export function TermsPage() {
                                 10.1 Engagement de la Société en cas de Violation de Propriété Intellectuelle
                             </Text.SubTitle>
                             <Text.Paragraph>
-                                La Société s'engage à protéger le Client contre toute réclamation relative à une violation des droits de propriété intellectuelle découlant de l'utilisation des Services. Pour cela, la Société prendra toutes les mesures appropriées, y compris la négociation d'un accord transactionnel. De plus, la Société prendra en charge tous les coûts et dommages associés à cette réclamation ou procédure, à condition que le Client respecte certaines obligations.
+                                La Société s'engage à protéger le Client contre toute réclamation relative à une violation des droits de propriété intellectuelle découlant de l'utilisation des Services. Pour cela, la Société prendra toutes les mesures appropriées, y compris la négociation d'un accord recordnel. De plus, la Société prendra en charge tous les coûts et dommages associés à cette réclamation ou procédure, à condition que le Client respecte certaines obligations.
 
                                 Le Client doit informer immédiatement la Société de toute réclamation et lui fournir tous les moyens nécessaires pour défendre ou régler la réclamation. Bien que la Société ait le contrôle total de la défense, le Client peut, à ses frais, consulter un avocat de son choix et participer à la défense. La Société a le droit de choisir entre plusieurs options pour résoudre le problème, telles que continuer à fournir les Services, les remplacer, les modifier ou les arrêter, en fonction de ce qui est le plus économiquement viable. Si la Société choisit de cesser de fournir les Services, elle indemnisera le Client pour les sommes déjà payées.
 

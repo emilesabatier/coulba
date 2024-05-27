@@ -1,5 +1,6 @@
 import * as v from "valibot"
-import { transactionSchema } from "../../../schemas/transaction/transaction.schema.js"
+import { recordSchema } from "../../../schemas/record/record.schema"
+import { transactionSchema } from "../../../schemas/transaction/transaction.schema"
 
 
 // Input
@@ -8,4 +9,9 @@ export const readTransactionParams = v.object({
 })
 
 // Output
-export const readTransactionReturn = transactionSchema
+export const readTransactionReturn = v.merge([
+    transactionSchema,
+    v.object({
+        records: v.array(recordSchema)
+    })
+])

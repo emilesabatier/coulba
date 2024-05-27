@@ -80,7 +80,10 @@ export const statementsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
-                .where(eq(statements.id, params.idStatement))
+                .where(and(
+                    eq(statements.idCompany, c.var.user.idCompany),
+                    eq(statements.id, params.idStatement)
+                ))
                 .returning()
 
             return c.json(updateStatement, 200)
@@ -94,7 +97,10 @@ export const statementsRoute = new Hono<AuthEnv>()
 
             const [deleteStatement] = await db
                 .delete(statements)
-                .where(eq(statements.id, params.idStatement))
+                .where(and(
+                    eq(statements.idCompany, c.var.user.idCompany),
+                    eq(statements.id, params.idStatement)
+                ))
                 .returning()
 
             return c.json(deleteStatement, 200)

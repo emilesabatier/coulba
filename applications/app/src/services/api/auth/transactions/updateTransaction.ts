@@ -13,6 +13,6 @@ export function updateTransaction(props: UpdateTransaction) {
         path: `/auth/transactions/${props.params.idTransaction}`,
         body: props.body,
         schema: auth.transactions.put.return,
-        message: "Erreur avec la modification de l'enregistrement"
+        message: "Erreur avec la modification de l'opération"
     })
 }

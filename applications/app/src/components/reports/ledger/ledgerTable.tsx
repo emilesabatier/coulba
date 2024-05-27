@@ -51,21 +51,21 @@ export function LedgerTable(props: LedgerTable) {
                                             </Table.Body.Row>
                                             <Fragment>
                                                 {
-                                                    entry.transactions.map((transaction) => {
+                                                    entry.records.map((record) => {
                                                         return (
-                                                            <Table.Body.Row key={transaction.key}>
+                                                            <Table.Body.Row key={record.key}>
                                                                 <Table.Body.Cell />
                                                                 <Table.Body.Cell>
-                                                                    <FormatDate isoDate={transaction.date} />
+                                                                    <FormatDate isoDate={record.date} />
                                                                 </Table.Body.Cell>
                                                                 <Table.Body.Cell>
-                                                                    <FormatText text={transaction.label} />
+                                                                    <FormatText text={record.label} />
                                                                 </Table.Body.Cell>
                                                                 <Table.Body.Cell className="w-[1%]" align="right">
-                                                                    <FormatPrice price={transaction.debit} />
+                                                                    <FormatPrice price={record.debit} />
                                                                 </Table.Body.Cell>
                                                                 <Table.Body.Cell className="w-[1%]" align="right">
-                                                                    <FormatPrice price={transaction.credit} />
+                                                                    <FormatPrice price={record.credit} />
                                                                 </Table.Body.Cell>
                                                             </Table.Body.Row>
                                                         )

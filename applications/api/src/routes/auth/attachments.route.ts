@@ -7,8 +7,8 @@ import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
-import { paramsValidator } from "../../middlewares/paramsValidator.js"
 import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
+import { paramsValidator } from "../../middlewares/paramsValidator.js"
 
 
 export const attachmentsRoute = new Hono<AuthEnv>()
@@ -60,7 +60,10 @@ export const attachmentsRoute = new Hono<AuthEnv>()
             const [readAttachment] = await db
                 .select()
                 .from(attachments)
-                .where(eq(attachments.id, params.idAttachment))
+                .where(and(
+                    eq(attachments.idCompany, c.var.user.idCompany),
+                    eq(attachments.id, params.idAttachment)
+                ))
 
             return c.json(readAttachment, 200)
         }
@@ -86,7 +89,10 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(attachments.id, params.idAttachment))
+                .where(and(
+                    eq(attachments.idCompany, c.var.user.idCompany),
+                    eq(attachments.id, params.idAttachment)
+                ))
                 .returning()
 
             return c.json(updateAttachment, 200)
@@ -101,7 +107,10 @@ export const attachmentsRoute = new Hono<AuthEnv>()
 
             const [deleteAttachment] = await db
                 .delete(attachments)
-                .where(eq(attachments.id, params.idAttachment))
+                .where(and(
+                    eq(attachments.idCompany, c.var.user.idCompany),
+                    eq(attachments.id, params.idAttachment)
+                ))
                 .returning()
 
             return c.json(deleteAttachment, 200)

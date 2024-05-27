@@ -6,6 +6,7 @@ import { companiesRoute } from './auth/companies.route.js'
 import { computationsRoute } from './auth/computations.route.js'
 import { journalsRoute } from './auth/journals.route.js'
 import { profileRoute } from './auth/profile.route.js'
+import { recordsRoute } from './auth/records.route.js'
 import { servicesRoute } from './auth/services.route.js'
 import { sheetsRoute } from './auth/sheets.route.js'
 import { statementsRoute } from './auth/statements.route.js'
@@ -17,9 +18,10 @@ import { yearsRoute } from './auth/years.route.js'
 export const authRoute = new Hono()
     .use("/*", checkAuth)
     .route('/attachments', attachmentsRoute)
+    .route('/transactions', transactionsRoute)
     .route('/companies', companiesRoute)
     .route('/users', usersRoute)
-    .route('/transactions', transactionsRoute)
+    .route('/records', recordsRoute)
     .route('/accounts', accountsRoute)
     .route('/sheets', sheetsRoute)
     .route('/statements', statementsRoute)

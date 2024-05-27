@@ -1,5 +1,5 @@
 import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, companies, computations, computationStatements, journals, sheets, statements, transactions, users, years } from '@coulba/schemas/models'
+import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, transactions, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -7,7 +7,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultTransactions } from './transactions'
+import { defaultTransactions } from './records'
 
 
 export function generateTemporaryPassword(): string {
@@ -230,27 +230,45 @@ async function seed() {
             await tx.insert(users).values(adminUser)
 
 
-            // Transactions
-            console.log("Add transactions")
-            const newTransactions: (typeof transactions.$inferInsert)[] = defaultTransactions.flatMap((transaction) => {
-                const idAccount = newAccounts.find((account) => account.number === transaction.accountNumber)?.id
-                if (!idAccount) {
-                    console.log("Erreur transaction", transaction)
-                    return []
-                }
-                return ([{
-                    id: generateId(),
+            // Records
+            console.log("Add records")
+            const newTransactions: (typeof transactions.$inferInsert)[] = []
+            const newRecords: (typeof records.$inferInsert)[] = []
+            defaultTransactions.forEach((transaction) => {
+
+                const idTransaction = generateId()
+                newTransactions.push({
+                    id: idTransaction,
                     idCompany: newCompany.id,
                     idYear: idCurrentYear,
-                    idAccount: idAccount,
                     isConfirmed: true,
                     label: transaction.label,
-                    date: transaction.date,
-                    debit: transaction.debit.toString(),
-                    credit: transaction.credit.toString()
-                }])
+                    date: transaction.date
+                })
+
+                transaction.records.forEach((record) => {
+                    const idAccount = newAccounts.find((account) => account.number === record.accountNumber)?.id
+                    if (!idAccount) {
+                        console.log("Erreur record", record)
+                        return
+                    }
+                    newRecords.push({
+                        id: generateId(),
+                        idCompany: newCompany.id,
+                        idYear: idCurrentYear,
+                        idAccount: idAccount,
+                        idTransaction: idTransaction,
+                        isConfirmed: true,
+                        label: record.label,
+                        date: record.date,
+                        debit: record.debit.toString(),
+                        credit: record.credit.toString()
+                    })
+                })
+
             })
             await tx.insert(transactions).values(newTransactions)
+            await tx.insert(records).values(newRecords)
         })
 
     } catch (error) {

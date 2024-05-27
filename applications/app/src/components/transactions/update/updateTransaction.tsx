@@ -12,7 +12,7 @@ type UpdateTransaction = {
 export function UpdateTransaction(props: UpdateTransaction) {
     return (
         <Link
-            to="/enregistrements/$idTransaction/modifier"
+            to="/operations/$idTransaction/modifier"
             params={{ idTransaction: props.transaction.id }}
             children={props.children}
         />

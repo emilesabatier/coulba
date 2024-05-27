@@ -11,6 +11,6 @@ export function validateTransaction(props: ValidateTransaction) {
     return patchAPI({
         path: `/auth/transactions/${props.params.idTransaction}/validate`,
         schema: auth.transactions.patch.validate.return,
-        message: "Erreur avec la validation de l'enregistrement"
+        message: "Erreur avec la validation de l'opération"
     })
 }

@@ -15,7 +15,7 @@ export function AppLayout() {
     // const currentRoute = router.state.matches.at(-1)
 
     const breadcrumbs = router.state.matches
-        .filter((match) => !!match.context.title)
+        .filter((match) => !!match.context?.title)
 
     if (session.isLoading) return (
         <div id="loading" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden">
@@ -34,7 +34,7 @@ export function AppLayout() {
                 <div className="flex justify-start items-end">
                     {
                         breadcrumbs.map((breadcrumb, index) => (
-                            <Fragment>
+                            <Fragment key={breadcrumb.id}>
                                 {index === 0 ? null : (
                                     <IconChevronRight className="text-neutral/50" />
                                 )}

@@ -11,6 +11,6 @@ export function deleteTransaction(props: DeleteTransaction) {
     return deleteAPI({
         path: `/auth/transactions/${props.params.idTransaction}`,
         schema: auth.transactions.delete.return,
-        message: "Erreur avec la suppression de l'enregistrement"
+        message: "Erreur avec la suppression de l'opération"
     })
 }

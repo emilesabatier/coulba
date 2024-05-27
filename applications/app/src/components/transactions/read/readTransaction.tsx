@@ -12,7 +12,7 @@ type ReadTransaction = {
 export function ReadTransaction(props: ReadTransaction) {
     return (
         <Link
-            to="/enregistrements/$idTransaction"
+            to="/operations/$idTransaction"
             params={{ idTransaction: props.idTransaction }}
             children={props.children}
         />

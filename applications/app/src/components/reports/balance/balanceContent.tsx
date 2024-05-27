@@ -2,7 +2,7 @@ import { formatPrice } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
-import { transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
+import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -10,10 +10,10 @@ import { BalanceTable } from "./balanceTable"
 
 
 export function BalanceContent() {
-    const transactions = useQuery(transactionsOptions)
+    const records = useQuery(recordsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(transactions.data ?? [], accounts.data ?? [])
+    const balance = getBalance(records.data ?? [], accounts.data ?? [])
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
     const totalBalanceDebit = balance.reduce<number>((previous, entry) => {
@@ -24,10 +24,10 @@ export function BalanceContent() {
         return previous + Number(entry.balance.credit)
     }, 0)
 
-    if (transactions.isLoading || accounts.isLoading) return <CircularLoader />
-    if (transactions.isError) return <ErrorMessage message={transactions.error.message} />
+    if (records.isLoading || accounts.isLoading) return <CircularLoader />
+    if (records.isError) return <ErrorMessage message={records.error.message} />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
-    if (!transactions.data || !accounts.data) return null
+    if (!records.data || !accounts.data) return null
     return (
         <Section.Root>
             <Section.Item>

@@ -185,7 +185,10 @@ export const yearsRoute = new Hono<AuthEnv>()
             const [readYear] = await db
                 .select()
                 .from(years)
-                .where(eq(years.id, params.idYear))
+                .where(and(
+                    eq(years.idCompany, c.var.user.idCompany),
+                    eq(years.id, params.idYear)
+                ))
 
             return c.json(readYear, 200)
         }
@@ -209,7 +212,10 @@ export const yearsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(eq(years.id, params.idYear))
+                .where(and(
+                    eq(years.idCompany, c.var.user.idCompany),
+                    eq(years.id, params.idYear)
+                ))
                 .returning()
 
             return c.json(updateYear, 200)
@@ -223,7 +229,10 @@ export const yearsRoute = new Hono<AuthEnv>()
 
             const [deleteYear] = await db
                 .delete(years)
-                .where(eq(years.id, params.idYear))
+                .where(and(
+                    eq(years.idCompany, c.var.user.idCompany),
+                    eq(years.id, params.idYear)
+                ))
                 .returning()
 
             return c.json(deleteYear, 200)

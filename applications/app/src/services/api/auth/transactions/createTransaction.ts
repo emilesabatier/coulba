@@ -12,6 +12,6 @@ export function createTransaction(props: CreateTransaction) {
         path: `/auth/transactions`,
         body: props.body,
         schema: auth.transactions.post.return,
-        message: "Erreur avec l'ajout de l'enregistrement"
+        message: "Erreur avec l'ajout de l'opération"
     })
 }

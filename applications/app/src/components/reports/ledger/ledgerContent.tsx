@@ -1,7 +1,7 @@
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
-import { transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
+import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { formatAccount } from "../../accounts/format/formatAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { LedgerTable } from "./ledgerTable"
@@ -12,56 +12,56 @@ export type Ledger = {
     label: string
     debit: number
     credit: number
-    transactions: {
+    records: {
         key: string
         date: string
         label: string
-        debit: string
-        credit: string
+        debit: number | string
+        credit: number | string
     }[]
 }
 
 export function LedgerContent() {
-    const transactions = useQuery(transactionsOptions)
+    const records = useQuery(recordsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const ledger = (transactions.data ?? [])
-        .reduce<Ledger[]>((_ledger, _transaction) => {
+    const ledger = (records.data ?? [])
+        .reduce<Ledger[]>((_ledger, _record) => {
 
-            const transaction = {
-                key: _transaction.id,
-                date: _transaction.date,
-                label: _transaction.label,
-                debit: _transaction.debit,
-                credit: _transaction.credit
+            const record = {
+                key: _record.id,
+                date: _record.date,
+                label: _record.label,
+                debit: _record.debit,
+                credit: _record.credit
             }
 
-            const currentLedgerEntry = _ledger.find((entry) => entry.key === _transaction.idAccount)
+            const currentLedgerEntry = _ledger.find((entry) => entry.key === _record.idAccount)
             if (currentLedgerEntry === undefined) {
-                const account = accounts.data?.find((_account) => _account.id === _transaction.idAccount)
+                const account = accounts.data?.find((_account) => _account.id === _record.idAccount)
                 if (!account) return _ledger
                 _ledger.push({
-                    key: _transaction.idAccount,
+                    key: _record.idAccount,
                     label: formatAccount(account),
-                    debit: Number(transaction.debit),
-                    credit: Number(transaction.credit),
-                    transactions: [transaction]
+                    debit: Number(record.debit),
+                    credit: Number(record.credit),
+                    records: [record]
                 })
                 return _ledger
             }
 
-            currentLedgerEntry.debit += Number(transaction.debit)
-            currentLedgerEntry.credit += Number(transaction.credit)
-            currentLedgerEntry.transactions.push(transaction)
+            currentLedgerEntry.debit += Number(record.debit)
+            currentLedgerEntry.credit += Number(record.credit)
+            currentLedgerEntry.records.push(record)
 
             return _ledger
         }, [])
         .sort((a, b) => a.label.localeCompare(b.label))
 
-    if (transactions.isLoading || accounts.isLoading) return <CircularLoader />
-    if (transactions.isError) return <ErrorMessage message={transactions.error.message} />
+    if (records.isLoading || accounts.isLoading) return <CircularLoader />
+    if (records.isError) return <ErrorMessage message={records.error.message} />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
-    if (!transactions.data || !accounts.data) return null
+    if (!records.data || !accounts.data) return null
     return (
         <div className="w-full h-full flex flex-col justify-start items-stretch gap-3">
             <LedgerTable ledger={ledger} />

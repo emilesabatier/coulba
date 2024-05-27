@@ -7,7 +7,7 @@ export const updateTransactionRoute = createRoute({
     getParentRoute: () => readTransactionLayout,
     beforeLoad: () => ({
         title: "Modifier",
-        description: "Remplir le formulaire et valider pour modifier l'enregistrement comptable."
+        description: undefined
     }),
     path: '/modifier',
     component: () => <UpdateTransactionPage />

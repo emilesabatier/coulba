@@ -60,6 +60,7 @@ import { createTransactionRoute } from './auth/app/transactions/createTransactio
 import { readTransactionLayout } from './auth/app/transactions/readTransaction.layout'
 import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
 import { transactionsLayout } from './auth/app/transactions/transactions.layout'
+import { transactionsRoute } from './auth/app/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/app/transactions/updateTransaction.route'
 import { authLayout } from './auth/auth.layout'
 import { rootLayout } from './root.layout'
@@ -70,7 +71,11 @@ import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
 import { signInRoute } from './signIn/signIn.route'
 import { signUpRoute } from './signUp/signUp.route'
-import { transactionsRoute } from './auth/app/transactions/transactions.route'
+import { createRecordRoute } from './auth/app/transactions/records/createRecord.route'
+import { readRecordLayout } from './auth/app/transactions/records/readRecord.layout'
+import { readRecordRoute } from './auth/app/transactions/records/readRecord.route'
+import { recordsLayout } from './auth/app/transactions/records/records.layout'
+import { updateRecordRoute } from './auth/app/transactions/records/updateRecord.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -97,7 +102,15 @@ const routeTree = rootLayout.addChildren([
                 createTransactionRoute,
                 readTransactionLayout.addChildren([
                     readTransactionRoute,
-                    updateTransactionRoute
+                    updateTransactionRoute,
+                    recordsLayout.addChildren([
+                        recordsRoute,
+                        createRecordRoute,
+                        readRecordLayout.addChildren([
+                            readRecordRoute,
+                            updateRecordRoute
+                        ])
+                    ]),
                 ])
             ]),
 

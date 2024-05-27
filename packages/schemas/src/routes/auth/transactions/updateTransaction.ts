@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { transactionSchema } from "../../../schemas/transaction/transaction.schema.js"
+import { transactionSchema } from "../../../schemas/transaction/transaction.schema"
 
 
 // Input
@@ -8,13 +8,8 @@ export const updateTransactionParams = v.object({
 })
 
 export const updateTransactionBody = v.partial(v.object({
-    idAccount: transactionSchema.entries.idAccount,
-    idJournal: transactionSchema.entries.idJournal,
-    idAttachment: transactionSchema.entries.idAttachment,
     label: transactionSchema.entries.label,
-    date: transactionSchema.entries.date,
-    debit: transactionSchema.entries.debit,
-    credit: transactionSchema.entries.credit,
+    date: transactionSchema.entries.date
 }))
 
 

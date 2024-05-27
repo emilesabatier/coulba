@@ -1,4 +1,4 @@
-import { accounts, journals, transactions } from "@coulba/schemas/models"
+import { accounts, journals, records } from "@coulba/schemas/models"
 import { v1 } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
@@ -10,10 +10,10 @@ import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { V1Env } from "../../middlewares/checkApiKey.js"
 
 
-export const transactionsRoute = new Hono<V1Env>()
+export const recordsRoute = new Hono<V1Env>()
     .post(
         '/',
-        validator("json", bodyValidator(v1.transactions.post.body)),
+        validator("json", bodyValidator(v1.records.post.body)),
         async (c) => {
             const body = c.req.valid('json')
 
@@ -40,12 +40,13 @@ export const transactionsRoute = new Hono<V1Env>()
                 idJournal = readJournal.id
             }
 
-            const [createTransaction] = await db
-                .insert(transactions)
+            const [createRecord] = await db
+                .insert(records)
                 .values({
                     id: generateId(),
                     idCompany: c.var.company.id,
                     idYear: c.var.currentYear.id,
+                    idTransaction: "",
                     idAccount: readAccount.id,
                     idJournal: idJournal,
                     idAttachment: body.idAttachment,
@@ -57,6 +58,6 @@ export const transactionsRoute = new Hono<V1Env>()
                 })
                 .returning()
 
-            return c.json(createTransaction, 200)
+            return c.json(createRecord, 200)
         }
     )
