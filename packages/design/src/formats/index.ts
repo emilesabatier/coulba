@@ -20,10 +20,6 @@ export * from "./select/select.format"
 
 export * from "./null/formatNull"
 
-export * from "./record/formatRecord"
-export * from "./record/formatRecordContent"
-export * from "./records/formatRecords"
-
 export * from "./relativeDateTime/formatRelativeDateTime"
 export * from "./relativeDateTime/relativeDateTime.format"
 
@@ -35,3 +31,4 @@ export * from "./price/price.format"
 
 export * from "./fileSize/fileSize.format"
 export * from "./fileSize/formatFileSize"
+

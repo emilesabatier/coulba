@@ -4,7 +4,6 @@ import { companies } from "./companies/index.js"
 import { computations } from "./computations/index.js"
 import { journals } from "./journals/index.js"
 import { profile } from "./profile/index.js"
-import { records } from "./records/index.js"
 import { services } from "./services/index.js"
 import { sheets } from "./sheets/index.js"
 import { statements } from "./statement/index.js"
@@ -20,7 +19,6 @@ export const auth = {
     statements: statements,
     attachments: attachments,
     companies: companies,
-    records: records,
     transactions: transactions,
     journals: journals,
     users: users,

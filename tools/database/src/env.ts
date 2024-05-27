@@ -19,7 +19,7 @@ export function env() {
     } catch (error) {
         if (error instanceof v.ValiError) {
             const errorMessage = v.flatten<typeof envSchema>(error)
-            // const errorMessage = Object.records(fieldErrors)
+            // const errorMessage = Object.transactions(fieldErrors)
             //     .map(([field, errors]) =>
             //         errors ? `${field}: ${errors.join(", ")}` : field,
             //     )

@@ -1,5 +1,5 @@
 import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
-import { FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { IconEye, IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { transactionsOptions } from "../../services/api/auth/transactions/transactionsOptions"
@@ -34,6 +34,12 @@ export function TransactionsTable() {
                             </ReadTransaction>
                         )
                     }
+                },
+                {
+                    accessorKey: 'isConfirmed',
+                    header: 'État',
+                    cell: ({ row }) => (<FormatBoolean boolean={row.original.isConfirmed} text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"} />),
+                    filterFn: 'includesString'
                 },
                 {
                     accessorKey: 'label',

@@ -60,13 +60,13 @@ export type Balance = {
     }
 }
 
-export function getBalance(records: v.Output<typeof auth.records.get.return>[], accounts: v.Output<typeof auth.accounts.get.return>[]) {
-    return records.reduce<Balance[]>((_balance, _record) => {
-        const account = accounts.find((_account) => _account.id === _record.idAccount)
+export function getBalance(transactions: v.Output<typeof auth.transactions.get.return>[], accounts: v.Output<typeof auth.accounts.get.return>[]) {
+    return transactions.reduce<Balance[]>((_balance, _transaction) => {
+        const account = accounts.find((_account) => _account.id === _transaction.idAccount)
         if (!account) return _balance
 
-        const debit = Number(_record.debit)
-        const credit = Number(_record.credit)
+        const debit = Number(_transaction.debit)
+        const credit = Number(_transaction.credit)
         const entry = {
             account: account,
             sum: {
@@ -79,15 +79,15 @@ export function getBalance(records: v.Output<typeof auth.records.get.return>[], 
             }
         }
 
-        const currentBalanceEntry = _balance.find((entry) => entry.account.id === _record.idAccount)
+        const currentBalanceEntry = _balance.find((entry) => entry.account.id === _transaction.idAccount)
         if (currentBalanceEntry === undefined) {
 
             _balance.push(entry)
             return _balance
         }
 
-        currentBalanceEntry.sum.debit += Number(_record.debit)
-        currentBalanceEntry.sum.credit += Number(_record.credit)
+        currentBalanceEntry.sum.debit += Number(_transaction.debit)
+        currentBalanceEntry.sum.credit += Number(_transaction.credit)
         currentBalanceEntry.balance = getBalanceEntry(currentBalanceEntry.balance.debit, currentBalanceEntry.balance.credit, entry.balance.debit, entry.balance.credit)
 
         return _balance

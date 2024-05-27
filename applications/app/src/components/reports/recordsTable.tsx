@@ -1,6 +1,6 @@
 import { FormatDate, FormatNull, FormatPrice, FormatText, formatPrice } from "@coulba/design/formats"
 import { useQuery } from "@tanstack/react-query"
-import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
+import { transactionsOptions } from "../../services/api/auth/transactions/transactionsOptions"
 import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
 import { FormatAttachmentWithFetch } from "../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../journals/format/formatJournalWithFetch"
@@ -8,23 +8,23 @@ import { Table } from "../layouts/table"
 
 
 export function RecordsTable() {
-    const records = useQuery(recordsOptions)
+    const transactions = useQuery(transactionsOptions)
 
-    const recordsData = (records.data ?? [])
+    const transactionsData = (transactions.data ?? [])
         .sort((a, b) => b.date.localeCompare(a.date))
 
-    const totalDebit = recordsData.reduce<number>((previous, record) => {
-        return previous + Number(record.debit)
+    const totalDebit = transactionsData.reduce<number>((previous, transaction) => {
+        return previous + Number(transaction.debit)
     }, 0)
 
-    const totalCredit = recordsData.reduce<number>((previous, record) => {
-        return previous + Number(record.credit)
+    const totalCredit = transactionsData.reduce<number>((previous, transaction) => {
+        return previous + Number(transaction.credit)
     }, 0)
 
     return (
         <Table
-            data={recordsData}
-            isLoading={records.isLoading}
+            data={transactionsData}
+            isLoading={transactions.isLoading}
             columns={[
                 {
                     accessorKey: 'date',

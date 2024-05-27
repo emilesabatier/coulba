@@ -1,5 +1,5 @@
 
-export type DefaultRecord = {
+export type DefaultTransaction = {
     date: string
     accountNumber: number
     label: string
@@ -7,7 +7,7 @@ export type DefaultRecord = {
     credit: number
 }
 
-export const defaultRecords: DefaultRecord[] = [
+export const defaultTransactions: DefaultTransaction[] = [
     {
         date: "2021-11-23T11:00:00.000Z",
         accountNumber: 651,

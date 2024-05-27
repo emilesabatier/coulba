@@ -4,8 +4,8 @@ import { auth } from "@coulba/schemas/routes"
 import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
-import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
+import { transactionsOptions } from "../../../services/api/auth/transactions/transactionsOptions"
 import { Balance, getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -105,10 +105,10 @@ function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[
 
 export function SheetContent() {
     const sheets = useQuery(sheetsOptions)
-    const records = useQuery(recordsOptions)
+    const transactions = useQuery(transactionsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(records.data ?? [], accounts.data ?? [])
+    const balance = getBalance(transactions.data ?? [], accounts.data ?? [])
 
     const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), balance, null)
         .sort((a, b) => a.number - b.number)
@@ -120,10 +120,10 @@ export function SheetContent() {
 
     const totalSheetLiability = sheetLiabilities.reduce<number>((previous, entry) => previous + Number(entry.net), 0)
 
-    if (records.isLoading || accounts.isLoading) return <CircularLoader />
-    if (records.isError) return <ErrorMessage message={records.error.message} />
+    if (transactions.isLoading || accounts.isLoading) return <CircularLoader />
+    if (transactions.isError) return <ErrorMessage message={transactions.error.message} />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
-    if (!records.data || !accounts.data) return null
+    if (!transactions.data || !accounts.data) return null
     return (
         <Section.Root>
             <Section.Item>

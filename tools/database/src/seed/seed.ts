@@ -1,5 +1,5 @@
 import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
+import { accounts, accountSheets, companies, computations, computationStatements, journals, sheets, statements, transactions, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -7,7 +7,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultRecords } from './records'
+import { defaultTransactions } from './transactions'
 
 
 export function generateTemporaryPassword(): string {
@@ -230,12 +230,12 @@ async function seed() {
             await tx.insert(users).values(adminUser)
 
 
-            // Records
-            console.log("Add records")
-            const newRecords: (typeof records.$inferInsert)[] = defaultRecords.flatMap((record) => {
-                const idAccount = newAccounts.find((account) => account.number === record.accountNumber)?.id
+            // Transactions
+            console.log("Add transactions")
+            const newTransactions: (typeof transactions.$inferInsert)[] = defaultTransactions.flatMap((transaction) => {
+                const idAccount = newAccounts.find((account) => account.number === transaction.accountNumber)?.id
                 if (!idAccount) {
-                    console.log("Erreur record", record)
+                    console.log("Erreur transaction", transaction)
                     return []
                 }
                 return ([{
@@ -243,13 +243,14 @@ async function seed() {
                     idCompany: newCompany.id,
                     idYear: idCurrentYear,
                     idAccount: idAccount,
-                    label: record.label,
-                    date: record.date,
-                    debit: record.debit.toString(),
-                    credit: record.credit.toString()
+                    isConfirmed: true,
+                    label: transaction.label,
+                    date: transaction.date,
+                    debit: transaction.debit.toString(),
+                    credit: transaction.credit.toString()
                 }])
             })
-            await tx.insert(records).values(newRecords)
+            await tx.insert(transactions).values(newTransactions)
         })
 
     } catch (error) {

@@ -60,7 +60,6 @@ import { createTransactionRoute } from './auth/app/transactions/createTransactio
 import { readTransactionLayout } from './auth/app/transactions/readTransaction.layout'
 import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
 import { transactionsLayout } from './auth/app/transactions/transactions.layout'
-import { transactionsRoute } from './auth/app/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/app/transactions/updateTransaction.route'
 import { authLayout } from './auth/auth.layout'
 import { rootLayout } from './root.layout'
@@ -71,6 +70,7 @@ import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
 import { signInRoute } from './signIn/signIn.route'
 import { signUpRoute } from './signUp/signUp.route'
+import { transactionsRoute } from './auth/app/transactions/transactions.route'
 
 
 const routeTree = rootLayout.addChildren([

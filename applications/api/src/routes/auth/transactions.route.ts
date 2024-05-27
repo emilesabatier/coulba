@@ -1,4 +1,4 @@
-import { records, transactions } from "@coulba/schemas/models"
+import { transactions } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
@@ -7,8 +7,8 @@ import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
-import { paramsValidator } from "../../middlewares/paramsValidator.js"
 import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
+import { paramsValidator } from "../../middlewares/paramsValidator.js"
 
 
 export const transactionsRoute = new Hono<AuthEnv>()
@@ -123,37 +123,15 @@ export const transactionsRoute = new Hono<AuthEnv>()
         async (c) => {
             const params = c.req.valid('param')
 
-            const updateTransaction = await db.transaction(async (tx) => {
-                const [updateTransaction] = await tx
-                    .update(transactions)
-                    .set({
-                        isConfirmed: true,
-                        lastUpdatedBy: c.var.user.id,
-                        lastUpdatedOn: new Date().toISOString()
-                    })
-                    .where(eq(transactions.id, params.idTransaction))
-                    .returning()
-
-                await tx
-                    .insert(records)
-                    .values({
-                        id: generateId(),
-                        idCompany: updateTransaction.idCompany,
-                        idYear: updateTransaction.idYear,
-                        idAccount: updateTransaction.idAccount,
-                        idJournal: updateTransaction.idJournal,
-                        idAttachment: updateTransaction.idAttachment,
-                        idTransaction: params.idTransaction,
-                        label: updateTransaction.label,
-                        date: updateTransaction.date,
-                        debit: updateTransaction.debit,
-                        credit: updateTransaction.credit,
-                        createdOn: updateTransaction.createdOn,
-                        createdBy: updateTransaction.createdBy
-                    })
-
-                return updateTransaction
-            })
+            const [updateTransaction] = await db
+                .update(transactions)
+                .set({
+                    isConfirmed: true,
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(eq(transactions.id, params.idTransaction))
+                .returning()
 
             return c.json(updateTransaction, 200)
         }

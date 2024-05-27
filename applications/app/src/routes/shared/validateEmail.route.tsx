@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
-import { sharedLayout } from "./shared.layout"
 import { ValidateEmailPage } from "../../pages/shared/validateEmailPage"
+import { sharedLayout } from "./shared.layout"
 
 
 export const validateEmailRoute = createRoute({

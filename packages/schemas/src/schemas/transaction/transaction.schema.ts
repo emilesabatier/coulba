@@ -15,7 +15,6 @@ export const transactionSchema = createSelectSchema(transactions, {
     idAccount: v.nonNullish(idSchema, "Le compte mouvementé doit être renseigné"),
     idJournal: idSchema,
     idAttachment: idSchema,
-    idRecord: idSchema,
     isConfirmed: booleanSchema,
     label: v.nonNullish(requiredTextSchema, "Le libellé doit être renseigné"),
     date: v.nonNullish(dateTimeSchema, "La date doit être renseignée"),
