@@ -28,17 +28,24 @@ export function CreateRecordForm() {
     return (
         <Form
             validationSchema={auth.records.post.body}
-            defaultValues={{}}
+            defaultValues={{
+                idTransaction: idTransaction
+            }}
             onCancel={() => router.navigate({
                 to: "/operations/$idTransaction",
                 params: { idTransaction: idTransaction }
             })}
             submitLabel="Ajouter l'enregistrement"
             onSubmit={async (data) => {
-                mutation.mutate({ body: data }, {
+                mutation.mutate({
+                    body: data
+                }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        // router.navigate({ to: "/enregistrements" })
+                        router.navigate({
+                            to: "/operations/$idTransaction",
+                            params: { idTransaction: idTransaction }
+                        })
                         toast({ title: "Nouvel enregistrement ajouté", variant: "success" })
                     }
                 })

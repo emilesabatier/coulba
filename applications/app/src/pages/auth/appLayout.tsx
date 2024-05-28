@@ -1,7 +1,7 @@
 import { ButtonGhost, ButtonMenu, ButtonMenuContent } from "@coulba/design/buttons"
 import { CircularLoader, Logo } from "@coulba/design/layouts"
 import { PopoverMenu } from "@coulba/design/overlays"
-import { IconBook, IconChevronRight, IconExternalLink, IconLogout2, IconSettings, IconUser } from "@tabler/icons-react"
+import { IconBook, IconChevronRight, IconExternalLink, IconLifebuoy, IconLogout2, IconSettings, IconUser } from "@tabler/icons-react"
 import { Link, Outlet, useRouter } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { DisplayVersion } from "../../components/layouts/navigation/displayVersion"
@@ -63,12 +63,18 @@ export function AppLayout() {
                                 className="w-full"
                             />
                         }
-                        align="start"
+                        align="end"
                     >
                         <Link to="/profil">
                             <ButtonMenuContent
                                 icon={<IconSettings />}
                                 text="Paramètres & sécurité"
+                            />
+                        </Link>
+                        <Link to="/support">
+                            <ButtonMenuContent
+                                icon={<IconLifebuoy />}
+                                text="Contacter le support"
                             />
                         </Link>
                         <a href="https://documentation.coulba.fr" target="_blank" rel="noopener noreferrer" className="cursor-pointer">

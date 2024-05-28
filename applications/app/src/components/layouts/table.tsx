@@ -107,6 +107,7 @@ export function Table<T>(props: Table<T>) {
                         {table.getRowModel().rows.map((row) => {
                             return (
                                 <tr
+                                    key={row.id}
                                     onClick={() => {
                                         if (!props.onRowClick) return
                                         props.onRowClick(row)
