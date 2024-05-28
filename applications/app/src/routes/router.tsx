@@ -11,6 +11,8 @@ import { APIRoute } from './auth/app/configuration/API.route'
 import { accountsLayout } from './auth/app/configuration/accounts/accounts.layout'
 import { accountsRoute } from './auth/app/configuration/accounts/accounts.route'
 import { createAccountRoute } from './auth/app/configuration/accounts/createAccount.route'
+import { readAccountLayout } from './auth/app/configuration/accounts/readAccount.layout'
+import { readAccountRoute } from './auth/app/configuration/accounts/readAccount.route'
 import { updateAccountRoute } from './auth/app/configuration/accounts/updateAccount.route'
 import { closingRoute } from './auth/app/configuration/closing.route'
 import { companyLayout } from './auth/app/configuration/company/company.layout'
@@ -23,16 +25,25 @@ import { journalsLayout } from './auth/app/configuration/journals/journals.layou
 import { journalsRoute } from './auth/app/configuration/journals/journals.route'
 import { updateJournalRoute } from './auth/app/configuration/journals/updateJournal.route'
 import { createSheetRoute } from './auth/app/configuration/sheets/createSheet.route'
+import { readSheetLayout } from './auth/app/configuration/sheets/readSheet.layout'
+import { readSheetRoute } from './auth/app/configuration/sheets/readSheet.route'
 import { sheetsLayout } from './auth/app/configuration/sheets/sheets.layout'
 import { sheetsRoute } from './auth/app/configuration/sheets/sheets.route'
 import { updateSheetRoute } from './auth/app/configuration/sheets/updateSheet.route'
 import { computationsLayout } from './auth/app/configuration/statements/computations/computations.layout'
+import { computationsRoute } from './auth/app/configuration/statements/computations/computations.route'
 import { createComputationRoute } from './auth/app/configuration/statements/computations/createComputation.route'
+import { readComputationLayout } from './auth/app/configuration/statements/computations/readComputation.layout'
+import { readComputationRoute } from './auth/app/configuration/statements/computations/readComputation.route'
 import { updateComputationRoute } from './auth/app/configuration/statements/computations/updateComputation.route'
-import { createStatementRoute } from './auth/app/configuration/statements/createStatement.route'
+import { createStatementRoute } from './auth/app/configuration/statements/statementRows/createStatement.route'
+import { readStatementLayout } from './auth/app/configuration/statements/statementRows/readStatement.layout'
+import { readStatementRoute } from './auth/app/configuration/statements/statementRows/readStatement.route'
+import { statementRowsLayout } from './auth/app/configuration/statements/statementRows/statementRows.layout'
+import { statementRowsRoute } from './auth/app/configuration/statements/statementRows/statementRows.route'
+import { updateStatementRoute } from './auth/app/configuration/statements/statementRows/updateStatement.route'
 import { statementsLayout } from './auth/app/configuration/statements/statements.layout'
 import { statementsRoute } from './auth/app/configuration/statements/statements.route'
-import { updateStatementRoute } from './auth/app/configuration/statements/updateStatement.route'
 import { createUserRoute } from './auth/app/configuration/users/createUser.route'
 import { updateUserRoute } from './auth/app/configuration/users/updateUser.route'
 import { usersLayout } from './auth/app/configuration/users/users.layout'
@@ -59,6 +70,11 @@ import { supportRoute } from './auth/app/support.route'
 import { createTransactionRoute } from './auth/app/transactions/createTransaction.route'
 import { readTransactionLayout } from './auth/app/transactions/readTransaction.layout'
 import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
+import { createRecordRoute } from './auth/app/transactions/records/createRecord.route'
+import { readRecordLayout } from './auth/app/transactions/records/readRecord.layout'
+import { readRecordRoute } from './auth/app/transactions/records/readRecord.route'
+import { recordsLayout } from './auth/app/transactions/records/records.layout'
+import { updateRecordRoute } from './auth/app/transactions/records/updateRecord.route'
 import { transactionsLayout } from './auth/app/transactions/transactions.layout'
 import { transactionsRoute } from './auth/app/transactions/transactions.route'
 import { updateTransactionRoute } from './auth/app/transactions/updateTransaction.route'
@@ -71,11 +87,6 @@ import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
 import { signInRoute } from './signIn/signIn.route'
 import { signUpRoute } from './signUp/signUp.route'
-import { createRecordRoute } from './auth/app/transactions/records/createRecord.route'
-import { readRecordLayout } from './auth/app/transactions/records/readRecord.layout'
-import { readRecordRoute } from './auth/app/transactions/records/readRecord.route'
-import { recordsLayout } from './auth/app/transactions/records/records.layout'
-import { updateRecordRoute } from './auth/app/transactions/records/updateRecord.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -158,20 +169,36 @@ const routeTree = rootLayout.addChildren([
                 accountsLayout.addChildren([
                     accountsRoute,
                     createAccountRoute,
-                    updateAccountRoute
+                    readAccountLayout.addChildren([
+                        readAccountRoute,
+                        updateAccountRoute
+                    ])
                 ]),
                 sheetsLayout.addChildren([
                     sheetsRoute,
                     createSheetRoute,
-                    updateSheetRoute
+                    readSheetLayout.addChildren([
+                        readSheetRoute,
+                        updateSheetRoute
+                    ])
                 ]),
                 statementsLayout.addChildren([
                     statementsRoute,
-                    createStatementRoute,
-                    updateStatementRoute,
+                    statementRowsLayout.addChildren([
+                        statementRowsRoute,
+                        createStatementRoute,
+                        readStatementLayout.addChildren([
+                            readStatementRoute,
+                            updateStatementRoute
+                        ])
+                    ]),
                     computationsLayout.addChildren([
+                        computationsRoute,
                         createComputationRoute,
-                        updateComputationRoute
+                        readComputationLayout.addChildren([
+                            readComputationRoute,
+                            updateComputationRoute
+                        ])
                     ])
                 ])
             ]),

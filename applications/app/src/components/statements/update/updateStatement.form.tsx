@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateStatementRoute } from "../../../routes/auth/app/configuration/statements/updateStatement.route"
+import { updateStatementRoute } from "../../../routes/auth/app/configuration/statements/statementRows/updateStatement.route"
 import { router } from "../../../routes/router"
 import { statementOptions, statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { updateStatement } from "../../../services/api/auth/statements/updateStatement"
@@ -32,7 +32,10 @@ export function UpdateStatementForm() {
         <Form
             validationSchema={auth.statements.put.body}
             defaultValues={statement.data}
-            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
+            onCancel={() => router.navigate({
+                to: "/configuration/compte-de-resultat/$idStatement",
+                params: { idStatement: idStatement }
+            })}
             submitLabel="Modifier la ligne"
             onSubmit={async (data) => {
                 mutation.mutate({
@@ -41,7 +44,10 @@ export function UpdateStatementForm() {
                 }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat" })
+                        router.navigate({
+                            to: "/configuration/compte-de-resultat/$idStatement",
+                            params: { idStatement: idStatement }
+                        })
                         toast({ title: "Ligne mise à jour", variant: "success" })
                     }
                 })

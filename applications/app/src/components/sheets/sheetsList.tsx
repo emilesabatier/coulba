@@ -1,9 +1,9 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronDown, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconChevronDown, IconEye, IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { ComponentProps } from "react"
 import * as v from "valibot"
@@ -11,8 +11,7 @@ import { sheetsOptions } from "../../services/api/auth/sheets/sheetsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
 import { CreateSheet } from "./create/createSheet"
-import { DeleteSheet } from "./delete/deleteSheet"
-import { UpdateSheet } from "./update/updateSheet"
+import { ReadSheet } from "./read/readSheet"
 
 
 type GroupedSheet = {
@@ -112,30 +111,28 @@ function SheetItem(props: SheetItem) {
                 props.className
             )}
         >
-            <div className="flex justify-between items-center gap-3 hover:bg-neutral/5 rounded-sm">
-                <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-start gap-2 p-2">
+            <div className="w-full flex justify-between items-start gap-1.5">
+                <AccordionTrigger className="w-fit flex justify-start items-center gap-3 py-1.5 px-3 hover:bg-neutral/5 rounded-sm">
+                    <div className="flex justify-start items-start gap-3">
                         <h2 className="font-bold">{props.groupedSheet.sheet.number}</h2>
                         <span className="text-neutral/75 text-left">{props.groupedSheet.sheet.label}</span>
                     </div>
-                    <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50 shrink-0",
-                        hasSubSheets ? undefined : "opacity-0"
-                    )} />
+                    <IconChevronDown
+                        size={16}
+                        className={cn(
+                            "text-neutral/50 shrink-0",
+                            hasSubSheets ? undefined : "opacity-0"
+                        )}
+                    />
                 </AccordionTrigger>
-                <div className="flex justify-end items-center gap-1">
-                    <UpdateSheet sheet={props.groupedSheet.sheet}>
-                        <ButtonGhost
-                            icon={<IconPencil />}
+                <ReadSheet idSheet={props.groupedSheet.sheet.id}>
+                    <div className="w-fit hover:bg-neutral/5 p-1.5 rounded-sm">
+                        <IconEye
+                            size={24}
+                            className="text-neutral/50 shrink-0"
                         />
-                    </UpdateSheet>
-                    <DeleteSheet sheet={props.groupedSheet.sheet}>
-                        <ButtonGhost
-                            icon={<IconTrash />}
-                            color="error"
-                        />
-                    </DeleteSheet>
-                </div>
+                    </div>
+                </ReadSheet>
             </div>
             <AccordionContent>
                 <Accordion type="multiple">

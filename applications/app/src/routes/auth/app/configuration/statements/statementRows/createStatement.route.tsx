@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
-import { CreateStatementPage } from "../../../../../pages/auth/configuration/statements/createStatementPage"
-import { statementsLayout } from "./statements.layout"
+import { CreateStatementPage } from "../../../../../../pages/auth/configuration/statements/statementRows/createStatementPage"
+import { statementsLayout } from "../statements.layout"
 
 
 export const createStatementRoute = createRoute({

@@ -1,9 +1,9 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronDown, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconChevronDown, IconEye, IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { ComponentProps } from "react"
 import * as v from "valibot"
@@ -11,8 +11,7 @@ import { accountsOptions } from "../../services/api/auth/accounts/accountsOption
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
 import { CreateAccount } from "./create/createAccount"
-import { DeleteAccount } from "./delete/deleteAccount"
-import { UpdateAccount } from "./update/updateAccount"
+import { ReadAccount } from "./read/readAccount"
 
 
 type GroupedAccount = {
@@ -88,30 +87,28 @@ function AccountItem(props: AccountItem) {
                 props.className
             )}
         >
-            <div className="flex justify-between items-center gap-3 hover:bg-neutral/5 rounded-sm">
-                <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-start gap-2 p-2">
+            <div className="w-full flex justify-between items-start gap-1.5">
+                <AccordionTrigger className="w-fit flex justify-start items-center gap-3 py-1.5 px-3 hover:bg-neutral/5 rounded-sm">
+                    <div className="flex justify-start items-start gap-3">
                         <h2 className="font-bold">{props.groupedAccount.account.number}</h2>
                         <span className="text-neutral/75 text-left">{props.groupedAccount.account.label}</span>
                     </div>
-                    <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50 shrink-0",
-                        hasSubAccounts ? undefined : "opacity-0"
-                    )} />
+                    <IconChevronDown
+                        size={16}
+                        className={cn(
+                            "text-neutral/50 shrink-0",
+                            hasSubAccounts ? undefined : "opacity-0"
+                        )}
+                    />
                 </AccordionTrigger>
-                <div className="flex justify-end items-center gap-1">
-                    <UpdateAccount account={props.groupedAccount.account}>
-                        <ButtonGhost
-                            icon={<IconPencil />}
+                <ReadAccount idAccount={props.groupedAccount.account.id}>
+                    <div className="w-fit hover:bg-neutral/5 p-1.5 rounded-sm">
+                        <IconEye
+                            size={24}
+                            className="text-neutral/50 shrink-0"
                         />
-                    </UpdateAccount>
-                    <DeleteAccount account={props.groupedAccount.account}>
-                        <ButtonGhost
-                            icon={<IconTrash />}
-                            color="error"
-                        />
-                    </DeleteAccount>
-                </div>
+                    </div>
+                </ReadAccount>
             </div>
             <AccordionContent>
                 <Accordion type="multiple">

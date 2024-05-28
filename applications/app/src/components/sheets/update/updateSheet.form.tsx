@@ -32,7 +32,10 @@ export function UpdateSheetForm() {
         <Form
             validationSchema={auth.sheets.put.body}
             defaultValues={sheet.data}
-            onCancel={() => router.navigate({ to: "/configuration/bilan" })}
+            onCancel={() => router.navigate({
+                to: "/configuration/bilan/$idSheet",
+                params: { idSheet: idSheet }
+            })}
             submitLabel="Modifier la ligne"
             onSubmit={async (data) => {
                 mutation.mutate({
@@ -41,7 +44,10 @@ export function UpdateSheetForm() {
                 }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/bilan" })
+                        router.navigate({
+                            to: "/configuration/bilan/$idSheet",
+                            params: { idSheet: idSheet }
+                        })
                         toast({ title: "Ligne mise à jour", variant: "success" })
                     }
                 })

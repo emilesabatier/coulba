@@ -33,7 +33,10 @@ export function UpdateAccountForm() {
         <Form
             validationSchema={auth.accounts.put.body}
             defaultValues={account.data}
-            onCancel={() => router.navigate({ to: "/configuration/comptes" })}
+            onCancel={() => router.navigate({
+                to: "/configuration/comptes/$idAccount",
+                params: { idAccount: idAccount }
+            })}
             submitLabel="Modifier le compte"
             onSubmit={async (data) => {
                 mutation.mutate({
@@ -42,7 +45,10 @@ export function UpdateAccountForm() {
                 }, {
                     onSuccess: (newData) => {
                         queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData && newData && [...oldData.filter((account) => account.id !== newData.id), newData])
-                        router.navigate({ to: "/configuration/comptes" })
+                        router.navigate({
+                            to: "/configuration/comptes/$idAccount",
+                            params: { idAccount: idAccount }
+                        })
                         toast({ title: "Compte mis à jour", variant: "success" })
                     }
                 })

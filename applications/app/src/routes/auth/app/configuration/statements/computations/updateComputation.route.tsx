@@ -1,14 +1,14 @@
 import { createRoute } from "@tanstack/react-router"
 import { UpdateComputationPage } from "../../../../../../pages/auth/configuration/statements/computations/updateComputationPage"
-import { computationsLayout } from "./computations.layout"
+import { readComputationLayout } from "./readComputation.layout"
 
 
 export const updateComputationRoute = createRoute({
-    getParentRoute: () => computationsLayout,
+    getParentRoute: () => readComputationLayout,
     beforeLoad: () => ({
         title: "Modifier",
         description: "Remplir le formulaire et valider pour modifier les données de l'opération du bilan."
     }),
-    path: '/$idComputation/modifier',
+    path: '/modifier',
     component: () => <UpdateComputationPage />
 })

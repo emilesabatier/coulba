@@ -36,7 +36,7 @@ const features = [
     {
         icon: <IconTool />,
         title: "Configuration",
-        description: "Configurez l'application en détail pour répondre à votre besoin spécifique (exercices fiscaux, journaux, plan des comptes, bilan ou encore le compte de résultats)."
+        description: "Configurez l'application en détail pour répondre à votre besoin spécifique (exercices fiscaux, journaux, plan des comptes, bilan ou encore le compte de résultat)."
     },
     {
         icon: <IconApiApp />,

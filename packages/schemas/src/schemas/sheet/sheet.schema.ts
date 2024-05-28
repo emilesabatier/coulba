@@ -4,7 +4,7 @@ import { integerSchema } from "../../components/index.js"
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
-import { sheetSides } from '../../components/values/sheetSide.js'
+import { sheetSides } from '../../components/values/sheetSides.js'
 import { sheets } from "../../models/index.js"
 
 

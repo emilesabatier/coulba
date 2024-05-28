@@ -64,7 +64,7 @@ export const menuItems: MenuItem[] = [
             {
                 basePath: "/documents/compte-de-resultat",
                 path: "/documents/compte-de-resultat",
-                label: "Compte de résultats"
+                label: "Compte de résultat"
             }
         ]
     },
