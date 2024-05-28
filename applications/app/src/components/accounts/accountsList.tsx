@@ -39,7 +39,7 @@ export function AccountsList() {
     const groupedAccounts = groupAccounts(accounts.data ?? [], 1)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
-    if (accounts.isLoading) return <CircularLoader />
+    if (accounts.isLoading) return <CircularLoader className="m-3" />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!accounts.data) return null
     return (

@@ -120,7 +120,7 @@ export function SheetContent() {
 
     const totalSheetLiability = sheetLiabilities.reduce<number>((previous, entry) => previous + Number(entry.net), 0)
 
-    if (records.isLoading || accounts.isLoading) return <CircularLoader />
+    if (records.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
     if (records.isError) return <ErrorMessage message={records.error.message} />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!records.data || !accounts.data) return null

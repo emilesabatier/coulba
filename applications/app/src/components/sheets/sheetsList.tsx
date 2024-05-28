@@ -44,7 +44,7 @@ export function SheetsList() {
         .filter((group) => group.sheet.side === "liability")
         .sort((a, b) => a.sheet.number - b.sheet.number)
 
-    if (sheets.isLoading) return <CircularLoader />
+    if (sheets.isLoading) return <CircularLoader className="m-3" />
     if (sheets.isError) return <ErrorMessage message={sheets.error.message} />
     if (!sheets.data) return null
     return (

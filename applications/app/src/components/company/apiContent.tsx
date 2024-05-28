@@ -28,7 +28,7 @@ export function ApiContent() {
         return navigator.clipboard.writeText(apiKey)
     }
 
-    if (company.isLoading) return <CircularLoader />
+    if (company.isLoading) return <CircularLoader className="m-3" />
     if (!company.data) return null
     return (
         <Section.Root>

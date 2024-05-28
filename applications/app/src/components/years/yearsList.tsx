@@ -17,7 +17,7 @@ export function YearsList() {
     const yearsArray = (years.data ?? [])
         .sort((a, b) => b.label.localeCompare(a.label))
 
-    if (years.isLoading) return <CircularLoader />
+    if (years.isLoading) return <CircularLoader className="m-3" />
     if (years.isError) return <ErrorMessage message={years.error.message} />
     if (!years.data) return null
     return (

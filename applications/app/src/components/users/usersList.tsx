@@ -16,7 +16,7 @@ import { UpdateUser } from "./update/updateUser"
 export function UsersList() {
     const users = useQuery(usersOptions)
 
-    if (users.isLoading) return <CircularLoader />
+    if (users.isLoading) return <CircularLoader className="m-3" />
     if (users.isError) return <ErrorMessage message={users.error.message} />
     if (!users.data) return null
     return (

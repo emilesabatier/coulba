@@ -52,7 +52,7 @@ export function Table<T>(props: Table<T>) {
         }
     })
 
-    if (props.isLoading) return <CircularLoader />
+    if (props.isLoading) return <CircularLoader className="m-3" />
     return (
         <Section.Root
         // className="h-full"

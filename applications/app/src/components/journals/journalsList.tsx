@@ -14,7 +14,7 @@ import { UpdateJournal } from "./update/updateJournal"
 export function JournalsList() {
     const journals = useQuery(journalsOptions)
 
-    if (journals.isLoading) return <CircularLoader />
+    if (journals.isLoading) return <CircularLoader className="m-3" />
     if (journals.isError) return <ErrorMessage message={journals.error.message} />
     if (!journals.data) return null
     return (

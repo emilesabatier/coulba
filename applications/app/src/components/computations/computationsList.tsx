@@ -18,7 +18,7 @@ export function ComputationsList() {
     const sortedComputations = (computations.data ?? [])
         .sort((a, b) => a.number - b.number)
 
-    if (computations.isLoading) return <CircularLoader />
+    if (computations.isLoading) return <CircularLoader className="m-3" />
     if (computations.isError) return <ErrorMessage message={computations.error.message} />
     if (!computations.data) return null
     return (

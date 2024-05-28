@@ -22,7 +22,7 @@ export function TransactionContent() {
     const { idTransaction } = useParams({ from: readTransactionRoute.id })
     const transaction = useQuery(transactionOptions(idTransaction))
 
-    if (transaction.isLoading) return <CircularLoader />
+    if (transaction.isLoading) return <CircularLoader className="m-3" />
     if (transaction.isError) return <ErrorMessage message={transaction.error.message} />
     if (!transaction.data) return null
     return (

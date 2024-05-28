@@ -39,7 +39,7 @@ export function StatementsList() {
     const groupedStatements = groupStatements(statements.data ?? [], null)
         .sort((a, b) => a.statement.number - b.statement.number)
 
-    if (statements.isLoading) return <CircularLoader />
+    if (statements.isLoading) return <CircularLoader className="m-3" />
     if (statements.isError) return <ErrorMessage message={statements.error.message} />
     if (!statements.data) return null
     return (
