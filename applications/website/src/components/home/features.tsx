@@ -1,4 +1,5 @@
-import { IconAccessible, IconApiApp, IconCrown, IconFiles, IconLock, IconPencilPlus, IconReportAnalytics, IconScale, IconTool, IconUsers } from "@tabler/icons-react"
+import { cn } from "@coulba/design/services"
+import { IconAccessible, IconApiApp, IconCrown, IconFiles, IconLock, IconPencilPlus, IconPigMoney, IconReportAnalytics, IconScale, IconTool, IconUsers, IconUsersGroup } from "@tabler/icons-react"
 
 
 const features = [
@@ -35,7 +36,7 @@ const features = [
     {
         icon: <IconTool />,
         title: "Configuration",
-        description: "Configurez les détails de vos exercices fiscaux, des journaux et du plan des comptes pour répondre à votre besoin spécifique."
+        description: "Configurez l'application en détail pour répondre à votre besoin spécifique (exercices fiscaux, journaux, plan des comptes, bilan ou encore le compte de résultats)."
     },
     {
         icon: <IconApiApp />,
@@ -51,6 +52,16 @@ const features = [
         icon: <IconLock />,
         title: "RGPD",
         description: "Seules certaines données sont collectées et dans un seul but d'utilisation interne d'amélioration du produit. Elle ne seront jamais partagées à un tiers."
+    },
+    {
+        icon: <IconUsersGroup />,
+        title: "Collaboratif",
+        description: "L'application est améliorée en fonction de vos retours. Une documentation open source est disponible pour toutes et tous."
+    },
+    {
+        icon: <IconPigMoney />,
+        title: "Aucun frais",
+        description: "L'utilisation de l'application est gratuite."
     }
 ]
 
@@ -58,15 +69,18 @@ export function Features() {
     return (
         <div id="fonctionnalites" className="w-full max-w-full h-full flex flex-col justify-start items-center gap-8 py-16">
             <div className="flex flex-col justify-start items-center gap-2 max-w-[768px]">
-                <h2 className="text-3xl leading-none uppercase text-center">Nos fonctionnalités</h2>
+                <h2 className="text-3xl leading-none uppercase text-center">Fonctionnalités</h2>
                 <p className="text-lg text-neutral/75 text-balance text-center">Pour avoir un point de vue global et savoir si l'application répond à vos besoins.</p>
             </div>
-            <div className="w-full h-full gap-2 flex flex-wrap justify-center items-stretch">
+            <div className="w-full h-full grid grid-cols-2 border-t border-x border-neutral/20">
                 {
                     features.map((feature) => {
                         return (
-                            <div className="min-w-[300px] w-full max-w-[600px] border border-neutral/20 rounded-md p-2 md:p-3 hover:shadow-sm flex flex-col justify-start items-start gap-2 md:gap-3">
-                                <div className="flex justify-start items-center gap-2">
+                            <div className={cn(
+                                "min-w-[300px] w-full p-3 hover:bg-neutral/5 flex flex-col justify-start items-start gap-3",
+                                "border-neutral/20 even:border-l border-b"
+                            )}>
+                                <div className="flex justify-start items-center gap-1.5">
                                     {feature.icon}
                                     <h3 className="text-lg leading-none uppercase whitespace-nowrap">{feature.title}</h3>
                                 </div>

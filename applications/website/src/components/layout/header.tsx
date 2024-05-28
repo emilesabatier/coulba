@@ -1,4 +1,4 @@
-import { ButtonOutline, ButtonOutlineContent } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonOutlineContent, ButtonPlainContent } from "@coulba/design/buttons"
 import { useDeviceDetect } from "@coulba/design/hooks"
 import { Logo } from "@coulba/design/layouts"
 import { Popover, PopoverContent, PopoverTrigger } from "@coulba/design/overlays"
@@ -19,19 +19,25 @@ export function Header() {
                         className="w-full md:w-fit justify-end"
                     />
                 </a> */}
-            <a href={import.meta.env.VITE_PUBLIC_APP_BASE} target="_blank" rel="noopener noreferrer" className="w-full md:w-fit">
+            <Link to="/tarif">
                 <ButtonOutlineContent
+                    text="Tarif"
+                    className="justify-center"
+                />
+            </Link>
+            <a href={import.meta.env.VITE_PUBLIC_APP_BASE} target="_blank" rel="noopener noreferrer" className="w-full md:w-fit">
+                <ButtonPlainContent
                     text="Connexion"
-                    className="w-full md:w-fit justify-center"
+                    className="justify-center"
                 />
             </a>
         </Fragment>
     )
     return (
-        <div className="w-full p-3 flex justify-center items-center">
-            <nav className="w-full max-w-[1280px] flex justify-between items-center gap-3 overflow-hidden">
-                <div className="relative w-fit flex justify-start items-center gap-2">
-                    <Link to="/" className="w-fit flex justify-center items-center">
+        <div className="w-full h-full p-3 flex justify-center items-center border-b border-neutral/20">
+            <nav className="w-full h-full max-w-[1280px] flex justify-between items-center gap-3">
+                <div className="w-full h-full flex justify-start items-center gap-2">
+                    <Link to="/" className="w-fit h-full flex justify-center items-center">
                         <Logo />
                     </Link>
                 </div>
@@ -50,7 +56,7 @@ export function Header() {
                             </PopoverContent>
                         </Popover>
                     ) : (
-                        <div className="flex justify-end items-center gap-1">
+                        <div className="flex justify-end items-center gap-1.5">
                             {menus}
                         </div>
                     )

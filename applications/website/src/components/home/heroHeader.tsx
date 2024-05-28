@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonPlainContent } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlainContent } from "@coulba/design/buttons"
 import { IconArrowDown } from "@tabler/icons-react"
 import { useNavigate } from "@tanstack/react-router"
 import { ScreenshotFrame } from "./screenshotFrame"
@@ -15,13 +15,13 @@ export function HeroHeader() {
                         Reprendre la main sur sa comptabilité
                     </h1>
                     <p className="text-lg text-neutral/75 text-balance text-center">
-                        La plupart des entrepreneurs individuels ou des très petites entreprises n'ont pas besoin de comptable, ni d'une application trop complexe.
+                        La plupart des entrepreneurs individuels ou des petites entreprises n'ont pas besoin de comptable.
                         <br />
                         Nous nous adressons à eux.
                     </p>
                 </div>
                 <div className="w-full flex justify-center items-start gap-2">
-                    <ButtonGhost
+                    <ButtonOutline
                         text="En savoir plus"
                         icon={<IconArrowDown />}
                         onClick={() => navigate({ to: "/", hash: "fonctionnalites" })}
