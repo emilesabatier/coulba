@@ -1,11 +1,11 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatBoolean, FormatDate, FormatDateTime, FormatText } from "@coulba/design/formats"
-import { IconEye, IconPlus } from "@tabler/icons-react"
+import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
+import { router } from "../../routes/router"
 import { transactionsOptions } from "../../services/api/auth/transactions/transactionsOptions"
 import { Table } from "../layouts/table"
 import { CreateTransaction } from "./create/createTransaction"
-import { ReadTransaction } from "./read/readTransaction"
 
 
 export function TransactionsTable() {
@@ -20,22 +20,14 @@ export function TransactionsTable() {
             isLoading={transactions.isLoading}
             columns={[
                 {
-                    id: 'actions',
-                    header: () => null,
-                    cell: ({ cell }) => {
-                        return (
-                            <ReadTransaction idTransaction={cell.row.original.id}>
-                                <ButtonGhost
-                                    icon={<IconEye />}
-                                />
-                            </ReadTransaction>
-                        )
-                    }
-                },
-                {
                     accessorKey: 'isConfirmed',
                     header: 'État',
-                    cell: ({ row }) => (<FormatBoolean boolean={row.original.isConfirmed} text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"} />),
+                    cell: ({ row }) => (
+                        <FormatBoolean
+                            boolean={row.original.isConfirmed}
+                            text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"}
+                        />
+                    ),
                     filterFn: 'includesString'
                 },
                 {
@@ -57,6 +49,12 @@ export function TransactionsTable() {
                     filterFn: 'includesString'
                 }
             ]}
+            onRowClick={(row) => {
+                router.navigate({
+                    to: "/operations/$idTransaction",
+                    params: { idTransaction: row.original.id }
+                })
+            }}
         >
             <CreateTransaction>
                 <ButtonPlain

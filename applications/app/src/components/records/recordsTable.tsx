@@ -1,14 +1,14 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { auth } from "@coulba/schemas/routes"
-import { IconEye, IconPlus } from "@tabler/icons-react"
+import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
+import { router } from "../../routes/router"
 import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
 import { FormatAttachmentWithFetch } from "../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../journals/format/formatJournalWithFetch"
 import { Table } from "../layouts/table"
 import { CreateRecord } from "./create/createRecord"
-import { ReadRecord } from "./read/readRecord"
 
 
 type RecordsTable = {
@@ -22,19 +22,6 @@ export function RecordsTable(props: RecordsTable) {
             data={props.transaction.records}
             isLoading={props.isLoading}
             columns={[
-                {
-                    id: 'actions',
-                    header: () => null,
-                    cell: ({ cell }) => {
-                        return (
-                            <ReadRecord idTransaction={props.transaction.id} idRecord={cell.row.original.id}>
-                                <ButtonGhost
-                                    icon={<IconEye />}
-                                />
-                            </ReadRecord>
-                        )
-                    }
-                },
                 {
                     accessorKey: 'isConfirmed',
                     header: 'État',
@@ -90,6 +77,15 @@ export function RecordsTable(props: RecordsTable) {
                     filterFn: 'includesString'
                 }
             ]}
+            onRowClick={(row) => {
+                router.navigate({
+                    to: "/operations/$idTransaction/enregistrements/$idRecord",
+                    params: {
+                        idTransaction: row.original.idTransaction,
+                        idRecord: row.original.id
+                    }
+                })
+            }}
         >
             <CreateRecord transaction={props.transaction}>
                 <ButtonPlain

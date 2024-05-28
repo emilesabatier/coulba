@@ -1,11 +1,11 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatDate, FormatDateTime, FormatFileSize, FormatNull, FormatText } from "@coulba/design/formats"
-import { IconEye, IconPlus } from "@tabler/icons-react"
+import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
+import { router } from "../../routes/router"
 import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
 import { Table } from "../layouts/table"
 import { CreateAttachment } from "./create/createAttachment"
-import { ReadAttachment } from "./read/readAttachment"
 
 
 export function AttachmentsTable() {
@@ -19,19 +19,6 @@ export function AttachmentsTable() {
             data={attachmentsData}
             isLoading={attachments.isLoading}
             columns={[
-                {
-                    id: 'actions',
-                    header: () => null,
-                    cell: ({ cell }) => {
-                        return (
-                            <ReadAttachment idAttachment={cell.row.original.id}>
-                                <ButtonGhost
-                                    icon={<IconEye />}
-                                />
-                            </ReadAttachment>
-                        )
-                    }
-                },
                 {
                     accessorKey: 'reference',
                     header: 'Référence',
@@ -69,6 +56,12 @@ export function AttachmentsTable() {
                     filterFn: 'includesString'
                 }
             ]}
+            onRowClick={(row) => {
+                router.navigate({
+                    to: "/fichiers/$idAttachment",
+                    params: { idAttachment: row.original.id }
+                })
+            }}
         >
             <CreateAttachment>
                 <ButtonPlain

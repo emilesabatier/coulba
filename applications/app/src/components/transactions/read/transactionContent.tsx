@@ -105,7 +105,7 @@ export function TransactionContent() {
             <Section.Item>
                 <Section.Title title="Enregistrements" />
             </Section.Item>
-            <Section.Item className="p-0">
+            <Section.Item className="p-0 border-b-0">
                 <RecordsTable
                     transaction={transaction.data}
                     isLoading={transaction.isLoading}
