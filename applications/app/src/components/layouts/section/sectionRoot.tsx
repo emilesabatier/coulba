@@ -11,7 +11,7 @@ export function SectionRoot(props: SectionRoot) {
     return (
         <div
             className={cn(
-                "shrink-0 w-full h-fit grid grid-cols-1",
+                "shrink-0 w-full h-fit max-h-full grid grid-cols-1",
                 props.className
             )}
             children={props.children}

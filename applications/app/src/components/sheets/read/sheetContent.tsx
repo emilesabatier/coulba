@@ -13,7 +13,7 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteSheet } from "../delete/deleteSheet"
 import { FormatSheetWithFetch } from "../format/formatSheetWithFetch"
-import { sideoptions } from "../sideOptions"
+import { sideOptions } from "../sideOptions"
 import { UpdateSheet } from "../update/updateSheet"
 
 
@@ -60,7 +60,7 @@ export function SheetContent() {
                         <FormatText text={sheet.data.label} />
                     </DataBlock.Item>
                     <DataBlock.Item label="Côté">
-                        <FormatSelect option={sheet.data.side} options={sideoptions} />
+                        <FormatSelect option={sheet.data.side} options={sideOptions} />
                     </DataBlock.Item>
                     <DataBlock.Item label="Ligne parent">
                         {!sheet.data.idParent ? <FormatNull /> : <FormatSheetWithFetch idSheet={sheet.data.idParent} />}
@@ -88,6 +88,15 @@ export function SheetContent() {
                         <FormatText text={sheet.data.id} />
                     </DataBlock.Item>
                 </DataBlock.Root>
+            </Section.Item>
+            <Section.Item>
+                <Section.Title title="Comptes liés" />
+            </Section.Item>
+            <Section.Item className="p-0 border-b-0">
+                <AccountSheetsTable
+                    statement={statement.data}
+                    isLoading={statement.isLoading}
+                />
             </Section.Item>
         </Section.Root>
     )

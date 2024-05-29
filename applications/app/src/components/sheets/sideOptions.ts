@@ -6,4 +6,4 @@ export const sidesTranslation: { [key in typeof sheetSides[number]]: string } = 
     "asset": "Actif",
     "liability": "Passif"
 }
-export const sideoptions = getOptions(sidesTranslation)
+export const sideOptions = getOptions(sidesTranslation)

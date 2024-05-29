@@ -51,6 +51,7 @@ export const InputInteger = forwardRef<HTMLInputElement, InputInteger>(
                     (!props.error) ? "border-neutral/20" : "border-error",
                     props.className
                 )}
+                autoFocus={props.autoFocus}
                 inputMode="decimal"
             />
         )

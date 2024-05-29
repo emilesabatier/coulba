@@ -36,6 +36,11 @@ import { createComputationRoute } from './auth/app/configuration/statements/comp
 import { readComputationLayout } from './auth/app/configuration/statements/computations/readComputation.layout'
 import { readComputationRoute } from './auth/app/configuration/statements/computations/readComputation.route'
 import { updateComputationRoute } from './auth/app/configuration/statements/computations/updateComputation.route'
+import { accountStatementsLayout } from './auth/app/configuration/statements/statementRows/accountStatements/accountStatements.layout'
+import { createAccountStatementRoute } from './auth/app/configuration/statements/statementRows/accountStatements/createAccountStatement.route'
+import { readAccountStatementLayout } from './auth/app/configuration/statements/statementRows/accountStatements/readAccountStatement.layout'
+import { readAccountStatementRoute } from './auth/app/configuration/statements/statementRows/accountStatements/readAccountStatement.route'
+import { updateAccountStatementRoute } from './auth/app/configuration/statements/statementRows/accountStatements/updateAccountStatement.route'
 import { createStatementRoute } from './auth/app/configuration/statements/statementRows/createStatement.route'
 import { readStatementLayout } from './auth/app/configuration/statements/statementRows/readStatement.layout'
 import { readStatementRoute } from './auth/app/configuration/statements/statementRows/readStatement.route'
@@ -121,7 +126,7 @@ const routeTree = rootLayout.addChildren([
                             readRecordRoute,
                             updateRecordRoute
                         ])
-                    ]),
+                    ])
                 ])
             ]),
 
@@ -189,7 +194,14 @@ const routeTree = rootLayout.addChildren([
                         createStatementRoute,
                         readStatementLayout.addChildren([
                             readStatementRoute,
-                            updateStatementRoute
+                            updateStatementRoute,
+                            accountStatementsLayout.addChildren([
+                                createAccountStatementRoute,
+                                readAccountStatementLayout.addChildren([
+                                    readAccountStatementRoute,
+                                    updateAccountStatementRoute
+                                ])
+                            ])
                         ])
                     ]),
                     computationsLayout.addChildren([

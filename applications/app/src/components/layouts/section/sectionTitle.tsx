@@ -8,6 +8,6 @@ type SectionTitle = {
 
 export function SectionTitle(props: SectionTitle) {
     return (
-        <span className="uppercase text-neutral/25">{props.title}</span>
+        <span className="uppercase text-neutral/50">{props.title}</span>
     )
 }

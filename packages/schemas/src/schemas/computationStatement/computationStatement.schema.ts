@@ -10,6 +10,7 @@ const computationStatementOperationSchema = v.picklist(operations)
 
 export const computationStatementSchema = createSelectSchema(computationStatements, {
     id: idSchema,
+    idCompany: idSchema,
     idComputation: idSchema,
     idStatement: idSchema,
     operation: computationStatementOperationSchema,

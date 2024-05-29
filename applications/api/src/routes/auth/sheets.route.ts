@@ -5,10 +5,11 @@ import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db.js"
-import { bodyValidator } from "../../middlewares/bodyValidator.js"
-import { AuthEnv } from "../../middlewares/checkAuth.js"
-import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { db } from "../../clients/db"
+import { bodyValidator } from "../../middlewares/bodyValidator"
+import { AuthEnv } from "../../middlewares/checkAuth"
+import { paramsValidator } from "../../middlewares/paramsValidator"
+import { accountSheetsRoute } from "./accountSheets.route"
 
 
 export const sheetsRoute = new Hono<AuthEnv>()
@@ -116,3 +117,5 @@ export const sheetsRoute = new Hono<AuthEnv>()
             return c.json(deleteSheet, 200)
         }
     )
+    .route('/account-sheets', accountSheetsRoute)
+

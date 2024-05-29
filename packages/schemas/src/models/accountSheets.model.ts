@@ -6,6 +6,7 @@ import { flows } from "../components/values/flows.js"
 import { accounts } from "./accounts.model.js"
 import { sheets } from "./sheets.model.js"
 import { users } from "./users.model.js"
+import { companies } from "./companies.model.js"
 
 
 // Model
@@ -15,6 +16,7 @@ export const accountSheets = pgTable(
     "account_sheets",
     {
         id: idColumn("id").primaryKey(),
+        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idAccount: idColumn("id_account").references(() => accounts.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idSheet: idColumn("id_sheet").references(() => sheets.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         flow: accountSheetFlow("flow"),

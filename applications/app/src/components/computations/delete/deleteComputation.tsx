@@ -23,13 +23,13 @@ export function DeleteComputation(props: DeleteComputation) {
 
     return (
         <Delete
-            title="Supprimer l'opération ?"
+            title="Supprimer le calcul ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
                 mutation.mutate({ params: { idComputation: props.computation.id } }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        toast({ title: "Opération supprimée", variant: "success" })
+                        toast({ title: "Calcul supprimé", variant: "success" })
                     }
                 })
                 return true

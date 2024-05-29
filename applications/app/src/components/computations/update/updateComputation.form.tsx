@@ -31,8 +31,11 @@ export function UpdateComputationForm() {
         <Form
             validationSchema={auth.computations.put.body}
             defaultValues={computation.data}
-            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
-            submitLabel="Modifier l'opération"
+            onCancel={() => router.navigate({
+                to: "/configuration/compte-de-resultat/calculs/$idComputation",
+                params: { idComputation: idComputation }
+            })}
+            submitLabel="Modifier"
             onSubmit={async (data) => {
                 mutation.mutate({
                     params: { idComputation: idComputation },
@@ -40,8 +43,11 @@ export function UpdateComputationForm() {
                 }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat" })
-                        toast({ title: "Opération mise à jour", variant: "success" })
+                        router.navigate({
+                            to: "/configuration/compte-de-resultat/calculs/$idComputation",
+                            params: { idComputation: idComputation }
+                        })
+                        toast({ title: "Calcul mis à jour", variant: "success" })
                     }
                 })
                 return true
@@ -56,7 +62,7 @@ export function UpdateComputationForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de l'opération."
+                                    tooltip="Le numéro qui définit l'ordre du calcul."
                                     isRequired
                                 />
                                 <FormControl>

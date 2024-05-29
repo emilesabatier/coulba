@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -9,8 +9,8 @@ import { router } from "../../../routes/router"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { createAccount } from "../../../services/api/auth/accounts/createAccount"
 import { Form } from "../../layouts/forms/form"
-import { StatementCombobox } from "../../statements/statementCombobox"
 import { AccountCombobox } from "../accountCombobox"
+import { systemOptions } from "../systemOptions"
 
 
 export function CreateAccountForm() {
@@ -103,17 +103,18 @@ export function CreateAccountForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idStatement"
+                        name="system"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne du compte de résultat"
-                                    tooltip="La ligne du compte de résultat sur laquelle la balance du compte est ajoutée."
+                                    label="Système minimal"
+                                    tooltip="Système minimal auquel appartient le compte."
                                 />
                                 <FormControl>
-                                    <StatementCombobox
+                                    <InputSelect
                                         value={field.value}
                                         onChange={field.onChange}
+                                        options={systemOptions}
                                     />
                                 </FormControl>
                                 <FormError />

@@ -1,10 +1,10 @@
 import { createRoute } from "@tanstack/react-router"
 import { CreateStatementPage } from "../../../../../../pages/auth/configuration/statements/statementRows/createStatementPage"
-import { statementsLayout } from "../statements.layout"
+import { statementRowsLayout } from "./statementRows.layout"
 
 
 export const createStatementRoute = createRoute({
-    getParentRoute: () => statementsLayout,
+    getParentRoute: () => statementRowsLayout,
     beforeLoad: () => ({
         title: "Ajouter",
         description: "Remplir le formulaire et valider pour ajouter une ligne dans le compte de résultat."

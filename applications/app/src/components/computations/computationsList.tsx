@@ -1,8 +1,9 @@
-import { ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
-import { IconPlus } from "@tabler/icons-react"
+import { IconChevronLeft, IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
+import { router } from "../../routes/router"
 import { computationsOptions } from "../../services/api/auth/computations/computationsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
@@ -22,11 +23,15 @@ export function ComputationsList() {
     if (!computations.data) return null
     return (
         <Section.Root>
-            <Section.Item>
+            <Section.Item className="justify-start">
+                <ButtonOutline
+                    onClick={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
+                    icon={<IconChevronLeft />}
+                />
                 <CreateComputation>
                     <ButtonPlain
                         icon={<IconPlus />}
-                        text="Ajouter un calcul"
+                        text="Ajouter"
                     />
                 </CreateComputation>
             </Section.Item>

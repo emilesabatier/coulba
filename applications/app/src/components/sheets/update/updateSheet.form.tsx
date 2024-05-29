@@ -36,7 +36,7 @@ export function UpdateSheetForm() {
                 to: "/configuration/bilan/$idSheet",
                 params: { idSheet: idSheet }
             })}
-            submitLabel="Modifier la ligne"
+            submitLabel="Modifier"
             onSubmit={async (data) => {
                 mutation.mutate({
                     params: { idSheet: idSheet },

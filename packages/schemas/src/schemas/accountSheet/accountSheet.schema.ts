@@ -11,6 +11,7 @@ const accountSheetFlowSchema = v.picklist(flows)
 
 export const accountSheetSchema = createSelectSchema(accountSheets, {
     id: idSchema,
+    idCompany: idSchema,
     idAccount: idSchema,
     idSheet: idSchema,
     flow: accountSheetFlowSchema,

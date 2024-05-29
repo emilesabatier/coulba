@@ -28,7 +28,7 @@ export function StatementContent() {
             <Section.Item>
                 <div className="flex justify-start items-center gap-1.5">
                     <ButtonOutline
-                        onClick={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
+                        onClick={() => router.navigate({ to: "/configuration/compte-de-resultat/lignes" })}
                         icon={<IconChevronLeft />}
                     />
                     <UpdateStatement statement={statement.data}>

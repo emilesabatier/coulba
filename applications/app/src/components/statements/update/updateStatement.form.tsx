@@ -33,10 +33,10 @@ export function UpdateStatementForm() {
             validationSchema={auth.statements.put.body}
             defaultValues={statement.data}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/$idStatement",
+                to: "/configuration/compte-de-resultat/lignes/$idStatement",
                 params: { idStatement: idStatement }
             })}
-            submitLabel="Modifier la ligne"
+            submitLabel="Modifier"
             onSubmit={async (data) => {
                 mutation.mutate({
                     params: { idStatement: idStatement },
@@ -45,7 +45,7 @@ export function UpdateStatementForm() {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         router.navigate({
-                            to: "/configuration/compte-de-resultat/$idStatement",
+                            to: "/configuration/compte-de-resultat/lignes/$idStatement",
                             params: { idStatement: idStatement }
                         })
                         toast({ title: "Ligne mise à jour", variant: "success" })

@@ -30,8 +30,8 @@ export function AppLayout() {
                 </Link>
                 <DisplayVersion />
             </div>
-            <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 flex justify-between items-end border-b border-neutral/20">
-                <div className="flex justify-start items-end">
+            <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 grid grid-cols-[auto_max-content] border-b border-neutral/20">
+                <div className="w-full flex justify-start items-end">
                     {
                         breadcrumbs.map((breadcrumb, index) => (
                             <Fragment key={breadcrumb.id}>
@@ -41,7 +41,7 @@ export function AppLayout() {
                                 {
                                     index < breadcrumbs.length - 1 ? (
                                         <Link to={breadcrumb.pathname}>
-                                            <span className="text-xl text-neutral/50 hover:underline">{breadcrumb.context.title}</span>
+                                            <span className="text-xl text-neutral/50 hover:underline whitespace-nowrap">{breadcrumb.context.title}</span>
                                         </Link>
                                     ) : (
                                         <span className="text-xl">{breadcrumb.context.title}</span>
@@ -55,7 +55,7 @@ export function AppLayout() {
                     <p className="text-neutral/50 max-w-[768px]">{props.description}</p>
                 )} */}
                 </div>
-                <div>
+                <div className="w-fit">
                     <PopoverMenu
                         triggerElement={
                             <ButtonGhost

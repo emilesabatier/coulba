@@ -8,6 +8,7 @@ import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { computationStatementsRoute } from "./computationStatements.route.js"
 
 
 export const statementsRoute = new Hono<AuthEnv>()
@@ -106,3 +107,4 @@ export const statementsRoute = new Hono<AuthEnv>()
             return c.json(deleteStatement, 200)
         }
     )
+    .route('/computation-statements', computationStatementsRoute)

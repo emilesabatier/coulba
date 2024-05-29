@@ -1,17 +1,18 @@
 import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
+import { CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronDown, IconEye, IconPlus } from "@tabler/icons-react"
+import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
-import { ComponentProps } from "react"
+import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 import { sheetsOptions } from "../../services/api/auth/sheets/sheetsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
 import { CreateSheet } from "./create/createSheet"
 import { ReadSheet } from "./read/readSheet"
+import { toRoman } from "../../services/toRoman"
 
 
 type GroupedSheet = {
@@ -52,41 +53,41 @@ export function SheetsList() {
                 <CreateSheet>
                     <ButtonPlain
                         icon={<IconPlus />}
-                        text="Ajouter une ligne"
+                        text="Ajouter"
                     />
                 </CreateSheet>
             </Section.Item>
-            <Section.Item>
-                <Section.Title title="Actif" />
-            </Section.Item>
-            <Section.Item className="flex flex-col justify-start items-stretch gap-1.5">
-                <Accordion type="multiple">
-                    {
-                        (groupedSheetsAssets.length === 0) ? (<FormatNull />) : groupedSheetsAssets.map((groupedSheet) => (
-                            <SheetItem
-                                key={groupedSheet.sheet.id}
-                                groupedSheet={groupedSheet}
-                                className="pl-0"
-                            />
-                        ))
-                    }
-                </Accordion>
-            </Section.Item>
-            <Section.Item>
-                <Section.Title title="Passif" />
-            </Section.Item>
-            <Section.Item className="flex flex-col justify-start items-stretch gap-1.5">
-                <Accordion type="multiple">
-                    {
-                        (groupedSheetsLiabilities.length === 0) ? (<FormatNull />) : groupedSheetsLiabilities.map((groupedSheet) => (
-                            <SheetItem
-                                key={groupedSheet.sheet.id}
-                                groupedSheet={groupedSheet}
-                                className="pl-0"
-                            />
-                        ))
-                    }
-                </Accordion>
+            <Section.Item className="p-0">
+                <div className="w-full grid grid-cols-2 grid-rows-[max-content_auto]">
+                    <div className="col-start-1 col-end-1 row-start-1 row-end-1 w-full h-full p-3 border-b border-r border-neutral/10">
+                        <Section.Title title="Actif" />
+                    </div>
+                    <div className="col-start-1 col-end-1 row-start-2 row-end-2 w-full h-full border-r border-neutral/10 p-0 flex-col justify-start items-stretch gap-0">
+                        {
+                            (groupedSheetsAssets.length === 0) ? (<FormatNull />) : groupedSheetsAssets.map((groupedSheet) => (
+                                <SheetItem
+                                    key={groupedSheet.sheet.id}
+                                    groupedSheet={groupedSheet}
+                                    level={0}
+                                />
+                            ))
+                        }
+                    </div>
+                    <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 border-b border-neutral/10">
+                        <Section.Title title="Passif" />
+                    </div>
+                    <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full h-full p-0 flex-col justify-start items-stretch gap-0">
+                        {
+                            (groupedSheetsLiabilities.length === 0) ? (<FormatNull />) : groupedSheetsLiabilities.map((groupedSheet) => (
+                                <SheetItem
+                                    key={groupedSheet.sheet.id}
+                                    groupedSheet={groupedSheet}
+                                    level={0}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
             </Section.Item>
         </Section.Root>
     )
@@ -96,58 +97,42 @@ export function SheetsList() {
 
 type SheetItem = {
     groupedSheet: GroupedSheet
+    level: number
     className?: ComponentProps<'div'>['className']
 }
 
 function SheetItem(props: SheetItem) {
-    const hasSubSheets = props.groupedSheet.subSheets.length > 0
-
     return (
-        <AccordionItem
-            disabled={!hasSubSheets}
-            value={props.groupedSheet.sheet.id}
-            className={cn(
-                "pl-4",
-                props.className
-            )}
-        >
-            <div className="w-full flex justify-between items-start gap-1.5">
-                <AccordionTrigger className="w-fit flex justify-start items-center gap-3 py-1.5 px-3 hover:bg-neutral/5 rounded-sm">
-                    <div className="flex justify-start items-start gap-3">
-                        <h2 className="font-bold">{props.groupedSheet.sheet.number}</h2>
-                        <span className="text-neutral/75 text-left">{props.groupedSheet.sheet.label}</span>
-                    </div>
-                    <IconChevronDown
-                        size={16}
-                        className={cn(
-                            "text-neutral/50 shrink-0",
-                            hasSubSheets ? undefined : "opacity-0"
-                        )}
-                    />
-                </AccordionTrigger>
-                <ReadSheet idSheet={props.groupedSheet.sheet.id}>
-                    <div className="w-fit hover:bg-neutral/5 p-1.5 rounded-sm">
-                        <IconEye
-                            size={24}
-                            className="text-neutral/50 shrink-0"
+        <Fragment>
+            <ReadSheet idSheet={props.groupedSheet.sheet.id} className="w-full">
+                <div
+                    className="w-full flex justify-start items-start gap-1.5 p-3 border-b border-neutral/5 hover:bg-neutral/5"
+                    style={{
+                        paddingLeft: `${(1 + props.level) * 12}px`
+                    }}
+                >
+                    {props.level > 0 ? null : (
+                        <span className="text-neutral font-bold">{toRoman(props.groupedSheet.sheet.number)}</span>
+                    )}
+                    <span className={cn(
+                        "text-neutral text-left",
+                        props.level === 0 ? "font-bold" : ""
+                    )}>
+                        {props.groupedSheet.sheet.label}
+                    </span>
+                </div>
+            </ReadSheet>
+            {
+                props.groupedSheet.subSheets
+                    .sort((a, b) => a.sheet.number - b.sheet.number)
+                    .map((groupedSubSheet) => (
+                        <SheetItem
+                            key={groupedSubSheet.sheet.id}
+                            groupedSheet={groupedSubSheet}
+                            level={props.level + 1}
                         />
-                    </div>
-                </ReadSheet>
-            </div>
-            <AccordionContent>
-                <Accordion type="multiple">
-                    {
-                        props.groupedSheet.subSheets
-                            .sort((a, b) => a.sheet.number - b.sheet.number)
-                            .map((groupedSubSheet) => (
-                                <SheetItem
-                                    key={groupedSubSheet.sheet.id}
-                                    groupedSheet={groupedSubSheet}
-                                />
-                            ))
-                    }
-                </Accordion>
-            </AccordionContent>
-        </AccordionItem>
+                    ))
+            }
+        </Fragment>
     )
 }

@@ -1,7 +1,7 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormRoot } from "@coulba/design/forms"
 import { valibotResolver } from "@hookform/resolvers/valibot"
-import { IconChevronLeft } from "@tabler/icons-react"
+import { IconCheck, IconChevronLeft } from "@tabler/icons-react"
 import { ReactElement } from "react"
 import { DefaultValues, UseFormReturn, useForm } from "react-hook-form"
 import * as v from "valibot"
@@ -56,6 +56,7 @@ export function Form<T extends v.ObjectSchema<v.ObjectEntries>>(props: Form<T>) 
                     />
                     <ButtonPlain
                         onClick={() => onSubmit()}
+                        icon={<IconCheck />}
                         text={props.submitLabel}
                         loader
                     />

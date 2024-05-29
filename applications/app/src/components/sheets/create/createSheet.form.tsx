@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -10,6 +10,7 @@ import { createSheet } from "../../../services/api/auth/sheets/createSheet"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { Form } from "../../layouts/forms/form"
 import { SheetCombobox } from "../sheetCombobox"
+import { sideOptions } from "../sideOptions"
 
 
 export function CreateSheetForm() {
@@ -22,9 +23,11 @@ export function CreateSheetForm() {
     return (
         <Form
             validationSchema={auth.sheets.post.body}
-            defaultValues={{}}
+            defaultValues={{
+                side: "asset"
+            }}
             onCancel={() => router.navigate({ to: "/configuration/bilan" })}
-            submitLabel="Ajouter la ligne"
+            submitLabel="Ajouter"
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
@@ -40,6 +43,27 @@ export function CreateSheetForm() {
         >
             {(form) => (
                 <Fragment>
+                    <FormField
+                        control={form.control}
+                        name="side"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Côté"
+                                    tooltip="Le côté du bilan."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={sideOptions}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="number"

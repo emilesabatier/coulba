@@ -23,14 +23,14 @@ export function CreateStatementForm() {
         <Form
             validationSchema={auth.statements.post.body}
             defaultValues={{}}
-            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
-            submitLabel="Ajouter la ligne"
+            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat/lignes" })}
+            submitLabel="Ajouter"
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat" })
+                        router.navigate({ to: "/configuration/compte-de-resultat/lignes" })
                         toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
                     }
                 })

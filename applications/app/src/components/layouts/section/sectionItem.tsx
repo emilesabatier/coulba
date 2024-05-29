@@ -11,7 +11,7 @@ export function SectionItem(props: SectionItem) {
     return (
         <div
             className={cn(
-                "h-fit flex justify-between items-center gap-1.5 p-3 border-b border-neutral/10",
+                "w-full h-fit flex justify-between items-center gap-1.5 p-3 border-b border-neutral/10",
                 props.className
             )}
             children={props.children}
