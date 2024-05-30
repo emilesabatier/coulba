@@ -1,12 +1,13 @@
-import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatDateTime, FormatNull, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readStatementRoute } from "../../../routes/auth/app/configuration/statements/statementRows/readStatement.route"
+import { readStatementRoute } from "../../../routes/auth/app/configuration/statements/statements/readStatement.route"
 import { router } from "../../../routes/router"
 import { statementOptions } from "../../../services/api/auth/statements/statementsOptions"
+import { AccountStatementsTable } from "../../accountStatements/accountStatementsTable"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -40,7 +41,7 @@ export function StatementContent() {
                 </div>
                 <div className="flex justify-end items-center gap-1.5">
                     <DeleteStatement statement={statement.data}>
-                        <ButtonGhost
+                        <ButtonOutline
                             icon={<IconTrash />}
                             color="error"
                         />
@@ -84,6 +85,15 @@ export function StatementContent() {
                         <FormatText text={statement.data.id} />
                     </DataBlock.Item>
                 </DataBlock.Root>
+            </Section.Item>
+            <Section.Item>
+                <Section.Title title="Comptes utilisés dans la ligne" />
+            </Section.Item>
+            <Section.Item className="p-0 border-b-0">
+                <AccountStatementsTable
+                    statement={statement.data}
+                    isLoading={statement.isLoading}
+                />
             </Section.Item>
         </Section.Root>
     )

@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatDateTime, FormatNull, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
@@ -7,6 +7,7 @@ import { useParams } from "@tanstack/react-router"
 import { readComputationRoute } from "../../../routes/auth/app/configuration/statements/computations/readComputation.route"
 import { router } from "../../../routes/router"
 import { computationOptions } from "../../../services/api/auth/computations/computationsOptions"
+import { ComputationStatementsTable } from "../../computationStatements/computationStatementsTable"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -39,7 +40,7 @@ export function ComputationContent() {
                 </div>
                 <div className="flex justify-end items-center gap-1.5">
                     <DeleteComputation computation={computation.data}>
-                        <ButtonGhost
+                        <ButtonOutline
                             icon={<IconTrash />}
                             color="error"
                         />
@@ -80,6 +81,15 @@ export function ComputationContent() {
                         <FormatText text={computation.data.id} />
                     </DataBlock.Item>
                 </DataBlock.Root>
+            </Section.Item>
+            <Section.Item>
+                <Section.Title title="Lignes du compte de résultat utilisées dans le calcul" />
+            </Section.Item>
+            <Section.Item className="p-0 border-b-0">
+                <ComputationStatementsTable
+                    computation={computation.data}
+                    isLoading={computation.isLoading}
+                />
             </Section.Item>
         </Section.Root>
     )

@@ -96,13 +96,13 @@ export const defaultStatements: DefaultStatement[] = [
         number: 27,
         label: "Rémunérations du personnel",
         numberParent: 2,
-        accounts: [641, 6411, 6412, 6413, 6414, 6415, 644, 6481]
+        accounts: [641, 6411, 6412, 6413, 6414, 6415, 644]
     },
     {
         number: 28,
         label: "Charges sociales",
         numberParent: 2,
-        accounts: [645, 6451, 6452, 6453, 6454, 6458, 646, 647, 6471, 6472, 6473, 6474, 6475, 6482]
+        accounts: [645, 6451, 6452, 6453, 6454, 6458, 646, 647, 6471, 6472, 6473, 6474, 6475]
     },
     {
         number: 29,

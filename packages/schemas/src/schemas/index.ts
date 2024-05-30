@@ -1,5 +1,6 @@
 export * from "./account/index.js"
 export * from "./accountSheet/index.js"
+export * from "./accountStatement/index.js"
 export * from "./attachment/index.js"
 export * from "./company/index.js"
 export * from "./computation/index.js"

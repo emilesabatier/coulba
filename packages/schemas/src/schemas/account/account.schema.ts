@@ -14,7 +14,6 @@ export const accountSchema = createSelectSchema(accounts, {
     id: idSchema,
     idCompany: idSchema,
     idYear: idSchema,
-    idStatement: idSchema,
     idParent: idSchema,
     number: integerSchema,
     label: requiredTextSchema,

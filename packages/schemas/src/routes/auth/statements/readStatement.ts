@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { accountSchema } from "../../../schemas/account/account.schema.js"
+import { accountStatementSchema } from "../../../schemas/accountStatement/accountStatement.schema.js"
 import { statementSchema } from "../../../schemas/statement/statement.schema.js"
 
 
@@ -12,6 +12,6 @@ export const readStatementParams = v.object({
 export const readStatementReturn = v.merge([
     statementSchema,
     v.object({
-        accounts: v.array(accountSchema)
+        accountStatements: v.array(accountStatementSchema)
     })
 ])

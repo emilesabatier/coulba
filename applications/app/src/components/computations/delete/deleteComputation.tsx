@@ -3,10 +3,10 @@ import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
-import { queryClient } from "../../../contexts/state/queryClient"
 import { computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
 import { deleteComputation } from "../../../services/api/auth/computations/deleteComputation"
 import { Delete } from "../../layouts/actions/delete"
+import { router } from "../../../routes/router"
 
 
 type DeleteComputation = {
@@ -28,7 +28,9 @@ export function DeleteComputation(props: DeleteComputation) {
             onSubmit={async () => {
                 mutation.mutate({ params: { idComputation: props.computation.id } }, {
                     onSuccess: () => {
-                        queryClient.invalidateQueries()
+                        router.navigate({
+                            to: "/configuration/compte-de-resultat/calculs"
+                        })
                         toast({ title: "Calcul supprimé", variant: "success" })
                     }
                 })

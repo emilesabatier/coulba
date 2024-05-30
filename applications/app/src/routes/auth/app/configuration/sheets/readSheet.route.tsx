@@ -1,5 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
-import { ReadSheetPage } from "../../../../../pages/auth/configuration/sheets/readSheetPage"
+import { Main } from "../../../../../components/layouts/main"
+import { SheetContent } from "../../../../../components/sheets/read/sheetContent"
 import { readSheetLayout } from "./readSheet.layout"
 
 
@@ -10,5 +11,9 @@ export const readSheetRoute = createRoute({
         description: undefined
     }),
     path: '/',
-    component: () => <ReadSheetPage />
+    component: () => (
+        <Main>
+            <SheetContent />
+        </Main>
+    )
 })

@@ -8,6 +8,7 @@ export const updateComputationStatementParams = v.object({
 })
 
 export const updateComputationStatementBody = v.partial(v.object({
+    idStatement: computationStatementSchema.entries.idStatement,
     operation: computationStatementSchema.entries.operation
 }))
 

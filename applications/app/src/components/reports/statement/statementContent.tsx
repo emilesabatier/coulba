@@ -29,11 +29,13 @@ function groupStatement(statements: v.Output<typeof auth.statements.get.return>[
             let net = 0
 
             if (childrenStatements.length === 0) {
-                balance
-                    .filter((_balance) => _balance.account.idStatement === statement.id)
-                    .forEach((_balance) => {
-                        net += _balance.balance.debit + _balance.balance.credit
-                    })
+                statement.accountStatements.forEach((accountStatement) => {
+                    balance
+                        .filter((_balance) => _balance.account.id === accountStatement.idAccount)
+                        .forEach((_balance) => {
+                            net += _balance.balance.debit + _balance.balance.credit
+                        })
+                })
             }
             else {
                 childrenStatements.forEach((childStatement) => {

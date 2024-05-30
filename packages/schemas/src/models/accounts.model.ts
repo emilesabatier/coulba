@@ -4,8 +4,8 @@ import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { systems } from "../components/values/systems.js"
 import { accountSheets } from "./accountSheets.model.js"
+import { accountStatements } from "./accountStatements.model.js"
 import { companies } from "./companies.model.js"
-import { statements } from "./statements.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
 
@@ -14,12 +14,11 @@ import { years } from "./years.model.js"
 export const accountSystem = pgEnum("account_system", systems)
 
 export const accounts = pgTable(
-    "accounts", 
+    "accounts",
     {
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
-        idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "set null", onUpdate: "cascade" }),
         idParent: idColumn("id_parent"),
         number: integer("number").notNull(),
         label: text("label").notNull(),
@@ -36,5 +35,6 @@ export const accounts = pgTable(
 
 // Relations
 export const accountRelations = relations(accounts, ({ many }) => ({
-    accountSheets: many(accountSheets)
+    accountSheets: many(accountSheets),
+    accountStatements: many(accountStatements)
 }))

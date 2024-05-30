@@ -76,6 +76,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
             const [updateAccountSheet] = await db
                 .update(accountSheets)
                 .set({
+                    idAccount: body.idAccount,
                     flow: body.flow,
                     isAllowance: body.isAllowance,
                     lastUpdatedOn: new Date().toISOString(),

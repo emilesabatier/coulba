@@ -75,6 +75,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
             const [updateComputationStatement] = await db
                 .update(computationStatements)
                 .set({
+                    idStatement: body.idStatement,
                     operation: body.operation,
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id

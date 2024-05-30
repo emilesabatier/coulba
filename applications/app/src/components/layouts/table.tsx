@@ -80,11 +80,11 @@ export function Table<T>(props: Table<T>) {
                                         colSpan={header.colSpan}
                                         className="w-fit"
                                     >
-                                        <div
-                                            onClick={header.column.getToggleSortingHandler()}
-                                            className="flex justify-start items-center gap-1.5 p-3 border-b border-b-neutral/10 border-t-2 border-t-white"
-                                        >
-                                            <div className="w-fit cursor-pointer hover:bg-neutral/5 flex justify-start items-center gap-1.5 p-1.5 rounded-sm">
+                                        <div className="flex justify-start items-center gap-1.5 p-3 border-b border-b-neutral/10 border-t-2 border-t-white">
+                                            <div
+                                                onClick={header.column.getToggleSortingHandler()}
+                                                className="w-fit cursor-pointer hover:bg-neutral/5 flex justify-start items-center gap-1.5 p-1.5 rounded-sm"
+                                            >
                                                 <span className="text-neutral/75 text-sm after:content-['\200b'] whitespace-nowrap">
                                                     {flexRender(
                                                         header.column.columnDef.header,

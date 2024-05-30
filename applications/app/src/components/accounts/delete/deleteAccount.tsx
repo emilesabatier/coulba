@@ -7,6 +7,7 @@ import { queryClient } from "../../../contexts/state/queryClient"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { deleteAccount } from "../../../services/api/auth/accounts/deleteAccount"
 import { Delete } from "../../layouts/actions/delete"
+import { router } from "../../../routes/router"
 
 
 type DeleteAccount = {
@@ -29,6 +30,9 @@ export function DeleteAccount(props: DeleteAccount) {
                 mutation.mutate({ params: { idAccount: props.account.id } }, {
                     onSuccess: (newData) => {
                         queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData?.filter((account) => account.id !== newData?.id))
+                        router.navigate({
+                            to: "/configuration/comptes"
+                        })
                         toast({ title: "Compte supprimé", variant: "success" })
                     }
                 })

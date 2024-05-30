@@ -4,6 +4,7 @@ import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
+import { statementInclude } from "../../../../../packages/schemas/build/schemas/statement/statement.include.js"
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
@@ -42,24 +43,30 @@ export const statementsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idStatement) {
-                const readStatements = await db
-                    .select()
-                    .from(statements)
-                    .where(and(
+                const readStatements = await db.query.statements.findMany({
+                    where: and(
                         eq(statements.idCompany, c.var.user.idCompany),
                         eq(statements.idYear, c.var.currentYear.id)
-                    ))
+                    ),
+                    columns: statementInclude,
+                    with: {
+                        accountStatements: true
+                    }
+                })
 
                 return c.json(readStatements, 200)
             }
 
-            const [readStatement] = await db
-                .select()
-                .from(statements)
-                .where(and(
+            const readStatement = await db.query.statements.findFirst({
+                where: and(
                     eq(statements.idCompany, c.var.user.idCompany),
                     eq(statements.id, params.idStatement)
-                ))
+                ),
+                columns: statementInclude,
+                with: {
+                    accountStatements: true
+                }
+            })
 
             return c.json(readStatement, 200)
         }

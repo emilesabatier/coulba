@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatDateTime, FormatNull, FormatSelect, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
@@ -7,6 +7,7 @@ import { useParams } from "@tanstack/react-router"
 import { readSheetRoute } from "../../../routes/auth/app/configuration/sheets/readSheet.route"
 import { router } from "../../../routes/router"
 import { sheetOptions } from "../../../services/api/auth/sheets/sheetsOptions"
+import { AccountSheetsTable } from "../../accountSheets/accountSheetsTable"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -41,7 +42,7 @@ export function SheetContent() {
                 </div>
                 <div className="flex justify-end items-center gap-1.5">
                     <DeleteSheet sheet={sheet.data}>
-                        <ButtonGhost
+                        <ButtonOutline
                             icon={<IconTrash />}
                             color="error"
                         />
@@ -90,12 +91,12 @@ export function SheetContent() {
                 </DataBlock.Root>
             </Section.Item>
             <Section.Item>
-                <Section.Title title="Comptes liés" />
+                <Section.Title title="Comptes utilisés dans le calcul" />
             </Section.Item>
             <Section.Item className="p-0 border-b-0">
                 <AccountSheetsTable
-                    statement={statement.data}
-                    isLoading={statement.isLoading}
+                    sheet={sheet.data}
+                    isLoading={sheet.isLoading}
                 />
             </Section.Item>
         </Section.Root>

@@ -1,6 +1,7 @@
 import { createRoute } from "@tanstack/react-router"
-import { CreateSheetPage } from "../../../../../pages/auth/configuration/sheets/createSheetPage"
 import { sheetsLayout } from "./sheets.layout"
+import { Main } from "../../../../../components/layouts/main"
+import { CreateSheetForm } from "../../../../../components/sheets/create/createSheet.form"
 
 
 export const createSheetRoute = createRoute({
@@ -10,5 +11,9 @@ export const createSheetRoute = createRoute({
         description: "Remplir le formulaire et valider pour ajouter une nouvelle ligne dans le bilan."
     }),
     path: '/ajouter',
-    component: () => <CreateSheetPage />
+    component: () => (
+        <Main>
+            <CreateSheetForm />
+        </Main>
+    )
 })

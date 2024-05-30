@@ -325,8 +325,7 @@ export const defaultStatements: DefaultStatement[] = [
                     6413,
                     6414,
                     6415,
-                    644,
-                    6481
+                    644
                 ],
                 statements: []
             },

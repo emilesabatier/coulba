@@ -1,5 +1,4 @@
 import * as v from "valibot"
-import { accountSchema } from "../../../schemas/account/account.schema"
 import { accountSheetSchema } from "../../../schemas/accountSheet/accountSheet.schema"
 
 
@@ -13,4 +12,4 @@ export const createAccountStatementBody = v.object({
 
 
 // Output
-export const createAccountStatementReturn = accountSchema
+export const createAccountStatementReturn = accountSheetSchema

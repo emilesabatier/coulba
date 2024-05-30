@@ -1,5 +1,5 @@
 import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, transactions, users, years } from '@coulba/schemas/models'
+import { accounts, accountSheets, accountStatements, companies, computations, computationStatements, journals, records, sheets, statements, transactions, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -85,6 +85,27 @@ async function seed() {
             await tx.insert(journals).values(newJournals)
 
 
+            // Accounts
+            console.log("Add accounts")
+            let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => ({
+                id: generateId(),
+                idCompany: newCompany.id,
+                idYear: idCurrentYear,
+                number: _account.number,
+                system: _account.system,
+                label: _account.label
+            }))
+            newAccounts = newAccounts.map((_account) => {
+                const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
+
+                return ({
+                    ..._account,
+                    idParent: parent?.id
+                })
+            })
+            await tx.insert(accounts).values(newAccounts)
+
+
             // Sheets
             console.log("Add sheets")
             let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
@@ -155,6 +176,7 @@ async function seed() {
                     if (!statement) throw new Error(`Erreur ${_computation.number} ${_statement.number}`)
                     newComputationStatements.push({
                         id: generateId(),
+                        idCompany: newCompany.id,
                         idComputation: _computation.id,
                         idStatement: statement.id,
                         operation: _statement.operation
@@ -163,31 +185,24 @@ async function seed() {
             })
             await tx.insert(computationStatements).values(newComputationStatements)
 
-            // Accounts
-            console.log("Add accounts")
-            let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => {
-                const statement = newStatements.find((_statement) => _statement.accounts.find(x => x.toString().startsWith(_account.number.toString())))
 
-                return ({
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    idYear: idCurrentYear,
-                    idStatement: statement?.id,
-                    number: _account.number,
-                    system: _account.system,
-                    label: _account.label
+            // AccountStatements
+            console.log("Add accountStatements")
+            const newAccountStatements: Array<(typeof accountStatements.$inferInsert)> = []
+            newStatements.forEach((_statement) => {
+                _statement.accounts.forEach((_account) => {
+                    const account = newAccounts.find((x) => x.number === _account)
+
+                    if (!account) throw new Error(`Erreur ${_statement.number} ${_account}`)
+                    newAccountStatements.push({
+                        id: generateId(),
+                        idCompany: newCompany.id,
+                        idAccount: account.id,
+                        idStatement: _statement.id
+                    })
                 })
             })
-            newAccounts = newAccounts.map((_account) => {
-                const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
-
-                return ({
-                    ..._account,
-                    idParent: parent?.id
-                })
-            })
-            await tx.insert(accounts).values(newAccounts)
-
+            await tx.insert(accountStatements).values(newAccountStatements)
 
             // AccountSheets
             console.log("Add accountSheets")
@@ -199,6 +214,7 @@ async function seed() {
                     if (!account) throw new Error(`Erreur ${_sheet.number} ${_account.number}`)
                     newAccountSheets.push({
                         id: generateId(),
+                        idCompany: newCompany.id,
                         idAccount: account.id,
                         idSheet: _sheet.id,
                         flow: _account.flow,

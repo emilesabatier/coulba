@@ -1,4 +1,5 @@
 import { accountSheets } from "./accountSheets/index.js"
+import { accountStatements } from "./accountStatements/index.js"
 import { accounts, } from "./accounts/index.js"
 import { attachments } from "./attachments/index.js"
 import { companies } from "./companies/index.js"
@@ -18,6 +19,7 @@ import { years } from "./years/index.js"
 export const auth = {
     accounts: accounts,
     accountSheets: accountSheets,
+    accountStatements: accountStatements,
     transactions: transactions,
     computations: computations,
     computationStatements: computationStatements,

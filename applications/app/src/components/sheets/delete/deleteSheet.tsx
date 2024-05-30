@@ -3,7 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
-import { queryClient } from "../../../contexts/state/queryClient"
+import { router } from "../../../routes/router"
 import { deleteSheet } from "../../../services/api/auth/sheets/deleteSheet"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { Delete } from "../../layouts/actions/delete"
@@ -23,13 +23,15 @@ export function DeleteSheet(props: DeleteSheet) {
 
     return (
         <Delete
-            title="Supprimer la ligne ?"
-            description="Attention, cela supprimera toutes les données et les sous-lignes associées."
+            title="Supprimer ?"
+            description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
                 mutation.mutate({ params: { idSheet: props.sheet.id } }, {
                     onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        toast({ title: "Ligne supprimée", variant: "success" })
+                        router.navigate({
+                            to: "/configuration/bilan"
+                        })
+                        toast({ title: "Données supprimées", variant: "success" })
                     }
                 })
                 return true

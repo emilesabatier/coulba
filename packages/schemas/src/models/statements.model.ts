@@ -2,7 +2,7 @@ import { relations, sql } from "drizzle-orm"
 import { integer, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
-import { accounts } from "./accounts.model.js"
+import { accountStatements } from "./accountStatements.model.js"
 import { companies } from "./companies.model.js"
 import { computationStatements } from "./computationStatements.model.js"
 import { users } from "./users.model.js"
@@ -31,6 +31,6 @@ export const statements = pgTable(
 
 // Relations
 export const statementRelations = relations(statements, ({ many }) => ({
-    accounts: many(accounts),
+    accountStatements: many(accountStatements),
     computationStatements: many(computationStatements)
 }))

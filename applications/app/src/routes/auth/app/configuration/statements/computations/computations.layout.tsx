@@ -1,9 +1,9 @@
 import { Outlet, createRoute } from "@tanstack/react-router"
-import { statementsLayout } from "../statements.layout"
+import { statementsConfigLayout } from "../statementsConfig.layout"
 
 
 export const computationsLayout = createRoute({
-    getParentRoute: () => statementsLayout,
+    getParentRoute: () => statementsConfigLayout,
     beforeLoad: () => ({
         title: "Calculs",
         description: undefined

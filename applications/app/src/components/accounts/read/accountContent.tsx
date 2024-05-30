@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatDateTime, FormatNull, FormatSelect, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
@@ -41,7 +41,7 @@ export function AccountContent() {
                 </div>
                 <div className="flex justify-end items-center gap-1.5">
                     <DeleteAccount account={account.data}>
-                        <ButtonGhost
+                        <ButtonOutline
                             icon={<IconTrash />}
                             color="error"
                         />

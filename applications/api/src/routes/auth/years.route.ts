@@ -1,5 +1,5 @@
 import { DefaultComputation, DefaultSheet, defaultAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
-import { accountSheets, accounts, computationStatements, computations, sheets, statements, years } from "@coulba/schemas/models"
+import { accountSheets, accountStatements, accounts, computationStatements, computations, sheets, statements, years } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
@@ -37,6 +37,33 @@ export const yearsRoute = new Hono<AuthEnv>()
             // Generate data
             await db.transaction(async (tx) => {
 
+                // Add accounts
+                let newAccounts: Array<(typeof accounts.$inferInsert)> = []
+                defaultAccounts.forEach((_account) => {
+                    const statement = newStatements.find((_statement) => _statement.accounts.toString().includes(_account.number.toString()))
+                    if (body.system === "condensed" && ["base", "developped"].includes(_account.system)) return
+                    if (body.system === "base" && ["developped"].includes(_account.system)) return
+                    newAccounts.push({
+                        id: generateId(),
+                        idCompany: c.var.company.id,
+                        idYear: createYear.id,
+                        number: _account.number,
+                        system: _account.system,
+                        label: _account.label
+                    })
+                })
+                newAccounts = newAccounts.map((_account) => {
+                    const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
+                    return ({
+                        ..._account,
+                        idParent: parent?.id
+                    })
+                })
+                await tx
+                    .insert(accounts)
+                    .values(newAccounts)
+
+
                 // Add sheets
                 let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
                     id: generateId(),
@@ -59,6 +86,28 @@ export const yearsRoute = new Hono<AuthEnv>()
                     .insert(sheets)
                     .values(newSheets)
 
+
+                // Add accountSheets
+                const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
+                newSheets.forEach((_sheet) => {
+                    _sheet.accounts.forEach((_account) => {
+                        const account = newAccounts.find((x) => x.number === _account.number)
+                        if (!account) return
+                        newAccountSheets.push({
+                            id: generateId(),
+                            idCompany: c.var.company.id,
+                            idAccount: account.id,
+                            idSheet: _sheet.id,
+                            flow: _account.flow,
+                            isAllowance: _account.isAllowance
+                        })
+                    })
+                })
+                await tx
+                    .insert(accountSheets)
+                    .values(newAccountSheets)
+
+
                 // Add statements
                 let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
                     id: generateId(),
@@ -79,6 +128,25 @@ export const yearsRoute = new Hono<AuthEnv>()
                 await tx
                     .insert(statements)
                     .values(newStatements)
+
+
+                // Add accountStatements
+                const newAccountStatements: Array<(typeof accountStatements.$inferInsert)> = []
+                newStatements.forEach((_statement) => {
+                    _statement.accounts.forEach((_account) => {
+                        const account = newAccounts.find((x) => x.number === _account)
+                        if (!account) return
+                        newAccountStatements.push({
+                            id: generateId(),
+                            idCompany: c.var.company.id,
+                            idAccount: account.id,
+                            idStatement: _statement.id
+                        })
+                    })
+                })
+                await tx
+                    .insert(accountStatements)
+                    .values(newAccountStatements)
 
 
                 // Add computations
@@ -105,6 +173,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         if (!statement) return
                         newComputationStatements.push({
                             id: generateId(),
+                            idCompany: c.var.company.id,
                             idComputation: _computation.id,
                             idStatement: statement.id,
                             operation: _statement.operation
@@ -115,52 +184,6 @@ export const yearsRoute = new Hono<AuthEnv>()
                     .insert(computationStatements)
                     .values(newComputationStatements)
 
-                // Add accounts
-                let newAccounts: Array<(typeof accounts.$inferInsert)> = []
-                defaultAccounts.forEach((_account) => {
-                    const statement = newStatements.find((_statement) => _statement.accounts.toString().includes(_account.number.toString()))
-                    if (body.system === "condensed" && ["base", "developped"].includes(_account.system)) return
-                    if (body.system === "base" && ["developped"].includes(_account.system)) return
-                    newAccounts.push({
-                        id: generateId(),
-                        idCompany: c.var.company.id,
-                        idYear: createYear.id,
-                        idStatement: statement?.id,
-                        number: _account.number,
-                        system: _account.system,
-                        label: _account.label
-                    })
-                })
-                newAccounts = newAccounts.map((_account) => {
-                    const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
-                    return ({
-                        ..._account,
-                        idParent: parent?.id
-                    })
-                })
-                await tx
-                    .insert(accounts)
-                    .values(newAccounts)
-
-
-                // Add accountSheets
-                const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
-                newSheets.forEach((_sheet) => {
-                    _sheet.accounts.forEach((_account) => {
-                        const account = newAccounts.find((x) => x.number === _account.number)
-                        if (!account) return
-                        newAccountSheets.push({
-                            id: generateId(),
-                            idAccount: account.id,
-                            idSheet: _sheet.id,
-                            flow: _account.flow,
-                            isAllowance: _account.isAllowance
-                        })
-                    })
-                })
-                await tx
-                    .insert(accountSheets)
-                    .values(newAccountSheets)
             })
 
 
