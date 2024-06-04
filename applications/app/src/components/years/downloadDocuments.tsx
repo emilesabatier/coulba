@@ -19,13 +19,31 @@ export function DownloadDocuments() {
 
         const closingDate = new Date(currentYear.data?.endingOn)
 
-        const csvArray = [[]]
+        const xml = document.implementation.createDocument("", "", null)
 
-        const encodedCsv = "data:text/csv;charset=utf-8," + encodeURIComponent(csvArray.map(e => e.join(";")).join("\n"))
+        const header = xml.createProcessingInstruction("xml", 'version="1.0" encoding="utf-8"')
+        const comptabilite = xml.createElement("comptabilite")
+        const exercice = xml.createElement("exercice")
+
+        const DateCloture = xml.createElement("DateCloture")
+        DateCloture.innerHTML = "20241001"
+
+        // var personElem1 = doc.createElement("person");
+        // personElem1.setAttribute("first-name", "eric");
+        // personElem1.setAttribute("middle-initial", "h");
+        // personElem1.setAttribute("last-name", "jung");
+
+        exercice.appendChild(DateCloture)
+        comptabilite.appendChild(exercice)
+        xml.appendChild(header)
+        xml.appendChild(comptabilite)
+
+        const xmlString = new XMLSerializer().serializeToString(xml)
+        const encodedXML = new Blob([xmlString], { type: 'text/plain' })
 
         const link = document.createElement("a")
-        link.setAttribute("href", encodedCsv)
-        link.setAttribute("download", `${company.data?.siren ?? "SIREN"}FEC${closingDate.getFullYear()}${closingDate.getMonth() + 1}${closingDate.getDate()}.txt`)
+        link.setAttribute("href", window.URL.createObjectURL(encodedXML))
+        link.setAttribute("download", `${company.data?.siren ?? "SIREN"}FEC${closingDate.getFullYear()}${closingDate.getMonth() + 1}${closingDate.getDate()}.xml`)
         document.body.appendChild(link)
 
         link.click()
@@ -41,7 +59,7 @@ export function DownloadDocuments() {
                     <Section.Title title="Télécharger les documents comptables" />
                     <p className="text-neutral/75">Cela permet de générer les documents nécessaires à l'administration fiscale.</p>
                 </div>
-                <div className="flex justify-start items-center gap-1">
+                <div className="flex flex-col justify-start items-start gap-1">
                     <p>
                         Vous pouvez télécharger le Fichier des Écritures Comptables (FEC) en cliquant sur le bouton ci-contre. Le fichier est dans le format
                     </p>
