@@ -1,4 +1,4 @@
-import { FormatDate, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { Fragment } from "react"
 import { Table } from "../../layouts/table/table"
 import { Ledger } from "./ledgerContent"
@@ -51,21 +51,18 @@ export function LedgerTable(props: LedgerTable) {
                                             </Table.Body.Row>
                                             <Fragment>
                                                 {
-                                                    entry.records.map((record) => {
+                                                    entry.rows.map((row) => {
                                                         return (
-                                                            <Table.Body.Row key={record.key}>
+                                                            <Table.Body.Row key={row.key}>
                                                                 <Table.Body.Cell />
                                                                 <Table.Body.Cell>
-                                                                    <FormatDate isoDate={record.date} />
-                                                                </Table.Body.Cell>
-                                                                <Table.Body.Cell>
-                                                                    <FormatText text={record.label} />
+                                                                    <FormatText text={row.label} />
                                                                 </Table.Body.Cell>
                                                                 <Table.Body.Cell className="w-[1%]" align="right">
-                                                                    <FormatPrice price={record.debit} />
+                                                                    <FormatPrice price={row.debit} />
                                                                 </Table.Body.Cell>
                                                                 <Table.Body.Cell className="w-[1%]" align="right">
-                                                                    <FormatPrice price={record.credit} />
+                                                                    <FormatPrice price={row.credit} />
                                                                 </Table.Body.Cell>
                                                             </Table.Body.Row>
                                                         )

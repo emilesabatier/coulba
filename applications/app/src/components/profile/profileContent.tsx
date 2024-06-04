@@ -5,10 +5,10 @@ import { IconMailCog, IconPasswordUser, IconPencil } from "@tabler/icons-react"
 import { useSession } from "../../contexts/session/useSession"
 import { DataBlock } from "../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../layouts/errorMessage"
+import { Section } from "../layouts/section/section"
 import { UpdateProfile } from "./updateProfile/updateProfile"
 import { UpdateProfileEmail } from "./updateProfileEmail/updateProfileEmail"
 import { UpdateProfilePassword } from "./updateProfilePassword/updateProfilePassword"
-import { Section } from "../layouts/section/section"
 
 
 export function ProfileContent() {
@@ -42,7 +42,7 @@ export function ProfileContent() {
                     </UpdateProfilePassword>
                 </div>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>

@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputDate, InputPrice, InputText } from "@coulba/design/inputs"
+import { InputDate, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -7,20 +7,19 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateRecordRoute } from "../../../routes/auth/app/transactions/records/updateRecord.route"
+import { updateRecordRoute } from "../../../routes/auth/app/records/updateRecord.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
 import { updateRecord } from "../../../services/api/auth/records/updateRecord"
-import { AccountCombobox } from "../../accounts/accountCombobox"
-import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
-import { JournalCombobox } from "../../journals/journalCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { FormBlock } from "../../layouts/forms/formBlock"
+import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
+import { JournalCombobox } from "../../journals/journalCombobox"
 
 
 export function UpdateRecordForm() {
-    const { idTransaction, idRecord } = useParams({ from: updateRecordRoute.id })
+    const { idRecord } = useParams({ from: updateRecordRoute.id })
     const record = useQuery(recordOptions(idRecord))
 
     const mutation = useMutation({
@@ -38,26 +37,20 @@ export function UpdateRecordForm() {
             onCancel={() => {
                 if (!record.data) return null
                 router.navigate({
-                    to: "/operations/$idTransaction/enregistrements/$idRecord",
-                    params: {
-                        idTransaction: idTransaction,
-                        idRecord: idRecord
-                    }
+                    to: "/ecritures/$idRecord",
+                    params: { idRecord: idRecord }
                 })
             }}
-            submitLabel="Modifier l'enregistrement"
+            submitLabel="Modifier l'écriture"
             onSubmit={async (data) => {
                 mutation.mutate({ params: { idRecord: idRecord }, body: data }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
                         router.navigate({
-                            to: "/operations/$idTransaction/enregistrements/$idRecord",
-                            params: {
-                                idTransaction: idTransaction,
-                                idRecord: idRecord
-                            }
+                            to: "/ecritures/$idRecord",
+                            params: { idRecord: idRecord }
                         })
-                        toast({ title: "Enregistrement mis à jour", variant: "success" })
+                        toast({ title: "Écriture mise à jour", variant: "success" })
                     }
                 })
 
@@ -74,7 +67,7 @@ export function UpdateRecordForm() {
                                 <FormItem>
                                     <FormLabel
                                         label="Libellé"
-                                        tooltip="Le libellé qui définit l'opération ajoutée."
+                                        tooltip="Le libellé qui définit l'écriture ajoutée."
                                         isRequired
                                     />
                                     <FormControl>
@@ -95,7 +88,7 @@ export function UpdateRecordForm() {
                                 <FormItem>
                                     <FormLabel
                                         label="Date"
-                                        tooltip="La date à laquelle l'opération a eu lieu."
+                                        tooltip="La date à laquelle l'écriture a eu lieu."
                                         isRequired
                                     />
                                     <FormControl>
@@ -115,7 +108,7 @@ export function UpdateRecordForm() {
                                 <FormItem>
                                     <FormLabel
                                         label="Journal"
-                                        tooltip="Le journal dans lequel s'inscrit l'enregistrement."
+                                        tooltip="Le journal dans lequel s'inscrit la ligne."
                                     />
                                     <FormControl>
                                         <JournalCombobox
@@ -127,70 +120,6 @@ export function UpdateRecordForm() {
                                 </FormItem>
                             )}
                         />
-                    </FormBlock>
-                    <FormBlock>
-                        <FormField
-                            control={form.control}
-                            name="idAccount"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel
-                                        label="Compte"
-                                        tooltip="Le compte qui est mouvementé par l'enregistrement."
-                                        isRequired
-                                    />
-                                    <FormControl>
-                                        <AccountCombobox
-                                            value={field.value}
-                                            onChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormError />
-                                </FormItem>
-                            )}
-                        />
-                        <div className="flex justify-start items-start gap-1">
-                            <FormField
-                                control={form.control}
-                                name="debit"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel
-                                            label="Débit"
-                                            tooltip="Le montant du débit si le compte est débiteur."
-                                        />
-                                        <FormControl>
-                                            <InputPrice
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                            />
-                                        </FormControl>
-                                        <FormError />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="credit"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel
-                                            label="Crédit"
-                                            tooltip="Le montant du crédit si le compte est créditeur."
-                                        />
-                                        <FormControl>
-                                            <InputPrice
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                            />
-                                        </FormControl>
-                                        <FormError />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                    </FormBlock>
-                    <FormBlock>
                         <FormField
                             control={form.control}
                             name="idAttachment"
@@ -198,7 +127,7 @@ export function UpdateRecordForm() {
                                 <FormItem>
                                     <FormLabel
                                         label="Pièce justificative"
-                                        tooltip="Le fichier pour appuyer l'enregistrement."
+                                        tooltip="Le fichier pour appuyer la ligne."
                                     />
                                     <FormControl>
                                         <AttachmentCombobox

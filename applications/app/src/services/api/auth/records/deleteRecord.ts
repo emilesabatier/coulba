@@ -11,6 +11,6 @@ export function deleteRecord(props: DeleteRecord) {
     return deleteAPI({
         path: `/auth/records/${props.params.idRecord}`,
         schema: auth.records.delete.return,
-        message: "Erreur avec la suppression de l'enregistrement"
+        message: "Erreur avec la suppression de l'écriture"
     })
 }

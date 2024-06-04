@@ -48,7 +48,7 @@ export function StatementContent() {
                     </DeleteStatement>
                 </div>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>
@@ -64,7 +64,7 @@ export function StatementContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Métadonnées" />
             </Section.Item>
             <Section.Item>
@@ -86,7 +86,7 @@ export function StatementContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Comptes utilisés dans la ligne" />
             </Section.Item>
             <Section.Item className="p-0 border-b-0">

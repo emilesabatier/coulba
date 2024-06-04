@@ -3,10 +3,10 @@ import { pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { operations } from "../components/values/operations.js"
+import { companies } from "./companies.model.js"
 import { computations } from "./computations.model.js"
 import { statements } from "./statements.model.js"
 import { users } from "./users.model.js"
-import { companies } from "./companies.model.js"
 
 
 // Model

@@ -51,7 +51,7 @@ export function ComputationStatementContent() {
                     </DeleteComputationStatement>
                 </div>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>
@@ -64,7 +64,7 @@ export function ComputationStatementContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Métadonnées" />
             </Section.Item>
             <Section.Item>

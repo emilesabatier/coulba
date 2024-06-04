@@ -7,7 +7,7 @@ export const updateComputationRoute = createRoute({
     getParentRoute: () => readComputationLayout,
     beforeLoad: () => ({
         title: "Modifier",
-        description: "Remplir le formulaire et valider pour modifier les données de l'opération du bilan."
+        description: "Remplir le formulaire et valider pour modifier les données de l'écriture du bilan."
     }),
     path: '/modifier',
     component: () => <UpdateComputationPage />

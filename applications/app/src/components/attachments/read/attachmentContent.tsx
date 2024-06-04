@@ -48,7 +48,7 @@ export function AttachmentContent() {
                     </DeleteAttachment>
                 </div>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>
@@ -70,7 +70,7 @@ export function AttachmentContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Métadonnées" />
             </Section.Item>
             <Section.Item>
@@ -92,7 +92,7 @@ export function AttachmentContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Aperçu du fichier" />
             </Section.Item>
             <Section.Item className="p-0">

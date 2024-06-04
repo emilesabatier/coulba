@@ -48,7 +48,7 @@ export function AccountContent() {
                     </DeleteAccount>
                 </div>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>
@@ -67,7 +67,7 @@ export function AccountContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Métadonnées" />
             </Section.Item>
             <Section.Item>

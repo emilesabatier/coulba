@@ -11,7 +11,6 @@ import { Delete } from "../../layouts/actions/delete"
 
 
 type DeleteRecord = {
-    transaction: v.Output<typeof auth.transactions.get.return>
     record: v.Output<typeof auth.records.get.return>
     children: ReactElement
 }
@@ -25,17 +24,14 @@ export function DeleteRecord(props: DeleteRecord) {
 
     return (
         <Delete
-            title="Supprimer l'enregistrement ?"
-            description="Attention, cela supprimera toutes les données."
+            title="Supprimer l'écriture ?"
+            description="Attention, cela supprimera toutes les données associées."
             onSubmit={async () => {
                 mutation.mutate({ params: { idRecord: props.record.id } }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/operations/$idTransaction",
-                            params: { idTransaction: props.transaction.id }
-                        })
-                        toast({ title: "Enregistrement supprimé", variant: "success" })
+                        router.navigate({ to: "/ecritures" })
+                        toast({ title: "Écriture supprimée", variant: "success" })
                     }
                 })
 

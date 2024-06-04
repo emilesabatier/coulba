@@ -74,25 +74,25 @@ import { updateProfileLayout } from './auth/app/profile/update/updateProfile.lay
 import { updateProfileRoute } from './auth/app/profile/update/updateProfile.page'
 import { updateProfileEmailRoute } from './auth/app/profile/update/updateProfileEmail.page'
 import { updateProfilePasswordRoute } from './auth/app/profile/update/updateProfilePassword.page'
+import { createRecordRoute } from './auth/app/records/createRecord.route'
+import { readRecordLayout } from './auth/app/records/readRecord.layout'
+import { readRecordRoute } from './auth/app/records/readRecord.route'
+import { recordsLayout } from './auth/app/records/records.layout'
+import { recordsRoute } from './auth/app/records/records.route'
+import { createRowRoute } from './auth/app/records/rows/createRow.route'
+import { readRowLayout } from './auth/app/records/rows/readRow.layout'
+import { readRowRoute } from './auth/app/records/rows/readRow.route'
+import { rowsLayout } from './auth/app/records/rows/rows.layout'
+import { updateRowRoute } from './auth/app/records/rows/updateRow.route'
+import { updateRecordRoute } from './auth/app/records/updateRecord.route'
 import { balanceRoute } from './auth/app/reports/balance.route'
 import { ledgerRoute } from './auth/app/reports/ledger.route'
-import { recordsRoute } from './auth/app/reports/records.route'
 import { reportsLayout } from './auth/app/reports/reports.layout'
 import { reportsRoute } from './auth/app/reports/reports.route'
+import { rowsRoute } from './auth/app/reports/rows.route'
 import { sheetRoute } from './auth/app/reports/sheet.route'
 import { statementRoute } from './auth/app/reports/statement.route'
 import { supportRoute } from './auth/app/support.route'
-import { createTransactionRoute } from './auth/app/transactions/createTransaction.route'
-import { readTransactionLayout } from './auth/app/transactions/readTransaction.layout'
-import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
-import { createRecordRoute } from './auth/app/transactions/records/createRecord.route'
-import { readRecordLayout } from './auth/app/transactions/records/readRecord.layout'
-import { readRecordRoute } from './auth/app/transactions/records/readRecord.route'
-import { recordsLayout } from './auth/app/transactions/records/records.layout'
-import { updateRecordRoute } from './auth/app/transactions/records/updateRecord.route'
-import { transactionsLayout } from './auth/app/transactions/transactions.layout'
-import { transactionsRoute } from './auth/app/transactions/transactions.route'
-import { updateTransactionRoute } from './auth/app/transactions/updateTransaction.route'
 import { authLayout } from './auth/auth.layout'
 import { rootLayout } from './root.layout'
 import { sharedLayout } from './shared/shared.layout'
@@ -123,18 +123,18 @@ const routeTree = rootLayout.addChildren([
         appLayout.addChildren([
             overviewRoute,
 
-            transactionsLayout.addChildren([
-                transactionsRoute,
-                createTransactionRoute,
-                readTransactionLayout.addChildren([
-                    readTransactionRoute,
-                    updateTransactionRoute,
-                    recordsLayout.addChildren([
-                        recordsRoute,
-                        createRecordRoute,
-                        readRecordLayout.addChildren([
-                            readRecordRoute,
-                            updateRecordRoute
+            recordsLayout.addChildren([
+                recordsRoute,
+                createRecordRoute,
+                readRecordLayout.addChildren([
+                    readRecordRoute,
+                    updateRecordRoute,
+                    rowsLayout.addChildren([
+                        rowsRoute,
+                        createRowRoute,
+                        readRowLayout.addChildren([
+                            readRowRoute,
+                            updateRowRoute
                         ])
                     ])
                 ])
@@ -151,7 +151,7 @@ const routeTree = rootLayout.addChildren([
 
             reportsLayout.addChildren([
                 reportsRoute,
-                recordsRoute,
+                rowsRoute,
                 ledgerRoute,
                 balanceRoute,
                 sheetRoute,

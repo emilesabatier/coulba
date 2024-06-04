@@ -9,5 +9,5 @@ export const reportsRoute = createRoute({
         description: undefined
     }),
     path: '/',
-    component: () => <Navigate to="/documents/journal" />
+    component: () => <Navigate to="/documents/livre-journal" />
 })

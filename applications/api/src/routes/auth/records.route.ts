@@ -1,9 +1,11 @@
-import { records } from "@coulba/schemas/models"
+import { rows } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
+import { records } from "../../../../../packages/schemas/build/models/records.model.js"
+import { recordInclude } from "../../../../../packages/schemas/build/schemas/record/record.include.js"
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
@@ -14,7 +16,6 @@ import { paramsValidator } from "../../middlewares/paramsValidator.js"
 export const recordsRoute = new Hono<AuthEnv>()
     .post(
         '/',
-        checkCurrentYear,
         validator("json", bodyValidator(auth.records.post.body)),
         async (c) => {
             const body = c.req.valid('json')
@@ -25,15 +26,11 @@ export const recordsRoute = new Hono<AuthEnv>()
                     id: generateId(),
                     idCompany: c.var.company.id,
                     idYear: c.var.currentYear.id,
-                    idTransaction: body.idTransaction,
-                    idAccount: body.idAccount,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
                     isConfirmed: false,
                     label: body.label,
                     date: body.date,
-                    debit: (body.debit ?? 0).toString(),
-                    credit: (body.credit ?? 0).toString(),
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })
@@ -49,31 +46,36 @@ export const recordsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idRecord) {
-                const readRecords = await db
-                    .select()
-                    .from(records)
-                    .where(and(
+                const readRecords = await db.query.records.findMany({
+                    where: and(
                         eq(records.idCompany, c.var.user.idCompany),
                         eq(records.idYear, c.var.currentYear.id)
-                    ))
+                    ),
+                    columns: recordInclude,
+                    with: {
+                        rows: true
+                    }
+                })
 
                 return c.json(readRecords, 200)
             }
 
-            const [readRecord] = await db
-                .select()
-                .from(records)
-                .where(and(
+            const readRecord = await db.query.records.findFirst({
+                where: and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord)
-                ))
+                ),
+                columns: recordInclude,
+                with: {
+                    rows: true
+                }
+            })
 
             return c.json(readRecord, 200)
         }
     )
     .put(
         '/:idRecord',
-        checkCurrentYear,
         validator("param", paramsValidator(auth.records.put.params)),
         validator("json", bodyValidator(auth.records.put.body)),
         async (c) => {
@@ -83,20 +85,17 @@ export const recordsRoute = new Hono<AuthEnv>()
             const [updateRecord] = await db
                 .update(records)
                 .set({
-                    idAccount: body.idAccount,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
                     label: body.label,
                     date: body.date,
-                    debit: body.debit?.toString(),
-                    credit: body.credit?.toString(),
-                    lastUpdatedBy: c.var.user.id,
-                    lastUpdatedOn: new Date().toISOString()
+                    lastUpdatedOn: new Date().toISOString(),
+                    lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord),
-                    eq(records.isConfirmed, false)
+                    eq(rows.isConfirmed, false)
                 ))
                 .returning()
 
@@ -105,7 +104,6 @@ export const recordsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idRecord',
-        checkCurrentYear,
         validator("param", paramsValidator(auth.records.put.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -115,10 +113,46 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord),
-                    eq(records.isConfirmed, false)
+                    eq(rows.isConfirmed, false)
                 ))
                 .returning()
 
             return c.json(deleteRecord, 200)
+        }
+    )
+    .patch(
+        '/:idRecord/validate',
+        checkCurrentYear,
+        validator("param", paramsValidator(auth.records.patch.validate.params)),
+        async (c) => {
+            const params = c.req.valid('param')
+
+            await db.transaction(async (tx) => {
+                await tx
+                    .update(records)
+                    .set({
+                        isConfirmed: true,
+                        lastUpdatedBy: c.var.user.id,
+                        lastUpdatedOn: new Date().toISOString()
+                    })
+                    .where(and(
+                        eq(records.idCompany, c.var.user.idCompany),
+                        eq(records.id, params.idRecord)
+                    ))
+
+                await tx
+                    .update(rows)
+                    .set({
+                        isConfirmed: true,
+                        lastUpdatedBy: c.var.user.id,
+                        lastUpdatedOn: new Date().toISOString()
+                    })
+                    .where(and(
+                        eq(rows.idCompany, c.var.user.idCompany),
+                        eq(rows.idRecord, params.idRecord)
+                    ))
+            })
+
+            return c.json({}, 200)
         }
     )

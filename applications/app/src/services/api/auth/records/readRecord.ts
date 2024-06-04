@@ -10,12 +10,12 @@ type ReadRecord = {
 
 export function readRecord(props: ReadRecord) {
     if (!props.params.idRecord) {
-        toast({ title: "Identifiant de l'enregistrement manquant" })
+        toast({ title: "Identifiant de l'écriture manquant" })
         return
     }
     return getAPI({
         path: `/auth/records/${props.params.idRecord}`,
         schema: auth.records.get.return,
-        message: "Erreur avec la lecture de l'enregistrement"
+        message: "Erreur avec la lecture de l'écriture"
     })
 }

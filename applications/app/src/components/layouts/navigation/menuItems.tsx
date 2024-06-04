@@ -24,10 +24,10 @@ export const menuItems: MenuItem[] = [
         path: "/"
     },
     {
-        key: "records",
-        label: "Opérations",
-        basePath: "/operations",
-        path: "/operations"
+        key: "rows",
+        label: "Écritures",
+        basePath: "/ecritures",
+        path: "/ecritures"
     },
     {
         key: "attachments",
@@ -42,9 +42,9 @@ export const menuItems: MenuItem[] = [
         path: "/documents/bilan",
         subMenuItems: [
             {
-                basePath: "/documents/journal",
-                path: "/documents/journal",
-                label: "Journal"
+                basePath: "/documents/livre-journal",
+                path: "/documents/livre-journal",
+                label: "Livre-journal"
             },
             {
                 basePath: "/documents/grand-livre",

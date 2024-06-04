@@ -19,7 +19,7 @@ import { Section } from "./section/section"
 
 
 type Table<T> = {
-    children?: ReactElement
+    children?: ReactElement | null
     data: Array<T>
     isLoading?: boolean
     columns: Array<ColumnDef<T>>
@@ -58,14 +58,16 @@ export function Table<T>(props: Table<T>) {
         // className="h-full"
         >
             <Section.Item>
-                {props.children ?? null}
+                <div>
+                    {props.children ?? null}
+                </div>
                 <InputDebounced
                     value={globalFilter ?? ""}
                     onChange={(value) => setGlobalFilter(value)}
                 >
                     <InputText
                         placeholder="Recherche"
-                        className="max-w-[300px]"
+                        className="max-w-[300px] ml-auto"
                     />
                 </InputDebounced>
             </Section.Item>

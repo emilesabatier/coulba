@@ -13,6 +13,6 @@ export function updateRecord(props: UpdateRecord) {
         path: `/auth/records/${props.params.idRecord}`,
         body: props.body,
         schema: auth.records.put.return,
-        message: "Erreur avec la modification de l'enregistrement"
+        message: "Erreur avec la modification de l'écriture"
     })
 }

@@ -7,7 +7,7 @@ export const balanceRoute = createRoute({
     getParentRoute: () => reportsLayout,
     beforeLoad: () => ({
         title: "Balance",
-        description: "La balance comptable agrège le débit & crédit des opérations par compte et affiche le solde de chacun."
+        description: "La balance comptable agrège le débit & crédit des écritures par compte et affiche le solde de chacun."
     }),
     path: '/balance',
     component: () => <BalancePage />

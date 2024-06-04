@@ -1,31 +1,35 @@
 import { ButtonPlain } from "@coulba/design/buttons"
-import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
-import { auth } from "@coulba/schemas/routes"
+import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatText } from "@coulba/design/formats"
 import { IconPlus } from "@tabler/icons-react"
-import * as v from "valibot"
+import { useQuery } from "@tanstack/react-query"
 import { router } from "../../routes/router"
-import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
-import { FormatAttachmentWithFetch } from "../attachments/format/formatAttachmentWithFetch"
-import { FormatJournalWithFetch } from "../journals/format/formatJournalWithFetch"
+import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
 import { Table } from "../layouts/table"
 import { CreateRecord } from "./create/createRecord"
+import { FormatAttachmentWithFetch } from "../attachments/format/formatAttachmentWithFetch"
+import { FormatJournalWithFetch } from "../journals/format/formatJournalWithFetch"
 
 
-type RecordsTable = {
-    transaction: v.Output<typeof auth.transactions.get.return>
-    isLoading?: boolean
-}
+export function RecordsTable() {
+    const records = useQuery(recordsOptions)
 
-export function RecordsTable(props: RecordsTable) {
+    const recordsData = (records.data ?? [])
+        .sort((a, b) => b.date.localeCompare(a.date))
+
     return (
         <Table
-            data={props.transaction.records}
-            isLoading={props.isLoading}
+            data={recordsData}
+            isLoading={records.isLoading}
             columns={[
                 {
                     accessorKey: 'isConfirmed',
                     header: 'État',
-                    cell: ({ row }) => (<FormatBoolean boolean={row.original.isConfirmed} text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"} />),
+                    cell: ({ row }) => (
+                        <FormatBoolean
+                            boolean={row.original.isConfirmed}
+                            text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"}
+                        />
+                    ),
                     filterFn: 'includesString'
                 },
                 {
@@ -41,33 +45,15 @@ export function RecordsTable(props: RecordsTable) {
                     filterFn: 'includesString'
                 },
                 {
-                    accessorKey: 'idAccount',
-                    header: 'Compte',
-                    cell: ({ row }) => (<FormatAccountWithFetch idAccount={row.original.idAccount} />),
-                    filterFn: 'includesString'
-                },
-                {
-                    accessorKey: 'idAttachment',
-                    header: 'Pièce justificative',
-                    cell: ({ row }) => (!row.original.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={row.original.idAttachment} />),
-                    filterFn: 'includesString'
-                },
-                {
                     accessorKey: 'date',
                     header: "Date",
                     cell: (context) => (<FormatDate isoDate={String(context.getValue())} />),
                     filterFn: 'includesString'
                 },
                 {
-                    accessorKey: 'debit',
-                    header: "Débit",
-                    cell: (context) => (<FormatPrice price={String(context.getValue())} />),
-                    filterFn: 'includesString'
-                },
-                {
-                    accessorKey: 'credit',
-                    header: "Crédit",
-                    cell: (context) => (<FormatPrice price={String(context.getValue())} />),
+                    accessorKey: 'idAttachment',
+                    header: 'Pièce justificative',
+                    cell: ({ row }) => (!row.original.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={row.original.idAttachment} />),
                     filterFn: 'includesString'
                 },
                 {
@@ -79,18 +65,15 @@ export function RecordsTable(props: RecordsTable) {
             ]}
             onRowClick={(row) => {
                 router.navigate({
-                    to: "/operations/$idTransaction/enregistrements/$idRecord",
-                    params: {
-                        idTransaction: row.original.idTransaction,
-                        idRecord: row.original.id
-                    }
+                    to: "/ecritures/$idRecord",
+                    params: { idRecord: row.original.id }
                 })
             }}
         >
-            <CreateRecord transaction={props.transaction}>
+            <CreateRecord>
                 <ButtonPlain
                     icon={<IconPlus />}
-                    text="Ajouter un enregistrement"
+                    text="Ajouter une écriture"
                 />
             </CreateRecord>
         </Table>

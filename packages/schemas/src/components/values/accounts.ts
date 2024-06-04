@@ -3775,7 +3775,7 @@ export const defaultAccounts: DefaultAccount[] = [
     {
         number: 6354,
         system: "developed",
-        label: "Droits d'enregistrement et de timbre"
+        label: "Droits d'ligne et de timbre"
     },
     {
         number: 63541,

@@ -8,10 +8,10 @@ import { computations } from "./computations/index.js"
 import { journals } from "./journals/index.js"
 import { profile } from "./profile/index.js"
 import { records } from "./records/index.js"
+import { rows } from "./rows/index.js"
 import { services } from "./services/index.js"
 import { sheets } from "./sheets/index.js"
 import { statements } from "./statements/index.js"
-import { transactions } from "./transactions/index.js"
 import { users } from "./users/index.js"
 import { years } from "./years/index.js"
 
@@ -20,14 +20,14 @@ export const auth = {
     accounts: accounts,
     accountSheets: accountSheets,
     accountStatements: accountStatements,
-    transactions: transactions,
+    records: records,
     computations: computations,
     computationStatements: computationStatements,
     sheets: sheets,
     statements: statements,
     attachments: attachments,
     companies: companies,
-    records: records,
+    rows: rows,
     journals: journals,
     users: users,
     years: years,

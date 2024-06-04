@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
-import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
+import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { Balance, getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
@@ -56,10 +56,10 @@ function groupStatement(statements: v.Output<typeof auth.statements.get.return>[
 export function StatementContent() {
     const statements = useQuery(statementsOptions)
     const computations = useQuery(computationsOptions)
-    const records = useQuery(recordsOptions)
+    const rows = useQuery(rowsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(records.data ?? [], accounts.data ?? [])
+    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
 
     const sortedStatements = groupStatement(statements.data ?? [], balance, null)
         .sort((a, b) => a.number - b.number)
@@ -68,10 +68,10 @@ export function StatementContent() {
         .sort((a, b) => a.number - b.number)
 
 
-    if (records.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
-    if (records.isError) return <ErrorMessage message={records.error.message} />
+    if (rows.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
+    if (rows.isError) return <ErrorMessage message={rows.error.message} />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
-    if (!records.data || !accounts.data) return null
+    if (!rows.data || !accounts.data) return null
     return (
         <StatementTable
             statements={sortedStatements}

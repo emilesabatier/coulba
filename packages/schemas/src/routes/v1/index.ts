@@ -1,8 +1,8 @@
 import { attachments } from "./attachments/index.js"
-import { records } from "./records/index.js"
+import { rows } from "./rows/index.js"
 
 
 export const v1 = {
     attachments: attachments,
-    records: records
+    rows: rows
 }

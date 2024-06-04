@@ -15,8 +15,8 @@ const features = [
     },
     {
         icon: <IconPencilPlus />,
-        title: "Enregistrements",
-        description: "Ajoutez, éditez et supprimez les enregistrements de manière fluide et sécurisé, avant validation et inscription définitive dans le journal."
+        title: "Lignes",
+        description: "Ajoutez, éditez et supprimez les lignes de manière fluide et sécurisé, avant validation et inscription définitive dans le journal."
     },
     {
         icon: <IconFiles />,
@@ -41,7 +41,7 @@ const features = [
     {
         icon: <IconApiApp />,
         title: "API",
-        description: "Disposez d'une API personnalisée pour automatiser l'ajout des enregistrements comptables."
+        description: "Disposez d'une API personnalisée pour automatiser l'ajout des lignes comptables."
     },
     {
         icon: <IconCrown />,

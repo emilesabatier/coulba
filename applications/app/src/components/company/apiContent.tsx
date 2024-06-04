@@ -55,7 +55,7 @@ export function ApiContent() {
                         La clé API n'est visible qu'au moment de la génération. Si vous l'avez perdue, générez une nouvelle clé, qui supprimera les accès de l'ancienne.
                     </p>
                     <p>
-                        La clé doit être ajoutée dans l'url à chaque requête, sous la forme <code className="rounded-sm bg-neutral/5 p-1">.../records?key=abcdef12345</code>
+                        La clé doit être ajoutée dans l'url à chaque requête, sous la forme <code className="rounded-sm bg-neutral/5 p-1">.../rows?key=abcdef12345</code>
                     </p>
                 </div>
             </Section.Item>

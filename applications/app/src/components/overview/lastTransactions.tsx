@@ -4,56 +4,56 @@
 // import { IconEye, IconPlus } from "@tabler/icons-react"
 // import { useQuery } from "@tanstack/react-query"
 // import { Link } from "@tanstack/react-router"
-// import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
+// import { rowsOptions } from "../../services/api/auth/rows/rowsOptions"
 // import { ErrorMessage } from "../layouts/errorMessage"
-// import { CreateRecord } from "../records/create/createRecord"
-// import { ReadRecord } from "../records/read/readRecord"
+// import { CreateRow } from "../rows/create/createRow"
+// import { ReadRow } from "../rows/read/readRow"
 
 
-// export function LastRecords() {
-//     const records = useQuery(recordsOptions)
+// export function LastRows() {
+//     const rows = useQuery(rowsOptions)
 
-//     if (records.isLoading) return <CircularLoader />
-//     if (records.isError) return <ErrorMessage message={records.error.message} />
-//     if (!records.data) return null
+//     if (rows.isLoading) return <CircularLoader />
+//     if (rows.isError) return <ErrorMessage message={rows.error.message} />
+//     if (!rows.data) return null
 
-//     const lastRecords = records.data
+//     const lastRows = rows.data
 //         .sort((a, b) => b.createdOn.localeCompare(a.createdOn))
 //         .slice(0, 10)
 
 //     return (
 //         <div className="w-full max-w-[400px] h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
 //             <div className="w-full flex justify-between items-center gap-3 p-3 border-b border-neutral/10">
-//                 <h2 className="text-xl text-neutral/75">Derniers enregistrements</h2>
-//                 <CreateRecord>
+//                 <h2 className="text-xl text-neutral/75">Derniers lignes</h2>
+//                 <CreateRow>
 //                     <ButtonPlain
 //                         icon={<IconPlus />}
 //                     />
-//                 </CreateRecord>
+//                 </createRow>
 //             </div>
 //             <div className="flex flex-col justify-start items-stretch h-[300px] overflow-auto">
-//                 {lastRecords.length > 0 ? null : <FormatNull text="Aucune donnée" className="w-full p-3" />}
-//                 {lastRecords.map((record) => {
+//                 {lastRows.length > 0 ? null : <FormatNull text="Aucune donnée" className="w-full p-3" />}
+//                 {lastRows.map((row) => {
 //                     return (
 //                         <div
-//                             key={record.id}
+//                             key={row.id}
 //                             className="flex justify-between items-center gap-3 p-3 border-b border-neutral/5 last:border-b-0"
 //                         >
-//                             <span>{record.label}</span>
-//                             <FormatDateTime isoDate={record.createdOn} className="ml-auto" />
-//                             <ReadRecord idRecord={record.id}>
+//                             <span>{row.label}</span>
+//                             <FormatDateTime isoDate={row.createdOn} className="ml-auto" />
+//                             <ReadRow idRow={row.id}>
 //                                 <ButtonGhost
 //                                     icon={<IconEye />}
 //                                 />
-//                             </ReadRecord>
+//                             </ReadRow>
 //                         </div>
 //                     )
 //                 })}
 //             </div>
 //             <div className="w-full p-3 border-t border-neutral/10">
-//                 <Link to="/enregistrements">
+//                 <Link to="/lignes">
 //                     <ButtonOutlineContent
-//                         text="Voir tous les enregistrements"
+//                         text="Voir tous les lignes"
 //                         className="w-full border-dashed justify-center"
 //                     />
 //                 </Link>

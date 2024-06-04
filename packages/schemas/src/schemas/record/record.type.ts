@@ -1,4 +1,4 @@
-import { records } from "../../models/records.model"
+import { records } from "../../models"
 import { recordInclude } from "./record.include"
 
 

@@ -12,6 +12,6 @@ export function createRecord(props: CreateRecord) {
         path: `/auth/records`,
         body: props.body,
         schema: auth.records.post.return,
-        message: "Erreur avec l'ajout de l'enregistrement"
+        message: "Erreur avec l'ajout de l'écriture"
     })
 }

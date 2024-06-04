@@ -23,7 +23,7 @@ export function CompanyContent() {
                     />
                 </UpdateCompany>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>

@@ -7,7 +7,7 @@ export const APIRoute = createRoute({
     getParentRoute: () => configurationLayout,
     beforeLoad: () => ({
         title: "API",
-        description: "Vous retrouvez sur cette page la clé API qui vous permettra d'automatiser l'ajout d'enregistrements depuis une source externe."
+        description: "Vous retrouvez sur cette page la clé API qui vous permettra d'automatiser l'ajout d'lignes depuis une source externe."
     }),
     path: '/api',
     component: () => <APIPage />

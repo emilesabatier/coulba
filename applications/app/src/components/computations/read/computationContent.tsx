@@ -47,7 +47,7 @@ export function ComputationContent() {
                     </DeleteComputation>
                 </div>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Informations" />
             </Section.Item>
             <Section.Item>
@@ -60,7 +60,7 @@ export function ComputationContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Métadonnées" />
             </Section.Item>
             <Section.Item>
@@ -82,7 +82,7 @@ export function ComputationContent() {
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item>
+            <Section.Item className="bg-neutral/5">
                 <Section.Title title="Lignes du compte de résultat utilisées dans le calcul" />
             </Section.Item>
             <Section.Item className="p-0 border-b-0">

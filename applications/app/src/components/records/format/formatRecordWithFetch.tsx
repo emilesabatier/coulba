@@ -10,7 +10,6 @@ import { formatRecord } from "./formatRecord"
 
 
 type FormatRecordWithFetch = {
-    idTransaction: v.Output<typeof auth.transactions.get.return>["id"]
     idRecord: v.Output<typeof auth.records.get.return>["id"]
 }
 
@@ -21,7 +20,7 @@ export function FormatRecordWithFetch(props: FormatRecordWithFetch) {
     if (record.isError) return <ErrorMessage message={record.error.message} />
     if (!record.data) return <FormatNull />
     return (
-        <ReadRecord idTransaction={props.idTransaction} idRecord={props.idRecord}>
+        <ReadRecord idRecord={props.idRecord}>
             <FormatText
                 text={formatRecord(record.data)}
                 className="underline hover:no-underline"

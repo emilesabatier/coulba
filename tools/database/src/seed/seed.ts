@@ -1,5 +1,5 @@
 import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, accountStatements, companies, computations, computationStatements, journals, records, sheets, statements, transactions, users, years } from '@coulba/schemas/models'
+import { accounts, accountSheets, accountStatements, companies, computations, computationStatements, journals, records, rows, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -7,7 +7,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultTransactions } from './records'
+import { defaultRecords } from './records.js'
 
 
 export function generateTemporaryPassword(): string {
@@ -66,14 +66,8 @@ async function seed() {
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    acronym: "HA",
+                    acronym: "AC",
                     label: "Achats"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    acronym: "SL",
-                    label: "Salaires"
                 },
                 {
                     id: generateId(),
@@ -81,6 +75,12 @@ async function seed() {
                     acronym: "BQ",
                     label: "Banque"
                 },
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    acronym: "OD",
+                    label: "Opérations diverses"
+                }
             ]
             await tx.insert(journals).values(newJournals)
 
@@ -246,45 +246,46 @@ async function seed() {
             await tx.insert(users).values(adminUser)
 
 
-            // Records
-            console.log("Add records")
-            const newTransactions: (typeof transactions.$inferInsert)[] = []
+            // Rows
+            console.log("Add rows")
             const newRecords: (typeof records.$inferInsert)[] = []
-            defaultTransactions.forEach((transaction) => {
+            const newRows: (typeof rows.$inferInsert)[] = []
+            defaultRecords.forEach((record) => {
 
-                const idTransaction = generateId()
-                newTransactions.push({
-                    id: idTransaction,
+                const idRecord = generateId()
+                newRecords.push({
+                    id: idRecord,
                     idCompany: newCompany.id,
                     idYear: idCurrentYear,
+                    idJournal: undefined,
+                    idAttachment: undefined,
                     isConfirmed: true,
-                    label: transaction.label,
-                    date: transaction.date
+                    label: record.label,
+                    date: record.date
                 })
 
-                transaction.records.forEach((record) => {
-                    const idAccount = newAccounts.find((account) => account.number === record.accountNumber)?.id
+                record.rows.forEach((row) => {
+                    const idAccount = newAccounts.find((account) => account.number === row.accountNumber)?.id
                     if (!idAccount) {
-                        console.log("Erreur record", record)
+                        console.log("Erreur row", row)
                         return
                     }
-                    newRecords.push({
+                    newRows.push({
                         id: generateId(),
                         idCompany: newCompany.id,
                         idYear: idCurrentYear,
                         idAccount: idAccount,
-                        idTransaction: idTransaction,
+                        idRecord: idRecord,
                         isConfirmed: true,
-                        label: record.label,
-                        date: record.date,
-                        debit: record.debit.toString(),
-                        credit: record.credit.toString()
+                        label: row.label,
+                        debit: row.debit.toString(),
+                        credit: row.credit.toString()
                     })
                 })
 
             })
-            await tx.insert(transactions).values(newTransactions)
             await tx.insert(records).values(newRecords)
+            await tx.insert(rows).values(newRows)
         })
 
     } catch (error) {

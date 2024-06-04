@@ -5,7 +5,6 @@ import * as v from "valibot"
 
 
 type ReadRecord = {
-    idTransaction: v.Output<typeof auth.transactions.get.return>["id"]
     idRecord: v.Output<typeof auth.records.get.return>["id"]
     children: ReactElement
 }
@@ -13,11 +12,8 @@ type ReadRecord = {
 export function ReadRecord(props: ReadRecord) {
     return (
         <Link
-            to="/operations/$idTransaction/enregistrements/$idRecord"
-            params={{
-                idTransaction: props.idTransaction,
-                idRecord: props.idRecord
-            }}
+            to="/ecritures/$idRecord"
+            params={{ idRecord: props.idRecord }}
             children={props.children}
         />
     )
