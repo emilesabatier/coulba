@@ -1,9 +1,9 @@
 import { Outlet, createRootRouteWithContext, useRouter } from "@tanstack/react-router"
-import { SessionContext } from "../contexts/session/session.context"
 import { useEffect } from "react"
+import { SessionContext } from "../contexts/session/session.context"
 
 
-type MyRouterContext = {
+type RouterContext = {
     title?: string
     description?: string
     session: {
@@ -14,7 +14,7 @@ type MyRouterContext = {
     }
 }
 
-export const rootLayout = createRootRouteWithContext<MyRouterContext>()({
+export const rootLayout = createRootRouteWithContext<RouterContext>()({
     component: () => {
 
         const router = useRouter()

@@ -1,4 +1,5 @@
 import { ParseRoute, createRouter } from '@tanstack/react-router'
+import { activationRoute } from './auth/activation.route'
 import { attachmentsLayout } from './auth/attachments/attachments.layout'
 import { attachmentsRoute } from './auth/attachments/attachments.route'
 import { createAttachmentRoute } from './auth/attachments/createAttachment.route'
@@ -100,7 +101,6 @@ import { resetPasswordRoute } from './signIn/resetPassword.route'
 import { signInLayout } from './signIn/signIn.layout'
 import { signInRoute } from './signIn/signIn.route'
 import { signUpRoute } from './signUp/signUp.route'
-import { activationRoute } from './auth/activation.route'
 
 
 const routeTree = rootLayout.addChildren([

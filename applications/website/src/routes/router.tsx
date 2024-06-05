@@ -14,7 +14,12 @@ const routeTree = rootLayout.addChildren([
 ])
 
 
-export const router = createRouter({ routeTree })
+export const router = createRouter({
+    routeTree,
+    context: {
+        title: "Coulba"
+    }
+})
 
 
 declare module '@tanstack/react-router' {

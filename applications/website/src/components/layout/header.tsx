@@ -34,8 +34,8 @@ export function Header() {
         </Fragment>
     )
     return (
-        <div className="w-full h-full p-3 flex justify-center items-center border-b border-neutral/20">
-            <nav className="w-full h-full max-w-[1280px] flex justify-between items-center gap-3">
+        <div className="w-full h-[64px] p-3 flex justify-center items-center border-b border-neutral/20 sticky top-0 bg-white">
+            <nav className="relative w-full h-full max-w-[1280px] flex justify-between items-center gap-3">
                 <div className="w-full h-full flex justify-start items-center gap-2">
                     <Link to="/" className="w-fit h-full flex justify-center items-center">
                         <Logo />
