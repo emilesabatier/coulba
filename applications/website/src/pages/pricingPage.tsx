@@ -31,9 +31,9 @@ export function PricingPage() {
                             Pourquoi ?
                         </Text.Title>
                         <Text.Paragraph>
-                            La comptabilité est une pierre fondamentale de la vie d'une entreprise. Nous sommes convaincus qu'en deça d'une certaine taille d'entreprise, la comptabilité peut être gérée en interne.
+                            La comptabilité est une pierre fondamentale de la vie d'une entreprise. Nous sommes convaincus qu'en deça d'une certaine taille, une entreprise peut gérer sa comptabilité en interne.
                             <br />
-                            En plus de réaliser des économies, notamment au début de vie de l'entreprise, cela permet de bien comprendre les flux économiques au sein des entreprises.
+                            En plus de réaliser des économies, cela permet de bien comprendre les flux économiques et financiers.
                         </Text.Paragraph>
                     </Text.Section>
                     <Text.Section>
@@ -55,7 +55,7 @@ export function PricingPage() {
                         <Text.Paragraph>
                             Vous pouvez faire un don en cliquant sur le lien suivant.
                         </Text.Paragraph>
-                        <a href="" target="_blank" rel="noopener noreferrer" className="w-fit">
+                        <a href="https://donate.stripe.com/6oE8xg5PV5EocWAfYY" target="_blank" rel="noopener noreferrer" className="w-fit">
                             <ButtonPlainContent
                                 text="Faire un don"
                                 className="justify-center"
