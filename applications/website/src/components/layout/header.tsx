@@ -36,31 +36,33 @@ export function Header() {
     return (
         <div className="w-full h-[64px] p-3 flex justify-center items-center border-b border-neutral/20 sticky top-0 bg-white">
             <nav className="relative w-full h-full max-w-[1280px] flex justify-between items-center gap-3">
-                <div className="w-full h-full flex justify-start items-center gap-2">
+                <div className="w-full h-full flex justify-start items-end">
                     <Link to="/" className="w-fit h-full flex justify-center items-center">
                         <Logo />
                     </Link>
                 </div>
-                {
-                    isMobile ? (
-                        <Popover>
-                            <PopoverTrigger asChild >
-                                <ButtonOutline
-                                    icon={<IconMenu />}
-                                />
-                            </PopoverTrigger>
-                            <PopoverContent align="end">
-                                <div className="p-3 flex flex-col justify-start items-start">
-                                    {menus}
-                                </div>
-                            </PopoverContent>
-                        </Popover>
-                    ) : (
-                        <div className="flex justify-end items-center gap-1.5">
-                            {menus}
-                        </div>
-                    )
-                }
+                <div className="flex justify-end items-center">
+                    {
+                        isMobile ? (
+                            <Popover>
+                                <PopoverTrigger asChild >
+                                    <ButtonOutline
+                                        icon={<IconMenu />}
+                                    />
+                                </PopoverTrigger>
+                                <PopoverContent align="end">
+                                    <div className="p-3 flex flex-col justify-start items-start">
+                                        {menus}
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
+                        ) : (
+                            <div className="flex justify-end items-center gap-1.5">
+                                {menus}
+                            </div>
+                        )
+                    }
+                </div>
             </nav>
         </div>
     )

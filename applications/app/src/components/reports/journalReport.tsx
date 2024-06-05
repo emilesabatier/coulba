@@ -1,28 +1,32 @@
-import { FormatDate, FormatPrice, FormatText, formatPrice } from "@coulba/design/formats"
+import { FormatDate, FormatText, formatPrice } from "@coulba/design/formats"
 import { useQuery } from "@tanstack/react-query"
-import { rowsOptions } from "../../services/api/auth/rows/rowsOptions"
-import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
+import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
 import { Table } from "../layouts/table"
 
 
 export function JournalReport() {
-    const rows = useQuery(rowsOptions)
+    const records = useQuery(recordsOptions)
 
-    const rowsData = (rows.data ?? [])
+    const recordsData = (records.data ?? [])
+        .filter((record) => record.isValidated)
         .sort((a, b) => b.createdOn.localeCompare(a.createdOn))
 
-    const totalDebit = rowsData.reduce<number>((previous, row) => {
-        return previous + Number(row.debit)
+    const totalDebit = recordsData.reduce<number>((sum, record) => {
+        return sum + record.rows.reduce((_sum, row) => {
+            return _sum + Number(row.debit)
+        }, 0)
     }, 0)
 
-    const totalCredit = rowsData.reduce<number>((previous, row) => {
-        return previous + Number(row.credit)
+    const totalCredit = recordsData.reduce<number>((sum, record) => {
+        return sum + record.rows.reduce((_sum, row) => {
+            return _sum + Number(row.credit)
+        }, 0)
     }, 0)
 
     return (
         <Table
-            data={rowsData}
-            isLoading={rows.isLoading}
+            data={recordsData}
+            isLoading={records.isLoading}
             columns={[
                 {
                     accessorKey: 'date',
@@ -36,25 +40,25 @@ export function JournalReport() {
                     cell: ({ row }) => (<FormatText text={row.original.label} />),
                     filterFn: 'includesString'
                 },
-                {
-                    accessorKey: 'idAccount',
-                    header: 'Compte',
-                    cell: ({ row }) => (<FormatAccountWithFetch idAccount={row.original.idAccount} />),
-                    filterFn: 'includesString',
-                    maxSize: 300
-                },
-                {
-                    accessorKey: 'debit',
-                    header: "Débit",
-                    cell: ({ row }) => (<FormatPrice price={row.original.debit} />),
-                    filterFn: 'includesString'
-                },
-                {
-                    accessorKey: 'credit',
-                    header: "Crédit",
-                    cell: ({ row }) => (<FormatPrice price={row.original.credit} />),
-                    filterFn: 'includesString'
-                }
+                // {
+                //     accessorKey: 'idAccount',
+                //     header: 'Compte',
+                //     cell: ({ row }) => (<FormatAccountWithFetch idAccount={row.original.idAccount} />),
+                //     filterFn: 'includesString',
+                //     maxSize: 300
+                // },
+                // {
+                //     accessorKey: 'debit',
+                //     header: "Débit",
+                //     cell: ({ row }) => (<FormatPrice price={row.original.debit} />),
+                //     filterFn: 'includesString'
+                // },
+                // {
+                //     accessorKey: 'credit',
+                //     header: "Crédit",
+                //     cell: ({ row }) => (<FormatPrice price={row.original.credit} />),
+                //     filterFn: 'includesString'
+                // }
             ]}
         >
             <div className="flex justify-center items-center gap-1.5">

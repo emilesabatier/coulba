@@ -3,6 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { records } from "../../../../../packages/schemas/build/models/records.model.js"
 import { recordInclude } from "../../../../../packages/schemas/build/schemas/record/record.include.js"
@@ -11,7 +12,6 @@ import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
-import { HTTPException } from "hono/http-exception"
 
 
 export const recordsRoute = new Hono<AuthEnv>()
@@ -96,7 +96,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord),
-                    eq(rows.isValidated, false)
+                    eq(records.isValidated, false)
                 ))
                 .returning()
 
@@ -114,7 +114,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord),
-                    eq(rows.isValidated, false)
+                    eq(records.isValidated, false)
                 ))
                 .returning()
 
