@@ -8,7 +8,7 @@ import { journals } from "../../models/index.js"
 export const journalSchema = createSelectSchema(journals, {
     id: idSchema,
     idCompany: idSchema,
-    acronym: requiredTextSchema,
+    code: requiredTextSchema,
     label: requiredTextSchema,
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,

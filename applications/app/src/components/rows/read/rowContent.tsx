@@ -4,7 +4,6 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { Fragment } from "react"
 import { readRowRoute } from "../../../routes/auth/app/records/rows/readRow.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
@@ -38,28 +37,25 @@ export function RowContent() {
                         })}
                         icon={<IconChevronLeft />}
                     />
-                    {row.data.isConfirmed ? null : (
-                        <Fragment>
-                            <UpdateRow row={row.data} record={record.data}>
-                                <ButtonPlain
-                                    icon={<IconPencil />}
-                                    text="Modifier"
-                                />
-                            </UpdateRow>
-                        </Fragment>
-                    )}
+                    <UpdateRow
+                        row={row.data}
+                        record={record.data}
+                    >
+                        <ButtonPlain
+                            icon={<IconPencil />}
+                            text="Modifier"
+                            disabled={row.data.isValidated}
+                        />
+                    </UpdateRow>
                 </div>
                 <div className="flex justify-end items-center gap-1.5">
-                    {row.data.isConfirmed ? null : (
-                        <Fragment>
-                            <DeleteRow row={row.data} record={record.data}>
-                                <ButtonGhost
-                                    icon={<IconTrash />}
-                                    color="error"
-                                />
-                            </DeleteRow>
-                        </Fragment>
-                    )}
+                    <DeleteRow row={row.data} record={record.data}>
+                        <ButtonGhost
+                            icon={<IconTrash />}
+                            color="error"
+                            disabled={row.data.isValidated}
+                        />
+                    </DeleteRow>
                 </div>
             </Section.Item>
             <Section.Item className="bg-neutral/5">

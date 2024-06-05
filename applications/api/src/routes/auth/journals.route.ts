@@ -22,7 +22,7 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .values({
                     id: generateId(),
                     idCompany: c.var.company.id,
-                    acronym: body.acronym,
+                    code: body.code,
                     label: body.label,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
@@ -69,7 +69,7 @@ export const journalsRoute = new Hono<AuthEnv>()
             const [updateJournal] = await db
                 .update(journals)
                 .set({
-                    acronym: body.acronym,
+                    code: body.code,
                     label: body.label,
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()

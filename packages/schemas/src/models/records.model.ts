@@ -2,12 +2,12 @@ import { relations, sql } from "drizzle-orm"
 import { boolean, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
+import { attachments } from "./attachments.model.js"
 import { companies } from "./companies.model.js"
+import { journals } from "./journals.model.js"
 import { rows } from "./rows.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
-import { attachments } from "./attachments.model.js"
-import { journals } from "./journals.model.js"
 
 
 // Model
@@ -19,7 +19,8 @@ export const records = pgTable(
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idJournal: idColumn("id_journal").references(() => journals.id, { onDelete: "set null", onUpdate: "cascade" }),
         idAttachment: idColumn("id_attachment").references(() => attachments.id, { onDelete: "set null", onUpdate: "cascade" }),
-        isConfirmed: boolean("is_confirmed").notNull(),
+        isValidated: boolean("is_validated").notNull(),
+        validatedOn: dateTimeColumn("validated_on"),
         label: text("label").notNull(),
         date: dateTimeColumn("date").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

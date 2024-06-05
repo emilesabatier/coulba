@@ -43,26 +43,38 @@ export const companiesRoute = new Hono()
                         {
                             id: generateId(),
                             idCompany: idCompany,
-                            acronym: "VT",
+                            code: "VT",
                             label: "Ventes"
                         },
                         {
                             id: generateId(),
                             idCompany: idCompany,
-                            acronym: "AC",
+                            code: "AC",
                             label: "Achats"
                         },
                         {
                             id: generateId(),
                             idCompany: idCompany,
-                            acronym: "BQ",
+                            code: "BQ",
                             label: "Banque"
                         },
                         {
                             id: generateId(),
                             idCompany: idCompany,
-                            acronym: "OD",
+                            code: "OD",
                             label: "Opérations diverses"
+                        },
+                        {
+                            id: generateId(),
+                            idCompany: idCompany,
+                            code: "VA",
+                            label: "Valeur ajoutée"
+                        },
+                        {
+                            id: generateId(),
+                            idCompany: idCompany,
+                            code: "AN",
+                            label: "À-nouveaux"
                         }
                     ])
 

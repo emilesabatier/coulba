@@ -11,6 +11,7 @@ import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { HTTPException } from "hono/http-exception"
 
 
 export const recordsRoute = new Hono<AuthEnv>()
@@ -28,7 +29,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                     idYear: c.var.currentYear.id,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
-                    isConfirmed: false,
+                    isValidated: false,
                     label: body.label,
                     date: body.date,
                     lastUpdatedBy: c.var.user.id,
@@ -95,7 +96,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord),
-                    eq(rows.isConfirmed, false)
+                    eq(rows.isValidated, false)
                 ))
                 .returning()
 
@@ -113,7 +114,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(records.idCompany, c.var.user.idCompany),
                     eq(records.id, params.idRecord),
-                    eq(rows.isConfirmed, false)
+                    eq(rows.isValidated, false)
                 ))
                 .returning()
 
@@ -127,11 +128,21 @@ export const recordsRoute = new Hono<AuthEnv>()
         async (c) => {
             const params = c.req.valid('param')
 
+            const [readRecord] = await db
+                .select()
+                .from(records)
+                .where(and(
+                    eq(records.idCompany, c.var.user.idCompany),
+                    eq(records.id, params.idRecord)
+                ))
+            if (!readRecord.idAttachment) throw new HTTPException(403, { message: "Il manque une pièce jointe" })
+
             await db.transaction(async (tx) => {
                 await tx
                     .update(records)
                     .set({
-                        isConfirmed: true,
+                        isValidated: true,
+                        validatedOn: new Date().toISOString(),
                         lastUpdatedBy: c.var.user.id,
                         lastUpdatedOn: new Date().toISOString()
                     })
@@ -143,7 +154,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 await tx
                     .update(rows)
                     .set({
-                        isConfirmed: true,
+                        isValidated: true,
                         lastUpdatedBy: c.var.user.id,
                         lastUpdatedOn: new Date().toISOString()
                     })

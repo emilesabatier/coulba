@@ -43,7 +43,7 @@ export function RecordContent() {
                         onClick={() => router.navigate({ to: "/ecritures" })}
                         icon={<IconChevronLeft />}
                     />
-                    {record.data.isConfirmed ? null : (
+                    {record.data.isValidated ? null : (
                         <Fragment>
                             <UpdateRecord record={record.data}>
                                 <ButtonPlain
@@ -63,7 +63,7 @@ export function RecordContent() {
                     )}
                 </div>
                 <div className="flex justify-end items-center gap-1.5">
-                    {record.data.isConfirmed ? null : (
+                    {record.data.isValidated ? null : (
                         <Fragment>
                             <DeleteRecord record={record.data}>
                                 <ButtonGhost
@@ -76,7 +76,7 @@ export function RecordContent() {
                 </div>
             </Section.Item>
             {
-                record.data.isConfirmed ? null : (
+                record.data.isValidated ? null : (
                     <Section.Item className="p-0">
                         {
                             totalDebit === totalCredit ? (
@@ -112,7 +112,10 @@ export function RecordContent() {
                         {!record.data.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={record.data.idAttachment} />}
                     </DataBlock.Item>
                     <DataBlock.Item label="Écriture validée ?">
-                        <FormatBoolean boolean={record.data.isConfirmed} />
+                        <FormatBoolean boolean={record.data.isValidated} />
+                    </DataBlock.Item>
+                    <DataBlock.Item label="Écriture validée le">
+                        <FormatDate isoDate={record.data.validatedOn} />
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>

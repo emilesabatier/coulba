@@ -7,7 +7,7 @@ export const journalsRoute = createRoute({
     getParentRoute: () => journalsLayout,
     beforeLoad: () => ({
         title: undefined,
-        description: "Vous retrouvez sur cette page la liste des journaux comptables."
+        description: "Vous retrouvez sur cette page la liste des journaux auxiliaires."
     }),
     path: '/',
     component: () => <JournalsPage />

@@ -60,26 +60,38 @@ async function seed() {
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    acronym: "VT",
+                    code: "VT",
                     label: "Ventes"
                 },
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    acronym: "AC",
+                    code: "AC",
                     label: "Achats"
                 },
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    acronym: "BQ",
+                    code: "BQ",
                     label: "Banque"
                 },
                 {
                     id: generateId(),
                     idCompany: newCompany.id,
-                    acronym: "OD",
+                    code: "OD",
                     label: "Opérations diverses"
+                },
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    code: "TVA",
+                    label: "TVA"
+                },
+                {
+                    id: generateId(),
+                    idCompany: newCompany.id,
+                    code: "AN",
+                    label: "À-nouveaux"
                 }
             ]
             await tx.insert(journals).values(newJournals)
@@ -259,7 +271,8 @@ async function seed() {
                     idYear: idCurrentYear,
                     idJournal: undefined,
                     idAttachment: undefined,
-                    isConfirmed: true,
+                    isValidated: false,
+                    validatedOn: undefined,
                     label: record.label,
                     date: record.date
                 })
@@ -276,7 +289,7 @@ async function seed() {
                         idYear: idCurrentYear,
                         idAccount: idAccount,
                         idRecord: idRecord,
-                        isConfirmed: true,
+                        isValidated: false,
                         label: row.label,
                         debit: row.debit.toString(),
                         credit: row.credit.toString()

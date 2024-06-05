@@ -12,7 +12,7 @@ export const journals = pgTable(
     {
         id: idColumn("id").primaryKey(),
         idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        acronym: text("acronym").notNull(),
+        code: text("code").notNull(),
         label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         createdOn: dateTimeColumn("created_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -20,6 +20,6 @@ export const journals = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.acronym, t.idCompany)
+        uniqueConstraint: unique().on(t.code, t.idCompany)
     })
 )

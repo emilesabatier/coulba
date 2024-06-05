@@ -4,7 +4,7 @@ export const rowInclude = {
     idCompany: true,
     idYear: true,
     idAccount: true,
-    isConfirmed: true,
+    isValidated: true,
     label: true,
     debit: true,
     credit: true,

@@ -107,7 +107,7 @@ export const menuItems: MenuItem[] = [
             {
                 basePath: "/configuration/journaux",
                 path: "/configuration/journaux",
-                label: "Journaux comptables"
+                label: "Journaux auxiliaires"
             },
             {
                 basePath: "/configuration/comptes",

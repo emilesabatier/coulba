@@ -72,12 +72,12 @@ export function UpdateJournalForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="acronym"
+                        name="code"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Acronyme"
-                                    tooltip="L'acronyme qui sera affiché."
+                                    label="codee"
+                                    tooltip="L'codee qui sera affiché."
                                     isRequired
                                 />
                                 <FormControl>

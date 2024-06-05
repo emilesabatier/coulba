@@ -28,15 +28,15 @@ export const rowsRoute = new Hono<V1Env>()
             if (!readAccount) throw new HTTPException(401, { message: "Le compte associé au numéro renseigné n'existe pas" })
 
             let idJournal = undefined
-            if (body.journalAcronym) {
+            if (body.journalcode) {
                 const [readJournal] = await db
                     .select()
                     .from(journals)
                     .where(and(
                         eq(journals.idCompany, c.var.company.id),
-                        eq(journals.acronym, body.journalAcronym)
+                        eq(journals.code, body.journalcode)
                     ))
-                if (!readJournal) throw new HTTPException(401, { message: "Le journal associé à l'acronyme renseigné n'existe pas" })
+                if (!readJournal) throw new HTTPException(401, { message: "Le journal associé à l'codee renseigné n'existe pas" })
                 idJournal = readJournal.id
             }
 
@@ -48,7 +48,7 @@ export const rowsRoute = new Hono<V1Env>()
                     idYear: c.var.currentYear.id,
                     idRecord: "",
                     idAccount: readAccount.id,
-                    isConfirmed: false,
+                    isValidated: false,
                     label: body.label,
                     debit: (body.debit ?? 0).toString(),
                     credit: (body.credit ?? 0).toString()

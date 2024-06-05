@@ -4,10 +4,10 @@ import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { router } from "../../routes/router"
 import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
-import { Table } from "../layouts/table"
-import { CreateRecord } from "./create/createRecord"
 import { FormatAttachmentWithFetch } from "../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../journals/format/formatJournalWithFetch"
+import { Table } from "../layouts/table"
+import { CreateRecord } from "./create/createRecord"
 
 
 export function RecordsTable() {
@@ -22,12 +22,12 @@ export function RecordsTable() {
             isLoading={records.isLoading}
             columns={[
                 {
-                    accessorKey: 'isConfirmed',
+                    accessorKey: 'isValidated',
                     header: 'État',
                     cell: ({ row }) => (
                         <FormatBoolean
-                            boolean={row.original.isConfirmed}
-                            text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"}
+                            boolean={row.original.isValidated}
+                            text={!row.original.isValidated ? "Brouillon" : "Confirmé"}
                         />
                     ),
                     filterFn: 'includesString'
@@ -57,9 +57,15 @@ export function RecordsTable() {
                     filterFn: 'includesString'
                 },
                 {
+                    accessorKey: 'validatedOn',
+                    header: "Validé le",
+                    cell: ({ row }) => (<FormatDate isoDate={row.original.validatedOn} />),
+                    filterFn: 'includesString'
+                },
+                {
                     accessorKey: 'createdOn',
                     header: "Ajouté le",
-                    cell: (context) => (<FormatDateTime isoDate={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.createdOn} />),
                     filterFn: 'includesString'
                 }
             ]}

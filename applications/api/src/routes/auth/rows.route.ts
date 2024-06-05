@@ -25,7 +25,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                 .from(records)
                 .where(and(
                     eq(records.id, body.idRecord),
-                    eq(records.isConfirmed, false)
+                    eq(records.isValidated, false)
                 ))
             if (!readRecord) throw new HTTPException(403, { message: "L'écriture est validée" })
 
@@ -37,7 +37,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                     idYear: c.var.currentYear.id,
                     idRecord: body.idRecord,
                     idAccount: body.idAccount,
-                    isConfirmed: false,
+                    isValidated: false,
                     label: body.label,
                     debit: (body.debit ?? 0).toString(),
                     credit: (body.credit ?? 0).toString(),
@@ -100,7 +100,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(rows.idCompany, c.var.user.idCompany),
                     eq(rows.id, params.idRow),
-                    eq(rows.isConfirmed, false)
+                    eq(rows.isValidated, false)
                 ))
                 .returning()
 
@@ -119,7 +119,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                 .where(and(
                     eq(rows.idCompany, c.var.user.idCompany),
                     eq(rows.id, params.idRow),
-                    eq(rows.isConfirmed, false)
+                    eq(rows.isValidated, false)
                 ))
                 .returning()
 

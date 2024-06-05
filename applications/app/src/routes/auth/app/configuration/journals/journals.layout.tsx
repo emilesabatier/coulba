@@ -5,7 +5,7 @@ import { configurationLayout } from "../configuration.layout"
 export const journalsLayout = createRoute({
     getParentRoute: () => configurationLayout,
     beforeLoad: () => ({
-        title: "Journaux",
+        title: "Journaux auxiliaires",
         description: undefined
     }),
     path: '/journaux',

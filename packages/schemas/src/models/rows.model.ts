@@ -18,7 +18,7 @@ export const rows = pgTable(
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idRecord: idColumn("id_record").references(() => records.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idAccount: idColumn("id_account").references(() => accounts.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        isConfirmed: boolean("is_confirmed").notNull(),
+        isValidated: boolean("is_validated").notNull(),
         label: text("label").notNull(),
         debit: numeric("debit", { scale: 2 }).notNull(),
         credit: numeric("credit", { scale: 2 }).notNull(),

@@ -8,6 +8,7 @@ type UpdateRow = {
     record: v.Output<typeof auth.records.get.return>
     row: v.Output<typeof auth.rows.get.return>
     children: ReactElement
+    isDisabled?: boolean
 }
 
 export function UpdateRow(props: UpdateRow) {
@@ -19,6 +20,7 @@ export function UpdateRow(props: UpdateRow) {
                 idRow: props.row.id
             }}
             children={props.children}
+            disabled={props.isDisabled}
         />
     )
 }

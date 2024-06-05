@@ -1,5 +1,5 @@
 import { ButtonPlain } from "@coulba/design/buttons"
-import { FormatBoolean, FormatDateTime, FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatDateTime, FormatPrice, FormatText } from "@coulba/design/formats"
 import { auth } from "@coulba/schemas/routes"
 import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
@@ -20,12 +20,6 @@ export function RowsTable(props: RowsTable) {
             data={props.record.rows}
             isLoading={props.isLoading}
             columns={[
-                {
-                    accessorKey: 'isConfirmed',
-                    header: 'État',
-                    cell: ({ row }) => (<FormatBoolean boolean={row.original.isConfirmed} text={!row.original.isConfirmed ? "Brouillon" : "Confirmé"} />),
-                    filterFn: 'includesString'
-                },
                 {
                     accessorKey: 'label',
                     header: 'Libellé',
@@ -69,12 +63,12 @@ export function RowsTable(props: RowsTable) {
         >
             <CreateRow
                 record={props.record}
-                isDisabled={props.record.isConfirmed}
+                isDisabled={props.record.isValidated}
             >
                 <ButtonPlain
                     icon={<IconPlus />}
                     text="Ajouter un ligne"
-                    disabled={props.record.isConfirmed}
+                    disabled={props.record.isValidated}
                 />
             </CreateRow>
         </Table>
