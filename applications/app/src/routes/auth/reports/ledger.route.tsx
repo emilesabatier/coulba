@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
 import { Main } from "../../../components/layouts/main"
-import { LedgerReport } from "../../../components/reports/ledger/ledgerReport"
+import { LedgerReport } from "../../../components/reports/ledgerReport"
 import { reportsLayout } from "./reports.layout"
 
 

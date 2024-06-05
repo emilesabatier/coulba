@@ -1,17 +1,49 @@
 import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
-import { Balance } from "../../../services/reports/getBalance"
-import { formatAccount } from "../../accounts/format/formatAccount"
-import { Table } from "../../layouts/table/table"
+import { CircularLoader } from "@coulba/design/layouts"
+import { useQuery } from "@tanstack/react-query"
+import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
+import { rowsOptions } from "../../services/api/auth/rows/rowsOptions"
+import { getBalance } from "../../services/reports/getBalance"
+import { formatAccount } from "../accounts/format/formatAccount"
+import { ErrorMessage } from "../layouts/errorMessage"
+import { Section } from "../layouts/section/section"
+import { Table } from "../layouts/table/table"
 
 
-type BalanceTable = {
-    balance: Balance[]
-}
+export function BalanceReport() {
+    const rows = useQuery(rowsOptions)
+    const accounts = useQuery(accountsOptions)
 
-export function BalanceTable(props: BalanceTable) {
+    const rowsData = (rows.data ?? [])
+        .filter((row) => row.isValidated)
+
+    const balance = getBalance(rowsData, accounts.data ?? [])
+        .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
+
+
+    const totalDebit = rowsData.reduce<number>((sum, row) => {
+        return sum + Number(row.debit)
+    }, 0)
+
+    const totalCredit = rowsData.reduce<number>((sum, row) => {
+        return sum + Number(row.credit)
+    }, 0)
+
+    const totalBalanceDebit = balance.reduce<number>((previous, entry) => {
+        return previous + Number(entry.balance.debit)
+    }, 0)
+
+    const totalBalanceCredit = balance.reduce<number>((previous, entry) => {
+        return previous + Number(entry.balance.credit)
+    }, 0)
+
+    if (rows.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
+    if (rows.isError) return <ErrorMessage message={rows.error.message} />
+    if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
+    if (!rows.data || !accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch">
-            <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto">
+        <Section.Root>
+            <Section.Item className="p-0">
                 <Table.Root>
                     <Table.Header.Root>
                         <Table.Header.Row>
@@ -32,10 +64,29 @@ export function BalanceTable(props: BalanceTable) {
                             </Table.Header.Cell>
                         </Table.Header.Row>
                     </Table.Header.Root>
+                    <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
+                        <Table.Body.Row>
+                            <Table.Body.Cell align="right">
+                                <span className="text-neutral/50">Total</span>
+                            </Table.Body.Cell>
+                            <Table.Body.Cell className="w-[1%]" align="right">
+                                <FormatPrice price={totalDebit} className="font-bold" />
+                            </Table.Body.Cell>
+                            <Table.Body.Cell className="w-[1%]" align="right">
+                                <FormatPrice price={totalCredit} className="font-bold" />
+                            </Table.Body.Cell>
+                            <Table.Body.Cell className="w-[1%]" align="right">
+                                <FormatPrice price={totalBalanceDebit} className="font-bold" />
+                            </Table.Body.Cell>
+                            <Table.Body.Cell className="w-[1%]" align="right">
+                                <FormatPrice price={totalBalanceCredit} className="font-bold" />
+                            </Table.Body.Cell>
+                        </Table.Body.Row>
+                    </Table.Body.Root>
                     <Table.Body.Root>
                         {
-                            props.balance.length > 0 ?
-                                props.balance.map((entry) => {
+                            balance.length > 0 ?
+                                balance.map((entry) => {
                                     return (
                                         <Table.Body.Row key={entry.account.id} className="border-neutral/5">
                                             <Table.Body.Cell>
@@ -66,7 +117,7 @@ export function BalanceTable(props: BalanceTable) {
                         }
                     </Table.Body.Root>
                 </Table.Root>
-            </div>
-        </div>
+            </Section.Item>
+        </Section.Root>
     )
 }

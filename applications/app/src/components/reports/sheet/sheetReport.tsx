@@ -108,7 +108,7 @@ export function SheetReport() {
     const rows = useQuery(rowsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
+    const balance = getBalance((rows.data ?? []).filter((row) => row.isValidated), accounts.data ?? [])
 
     const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), balance, null)
         .sort((a, b) => a.number - b.number)
@@ -126,18 +126,16 @@ export function SheetReport() {
     if (!rows.data || !accounts.data) return null
     return (
         <Section.Root>
-            <Section.Item>
-                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
-                    <span className="text-lg uppercase text-neutral/50">Total actif</span>
-                    <span className="text-2xl">{formatPrice(totalSheetAsset)}</span>
-                </div>
-                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
-                    <span className="text-lg uppercase text-neutral/50">Total passif</span>
-                    <span className="text-2xl">{formatPrice(totalSheetLiability)}</span>
-                </div>
-            </Section.Item>
             <Section.Item className="p-0">
-                <div className="grid grid-cols-1 xl:grid-cols-2">
+                <div className="grid grid-cols-2 grid-rows-[max-content_auto]">
+                    <div className="w-full px-3 py-1.5 border-r border-b border-neutral/10 flex justify-start items-end gap-3">
+                        <span className="text-lg uppercase text-neutral/50">Total actif</span>
+                        <span className="text-2xl">{formatPrice(totalSheetAsset)}</span>
+                    </div>
+                    <div className="w-full px-3 py-1.5 border-b border-neutral/10 flex justify-start items-end gap-3">
+                        <span className="text-lg uppercase text-neutral/50">Total passif</span>
+                        <span className="text-2xl">{formatPrice(totalSheetLiability)}</span>
+                    </div>
                     <SheetAssetsTable sheet={sheetAssets} />
                     <SheetLiabilitiesTable sheet={sheetLiabilities} />
                 </div>

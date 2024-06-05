@@ -9,6 +9,7 @@ import { statementsOptions } from "../../../services/api/auth/statements/stateme
 import { Balance, getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { StatementTable } from "./statementTable"
+import { Section } from "../../layouts/section/section"
 
 
 
@@ -59,7 +60,7 @@ export function StatementReport() {
     const rows = useQuery(rowsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
+    const balance = getBalance((rows.data ?? []).filter((row) => row.isValidated), accounts.data ?? [])
 
     const sortedStatements = groupStatement(statements.data ?? [], balance, null)
         .sort((a, b) => a.number - b.number)
@@ -73,9 +74,13 @@ export function StatementReport() {
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!rows.data || !accounts.data) return null
     return (
-        <StatementTable
-            statements={sortedStatements}
-            computations={sortedComputations}
-        />
+        <Section.Root>
+            <Section.Item className="p-0">
+                <StatementTable
+                    statements={sortedStatements}
+                    computations={sortedComputations}
+                />
+            </Section.Item>
+        </Section.Root>
     )
 }

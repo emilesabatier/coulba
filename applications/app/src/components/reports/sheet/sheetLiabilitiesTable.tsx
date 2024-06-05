@@ -12,23 +12,19 @@ type SheetLiabilitiesTable = {
 
 export function SheetLiabilitiesTable(props: SheetLiabilitiesTable) {
     return (
-        <div className="w-full flex flex-col justify-start items-stretch">
-            <div className="w-full flex flex-col justify-start items-stretch overflow-auto">
-                <Table.Root>
-                    <Table.Header.Root>
-                        <Table.Header.Row>
-                            <Table.Header.Cell />
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm">Net</span>
-                            </Table.Header.Cell>
-                        </Table.Header.Row>
-                    </Table.Header.Root>
-                    <Table.Body.Root>
-                        <SheetLiabilityBody sheet={props.sheet} displayNumber={true} increment={0} />
-                    </Table.Body.Root>
-                </Table.Root>
-            </div>
-        </div>
+        <Table.Root>
+            <Table.Header.Root>
+                <Table.Header.Row>
+                    <Table.Header.Cell />
+                    <Table.Header.Cell className="w-[1%]" align="right">
+                        <span className="text-neutral/75 text-sm">Net</span>
+                    </Table.Header.Cell>
+                </Table.Header.Row>
+            </Table.Header.Root>
+            <Table.Body.Root>
+                <SheetLiabilityBody sheet={props.sheet} displayNumber={true} increment={0} />
+            </Table.Body.Root>
+        </Table.Root>
     )
 }
 
@@ -62,9 +58,15 @@ function SheetLiabilityBody(props: SheetLiabilityBody) {
                                         )}
                                     />
                                 </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.net} />
-                                </Table.Body.Cell>
+                                {
+                                    entry.sheets.length > 0 ? (
+                                        <Table.Body.Cell colSpan={3} />
+                                    ) : (
+                                        <Table.Body.Cell className="w-[1%]" align="right">
+                                            <FormatPrice price={entry.net} />
+                                        </Table.Body.Cell>
+                                    )
+                                }
                             </Table.Body.Row>
                             <SheetLiabilityBody sheet={entry.sheets} increment={props.increment + 1} />
                         </Fragment>

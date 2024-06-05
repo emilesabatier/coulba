@@ -13,10 +13,11 @@ type FormatPrice = {
 export function FormatPrice(props: FormatPrice) {
     if (props.price === undefined || props.price === null) return <FormatNull />
     return (
-        <FormatBase className={props.className}>
+        <FormatBase>
             <span className={cn(
                 "w-fit max-w-full overflow-hidden whitespace-nowrap text-ellipsis text-base break-words",
-                formatPrice(props.price) === "0.00" ? "text-neutral/25" : ""
+                formatPrice(props.price) === "0.00" ? "text-neutral/25" : "",
+                props.className
             )}>
                 {formatPrice(props.price)}
             </span>

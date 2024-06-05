@@ -1,7 +1,10 @@
-import { FormatDate, FormatText, formatPrice } from "@coulba/design/formats"
+import { FormatDate, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { useQuery } from "@tanstack/react-query"
+import { Fragment } from "react/jsx-runtime"
 import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
-import { Table } from "../layouts/table"
+import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
+import { Section } from "../layouts/section/section"
+import { Table } from "../layouts/table/table"
 
 
 export function JournalReport() {
@@ -9,7 +12,7 @@ export function JournalReport() {
 
     const recordsData = (records.data ?? [])
         .filter((record) => record.isValidated)
-        .sort((a, b) => b.createdOn.localeCompare(a.createdOn))
+        .sort((a, b) => b.date.localeCompare(a.date))
 
     const totalDebit = recordsData.reduce<number>((sum, record) => {
         return sum + record.rows.reduce((_sum, row) => {
@@ -24,123 +27,96 @@ export function JournalReport() {
     }, 0)
 
     return (
-        <Table
-            data={recordsData}
-            isLoading={records.isLoading}
-            columns={[
-                {
-                    accessorKey: 'date',
-                    header: "Date",
-                    cell: (context) => (<FormatDate isoDate={String(context.getValue())} />),
-                    filterFn: 'includesString'
-                },
-                {
-                    accessorKey: 'label',
-                    header: 'Libellé',
-                    cell: ({ row }) => (<FormatText text={row.original.label} />),
-                    filterFn: 'includesString'
-                },
-                // {
-                //     accessorKey: 'idAccount',
-                //     header: 'Compte',
-                //     cell: ({ row }) => (<FormatAccountWithFetch idAccount={row.original.idAccount} />),
-                //     filterFn: 'includesString',
-                //     maxSize: 300
-                // },
-                // {
-                //     accessorKey: 'debit',
-                //     header: "Débit",
-                //     cell: ({ row }) => (<FormatPrice price={row.original.debit} />),
-                //     filterFn: 'includesString'
-                // },
-                // {
-                //     accessorKey: 'credit',
-                //     header: "Crédit",
-                //     cell: ({ row }) => (<FormatPrice price={row.original.credit} />),
-                //     filterFn: 'includesString'
-                // }
-            ]}
-        >
-            <div className="flex justify-center items-center gap-1.5">
-                {/* {
-                (formatPrice(totalDebit) === formatPrice(totalCredit)) ? null : (
-                    <div className="border border-warning rounded-md p-3 bg-warning/5 flex justify-start items-start gap-3">
-                        <IconAlertTriangle className="stroke-warning" />
-                        <p className="text-warning">Attention, le total de la colonne débit et le total de la colonne crédit sont différents. Des ajustements sont nécessaires de votre part.</p>
-                    </div>
-                )
-            } */}
-                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
-                    <span className="text-lg uppercase text-neutral/25 whitespace-nowrap">Débit total</span>
-                    <span className="text-2xl">{formatPrice(totalDebit)}</span>
-                </div>
-                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
-                    <span className="text-lg uppercase text-neutral/25 whitespace-nowrap">Crédit total</span>
-                    <span className="text-2xl">{formatPrice(totalCredit)}</span>
-                </div>
-            </div>
-        </Table>
+        <Section.Root>
+            <Section.Item className="p-0">
+                <Table.Root>
+                    <Table.Header.Root>
+                        <Table.Header.Row>
+                            <Table.Header.Cell>
+                                <span className="text-neutral/75 text-sm italic">Date</span>
+                            </Table.Header.Cell>
+                            <Table.Header.Cell>
+                                <span className="text-neutral/75 text-sm">Libellé</span>
+                            </Table.Header.Cell>
+                            <Table.Header.Cell>
+                                <span className="text-neutral/75 text-sm">Compte</span>
+                            </Table.Header.Cell>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Débit</span>
+                            </Table.Header.Cell>
+                            <Table.Header.Cell className="w-[1%]" align="right">
+                                <span className="text-neutral/75 text-sm whitespace-nowrap">Crédit</span>
+                            </Table.Header.Cell>
+                        </Table.Header.Row>
+                    </Table.Header.Root>
+                    <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
+                        <Table.Body.Row>
+                            <Table.Body.Cell colSpan={2} />
+                            <Table.Body.Cell align="right">
+                                <span className="text-neutral/50">Total</span>
+                            </Table.Body.Cell>
+                            <Table.Body.Cell className="w-[1%]" align="right">
+                                <FormatPrice price={totalDebit} className="font-bold" />
+                            </Table.Body.Cell>
+                            <Table.Body.Cell className="w-[1%]" align="right">
+                                <FormatPrice price={totalCredit} className="font-bold" />
+                            </Table.Body.Cell>
+                        </Table.Body.Row>
+                    </Table.Body.Root>
+                    <Fragment>
+                        {
+                            recordsData.length > 0 ?
+                                recordsData.map((record) => {
+                                    return (
+                                        <Table.Body.Root key={record.id} className="border-y border-neutral/10 last:border-b-0">
+                                            <Table.Body.Row className="border-neutral/10 bg-neutral/5">
+                                                <Table.Body.Cell>
+                                                    <FormatDate isoDate={record.date} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell>
+                                                    <FormatText text={record.label} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell colSpan={3} />
+                                            </Table.Body.Row>
+                                            <Fragment>
+                                                {
+                                                    record.rows.map((row) => {
+                                                        return (
+                                                            <Table.Body.Row key={row.id}>
+                                                                <Table.Body.Cell />
+                                                                <Table.Body.Cell>
+                                                                    <FormatText text={row.label} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell>
+                                                                    <FormatAccountWithFetch idAccount={row.idAccount} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={row.debit} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={row.credit} />
+                                                                </Table.Body.Cell>
+                                                            </Table.Body.Row>
+                                                        )
+                                                    })
+                                                }
+                                            </Fragment>
+                                        </Table.Body.Root>
+                                    )
+                                })
+                                : (
+                                    <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
+                                        <Table.Body.Row>
+                                            <Table.Body.Cell>
+                                                <FormatNull className="" />
+                                            </Table.Body.Cell>
+                                        </Table.Body.Row>
+                                    </Table.Body.Root>
+                                )
+                        }
+                    </Fragment>
+                </Table.Root>
+            </Section.Item>
+        </Section.Root>
     )
-
-
-    // return (
-    //     <div className="w-full h-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
-    //         <div className="flex justify-end items-stretch p-3 border-b border-neutral/10">
-    //             <InputDebounced
-    //                 value={globalFilter ?? ""}
-    //                 onChange={(value) => setGlobalFilter(value)}
-    //             >
-    //                 <InputText
-    //                     placeholder="Recherche"
-    //                     className="max-w-[300px]"
-    //                 />
-    //             </InputDebounced>
-    //         </div>
-    //         <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto">
-    //             <table className="w-full h-full border-collapse">
-    //                 <thead className="w-full border-b border-neutral/10">
-    //                     <tr className="w-full">
-    //                         {table.getFlatHeaders().map((header) => {
-    //                             return (
-    //                                 <th key={header.id} colSpan={header.colSpan} className="w-fit p-2">
-    //                                     {header.isPlaceholder ? null : (
-    //                                         <div className="flex justify-start items-center p-2">
-    //                                             <span className="text-neutral/75 text-sm">
-    //                                                 {flexRender(
-    //                                                     header.column.columnDef.header,
-    //                                                     header.getContext()
-    //                                                 )}
-    //                                             </span>
-    //                                         </div>
-    //                                     )}
-    //                                 </th>
-    //                             )
-    //                         })}
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody className="w-full">
-    //                     {table.getRowModel().rows.length > 0 ? null : <tr><td><FormatNull className="p-2" /></td></tr>}
-    //                     {table.getRowModel().rows.map((row) => {
-    //                         return (
-    //                             <tr className="w-full border-b border-neutral/5 last:border-b-0">
-    //                                 {row.getVisibleCells().map(cell => {
-    //                                     return (
-    //                                         <td key={cell.id} className="w-fit max-w-[400px] p-2 last:w-[1%]">
-    //                                             <div className="flex justify-start items-center p-2">
-    //                                                 {flexRender(
-    //                                                     cell.column.columnDef.cell,
-    //                                                     cell.getContext()
-    //                                                 )}
-    //                                             </div>
-    //                                         </td>
-    //                                     )
-    //                                 })}
-    //                             </tr>
-    //                         )
-    //                     })}
-    //                 </tbody>
-    //             </table>
-    //         </div>
-    //     </div>
-    // )
 }

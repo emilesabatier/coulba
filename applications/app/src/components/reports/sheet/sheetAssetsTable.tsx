@@ -12,29 +12,25 @@ type SheetAssetsTable = {
 
 export function SheetAssetsTable(props: SheetAssetsTable) {
     return (
-        <div className="w-full flex flex-col justify-start items-stretch border-r border-neutral/10">
-            <div className="w-full flex flex-col justify-start items-stretch overflow-auto">
-                <Table.Root>
-                    <Table.Header.Root>
-                        <Table.Header.Row>
-                            <Table.Header.Cell />
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm">Brut</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm whitespace-nowrap">Amort. & Dépre.</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm">Net</span>
-                            </Table.Header.Cell>
-                        </Table.Header.Row>
-                    </Table.Header.Root>
-                    <Table.Body.Root>
-                        <SheetAssetBody sheet={props.sheet} displayNumber={true} increment={0} />
-                    </Table.Body.Root>
-                </Table.Root>
-            </div>
-        </div>
+        <Table.Root className="border-r border-neutral/10">
+            <Table.Header.Root>
+                <Table.Header.Row>
+                    <Table.Header.Cell />
+                    <Table.Header.Cell className="w-[1%]" align="right">
+                        <span className="text-neutral/75 text-sm">Brut</span>
+                    </Table.Header.Cell>
+                    <Table.Header.Cell className="w-[1%]" align="right">
+                        <span className="text-neutral/75 text-sm whitespace-nowrap">Amort. & Dépre.</span>
+                    </Table.Header.Cell>
+                    <Table.Header.Cell className="w-[1%]" align="right">
+                        <span className="text-neutral/75 text-sm">Net</span>
+                    </Table.Header.Cell>
+                </Table.Header.Row>
+            </Table.Header.Root>
+            <Table.Body.Root>
+                <SheetAssetBody sheet={props.sheet} displayNumber={true} increment={0} />
+            </Table.Body.Root>
+        </Table.Root>
     )
 }
 
@@ -68,15 +64,23 @@ function SheetAssetBody(props: SheetAssetBody) {
                                         )}
                                     />
                                 </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.gross} />
-                                </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.allowance} />
-                                </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.net} />
-                                </Table.Body.Cell>
+                                {
+                                    entry.sheets.length > 0 ? (
+                                        <Table.Body.Cell colSpan={3} />
+                                    ) : (
+                                        <Fragment>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.gross} />
+                                            </Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.allowance} />
+                                            </Table.Body.Cell>
+                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                <FormatPrice price={entry.net} />
+                                            </Table.Body.Cell>
+                                        </Fragment>
+                                    )
+                                }
                             </Table.Body.Row>
                             <SheetAssetBody sheet={entry.sheets} increment={props.increment + 1} />
                         </Fragment>

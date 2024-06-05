@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router"
 import { Main } from "../../../components/layouts/main"
-import { BalanceReport } from "../../../components/reports/balance/balanceReport"
+import { BalanceReport } from "../../../components/reports/balanceReport"
 import { reportsLayout } from "./reports.layout"
 
 

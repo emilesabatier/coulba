@@ -11,7 +11,7 @@ export function TableRoot(props: TableRoot) {
     return (
         <table
             className={cn(
-                "w-full h-full border-collapse",
+                "w-full h-fit border-collapse",
                 props.className
             )}
             children={props.children}
