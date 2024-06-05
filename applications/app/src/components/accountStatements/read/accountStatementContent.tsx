@@ -4,7 +4,6 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readAccountStatementRoute } from "../../../routes/auth/app/configuration/statements/statements/accountStatements/readAccountStatement.route"
 import { router } from "../../../routes/router"
 import { accountStatementOptions } from "../../../services/api/auth/accountStatements/accountStatementsOptions"
 import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithFetch"
@@ -14,6 +13,7 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteAccountStatement } from "../delete/deleteAccountStatement"
 import { UpdateAccountStatement } from "../update/updateAccountStatement"
+import { readAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/readAccountStatement.route"
 
 
 export function AccountStatementContent() {

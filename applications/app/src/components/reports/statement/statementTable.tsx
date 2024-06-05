@@ -5,7 +5,7 @@ import { Fragment } from "react"
 import * as v from "valibot"
 import { toRoman } from "../../../services/toRoman"
 import { Table } from "../../layouts/table/table"
-import { Statement } from "./statementContent"
+import { Statement } from "./statementReport"
 
 
 type StatementTable = {

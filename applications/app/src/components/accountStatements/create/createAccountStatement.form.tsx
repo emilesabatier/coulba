@@ -5,12 +5,12 @@ import { useMutation } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { createAccountStatementRoute } from "../../../routes/auth/app/configuration/statements/statements/accountStatements/createAccountStatement.route"
 import { router } from "../../../routes/router"
 import { accountStatementsOptions } from "../../../services/api/auth/accountStatements/accountStatementsOptions"
 import { createAccountStatement } from "../../../services/api/auth/accountStatements/createAccountStatement"
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { Form } from "../../layouts/forms/form"
+import { createAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/createAccountStatement.route"
 
 
 export function CreateAccountStatementForm() {

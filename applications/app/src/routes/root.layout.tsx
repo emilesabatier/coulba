@@ -1,6 +1,6 @@
-import { createRootRouteWithContext } from "@tanstack/react-router"
+import { Outlet, createRootRouteWithContext, useRouter } from "@tanstack/react-router"
 import { SessionContext } from "../contexts/session/session.context"
-import { RootLayout } from "../pages/rootLayout"
+import { useEffect } from "react"
 
 
 type MyRouterContext = {
@@ -15,5 +15,22 @@ type MyRouterContext = {
 }
 
 export const rootLayout = createRootRouteWithContext<MyRouterContext>()({
-    component: RootLayout,
+    component: () => {
+
+        const router = useRouter()
+
+        const matchWithTitle = [...router.state.matches]
+            .reverse()
+            .find((d) => d.context?.title)
+
+        const title = matchWithTitle?.context?.title || 'Coulba'
+
+        useEffect(() => { document.title = title }, [title])
+
+        return (
+            <div className="w-full h-full overflow-auto">
+                <Outlet />
+            </div>
+        )
+    }
 })

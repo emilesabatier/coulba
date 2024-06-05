@@ -7,12 +7,12 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateUserRoute } from "../../../routes/auth/app/configuration/users/updateUser.route"
 import { router } from "../../../routes/router"
 import { updateUser } from "../../../services/api/auth/users/updateUser"
 import { userOptions, usersOptions } from "../../../services/api/auth/users/usersOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
+import { updateUserRoute } from "../../../routes/auth/configuration/users/updateUser.route"
 
 
 export function UpdateUserForm() {

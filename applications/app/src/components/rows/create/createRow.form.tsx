@@ -6,13 +6,13 @@ import { useMutation } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { createRowRoute } from "../../../routes/auth/app/records/rows/createRow.route"
 import { router } from "../../../routes/router"
 import { createRow } from "../../../services/api/auth/rows/createRow"
 import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { Form } from "../../layouts/forms/form"
 import { FormBlock } from "../../layouts/forms/formBlock"
+import { createRowRoute } from "../../../routes/auth/records/rows/createRow.route"
 
 
 export function CreateRowForm() {

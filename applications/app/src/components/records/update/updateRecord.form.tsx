@@ -7,15 +7,15 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateRecordRoute } from "../../../routes/auth/app/records/updateRecord.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
 import { updateRecord } from "../../../services/api/auth/records/updateRecord"
+import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
+import { JournalCombobox } from "../../journals/journalCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { FormBlock } from "../../layouts/forms/formBlock"
-import { AttachmentCombobox } from "../../attachments/attachmentCombobox"
-import { JournalCombobox } from "../../journals/journalCombobox"
+import { updateRecordRoute } from "../../../routes/auth/records/updateRecord.route"
 
 
 export function UpdateRecordForm() {

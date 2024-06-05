@@ -7,7 +7,6 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateAccountRoute } from "../../../routes/auth/app/configuration/accounts/updateAccount.route"
 import { router } from "../../../routes/router"
 import { accountOptions, accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { updateAccount } from "../../../services/api/auth/accounts/updateAccount"
@@ -15,6 +14,7 @@ import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { AccountCombobox } from "../accountCombobox"
 import { systemOptions } from "../systemOptions"
+import { updateAccountRoute } from "../../../routes/auth/configuration/accounts/updateAccount.route"
 
 
 export function UpdateAccountForm() {

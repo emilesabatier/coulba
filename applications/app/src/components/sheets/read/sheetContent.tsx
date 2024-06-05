@@ -4,7 +4,6 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readSheetRoute } from "../../../routes/auth/app/configuration/sheets/readSheet.route"
 import { router } from "../../../routes/router"
 import { sheetOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { AccountSheetsTable } from "../../accountSheets/accountSheetsTable"
@@ -16,6 +15,7 @@ import { DeleteSheet } from "../delete/deleteSheet"
 import { FormatSheetWithFetch } from "../format/formatSheetWithFetch"
 import { sideOptions } from "../sideOptions"
 import { UpdateSheet } from "../update/updateSheet"
+import { readSheetRoute } from "../../../routes/auth/configuration/sheets/readSheet.route"
 
 
 export function SheetContent() {

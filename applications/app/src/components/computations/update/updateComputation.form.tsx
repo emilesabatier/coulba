@@ -7,12 +7,12 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateComputationRoute } from "../../../routes/auth/app/configuration/statements/computations/updateComputation.route"
 import { router } from "../../../routes/router"
 import { computationOptions, computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
 import { updateComputation } from "../../../services/api/auth/computations/updateComputation"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
+import { updateComputationRoute } from "../../../routes/auth/configuration/statements/computations/updateComputation.route"
 
 
 export function UpdateComputationForm() {

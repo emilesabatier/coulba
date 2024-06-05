@@ -4,7 +4,6 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readAttachmentRoute } from "../../../routes/auth/app/attachments/readAttachment.route"
 import { router } from "../../../routes/router"
 import { attachmentOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
 import { useFile } from "../../../services/file/useFile"
@@ -14,6 +13,7 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteAttachment } from "../delete/deleteAttachment"
 import { UpdateAttachment } from "../update/updateAttachment"
+import { readAttachmentRoute } from "../../../routes/auth/attachments/readAttachment.route"
 
 
 export function AttachmentContent() {

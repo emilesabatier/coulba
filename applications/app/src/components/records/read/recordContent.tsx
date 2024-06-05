@@ -1,15 +1,16 @@
 import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatText, formatPrice } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
-import { IconAlertTriangle, IconChevronLeft, IconCircleCheck, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
+import { IconChevronLeft, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
-import { readRecordRoute } from "../../../routes/auth/app/records/readRecord.route"
+import { readRecordRoute } from "../../../routes/auth/records/readRecord.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
 import { FormatAttachmentWithFetch } from "../../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../../journals/format/formatJournalWithFetch"
+import { Banner } from "../../layouts/banner"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -76,19 +77,26 @@ export function RecordContent() {
                 </div>
             </Section.Item>
             {
+                record.data.idAttachment ? null : (
+                    <Section.Item className="p-0">
+                        <Banner variant="error">
+                            Il manque une pièce justificative.
+                        </Banner>
+                    </Section.Item>
+                )
+            }
+            {
                 record.data.isValidated ? null : (
                     <Section.Item className="p-0">
                         {
                             totalDebit === totalCredit ? (
-                                <div className="w-full bg-success/5 p-3 flex justify-start items-center gap-1.5">
-                                    <IconCircleCheck size={20} className="text-success" />
-                                    <p className="text-success">Les montants au débit et au crédit sont identiques.</p>
-                                </div>
+                                <Banner variant="success">
+                                    Les montants au débit et au crédit sont identiques.
+                                </Banner>
                             ) : (
-                                <div className="w-full bg-error/5 p-3 flex justify-start items-center gap-1.5">
-                                    <IconAlertTriangle size={20} className="text-error" />
-                                    <p className="text-error">Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider.</p>
-                                </div>
+                                <Banner variant="error">
+                                    Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider.
+                                </Banner>
                             )
                         }
                     </Section.Item>

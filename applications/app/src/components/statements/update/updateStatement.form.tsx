@@ -7,13 +7,13 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateStatementRoute } from "../../../routes/auth/app/configuration/statements/statements/updateStatement.route"
 import { router } from "../../../routes/router"
 import { statementOptions, statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { updateStatement } from "../../../services/api/auth/statements/updateStatement"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { StatementCombobox } from "../statementCombobox"
+import { updateStatementRoute } from "../../../routes/auth/configuration/statements/statements/updateStatement.route"
 
 
 export function UpdateStatementForm() {

@@ -7,7 +7,6 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateComputationStatementRoute } from "../../../routes/auth/app/configuration/statements/computations/computationStatements/updateComputationStatement.route"
 import { router } from "../../../routes/router"
 import { computationStatementOptions, computationStatementsOptions } from "../../../services/api/auth/computationStatements/computationStatementsOptions"
 import { updateComputationStatement } from "../../../services/api/auth/computationStatements/updateComputationStatements"
@@ -15,6 +14,7 @@ import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { StatementCombobox } from "../../statements/statementCombobox"
 import { operationOptions } from "../operationOptions"
+import { updateComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/updateComputationStatement.route"
 
 
 export function UpdateComputationStatementForm() {

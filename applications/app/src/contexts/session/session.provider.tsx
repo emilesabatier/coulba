@@ -23,17 +23,6 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
             return
         }
 
-        if (router.state.location.pathname !== "/activation" && !response.isInvitationValidated) {
-            setIsLoading(false)
-            router.invalidate()
-            router.navigate({ from: router.state.location.pathname, to: "/activation" })
-        }
-        if (router.state.location.pathname === "/activation" && response.isInvitationValidated) {
-            setIsLoading(false)
-            router.invalidate()
-            router.navigate({ from: "/activation", to: "/" })
-        }
-
         setProfile(response)
         setIsLoading(false)
     }

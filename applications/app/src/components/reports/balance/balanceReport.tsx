@@ -1,0 +1,48 @@
+import { formatPrice } from "@coulba/design/formats"
+import { CircularLoader } from "@coulba/design/layouts"
+import { useQuery } from "@tanstack/react-query"
+import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
+import { getBalance } from "../../../services/reports/getBalance"
+import { ErrorMessage } from "../../layouts/errorMessage"
+import { Section } from "../../layouts/section/section"
+import { BalanceTable } from "./balanceTable"
+
+
+export function BalanceReport() {
+    const rows = useQuery(rowsOptions)
+    const accounts = useQuery(accountsOptions)
+
+    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
+        .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
+
+    const totalBalanceDebit = balance.reduce<number>((previous, entry) => {
+        return previous + Number(entry.balance.debit)
+    }, 0)
+
+    const totalBalanceCredit = balance.reduce<number>((previous, entry) => {
+        return previous + Number(entry.balance.credit)
+    }, 0)
+
+    if (rows.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
+    if (rows.isError) return <ErrorMessage message={rows.error.message} />
+    if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
+    if (!rows.data || !accounts.data) return null
+    return (
+        <Section.Root>
+            <Section.Item>
+                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
+                    <span className="text-lg uppercase text-neutral/50">Solde débiteur total</span>
+                    <span className="text-2xl">{formatPrice(totalBalanceDebit)}</span>
+                </div>
+                <div className="w-full px-3 py-1.5 border border-neutral/10 rounded-md flex justify-start items-end gap-3">
+                    <span className="text-lg uppercase text-neutral/50">Solde créditeur total</span>
+                    <span className="text-2xl">{formatPrice(totalBalanceCredit)}</span>
+                </div>
+            </Section.Item>
+            <Section.Item>
+                <BalanceTable balance={balance} />
+            </Section.Item>
+        </Section.Root>
+    )
+}

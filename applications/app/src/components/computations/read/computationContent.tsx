@@ -4,7 +4,6 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readComputationRoute } from "../../../routes/auth/app/configuration/statements/computations/readComputation.route"
 import { router } from "../../../routes/router"
 import { computationOptions } from "../../../services/api/auth/computations/computationsOptions"
 import { ComputationStatementsTable } from "../../computationStatements/computationStatementsTable"
@@ -14,6 +13,7 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteComputation } from "../delete/deleteComputation"
 import { UpdateComputation } from "../update/updateComputation"
+import { readComputationRoute } from "../../../routes/auth/configuration/statements/computations/readComputation.route"
 
 
 export function ComputationContent() {

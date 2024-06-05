@@ -1,7 +1,7 @@
 import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { Fragment } from "react"
 import { Table } from "../../layouts/table/table"
-import { Ledger } from "./ledgerContent"
+import { Ledger } from "./ledgerReport"
 
 
 type LedgerTable = {

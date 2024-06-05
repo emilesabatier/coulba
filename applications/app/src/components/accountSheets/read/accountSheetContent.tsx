@@ -4,7 +4,6 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
-import { readAccountSheetRoute } from "../../../routes/auth/app/configuration/sheets/accountSheets/readAccountSheet.route"
 import { router } from "../../../routes/router"
 import { accountSheetOptions } from "../../../services/api/auth/accountSheets/accountSheetsOptions"
 import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithFetch"
@@ -15,6 +14,7 @@ import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteAccountSheet } from "../delete/deleteAccountSheet"
 import { flowOptions } from "../flowOptions"
 import { UpdateAccountSheet } from "../update/updateAccountSheet"
+import { readAccountSheetRoute } from "../../../routes/auth/configuration/sheets/accountSheets/readAccountSheet.route"
 
 
 export function AccountSheetContent() {

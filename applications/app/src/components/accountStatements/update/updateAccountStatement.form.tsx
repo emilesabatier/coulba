@@ -12,7 +12,7 @@ import { updateAccountStatement } from "../../../services/api/auth/accountStatem
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
-import { updateAccountStatementRoute } from "../../../routes/auth/app/configuration/statements/statements/accountStatements/updateAccountStatement.route"
+import { updateAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/updateAccountStatement.route"
 
 
 export function UpdateAccountStatementForm() {
