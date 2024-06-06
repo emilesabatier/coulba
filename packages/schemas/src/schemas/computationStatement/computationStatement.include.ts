@@ -1,7 +1,7 @@
 
 export const computationStatementInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idComputation: true,
     idStatement: true,
     operation: true,

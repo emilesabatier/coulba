@@ -1,7 +1,7 @@
 
 export const accountStatementInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idAccount: true,
     idStatement: true,
     lastUpdatedOn: true,

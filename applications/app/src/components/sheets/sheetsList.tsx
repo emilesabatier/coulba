@@ -8,11 +8,11 @@ import { useQuery } from "@tanstack/react-query"
 import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 import { sheetsOptions } from "../../services/api/auth/sheets/sheetsOptions"
+import { toRoman } from "../../services/toRoman"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
 import { CreateSheet } from "./create/createSheet"
 import { ReadSheet } from "./read/readSheet"
-import { toRoman } from "../../services/toRoman"
 
 
 type GroupedSheet = {
@@ -64,13 +64,16 @@ export function SheetsList() {
                     </div>
                     <div className="col-start-1 col-end-1 row-start-2 row-end-2 w-full h-full border-r border-neutral/10 p-0 flex-col justify-start items-stretch gap-0">
                         {
-                            (groupedSheetsAssets.length === 0) ? (<FormatNull />) : groupedSheetsAssets.map((groupedSheet) => (
+                            (groupedSheetsAssets.length > 0) ? groupedSheetsAssets.map((groupedSheet) => (
                                 <SheetItem
                                     key={groupedSheet.sheet.id}
                                     groupedSheet={groupedSheet}
                                     level={0}
                                 />
                             ))
+                                : (
+                                    <FormatNull className="p-3" />
+                                )
                         }
                     </div>
                     <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 border-b border-neutral/10">
@@ -78,13 +81,16 @@ export function SheetsList() {
                     </div>
                     <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full h-full p-0 flex-col justify-start items-stretch gap-0">
                         {
-                            (groupedSheetsLiabilities.length === 0) ? (<FormatNull />) : groupedSheetsLiabilities.map((groupedSheet) => (
+                            (groupedSheetsLiabilities.length > 0) ? groupedSheetsLiabilities.map((groupedSheet) => (
                                 <SheetItem
                                     key={groupedSheet.sheet.id}
                                     groupedSheet={groupedSheet}
                                     level={0}
                                 />
                             ))
+                                : (
+                                    <FormatNull className="p-3" />
+                                )
                         }
                     </div>
                 </div>

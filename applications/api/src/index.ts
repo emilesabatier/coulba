@@ -1,6 +1,5 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { deleteCookie } from 'hono/cookie'
 import { cors } from 'hono/cors'
 import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
@@ -32,9 +31,9 @@ app.onError((error, c) => {
     console.log(error)
     if (error instanceof HTTPException) {
         if (error.status === 401) {
-            deleteCookie(c, "id_session")
-            deleteCookie(c, "is_signed_in")
-            return c.text("Erreur interne", 401)
+            // deleteCookie(c, "id_session")
+            // deleteCookie(c, "is_signed_in")
+            return c.text("Non autorisé", 401)
         }
         return error.getResponse()
     }

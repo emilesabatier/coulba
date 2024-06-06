@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm"
 import { pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
-import { companies } from "./companies.model.js"
+import { organizations } from "./organizations.model.js"
 import { users } from "./users.model.js"
 
 
@@ -11,7 +11,7 @@ export const journals = pgTable(
     "journals",
     {
         id: idColumn("id").primaryKey(),
-        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         code: text("code").notNull(),
         label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -20,6 +20,6 @@ export const journals = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.code, t.idCompany)
+        uniqueConstraint: unique().on(t.code, t.idOrganization)
     })
 )

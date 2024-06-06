@@ -9,7 +9,7 @@ import { records } from '../../models/records.model.js'
 
 export const recordSchema = createSelectSchema(records, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idYear: idSchema,
     idJournal: idSchema,
     idAttachment: idSchema,

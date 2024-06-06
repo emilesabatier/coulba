@@ -23,7 +23,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
                 .insert(computationStatements)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idComputation: body.idComputation,
                     idStatement: body.idStatement,
                     operation: body.operation,
@@ -46,7 +46,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
                     .select()
                     .from(computationStatements)
                     .where(and(
-                        eq(computationStatements.idCompany, c.var.user.idCompany)
+                        eq(computationStatements.idOrganization, c.var.user.idOrganization)
                     ))
 
                 return c.json(readComputationStatements, 200)
@@ -56,7 +56,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(computationStatements)
                 .where(and(
-                    eq(computationStatements.idCompany, c.var.user.idCompany),
+                    eq(computationStatements.idOrganization, c.var.user.idOrganization),
                     eq(computationStatements.id, params.idComputationStatement)
                 ))
 
@@ -81,7 +81,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(computationStatements.idCompany, c.var.user.idCompany),
+                    eq(computationStatements.idOrganization, c.var.user.idOrganization),
                     eq(computationStatements.id, params.idComputationStatement)
                 ))
                 .returning()
@@ -99,7 +99,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
             const [deleteComputationStatement] = await db
                 .delete(computationStatements)
                 .where(and(
-                    eq(computationStatements.idCompany, c.var.user.idCompany),
+                    eq(computationStatements.idOrganization, c.var.user.idOrganization),
                     eq(computationStatements.id, params.idComputationStatement)
                 ))
                 .returning()

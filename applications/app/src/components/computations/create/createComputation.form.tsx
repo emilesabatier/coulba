@@ -27,12 +27,9 @@ export function CreateComputationForm() {
             onSubmit={async (data) => {
 
                 mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
+                    onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/configuration/compte-de-resultat/calculs/$idComputation",
-                            params: { idComputation: newData.id }
-                        })
+                        router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
                         toast({ title: "Nouveau calcul ajouté", variant: "success" })
                     }
                 })

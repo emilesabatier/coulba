@@ -30,12 +30,14 @@ export function CreateRecordForm() {
             onSubmit={async (data) => {
                 mutation.mutate({ body: data }, {
                     onSuccess: (newData) => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/ecritures/$idRecord",
-                            params: { idRecord: newData.id }
-                        })
-                        toast({ title: "Nouvelle écriture ajoutée", variant: "success" })
+                        if (!!newData) {
+                            queryClient.invalidateQueries()
+                            router.navigate({
+                                to: "/ecritures/$idRecord",
+                                params: { idRecord: newData.id }
+                            })
+                            toast({ title: "Nouvelle écriture ajoutée", variant: "success" })
+                        }
                     }
                 })
 

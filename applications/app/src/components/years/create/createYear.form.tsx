@@ -4,6 +4,8 @@ import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { Fragment } from "react"
+import { useCurrentYear } from "../../../contexts/currentYear/useCurrentYear"
+import { useOrganization } from "../../../contexts/organization/useOrganization"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { createYear } from "../../../services/api/auth/years/createYear"
@@ -14,6 +16,8 @@ import { YearCombobox } from "../input/yearCombobox"
 
 
 export function CreateYearForm() {
+    const organization = useOrganization()
+    const currentYear = useCurrentYear()
 
     const mutation = useMutation({
         mutationKey: yearsOptions.queryKey,
@@ -23,13 +27,16 @@ export function CreateYearForm() {
     return (
         <Form
             validationSchema={auth.years.post.body}
-            defaultValues={{}}
+            defaultValues={{
+                system: "base"
+            }}
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
             onSubmit={async (data) => {
                 mutation.mutate({ body: data }, {
-                    onSuccess: () => {
+                    onSuccess: (newData) => {
                         queryClient.invalidateQueries()
+                        if (newData?.isSelected) currentYear.mutate()
                         router.navigate({ to: "/configuration/exercices" })
                         toast({ title: "Nouvel exercice ajouté", variant: "success" })
                     }
@@ -101,27 +108,31 @@ export function CreateYearForm() {
                             </FormItem>
                         )}
                     />
-                    <FormField
-                        control={form.control}
-                        name="system"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel
-                                    label="Système"
-                                    tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
-                                    isRequired
-                                />
-                                <FormControl>
-                                    <InputSelect
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        options={systemOptions}
-                                    />
-                                </FormControl>
-                                <FormError />
-                            </FormItem>
-                        )}
-                    />
+                    {
+                        organization.data?.type === "association" ? null : (
+                            <FormField
+                                control={form.control}
+                                name="system"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel
+                                            label="Système"
+                                            tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
+                                            isRequired
+                                        />
+                                        <FormControl>
+                                            <InputSelect
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                                options={systemOptions}
+                                            />
+                                        </FormControl>
+                                        <FormError />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
                     <FormField
                         control={form.control}
                         name="idPreviousYear"
@@ -130,7 +141,6 @@ export function CreateYearForm() {
                                 <FormLabel
                                     label="Exercice précédent"
                                     tooltip="L'exercice qui précède chronologiquement."
-                                    isRequired
                                 />
                                 <FormControl>
                                     <YearCombobox

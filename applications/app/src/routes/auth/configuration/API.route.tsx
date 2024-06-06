@@ -1,7 +1,7 @@
 import { createRoute } from "@tanstack/react-router"
-import { configurationLayout } from "./configuration.layout"
-import { ApiContent } from "../../../components/company/apiContent"
 import { Main } from "../../../components/layouts/main"
+import { ApiContent } from "../../../components/organization/apiContent"
+import { configurationLayout } from "./configuration.layout"
 
 
 export const APIRoute = createRoute({

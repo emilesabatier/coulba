@@ -4,6 +4,7 @@ import { computationInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
@@ -16,13 +17,15 @@ export const computationsRoute = new Hono<AuthEnv>()
         '/',
         validator("json", bodyValidator(auth.computations.post.body)),
         async (c) => {
+            if (!c.var.currentYear) throw new HTTPException(400)
+
             const body = c.req.valid('json')
 
             const [createComputation] = await db
                 .insert(computations)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     number: body.number,
                     label: body.label,
@@ -42,9 +45,11 @@ export const computationsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idComputation) {
+                if (!c.var.currentYear) return c.json([], 200)
+
                 const readComputations = await db.query.computations.findMany({
                     where: and(
-                        eq(computations.idCompany, c.var.user.idCompany),
+                        eq(computations.idOrganization, c.var.user.idOrganization),
                         eq(computations.idYear, c.var.currentYear.id)
                     ),
                     columns: computationInclude,
@@ -58,7 +63,7 @@ export const computationsRoute = new Hono<AuthEnv>()
 
             const readComputation = await db.query.computations.findFirst({
                 where: and(
-                    eq(computations.idCompany, c.var.user.idCompany),
+                    eq(computations.idOrganization, c.var.user.idOrganization),
                     eq(computations.id, params.idComputation)
                 ),
                 columns: computationInclude,
@@ -87,7 +92,7 @@ export const computationsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(computations.idCompany, c.var.user.idCompany),
+                    eq(computations.idOrganization, c.var.user.idOrganization),
                     eq(computations.id, params.idComputation)
                 ))
                 .returning()
@@ -104,7 +109,7 @@ export const computationsRoute = new Hono<AuthEnv>()
             const [deleteComputation] = await db
                 .delete(computations)
                 .where(and(
-                    eq(computations.idCompany, c.var.user.idCompany),
+                    eq(computations.idOrganization, c.var.user.idOrganization),
                     eq(computations.id, params.idComputation)
                 ))
                 .returning()

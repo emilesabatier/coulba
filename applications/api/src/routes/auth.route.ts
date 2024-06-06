@@ -4,10 +4,10 @@ import { accountSheetsRoute } from './auth/accountSheets.route.js'
 import { accountStatementsRoute } from './auth/accountStatements.route.js'
 import { accountsRoute } from './auth/accounts.route.js'
 import { attachmentsRoute } from './auth/attachments.route.js'
-import { companiesRoute } from './auth/companies.route.js'
 import { computationStatementsRoute } from './auth/computationStatements.route.js'
 import { computationsRoute } from './auth/computations.route.js'
 import { journalsRoute } from './auth/journals.route.js'
+import { organizationsRoute } from './auth/organizations.route.js'
 import { profileRoute } from './auth/profile.route.js'
 import { recordsRoute } from './auth/records.route.js'
 import { rowsRoute } from './auth/rows.route.js'
@@ -22,7 +22,7 @@ export const authRoute = new Hono()
     .use("/*", checkAuth)
     .route('/attachments', attachmentsRoute)
     .route('/records', recordsRoute)
-    .route('/companies', companiesRoute)
+    .route('/organizations', organizationsRoute)
     .route('/users', usersRoute)
     .route('/rows', rowsRoute)
     .route('/accounts', accountsRoute)

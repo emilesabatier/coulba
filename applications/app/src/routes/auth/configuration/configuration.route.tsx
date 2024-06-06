@@ -9,5 +9,5 @@ export const configurationRoute = createRoute({
         description: undefined
     }),
     path: '/',
-    component: () => <Navigate to="/configuration/societe" />
+    component: () => <Navigate to="/configuration/organisation" />
 })

@@ -1,4 +1,4 @@
-import { FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { cn } from "@coulba/design/services"
 import { Fragment } from "react"
 import { toRoman } from "../../../services/toRoman"
@@ -28,7 +28,24 @@ export function SheetAssetsTable(props: SheetAssetsTable) {
                 </Table.Header.Row>
             </Table.Header.Root>
             <Table.Body.Root>
-                <SheetAssetBody sheet={props.sheet} displayNumber={true} increment={0} />
+                {
+                    props.sheet.length > 0 ? (
+                        <SheetAssetBody
+                            sheet={props.sheet}
+                            displayNumber={true}
+                            increment={0}
+                        />
+                    )
+                        : (
+                            <Table.Body.Root className="border-b border-neutral/10 last:border-b-0">
+                                <Table.Body.Row>
+                                    <Table.Body.Cell>
+                                        <FormatNull className="" />
+                                    </Table.Body.Cell>
+                                </Table.Body.Row>
+                            </Table.Body.Root>
+                        )
+                }
             </Table.Body.Root>
         </Table.Root>
     )

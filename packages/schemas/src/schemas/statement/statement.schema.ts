@@ -8,7 +8,7 @@ import { statements } from "../../models/index.js"
 
 export const statementSchema = createSelectSchema(statements, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idYear: idSchema,
     idParent: idSchema,
     number: integerSchema,

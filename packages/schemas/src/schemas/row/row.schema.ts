@@ -10,7 +10,7 @@ import { rows } from '../../models/rows.model.js'
 
 export const rowSchema = createSelectSchema(rows, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idYear: idSchema,
     idAccount: v.nonNullish(idSchema, "Le compte mouvementé doit être renseigné"),
     isValidated: booleanSchema,

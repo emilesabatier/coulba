@@ -10,7 +10,7 @@ type RouterContext = {
         isLoading: SessionContext["isLoading"]
         mutate: SessionContext["mutate"]
         profile: SessionContext["profile"]
-        isSignedIn?: SessionContext["isSignedIn"]
+        isSignedIn: SessionContext["isSignedIn"]
     }
 }
 

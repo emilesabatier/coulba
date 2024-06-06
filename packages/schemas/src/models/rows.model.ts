@@ -3,7 +3,7 @@ import { boolean, numeric, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { accounts } from "./accounts.model.js"
-import { companies } from "./companies.model.js"
+import { organizations } from "./organizations.model.js"
 import { records } from "./records.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
@@ -14,7 +14,7 @@ export const rows = pgTable(
     "rows",
     {
         id: idColumn("id").primaryKey(),
-        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idRecord: idColumn("id_record").references(() => records.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idAccount: idColumn("id_account").references(() => accounts.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),

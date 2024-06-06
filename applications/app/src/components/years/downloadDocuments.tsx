@@ -2,8 +2,8 @@ import { ButtonPlain } from "@coulba/design/buttons"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconDownload } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
-import { useCompany } from "../../contexts/company/useCompany"
-import { useCurrentYear } from "../../contexts/currentYear/useCurrentYear"
+import { CurrentYearContext } from "../../contexts/currentYear/currentYear.context"
+import { useOrganization } from "../../contexts/organization/useOrganization"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
 import { journalsOptions } from "../../services/api/auth/journals/journalsOptions"
@@ -12,13 +12,16 @@ import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
 
 
-export function DownloadDocuments() {
+type DownloadDocuments = {
+    currentYear: CurrentYearContext
+}
+
+export function DownloadDocuments(props: DownloadDocuments) {
     const records = useQuery(recordsOptions)
     const journals = useQuery(journalsOptions)
     const accounts = useQuery(accountsOptions)
     const attachments = useQuery(attachmentsOptions)
-    const company = useCompany()
-    const currentYear = useCurrentYear()
+    const organization = useOrganization()
 
     const recordsData = (records.data ?? [])
         .filter((record) => record.isValidated && !!record.validatedOn)
@@ -31,7 +34,7 @@ export function DownloadDocuments() {
         ...(journals.data ?? []),
         {
             id: null,
-            idCompany: "",
+            idOrganization: "",
             code: "NR",
             label: "Non renseigné",
             lastUpdatedBy: null,
@@ -42,7 +45,7 @@ export function DownloadDocuments() {
     ]
 
     function exportFEC() {
-        if (!currentYear.data || !journals.data || !company.data || !records.data || !attachments.data || !accounts.data) return
+        if (!props.currentYear.data || !journals.data || !organization.data || !records.data || !attachments.data || !accounts.data) return
 
         const xml = document.implementation.createDocument("", "", null)
 
@@ -51,7 +54,7 @@ export function DownloadDocuments() {
         const exerciceNode = xml.createElement("exercice")
 
         const DateClotureNode = xml.createElement("DateCloture")
-        DateClotureNode.innerHTML = new Date(currentYear.data.endingOn).toISOString()
+        DateClotureNode.innerHTML = new Date(props.currentYear.data.endingOn).toISOString()
         exerciceNode.appendChild(DateClotureNode)
 
         journalsData.forEach((journal) => {
@@ -147,16 +150,16 @@ export function DownloadDocuments() {
 
         const link = document.createElement("a")
         link.setAttribute("href", window.URL.createObjectURL(encodedXML))
-        const closingDate = new Date(currentYear.data.endingOn)
-        link.setAttribute("download", `${company.data.siren ?? "SIREN"}FEC${`${closingDate.getFullYear()}${closingDate.getMonth() + 1}${closingDate.getDate()}`}.xml`)
+        const closingDate = new Date(props.currentYear.data.endingOn)
+        link.setAttribute("download", `${organization.data.siren ?? "SIREN"}FEC${`${closingDate.getFullYear()}${closingDate.getMonth() + 1}${closingDate.getDate()}`}.xml`)
         document.body.appendChild(link)
 
         link.click()
     }
 
-    if (records.isLoading || company.isLoading || currentYear.isLoading) return <CircularLoader className="m-3" />
+    if (records.isLoading || organization.isLoading || props.currentYear.isLoading) return <CircularLoader className="m-3" />
     if (records.isError) return <ErrorMessage message={records.error.message} />
-    if (!records.data || !company.data || !currentYear.data) return null
+    if (!records.data || !organization.data || !props.currentYear.data) return null
     return (
         <Section.Root>
             <Section.Item className="flex-col justify-start items-start gap-3">

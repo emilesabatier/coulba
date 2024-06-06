@@ -29,29 +29,33 @@ export function JournalsList() {
             </Section.Item>
             <Section.Item className="p-0 flex flex-col justify-start items-stretch gap-0">
                 {
-                    (!journals.data || journals.data?.length === 0) ? (<FormatNull />) : journals.data.map((journal) => {
-                        return (
-                            <div className="w-full flex justify-between items-center p-3 border-b border-neutral/5 last:border-b-0">
-                                <div className="flex justify-start items-center gap-3">
-                                    <h2>{journal.label}</h2>
-                                    <span className="text-neutral/50">{journal.code}</span>
+                    (journals.data?.length > 0) ?
+                        journals.data.map((journal) => {
+                            return (
+                                <div className="w-full flex justify-between items-center p-3 border-b border-neutral/5 last:border-b-0">
+                                    <div className="flex justify-start items-center gap-3">
+                                        <h2>{journal.label}</h2>
+                                        <span className="text-neutral/50">{journal.code}</span>
+                                    </div>
+                                    <div className="flex justify-end items-center gap-1">
+                                        <UpdateJournal journal={journal}>
+                                            <ButtonGhost
+                                                icon={<IconPencil />}
+                                            />
+                                        </UpdateJournal>
+                                        <DeleteJournal journal={journal}>
+                                            <ButtonGhost
+                                                icon={<IconTrash />}
+                                                color="error"
+                                            />
+                                        </DeleteJournal>
+                                    </div>
                                 </div>
-                                <div className="flex justify-end items-center gap-1">
-                                    <UpdateJournal journal={journal}>
-                                        <ButtonGhost
-                                            icon={<IconPencil />}
-                                        />
-                                    </UpdateJournal>
-                                    <DeleteJournal journal={journal}>
-                                        <ButtonGhost
-                                            icon={<IconTrash />}
-                                            color="error"
-                                        />
-                                    </DeleteJournal>
-                                </div>
-                            </div>
+                            )
+                        })
+                        : (
+                            <FormatNull className="p-3" />
                         )
-                    })
                 }
             </Section.Item>
         </Section.Root>

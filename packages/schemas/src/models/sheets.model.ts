@@ -2,24 +2,24 @@ import { relations, sql } from "drizzle-orm"
 import { integer, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
-import { sheetSides } from "../components/values/sheetSides.js"
+import { sides } from "../components/values/sides.js"
 import { accountSheets } from "./accountSheets.model.js"
-import { companies } from "./companies.model.js"
+import { organizations } from "./organizations.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
 
 
 // Model
-export const sheetSide = pgEnum("sheet_side", sheetSides)
+export const sheetSideEnum = pgEnum("sheet_side", sides)
 
 export const sheets = pgTable(
     "sheets",
     {
         id: idColumn("id").primaryKey(),
-        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idParent: idColumn("id_parent"),
-        side: sheetSide("side").notNull(),
+        side: sheetSideEnum("side").notNull(),
         number: integer("number").notNull(),
         label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -28,7 +28,7 @@ export const sheets = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.idCompany, t.idYear, t.side, t.number)
+        uniqueConstraint: unique().on(t.idOrganization, t.idYear, t.side, t.number)
     })
 )
 

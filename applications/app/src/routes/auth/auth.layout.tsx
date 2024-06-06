@@ -12,10 +12,6 @@ export const authLayout = createRoute({
         if (!context.session.isSignedIn) {
             throw redirect({ to: '/connexion' })
         }
-        return ({
-            title: undefined,
-            description: undefined
-        })
     },
     pendingComponent: () => <CircularLoader />,
     component: () => (

@@ -21,7 +21,7 @@ export const rowsRoute = new Hono<V1Env>()
                 .select()
                 .from(accounts)
                 .where(and(
-                    eq(accounts.idCompany, c.var.company.id),
+                    eq(accounts.idOrganization, c.var.organization.id),
                     eq(accounts.idYear, c.var.currentYear.id),
                     eq(accounts.number, body.accountNumber)
                 ))
@@ -33,7 +33,7 @@ export const rowsRoute = new Hono<V1Env>()
                     .select()
                     .from(journals)
                     .where(and(
-                        eq(journals.idCompany, c.var.company.id),
+                        eq(journals.idOrganization, c.var.organization.id),
                         eq(journals.code, body.journalcode)
                     ))
                 if (!readJournal) throw new HTTPException(401, { message: "Le journal associé à l'codee renseigné n'existe pas" })
@@ -44,7 +44,7 @@ export const rowsRoute = new Hono<V1Env>()
                 .insert(rows)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idRecord: "",
                     idAccount: readAccount.id,

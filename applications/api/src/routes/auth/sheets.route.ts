@@ -4,6 +4,7 @@ import { sheetInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -17,13 +18,15 @@ export const sheetsRoute = new Hono<AuthEnv>()
         '/',
         validator("json", bodyValidator(auth.sheets.post.body)),
         async (c) => {
+            if (!c.var.currentYear) throw new HTTPException(400)
+
             const body = c.req.valid('json')
 
             const [createSheet] = await db
                 .insert(sheets)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idParent: body.idParent,
                     side: body.side,
@@ -45,9 +48,11 @@ export const sheetsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idSheet) {
+                if (!c.var.currentYear) return c.json([], 200)
+
                 const readSheets = await db.query.sheets.findMany({
                     where: and(
-                        eq(sheets.idCompany, c.var.user.idCompany),
+                        eq(sheets.idOrganization, c.var.user.idOrganization),
                         eq(sheets.idYear, c.var.currentYear.id)
                     ),
                     columns: sheetInclude,
@@ -61,7 +66,7 @@ export const sheetsRoute = new Hono<AuthEnv>()
 
             const readSheet = await db.query.sheets.findFirst({
                 where: and(
-                    eq(sheets.idCompany, c.var.user.idCompany),
+                    eq(sheets.idOrganization, c.var.user.idOrganization),
                     eq(sheets.id, params.idSheet)
                 ),
                 columns: sheetInclude,
@@ -92,7 +97,7 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(sheets.idCompany, c.var.user.idCompany),
+                    eq(sheets.idOrganization, c.var.user.idOrganization),
                     eq(sheets.id, params.idSheet)
                 ))
                 .returning()
@@ -109,7 +114,7 @@ export const sheetsRoute = new Hono<AuthEnv>()
             const [deleteSheet] = await db
                 .delete(sheets)
                 .where(and(
-                    eq(sheets.idCompany, c.var.user.idCompany),
+                    eq(sheets.idOrganization, c.var.user.idOrganization),
                     eq(sheets.id, params.idSheet)
                 ))
                 .returning()

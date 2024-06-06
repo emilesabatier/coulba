@@ -1,5 +1,6 @@
 import * as v from "valibot"
 import { requiredTextSchema } from "../../../components/schemas/requiredText.schema.js"
+import { sessionSchema } from "../../../schemas/session/session.schema.js"
 import { userSchema } from "../../../schemas/user/user.schema.js"
 
 
@@ -11,4 +12,4 @@ export const signInBody = v.object({
 
 
 // Output
-export const signInReturn = v.object({})
+export const signInReturn = sessionSchema

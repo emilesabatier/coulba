@@ -15,15 +15,15 @@ import { readAccountLayout } from './auth/configuration/accounts/readAccount.lay
 import { readAccountRoute } from './auth/configuration/accounts/readAccount.route'
 import { updateAccountRoute } from './auth/configuration/accounts/updateAccount.route'
 import { closingRoute } from './auth/configuration/closing.route'
-import { companyLayout } from './auth/configuration/company/company.layout'
-import { companyRoute } from './auth/configuration/company/company.route'
-import { updateCompanyRoute } from './auth/configuration/company/updateCompany.route'
 import { configurationLayout } from './auth/configuration/configuration.layout'
 import { configurationRoute } from './auth/configuration/configuration.route'
 import { createJournalRoute } from './auth/configuration/journals/createJournal.route'
 import { journalsLayout } from './auth/configuration/journals/journals.layout'
 import { journalsRoute } from './auth/configuration/journals/journals.route'
 import { updateJournalRoute } from './auth/configuration/journals/updateJournal.route'
+import { organizationLayout } from './auth/configuration/organization/organization.layout'
+import { organizationRoute } from './auth/configuration/organization/organization.route'
+import { updateOrganizationRoute } from './auth/configuration/organization/updateOrganization.route'
 import { accountSheetsLayout } from './auth/configuration/sheets/accountSheets/accountSheets.layout'
 import { createAccountSheetRoute } from './auth/configuration/sheets/accountSheets/createAccountSheet.route'
 import { readAccountSheetLayout } from './auth/configuration/sheets/accountSheets/readAccountSheet.layout'
@@ -94,29 +94,30 @@ import { sheetRoute } from './auth/reports/sheet.route'
 import { statementRoute } from './auth/reports/statement.route'
 import { supportRoute } from './auth/support.route'
 import { rootLayout } from './root.layout'
-import { sharedLayout } from './shared/shared.layout'
-import { validateEmailRoute } from './shared/validateEmail.route'
-import { validateInvitationRoute } from './shared/validateInvitation.route'
-import { resetPasswordRoute } from './signIn/resetPassword.route'
-import { signInLayout } from './signIn/signIn.layout'
-import { signInRoute } from './signIn/signIn.route'
-import { signUpRoute } from './signUp/signUp.route'
+import { sharedLayout } from './unauth/shared/shared.layout'
+import { validateEmailRoute } from './unauth/shared/validateEmail.route'
+import { validateInvitationRoute } from './unauth/shared/validateInvitation.route'
+import { resetPasswordRoute } from './unauth/signIn/resetPassword.route'
+import { signInLayout } from './unauth/signIn/signIn.layout'
+import { signInRoute } from './unauth/signIn/signIn.route'
+import { signUpRoute } from './unauth/signUp/signUp.route'
+import { unauthLayout } from './unauth/unauth.layout'
 
 
 const routeTree = rootLayout.addChildren([
+    unauthLayout.addChildren([
+        signUpRoute,
 
-    signUpRoute,
+        signInLayout.addChildren([
+            signInRoute,
+            resetPasswordRoute
+        ]),
 
-    signInLayout.addChildren([
-        signInRoute,
-        resetPasswordRoute
+        sharedLayout.addChildren([
+            validateInvitationRoute,
+            validateEmailRoute
+        ])
     ]),
-
-    sharedLayout.addChildren([
-        validateInvitationRoute,
-        validateEmailRoute
-    ]),
-
     authLayout.addChildren([
         overviewRoute,
         activationRoute,
@@ -167,9 +168,9 @@ const routeTree = rootLayout.addChildren([
 
         configurationLayout.addChildren([
             configurationRoute,
-            companyLayout.addChildren([
-                companyRoute,
-                updateCompanyRoute
+            organizationLayout.addChildren([
+                organizationRoute,
+                updateOrganizationRoute
             ]),
             usersLayout.addChildren([
                 usersRoute,
@@ -261,7 +262,7 @@ export const router = createRouter({
             isLoading: false,
             mutate: async () => { },
             profile: undefined,
-            isSignedIn: undefined
+            isSignedIn: false
         }
     },
     notFoundMode: "root"

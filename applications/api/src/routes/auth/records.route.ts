@@ -19,13 +19,15 @@ export const recordsRoute = new Hono<AuthEnv>()
         '/',
         validator("json", bodyValidator(auth.records.post.body)),
         async (c) => {
+            if (!c.var.currentYear) throw new HTTPException(400)
+
             const body = c.req.valid('json')
 
             const [createRecord] = await db
                 .insert(records)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
@@ -44,12 +46,15 @@ export const recordsRoute = new Hono<AuthEnv>()
         "/:idRecord?",
         validator("param", paramsValidator(auth.records.get.params)),
         async (c) => {
+
             const params = c.req.valid('param')
 
             if (!params.idRecord) {
+                if (!c.var.currentYear) return c.json([], 200)
+
                 const readRecords = await db.query.records.findMany({
                     where: and(
-                        eq(records.idCompany, c.var.user.idCompany),
+                        eq(records.idOrganization, c.var.user.idOrganization),
                         eq(records.idYear, c.var.currentYear.id)
                     ),
                     columns: recordInclude,
@@ -63,7 +68,7 @@ export const recordsRoute = new Hono<AuthEnv>()
 
             const readRecord = await db.query.records.findFirst({
                 where: and(
-                    eq(records.idCompany, c.var.user.idCompany),
+                    eq(records.idOrganization, c.var.user.idOrganization),
                     eq(records.id, params.idRecord)
                 ),
                 columns: recordInclude,
@@ -94,7 +99,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(records.idCompany, c.var.user.idCompany),
+                    eq(records.idOrganization, c.var.user.idOrganization),
                     eq(records.id, params.idRecord),
                     eq(records.isValidated, false)
                 ))
@@ -112,7 +117,7 @@ export const recordsRoute = new Hono<AuthEnv>()
             const [deleteRecord] = await db
                 .delete(records)
                 .where(and(
-                    eq(records.idCompany, c.var.user.idCompany),
+                    eq(records.idOrganization, c.var.user.idOrganization),
                     eq(records.id, params.idRecord),
                     eq(records.isValidated, false)
                 ))
@@ -132,7 +137,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(records)
                 .where(and(
-                    eq(records.idCompany, c.var.user.idCompany),
+                    eq(records.idOrganization, c.var.user.idOrganization),
                     eq(records.id, params.idRecord)
                 ))
             if (!readRecord.idAttachment) throw new HTTPException(403, { message: "Il manque une pièce jointe" })
@@ -147,7 +152,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                         lastUpdatedOn: new Date().toISOString()
                     })
                     .where(and(
-                        eq(records.idCompany, c.var.user.idCompany),
+                        eq(records.idOrganization, c.var.user.idOrganization),
                         eq(records.id, params.idRecord)
                     ))
 
@@ -159,7 +164,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                         lastUpdatedOn: new Date().toISOString()
                     })
                     .where(and(
-                        eq(rows.idCompany, c.var.user.idCompany),
+                        eq(rows.idOrganization, c.var.user.idOrganization),
                         eq(rows.idRecord, params.idRecord)
                     ))
             })

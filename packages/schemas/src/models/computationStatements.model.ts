@@ -3,23 +3,23 @@ import { pgEnum, pgTable, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { operations } from "../components/values/operations.js"
-import { companies } from "./companies.model.js"
 import { computations } from "./computations.model.js"
+import { organizations } from "./organizations.model.js"
 import { statements } from "./statements.model.js"
 import { users } from "./users.model.js"
 
 
 // Model
-export const computationStatementOperation = pgEnum("operation", operations)
+export const computationStatementOperationEnum = pgEnum("computation_statement_operation", operations)
 
 export const computationStatements = pgTable(
     "computation_statements",
     {
         id: idColumn("id").primaryKey(),
-        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idComputation: idColumn("id_computation").references(() => computations.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
-        operation: computationStatementOperation("operation").notNull(),
+        operation: computationStatementOperationEnum("operation").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         createdOn: dateTimeColumn("created_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         lastUpdatedBy: idColumn("last_updated_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),

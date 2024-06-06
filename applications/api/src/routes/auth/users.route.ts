@@ -26,7 +26,7 @@ export const usersRoute = new Hono<AuthEnv>()
                 .insert(users)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.user.idCompany,
+                    idOrganization: c.var.user.idOrganization,
                     isAdmin: body.isAdmin,
                     alias: body.alias,
                     email: body.email,
@@ -52,7 +52,7 @@ export const usersRoute = new Hono<AuthEnv>()
                 const readUsers = await db
                     .select()
                     .from(users)
-                    .where(eq(users.idCompany, c.var.user.idCompany))
+                    .where(eq(users.idOrganization, c.var.user.idOrganization))
 
                 return c.json(readUsers, 200)
             }
@@ -61,7 +61,7 @@ export const usersRoute = new Hono<AuthEnv>()
                 .select()
                 .from(users)
                 .where(and(
-                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.idOrganization, c.var.user.idOrganization),
                     eq(users.id, params.idUser)
                 ))
 
@@ -86,7 +86,7 @@ export const usersRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.idOrganization, c.var.user.idOrganization),
                     eq(users.id, params.idUser)
                 ))
                 .returning()
@@ -103,7 +103,7 @@ export const usersRoute = new Hono<AuthEnv>()
             const [deleteUser] = await db
                 .delete(users)
                 .where(and(
-                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.idOrganization, c.var.user.idOrganization),
                     eq(users.id, params.idUser)
                 ))
                 .returning()
@@ -129,7 +129,7 @@ export const usersRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(users.idCompany, c.var.user.idCompany),
+                    eq(users.idOrganization, c.var.user.idOrganization),
                     eq(users.id, params.idUser),
                     eq(users.isInvitationValidated, false)
                 ))

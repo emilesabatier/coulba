@@ -1,7 +1,7 @@
 
 export const rowInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
     idAccount: true,
     isValidated: true,

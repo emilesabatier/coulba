@@ -59,13 +59,16 @@ export function StatementsList() {
             </Section.Item>
             <Section.Item className="p-0 flex-col justify-start items-stretch gap-0">
                 {
-                    (groupedStatements.length === 0) ? (<FormatNull />) : groupedStatements.map((groupedStatement) => (
+                    (groupedStatements.length > 0) ? groupedStatements.map((groupedStatement) => (
                         <StatementItem
                             key={groupedStatement.statement.id}
                             groupedStatement={groupedStatement}
                             level={0}
                         />
                     ))
+                        : (
+                            <FormatNull className="p-3" />
+                        )
                 }
             </Section.Item>
         </Section.Root>

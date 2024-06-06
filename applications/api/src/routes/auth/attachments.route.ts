@@ -3,6 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
@@ -17,13 +18,15 @@ export const attachmentsRoute = new Hono<AuthEnv>()
         checkCurrentYear,
         validator("json", bodyValidator(auth.attachments.post.body)),
         async (c) => {
+            if (!c.var.currentYear) throw new HTTPException(400)
+
             const body = c.req.valid('json')
 
             const [createAttachment] = await db
                 .insert(attachments)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     reference: body.reference,
                     label: body.label,
@@ -46,11 +49,13 @@ export const attachmentsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idAttachment) {
+                if (!c.var.currentYear) return c.json([], 200)
+
                 const readAttachments = await db
                     .select()
                     .from(attachments)
                     .where(and(
-                        eq(attachments.idCompany, c.var.user.idCompany),
+                        eq(attachments.idOrganization, c.var.user.idOrganization),
                         eq(attachments.idYear, c.var.currentYear.id)
                     ))
 
@@ -61,7 +66,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(attachments)
                 .where(and(
-                    eq(attachments.idCompany, c.var.user.idCompany),
+                    eq(attachments.idOrganization, c.var.user.idOrganization),
                     eq(attachments.id, params.idAttachment)
                 ))
 
@@ -90,7 +95,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(attachments.idCompany, c.var.user.idCompany),
+                    eq(attachments.idOrganization, c.var.user.idOrganization),
                     eq(attachments.id, params.idAttachment)
                 ))
                 .returning()
@@ -108,7 +113,7 @@ export const attachmentsRoute = new Hono<AuthEnv>()
             const [deleteAttachment] = await db
                 .delete(attachments)
                 .where(and(
-                    eq(attachments.idCompany, c.var.user.idCompany),
+                    eq(attachments.idOrganization, c.var.user.idOrganization),
                     eq(attachments.id, params.idAttachment)
                 ))
                 .returning()

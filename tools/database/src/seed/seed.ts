@@ -1,5 +1,5 @@
-import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, accountStatements, companies, computations, computationStatements, journals, records, rows, sheets, statements, users, years } from '@coulba/schemas/models'
+import { companyAccounts, DefaultComputation, defaultComputations, defaultJournals, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
+import { accounts, accountSheets, accountStatements, computations, computationStatements, journals, organizations, records, rows, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -26,15 +26,16 @@ async function seed() {
         await db.transaction(async (tx) => {
 
 
-            // Companies
-            console.log("Add company")
-            const newCompany: (typeof companies.$inferInsert) = {
+            // Organizations
+            console.log("Add organization")
+            const newOrganization: (typeof organizations.$inferInsert) = {
                 id: generateId(),
+                type: "company",
                 siren: null,
                 name: null,
                 email: null
             }
-            await tx.insert(companies).values(newCompany)
+            await tx.insert(organizations).values(newOrganization)
 
 
             // Years
@@ -43,7 +44,7 @@ async function seed() {
             const newYears: (typeof years.$inferInsert)[] = [
                 {
                     id: idCurrentYear,
-                    idCompany: newCompany.id,
+                    idOrganization: newOrganization.id,
                     isSelected: true,
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
@@ -56,54 +57,23 @@ async function seed() {
 
             // Journals
             console.log("Add journals")
-            const newJournals: (typeof journals.$inferInsert)[] = [
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    code: "VT",
-                    label: "Ventes"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    code: "AC",
-                    label: "Achats"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    code: "BQ",
-                    label: "Banque"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    code: "OD",
-                    label: "Opérations diverses"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    code: "TVA",
-                    label: "TVA"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    code: "AN",
-                    label: "À-nouveaux"
-                }
-            ]
+            const newJournals: (typeof journals.$inferInsert)[] = defaultJournals.map((journal) => ({
+                id: generateId(),
+                idOrganization: newOrganization.id,
+                code: journal.code,
+                label: journal.label
+            }))
             await tx.insert(journals).values(newJournals)
 
 
             // Accounts
             console.log("Add accounts")
-            let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => ({
+            let newAccounts: (typeof accounts.$inferInsert)[] = companyAccounts.map((_account) => ({
                 id: generateId(),
-                idCompany: newCompany.id,
+                idOrganization: newOrganization.id,
                 idYear: idCurrentYear,
                 number: _account.number,
+                type: "company",
                 system: _account.system,
                 label: _account.label
             }))
@@ -122,7 +92,7 @@ async function seed() {
             console.log("Add sheets")
             let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
                 id: generateId(),
-                idCompany: newCompany.id,
+                idOrganization: newOrganization.id,
                 idYear: idCurrentYear,
                 side: _sheet.side,
                 number: _sheet.number,
@@ -145,7 +115,7 @@ async function seed() {
             console.log("Add statements")
             let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
                 id: generateId(),
-                idCompany: newCompany.id,
+                idOrganization: newOrganization.id,
                 idYear: idCurrentYear,
                 number: _statement.number,
                 label: _statement.label,
@@ -168,7 +138,7 @@ async function seed() {
             const newComputations: (typeof computations.$inferInsert & { statements: DefaultComputation["statements"][number][] })[] = defaultComputations.map((_computation) => {
                 return ({
                     id: generateId(),
-                    idCompany: newCompany.id,
+                    idOrganization: newOrganization.id,
                     idYear: idCurrentYear,
                     number: _computation.number,
                     label: _computation.label,
@@ -188,7 +158,7 @@ async function seed() {
                     if (!statement) throw new Error(`Erreur ${_computation.number} ${_statement.number}`)
                     newComputationStatements.push({
                         id: generateId(),
-                        idCompany: newCompany.id,
+                        idOrganization: newOrganization.id,
                         idComputation: _computation.id,
                         idStatement: statement.id,
                         operation: _statement.operation
@@ -208,7 +178,7 @@ async function seed() {
                     if (!account) throw new Error(`Erreur ${_statement.number} ${_account}`)
                     newAccountStatements.push({
                         id: generateId(),
-                        idCompany: newCompany.id,
+                        idOrganization: newOrganization.id,
                         idAccount: account.id,
                         idStatement: _statement.id
                     })
@@ -226,7 +196,7 @@ async function seed() {
                     if (!account) throw new Error(`Erreur ${_sheet.number} ${_account.number}`)
                     newAccountSheets.push({
                         id: generateId(),
-                        idCompany: newCompany.id,
+                        idOrganization: newOrganization.id,
                         idAccount: account.id,
                         idSheet: _sheet.id,
                         flow: _account.flow,
@@ -244,7 +214,7 @@ async function seed() {
             const passwordHash = pbkdf2Sync(invitationToken, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
             const adminUser: (typeof users.$inferInsert) = {
                 id: generateId(),
-                idCompany: newCompany.id,
+                idOrganization: newOrganization.id,
                 isAdmin: true,
                 isActive: true,
                 email: "dev@emilesabatier.com",
@@ -267,7 +237,7 @@ async function seed() {
                 const idRecord = generateId()
                 newRecords.push({
                     id: idRecord,
-                    idCompany: newCompany.id,
+                    idOrganization: newOrganization.id,
                     idYear: idCurrentYear,
                     idJournal: undefined,
                     idAttachment: undefined,
@@ -285,7 +255,7 @@ async function seed() {
                     }
                     newRows.push({
                         id: generateId(),
-                        idCompany: newCompany.id,
+                        idOrganization: newOrganization.id,
                         idYear: idCurrentYear,
                         idAccount: idAccount,
                         idRecord: idRecord,

@@ -10,8 +10,7 @@ export const updateAccountParams = v.object({
 export const updateAccountBody = v.partial(v.object({
     idParent: accountSchema.entries.idParent,
     number: accountSchema.entries.number,
-    label: accountSchema.entries.label,
-    system: accountSchema.entries.system
+    label: accountSchema.entries.label
 }))
 
 

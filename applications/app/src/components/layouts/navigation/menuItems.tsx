@@ -72,12 +72,12 @@ export const menuItems: MenuItem[] = [
         key: "configuration",
         label: "Configuration",
         basePath: "/configuration",
-        path: "/configuration/societe",
+        path: "/configuration/organisation",
         subMenuItems: [
             {
-                basePath: "/configuration/societe",
-                path: "/configuration/societe",
-                label: "Société"
+                basePath: "/configuration/organisation",
+                path: "/configuration/organisation",
+                label: "Organisation"
             },
             {
                 basePath: "/configuration/utilisateurs",

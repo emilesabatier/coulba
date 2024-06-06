@@ -1,7 +1,7 @@
 
 export const accountSheetInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idAccount: true,
     idSheet: true,
     flow: true,

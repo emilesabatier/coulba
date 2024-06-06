@@ -6,8 +6,7 @@ import { accountSchema } from "../../../schemas/account/account.schema.js"
 export const createAccountBody = v.object({
     idParent: accountSchema.entries.idParent,
     number: accountSchema.entries.number,
-    label: accountSchema.entries.label,
-    system: accountSchema.entries.system
+    label: accountSchema.entries.label
 })
 
 

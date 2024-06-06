@@ -8,7 +8,7 @@ export const journalRoute = createRoute({
     getParentRoute: () => reportsLayout,
     beforeLoad: () => ({
         title: "Livre-journal",
-        description: "Le livre-journal est un document qui contient toutes les entrées enregistrées et validées. Il représente toutes les écritures de votre société."
+        description: "Le livre-journal est un document qui contient toutes les entrées enregistrées et validées. Il représente toutes les écritures de votre organisation."
     }),
     path: '/livre-journal',
     component: () => (

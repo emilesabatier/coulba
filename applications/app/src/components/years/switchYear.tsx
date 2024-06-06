@@ -19,7 +19,6 @@ export function SwitchYear() {
         mutationFn: switchYear
     })
 
-    if (!currentYear.data) return null
     return (
         <Section.Root>
             <Section.Item className="flex-col justify-start items-start gap-3">

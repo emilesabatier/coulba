@@ -29,12 +29,14 @@ export function CreateUserForm() {
 
                 mutation.mutate({ body: data }, {
                     onSuccess: async (newData) => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/utilisateurs" })
-                        toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })
+                        if (!!newData) {
+                            queryClient.invalidateQueries()
+                            router.navigate({ to: "/configuration/utilisateurs" })
+                            toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })
 
-                        const response = await sendInvitation({ params: { idUser: newData.id } })
-                        if (response) {
+                            const response = await sendInvitation({ params: { idUser: newData.id } })
+                            if (!response) return
+
                             toast({ title: "Invitation envoyée", variant: "success" })
                         }
                     }

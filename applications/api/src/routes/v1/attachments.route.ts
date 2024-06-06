@@ -25,7 +25,7 @@ export const attachmentsRoute = new Hono<V1Env>()
             const size = body.file.size
             const type = body.file.type
 
-            const key = `companies/${c.var.company.id}/${c.var.currentYear.id}/${generateId()}`
+            const key = `organizations/${c.var.organization.id}/${c.var.currentYear.id}/${generateId()}`
             await s3Client.send(new PutObjectCommand({
                 ACL: "authenticated-read",
                 Bucket: env()?.SCW_BUCKET_NAME,
@@ -33,7 +33,7 @@ export const attachmentsRoute = new Hono<V1Env>()
                 Body: Buffer.from(await body.file.arrayBuffer()),
                 ContentType: type,
                 Metadata: {
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id
                 }
             }))
@@ -42,7 +42,7 @@ export const attachmentsRoute = new Hono<V1Env>()
                 .insert(attachments)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     reference: body.reference,
                     label: body.label,

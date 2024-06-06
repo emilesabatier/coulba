@@ -6,14 +6,12 @@ import { operations } from '../../components/values/operations.js'
 import { computationStatements } from '../../models/computationStatements.model.js'
 
 
-const computationStatementOperationSchema = v.picklist(operations)
-
 export const computationStatementSchema = createSelectSchema(computationStatements, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idComputation: idSchema,
     idStatement: idSchema,
-    operation: computationStatementOperationSchema,
+    operation: v.picklist(operations),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

@@ -1,7 +1,7 @@
 
 export const attachmentInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
     reference: true,
     label: true,

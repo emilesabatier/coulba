@@ -7,12 +7,12 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateAttachmentRoute } from "../../../routes/auth/attachments/updateAttachment.route"
 import { router } from "../../../routes/router"
 import { attachmentOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
 import { updateAttachment } from "../../../services/api/auth/attachments/updateAttachment"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
-import { updateAttachmentRoute } from "../../../routes/auth/attachments/updateAttachment.route"
 
 
 
@@ -47,9 +47,11 @@ export function UpdateAttachmentForm() {
                     }
                 }, {
                     onSuccess: (newData) => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: newData.id } })
-                        toast({ title: "Fichier mis à jour", variant: "success" })
+                        if (!!newData) {
+                            queryClient.invalidateQueries()
+                            router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: newData.id } })
+                            toast({ title: "Fichier mis à jour", variant: "success" })
+                        }
                     }
                 })
                 return true

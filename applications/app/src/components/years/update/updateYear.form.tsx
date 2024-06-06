@@ -7,13 +7,13 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateYearRoute } from "../../../routes/auth/configuration/years/updateYear.route"
 import { router } from "../../../routes/router"
 import { updateYear } from "../../../services/api/auth/years/updateYear"
 import { yearOptions, yearsOptions } from "../../../services/api/auth/years/yearsOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { YearCombobox } from "../input/yearCombobox"
-import { updateYearRoute } from "../../../routes/auth/configuration/years/updateYear.route"
 
 
 export function UpdateYearForm() {

@@ -5,6 +5,8 @@ import { IconBook, IconChevronRight, IconExternalLink, IconLifebuoy, IconLogout2
 import { Link, Outlet, useRouter } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { useSession } from "../../contexts/session/useSession"
+import { signOut } from "../../services/api/shared/sessions/signOut"
+import { deleteCookies } from "../../services/deleteCookies"
 import { DisplayVersion } from "./navigation/displayVersion"
 import { Navigation } from "./navigation/navigation"
 
@@ -18,12 +20,12 @@ export function AuthLayout() {
         .filter((match) => !!match.context?.title)
 
     if (session.isLoading) return (
-        <div id="loading" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden">
+        <div id="loading" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden flex justify-center items-center">
             <CircularLoader />
         </div>
     )
     return (
-        <div id="app" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden grid grid-cols-[max-content_auto] grid-rows-[64px_auto]">
+        <div id="auth" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden grid grid-cols-[max-content_auto] grid-rows-[64px_auto]">
             <div className="col-start-1 col-end-1 row-start-1 row-end-1 w-full h-full p-3 border-b border-r border-neutral/20 flex justify-between items-end">
                 <Link to="/" className="h-full flex justify-center items-center">
                     <Logo />
@@ -99,7 +101,15 @@ export function AuthLayout() {
                             text="Se déconnecter"
                             icon={<IconLogout2 />}
                             color="error"
-                            onClick={async () => await session.signOut()}
+                            onClick={async () => {
+                                await signOut()
+
+                                deleteCookies()
+                                await session.mutate()
+                                // toast({ title: "Déconnexion réussie", variant: "success" })
+                                // router.navigate({ to: "/connexion" })
+                                window.location.reload()
+                            }}
                         />
                     </PopoverMenu>
                 </div>

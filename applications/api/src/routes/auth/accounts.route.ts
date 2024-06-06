@@ -3,6 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
+import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
@@ -17,17 +18,20 @@ export const accountsRoute = new Hono<AuthEnv>()
         checkCurrentYear,
         validator("json", bodyValidator(auth.accounts.post.body)),
         async (c) => {
+            if (!c.var.currentYear) throw new HTTPException(400)
+
             const body = c.req.valid('json')
 
             const [createAccount] = await db
                 .insert(accounts)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idParent: body.idParent,
                     label: body.label,
                     number: body.number,
+                    type: c.var.organization.type,
                     system: c.var.currentYear.system,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
@@ -44,11 +48,13 @@ export const accountsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idAccount) {
+                if (!c.var.currentYear) return c.json([], 200)
+
                 const readAccounts = await db
                     .select()
                     .from(accounts)
                     .where(and(
-                        eq(accounts.idCompany, c.var.user.idCompany),
+                        eq(accounts.idOrganization, c.var.user.idOrganization),
                         eq(accounts.idYear, c.var.currentYear.id)
                     ))
 
@@ -59,7 +65,7 @@ export const accountsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(accounts)
                 .where(and(
-                    eq(accounts.idCompany, c.var.user.idCompany),
+                    eq(accounts.idOrganization, c.var.user.idOrganization),
                     eq(accounts.id, params.idAccount)
                 ))
 
@@ -81,12 +87,11 @@ export const accountsRoute = new Hono<AuthEnv>()
                     idParent: body.idParent,
                     label: body.label,
                     number: body.number,
-                    system: body.system,
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(accounts.idCompany, c.var.user.idCompany),
+                    eq(accounts.idOrganization, c.var.user.idOrganization),
                     eq(accounts.id, params.idAccount)
                 ))
                 .returning()
@@ -104,7 +109,7 @@ export const accountsRoute = new Hono<AuthEnv>()
             const [deleteAccount] = await db
                 .delete(accounts)
                 .where(and(
-                    eq(accounts.idCompany, c.var.user.idCompany),
+                    eq(accounts.idOrganization, c.var.user.idOrganization),
                     eq(accounts.id, params.idAccount)
                 ))
                 .returning()

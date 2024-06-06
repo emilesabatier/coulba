@@ -7,14 +7,12 @@ import { flows } from '../../components/values/flows.js'
 import { accountSheets } from '../../models/accountSheets.model.js'
 
 
-const accountSheetFlowSchema = v.picklist(flows)
-
 export const accountSheetSchema = createSelectSchema(accountSheets, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idAccount: idSchema,
     idSheet: idSchema,
-    flow: accountSheetFlowSchema,
+    flow: v.picklist(flows),
     isAllowance: booleanSchema,
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,

@@ -2,10 +2,10 @@ import { accountSheets } from "./accountSheets/index.js"
 import { accountStatements } from "./accountStatements/index.js"
 import { accounts, } from "./accounts/index.js"
 import { attachments } from "./attachments/index.js"
-import { companies } from "./companies/index.js"
 import { computationStatements } from "./computationStatements/index.js"
 import { computations } from "./computations/index.js"
 import { journals } from "./journals/index.js"
+import { organizations } from "./organizations/index.js"
 import { profile } from "./profile/index.js"
 import { records } from "./records/index.js"
 import { rows } from "./rows/index.js"
@@ -26,7 +26,7 @@ export const auth = {
     sheets: sheets,
     statements: statements,
     attachments: attachments,
-    companies: companies,
+    organizations: organizations,
     rows: rows,
     journals: journals,
     users: users,

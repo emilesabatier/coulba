@@ -9,7 +9,7 @@ import { attachments } from "../../models/attachments.model.js"
 
 export const attachmentSchema = createSelectSchema(attachments, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idYear: idSchema,
     reference: requiredTextSchema,
     label: textSchema,

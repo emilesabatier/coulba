@@ -1,7 +1,7 @@
 
 export const recordInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
     idJournal: true,
     idAttachment: true,

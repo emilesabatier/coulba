@@ -37,7 +37,7 @@ export function ComputationsList() {
             </Section.Item>
             <Section.Item className="p-0 flex flex-col justify-start items-stretch gap-0">
                 {
-                    (!sortedComputations || sortedComputations?.length === 0) ? (<FormatNull />) : sortedComputations.map((computation) => {
+                    (sortedComputations?.length > 0) ? sortedComputations.map((computation) => {
                         return (
                             <ReadComputation idComputation={computation.id} className="w-full cursor-pointer hover:bg-neutral/5 border-b border-neutral/5 last:border-b-0">
                                 <div className="flex justify-start items-center gap-1.5 p-3">
@@ -47,6 +47,9 @@ export function ComputationsList() {
                             </ReadComputation>
                         )
                     })
+                        : (
+                            <FormatNull className="p-3" />
+                        )
                 }
             </Section.Item>
         </Section.Root>

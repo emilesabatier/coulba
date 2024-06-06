@@ -23,7 +23,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
                 .insert(accountSheets)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idAccount: body.idAccount,
                     idSheet: body.idSheet,
                     flow: body.flow,
@@ -47,7 +47,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
                     .select()
                     .from(accountSheets)
                     .where(and(
-                        eq(accountSheets.idCompany, c.var.user.idCompany)
+                        eq(accountSheets.idOrganization, c.var.user.idOrganization)
                     ))
 
                 return c.json(readAccountSheets, 200)
@@ -57,7 +57,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(accountSheets)
                 .where(and(
-                    eq(accountSheets.idCompany, c.var.user.idCompany),
+                    eq(accountSheets.idOrganization, c.var.user.idOrganization),
                     eq(accountSheets.id, params.idAccountSheet)
                 ))
 
@@ -83,7 +83,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(accountSheets.idCompany, c.var.user.idCompany),
+                    eq(accountSheets.idOrganization, c.var.user.idOrganization),
                     eq(accountSheets.id, params.idAccountSheet)
                 ))
                 .returning()
@@ -101,7 +101,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
             const [deleteAccountSheet] = await db
                 .delete(accountSheets)
                 .where(and(
-                    eq(accountSheets.idCompany, c.var.user.idCompany),
+                    eq(accountSheets.idOrganization, c.var.user.idOrganization),
                     eq(accountSheets.id, params.idAccountSheet)
                 ))
                 .returning()

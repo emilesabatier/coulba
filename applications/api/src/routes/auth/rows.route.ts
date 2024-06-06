@@ -18,6 +18,8 @@ export const rowsRoute = new Hono<AuthEnv>()
         checkCurrentYear,
         validator("json", bodyValidator(auth.rows.post.body)),
         async (c) => {
+            if (!c.var.currentYear) throw new HTTPException(400)
+
             const body = c.req.valid('json')
 
             const [readRecord] = await db
@@ -33,7 +35,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                 .insert(rows)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idRecord: body.idRecord,
                     idAccount: body.idAccount,
@@ -56,11 +58,13 @@ export const rowsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idRow) {
+                if (!c.var.currentYear) return c.json([], 200)
+
                 const readRows = await db
                     .select()
                     .from(rows)
                     .where(and(
-                        eq(rows.idCompany, c.var.user.idCompany),
+                        eq(rows.idOrganization, c.var.user.idOrganization),
                         eq(rows.idYear, c.var.currentYear.id)
                     ))
 
@@ -71,7 +75,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(rows)
                 .where(and(
-                    eq(rows.idCompany, c.var.user.idCompany),
+                    eq(rows.idOrganization, c.var.user.idOrganization),
                     eq(rows.id, params.idRow)
                 ))
 
@@ -98,7 +102,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(rows.idCompany, c.var.user.idCompany),
+                    eq(rows.idOrganization, c.var.user.idOrganization),
                     eq(rows.id, params.idRow),
                     eq(rows.isValidated, false)
                 ))
@@ -117,7 +121,7 @@ export const rowsRoute = new Hono<AuthEnv>()
             const [deleteRow] = await db
                 .delete(rows)
                 .where(and(
-                    eq(rows.idCompany, c.var.user.idCompany),
+                    eq(rows.idOrganization, c.var.user.idOrganization),
                     eq(rows.id, params.idRow),
                     eq(rows.isValidated, false)
                 ))

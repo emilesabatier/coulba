@@ -1,7 +1,7 @@
 
 export const yearInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idPreviousYear: true,
     isClosed: true,
     isSelected: true,

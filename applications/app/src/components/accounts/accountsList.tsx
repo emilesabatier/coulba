@@ -52,13 +52,17 @@ export function AccountsList() {
             </Section.Item>
             <Section.Item className="p-0 flex-col justify-start items-stretch gap-0 overflow-auto">
                 {
-                    (groupedAccounts.length === 0) ? (<FormatNull />) : groupedAccounts.map((groupedAccount) => (
-                        <AccountItem
-                            key={groupedAccount.account.id}
-                            groupedAccount={groupedAccount}
-                            level={0}
-                        />
-                    ))
+                    (groupedAccounts.length > 0) ?
+                        groupedAccounts.map((groupedAccount) => (
+                            <AccountItem
+                                key={groupedAccount.account.id}
+                                groupedAccount={groupedAccount}
+                                level={0}
+                            />
+                        ))
+                        : (
+                            <FormatNull className="p-3" />
+                        )
                 }
             </Section.Item>
         </Section.Root>
@@ -76,9 +80,9 @@ type AccountItem = {
 function AccountItem(props: AccountItem) {
     return (
         <Fragment>
-            <ReadAccount idAccount={props.groupedAccount.account.id} className="w-full">
+            <ReadAccount idAccount={props.groupedAccount.account.id} className="w-full border-b border-neutral/5 last:border-b-0">
                 <div
-                    className="w-full flex justify-start items-start gap-1.5 p-3 border-b border-neutral/5 hover:bg-neutral/5"
+                    className="w-full flex justify-start items-start gap-1.5 p-3 hover:bg-neutral/5"
                     style={{
                         paddingLeft: `${(1 + props.level) * 12}px`
                     }}

@@ -15,7 +15,6 @@ type DeleteYear = {
 }
 
 export function DeleteYear(props: DeleteYear) {
-
     const mutation = useMutation({
         mutationKey: yearsOptions.queryKey,
         mutationFn: deleteYear

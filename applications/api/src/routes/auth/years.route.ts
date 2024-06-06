@@ -1,4 +1,4 @@
-import { DefaultComputation, DefaultSheet, defaultAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
+import { DefaultComputation, DefaultSheet, associationAccounts, companyAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
 import { accountSheets, accountStatements, accounts, computationStatements, computations, sheets, statements, years } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
@@ -18,36 +18,43 @@ export const yearsRoute = new Hono<AuthEnv>()
         async (c) => {
             const body = c.req.valid('json')
 
-            const [createYear] = await db
-                .insert(years)
-                .values({
-                    id: generateId(),
-                    idPreviousYear: body.idPreviousYear,
-                    isSelected: false,
-                    idCompany: c.var.company.id,
-                    label: body.label,
-                    startingOn: body.startingOn,
-                    endingOn: body.endingOn,
-                    system: body.system,
-                    lastUpdatedBy: c.var.user.id,
-                    createdBy: c.var.user.id
-                })
-                .returning()
-
             // Generate data
-            await db.transaction(async (tx) => {
+            const createYear = await db.transaction(async (tx) => {
+
+                const [createYear] = await tx
+                    .insert(years)
+                    .values({
+                        id: generateId(),
+                        idPreviousYear: body.idPreviousYear,
+                        isSelected: !c.var.currentYear ? true : false,
+                        idOrganization: c.var.organization.id,
+                        label: body.label,
+                        startingOn: body.startingOn,
+                        endingOn: body.endingOn,
+                        system: body.system,
+                        lastUpdatedBy: c.var.user.id,
+                        createdBy: c.var.user.id
+                    })
+                    .returning()
 
                 // Add accounts
                 let newAccounts: Array<(typeof accounts.$inferInsert)> = []
+                const defaultAccounts = (c.var.organization.type === "association") ? associationAccounts : (
+                    companyAccounts
+                        .filter((account) => {
+                            if (body.system === "condensed" && ["base", "developped"].includes(account.system)) return true
+                            if (body.system === "base" && ["developped"].includes(account.system)) return true
+                            return false
+                        })
+                )
+
                 defaultAccounts.forEach((_account) => {
-                    const statement = newStatements.find((_statement) => _statement.accounts.toString().includes(_account.number.toString()))
-                    if (body.system === "condensed" && ["base", "developped"].includes(_account.system)) return
-                    if (body.system === "base" && ["developped"].includes(_account.system)) return
                     newAccounts.push({
                         id: generateId(),
-                        idCompany: c.var.company.id,
+                        idOrganization: c.var.organization.id,
                         idYear: createYear.id,
                         number: _account.number,
+                        type: c.var.organization.type,
                         system: _account.system,
                         label: _account.label
                     })
@@ -59,15 +66,17 @@ export const yearsRoute = new Hono<AuthEnv>()
                         idParent: parent?.id
                     })
                 })
-                await tx
-                    .insert(accounts)
-                    .values(newAccounts)
+                if (newAccounts.length > 0) {
+                    await tx
+                        .insert(accounts)
+                        .values(newAccounts)
+                }
 
 
                 // Add sheets
                 let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: createYear.id,
                     side: _sheet.side,
                     number: _sheet.number,
@@ -82,9 +91,11 @@ export const yearsRoute = new Hono<AuthEnv>()
                         idParent: parent?.id
                     })
                 })
-                await tx
-                    .insert(sheets)
-                    .values(newSheets)
+                if (newSheets.length > 0) {
+                    await tx
+                        .insert(sheets)
+                        .values(newSheets)
+                }
 
 
                 // Add accountSheets
@@ -95,7 +106,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         if (!account) return
                         newAccountSheets.push({
                             id: generateId(),
-                            idCompany: c.var.company.id,
+                            idOrganization: c.var.organization.id,
                             idAccount: account.id,
                             idSheet: _sheet.id,
                             flow: _account.flow,
@@ -103,15 +114,17 @@ export const yearsRoute = new Hono<AuthEnv>()
                         })
                     })
                 })
-                await tx
-                    .insert(accountSheets)
-                    .values(newAccountSheets)
+                if (newAccountSheets.length > 0) {
+                    await tx
+                        .insert(accountSheets)
+                        .values(newAccountSheets)
+                }
 
 
                 // Add statements
                 let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: createYear.id,
                     number: _statement.number,
                     label: _statement.label,
@@ -125,9 +138,11 @@ export const yearsRoute = new Hono<AuthEnv>()
                         idParent: parent?.id
                     })
                 })
-                await tx
-                    .insert(statements)
-                    .values(newStatements)
+                if (newStatements.length > 0) {
+                    await tx
+                        .insert(statements)
+                        .values(newStatements)
+                }
 
 
                 // Add accountStatements
@@ -138,31 +153,35 @@ export const yearsRoute = new Hono<AuthEnv>()
                         if (!account) return
                         newAccountStatements.push({
                             id: generateId(),
-                            idCompany: c.var.company.id,
+                            idOrganization: c.var.organization.id,
                             idAccount: account.id,
                             idStatement: _statement.id
                         })
                     })
                 })
-                await tx
-                    .insert(accountStatements)
-                    .values(newAccountStatements)
+                if (newAccountStatements.length > 0) {
+                    await tx
+                        .insert(accountStatements)
+                        .values(newAccountStatements)
+                }
 
 
                 // Add computations
                 const newComputations: (typeof computations.$inferInsert & { statements: DefaultComputation["statements"][number][] })[] = defaultComputations.map((_computation) => {
                     return ({
                         id: generateId(),
-                        idCompany: c.var.company.id,
+                        idOrganization: c.var.organization.id,
                         idYear: createYear.id,
                         number: _computation.number,
                         label: _computation.label,
                         statements: _computation.statements
                     })
                 })
-                await tx
-                    .insert(computations)
-                    .values(newComputations)
+                if (newComputations.length > 0) {
+                    await tx
+                        .insert(computations)
+                        .values(newComputations)
+                }
 
 
                 // Add computationStatements
@@ -173,17 +192,20 @@ export const yearsRoute = new Hono<AuthEnv>()
                         if (!statement) return
                         newComputationStatements.push({
                             id: generateId(),
-                            idCompany: c.var.company.id,
+                            idOrganization: c.var.organization.id,
                             idComputation: _computation.id,
                             idStatement: statement.id,
                             operation: _statement.operation
                         })
                     })
                 })
-                await tx
-                    .insert(computationStatements)
-                    .values(newComputationStatements)
+                if (newComputationStatements.length > 0) {
+                    await tx
+                        .insert(computationStatements)
+                        .values(newComputationStatements)
+                }
 
+                return createYear
             })
 
 
@@ -200,7 +222,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                 const readYears = await db
                     .select()
                     .from(years)
-                    .where(eq(years.idCompany, c.var.user.idCompany))
+                    .where(eq(years.idOrganization, c.var.user.idOrganization))
 
                 return c.json(readYears, 200)
             }
@@ -209,7 +231,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(years)
                 .where(and(
-                    eq(years.idCompany, c.var.user.idCompany),
+                    eq(years.idOrganization, c.var.user.idOrganization),
                     eq(years.id, params.idYear)
                 ))
 
@@ -236,7 +258,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(years.idCompany, c.var.user.idCompany),
+                    eq(years.idOrganization, c.var.user.idOrganization),
                     eq(years.id, params.idYear)
                 ))
                 .returning()
@@ -253,8 +275,9 @@ export const yearsRoute = new Hono<AuthEnv>()
             const [deleteYear] = await db
                 .delete(years)
                 .where(and(
-                    eq(years.idCompany, c.var.user.idCompany),
-                    eq(years.id, params.idYear)
+                    eq(years.idOrganization, c.var.user.idOrganization),
+                    eq(years.id, params.idYear),
+                    eq(years.isSelected, false)
                 ))
                 .returning()
 
@@ -267,17 +290,19 @@ export const yearsRoute = new Hono<AuthEnv>()
         async (c) => {
             const params = c.req.valid('param')
 
-            await db
-                .update(years)
-                .set({
-                    isSelected: false,
-                    lastUpdatedBy: c.var.user.id,
-                    lastUpdatedOn: new Date().toISOString()
-                })
-                .where(and(
-                    eq(years.idCompany, c.var.company.id),
-                    eq(years.id, c.var.currentYear.id)
-                ))
+            if (c.var.currentYear !== undefined) {
+                await db
+                    .update(years)
+                    .set({
+                        isSelected: false,
+                        lastUpdatedBy: c.var.user.id,
+                        lastUpdatedOn: new Date().toISOString()
+                    })
+                    .where(and(
+                        eq(years.idOrganization, c.var.organization.id),
+                        eq(years.id, c.var.currentYear.id)
+                    ))
+            }
 
             const [updateYear] = await db
                 .update(years)
@@ -287,7 +312,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(years.idCompany, c.var.company.id),
+                    eq(years.idOrganization, c.var.organization.id),
                     eq(years.id, params.idYear)
                 ))
                 .returning()
@@ -309,7 +334,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(years.idCompany, c.var.company.id),
+                    eq(years.idOrganization, c.var.organization.id),
                     eq(years.id, params.idYear)
                 ))
                 .returning()

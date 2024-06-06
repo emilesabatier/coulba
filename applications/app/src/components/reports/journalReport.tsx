@@ -105,7 +105,7 @@ export function JournalReport() {
                                     )
                                 })
                                 : (
-                                    <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
+                                    <Table.Body.Root className="border-b border-neutral/10 last:border-b-0">
                                         <Table.Body.Row>
                                             <Table.Body.Cell>
                                                 <FormatNull className="" />

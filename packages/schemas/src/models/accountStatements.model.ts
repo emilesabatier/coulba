@@ -3,7 +3,7 @@ import { pgTable, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { accounts } from "./accounts.model.js"
-import { companies } from "./companies.model.js"
+import { organizations } from "./organizations.model.js"
 import { statements } from "./statements.model.js"
 import { users } from "./users.model.js"
 
@@ -13,7 +13,7 @@ export const accountStatements = pgTable(
     "account_statements",
     {
         id: idColumn("id").primaryKey(),
-        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idAccount: idColumn("id_account").references(() => accounts.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

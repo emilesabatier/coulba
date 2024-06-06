@@ -10,7 +10,7 @@ import { users } from '../../models/index.js'
 
 export const userSchema = createSelectSchema(users, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     isAdmin: booleanSchema,
     alias: textSchema,
     email: v.nonNullish(emailSchema, "Un email doit être renseigné"),

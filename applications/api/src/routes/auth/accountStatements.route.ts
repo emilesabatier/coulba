@@ -23,7 +23,7 @@ export const accountStatementsRoute = new Hono<AuthEnv>()
                 .insert(accountStatements)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idAccount: body.idAccount,
                     idStatement: body.idStatement,
                     lastUpdatedBy: c.var.user.id,
@@ -45,7 +45,7 @@ export const accountStatementsRoute = new Hono<AuthEnv>()
                     .select()
                     .from(accountStatements)
                     .where(and(
-                        eq(accountStatements.idCompany, c.var.user.idCompany)
+                        eq(accountStatements.idOrganization, c.var.user.idOrganization)
                     ))
 
                 return c.json(readAccountStatements, 200)
@@ -55,7 +55,7 @@ export const accountStatementsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(accountStatements)
                 .where(and(
-                    eq(accountStatements.idCompany, c.var.user.idCompany),
+                    eq(accountStatements.idOrganization, c.var.user.idOrganization),
                     eq(accountStatements.id, params.idAccountStatement)
                 ))
 
@@ -79,7 +79,7 @@ export const accountStatementsRoute = new Hono<AuthEnv>()
                     lastUpdatedBy: c.var.user.id
                 })
                 .where(and(
-                    eq(accountStatements.idCompany, c.var.user.idCompany),
+                    eq(accountStatements.idOrganization, c.var.user.idOrganization),
                     eq(accountStatements.id, params.idAccountStatement)
                 ))
                 .returning()
@@ -97,7 +97,7 @@ export const accountStatementsRoute = new Hono<AuthEnv>()
             const [deleteAccountStatement] = await db
                 .delete(accountStatements)
                 .where(and(
-                    eq(accountStatements.idCompany, c.var.user.idCompany),
+                    eq(accountStatements.idOrganization, c.var.user.idOrganization),
                     eq(accountStatements.id, params.idAccountStatement)
                 ))
                 .returning()

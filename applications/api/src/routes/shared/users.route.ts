@@ -1,7 +1,7 @@
 import { sessions, users } from '@coulba/schemas/models'
 import { shared } from '@coulba/schemas/routes'
 import { generateId } from '@coulba/schemas/services'
-import { and, eq, sql } from 'drizzle-orm'
+import { and, eq, isNotNull, sql } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { setCookie, setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
@@ -67,9 +67,9 @@ export const usersRoute = new Hono()
                 .from(users)
                 .where(and(
                     eq(users.id, body.id),
-                    eq(users.invitationToken, body.invitationToken),
-
+                    eq(users.invitationToken, body.invitationToken)
                 ))
+            if (!readUser) throw new HTTPException(403, { message: "Invitation non trouvée" })
 
             const currentDate = new Date()
             const sessionLifetime = Number(env()?.SESSION_LIFETIME)
@@ -111,6 +111,16 @@ export const usersRoute = new Hono()
         async (c) => {
             const body = c.req.valid('json')
 
+            const [readUser] = await db
+                .select()
+                .from(users)
+                .where(and(
+                    eq(users.id, body.id),
+                    isNotNull(users.emailToken),
+                    eq(users.emailToken, body.emailToken)
+                ))
+            if (!readUser) throw new HTTPException(403, { message: "Utilisateur non trouvé" })
+
             await db
                 .update(users)
                 .set({
@@ -122,10 +132,7 @@ export const usersRoute = new Hono()
                     lastUpdatedBy: null,
                     lastUpdatedOn: new Date().toISOString()
                 })
-                .where(and(
-                    eq(users.id, body.id),
-                    eq(users.emailToken, body.emailToken)
-                ))
+                .where(eq(users.id, body.id))
 
             return c.json({}, 200)
         }

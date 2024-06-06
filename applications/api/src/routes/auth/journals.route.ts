@@ -21,7 +21,7 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .insert(journals)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     code: body.code,
                     label: body.label,
                     lastUpdatedBy: c.var.user.id,
@@ -42,7 +42,7 @@ export const journalsRoute = new Hono<AuthEnv>()
                 const readJournals = await db
                     .select()
                     .from(journals)
-                    .where(eq(journals.idCompany, c.var.user.idCompany))
+                    .where(eq(journals.idOrganization, c.var.user.idOrganization))
 
                 return c.json(readJournals, 200)
             }
@@ -51,7 +51,7 @@ export const journalsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(journals)
                 .where(and(
-                    eq(journals.idCompany, c.var.user.idCompany),
+                    eq(journals.idOrganization, c.var.user.idOrganization),
                     eq(journals.id, params.idJournal)
                 ))
 
@@ -75,7 +75,7 @@ export const journalsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString()
                 })
                 .where(and(
-                    eq(journals.idCompany, c.var.user.idCompany),
+                    eq(journals.idOrganization, c.var.user.idOrganization),
                     eq(journals.id, params.idJournal)
                 ))
                 .returning()
@@ -92,7 +92,7 @@ export const journalsRoute = new Hono<AuthEnv>()
             const [deleteJournal] = await db
                 .delete(journals)
                 .where(and(
-                    eq(journals.idCompany, c.var.user.idCompany),
+                    eq(journals.idOrganization, c.var.user.idOrganization),
                     eq(journals.id, params.idJournal)
                 ))
                 .returning()
