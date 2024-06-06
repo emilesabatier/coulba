@@ -26,7 +26,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                     .values({
                         id: generateId(),
                         idPreviousYear: body.idPreviousYear,
-                        isSelected: !c.var.currentYear ? true : false,
+                        isSelected: false,
                         idOrganization: c.var.organization.id,
                         label: body.label,
                         startingOn: body.startingOn,

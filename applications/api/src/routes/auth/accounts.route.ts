@@ -3,7 +3,6 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
@@ -18,8 +17,6 @@ export const accountsRoute = new Hono<AuthEnv>()
         checkCurrentYear,
         validator("json", bodyValidator(auth.accounts.post.body)),
         async (c) => {
-            if (!c.var.currentYear) throw new HTTPException(400)
-
             const body = c.req.valid('json')
 
             const [createAccount] = await db
@@ -48,8 +45,6 @@ export const accountsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idAccount) {
-                if (!c.var.currentYear) return c.json([], 200)
-
                 const readAccounts = await db
                     .select()
                     .from(accounts)

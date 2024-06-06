@@ -6,9 +6,10 @@ import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
 import * as v from "valibot"
 import { useSession } from "../../contexts/session/useSession"
-import { createOrganization } from "../../services/api/shared/organizations/createOrganization"
-import { organizationTypeOptions } from "../organization/organizationTypeOptions"
 import { router } from "../../routes/router"
+import { createOrganization } from "../../services/api/shared/organizations/createOrganization"
+import { systemOptions } from "../accounts/systemOptions"
+import { organizationTypeOptions } from "../organization/organizationTypeOptions"
 
 
 export function SignUpForm() {
@@ -19,7 +20,8 @@ export function SignUpForm() {
         criteriaMode: "all",
         shouldFocusError: true,
         defaultValues: {
-            type: "company"
+            type: "company",
+            system: "base"
         },
         resolver: valibotResolver(shared.organizations.post.body),
     })
@@ -65,6 +67,31 @@ export function SignUpForm() {
                             </FormItem>
                         )}
                     />
+                    {
+                        form.watch("type") === "association" ? null : (
+                            <FormField
+                                control={form.control}
+                                name="system"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel
+                                            label="Système"
+                                            tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
+                                            isRequired
+                                        />
+                                        <FormControl>
+                                            <InputSelect
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                                options={systemOptions}
+                                            />
+                                        </FormControl>
+                                        <FormError />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
                     <FormField
                         control={form.control}
                         name="user.email"

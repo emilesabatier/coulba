@@ -18,8 +18,6 @@ export const rowsRoute = new Hono<AuthEnv>()
         checkCurrentYear,
         validator("json", bodyValidator(auth.rows.post.body)),
         async (c) => {
-            if (!c.var.currentYear) throw new HTTPException(400)
-
             const body = c.req.valid('json')
 
             const [readRecord] = await db
@@ -58,8 +56,6 @@ export const rowsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idRow) {
-                if (!c.var.currentYear) return c.json([], 200)
-
                 const readRows = await db
                     .select()
                     .from(rows)

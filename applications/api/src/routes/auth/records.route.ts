@@ -19,8 +19,6 @@ export const recordsRoute = new Hono<AuthEnv>()
         '/',
         validator("json", bodyValidator(auth.records.post.body)),
         async (c) => {
-            if (!c.var.currentYear) throw new HTTPException(400)
-
             const body = c.req.valid('json')
 
             const [createRecord] = await db
@@ -50,8 +48,6 @@ export const recordsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idRecord) {
-                if (!c.var.currentYear) return c.json([], 200)
-
                 const readRecords = await db.query.records.findMany({
                     where: and(
                         eq(records.idOrganization, c.var.user.idOrganization),

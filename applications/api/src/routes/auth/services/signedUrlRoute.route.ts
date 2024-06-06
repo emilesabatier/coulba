@@ -45,8 +45,6 @@ export const signedUrlRoute = new Hono<AuthEnv>()
         '/generate-put',
         validator("json", bodyValidator(auth.services.use.signedUrl.patch.generatePut.body)),
         async (c) => {
-            if (!c.var.currentYear) throw new HTTPException(400)
-
             const body = c.req.valid('json')
 
             if (body.size > 10000000) throw new HTTPException(500, { message: "File too large" })

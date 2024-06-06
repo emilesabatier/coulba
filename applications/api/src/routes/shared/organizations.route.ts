@@ -1,5 +1,5 @@
 import { defaultJournals } from "@coulba/schemas/components"
-import { journals, organizations, sessions, users } from "@coulba/schemas/models"
+import { journals, organizations, sessions, users, years } from "@coulba/schemas/models"
 import { shared } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -38,8 +38,23 @@ export const organizationsRoute = new Hono()
                         email: null
                     })
 
+                // Add current Year
+                const currentDate = new Date()
+                await tx
+                    .insert(years)
+                    .values({
+                        id: generateId(),
+                        idOrganization: idOrganization,
+                        isSelected: true,
+                        label: `Exercice ${currentDate.getFullYear()}`,
+                        startingOn: new Date(currentDate.getFullYear(), 0, 1, 0, 0, 0).toISOString(),
+                        endingOn: new Date(currentDate.getFullYear(), 11, 31, 23, 59, 59).toISOString(),
+                        isClosed: false,
+                        system: body.system
+                    })
+
                 // Add journals
-                await db
+                await tx
                     .insert(journals)
                     .values(
                         defaultJournals.map((journal) => ({

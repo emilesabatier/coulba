@@ -9,7 +9,7 @@ import { env } from "../env.js"
 
 export type AuthEnv = {
     Variables: {
-        currentYear: typeof years.$inferSelect | undefined
+        currentYear: typeof years.$inferSelect
         organization: typeof organizations.$inferSelect
         user: typeof users.$inferSelect
     }
@@ -59,6 +59,7 @@ export const checkAuth: MiddlewareHandler<AuthEnv> = async (c, next) => {
             eq(years.idOrganization, readOrganization.id),
             eq(years.isSelected, true)
         ))
+    if (!readYear) throw new HTTPException(401, { message: "Exercice actuel non trouvé" })
     c.set('currentYear', readYear)
 
     await next()

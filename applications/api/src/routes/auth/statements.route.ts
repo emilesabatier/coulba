@@ -3,7 +3,6 @@ import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { statementInclude } from "../../../../../packages/schemas/build/schemas/statement/statement.include.js"
 import { db } from "../../clients/db.js"
@@ -18,8 +17,6 @@ export const statementsRoute = new Hono<AuthEnv>()
         '/',
         validator("json", bodyValidator(auth.statements.post.body)),
         async (c) => {
-            if (!c.var.currentYear) throw new HTTPException(400)
-
             const body = c.req.valid('json')
 
             const [createStatement] = await db
@@ -46,8 +43,6 @@ export const statementsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idStatement) {
-                if (!c.var.currentYear) return c.json([], 200)
-
                 const readStatements = await db.query.statements.findMany({
                     where: and(
                         eq(statements.idOrganization, c.var.user.idOrganization),

@@ -4,7 +4,6 @@ import { sheetInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
-import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
 import { db } from "../../clients/db"
 import { bodyValidator } from "../../middlewares/bodyValidator"
@@ -18,8 +17,6 @@ export const sheetsRoute = new Hono<AuthEnv>()
         '/',
         validator("json", bodyValidator(auth.sheets.post.body)),
         async (c) => {
-            if (!c.var.currentYear) throw new HTTPException(400)
-
             const body = c.req.valid('json')
 
             const [createSheet] = await db
@@ -48,8 +45,6 @@ export const sheetsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
 
             if (!params.idSheet) {
-                if (!c.var.currentYear) return c.json([], 200)
-
                 const readSheets = await db.query.sheets.findMany({
                     where: and(
                         eq(sheets.idOrganization, c.var.user.idOrganization),

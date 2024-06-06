@@ -22,10 +22,6 @@ export const defaultJournals: DefaultJournal[] = [
         label: "Opérations diverses"
     },
     {
-        code: "VA",
-        label: "Valeur ajoutée"
-    },
-    {
         code: "AN",
         label: "À-nouveaux"
     }
