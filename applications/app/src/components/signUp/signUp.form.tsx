@@ -1,6 +1,6 @@
 import { ButtonPlain } from "@coulba/design/buttons"
 import { FormControl, FormError, FormField, FormItem, FormLabel, FormRoot } from "@coulba/design/forms"
-import { InputPassword, InputSelect, InputText } from "@coulba/design/inputs"
+import { InputPassword, InputSelect, InputSwitch, InputText } from "@coulba/design/inputs"
 import { shared } from "@coulba/schemas/routes"
 import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
@@ -8,7 +8,6 @@ import * as v from "valibot"
 import { useSession } from "../../contexts/session/useSession"
 import { router } from "../../routes/router"
 import { createOrganization } from "../../services/api/shared/organizations/createOrganization"
-import { systemOptions } from "../accounts/systemOptions"
 import { organizationTypeOptions } from "../organization/organizationTypeOptions"
 
 
@@ -21,7 +20,7 @@ export function SignUpForm() {
         shouldFocusError: true,
         defaultValues: {
             type: "company",
-            system: "base"
+            isWithOptionalAccounts: false
         },
         resolver: valibotResolver(shared.organizations.post.body),
     })
@@ -67,31 +66,26 @@ export function SignUpForm() {
                             </FormItem>
                         )}
                     />
-                    {
-                        form.watch("type") === "association" ? null : (
-                            <FormField
-                                control={form.control}
-                                name="system"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel
-                                            label="Système"
-                                            tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
-                                            isRequired
-                                        />
-                                        <FormControl>
-                                            <InputSelect
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                                options={systemOptions}
-                                            />
-                                        </FormControl>
-                                        <FormError />
-                                    </FormItem>
-                                )}
-                            />
-                        )
-                    }
+                    <FormField
+                        control={form.control}
+                        name="isWithOptionalAccounts"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Système minimal ?"
+                                    tooltip="."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputSwitch
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="user.email"

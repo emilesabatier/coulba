@@ -1,9 +1,10 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
-import { FormatDateTime, FormatNull, FormatSelect, FormatText } from "@coulba/design/formats"
+import { FormatBoolean, FormatDateTime, FormatNull, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { readAccountRoute } from "../../../routes/auth/configuration/accounts/readAccount.route"
 import { router } from "../../../routes/router"
 import { accountOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
@@ -12,9 +13,7 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteAccount } from "../delete/deleteAccount"
 import { FormatAccountWithFetch } from "../format/formatAccountWithFetch"
-import { systemOptions } from "../systemOptions"
 import { UpdateAccount } from "../update/updateAccount"
-import { readAccountRoute } from "../../../routes/auth/configuration/accounts/readAccount.route"
 
 
 export function AccountContent() {
@@ -59,8 +58,8 @@ export function AccountContent() {
                     <DataBlock.Item label="Libellé">
                         <FormatText text={account.data.label} />
                     </DataBlock.Item>
-                    <DataBlock.Item label="Système minimal">
-                        <FormatSelect option={account.data.system} options={systemOptions} />
+                    <DataBlock.Item label="Système">
+                        <FormatBoolean boolean={account.data.isOptional} text={account.data.isOptional ? "Minimal" : "Facultatif"} />
                     </DataBlock.Item>
                     <DataBlock.Item label="Compte parent">
                         {!account.data.idParent ? <FormatNull /> : <FormatAccountWithFetch idAccount={account.data.idParent} />}

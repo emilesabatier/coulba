@@ -31,7 +31,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         label: body.label,
                         startingOn: body.startingOn,
                         endingOn: body.endingOn,
-                        system: body.system,
+                        isWithOptionalAccounts: body.isWithOptionalAccounts,
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
@@ -39,26 +39,24 @@ export const yearsRoute = new Hono<AuthEnv>()
 
                 // Add accounts
                 let newAccounts: Array<(typeof accounts.$inferInsert)> = []
-                const defaultAccounts = (c.var.organization.type === "association") ? associationAccounts : (
-                    companyAccounts
-                        .filter((account) => {
-                            if (body.system === "condensed" && ["base", "developped"].includes(account.system)) return true
-                            if (body.system === "base" && ["developped"].includes(account.system)) return true
-                            return false
-                        })
-                )
+                const defaultAccounts = (c.var.organization.type === "association") ? associationAccounts : companyAccounts
 
-                defaultAccounts.forEach((_account) => {
-                    newAccounts.push({
-                        id: generateId(),
-                        idOrganization: c.var.organization.id,
-                        idYear: createYear.id,
-                        number: _account.number,
-                        type: c.var.organization.type,
-                        system: _account.system,
-                        label: _account.label
+                defaultAccounts
+                    .filter((account) => {
+                        if (account.isOptional && !c.var.currentYear.isWithOptionalAccounts) return false
+                        return true
                     })
-                })
+                    .forEach((_account) => {
+                        newAccounts.push({
+                            id: generateId(),
+                            idOrganization: c.var.organization.id,
+                            idYear: createYear.id,
+                            number: _account.number,
+                            type: c.var.organization.type,
+                            isOptional: _account.isOptional,
+                            label: _account.label
+                        })
+                    })
                 newAccounts = newAccounts.map((_account) => {
                     const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
                     return ({

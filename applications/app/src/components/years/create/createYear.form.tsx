@@ -1,22 +1,19 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputDate, InputSelect, InputText } from "@coulba/design/inputs"
+import { InputDate, InputSwitch, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { Fragment } from "react"
 import { useCurrentYear } from "../../../contexts/currentYear/useCurrentYear"
-import { useOrganization } from "../../../contexts/organization/useOrganization"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { createYear } from "../../../services/api/auth/years/createYear"
 import { yearsOptions } from "../../../services/api/auth/years/yearsOptions"
-import { systemOptions } from "../../accounts/systemOptions"
 import { Form } from "../../layouts/forms/form"
 import { YearCombobox } from "../input/yearCombobox"
 
 
 export function CreateYearForm() {
-    const organization = useOrganization()
     const currentYear = useCurrentYear()
 
     const mutation = useMutation({
@@ -28,7 +25,7 @@ export function CreateYearForm() {
         <Form
             validationSchema={auth.years.post.body}
             defaultValues={{
-                system: "base"
+                isWithOptionalAccounts: false
             }}
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
@@ -108,31 +105,26 @@ export function CreateYearForm() {
                             </FormItem>
                         )}
                     />
-                    {
-                        organization.data?.type === "association" ? null : (
-                            <FormField
-                                control={form.control}
-                                name="system"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel
-                                            label="Système"
-                                            tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
-                                            isRequired
-                                        />
-                                        <FormControl>
-                                            <InputSelect
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                                options={systemOptions}
-                                            />
-                                        </FormControl>
-                                        <FormError />
-                                    </FormItem>
-                                )}
-                            />
-                        )
-                    }
+                    <FormField
+                        control={form.control}
+                        name="isWithOptionalAccounts"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Système minimal ?"
+                                    tooltip="."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputSwitch
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="idPreviousYear"

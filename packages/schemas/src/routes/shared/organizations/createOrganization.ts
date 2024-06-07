@@ -9,7 +9,7 @@ import { yearSchema } from "../../../schemas/year/year.schema.js"
 // Input
 export const createOrganizationBody = v.object({
     type: organizationSchema.entries.type,
-    system: yearSchema.entries.system,
+    isWithOptionalAccounts: yearSchema.entries.isWithOptionalAccounts,
     user: v.object({
         email: userSchema.entries.email,
         password: passwordSchema,

@@ -49,7 +49,7 @@ async function seed() {
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2024, 11, 31, 12, 0, 0).toISOString(),
-                    system: "developed"
+                    isWithOptionalAccounts: true
                 }
             ]
             await tx.insert(years).values(newYears)
@@ -74,7 +74,7 @@ async function seed() {
                 idYear: idCurrentYear,
                 number: _account.number,
                 type: "company",
-                system: _account.system,
+                isOptional: _account.isOptional,
                 label: _account.label
             }))
             newAccounts = newAccounts.map((_account) => {

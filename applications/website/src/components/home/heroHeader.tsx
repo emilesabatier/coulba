@@ -15,7 +15,7 @@ export function HeroHeader() {
                         Reprendre la main sur sa comptabilité
                     </h1>
                     <p className="text-lg text-neutral/75 text-balance text-center">
-                        La plupart des entrepreneurs individuels ou des petites entreprises n'ont pas besoin de comptable.
+                        La plupart des entrepreneurs individuels et des petites entreprises ou associations n'ont pas besoin de comptable.
                         <br />
                         Nous nous adressons à eux.
                     </p>

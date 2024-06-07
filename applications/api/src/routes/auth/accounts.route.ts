@@ -29,7 +29,7 @@ export const accountsRoute = new Hono<AuthEnv>()
                     label: body.label,
                     number: body.number,
                     type: c.var.organization.type,
-                    system: c.var.currentYear.system,
+                    isOptional: false,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })

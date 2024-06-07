@@ -50,7 +50,7 @@ export const organizationsRoute = new Hono()
                         startingOn: new Date(currentDate.getFullYear(), 0, 1, 0, 0, 0).toISOString(),
                         endingOn: new Date(currentDate.getFullYear(), 11, 31, 23, 59, 59).toISOString(),
                         isClosed: false,
-                        system: body.system
+                        isWithOptionalAccounts: body.isWithOptionalAccounts
                     })
 
                 // Add journals

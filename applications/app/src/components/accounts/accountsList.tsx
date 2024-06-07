@@ -1,6 +1,7 @@
 import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
+import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
 import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
@@ -87,8 +88,18 @@ function AccountItem(props: AccountItem) {
                         paddingLeft: `${(1 + props.level) * 12}px`
                     }}
                 >
-                    <span className="text-neutral font-bold">{props.groupedAccount.account.number}</span>
-                    <span className="text-neutral text-left">{props.groupedAccount.account.label}</span>
+                    <span className={cn(
+                        "text-neutral font-bold",
+                        props.groupedAccount.account.isOptional ? "italic" : ""
+                    )}>
+                        {props.groupedAccount.account.number}
+                    </span>
+                    <span className={cn(
+                        "text-neutral text-left",
+                        props.groupedAccount.account.isOptional ? "italic" : ""
+                    )}>
+                        {props.groupedAccount.account.label}
+                    </span>
                 </div>
             </ReadAccount>
             {
