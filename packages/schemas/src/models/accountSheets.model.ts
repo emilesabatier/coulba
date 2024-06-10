@@ -27,7 +27,7 @@ export const accountSheets = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.idAccount, t.idSheet)
+        uniqueConstraint: unique().on(t.idOrganization, t.idAccount, t.idSheet)
     })
 )
 

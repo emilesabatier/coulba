@@ -5,7 +5,6 @@ import { organizationSchema } from "../../../schemas/organization/organization.s
 
 // Input
 export const updateOrganizationBody = v.partial(v.object({
-    type: organizationSchema.entries.type,
     siren: organizationSchema.entries.siren,
     name: organizationSchema.entries.name,
     email: organizationSchema.entries.email

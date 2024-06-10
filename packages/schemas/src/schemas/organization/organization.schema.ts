@@ -1,6 +1,6 @@
 import { createSelectSchema } from 'drizzle-valibot'
 import * as v from "valibot"
-import { types } from '../../components/index.js'
+import { organizationScopes } from '../../components/index.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { emailSchema } from '../../components/schemas/email.schema.js'
 import { idSchema } from "../../components/schemas/id.schema.js"
@@ -11,7 +11,7 @@ import { organizations } from "../../models/index.js"
 
 export const organizationSchema = createSelectSchema(organizations, {
     id: idSchema,
-    type: v.picklist(types),
+    scope: v.picklist(organizationScopes),
     siren: v.nullish(sirenSchema),
     name: textSchema,
     email: v.nullish(emailSchema),

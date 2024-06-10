@@ -1,5 +1,5 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
-import { FormatBoolean, FormatDateTime, FormatNull, FormatText } from "@coulba/design/formats"
+import { FormatBoolean, FormatDateTime, FormatNull, FormatSelect, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
@@ -11,6 +11,7 @@ import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
+import { accountTypeOptions } from "../accountTypeOptions"
 import { DeleteAccount } from "../delete/deleteAccount"
 import { FormatAccountWithFetch } from "../format/formatAccountWithFetch"
 import { UpdateAccount } from "../update/updateAccount"
@@ -58,8 +59,17 @@ export function AccountContent() {
                     <DataBlock.Item label="Libellé">
                         <FormatText text={account.data.label} />
                     </DataBlock.Item>
-                    <DataBlock.Item label="Système">
-                        <FormatBoolean boolean={account.data.isOptional} text={account.data.isOptional ? "Minimal" : "Facultatif"} />
+                    {/* <DataBlock.Item label="Système">
+                        <FormatBoolean boolean={account.data.isMandatory} text={account.data.isMandatory ? "Minimal" : "Facultatif"} />
+                    </DataBlock.Item> */}
+                    <DataBlock.Item label="Classe/sous-classe ?">
+                        <FormatBoolean boolean={account.data.isClass} />
+                    </DataBlock.Item>
+                    <DataBlock.Item label="Sélectionnable ?">
+                        <FormatBoolean boolean={account.data.isSelectable} />
+                    </DataBlock.Item>
+                    <DataBlock.Item label="Type de compte">
+                        <FormatSelect option={account.data.type} options={accountTypeOptions} />
                     </DataBlock.Item>
                     <DataBlock.Item label="Compte parent">
                         {!account.data.idParent ? <FormatNull /> : <FormatAccountWithFetch idAccount={account.data.idParent} />}

@@ -5,7 +5,7 @@ import { IconPencil } from "@tabler/icons-react"
 import { useOrganization } from "../../contexts/organization/useOrganization"
 import { DataBlock } from "../layouts/dataBlock/dataBlock"
 import { Section } from "../layouts/section/section"
-import { organizationTypeOptions } from "./organizationTypeOptions"
+import { organizationScopeOptions } from "./organizationScopeOptions"
 import { UpdateOrganization } from "./updateOrganization/updateOrganization"
 
 
@@ -30,7 +30,7 @@ export function OrganizationContent() {
             <Section.Item>
                 <DataBlock.Root>
                     <DataBlock.Item label="Type">
-                        <FormatSelect option={organization.data.type} options={organizationTypeOptions} />
+                        <FormatSelect option={organization.data.scope} options={organizationScopeOptions} />
                     </DataBlock.Item>
                     <DataBlock.Item label="SIREN">
                         <FormatText text={organization.data.siren} />

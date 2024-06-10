@@ -29,14 +29,6 @@ export const defaultComputations: DefaultComputation[] = [
         label: "Résultat financier",
         statements: [
             {
-                number: 3,
-                operation: "plus"
-            },
-            {
-                number: 4,
-                operation: "minus"
-            },
-            {
                 number: 5,
                 operation: "plus"
             },
@@ -130,6 +122,10 @@ export const defaultComputations: DefaultComputation[] = [
             },
             {
                 number: 8,
+                operation: "plus"
+            },
+            {
+                number: 9,
                 operation: "plus"
             },
             {

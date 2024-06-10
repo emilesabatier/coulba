@@ -90,13 +90,13 @@ function AccountItem(props: AccountItem) {
                 >
                     <span className={cn(
                         "text-neutral font-bold",
-                        props.groupedAccount.account.isOptional ? "italic" : ""
+                        props.groupedAccount.account.isMandatory ? "" : ""
                     )}>
                         {props.groupedAccount.account.number}
                     </span>
                     <span className={cn(
                         "text-neutral text-left",
-                        props.groupedAccount.account.isOptional ? "italic" : ""
+                        props.groupedAccount.account.isMandatory ? "" : ""
                     )}>
                         {props.groupedAccount.account.label}
                     </span>

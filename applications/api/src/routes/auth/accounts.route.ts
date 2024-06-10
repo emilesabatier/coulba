@@ -26,10 +26,13 @@ export const accountsRoute = new Hono<AuthEnv>()
                     idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idParent: body.idParent,
+                    isClass: body.isClass,
+                    isSelectable: body.isSelectable,
                     label: body.label,
                     number: body.number,
-                    type: c.var.organization.type,
-                    isOptional: false,
+                    type: body.type,
+                    scope: c.var.organization.scope,
+                    isMandatory: true,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })

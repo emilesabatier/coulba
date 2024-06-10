@@ -49,7 +49,7 @@ async function seed() {
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2024, 11, 31, 12, 0, 0).toISOString(),
-                    isWithOptionalAccounts: true
+                    isMinimalSystem: true
                 }
             ]
             await tx.insert(years).values(newYears)
@@ -73,9 +73,12 @@ async function seed() {
                 idOrganization: newOrganization.id,
                 idYear: idCurrentYear,
                 number: _account.number,
-                type: "company",
-                isOptional: _account.isOptional,
-                label: _account.label
+                isMandatory: _account.isMandatory,
+                isClass: _account.isClass,
+                isSelectable: _account.isSelectable,
+                label: _account.label,
+                type: _account.type,
+                scope: "company"
             }))
             newAccounts = newAccounts.map((_account) => {
                 const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
@@ -111,6 +114,27 @@ async function seed() {
             await tx.insert(sheets).values(newSheets)
 
 
+            // AccountSheets
+            console.log("Add accountSheets")
+            const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
+            newSheets.forEach((_sheet) => {
+                _sheet.accounts.forEach((_account) => {
+                    const account = newAccounts.find((x) => x.number === _account.number)
+
+                    if (!account) return console.log(`Account not found ${_sheet.number} ${_account.number}`)
+                    newAccountSheets.push({
+                        id: generateId(),
+                        idOrganization: newOrganization.id,
+                        idAccount: account.id,
+                        idSheet: _sheet.id,
+                        flow: _account.flow,
+                        isAllowance: _account.isAllowance
+                    })
+                })
+            })
+            await tx.insert(accountSheets).values(newAccountSheets)
+
+
             // Statements
             console.log("Add statements")
             let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
@@ -131,6 +155,26 @@ async function seed() {
                 })
             })
             await tx.insert(statements).values(newStatements)
+
+
+            // AccountStatements
+            console.log("Add accountStatements")
+            const newAccountStatements: Array<(typeof accountStatements.$inferInsert)> = []
+            newStatements.forEach((_statement) => {
+                _statement.accounts.forEach((_account) => {
+                    const account = newAccounts.find((x) => x.number === _account)
+
+                    if (!account) return console.log(`Account not found ${_statement.number} ${_account}`)
+                    // if (newAccountStatements.find(x => x.idAccount === account.id && x.idStatement == _statement.id)) console.log(_account)
+                    newAccountStatements.push({
+                        id: generateId(),
+                        idOrganization: newOrganization.id,
+                        idAccount: account.id,
+                        idStatement: _statement.id
+                    })
+                })
+            })
+            await tx.insert(accountStatements).values(newAccountStatements)
 
 
             // Computations
@@ -155,7 +199,7 @@ async function seed() {
                 _computation.statements.forEach((_statement) => {
                     const statement = newStatements.find((x) => x.number === _statement.number)
 
-                    if (!statement) throw new Error(`Erreur ${_computation.number} ${_statement.number}`)
+                    if (!statement) return console.log(`Statement not found ${_computation.number} ${_statement.number}`)
                     newComputationStatements.push({
                         id: generateId(),
                         idOrganization: newOrganization.id,
@@ -168,44 +212,24 @@ async function seed() {
             await tx.insert(computationStatements).values(newComputationStatements)
 
 
-            // AccountStatements
-            console.log("Add accountStatements")
-            const newAccountStatements: Array<(typeof accountStatements.$inferInsert)> = []
-            newStatements.forEach((_statement) => {
-                _statement.accounts.forEach((_account) => {
-                    const account = newAccounts.find((x) => x.number === _account)
+            // Check accounts
+            newAccounts.forEach((account) => {
+                if (account.isClass) return
+                if (!account.isSelectable) return
+                // if (newAccounts.find(x => x.idParent === account.id)) return
 
-                    if (!account) throw new Error(`Erreur ${_statement.number} ${_account}`)
-                    newAccountStatements.push({
-                        id: generateId(),
-                        idOrganization: newOrganization.id,
-                        idAccount: account.id,
-                        idStatement: _statement.id
-                    })
-                })
+                const accountClass = account.number.toString().at(0) ?? ""
+
+                if (["1", "2", "3", "4", "5"].includes(accountClass)) {
+                    const accountSheet = newAccountSheets.find((accountSheet) => accountSheet.idAccount === account.id)
+                    if (!accountSheet) console.log(`Account not used (sheet) ${account.number} ${account.isMandatory}`)
+                }
+
+                if (["6", "7"].includes(accountClass)) {
+                    const accountStatement = newAccountStatements.find((accountStatement) => accountStatement.idAccount === account.id)
+                    if (!accountStatement) console.log(`Account not used (statement) ${account.number} ${account.isMandatory}`)
+                }
             })
-            await tx.insert(accountStatements).values(newAccountStatements)
-
-            // AccountSheets
-            console.log("Add accountSheets")
-            const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
-            newSheets.forEach((_sheet) => {
-                _sheet.accounts.forEach((_account) => {
-                    const account = newAccounts.find((x) => x.number === _account.number)
-
-                    if (!account) throw new Error(`Erreur ${_sheet.number} ${_account.number}`)
-                    newAccountSheets.push({
-                        id: generateId(),
-                        idOrganization: newOrganization.id,
-                        idAccount: account.id,
-                        idSheet: _sheet.id,
-                        flow: _account.flow,
-                        isAllowance: _account.isAllowance
-                    })
-                })
-            })
-            await tx.insert(accountSheets).values(newAccountSheets)
-
 
             // Users
             console.log("Add user")

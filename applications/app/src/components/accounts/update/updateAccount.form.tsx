@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputSwitch, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -14,6 +14,7 @@ import { updateAccount } from "../../../services/api/auth/accounts/updateAccount
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { AccountCombobox } from "../accountCombobox"
+import { accountTypeOptions } from "../accountTypeOptions"
 
 
 export function UpdateAccountForm() {
@@ -110,6 +111,64 @@ export function UpdateAccountForm() {
                                     <AccountCombobox
                                         value={field.value}
                                         onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="isClass"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Classe/sous-classe ?"
+                                    tooltip="Le compte est une classe ou une sous-classe de compte."
+                                />
+                                <FormControl>
+                                    <InputSwitch
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="isSelectable"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Sélectionnable ?"
+                                    tooltip="Le compte est sélectionnable pour les écritures."
+                                />
+                                <FormControl>
+                                    <InputSwitch
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="type"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Type de compte"
+                                    tooltip="Si le compte est de bilan, de gestion ou spécial."
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={accountTypeOptions}
                                     />
                                 </FormControl>
                                 <FormError />

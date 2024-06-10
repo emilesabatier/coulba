@@ -14,6 +14,7 @@ import { cn } from "../../services/cn"
 export type Option = {
     key: string
     label: string
+    disabled?: boolean
 }
 type InputCombobox = {
     error?: FieldError
@@ -155,13 +156,16 @@ export function InputCombobox(props: InputCombobox) {
                                                     }}
                                                     className={cn(
                                                         "h-[40px] flex justify-between items-center overflow-hidden gap-2 p-2",
-                                                        selectedOption?.key === option.key ? "bg-neutral/5" : "bg-none hover:bg-neutral/5"
+                                                        selectedOption?.key === option.key ? "bg-neutral/5" : "bg-none hover:bg-neutral/5",
+                                                        option.disabled ? "bg-white hover:bg-white cursor-not-allowed" : ""
                                                     )}
+                                                    disabled={option.disabled}
                                                 >
                                                     <span
                                                         className={cn(
                                                             "overflow-hidden whitespace-nowrap text-ellipsis",
-                                                            selectedOption?.key === option.key ? "text-neutral" : "text-neutral"
+                                                            selectedOption?.key === option.key ? "text-neutral" : "text-neutral",
+                                                            option.disabled ? "text-neutral/50" : ""
                                                         )}
                                                     >
                                                         {option.label}

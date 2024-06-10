@@ -25,7 +25,7 @@ export function CreateYearForm() {
         <Form
             validationSchema={auth.years.post.body}
             defaultValues={{
-                isWithOptionalAccounts: false
+                isMinimalSystem: false
             }}
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
@@ -107,12 +107,12 @@ export function CreateYearForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="isWithOptionalAccounts"
+                        name="isMinimalSystem"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
                                     label="Système minimal ?"
-                                    tooltip="."
+                                    tooltip="Si activé, seuls les comptes du système minimal seront créés."
                                     isRequired
                                 />
                                 <FormControl>

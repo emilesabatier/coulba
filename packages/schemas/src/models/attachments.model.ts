@@ -26,6 +26,6 @@ export const attachments = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.reference, t.idYear, t.idOrganization)
+        uniqueConstraint: unique().on(t.idOrganization, t.idYear, t.reference)
     })
 )

@@ -12,7 +12,7 @@ export function ActivationBanner() {
     return (
         <Section.Item className="p-0">
             <Banner variant="warning">
-                Votre compte n'est pas activé. Vous pouvez valider votre compte en&nbsp;
+                Votre compte n'est pas activé. Vous pouvez l'activer en&nbsp;
                 <Link
                     to="/activation"
                     className="text-warning underline hover:no-underline"

@@ -1,7 +1,7 @@
 
 export const organizationInclude = {
     id: true,
-    type: true,
+    scope: true,
     siren: true,
     name: true,
     email: true,
@@ -11,4 +11,4 @@ export const organizationInclude = {
 } as const
 
 
-export const organizationIncludeKeys = ["id", "type", "siren", "name", "email", "lastUpdatedOn", "createdOn", "lastUpdatedBy"] as const
+export const organizationIncludeKeys = ["id", "scope", "siren", "name", "email", "lastUpdatedOn", "createdOn", "lastUpdatedBy"] as const

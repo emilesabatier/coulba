@@ -8,7 +8,7 @@ import * as v from "valibot"
 import { useSession } from "../../contexts/session/useSession"
 import { router } from "../../routes/router"
 import { createOrganization } from "../../services/api/shared/organizations/createOrganization"
-import { organizationTypeOptions } from "../organization/organizationTypeOptions"
+import { organizationScopeOptions } from "../organization/organizationScopeOptions"
 
 
 export function SignUpForm() {
@@ -19,8 +19,8 @@ export function SignUpForm() {
         criteriaMode: "all",
         shouldFocusError: true,
         defaultValues: {
-            type: "company",
-            isWithOptionalAccounts: false
+            scope: "company",
+            isMinimalSystem: false
         },
         resolver: valibotResolver(shared.organizations.post.body),
     })
@@ -47,7 +47,7 @@ export function SignUpForm() {
                 <div className="w-full flex flex-col justify-start items-stretch gap-3">
                     <FormField
                         control={form.control}
-                        name="type"
+                        name="scope"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
@@ -59,7 +59,7 @@ export function SignUpForm() {
                                     <InputSelect
                                         value={field.value}
                                         onChange={field.onChange}
-                                        options={organizationTypeOptions}
+                                        options={organizationScopeOptions}
                                     />
                                 </FormControl>
                                 <FormError />
@@ -68,7 +68,7 @@ export function SignUpForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="isWithOptionalAccounts"
+                        name="isMinimalSystem"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel

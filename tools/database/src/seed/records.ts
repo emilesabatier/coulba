@@ -25,14 +25,14 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 445663,
-                label: "TVA déductible extracommunautaire (auto-liquidation)",
+                accountNumber: 4456,
+                label: "TVA déductible (autoliquidation)",
                 debit: 11.23,
                 credit: 0
             },
             {
-                accountNumber: 4453,
-                label: "TVA due extracommunautaire (auto-liquidation)",
+                accountNumber: 4457,
+                label: "TVA due (autoliquidation)",
                 debit: 0,
                 credit: 11.23
             },
@@ -67,7 +67,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 10.7,
                 credit: 0
@@ -103,7 +103,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 1.4,
                 credit: 0
@@ -139,7 +139,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 29.8,
                 credit: 0
@@ -163,7 +163,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 38.8,
                 credit: 0
@@ -199,7 +199,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 9.81,
                 credit: 0
@@ -283,7 +283,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44571,
+                accountNumber: 4457,
                 label: "TVA due",
                 debit: 0,
                 credit: 312
@@ -307,7 +307,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 4.55,
                 credit: 0
@@ -343,14 +343,14 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 445663,
-                label: "TVA déductible extracommunautaire (auto-liquidation)",
+                accountNumber: 4456,
+                label: "TVA déductible (autoliquidation)",
                 debit: 1.08,
                 credit: 0
             },
             {
-                accountNumber: 4453,
-                label: "TVA due extracommunautaire (auto-liquidation)",
+                accountNumber: 4457,
+                label: "TVA due (autoliquidation)",
                 debit: 0,
                 credit: 1.08
             },
@@ -439,7 +439,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 4.64,
                 credit: 0
@@ -475,7 +475,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 0.68,
                 credit: 0
@@ -511,7 +511,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 0.77,
                 credit: 0
@@ -547,7 +547,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 4.75,
                 credit: 0
@@ -583,7 +583,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 3.09,
                 credit: 0
@@ -619,7 +619,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 4.33,
                 credit: 0
@@ -655,7 +655,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44571,
+                accountNumber: 4457,
                 label: "TVA due",
                 debit: 0,
                 credit: 126
@@ -679,7 +679,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44571,
+                accountNumber: 4457,
                 label: "TVA due",
                 debit: 0,
                 credit: 471.6
@@ -703,7 +703,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44571,
+                accountNumber: 4457,
                 label: "TVA due",
                 debit: 0,
                 credit: 138
@@ -727,7 +727,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 0.6,
                 credit: 0
@@ -763,7 +763,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 4.16,
                 credit: 0
@@ -781,7 +781,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 27.48,
                 credit: 0
@@ -799,7 +799,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 7.09,
                 credit: 0
@@ -871,7 +871,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 15.26,
                 credit: 0
@@ -907,14 +907,14 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 445663,
-                label: "TVA déductible extracommunautaire (auto-liquidation)",
+                accountNumber: 4456,
+                label: "TVA déductible (autoliquidation)",
                 debit: 24.14,
                 credit: 0
             },
             {
-                accountNumber: 4453,
-                label: "TVA due extracommunautaire (auto-liquidation)",
+                accountNumber: 4457,
+                label: "TVA due (autoliquidation)",
                 debit: 0,
                 credit: 24.14
             },
@@ -967,7 +967,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 4,
                 credit: 0
@@ -997,7 +997,7 @@ export const defaultRecords: Array<DefaultRecord> = [
         date: "2022-11-29T11:00:00.000Z",
         rows: [
             {
-                accountNumber: 796,
+                accountNumber: 768,
                 label: "Cashback Qonto",
                 debit: 0,
                 credit: 2.2
@@ -1021,7 +1021,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 1.4,
                 credit: 0
@@ -1075,7 +1075,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 28183,
+                accountNumber: 2818,
                 label: "Amortissement clavier",
                 debit: 0,
                 credit: 0.75
@@ -1087,7 +1087,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 28183,
+                accountNumber: 2818,
                 label: "Amortissement écran",
                 debit: 0,
                 credit: 4.97
@@ -1099,7 +1099,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 28183,
+                accountNumber: 2818,
                 label: "Amortissement support écran",
                 debit: 0,
                 credit: 1.28
@@ -1107,18 +1107,18 @@ export const defaultRecords: Array<DefaultRecord> = [
         ]
     },
     {
-        label: "Auto-liquidation extracommunautaire",
+        label: "Autoliquidation",
         date: "2022-12-31T10:00:00.000Z",
         rows: [
             {
-                accountNumber: 4453,
-                label: "TVA extracommunautaire due",
+                accountNumber: 4457,
+                label: "TVA due",
                 debit: 36.45,
                 credit: 0
             },
             {
-                accountNumber: 445663,
-                label: "TVA extracommunautaire déductible",
+                accountNumber: 4456,
+                label: "TVA déductible",
                 debit: 0,
                 credit: 36.45
             }
@@ -1129,13 +1129,13 @@ export const defaultRecords: Array<DefaultRecord> = [
         date: "2022-12-31T10:00:00.000Z",
         rows: [
             {
-                accountNumber: 44571,
+                accountNumber: 4457,
                 label: "TVA due",
                 debit: 1047.6,
                 credit: 0
             },
             {
-                accountNumber: 44566,
+                accountNumber: 4456,
                 label: "TVA déductible",
                 debit: 0,
                 credit: 173.31
@@ -1177,7 +1177,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 10611,
+                accountNumber: 1061,
                 label: "Affectation vers la réserve légale",
                 debit: 0,
                 credit: 100
@@ -1195,7 +1195,7 @@ export const defaultRecords: Array<DefaultRecord> = [
                 credit: 0
             },
             {
-                accountNumber: 10688,
+                accountNumber: 1068,
                 label: "Affectation vers les autres réserves",
                 debit: 0,
                 credit: 181.02

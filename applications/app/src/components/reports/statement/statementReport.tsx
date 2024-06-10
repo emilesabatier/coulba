@@ -8,8 +8,8 @@ import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { Balance, getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
-import { StatementTable } from "./statementTable"
 import { Section } from "../../layouts/section/section"
+import { StatementTable } from "./statementTable"
 
 
 
@@ -34,7 +34,12 @@ function groupStatement(statements: v.Output<typeof auth.statements.get.return>[
                     balance
                         .filter((_balance) => _balance.account.id === accountStatement.idAccount)
                         .forEach((_balance) => {
-                            net += _balance.balance.debit + _balance.balance.credit
+                            if (_balance.account.number.toString().at(0) === "6") {
+                                net += _balance.balance.debit - _balance.balance.credit
+                            }
+                            if (_balance.account.number.toString().at(0) === "7") {
+                                net += _balance.balance.credit - _balance.balance.debit
+                            }
                         })
                 })
             }

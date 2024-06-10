@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputSelect, InputSiren, InputText } from "@coulba/design/inputs"
+import { InputSiren, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -8,7 +8,6 @@ import { useOrganization } from "../../../contexts/organization/useOrganization"
 import { router } from "../../../routes/router"
 import { updateOrganization } from "../../../services/api/auth/organizations/updateOrganization"
 import { Form } from "../../layouts/forms/form"
-import { organizationTypeOptions } from "../organizationTypeOptions"
 
 
 export function UpdateOrganizationForm() {
@@ -34,27 +33,6 @@ export function UpdateOrganizationForm() {
         >
             {(form) => (
                 <Fragment>
-                    <FormField
-                        control={form.control}
-                        name="type"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel
-                                    label="Type"
-                                    tooltip="Le type de votre structure."
-                                    isRequired
-                                />
-                                <FormControl>
-                                    <InputSelect
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        options={organizationTypeOptions}
-                                    />
-                                </FormControl>
-                                <FormError />
-                            </FormItem>
-                        )}
-                    />
                     <FormField
                         control={form.control}
                         name="siren"

@@ -12,7 +12,7 @@ export const yearSchema = createSelectSchema(years, {
     idPreviousYear: idSchema,
     isClosed: booleanSchema,
     isSelected: booleanSchema,
-    isWithOptionalAccounts: booleanSchema,
+    isMinimalSystem: booleanSchema,
     label: requiredTextSchema,
     startingOn: dateTimeSchema,
     endingOn: dateTimeSchema,

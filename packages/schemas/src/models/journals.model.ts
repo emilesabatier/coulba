@@ -20,6 +20,6 @@ export const journals = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.code, t.idOrganization)
+        uniqueConstraint: unique().on(t.idOrganization, t.code)
     })
 )

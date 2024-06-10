@@ -1,6 +1,6 @@
 import { createSelectSchema } from 'drizzle-valibot'
 import * as v from "valibot"
-import { integerSchema, types } from "../../components/index.js"
+import { accountTypes, integerSchema, organizationScopes } from "../../components/index.js"
 import { booleanSchema } from '../../components/schemas/boolean.schema.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
@@ -13,10 +13,13 @@ export const accountSchema = createSelectSchema(accounts, {
     idOrganization: idSchema,
     idYear: idSchema,
     idParent: idSchema,
-    isOptional: booleanSchema,
+    isMandatory: booleanSchema,
+    isClass: booleanSchema,
+    isSelectable: booleanSchema,
     number: integerSchema,
     label: requiredTextSchema,
-    type: v.picklist(types),
+    type: v.picklist(accountTypes),
+    scope: v.picklist(organizationScopes),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

@@ -8,8 +8,8 @@ import { yearSchema } from "../../../schemas/year/year.schema.js"
 
 // Input
 export const createOrganizationBody = v.object({
-    type: organizationSchema.entries.type,
-    isWithOptionalAccounts: yearSchema.entries.isWithOptionalAccounts,
+    scope: organizationSchema.entries.scope,
+    isMinimalSystem: yearSchema.entries.isMinimalSystem,
     user: v.object({
         email: userSchema.entries.email,
         password: passwordSchema,

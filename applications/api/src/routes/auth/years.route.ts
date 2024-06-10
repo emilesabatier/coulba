@@ -1,4 +1,4 @@
-import { DefaultComputation, DefaultSheet, associationAccounts, companyAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
+import { DefaultComputation, DefaultSheet, companyAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
 import { accountSheets, accountStatements, accounts, computationStatements, computations, sheets, statements, years } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
@@ -31,7 +31,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         label: body.label,
                         startingOn: body.startingOn,
                         endingOn: body.endingOn,
-                        isWithOptionalAccounts: body.isWithOptionalAccounts,
+                        isMinimalSystem: body.isMinimalSystem,
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
@@ -39,11 +39,12 @@ export const yearsRoute = new Hono<AuthEnv>()
 
                 // Add accounts
                 let newAccounts: Array<(typeof accounts.$inferInsert)> = []
-                const defaultAccounts = (c.var.organization.type === "association") ? associationAccounts : companyAccounts
+                // const defaultAccounts = (c.var.organization.scope === "association") ? associationAccounts : companyAccounts
+                const defaultAccounts = companyAccounts
 
                 defaultAccounts
                     .filter((account) => {
-                        if (account.isOptional && !c.var.currentYear.isWithOptionalAccounts) return false
+                        if (account.isMandatory && !c.var.currentYear.isMinimalSystem) return false
                         return true
                     })
                     .forEach((_account) => {
@@ -52,9 +53,12 @@ export const yearsRoute = new Hono<AuthEnv>()
                             idOrganization: c.var.organization.id,
                             idYear: createYear.id,
                             number: _account.number,
-                            type: c.var.organization.type,
-                            isOptional: _account.isOptional,
-                            label: _account.label
+                            isMandatory: _account.isMandatory,
+                            isClass: _account.isClass,
+                            isSelectable: _account.isSelectable,
+                            label: _account.label,
+                            type: _account.type,
+                            scope: c.var.organization.scope
                         })
                     })
                 newAccounts = newAccounts.map((_account) => {
