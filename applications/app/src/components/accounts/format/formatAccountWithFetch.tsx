@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 import * as v from "valibot"
 import { accountOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
+import { ReadAccount } from "../read/readAccount"
 import { formatAccount } from "./formatAccount"
 
 
@@ -18,5 +19,12 @@ export function FormatAccountWithFetch(props: FormatAccountWithFetch) {
     if (account.isLoading) return (<CircularLoader />)
     if (account.isError) return <ErrorMessage message={account.error.message} />
     if (!account.data) return <FormatNull />
-    return <FormatText text={formatAccount(account.data)} />
+    return (
+        <ReadAccount idAccount={props.idAccount}>
+            <FormatText
+                text={formatAccount(account.data)}
+                className="underline hover:no-underline"
+            />
+        </ReadAccount>
+    )
 }

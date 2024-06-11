@@ -2,7 +2,6 @@ import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
-import { rowsOptions } from "../../services/api/auth/rows/rowsOptions"
 import { getBalance } from "../../services/reports/getBalance"
 import { formatAccount } from "../accounts/format/formatAccount"
 import { ErrorMessage } from "../layouts/errorMessage"
@@ -11,22 +10,20 @@ import { Table } from "../layouts/table/table"
 
 
 export function BalanceReport() {
-    const rows = useQuery(rowsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const rowsData = (rows.data ?? [])
-        .filter((row) => row.isValidated)
+    const accountsData = accounts.data ?? []
 
-    const balance = getBalance(rowsData, accounts.data ?? [])
+    const balance = getBalance(accountsData)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
 
-    const totalDebit = rowsData.reduce<number>((sum, row) => {
-        return sum + Number(row.debit)
+    const totalDebit = accountsData.reduce<number>((sum, account) => {
+        return sum + Number(account.debit)
     }, 0)
 
-    const totalCredit = rowsData.reduce<number>((sum, row) => {
-        return sum + Number(row.credit)
+    const totalCredit = accountsData.reduce<number>((sum, account) => {
+        return sum + Number(account.credit)
     }, 0)
 
     const totalBalanceDebit = balance.reduce<number>((previous, entry) => {
@@ -37,10 +34,9 @@ export function BalanceReport() {
         return previous + Number(entry.balance.credit)
     }, 0)
 
-    if (rows.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
-    if (rows.isError) return <ErrorMessage message={rows.error.message} />
+    if (accounts.isLoading) return <CircularLoader className="m-3" />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
-    if (!rows.data || !accounts.data) return null
+    if (!accounts.data) return null
     return (
         <Section.Root>
             <Section.Item className="p-0">

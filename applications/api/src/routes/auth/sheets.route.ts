@@ -27,8 +27,10 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     idYear: c.var.currentYear.id,
                     idParent: body.idParent,
                     side: body.side,
-                    label: body.label,
                     number: body.number,
+                    label: body.label,
+                    gross: "0",
+                    allowance: "0",
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })

@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm"
-import { boolean, integer, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
+import { boolean, integer, numeric, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { accountTypes, organizationScopes } from "../components/index.js"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
@@ -26,6 +26,8 @@ export const accounts = pgTable(
         isSelectable: boolean("is_selectable").notNull(),
         number: integer("number").notNull(),
         label: text("label").notNull(),
+        debit: numeric("debit", { scale: 2 }).notNull(),
+        credit: numeric("credit", { scale: 2 }).notNull(),
         type: accountTypeEnum("type").notNull(),
         scope: accountScopeEnum("scope").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

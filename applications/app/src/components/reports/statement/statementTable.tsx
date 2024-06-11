@@ -5,7 +5,7 @@ import { Fragment } from "react"
 import * as v from "valibot"
 import { toRoman } from "../../../services/toRoman"
 import { Table } from "../../layouts/table/table"
-import { Statement } from "./statementReport"
+import { Statement } from "./groupStatements"
 
 
 type StatementTable = {
@@ -42,7 +42,7 @@ export function StatementTable(props: StatementTable) {
                                 }))
                                 .sort((a, b) => {
                                     if (!a.statement || !b.statement) return 0
-                                    return a.statement.number.toString().localeCompare(b.statement.number.toString())
+                                    return (a.statement.number - b.statement.number)
                                 })
 
                             const sum = computationStatements.reduce((sum, computationStatement) => {

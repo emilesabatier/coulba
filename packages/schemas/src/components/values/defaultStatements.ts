@@ -198,7 +198,7 @@ export const defaultStatements: DefaultStatement[] = [
         number: 53,
         label: "Autres intérêts et produits assimilés",
         numberParent: 5,
-        accounts: [763, 7631, 7638, 765]
+        accounts: [763, 7631, 7638, 765, 768, 7683]
     },
     {
         number: 54,

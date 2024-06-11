@@ -13,7 +13,7 @@ export type DefaultRow = {
 }
 
 
-export const defaultRecords: Array<DefaultRecord> = [
+export const defaultRecords2022: Array<DefaultRecord> = [
     {
         label: "Location d'un nom de domaine",
         date: "2021-11-23T11:00:00.000Z",

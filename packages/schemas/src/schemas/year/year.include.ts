@@ -9,6 +9,7 @@ export const yearInclude = {
     label: true,
     startingOn: true,
     endingOn: true,
+    state: true,
     lastUpdatedOn: true,
     createdOn: true,
     lastUpdatedBy: true,

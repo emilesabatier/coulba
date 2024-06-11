@@ -9,6 +9,8 @@ export const accountInclude = {
     isSelectable: true,
     number: true,
     label: true,
+    debit: true,
+    credit: true,
     type: true,
     lastUpdatedOn: true,
     createdOn: true,

@@ -3,7 +3,7 @@ import { cn } from "@coulba/design/services"
 import { Fragment } from "react"
 import { toRoman } from "../../../services/toRoman"
 import { Table } from "../../layouts/table/table"
-import { SheetLiability } from "./sheetReport"
+import { SheetLiability } from "./groupSheets"
 
 
 type SheetLiabilitiesTable = {

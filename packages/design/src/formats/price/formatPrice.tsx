@@ -19,7 +19,7 @@ export function FormatPrice(props: FormatPrice) {
                 formatPrice(props.price) === "0.00" ? "text-neutral/25" : "",
                 props.className
             )}>
-                {Number(props.price) < 0 ? `(${formatPrice(props.price)})` : formatPrice(props.price)}
+                {Number(props.price) < 0 ? `(${formatPrice(Math.abs(Number(props.price)))})` : formatPrice(props.price)}
             </span>
         </FormatBase>
     )

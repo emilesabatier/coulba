@@ -7,7 +7,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultRecords } from './records.js'
+import { defaultRecords2022 } from './records2022.js'
 
 
 export function generateTemporaryPassword(): string {
@@ -30,7 +30,7 @@ async function seed() {
             console.log("Add organization")
             const newOrganization: (typeof organizations.$inferInsert) = {
                 id: generateId(),
-                type: "company",
+                scope: "company",
                 siren: null,
                 name: null,
                 email: null
@@ -40,17 +40,39 @@ async function seed() {
 
             // Years
             console.log("Add years")
-            const idCurrentYear = generateId()
+            const idYear2022 = generateId()
+            const idYear2023 = generateId()
             const newYears: (typeof years.$inferInsert)[] = [
                 {
-                    id: idCurrentYear,
+                    id: idYear2022,
                     idOrganization: newOrganization.id,
                     isSelected: true,
-                    label: "Exercice 2024",
-                    startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
-                    endingOn: new Date(2024, 11, 31, 12, 0, 0).toISOString(),
-                    isMinimalSystem: true
-                }
+                    label: "Exercice 2022",
+                    startingOn: new Date(2021, 11, 29, 0, 0).toISOString(),
+                    endingOn: new Date(2022, 11, 31, 23, 59, 99).toISOString(),
+                    state: "open",
+                    isMinimalSystem: false
+                },
+                // {
+                //     id: idYear2023,
+                //     idOrganization: newOrganization.id,
+                //     isSelected: false,
+                //     label: "Exercice 2023",
+                //     startingOn: new Date(2023, 0, 1, 0, 0).toISOString(),
+                //     endingOn: new Date(2023, 11, 31, 23, 59, 99).toISOString(),
+                //     state: "open",
+                //     isMinimalSystem: false
+                // },
+                // {
+                //     id: generateId(),
+                //     idOrganization: newOrganization.id,
+                //     isSelected: true,
+                //     label: "Exercice 2024",
+                //     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
+                //     endingOn: new Date(2024, 11, 31, 23, 59, 99).toISOString(),
+                //     state: "open",
+                //     isMinimalSystem: false
+                // }
             ]
             await tx.insert(years).values(newYears)
 
@@ -71,12 +93,14 @@ async function seed() {
             let newAccounts: (typeof accounts.$inferInsert)[] = companyAccounts.map((_account) => ({
                 id: generateId(),
                 idOrganization: newOrganization.id,
-                idYear: idCurrentYear,
+                idYear: idYear2022,
                 number: _account.number,
                 isMandatory: _account.isMandatory,
                 isClass: _account.isClass,
                 isSelectable: _account.isSelectable,
                 label: _account.label,
+                debit: "0",
+                credit: "0",
                 type: _account.type,
                 scope: "company"
             }))
@@ -96,10 +120,12 @@ async function seed() {
             let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
                 id: generateId(),
                 idOrganization: newOrganization.id,
-                idYear: idCurrentYear,
+                idYear: idYear2022,
                 side: _sheet.side,
                 number: _sheet.number,
                 label: _sheet.label,
+                gross: "0",
+                allowance: "0",
                 numberParent: _sheet.numberParent,
                 accounts: _sheet.accounts
             }))
@@ -140,9 +166,10 @@ async function seed() {
             let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
                 id: generateId(),
                 idOrganization: newOrganization.id,
-                idYear: idCurrentYear,
+                idYear: idYear2022,
                 number: _statement.number,
                 label: _statement.label,
+                net: "0",
                 numberParent: _statement.numberParent,
                 accounts: _statement.accounts
             }))
@@ -183,7 +210,7 @@ async function seed() {
                 return ({
                     id: generateId(),
                     idOrganization: newOrganization.id,
-                    idYear: idCurrentYear,
+                    idYear: idYear2022,
                     number: _computation.number,
                     label: _computation.label,
                     statements: _computation.statements
@@ -256,13 +283,13 @@ async function seed() {
             console.log("Add rows")
             const newRecords: (typeof records.$inferInsert)[] = []
             const newRows: (typeof rows.$inferInsert)[] = []
-            defaultRecords.forEach((record) => {
+            defaultRecords2022.forEach((record) => {
 
                 const idRecord = generateId()
                 newRecords.push({
                     id: idRecord,
                     idOrganization: newOrganization.id,
-                    idYear: idCurrentYear,
+                    idYear: idYear2022,
                     idJournal: undefined,
                     idAttachment: undefined,
                     isValidated: false,
@@ -280,7 +307,7 @@ async function seed() {
                     newRows.push({
                         id: generateId(),
                         idOrganization: newOrganization.id,
-                        idYear: idCurrentYear,
+                        idYear: idYear2022,
                         idAccount: idAccount,
                         idRecord: idRecord,
                         isValidated: false,

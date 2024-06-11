@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm"
-import { AnyPgColumn, boolean, pgTable, text, unique } from "drizzle-orm/pg-core"
+import { AnyPgColumn, boolean, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
+import { yearStates } from "../components/index.js"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { organizations } from "./organizations.model.js"
@@ -7,15 +8,18 @@ import { users } from "./users.model.js"
 
 
 // Model
+export const yearStateEnum = pgEnum("year_state", yearStates)
+
 export const years = pgTable(
     "years",
     {
         id: idColumn("id").primaryKey(),
         idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         idPreviousYear: idColumn("id_previous_year").references((): AnyPgColumn => years.id, { onDelete: "set null", onUpdate: "cascade" }),
-        isClosed: boolean("is_closed").default(false).notNull(),
         isSelected: boolean("is_selected").notNull(),
         isMinimalSystem: boolean("is_minimal_system").notNull(),
+        isClosed: boolean("is_closed").notNull(),
+        closedOn: dateTimeColumn("closed_on"),
         label: text("label").notNull(),
         startingOn: dateTimeColumn("starting_on").notNull(),
         endingOn: dateTimeColumn("ending_on").notNull(),

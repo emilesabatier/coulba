@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm"
-import { integer, pgTable, text, unique } from "drizzle-orm/pg-core"
+import { integer, numeric, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { accountStatements } from "./accountStatements.model.js"
@@ -19,6 +19,7 @@ export const statements = pgTable(
         idParent: idColumn("id_parent"),
         number: integer("number").notNull(),
         label: text("label").notNull(),
+        net: numeric("net", { scale: 2 }).notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         createdOn: dateTimeColumn("created_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
         lastUpdatedBy: idColumn("last_updated_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),

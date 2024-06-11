@@ -32,6 +32,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         startingOn: body.startingOn,
                         endingOn: body.endingOn,
                         isMinimalSystem: body.isMinimalSystem,
+                        state: "open",
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
@@ -44,7 +45,7 @@ export const yearsRoute = new Hono<AuthEnv>()
 
                 defaultAccounts
                     .filter((account) => {
-                        if (account.isMandatory && !c.var.currentYear.isMinimalSystem) return false
+                        if (!account.isMandatory && c.var.currentYear.isMinimalSystem) return false
                         return true
                     })
                     .forEach((_account) => {
@@ -57,6 +58,8 @@ export const yearsRoute = new Hono<AuthEnv>()
                             isClass: _account.isClass,
                             isSelectable: _account.isSelectable,
                             label: _account.label,
+                            debit: "0",
+                            credit: "0",
                             type: _account.type,
                             scope: c.var.organization.scope
                         })
@@ -83,6 +86,8 @@ export const yearsRoute = new Hono<AuthEnv>()
                     side: _sheet.side,
                     number: _sheet.number,
                     label: _sheet.label,
+                    gross: "0",
+                    allowance: "0",
                     numberParent: _sheet.numberParent,
                     accounts: _sheet.accounts
                 }))
@@ -130,6 +135,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                     idYear: createYear.id,
                     number: _statement.number,
                     label: _statement.label,
+                    net: "0",
                     numberParent: _statement.numberParent,
                     accounts: _statement.accounts
                 }))
@@ -328,6 +334,56 @@ export const yearsRoute = new Hono<AuthEnv>()
         async (c) => {
             const params = c.req.valid('param')
 
+
+            // // Read all accounts
+            // const readAccounts = await db.query.accounts.findMany({
+            //     where: and(
+            //         eq(accounts.idOrganization, c.var.user.idOrganization),
+            //         eq(accounts.idYear, params.idYear)
+            //     )
+            // })
+            // const readSheets = await db.query.sheets.findMany({
+            //     where: and(
+            //         eq(sheets.idOrganization, c.var.user.idOrganization),
+            //         eq(sheets.idYear, params.idYear)
+            //     )
+            // })
+
+            // // Compute the year result
+            // const amounts = {
+            //     assets: 0,
+            //     liabilities: 0,
+            //     result: readAccounts.reduce((sum, account) => {
+            //         if (["6", "7"].includes(account.number.toString().at(0) ?? "")) {
+            //             const balance = Number(account.debit) - Number(account.credit)
+            //             return sum + balance
+            //         }
+            //         return sum
+            //     }, 0)
+            // }
+            // readSheets.forEach((sheet) => {
+            //     if (sheet.side === "asset") return amounts.assets += Number(sheet.gross) - Number(sheet.allowance)
+            //     if (sheet.side === "liability") return amounts.liabilities += Number(sheet.gross) - Number(sheet.allowance)
+            // })
+
+            // if (amounts.assets !== amounts.liabilities + amounts.result) throw new HTTPException(400, { message: "Le bilan n'est pas équilibré" })
+
+            // // Add amount in the result account
+            // await db
+            //     .update(accounts)
+            //     .set({
+            //         debit: (amounts.result > 0) ? "0" : amounts.result.toString(),
+            //         credit: (amounts.result > 0) ? amounts.result.toString() : "0",
+            //         lastUpdatedBy: c.var.user.id,
+            //         lastUpdatedOn: new Date().toISOString()
+            //     })
+            //     .where(and(
+            //         eq(accounts.idOrganization, c.var.user.idOrganization),
+            //         eq(accounts.idYear, params.idYear),
+            //         eq(accounts.number, (amounts.result > 0) ? 120 : 129)
+            //     ))
+
+
             const [updateYear] = await db
                 .update(years)
                 .set({
@@ -343,4 +399,4 @@ export const yearsRoute = new Hono<AuthEnv>()
 
             return c.json(updateYear, 200)
         }
-    )
+    )  

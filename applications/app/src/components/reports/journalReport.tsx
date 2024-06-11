@@ -33,7 +33,7 @@ export function JournalReport() {
                     <Table.Header.Root>
                         <Table.Header.Row>
                             <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm italic">Date</span>
+                                <span className="text-neutral/75 text-sm">Date</span>
                             </Table.Header.Cell>
                             <Table.Header.Cell>
                                 <span className="text-neutral/75 text-sm">Libellé</span>
