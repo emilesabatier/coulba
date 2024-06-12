@@ -1,29 +1,33 @@
 import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
-import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
-import { getBalance } from "../../services/reports/getBalance"
-import { formatAccount } from "../accounts/format/formatAccount"
-import { ErrorMessage } from "../layouts/errorMessage"
-import { Section } from "../layouts/section/section"
-import { Table } from "../layouts/table/table"
+import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
+import { formatAccount } from "../../accounts/format/formatAccount"
+import { ErrorMessage } from "../../layouts/errorMessage"
+import { Section } from "../../layouts/section/section"
+import { Table } from "../../layouts/table/table"
+import { getBalance } from "./getBalance"
 
 
 export function BalanceReport() {
     const accounts = useQuery(accountsOptions)
+    const rows = useQuery(rowsOptions)
 
     const accountsData = accounts.data ?? []
+    const rowsData = (rows.data ?? [])
+        .filter((row) => row.isValidated)
 
-    const balance = getBalance(accountsData)
+    const balance = getBalance(rowsData, accountsData)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
 
-    const totalDebit = accountsData.reduce<number>((sum, account) => {
-        return sum + Number(account.debit)
+    const totalDebit = rowsData.reduce<number>((sum, row) => {
+        return sum + Number(row.debit)
     }, 0)
 
-    const totalCredit = accountsData.reduce<number>((sum, account) => {
-        return sum + Number(account.credit)
+    const totalCredit = rowsData.reduce<number>((sum, row) => {
+        return sum + Number(row.credit)
     }, 0)
 
     const totalBalanceDebit = balance.reduce<number>((previous, entry) => {

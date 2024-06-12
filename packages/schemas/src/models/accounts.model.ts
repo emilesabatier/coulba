@@ -1,11 +1,12 @@
 import { relations, sql } from "drizzle-orm"
-import { boolean, integer, numeric, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
+import { boolean, integer, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { accountTypes, organizationScopes } from "../components/index.js"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { accountSheets } from "./accountSheets.model.js"
 import { accountStatements } from "./accountStatements.model.js"
 import { organizations } from "./organizations.model.js"
+import { rows } from "./rows.model.js"
 import { users } from "./users.model.js"
 import { years } from "./years.model.js"
 
@@ -26,8 +27,6 @@ export const accounts = pgTable(
         isSelectable: boolean("is_selectable").notNull(),
         number: integer("number").notNull(),
         label: text("label").notNull(),
-        debit: numeric("debit", { scale: 2 }).notNull(),
-        credit: numeric("credit", { scale: 2 }).notNull(),
         type: accountTypeEnum("type").notNull(),
         scope: accountScopeEnum("scope").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -43,5 +42,6 @@ export const accounts = pgTable(
 // Relations
 export const accountRelations = relations(accounts, ({ many }) => ({
     accountSheets: many(accountSheets),
-    accountStatements: many(accountStatements)
+    accountStatements: many(accountStatements),
+    rows: many(rows)
 }))

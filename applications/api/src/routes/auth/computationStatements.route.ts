@@ -24,6 +24,7 @@ export const computationStatementsRoute = new Hono<AuthEnv>()
                 .values({
                     id: generateId(),
                     idOrganization: c.var.organization.id,
+                    idYear: c.var.currentYear.id,
                     idComputation: body.idComputation,
                     idStatement: body.idStatement,
                     operation: body.operation,

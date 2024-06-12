@@ -1,6 +1,6 @@
 import { auth } from "@coulba/schemas/routes"
 import * as v from "valibot"
-import { patchAPI } from "../../fetch/patchAPI"
+import { patchAPI } from "../../../fetch/patchAPI"
 
 
 type SwitchYear = {
@@ -11,6 +11,6 @@ export function switchYear(props: SwitchYear) {
     return patchAPI({
         path: `/auth/years/${props.params.idYear}/switch`,
         schema: auth.years.patch.switch.return,
-        message: "Erreur avec le changement d'exercice fiscal"
+        message: "Erreur avec le changement d'exercice"
     })
 }

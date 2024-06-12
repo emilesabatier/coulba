@@ -4,7 +4,6 @@ import { accountTypes, integerSchema, organizationScopes } from "../../component
 import { booleanSchema } from '../../components/schemas/boolean.schema.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
-import { numericSchema } from '../../components/schemas/numeric.schema.js'
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
 import { accounts } from "../../models/index.js"
 
@@ -19,8 +18,6 @@ export const accountSchema = createSelectSchema(accounts, {
     isSelectable: booleanSchema,
     number: integerSchema,
     label: requiredTextSchema,
-    debit: numericSchema,
-    credit: numericSchema,
     type: v.picklist(accountTypes),
     scope: v.picklist(organizationScopes),
     lastUpdatedOn: dateTimeSchema,

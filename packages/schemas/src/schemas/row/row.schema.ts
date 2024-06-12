@@ -14,6 +14,7 @@ export const rowSchema = createSelectSchema(rows, {
     idYear: idSchema,
     idAccount: v.nonNullish(idSchema, "Le compte mouvementé doit être renseigné"),
     isValidated: booleanSchema,
+    isComputed: booleanSchema,
     label: v.nonNullish(requiredTextSchema, "Le libellé doit être renseigné"),
     debit: numericSchema,
     credit: numericSchema,

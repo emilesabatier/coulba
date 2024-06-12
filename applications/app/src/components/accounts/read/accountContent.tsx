@@ -1,5 +1,5 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
-import { FormatBoolean, FormatDateTime, FormatNull, FormatPrice, FormatSelect, FormatText } from "@coulba/design/formats"
+import { FormatBoolean, FormatDateTime, FormatNull, FormatSelect, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
@@ -73,22 +73,6 @@ export function AccountContent() {
                     </DataBlock.Item>
                     <DataBlock.Item label="Compte parent">
                         {!account.data.idParent ? <FormatNull /> : <FormatAccountWithFetch idAccount={account.data.idParent} />}
-                    </DataBlock.Item>
-                </DataBlock.Root>
-            </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Données" />
-            </Section.Item>
-            <Section.Item>
-                <DataBlock.Root>
-                    <DataBlock.Item label="Débit">
-                        <FormatPrice price={account.data.debit} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Crédit">
-                        <FormatPrice price={account.data.credit} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Solde">
-                        <FormatPrice price={Number(account.data.debit) - Number(account.data.credit)} />
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>

@@ -10,6 +10,7 @@ import { accountSheets } from '../../models/accountSheets.model.js'
 export const accountSheetSchema = createSelectSchema(accountSheets, {
     id: idSchema,
     idOrganization: idSchema,
+    idYear: idSchema,
     idAccount: idSchema,
     idSheet: idSchema,
     flow: v.picklist(flows),

@@ -38,6 +38,7 @@ export const rowsRoute = new Hono<AuthEnv>()
                     idRecord: body.idRecord,
                     idAccount: body.idAccount,
                     isValidated: false,
+                    isComputed: false,
                     label: body.label,
                     debit: (body.debit ?? 0).toString(),
                     credit: (body.credit ?? 0).toString(),

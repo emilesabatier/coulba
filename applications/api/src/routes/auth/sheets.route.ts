@@ -29,8 +29,6 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     side: body.side,
                     number: body.number,
                     label: body.label,
-                    gross: "0",
-                    allowance: "0",
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })

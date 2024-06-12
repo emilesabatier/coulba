@@ -15,7 +15,7 @@ import { servicesRoute } from './auth/services.route.js'
 import { sheetsRoute } from './auth/sheets.route.js'
 import { statementsRoute } from './auth/statements.route.js'
 import { usersRoute } from './auth/users.route.js'
-import { yearsRoute } from './auth/years.route.js'
+import { yearsRoute } from './auth/years/years.route.js'
 
 
 export const authRoute = new Hono()

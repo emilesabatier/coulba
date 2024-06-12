@@ -5,7 +5,6 @@ import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
 import { sheets } from "../../models/index.js"
-import { numericSchema } from '../../components/schemas/numeric.schema.js'
 
 
 export const sheetSchema = createSelectSchema(sheets, {
@@ -15,8 +14,6 @@ export const sheetSchema = createSelectSchema(sheets, {
     idParent: idSchema,
     side: v.picklist(sides),
     number: integerSchema,
-    gross: numericSchema,
-    allowance: numericSchema,
     label: requiredTextSchema,
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,

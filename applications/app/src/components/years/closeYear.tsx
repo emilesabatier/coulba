@@ -2,7 +2,7 @@ import { ButtonOutline } from "@coulba/design/buttons"
 import { FormatBoolean } from "@coulba/design/formats"
 import { toast } from "@coulba/design/overlays"
 import { CurrentYearContext } from "../../contexts/currentYear/currentYear.context"
-import { closeYear } from "../../services/api/auth/years/closeYear"
+import { closeYear } from "../../services/api/auth/years/operations/closeYear"
 import { ConfirmDialog } from "../layouts/actions/confirmDialog"
 import { Section } from "../layouts/section/section"
 
@@ -36,7 +36,7 @@ export function CloseYear(props: CloseYear) {
                                     onSubmit={async () => {
                                         if (!props.currentYear.data) return false
 
-                                        const response = await closeYear({ params: { idYear: props.currentYear.data.id } })
+                                        const response = await closeYear()
                                         if (!response) return false
 
                                         props.currentYear.mutate()

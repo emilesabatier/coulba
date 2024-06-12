@@ -7,6 +7,7 @@ import { computations } from "./computations.model.js"
 import { organizations } from "./organizations.model.js"
 import { statements } from "./statements.model.js"
 import { users } from "./users.model.js"
+import { years } from "./years.model.js"
 
 
 // Model
@@ -17,6 +18,7 @@ export const computationStatements = pgTable(
     {
         id: idColumn("id").primaryKey(),
         idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idComputation: idColumn("id_computation").references(() => computations.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idStatement: idColumn("id_statement").references(() => statements.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         operation: computationStatementOperationEnum("operation").notNull(),

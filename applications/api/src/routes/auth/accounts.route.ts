@@ -29,8 +29,6 @@ export const accountsRoute = new Hono<AuthEnv>()
                     isClass: body.isClass,
                     isSelectable: body.isSelectable,
                     label: body.label,
-                    debit: "0",
-                    credit: "0",
                     number: body.number,
                     type: body.type,
                     scope: c.var.organization.scope,

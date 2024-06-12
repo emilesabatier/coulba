@@ -4,9 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
-import { getBalance } from "../../../services/reports/getBalance"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { getBalance } from "../balance/getBalance"
 import { groupSheetsAssets, groupSheetsLiabilities } from "./groupSheets"
 import { SheetAssetsTable } from "./sheetAssetsTable"
 import { SheetLiabilitiesTable } from "./sheetLiabilitiesTable"
@@ -17,7 +17,7 @@ export function SheetReport() {
     const rows = useQuery(rowsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(accounts.data ?? [])
+    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
 
     const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), balance, null)
         .sort((a, b) => a.number - b.number)

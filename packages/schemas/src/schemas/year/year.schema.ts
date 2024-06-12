@@ -1,6 +1,4 @@
 import { createSelectSchema } from 'drizzle-valibot'
-import * as v from "valibot"
-import { yearStates } from '../../components/index.js'
 import { booleanSchema } from '../../components/schemas/boolean.schema.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
@@ -16,7 +14,6 @@ export const yearSchema = createSelectSchema(years, {
     isSelected: booleanSchema,
     isMinimalSystem: booleanSchema,
     label: requiredTextSchema,
-    state: v.picklist(yearStates),
     startingOn: dateTimeSchema,
     endingOn: dateTimeSchema,
     lastUpdatedOn: dateTimeSchema,

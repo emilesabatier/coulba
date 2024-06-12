@@ -24,6 +24,7 @@ export const accountSheetsRoute = new Hono<AuthEnv>()
                 .values({
                     id: generateId(),
                     idOrganization: c.var.organization.id,
+                    idYear: c.var.currentYear.id,
                     idAccount: body.idAccount,
                     idSheet: body.idSheet,
                     flow: body.flow,

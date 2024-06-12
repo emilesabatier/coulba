@@ -6,7 +6,6 @@ export const statementInclude = {
     idParent: true,
     number: true,
     label: true,
-    net: true,
     lastUpdatedOn: true,
     createdOn: true,
     lastUpdatedBy: true,

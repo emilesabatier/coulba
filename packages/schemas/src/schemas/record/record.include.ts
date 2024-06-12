@@ -5,6 +5,7 @@ export const recordInclude = {
     idYear: true,
     idJournal: true,
     idAttachment: true,
+    idAutomatic: true,
     isValidated: true,
     validatedOn: true,
     label: true,

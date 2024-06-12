@@ -9,6 +9,7 @@ import { computationStatements } from '../../models/computationStatements.model.
 export const computationStatementSchema = createSelectSchema(computationStatements, {
     id: idSchema,
     idOrganization: idSchema,
+    idYear: idSchema,
     idComputation: idSchema,
     idStatement: idSchema,
     operation: v.picklist(operations),

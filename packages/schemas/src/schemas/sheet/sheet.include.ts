@@ -7,8 +7,6 @@ export const sheetInclude = {
     side: true,
     number: true,
     label: true,
-    gross: true,
-    allowance: true,
     lastUpdatedOn: true,
     createdOn: true,
     lastUpdatedBy: true,

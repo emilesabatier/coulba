@@ -8,6 +8,6 @@ export function readYears() {
     return getAPI({
         path: `/auth/years`,
         schema: v.array(auth.years.get.return),
-        message: "Erreur avec la lecture des exercices fiscaux"
+        message: "Erreur avec la lecture des exercices"
     })
 }

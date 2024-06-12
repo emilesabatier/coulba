@@ -2,6 +2,7 @@
 export const accountStatementInclude = {
     id: true,
     idOrganization: true,
+    idYear: true,
     idAccount: true,
     idStatement: true,
     lastUpdatedOn: true,

@@ -1,8 +1,11 @@
-import { closeYearParams, closeYearReturn } from "./closeYear.js"
 import { createYearBody, createYearReturn } from "./createYear.js"
 import { deleteYearParams, deleteYearReturn } from "./deleteYear.js"
+import { closeReturn } from "./patch/close.js"
+import { computeResultBody, computeResultReturn } from "./patch/computeResult.js"
+import { openBody, openReturn } from "./patch/open.js"
+import { settleSheetBody, settleSheetReturn } from "./patch/settleSheet.js"
+import { switchYearParams, switchYearReturn } from "./patch/switchYear.js"
 import { readYearParams, readYearReturn } from "./readYear.js"
-import { switchYearParams, switchYearReturn } from "./switchYear.js"
 import { updateYearBody, updateYearParams, updateYearReturn } from "./updateYear.js"
 
 
@@ -29,9 +32,20 @@ export const years = {
             params: switchYearParams,
             return: switchYearReturn
         },
+        computeResult: {
+            body: computeResultBody,
+            return: computeResultReturn
+        },
+        settleSheet: {
+            body: settleSheetBody,
+            return: settleSheetReturn
+        },
         close: {
-            params: closeYearParams,
-            return: closeYearReturn
+            return: closeReturn
+        },
+        open: {
+            body: openBody,
+            return: openReturn
         }
     }
 }

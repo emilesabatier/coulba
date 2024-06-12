@@ -47,10 +47,10 @@ async function seed() {
                     id: idYear2022,
                     idOrganization: newOrganization.id,
                     isSelected: true,
+                    isClosed: false,
                     label: "Exercice 2022",
                     startingOn: new Date(2021, 11, 29, 0, 0).toISOString(),
                     endingOn: new Date(2022, 11, 31, 23, 59, 99).toISOString(),
-                    state: "open",
                     isMinimalSystem: false
                 },
                 // {
@@ -99,8 +99,6 @@ async function seed() {
                 isClass: _account.isClass,
                 isSelectable: _account.isSelectable,
                 label: _account.label,
-                debit: "0",
-                credit: "0",
                 type: _account.type,
                 scope: "company"
             }))
@@ -124,8 +122,6 @@ async function seed() {
                 side: _sheet.side,
                 number: _sheet.number,
                 label: _sheet.label,
-                gross: "0",
-                allowance: "0",
                 numberParent: _sheet.numberParent,
                 accounts: _sheet.accounts
             }))
@@ -151,6 +147,7 @@ async function seed() {
                     newAccountSheets.push({
                         id: generateId(),
                         idOrganization: newOrganization.id,
+                        idYear: idYear2022,
                         idAccount: account.id,
                         idSheet: _sheet.id,
                         flow: _account.flow,
@@ -169,7 +166,6 @@ async function seed() {
                 idYear: idYear2022,
                 number: _statement.number,
                 label: _statement.label,
-                net: "0",
                 numberParent: _statement.numberParent,
                 accounts: _statement.accounts
             }))
@@ -196,6 +192,7 @@ async function seed() {
                     newAccountStatements.push({
                         id: generateId(),
                         idOrganization: newOrganization.id,
+                        idYear: idYear2022,
                         idAccount: account.id,
                         idStatement: _statement.id
                     })
@@ -230,6 +227,7 @@ async function seed() {
                     newComputationStatements.push({
                         id: generateId(),
                         idOrganization: newOrganization.id,
+                        idYear: idYear2022,
                         idComputation: _computation.id,
                         idStatement: statement.id,
                         operation: _statement.operation
@@ -311,6 +309,7 @@ async function seed() {
                         idAccount: idAccount,
                         idRecord: idRecord,
                         isValidated: false,
+                        isComputed: false,
                         label: row.label,
                         debit: row.debit.toString(),
                         credit: row.credit.toString()

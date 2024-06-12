@@ -4,6 +4,7 @@ import { booleanSchema } from '../../components/schemas/boolean.schema.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
+import { textSchema } from '../../components/schemas/text.schema.js'
 import { records } from '../../models/records.model.js'
 
 
@@ -13,6 +14,7 @@ export const recordSchema = createSelectSchema(records, {
     idYear: idSchema,
     idJournal: idSchema,
     idAttachment: idSchema,
+    idAutomatic: textSchema,
     isValidated: booleanSchema,
     validatedOn: dateTimeSchema,
     label: v.nonNullish(requiredTextSchema, "Le libellé doit être renseigné"),

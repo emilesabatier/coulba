@@ -2,6 +2,7 @@
 export const computationStatementInclude = {
     id: true,
     idOrganization: true,
+    idYear: true,
     idComputation: true,
     idStatement: true,
     operation: true,

@@ -28,7 +28,6 @@ export const statementsRoute = new Hono<AuthEnv>()
                     idParent: body.idParent,
                     number: body.number,
                     label: body.label,
-                    net: "0",
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })

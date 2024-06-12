@@ -5,10 +5,11 @@ import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
-import { db } from "../../clients/db.js"
-import { bodyValidator } from "../../middlewares/bodyValidator.js"
-import { AuthEnv } from "../../middlewares/checkAuth.js"
-import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { db } from "../../../clients/db.js"
+import { bodyValidator } from "../../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../../middlewares/checkAuth.js"
+import { paramsValidator } from "../../../middlewares/paramsValidator.js"
+import { yearPatchRoutes } from "./patch.route.js"
 
 
 export const yearsRoute = new Hono<AuthEnv>()
@@ -25,14 +26,14 @@ export const yearsRoute = new Hono<AuthEnv>()
                     .insert(years)
                     .values({
                         id: generateId(),
-                        idPreviousYear: body.idPreviousYear,
-                        isSelected: false,
                         idOrganization: c.var.organization.id,
+                        idPreviousYear: body.idPreviousYear,
+                        isMinimalSystem: body.isMinimalSystem,
+                        isSelected: false,
+                        isClosed: false,
                         label: body.label,
                         startingOn: body.startingOn,
                         endingOn: body.endingOn,
-                        isMinimalSystem: body.isMinimalSystem,
-                        state: "open",
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
@@ -58,8 +59,6 @@ export const yearsRoute = new Hono<AuthEnv>()
                             isClass: _account.isClass,
                             isSelectable: _account.isSelectable,
                             label: _account.label,
-                            debit: "0",
-                            credit: "0",
                             type: _account.type,
                             scope: c.var.organization.scope
                         })
@@ -114,6 +113,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         newAccountSheets.push({
                             id: generateId(),
                             idOrganization: c.var.organization.id,
+                            idYear: createYear.id,
                             idAccount: account.id,
                             idSheet: _sheet.id,
                             flow: _account.flow,
@@ -162,6 +162,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         newAccountStatements.push({
                             id: generateId(),
                             idOrganization: c.var.organization.id,
+                            idYear: createYear.id,
                             idAccount: account.id,
                             idStatement: _statement.id
                         })
@@ -201,6 +202,7 @@ export const yearsRoute = new Hono<AuthEnv>()
                         newComputationStatements.push({
                             id: generateId(),
                             idOrganization: c.var.organization.id,
+                            idYear: createYear.id,
                             idComputation: _computation.id,
                             idStatement: statement.id,
                             operation: _statement.operation
@@ -292,111 +294,4 @@ export const yearsRoute = new Hono<AuthEnv>()
             return c.json(deleteYear, 200)
         }
     )
-    .patch(
-        '/:idYear/switch',
-        validator("param", paramsValidator(auth.years.patch.switch.params)),
-        async (c) => {
-            const params = c.req.valid('param')
-
-            if (c.var.currentYear !== undefined) {
-                await db
-                    .update(years)
-                    .set({
-                        isSelected: false,
-                        lastUpdatedBy: c.var.user.id,
-                        lastUpdatedOn: new Date().toISOString()
-                    })
-                    .where(and(
-                        eq(years.idOrganization, c.var.organization.id),
-                        eq(years.id, c.var.currentYear.id)
-                    ))
-            }
-
-            const [updateYear] = await db
-                .update(years)
-                .set({
-                    isSelected: true,
-                    lastUpdatedBy: c.var.user.id,
-                    lastUpdatedOn: new Date().toISOString()
-                })
-                .where(and(
-                    eq(years.idOrganization, c.var.organization.id),
-                    eq(years.id, params.idYear)
-                ))
-                .returning()
-
-            return c.json(updateYear, 200)
-        }
-    )
-    .patch(
-        '/:idYear/close',
-        validator("param", paramsValidator(auth.years.patch.close.params)),
-        async (c) => {
-            const params = c.req.valid('param')
-
-
-            // // Read all accounts
-            // const readAccounts = await db.query.accounts.findMany({
-            //     where: and(
-            //         eq(accounts.idOrganization, c.var.user.idOrganization),
-            //         eq(accounts.idYear, params.idYear)
-            //     )
-            // })
-            // const readSheets = await db.query.sheets.findMany({
-            //     where: and(
-            //         eq(sheets.idOrganization, c.var.user.idOrganization),
-            //         eq(sheets.idYear, params.idYear)
-            //     )
-            // })
-
-            // // Compute the year result
-            // const amounts = {
-            //     assets: 0,
-            //     liabilities: 0,
-            //     result: readAccounts.reduce((sum, account) => {
-            //         if (["6", "7"].includes(account.number.toString().at(0) ?? "")) {
-            //             const balance = Number(account.debit) - Number(account.credit)
-            //             return sum + balance
-            //         }
-            //         return sum
-            //     }, 0)
-            // }
-            // readSheets.forEach((sheet) => {
-            //     if (sheet.side === "asset") return amounts.assets += Number(sheet.gross) - Number(sheet.allowance)
-            //     if (sheet.side === "liability") return amounts.liabilities += Number(sheet.gross) - Number(sheet.allowance)
-            // })
-
-            // if (amounts.assets !== amounts.liabilities + amounts.result) throw new HTTPException(400, { message: "Le bilan n'est pas équilibré" })
-
-            // // Add amount in the result account
-            // await db
-            //     .update(accounts)
-            //     .set({
-            //         debit: (amounts.result > 0) ? "0" : amounts.result.toString(),
-            //         credit: (amounts.result > 0) ? amounts.result.toString() : "0",
-            //         lastUpdatedBy: c.var.user.id,
-            //         lastUpdatedOn: new Date().toISOString()
-            //     })
-            //     .where(and(
-            //         eq(accounts.idOrganization, c.var.user.idOrganization),
-            //         eq(accounts.idYear, params.idYear),
-            //         eq(accounts.number, (amounts.result > 0) ? 120 : 129)
-            //     ))
-
-
-            const [updateYear] = await db
-                .update(years)
-                .set({
-                    isClosed: true,
-                    lastUpdatedBy: c.var.user.id,
-                    lastUpdatedOn: new Date().toISOString()
-                })
-                .where(and(
-                    eq(years.idOrganization, c.var.organization.id),
-                    eq(years.id, params.idYear)
-                ))
-                .returning()
-
-            return c.json(updateYear, 200)
-        }
-    )  
+    .route('', yearPatchRoutes)
