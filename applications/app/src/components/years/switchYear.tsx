@@ -1,18 +1,19 @@
-import { ButtonOutline } from "@coulba/design/buttons"
+import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
 import { toast } from "@coulba/design/overlays"
+import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
-import { useState } from "react"
+import { Fragment } from "react"
 import { useCurrentYear } from "../../contexts/currentYear/useCurrentYear"
 import { queryClient } from "../../contexts/state/queryClient"
-import { switchYear } from "../../services/api/auth/years/operations/switchYear"
+import { router } from "../../routes/router"
+import { switchYear } from "../../services/api/auth/years/patch/switchYear"
 import { yearsOptions } from "../../services/api/auth/years/yearsOptions"
-import { Section } from "../layouts/section/section"
+import { Form } from "../layouts/forms/form"
 import { YearCombobox } from "./input/yearCombobox"
 
 
 export function SwitchYear() {
     const currentYear = useCurrentYear()
-    const [idYear, setIdYear] = useState<string | undefined>(undefined)
 
     const mutation = useMutation({
         mutationKey: yearsOptions.queryKey,
@@ -20,39 +21,49 @@ export function SwitchYear() {
     })
 
     return (
-        <Section.Root>
-            <Section.Item className="flex-col justify-start items-start gap-3">
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <Section.Title title="Changer d'exercice" />
-                    <p className="text-neutral/75">Cela permet de changer l'exercice fiscal sélectionné dans l'application. C'est utile pour notamment consulter les données des exercices précédents.</p>
-                </div>
-                <div className="flex justify-start items-center gap-1">
-                    <YearCombobox
-                        value={idYear}
-                        onChange={(idYear) => setIdYear(idYear ?? undefined)}
-                        filter={(year) => year.id !== currentYear.data?.id}
-                        className="w-fit"
-                    />
-                    <ButtonOutline
-                        text="Changer l'exercice"
-                        className="shrink-0"
-                        onClick={async () => {
-                            if (!idYear) {
-                                toast({ title: "Vous devez sélectionner un exercice", variant: "error" })
-                                return
-                            }
+        <Form
+            validationSchema={auth.years.patch.switch.params}
+            defaultValues={{}}
+            onCancel={() => router.navigate({ to: "/configuration/exercices" })}
+            submitLabel="Sélectionner l'exercice"
+            onSubmit={async (data) => {
+                mutation.mutate({ params: { idYear: data.idYear } }, {
+                    onSuccess: () => {
+                        queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                        currentYear.mutate()
+                        router.navigate({ to: "/configuration/exercices" })
+                        toast({ title: "L'exercice actuel a été changé", variant: "success" })
+                    }
+                })
 
-                            mutation.mutate({ params: { idYear: idYear } }, {
-                                onSuccess: () => {
-                                    queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
-                                    currentYear.mutate()
-                                    toast({ title: "L'exercice actuel a été changé", variant: "success" })
-                                }
-                            })
-                        }}
+                return true
+            }}
+        >
+            {(form) => (
+                <Fragment>
+                    <FormField
+                        control={form.control}
+                        name="idYear"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Exercice"
+                                    tooltip="L'exercice qui sera sélectionné."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <YearCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        filter={(year) => year.id !== currentYear.data?.id}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
                     />
-                </div>
-            </Section.Item>
-        </Section.Root>
+                </Fragment>
+            )}
+        </Form>
     )
 }

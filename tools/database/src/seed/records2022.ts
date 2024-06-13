@@ -1166,58 +1166,58 @@ export const defaultRecords2022: Array<DefaultRecord> = [
             }
         ]
     },
-    {
-        label: "Affectation réserve légale",
-        date: "2022-12-31T10:00:00.000Z",
-        rows: [
-            {
-                accountNumber: 120,
-                label: "Affectation depuis le compte de résultat",
-                debit: 100,
-                credit: 0
-            },
-            {
-                accountNumber: 1061,
-                label: "Affectation vers la réserve légale",
-                debit: 0,
-                credit: 100
-            }
-        ]
-    },
-    {
-        label: "Affectation autres réserves",
-        date: "2022-12-31T10:00:00.000Z",
-        rows: [
-            {
-                accountNumber: 120,
-                label: "Affectation depuis le compte de résultat",
-                debit: 181.02,
-                credit: 0
-            },
-            {
-                accountNumber: 1068,
-                label: "Affectation vers les autres réserves",
-                debit: 0,
-                credit: 181.02
-            }
-        ]
-    },
-    {
-        label: "Affectation vers le report à nouveau",
-        date: "2022-12-31T10:00:00.000Z",
-        rows: [
-            {
-                accountNumber: 120,
-                label: "Affectation depuis le compte de résultat",
-                debit: 3339.38,
-                credit: 0
-            },
-            {
-                accountNumber: 110,
-                label: "Affectation vers le report à nouveau",
-                debit: 0,
-                credit: 3339.38
-            }
-        ]
-    }
+    // {
+    //     label: "Affectation réserve légale",
+    //     date: "2022-12-31T10:00:00.000Z",
+    //     rows: [
+    //         {
+    //             accountNumber: 120,
+    //             label: "Affectation depuis le compte de résultat",
+    //             debit: 100,
+    //             credit: 0
+    //         },
+    //         {
+    //             accountNumber: 1061,
+    //             label: "Affectation vers la réserve légale",
+    //             debit: 0,
+    //             credit: 100
+    //         }
+    //     ]
+    // },
+    // {
+    //     label: "Affectation autres réserves",
+    //     date: "2022-12-31T10:00:00.000Z",
+    //     rows: [
+    //         {
+    //             accountNumber: 120,
+    //             label: "Affectation depuis le compte de résultat",
+    //             debit: 181.02,
+    //             credit: 0
+    //         },
+    //         {
+    //             accountNumber: 1068,
+    //             label: "Affectation vers les autres réserves",
+    //             debit: 0,
+    //             credit: 181.02
+    //         }
+    //     ]
+    // },
+    // {
+    //     label: "Affectation vers le report à nouveau",
+    //     date: "2022-12-31T10:00:00.000Z",
+    //     rows: [
+    //         {
+    //             accountNumber: 120,
+    //             label: "Affectation depuis le compte de résultat",
+    //             debit: 3339.38,
+    //             credit: 0
+    //         },
+    //         {
+    //             accountNumber: 110,
+    //             label: "Affectation vers le report à nouveau",
+    //             debit: 0,
+    //             credit: 3339.38
+    //         }
+    //     ]
+    // }
 ]

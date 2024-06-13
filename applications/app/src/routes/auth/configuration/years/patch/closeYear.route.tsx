@@ -1,15 +1,14 @@
 import { createRoute } from "@tanstack/react-router"
-import { Banner } from "../../../components/layouts/banner"
-import { Main } from "../../../components/layouts/main"
-import { Section } from "../../../components/layouts/section/section"
-import { CloseYear } from "../../../components/years/closeYear"
-import { DownloadDocuments } from "../../../components/years/downloadDocuments"
-import { useCurrentYear } from "../../../contexts/currentYear/useCurrentYear"
-import { configurationLayout } from "./configuration.layout"
+import { Banner } from "../../../../../components/layouts/banner"
+import { Main } from "../../../../../components/layouts/main"
+import { Section } from "../../../../../components/layouts/section/section"
+import { CloseYear } from "../../../../../components/years/closeYear"
+import { useCurrentYear } from "../../../../../contexts/currentYear/useCurrentYear"
+import { yearsLayout } from "../years.layout"
 
 
-export const closingRoute = createRoute({
-    getParentRoute: () => configurationLayout,
+export const closeYearRoute = createRoute({
+    getParentRoute: () => yearsLayout,
     beforeLoad: () => ({
         title: "Clôture",
         description: "Vous pouvez sur cette page clôturer l'exercice fiscal en cours et générer la version finale des documents comptables."
@@ -32,7 +31,6 @@ export const closingRoute = createRoute({
         return (
             <Main>
                 <CloseYear currentYear={currentYear} />
-                <DownloadDocuments currentYear={currentYear} />
             </Main>
         )
     }

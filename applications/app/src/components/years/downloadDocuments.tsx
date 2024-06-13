@@ -1,9 +1,10 @@
-import { ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { CircularLoader } from "@coulba/design/layouts"
-import { IconDownload } from "@tabler/icons-react"
+import { IconChevronLeft, IconDownload } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { CurrentYearContext } from "../../contexts/currentYear/currentYear.context"
 import { useOrganization } from "../../contexts/organization/useOrganization"
+import { router } from "../../routes/router"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
 import { journalsOptions } from "../../services/api/auth/journals/journalsOptions"
@@ -69,6 +70,9 @@ export function DownloadDocuments(props: DownloadDocuments) {
             journalNode.appendChild(JournalLibNode)
 
             recordsData.filter((record) => record.idJournal === journal.id).forEach((record) => {
+                const rows = record.rows.filter((row) => row.isValidated)
+                if (rows.length === 0) return
+
                 const attachment = attachments.data?.find((attachment) => attachment.id === record.idAttachment)
                 if (!attachment) return
                 if (!record.validatedOn) return
@@ -107,9 +111,10 @@ export function DownloadDocuments(props: DownloadDocuments) {
                 ValidDateNode.innerHTML = new Date(record.validatedOn).toISOString()
                 ecritureNode.appendChild(ValidDateNode)
 
-                record.rows.forEach((row) => {
+                rows.forEach((row) => {
                     const account = accounts.data?.find((account) => account.id === row.idAccount)
                     if (!account) return
+                    if (!["1", "2", "3", "4", "5", "6", "7"].includes(account.number.toString().at(0) ?? "")) return
 
                     const ligneNode = xml.createElement("ligne")
 
@@ -162,6 +167,12 @@ export function DownloadDocuments(props: DownloadDocuments) {
     if (!records.data || !organization.data || !props.currentYear.data) return null
     return (
         <Section.Root>
+            <Section.Item className="justify-start">
+                <ButtonOutline
+                    onClick={() => router.navigate({ to: "/configuration/exercices" })}
+                    icon={<IconChevronLeft />}
+                />
+            </Section.Item>
             <Section.Item className="flex-col justify-start items-start gap-3">
                 <div className="flex flex-col justify-start items-start gap-1">
                     <Section.Title title="Télécharger les documents comptables" />

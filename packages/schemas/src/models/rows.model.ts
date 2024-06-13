@@ -35,5 +35,9 @@ export const rowRelations = relations(rows, ({ one }) => ({
     record: one(records, {
         fields: [rows.idRecord],
         references: [records.id],
+    }),
+    account: one(accounts, {
+        fields: [rows.idAccount],
+        references: [accounts.id],
     })
 }))

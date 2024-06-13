@@ -28,7 +28,7 @@ export function LedgerReport() {
     const accounts = useQuery(accountsOptions)
 
     const ledger = (rows.data ?? [])
-        .filter((row) => row.isValidated)
+        .filter((row) => row.isValidated && row.isComputed)
         .reduce<Ledger[]>((_ledger, _row) => {
 
             const row = {

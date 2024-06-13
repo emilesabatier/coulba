@@ -32,10 +32,11 @@ export function ValidateRecord(props: ValidateRecord) {
                 mutation.mutate({ params: { idRecord: props.record.id } }, {
                     onSuccess: () => {
                         queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/ecritures/$idRecord",
-                            params: { idRecord: props.record.id }
-                        })
+                        // router.navigate({
+                        //     to: "/ecritures/$idRecord",
+                        //     params: { idRecord: props.record.id }
+                        // })
+                        router.navigate({ to: "/ecritures" })
                         toast({ title: "Écriture validée", variant: "success" })
                     }
                 })

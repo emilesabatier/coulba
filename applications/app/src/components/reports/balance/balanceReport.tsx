@@ -16,11 +16,10 @@ export function BalanceReport() {
 
     const accountsData = accounts.data ?? []
     const rowsData = (rows.data ?? [])
-        .filter((row) => row.isValidated)
+        .filter((row) => row.isValidated && row.isComputed)
 
     const balance = getBalance(rowsData, accountsData)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
-
 
     const totalDebit = rowsData.reduce<number>((sum, row) => {
         return sum + Number(row.debit)

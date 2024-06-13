@@ -84,11 +84,6 @@ export const menuItems: MenuItem[] = [
                 path: "/configuration/utilisateurs",
                 label: "Utilisateurs"
             },
-            // {
-            //     basePath: "/configuration/abonnement",
-            //     path: "/configuration/abonnement",
-            //     label: "Abonnement"
-            // },
             {
                 basePath: "/configuration/api",
                 path: "/configuration/api",
@@ -98,11 +93,6 @@ export const menuItems: MenuItem[] = [
                 basePath: "/configuration/exercices",
                 path: "/configuration/exercices",
                 label: "Exercices fiscaux"
-            },
-            {
-                basePath: "/configuration/cloture",
-                path: "/configuration/cloture",
-                label: "Clôture"
             },
             {
                 basePath: "/configuration/journaux",

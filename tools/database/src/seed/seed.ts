@@ -290,7 +290,7 @@ async function seed() {
                     idYear: idYear2022,
                     idJournal: undefined,
                     idAttachment: undefined,
-                    isValidated: false,
+                    isValidated: true,
                     validatedOn: undefined,
                     label: record.label,
                     date: record.date
@@ -308,8 +308,8 @@ async function seed() {
                         idYear: idYear2022,
                         idAccount: idAccount,
                         idRecord: idRecord,
-                        isValidated: false,
-                        isComputed: false,
+                        isValidated: true,
+                        isComputed: true,
                         label: row.label,
                         debit: row.debit.toString(),
                         credit: row.credit.toString()

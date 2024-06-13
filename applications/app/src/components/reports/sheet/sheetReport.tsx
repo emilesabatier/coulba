@@ -17,7 +17,10 @@ export function SheetReport() {
     const rows = useQuery(rowsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
+    const rowsData = (rows.data ?? [])
+        .filter((row) => row.isValidated && row.isComputed)
+
+    const balance = getBalance(rowsData, accounts.data ?? [])
 
     const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), balance, null)
         .sort((a, b) => a.number - b.number)

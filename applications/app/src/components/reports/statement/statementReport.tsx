@@ -2,13 +2,13 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
+import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
 import { getBalance } from "../balance/getBalance"
 import { groupStatements } from "./groupStatements"
 import { StatementTable } from "./statementTable"
-import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 
 
 export function StatementReport() {
@@ -17,7 +17,10 @@ export function StatementReport() {
     const accounts = useQuery(accountsOptions)
     const rows = useQuery(rowsOptions)
 
-    const balance = getBalance(rows.data ?? [], accounts.data ?? [])
+    const rowsData = (rows.data ?? [])
+        .filter((row) => row.isValidated && row.isComputed)
+
+    const balance = getBalance(rowsData, accounts.data ?? [])
 
     const sortedStatements = groupStatements(statements.data ?? [], balance, null)
         .sort((a, b) => a.number - b.number)

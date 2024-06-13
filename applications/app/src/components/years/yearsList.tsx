@@ -1,8 +1,9 @@
-import { ButtonGhost, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull, formatDate } from "@coulba/design/formats"
 import { Chip, CircularLoader } from "@coulba/design/layouts"
-import { IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconChevronLeft, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
+import { router } from "../../routes/router"
 import { yearsOptions } from "../../services/api/auth/years/yearsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
@@ -22,7 +23,11 @@ export function YearsList() {
     if (!years.data) return null
     return (
         <Section.Root>
-            <Section.Item>
+            <Section.Item className="justify-start">
+                <ButtonOutline
+                    onClick={() => router.navigate({ to: "/configuration/exercices" })}
+                    icon={<IconChevronLeft />}
+                />
                 <CreateYear>
                     <ButtonPlain
                         icon={<IconPlus />}

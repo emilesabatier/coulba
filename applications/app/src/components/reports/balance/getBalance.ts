@@ -61,12 +61,12 @@ export type Balance = {
 }
 
 export function getBalance(rows: v.Output<typeof auth.rows.get.return>[], accounts: v.Output<typeof auth.accounts.get.return>[]) {
-    return rows.reduce<Balance[]>((_balance, _row) => {
-        const account = accounts.find((_account) => _account.id === _row.idAccount)
-        if (!account) return _balance
+    const accountsArray = rows.reduce<Balance[]>((accountsArray, row) => {
+        const account = accounts.find((account) => account.id === row.idAccount)
+        if (!account) return accountsArray
 
-        const debit = Number(_row.debit)
-        const credit = Number(_row.credit)
+        const debit = Number(row.debit)
+        const credit = Number(row.credit)
         const entry = {
             account: account,
             sum: {
@@ -74,20 +74,32 @@ export function getBalance(rows: v.Output<typeof auth.rows.get.return>[], accoun
                 credit: credit
             },
             balance: {
-                debit: (debit > credit) ? (debit - credit) : 0,
-                credit: (debit <= credit) ? (credit - debit) : 0,
+                debit: 0,
+                credit: 0
             }
         }
 
-        const currentBalanceEntry = _balance.find((entry) => entry.account.id === _row.idAccount)
-        if (currentBalanceEntry === undefined) {
-            _balance.push(entry)
-            return _balance
+        const currentEntry = accountsArray.find((entry) => entry.account.id === row.idAccount)
+        if (currentEntry === undefined) {
+            accountsArray.push(entry)
+            return accountsArray
         }
 
-        currentBalanceEntry.sum.debit += Number(_row.debit)
-        currentBalanceEntry.sum.credit += Number(_row.credit)
+        currentEntry.sum.debit += entry.sum.debit
+        currentEntry.sum.credit += entry.sum.credit
 
-        return _balance
+        return accountsArray
     }, [])
+
+    return accountsArray.map((accountEntry) => {
+        const algebricBalance = accountEntry.sum.debit - accountEntry.sum.credit
+        const balance = {
+            debit: (algebricBalance > 0) ? algebricBalance : 0,
+            credit: (algebricBalance < 0) ? -algebricBalance : 0
+        }
+        return ({
+            ...accountEntry,
+            balance: balance
+        })
+    })
 }

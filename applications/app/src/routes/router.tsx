@@ -14,7 +14,6 @@ import { createAccountRoute } from './auth/configuration/accounts/createAccount.
 import { readAccountLayout } from './auth/configuration/accounts/readAccount.layout'
 import { readAccountRoute } from './auth/configuration/accounts/readAccount.route'
 import { updateAccountRoute } from './auth/configuration/accounts/updateAccount.route'
-import { closingRoute } from './auth/configuration/closing.route'
 import { configurationLayout } from './auth/configuration/configuration.layout'
 import { configurationRoute } from './auth/configuration/configuration.route'
 import { createJournalRoute } from './auth/configuration/journals/createJournal.route'
@@ -64,9 +63,13 @@ import { updateUserRoute } from './auth/configuration/users/updateUser.route'
 import { usersLayout } from './auth/configuration/users/users.layout'
 import { usersRoute } from './auth/configuration/users/users.route'
 import { createYearRoute } from './auth/configuration/years/createYear.route'
+import { downloadDocumentsRoute } from './auth/configuration/years/patch/downloadDocuments.route'
+import { openYearRoute } from './auth/configuration/years/patch/openYear.route'
+import { switchYearRoute } from './auth/configuration/years/patch/switchYear.route'
 import { updateYearRoute } from './auth/configuration/years/updateYear.route'
 import { yearsLayout } from './auth/configuration/years/years.layout'
 import { yearsRoute } from './auth/configuration/years/years.route'
+import { yearsListRoute } from './auth/configuration/years/yearsList.route'
 import { overviewRoute } from './auth/overview/overview.route'
 import { profileLayout } from './auth/profile/profile.layout'
 import { profileRoute } from './auth/profile/profile.route'
@@ -102,6 +105,7 @@ import { signInLayout } from './unauth/signIn/signIn.layout'
 import { signInRoute } from './unauth/signIn/signIn.route'
 import { signUpRoute } from './unauth/signUp/signUp.route'
 import { unauthLayout } from './unauth/unauth.layout'
+import { closeYearRoute } from './auth/configuration/years/patch/closeYear.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -180,10 +184,14 @@ const routeTree = rootLayout.addChildren([
             APIRoute,
             yearsLayout.addChildren([
                 yearsRoute,
+                yearsListRoute,
                 createYearRoute,
-                updateYearRoute
+                updateYearRoute,
+                switchYearRoute,
+                closeYearRoute,
+                downloadDocumentsRoute,
+                openYearRoute
             ]),
-            closingRoute,
             journalsLayout.addChildren([
                 journalsRoute,
                 createJournalRoute,

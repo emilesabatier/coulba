@@ -7,7 +7,7 @@ import { journalSchema } from "../../../../schemas/journal/journal.schema"
 export const computeResultBody = v.object({
     idJournalClosing: journalSchema.entries.id,
     idAccountProfit: accountSchema.entries.id,
-    idAccountLost: accountSchema.entries.id
+    idAccountLoss: accountSchema.entries.id
 })
 
 

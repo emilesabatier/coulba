@@ -1,4 +1,4 @@
-import { accountSheets, accountStatements, records, rows, years } from "@coulba/schemas/models"
+import { accounts, records, rows, years } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq, sql } from "drizzle-orm"
@@ -54,33 +54,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
         async (c) => {
             const body = c.req.valid('json')
 
-            // Read all accountStatements
-            const readAccountStatements = await db.query.accountStatements.findMany({
-                where: and(
-                    eq(accountStatements.idOrganization, c.var.user.idOrganization),
-                    eq(accountStatements.idYear, c.var.currentYear.id)
-                ),
-                with: {
-                    account: {
-                        with: {
-                            rows: true
-                        }
-                    }
-                }
-            })
-
-            // Compute the year result
-            const algebricYearResult = readAccountStatements.reduce((sum, accountStatement) => {
-                return sum + accountStatement.account.rows.reduce((_sum, row) => {
-                    if (row.idAccount !== accountStatement.idAccount) return _sum
-                    return _sum + Number(row.debit) - Number(row.credit)
-                }, 0)
-            }, 0)
-            const yearResult = {
-                debit: (algebricYearResult > 0) ? algebricYearResult : 0,
-                credit: (algebricYearResult < 0) ? -algebricYearResult : 0
-            }
-
             // // Check if sheet is balanced
             // let totalAssets = 0
             // let totalLiabilities = 0
@@ -119,50 +92,79 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                     })
                     .returning()
 
+                // We read the current accounts
+                const readAccounts = await tx.query.accounts.findMany({
+                    where: and(
+                        eq(accounts.idOrganization, c.var.user.idOrganization),
+                        eq(accounts.idYear, c.var.currentYear.id)
+                    ),
+                    with: {
+                        rows: true,
+                        accountStatements: true
+                    }
+                })
+
                 // Add closing rows
-                const statementRows: Array<(typeof rows.$inferInsert)> = [
-                    ...readAccountStatements.map((accountStatement) => {
-                        const balance = {
-                            debit: 0,
-                            credit: 0
-                        }
-                        accountStatement.account.rows.forEach((row) => {
-                            if (row.idAccount !== accountStatement.idAccount) return
-                            const algebricBalance = Number(row.debit) - Number(row.credit)
-                            balance.debit += (algebricBalance > 0) ? algebricBalance : 0
-                            balance.credit += (algebricBalance < 0) ? -algebricBalance : 0
-                        })
-                        return ({
-                            id: generateId(),
-                            idOrganization: c.var.organization.id,
-                            idYear: c.var.currentYear.id,
-                            idRecord: createRecord.id,
-                            idAccount: accountStatement.idAccount,
-                            isValidated: true,
-                            isComputed: false,
-                            debit: balance.credit.toString(),
-                            credit: balance.debit.toString(),
-                            label: "Solde du compte",
-                            lastUpdatedBy: c.var.user.id,
-                            createdBy: c.var.user.id
-                        })
-                    }),
-                    {
+                const statementRows: Array<(typeof rows.$inferInsert)> = []
+                readAccounts.forEach((account) => {
+                    if (account.accountStatements.length === 0) return
+
+                    const sum = {
+                        debit: 0,
+                        credit: 0
+                    }
+
+                    account.rows.forEach((row) => {
+                        if (!row.isValidated || !row.isComputed) return
+                        sum.debit += Number(row.debit)
+                        sum.credit += Number(row.credit)
+                    })
+
+                    const algebricBalance = Number(sum.debit) - Number(sum.credit)
+                    if (Math.abs(algebricBalance) < 0.01) return
+                    const balance = {
+                        debit: (algebricBalance > 0) ? algebricBalance : 0,
+                        credit: (algebricBalance < 0) ? -algebricBalance : 0
+                    }
+                    statementRows.push({
                         id: generateId(),
                         idOrganization: c.var.organization.id,
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
-                        idAccount: (algebricYearResult > 0) ? body.idAccountProfit : body.idAccountLost,
+                        idAccount: account.id,
                         isValidated: true,
-                        isComputed: true,
-                        debit: yearResult.debit.toString(),
-                        credit: yearResult.credit.toString(),
-                        label: "Résultat de l'exercice",
+                        isComputed: false,
+                        debit: balance.credit.toString(),
+                        credit: balance.debit.toString(),
+                        label: "Solde du compte",
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
-                    }
-                ]
-                await tx.insert(rows).values(statementRows)
+                    })
+                })
+                const algebricBalance = statementRows.reduce((sum, row) => sum + Number(row.debit), 0) - statementRows.reduce((sum, row) => sum + Number(row.credit), 0)
+                const balance = {
+                    debit: (algebricBalance > 0) ? algebricBalance : 0,
+                    credit: (algebricBalance < 0) ? -algebricBalance : 0
+                }
+                await tx
+                    .insert(rows)
+                    .values([
+                        ...statementRows,
+                        {
+                            id: generateId(),
+                            idOrganization: c.var.organization.id,
+                            idYear: c.var.currentYear.id,
+                            idRecord: createRecord.id,
+                            idAccount: (algebricBalance < 0) ? body.idAccountLoss : body.idAccountProfit,
+                            isValidated: true,
+                            isComputed: true,
+                            debit: balance.credit.toString(),
+                            credit: balance.debit.toString(),
+                            label: "Résultat de l'exercice",
+                            lastUpdatedBy: c.var.user.id,
+                            createdBy: c.var.user.id
+                        }
+                    ])
             })
 
             return c.json({}, 200)
@@ -193,7 +195,8 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idOrganization: c.var.organization.id,
                         idYear: c.var.currentYear.id,
                         idJournal: body.idJournalClosing,
-                        label: "Clôture des comptes de bilan",
+                        idAutomatic: "SETTLE_SHEET",
+                        label: "Solde des comptes de bilan",
                         date: c.var.currentYear.endingOn,
                         isValidated: true,
                         validatedOn: c.var.currentYear.endingOn,
@@ -202,39 +205,45 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                     })
                     .returning()
 
-                // We read the current accountSheets
-                const readAccountSheets = await tx.query.accountSheets.findMany({
+                // We read the current accounts
+                const readAccounts = await tx.query.accounts.findMany({
                     where: and(
-                        eq(accountSheets.idOrganization, c.var.user.idOrganization),
-                        eq(accountSheets.idYear, c.var.currentYear.id)
+                        eq(accounts.idOrganization, c.var.user.idOrganization),
+                        eq(accounts.idYear, c.var.currentYear.id)
                     ),
                     with: {
-                        account: {
-                            with: {
-                                rows: true
-                            }
-                        }
+                        rows: true,
+                        accountSheets: true
                     }
                 })
 
                 // We create the new rows
-                const sheetRows = readAccountSheets.map((accountSheet) => {
-                    const balance = {
+                const sheetRows: Array<(typeof rows.$inferInsert)> = []
+                readAccounts.forEach((account) => {
+                    if (account.accountSheets.length === 0) return
+
+                    const sum = {
                         debit: 0,
                         credit: 0
                     }
-                    accountSheet.account.rows.forEach((row) => {
-                        if (row.idAccount !== accountSheet.idAccount) return
-                        const algebricBalance = Number(row.debit) - Number(row.credit)
-                        balance.debit += (algebricBalance > 0) ? algebricBalance : 0
-                        balance.credit += (algebricBalance < 0) ? -algebricBalance : 0
+                    account.rows.forEach((row) => {
+                        if (!row.isValidated || !row.isComputed) return
+                        sum.debit += Number(row.debit)
+                        sum.credit += Number(row.credit)
                     })
-                    return ({
+
+                    const algebricBalance = Number(sum.debit) - Number(sum.credit)
+                    if (Math.abs(algebricBalance) < 0.01) return
+                    const balance = {
+                        debit: (algebricBalance > 0) ? algebricBalance : 0,
+                        credit: (algebricBalance < 0) ? -algebricBalance : 0
+                    }
+                    sheetRows.push({
                         id: generateId(),
                         idOrganization: c.var.organization.id,
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
-                        idAccount: accountSheet.idAccount,
+                        idAccount: account.id,
                         isValidated: true,
                         isComputed: false,
                         debit: balance.credit.toString(),
@@ -246,23 +255,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                 })
                 await tx
                     .insert(rows)
-                    .values([
-                        ...sheetRows,
-                        {
-                            id: generateId(),
-                            idOrganization: c.var.organization.id,
-                            idYear: c.var.currentYear.id,
-                            idRecord: createRecord.id,
-                            idAccount: body.idAccountSheetClosing,
-                            isValidated: true,
-                            isComputed: false,
-                            debit: sheetRows.reduce((sum, row) => sum + Number(row.credit), 0).toString(),
-                            credit: sheetRows.reduce((sum, row) => sum + Number(row.debit), 0).toString(),
-                            label: "Clôture du bilan",
-                            lastUpdatedBy: c.var.user.id,
-                            createdBy: c.var.user.id
-                        }
-                    ])
+                    .values(sheetRows)
             })
 
             return c.json({}, 200)
@@ -319,73 +312,46 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idAutomatic: "OPEN_SHEET",
                         label: "Report du bilan de l'exercice précédent",
                         date: c.var.currentYear.startingOn,
-                        isValidated: false,
+                        isValidated: true,
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
                     .returning()
 
-                // We read all previous accountSheets
-                const readAccountSheets = await tx.query.accountSheets.findMany({
+                // We read the current accounts
+                const readRecord = await tx.query.records.findFirst({
                     where: and(
-                        eq(accountSheets.idOrganization, c.var.user.idOrganization),
-                        eq(accountSheets.idYear, idPreviousYear)
+                        eq(records.idOrganization, c.var.user.idOrganization),
+                        eq(records.idYear, idPreviousYear),
+                        eq(records.idAutomatic, "SETTLE_SHEET")
                     ),
                     with: {
-                        account: {
-                            with: {
-                                rows: true
-                            }
-                        }
+                        rows: true,
                     }
                 })
+                if (!readRecord) throw new HTTPException(400, { message: "Le solde du bilan de l'exercice précédent n'a pas été trouvé" })
 
                 // We create the new rows
-                const sheetRows = readAccountSheets.map((accountSheet) => {
-                    const balance = {
-                        debit: 0,
-                        credit: 0
-                    }
-                    accountSheet.account.rows.forEach((row) => {
-                        if (row.idAccount !== accountSheet.idAccount) return
-                        const algebricBalance = Number(row.debit) - Number(row.credit)
-                        balance.debit += (algebricBalance > 0) ? algebricBalance : 0
-                        balance.credit += (algebricBalance < 0) ? -algebricBalance : 0
-                    })
-                    return ({
+                const sheetRows: Array<(typeof rows.$inferInsert)> = []
+                readRecord.rows.forEach((row) => {
+                    sheetRows.push({
                         id: generateId(),
                         idOrganization: c.var.organization.id,
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
-                        idAccount: accountSheet.idAccount,
+                        idAccount: row.idAccount,
                         isValidated: true,
                         isComputed: true,
-                        debit: balance.credit.toString(),
-                        credit: balance.debit.toString(),
-                        label: "Report de la balance du compte",
+                        debit: row.credit.toString(),
+                        credit: row.debit.toString(),
+                        label: "Report du compte",
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
                 })
                 await tx
                     .insert(rows)
-                    .values([
-                        ...sheetRows,
-                        {
-                            id: generateId(),
-                            idOrganization: c.var.organization.id,
-                            idYear: c.var.currentYear.id,
-                            idRecord: createRecord.id,
-                            idAccount: body.idAccountSheetOpening,
-                            isValidated: true,
-                            isComputed: true,
-                            debit: sheetRows.reduce((sum, row) => sum + Number(row.credit), 0).toString(),
-                            credit: sheetRows.reduce((sum, row) => sum + Number(row.debit), 0).toString(),
-                            label: "Ouverture du bilan",
-                            lastUpdatedBy: c.var.user.id,
-                            createdBy: c.var.user.id
-                        }
-                    ])
+                    .values(sheetRows)
 
             })
 
