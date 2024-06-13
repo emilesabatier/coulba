@@ -1,23 +1,21 @@
-import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { CircularLoader } from "@coulba/design/layouts"
-import { IconChevronLeft, IconDownload } from "@tabler/icons-react"
+import { IconDownload } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
-import { CurrentYearContext } from "../../contexts/currentYear/currentYear.context"
-import { useOrganization } from "../../contexts/organization/useOrganization"
-import { router } from "../../routes/router"
-import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
-import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
-import { journalsOptions } from "../../services/api/auth/journals/journalsOptions"
-import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
-import { ErrorMessage } from "../layouts/errorMessage"
-import { Section } from "../layouts/section/section"
+import { CurrentYearContext } from "../../../contexts/currentYear/currentYear.context"
+import { useOrganization } from "../../../contexts/organization/useOrganization"
+import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { attachmentsOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
+import { journalsOptions } from "../../../services/api/auth/journals/journalsOptions"
+import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
+import { ErrorMessage } from "../../layouts/errorMessage"
 
 
-type DownloadDocuments = {
+type DownloadFEC = {
     currentYear: CurrentYearContext
 }
 
-export function DownloadDocuments(props: DownloadDocuments) {
+export function DownloadFEC(props: DownloadFEC) {
     const records = useQuery(recordsOptions)
     const journals = useQuery(journalsOptions)
     const accounts = useQuery(accountsOptions)
@@ -166,29 +164,10 @@ export function DownloadDocuments(props: DownloadDocuments) {
     if (records.isError) return <ErrorMessage message={records.error.message} />
     if (!records.data || !organization.data || !props.currentYear.data) return null
     return (
-        <Section.Root>
-            <Section.Item className="justify-start">
-                <ButtonOutline
-                    onClick={() => router.navigate({ to: "/configuration/exercices" })}
-                    icon={<IconChevronLeft />}
-                />
-            </Section.Item>
-            <Section.Item className="flex-col justify-start items-start gap-3">
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <Section.Title title="Télécharger les documents comptables" />
-                    <p className="text-neutral/75">Cela permet de générer les documents nécessaires à l'administration fiscale.</p>
-                </div>
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <p>
-                        Vous pouvez télécharger le Fichier des Écritures Comptables (FEC) en cliquant sur le bouton ci-contre. Le fichier est dans le format
-                    </p>
-                    <ButtonPlain
-                        text="Télécharger le Fichier des Écritures Comptables (FEC)"
-                        icon={<IconDownload />}
-                        onClick={() => exportFEC()}
-                    />
-                </div>
-            </Section.Item>
-        </Section.Root>
+        <ButtonPlain
+            text="Télécharger"
+            icon={<IconDownload />}
+            onClick={() => exportFEC()}
+        />
     )
 }

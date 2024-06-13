@@ -2,19 +2,20 @@ import { toast } from "@coulba/design/overlays"
 import * as v from "valibot"
 
 
-type PatchAPI<T extends v.ObjectEntries> = {
+type BlobAPI<T extends v.ObjectEntries> = {
     path: string
     schema: v.ObjectSchema<T> | v.BaseSchema
     body?: object
     message?: string
+    method?: string
 }
 
-export async function patchAPI<T extends v.ObjectEntries>(props: PatchAPI<T>) {
+export async function blobAPI<T extends v.ObjectEntries>(props: BlobAPI<T>) {
     try {
         const response = await fetch(
             new URL(`${import.meta.env.VITE_PUBLIC_API_BASE}${props.path}`),
             {
-                method: "PATCH",
+                method: props.method ?? "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -25,7 +26,7 @@ export async function patchAPI<T extends v.ObjectEntries>(props: PatchAPI<T>) {
 
         if (!response.ok) throw new Error("Error with the response")
 
-        return v.parse(props.schema, await response.json())
+        return v.parse(props.schema, await response.blob())
     } catch (error) {
         if (import.meta.env.VITE_ENV !== "production") {
             if (error instanceof v.ValiError) {

@@ -1,5 +1,6 @@
 import { createStatementBody, createStatementReturn } from "./createStatement.js"
 import { deleteStatementParams, deleteStatementReturn } from "./deleteStatement.js"
+import { downloadReturn } from "./download.js"
 import { readStatementParams, readStatementReturn } from "./readStatement.js"
 import { updateStatementBody, updateStatementParams, updateStatementReturn } from "./updateStatement.js"
 
@@ -21,5 +22,10 @@ export const statements = {
     delete: {
         params: deleteStatementParams,
         return: deleteStatementReturn
+    },
+    patch: {
+        download: {
+            return: downloadReturn
+        }
     }
 }

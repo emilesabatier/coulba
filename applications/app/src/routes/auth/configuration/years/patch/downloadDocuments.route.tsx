@@ -2,7 +2,7 @@ import { createRoute } from "@tanstack/react-router"
 import { Banner } from "../../../../../components/layouts/banner"
 import { Main } from "../../../../../components/layouts/main"
 import { Section } from "../../../../../components/layouts/section/section"
-import { DownloadDocuments } from "../../../../../components/years/downloadDocuments"
+import { DownloadDocuments } from "../../../../../components/years/download/downloadDocuments"
 import { useCurrentYear } from "../../../../../contexts/currentYear/useCurrentYear"
 import { yearsLayout } from "../years.layout"
 

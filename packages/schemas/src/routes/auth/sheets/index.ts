@@ -1,5 +1,6 @@
 import { createSheetBody, createSheetReturn } from "./createSheet.js"
 import { deleteSheetParams, deleteSheetReturn } from "./deleteSheet.js"
+import { downloadReturn } from "./download.js"
 import { readSheetParams, readSheetReturn } from "./readSheet.js"
 import { updateSheetBody, updateSheetParams, updateSheetReturn } from "./updateSheet.js"
 
@@ -21,5 +22,10 @@ export const sheets = {
     delete: {
         params: deleteSheetParams,
         return: deleteSheetReturn
+    },
+    patch: {
+        download: {
+            return: downloadReturn
+        }
     }
 }
