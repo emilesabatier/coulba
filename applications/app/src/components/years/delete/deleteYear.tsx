@@ -15,22 +15,21 @@ type DeleteYear = {
 }
 
 export function DeleteYear(props: DeleteYear) {
-    const mutation = useMutation({
-        mutationKey: yearsOptions.queryKey,
-        mutationFn: deleteYear
-    })
+    const mutation = useMutation({ mutationFn: deleteYear })
 
     return (
         <Delete
             title="Supprimer l'exercice ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
-                mutation.mutate({ params: { idYear: props.year.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        toast({ title: "Exercice supprimé", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idYear: props.year.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                toast({ title: "Exercice supprimé", variant: "success" })
+
                 return true
             }}
             children={props.children}

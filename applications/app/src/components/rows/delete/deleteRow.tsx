@@ -17,26 +17,23 @@ type DeleteRow = {
 }
 
 export function DeleteRow(props: DeleteRow) {
-
-    const mutation = useMutation({
-        mutationKey: rowsOptions.queryKey,
-        mutationFn: deleteRow
-    })
+    const mutation = useMutation({ mutationFn: deleteRow })
 
     return (
         <Delete
             title="Supprimer la ligne ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
-                mutation.mutate({ params: { idRow: props.row.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        toast({ title: "Ligne supprimée", variant: "success" })
-                        router.navigate({
-                            to: "/ecritures/$idRecord",
-                            params: { idRecord: props.record.id }
-                        })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idRow: props.row.id }
+                })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: rowsOptions.queryKey })
+                toast({ title: "Ligne supprimée", variant: "success" })
+                router.navigate({
+                    to: "/ecritures/$idRecord",
+                    params: { idRecord: props.record.id }
                 })
 
                 return true

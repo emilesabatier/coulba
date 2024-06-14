@@ -7,22 +7,18 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateComputationRoute } from "../../../routes/auth/configuration/statements/computations/updateComputation.route"
 import { router } from "../../../routes/router"
-import { computationOptions, computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
+import { computationOptions } from "../../../services/api/auth/computations/computationsOptions"
 import { updateComputation } from "../../../services/api/auth/computations/updateComputation"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
-import { updateComputationRoute } from "../../../routes/auth/configuration/statements/computations/updateComputation.route"
 
 
 export function UpdateComputationForm() {
     const { idComputation } = useParams({ from: updateComputationRoute.id })
     const computation = useQuery(computationOptions(idComputation))
-
-    const mutation = useMutation({
-        mutationKey: computationsOptions.queryKey,
-        mutationFn: updateComputation
-    })
+    const mutation = useMutation({ mutationFn: updateComputation })
 
     if (computation.isLoading) return <CircularLoader />
     if (computation.isError) return <ErrorMessage message={computation.error.message} />
@@ -37,19 +33,19 @@ export function UpdateComputationForm() {
             })}
             submitLabel="Modifier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idComputation: idComputation },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/configuration/compte-de-resultat/calculs/$idComputation",
-                            params: { idComputation: idComputation }
-                        })
-                        toast({ title: "Calcul mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: computationOptions(idComputation).queryKey })
+                router.navigate({
+                    to: "/configuration/compte-de-resultat/calculs/$idComputation",
+                    params: { idComputation: idComputation }
+                })
+                toast({ title: "Calcul mis à jour", variant: "success" })
+
                 return true
             }}
         >

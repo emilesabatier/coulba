@@ -17,11 +17,7 @@ type DeleteAttachment = {
 }
 
 export function DeleteAttachment(props: DeleteAttachment) {
-
-    const mutation = useMutation({
-        mutationKey: attachmentsOptions.queryKey,
-        mutationFn: deleteAttachment
-    })
+    const mutation = useMutation({ mutationFn: deleteAttachment })
 
     return (
         <Delete
@@ -41,13 +37,14 @@ export function DeleteAttachment(props: DeleteAttachment) {
                 }))
                 if (!uploadPhotoResponse?.ok) return false
 
-                mutation.mutate({ params: { idAttachment: props.attachment.id } }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(attachmentsOptions.queryKey, (oldData) => oldData?.filter((attachment) => attachment.id !== newData?.id))
-                        router.navigate({ to: "/fichiers" })
-                        toast({ title: "Fichier supprimé", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idAttachment: props.attachment.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: attachmentsOptions.queryKey })
+                router.navigate({ to: "/fichiers" })
+                toast({ title: "Fichier supprimé", variant: "success" })
 
                 return true
             }}

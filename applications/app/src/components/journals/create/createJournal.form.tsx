@@ -12,11 +12,7 @@ import { Form } from "../../layouts/forms/form"
 
 
 export function CreateJournalForm() {
-
-    const mutation = useMutation({
-        mutationKey: journalsOptions.queryKey,
-        mutationFn: createJournal
-    })
+    const mutation = useMutation({ mutationFn: createJournal })
 
     return (
         <Form
@@ -25,14 +21,14 @@ export function CreateJournalForm() {
             onCancel={() => router.navigate({ to: "/configuration/journaux" })}
             submitLabel="Ajouter le journal"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/journaux" })
-                        toast({ title: "Nouveau journal ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: journalsOptions.queryKey })
+                router.navigate({ to: "/configuration/journaux" })
+                toast({ title: "Nouveau journal ajouté", variant: "success" })
 
                 return true
             }}

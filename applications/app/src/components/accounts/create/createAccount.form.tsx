@@ -14,11 +14,7 @@ import { accountTypeOptions } from "../accountTypeOptions"
 
 
 export function CreateAccountForm() {
-
-    const mutation = useMutation({
-        mutationKey: accountsOptions.queryKey,
-        mutationFn: createAccount
-    })
+    const mutation = useMutation({ mutationFn: createAccount })
 
     return (
         <Form
@@ -27,14 +23,17 @@ export function CreateAccountForm() {
             onCancel={() => router.navigate({ to: "/configuration/comptes" })}
             submitLabel="Ajouter le compte"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
-                        router.navigate({ to: "/configuration/comptes" })
-                        toast({ title: "Nouveau compte ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: accountsOptions.queryKey })
+                router.navigate({
+                    to: "/configuration/comptes/$idAccount",
+                    params: { idAccount: response.id }
+                })
+                toast({ title: "Nouveau compte ajouté", variant: "success" })
 
                 return true
             }}

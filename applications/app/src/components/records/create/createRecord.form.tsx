@@ -15,11 +15,7 @@ import { FormBlock } from "../../layouts/forms/formBlock"
 
 
 export function CreateRecordForm() {
-
-    const mutation = useMutation({
-        mutationKey: recordsOptions.queryKey,
-        mutationFn: createRecord
-    })
+    const mutation = useMutation({ mutationFn: createRecord })
 
     return (
         <Form
@@ -28,18 +24,17 @@ export function CreateRecordForm() {
             onCancel={() => router.navigate({ to: "/ecritures" })}
             submitLabel="Ajouter l'écriture"
             onSubmit={async (data) => {
-                mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        if (!!newData) {
-                            queryClient.invalidateQueries()
-                            router.navigate({
-                                to: "/ecritures/$idRecord",
-                                params: { idRecord: newData.id }
-                            })
-                            toast({ title: "Nouvelle écriture ajoutée", variant: "success" })
-                        }
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: recordsOptions.queryKey })
+                router.navigate({
+                    to: "/ecritures/$idRecord",
+                    params: { idRecord: response.id }
+                })
+                toast({ title: "Nouvelle écriture ajoutée", variant: "success" })
 
                 return true
             }}

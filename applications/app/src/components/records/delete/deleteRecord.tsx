@@ -16,24 +16,21 @@ type DeleteRecord = {
 }
 
 export function DeleteRecord(props: DeleteRecord) {
-
-    const mutation = useMutation({
-        mutationKey: recordsOptions.queryKey,
-        mutationFn: deleteRecord
-    })
+    const mutation = useMutation({ mutationFn: deleteRecord })
 
     return (
         <Delete
             title="Supprimer l'écriture ?"
             description="Attention, cela supprimera toutes les données associées."
             onSubmit={async () => {
-                mutation.mutate({ params: { idRecord: props.record.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/ecritures" })
-                        toast({ title: "Écriture supprimée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idRecord: props.record.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: recordsOptions.queryKey })
+                router.navigate({ to: "/ecritures" })
+                toast({ title: "Écriture supprimée", variant: "success" })
 
                 return true
             }}

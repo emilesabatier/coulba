@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateRecordRoute } from "../../../routes/auth/records/updateRecord.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
 import { updateRecord } from "../../../services/api/auth/records/updateRecord"
@@ -15,17 +16,12 @@ import { JournalCombobox } from "../../journals/journalCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { FormBlock } from "../../layouts/forms/formBlock"
-import { updateRecordRoute } from "../../../routes/auth/records/updateRecord.route"
 
 
 export function UpdateRecordForm() {
     const { idRecord } = useParams({ from: updateRecordRoute.id })
     const record = useQuery(recordOptions(idRecord))
-
-    const mutation = useMutation({
-        mutationKey: recordOptions(idRecord).queryKey,
-        mutationFn: updateRecord
-    })
+    const mutation = useMutation({ mutationFn: updateRecord })
 
     if (record.isLoading) return <CircularLoader />
     if (record.isError) return <ErrorMessage message={record.error.message} />
@@ -43,16 +39,18 @@ export function UpdateRecordForm() {
             }}
             submitLabel="Modifier l'écriture"
             onSubmit={async (data) => {
-                mutation.mutate({ params: { idRecord: idRecord }, body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/ecritures/$idRecord",
-                            params: { idRecord: idRecord }
-                        })
-                        toast({ title: "Écriture mise à jour", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idRecord: idRecord },
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: recordOptions(idRecord).queryKey })
+                router.navigate({
+                    to: "/ecritures/$idRecord",
+                    params: { idRecord: idRecord }
+                })
+                toast({ title: "Écriture mise à jour", variant: "success" })
 
                 return true
             }}

@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { router } from "../../../routes/router"
 import { deleteStatement } from "../../../services/api/auth/statements/deleteStatement"
 import { statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { Delete } from "../../layouts/actions/delete"
@@ -15,23 +16,22 @@ type DeleteStatement = {
 }
 
 export function DeleteStatement(props: DeleteStatement) {
-
-    const mutation = useMutation({
-        mutationKey: statementsOptions.queryKey,
-        mutationFn: deleteStatement
-    })
+    const mutation = useMutation({ mutationFn: deleteStatement })
 
     return (
         <Delete
             title="Supprimer la ligne ?"
             description="Attention, cela supprimera toutes les données et les sous-lignes associés."
             onSubmit={async () => {
-                mutation.mutate({ params: { idStatement: props.statement.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        toast({ title: "Ligne supprimée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idStatement: props.statement.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: statementsOptions.queryKey })
+                router.navigate({ to: "/configuration/compte-de-resultat/lignes" })
+                toast({ title: "Ligne supprimée", variant: "success" })
+
                 return true
             }}
             children={props.children}

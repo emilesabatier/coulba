@@ -16,11 +16,7 @@ type ValidateRecord = {
 }
 
 export function ValidateRecord(props: ValidateRecord) {
-
-    const mutation = useMutation({
-        mutationKey: recordOptions(props.record.id).queryKey,
-        mutationFn: validateRecord
-    })
+    const mutation = useMutation({ mutationFn: validateRecord })
 
     return (
         <ConfirmDialog
@@ -29,17 +25,18 @@ export function ValidateRecord(props: ValidateRecord) {
             submitLabel="Valider"
             color="success"
             onSubmit={async () => {
-                mutation.mutate({ params: { idRecord: props.record.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        // router.navigate({
-                        //     to: "/ecritures/$idRecord",
-                        //     params: { idRecord: props.record.id }
-                        // })
-                        router.navigate({ to: "/ecritures" })
-                        toast({ title: "Écriture validée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idRecord: props.record.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: recordOptions(props.record.id).queryKey })
+                // router.navigate({
+                //     to: "/ecritures/$idRecord",
+                //     params: { idRecord: props.record.id }
+                // })
+                router.navigate({ to: "/ecritures" })
+                toast({ title: "Écriture validée", variant: "success" })
 
                 return true
             }}

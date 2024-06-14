@@ -7,17 +7,12 @@ import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { createUser } from "../../../services/api/auth/users/createUser"
-import { sendInvitation } from "../../../services/api/auth/users/sendInvitation"
 import { usersOptions } from "../../../services/api/auth/users/usersOptions"
 import { Form } from "../../layouts/forms/form"
 
 
 export function CreateUserForm() {
-
-    const mutation = useMutation({
-        mutationKey: usersOptions.queryKey,
-        mutationFn: createUser
-    })
+    const mutation = useMutation({ mutationFn: createUser })
 
     return (
         <Form
@@ -26,21 +21,19 @@ export function CreateUserForm() {
             onCancel={() => router.navigate({ to: "/configuration/utilisateurs" })}
             submitLabel="Ajouter l'utilisateur"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: async (newData) => {
-                        if (!!newData) {
-                            queryClient.invalidateQueries()
-                            router.navigate({ to: "/configuration/utilisateurs" })
-                            toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })
-
-                            const response = await sendInvitation({ params: { idUser: newData.id } })
-                            if (!response) return
-
-                            toast({ title: "Invitation envoyée", variant: "success" })
-                        }
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: usersOptions.queryKey })
+                router.navigate({ to: "/configuration/utilisateurs" })
+                toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })
+
+                // const response = await sendInvitation({ params: { idUser: newData.id } })
+                // if (!response) return
+
+                // toast({ title: "Invitation envoyée", variant: "success" })
 
                 return true
             }}

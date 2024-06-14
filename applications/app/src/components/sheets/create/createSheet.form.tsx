@@ -14,11 +14,7 @@ import { sideOptions } from "../sideOptions"
 
 
 export function CreateSheetForm() {
-
-    const mutation = useMutation({
-        mutationKey: sheetsOptions.queryKey,
-        mutationFn: createSheet
-    })
+    const mutation = useMutation({ mutationFn: createSheet })
 
     return (
         <Form
@@ -29,14 +25,17 @@ export function CreateSheetForm() {
             onCancel={() => router.navigate({ to: "/configuration/bilan" })}
             submitLabel="Ajouter"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/bilan" })
-                        toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: sheetsOptions.queryKey })
+                router.navigate({
+                    to: "/configuration/bilan/$idSheet",
+                    params: { idSheet: response.id }
+                })
+                toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
 
                 return true
             }}

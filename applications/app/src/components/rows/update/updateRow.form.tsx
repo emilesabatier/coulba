@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateRowRoute } from "../../../routes/auth/records/rows/updateRow.route"
 import { router } from "../../../routes/router"
 import { rowOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { updateRow } from "../../../services/api/auth/rows/updateRow"
@@ -14,17 +15,12 @@ import { AccountCombobox } from "../../accounts/accountCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { FormBlock } from "../../layouts/forms/formBlock"
-import { updateRowRoute } from "../../../routes/auth/records/rows/updateRow.route"
 
 
 export function UpdateRowForm() {
     const { idRecord, idRow } = useParams({ from: updateRowRoute.id })
     const row = useQuery(rowOptions(idRow))
-
-    const mutation = useMutation({
-        mutationKey: rowOptions(idRow).queryKey,
-        mutationFn: updateRow
-    })
+    const mutation = useMutation({ mutationFn: updateRow })
 
     if (row.isLoading) return <CircularLoader />
     if (row.isError) return <ErrorMessage message={row.error.message} />
@@ -45,19 +41,21 @@ export function UpdateRowForm() {
             }}
             submitLabel="Modifier la ligne"
             onSubmit={async (data) => {
-                mutation.mutate({ params: { idRow: idRow }, body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/ecritures/$idRecord/lignes/$idRow",
-                            params: {
-                                idRecord: idRecord,
-                                idRow: idRow
-                            }
-                        })
-                        toast({ title: "Ligne mise à jour", variant: "success" })
+                const response = await mutation.mutateAsync({
+                    params: { idRow: idRow },
+                    body: data
+                })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: rowOptions(idRow).queryKey })
+                router.navigate({
+                    to: "/ecritures/$idRecord/lignes/$idRow",
+                    params: {
+                        idRecord: idRecord,
+                        idRow: idRow
                     }
                 })
+                toast({ title: "Ligne mise à jour", variant: "success" })
 
                 return true
             }}

@@ -25,7 +25,7 @@ export function UpdateProfileForm() {
                 const response = await updateProfile({ body: data })
                 if (!response) return false
 
-                session.mutate()
+                await session.mutate()
                 router.navigate({ to: "/profil" })
                 toast({ title: "Profil mis à jour", variant: "success" })
 

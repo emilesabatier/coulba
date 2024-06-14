@@ -6,22 +6,18 @@ import { useMutation } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { createComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/createComputationStatement.route"
 import { router } from "../../../routes/router"
 import { computationStatementsOptions } from "../../../services/api/auth/computationStatements/computationStatementsOptions"
 import { createComputationStatement } from "../../../services/api/auth/computationStatements/createComputationStatement"
 import { Form } from "../../layouts/forms/form"
 import { StatementCombobox } from "../../statements/statementCombobox"
 import { operationOptions } from "../operationOptions"
-import { createComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/createComputationStatement.route"
 
 
 export function CreateComputationStatementForm() {
     const { idComputation } = useParams({ from: createComputationStatementRoute.id })
-
-    const mutation = useMutation({
-        mutationKey: computationStatementsOptions.queryKey,
-        mutationFn: createComputationStatement
-    })
+    const mutation = useMutation({ mutationFn: createComputationStatement })
 
     return (
         <Form
@@ -36,17 +32,17 @@ export function CreateComputationStatementForm() {
             })}
             submitLabel="Ajouter"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/configuration/compte-de-resultat/calculs/$idComputation",
-                            params: { idComputation: idComputation }
-                        })
-                        toast({ title: "Données ajoutées", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: computationStatementsOptions.queryKey })
+                router.navigate({
+                    to: "/configuration/compte-de-resultat/calculs/$idComputation",
+                    params: { idComputation: idComputation }
+                })
+                toast({ title: "Données ajoutées", variant: "success" })
 
                 return true
             }}

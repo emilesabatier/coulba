@@ -22,12 +22,13 @@ export function UpdateOrganizationForm() {
             onCancel={() => router.navigate({ to: "/configuration/organisation" })}
             submitLabel="Modifier les informations"
             onSubmit={async (data) => {
-                await updateOrganization({ body: data })
+                const response = await updateOrganization({ body: data })
+                if (!response) return false
 
-                organization.mutate()
-
+                await organization.mutate()
                 router.navigate({ to: "/configuration/organisation" })
                 toast({ title: "Informations de l'organisation mises à jour", variant: "success" })
+
                 return true
             }}
         >

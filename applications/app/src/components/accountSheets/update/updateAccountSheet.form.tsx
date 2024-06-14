@@ -7,24 +7,20 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateAccountSheetRoute } from "../../../routes/auth/configuration/sheets/accountSheets/updateAccountSheet.route"
 import { router } from "../../../routes/router"
-import { accountSheetOptions, accountSheetsOptions } from "../../../services/api/auth/accountSheets/accountSheetsOptions"
+import { accountSheetOptions } from "../../../services/api/auth/accountSheets/accountSheetsOptions"
 import { updateAccountSheet } from "../../../services/api/auth/accountSheets/updateAccountSheet"
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { flowOptions } from "../flowOptions"
-import { updateAccountSheetRoute } from "../../../routes/auth/configuration/sheets/accountSheets/updateAccountSheet.route"
 
 
 export function UpdateAccountSheetForm() {
     const { idSheet, idAccountSheet } = useParams({ from: updateAccountSheetRoute.id })
     const accountSheet = useQuery(accountSheetOptions(idAccountSheet))
-
-    const mutation = useMutation({
-        mutationKey: accountSheetsOptions.queryKey,
-        mutationFn: updateAccountSheet
-    })
+    const mutation = useMutation({ mutationFn: updateAccountSheet })
 
     if (accountSheet.isLoading) return <CircularLoader />
     if (accountSheet.isError) return <ErrorMessage message={accountSheet.error.message} />
@@ -42,22 +38,22 @@ export function UpdateAccountSheetForm() {
             })}
             submitLabel="Modifier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idAccountSheet: idAccountSheet },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/configuration/bilan/$idSheet/comptes/$idAccountSheet",
-                            params: {
-                                idSheet: idSheet,
-                                idAccountSheet: idAccountSheet
-                            }
-                        })
-                        toast({ title: "Données mises à jour", variant: "success" })
+                })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: accountSheetOptions(idAccountSheet).queryKey })
+                router.navigate({
+                    to: "/configuration/bilan/$idSheet/comptes/$idAccountSheet",
+                    params: {
+                        idSheet: idSheet,
+                        idAccountSheet: idAccountSheet
                     }
                 })
+                toast({ title: "Données mises à jour", variant: "success" })
+
                 return true
             }}
         >

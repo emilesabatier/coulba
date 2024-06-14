@@ -6,23 +6,19 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/updateAccountStatement.route"
 import { router } from "../../../routes/router"
-import { accountStatementOptions, accountStatementsOptions } from "../../../services/api/auth/accountStatements/accountStatementsOptions"
+import { accountStatementOptions } from "../../../services/api/auth/accountStatements/accountStatementsOptions"
 import { updateAccountStatement } from "../../../services/api/auth/accountStatements/updateAccountStatement"
 import { AccountCombobox } from "../../accounts/accountCombobox"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
-import { updateAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/updateAccountStatement.route"
 
 
 export function UpdateAccountStatementForm() {
     const { idStatement, idAccountStatement } = useParams({ from: updateAccountStatementRoute.id })
     const accountStatement = useQuery(accountStatementOptions(idAccountStatement))
-
-    const mutation = useMutation({
-        mutationKey: accountStatementsOptions.queryKey,
-        mutationFn: updateAccountStatement
-    })
+    const mutation = useMutation({ mutationFn: updateAccountStatement })
 
     if (accountStatement.isLoading) return <CircularLoader />
     if (accountStatement.isError) return <ErrorMessage message={accountStatement.error.message} />
@@ -40,22 +36,22 @@ export function UpdateAccountStatementForm() {
             })}
             submitLabel="Modifier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idAccountStatement: idAccountStatement },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement",
-                            params: {
-                                idStatement: idStatement,
-                                idAccountStatement: idAccountStatement
-                            }
-                        })
-                        toast({ title: "Données mises à jour", variant: "success" })
+                })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: accountStatementOptions(idAccountStatement).queryKey })
+                router.navigate({
+                    to: "/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement",
+                    params: {
+                        idStatement: idStatement,
+                        idAccountStatement: idAccountStatement
                     }
                 })
+                toast({ title: "Données mises à jour", variant: "success" })
+
                 return true
             }}
         >

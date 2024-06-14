@@ -13,11 +13,7 @@ import { StatementCombobox } from "../statementCombobox"
 
 
 export function CreateStatementForm() {
-
-    const mutation = useMutation({
-        mutationKey: statementsOptions.queryKey,
-        mutationFn: createStatement
-    })
+    const mutation = useMutation({ mutationFn: createStatement })
 
     return (
         <Form
@@ -26,14 +22,17 @@ export function CreateStatementForm() {
             onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat/lignes" })}
             submitLabel="Ajouter"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat/lignes" })
-                        toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: statementsOptions.queryKey })
+                router.navigate({
+                    to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                    params: { idStatement: response.id }
+                })
+                toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
 
                 return true
             }}

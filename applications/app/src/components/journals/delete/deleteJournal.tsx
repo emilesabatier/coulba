@@ -15,23 +15,21 @@ type DeleteJournal = {
 }
 
 export function DeleteJournal(props: DeleteJournal) {
-
-    const mutation = useMutation({
-        mutationKey: journalsOptions.queryKey,
-        mutationFn: deleteJournal
-    })
+    const mutation = useMutation({ mutationFn: deleteJournal })
 
     return (
         <Delete
             title="Supprimer le journal ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
-                mutation.mutate({ params: { idJournal: props.journal.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        toast({ title: "Journal supprimé", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idJournal: props.journal.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: journalsOptions.queryKey })
+                toast({ title: "Journal supprimé", variant: "success" })
+
                 return true
             }}
             children={props.children}

@@ -19,11 +19,7 @@ import { Form } from "../../layouts/forms/form"
 export function UpdateAttachmentForm() {
     const { idAttachment } = useParams({ from: updateAttachmentRoute.id })
     const attachment = useQuery(attachmentOptions(idAttachment))
-
-    const mutation = useMutation({
-        mutationKey: attachmentOptions(idAttachment).queryKey,
-        mutationFn: updateAttachment
-    })
+    const mutation = useMutation({ mutationFn: updateAttachment })
 
     if (attachment.isLoading) return <CircularLoader />
     if (attachment.isError) return <ErrorMessage message={attachment.error.message} />
@@ -38,22 +34,23 @@ export function UpdateAttachmentForm() {
             }}
             submitLabel="Modifier le fichier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idAttachment: idAttachment },
                     body: {
                         reference: data.reference,
                         label: data.label,
                         date: data.date
                     }
-                }, {
-                    onSuccess: (newData) => {
-                        if (!!newData) {
-                            queryClient.invalidateQueries()
-                            router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: newData.id } })
-                            toast({ title: "Fichier mis à jour", variant: "success" })
-                        }
-                    }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: attachmentOptions(idAttachment).queryKey })
+                router.navigate({
+                    to: "/fichiers/$idAttachment",
+                    params: { idAttachment: response.id }
+                })
+                toast({ title: "Fichier mis à jour", variant: "success" })
+
                 return true
             }}
         >

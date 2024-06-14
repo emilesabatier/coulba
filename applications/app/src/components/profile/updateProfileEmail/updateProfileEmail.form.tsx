@@ -6,9 +6,15 @@ import { Fragment } from "react"
 import { router } from "../../../routes/router"
 import { updateProfileEmail } from "../../../services/api/auth/profile/updateProfileEmail"
 import { Form } from "../../layouts/forms/form"
+import { CircularLoader } from "@coulba/design/layouts"
+import { useSession } from "../../../contexts/session/useSession"
 
 
 export function UpdateProfileEmailForm() {
+    const session = useSession()
+
+    if (session.isLoading) return <CircularLoader />
+    if (!session.profile) return null
     return (
         <Form
             validationSchema={auth.profile.patch.updateEmail.body}
@@ -19,6 +25,7 @@ export function UpdateProfileEmailForm() {
                 const response = await updateProfileEmail({ body: data })
                 if (!response) return false
 
+                await session.mutate()
                 router.navigate({ to: "/profil" })
                 toast({ title: "Un email de validation a été envoyé à la nouvelle adresse", variant: "success" })
 

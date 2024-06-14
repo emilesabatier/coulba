@@ -15,11 +15,7 @@ import { Form } from "../../layouts/forms/form"
 
 
 export function CreateAttachmentForm() {
-
-    const mutation = useMutation({
-        mutationKey: attachmentsOptions.queryKey,
-        mutationFn: createAttachment
-    })
+    const mutation = useMutation({ mutationFn: createAttachment })
 
     return (
         <Form
@@ -52,7 +48,7 @@ export function CreateAttachmentForm() {
                 }))
                 if (!uploadFileResponse?.ok) return false
 
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     body: {
                         reference: data.reference,
                         label: data.label,
@@ -61,13 +57,12 @@ export function CreateAttachmentForm() {
                         type: data.file.type,
                         size: data.file.size
                     }
-                }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(attachmentsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
-                        router.navigate({ to: "/fichiers" })
-                        toast({ title: "Nouveau fichier ajouté", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: attachmentsOptions.queryKey })
+                router.navigate({ to: "/fichiers" })
+                toast({ title: "Nouveau fichier ajouté", variant: "success" })
 
                 return true
             }}

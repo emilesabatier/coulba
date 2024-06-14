@@ -12,11 +12,7 @@ import { Form } from "../../layouts/forms/form"
 
 
 export function CreateComputationForm() {
-
-    const mutation = useMutation({
-        mutationKey: computationsOptions.queryKey,
-        mutationFn: createComputation
-    })
+    const mutation = useMutation({ mutationFn: createComputation })
 
     return (
         <Form
@@ -25,14 +21,14 @@ export function CreateComputationForm() {
             onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat/calculs" })}
             submitLabel="Ajouter"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
-                        toast({ title: "Nouveau calcul ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: computationsOptions.queryKey })
+                router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
+                toast({ title: "Nouveau calcul ajouté", variant: "success" })
 
                 return true
             }}

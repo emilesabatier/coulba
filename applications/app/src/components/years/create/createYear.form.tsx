@@ -15,11 +15,7 @@ import { YearCombobox } from "../input/yearCombobox"
 
 export function CreateYearForm() {
     const currentYear = useCurrentYear()
-
-    const mutation = useMutation({
-        mutationKey: yearsOptions.queryKey,
-        mutationFn: createYear
-    })
+    const mutation = useMutation({ mutationFn: createYear })
 
     return (
         <Form
@@ -30,14 +26,15 @@ export function CreateYearForm() {
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
             onSubmit={async (data) => {
-                mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.invalidateQueries()
-                        if (newData?.isSelected) currentYear.mutate()
-                        router.navigate({ to: "/configuration/exercices" })
-                        toast({ title: "Nouvel exercice ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                if (response.isSelected) await currentYear.mutate()
+                router.navigate({ to: "/configuration/exercices" })
+                toast({ title: "Nouvel exercice ajouté", variant: "success" })
 
                 return true
             }}

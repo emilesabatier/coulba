@@ -7,24 +7,20 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
+import { updateComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/updateComputationStatement.route"
 import { router } from "../../../routes/router"
-import { computationStatementOptions, computationStatementsOptions } from "../../../services/api/auth/computationStatements/computationStatementsOptions"
+import { computationStatementOptions } from "../../../services/api/auth/computationStatements/computationStatementsOptions"
 import { updateComputationStatement } from "../../../services/api/auth/computationStatements/updateComputationStatements"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
 import { StatementCombobox } from "../../statements/statementCombobox"
 import { operationOptions } from "../operationOptions"
-import { updateComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/updateComputationStatement.route"
 
 
 export function UpdateComputationStatementForm() {
     const { idComputation, idComputationStatement } = useParams({ from: updateComputationStatementRoute.id })
     const computationStatement = useQuery(computationStatementOptions(idComputationStatement))
-
-    const mutation = useMutation({
-        mutationKey: computationStatementsOptions.queryKey,
-        mutationFn: updateComputationStatement
-    })
+    const mutation = useMutation({ mutationFn: updateComputationStatement })
 
     if (computationStatement.isLoading) return <CircularLoader />
     if (computationStatement.isError) return <ErrorMessage message={computationStatement.error.message} />
@@ -42,22 +38,22 @@ export function UpdateComputationStatementForm() {
             })}
             submitLabel="Modifier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idComputationStatement: idComputationStatement },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({
-                            to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
-                            params: {
-                                idComputation: idComputation,
-                                idComputationStatement: idComputationStatement
-                            }
-                        })
-                        toast({ title: "Données mises à jour", variant: "success" })
+                })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: computationStatementOptions(idComputationStatement).queryKey })
+                router.navigate({
+                    to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
+                    params: {
+                        idComputation: idComputation,
+                        idComputationStatement: idComputationStatement
                     }
                 })
+                toast({ title: "Données mises à jour", variant: "success" })
+
                 return true
             }}
         >

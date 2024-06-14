@@ -3,6 +3,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { ReactElement } from "react"
 import * as v from "valibot"
+import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { deleteSheet } from "../../../services/api/auth/sheets/deleteSheet"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
@@ -15,25 +16,22 @@ type DeleteSheet = {
 }
 
 export function DeleteSheet(props: DeleteSheet) {
-
-    const mutation = useMutation({
-        mutationKey: sheetsOptions.queryKey,
-        mutationFn: deleteSheet
-    })
+    const mutation = useMutation({ mutationFn: deleteSheet })
 
     return (
         <Delete
             title="Supprimer ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
-                mutation.mutate({ params: { idSheet: props.sheet.id } }, {
-                    onSuccess: () => {
-                        router.navigate({
-                            to: "/configuration/bilan"
-                        })
-                        toast({ title: "Données supprimées", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idSheet: props.sheet.id }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: sheetsOptions.queryKey })
+                router.navigate({ to: "/configuration/bilan" })
+                toast({ title: "Données supprimées", variant: "success" })
+
                 return true
             }}
             children={props.children}

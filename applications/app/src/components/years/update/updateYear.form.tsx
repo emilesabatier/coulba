@@ -19,11 +19,7 @@ import { YearCombobox } from "../input/yearCombobox"
 export function UpdateYearForm() {
     const { idYear } = useParams({ from: updateYearRoute.id })
     const year = useQuery(yearOptions(idYear))
-
-    const mutation = useMutation({
-        mutationKey: yearsOptions.queryKey,
-        mutationFn: updateYear
-    })
+    const mutation = useMutation({ mutationFn: updateYear })
 
     if (year.isLoading) return <CircularLoader />
     if (year.isError) return <ErrorMessage message={year.error.message} />
@@ -35,16 +31,16 @@ export function UpdateYearForm() {
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Modifier l'exercice"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idYear: idYear },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/exercices" })
-                        toast({ title: "Exercice mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                router.navigate({ to: "/configuration/exercices" })
+                toast({ title: "Exercice mis à jour", variant: "success" })
+
                 return true
             }}
         >

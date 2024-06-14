@@ -9,7 +9,7 @@ import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { updateAccountRoute } from "../../../routes/auth/configuration/accounts/updateAccount.route"
 import { router } from "../../../routes/router"
-import { accountOptions, accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { accountOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { updateAccount } from "../../../services/api/auth/accounts/updateAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
@@ -20,11 +20,7 @@ import { accountTypeOptions } from "../accountTypeOptions"
 export function UpdateAccountForm() {
     const { idAccount } = useParams({ from: updateAccountRoute.id })
     const account = useQuery(accountOptions(idAccount))
-
-    const mutation = useMutation({
-        mutationKey: accountsOptions.queryKey,
-        mutationFn: updateAccount
-    })
+    const mutation = useMutation({ mutationFn: updateAccount })
 
     if (account.isLoading) return <CircularLoader />
     if (account.isError) return <ErrorMessage message={account.error.message} />
@@ -39,19 +35,19 @@ export function UpdateAccountForm() {
             })}
             submitLabel="Modifier le compte"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idAccount: idAccount },
                     body: data
-                }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData && newData && [...oldData.filter((account) => account.id !== newData.id), newData])
-                        router.navigate({
-                            to: "/configuration/comptes/$idAccount",
-                            params: { idAccount: idAccount }
-                        })
-                        toast({ title: "Compte mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                queryClient.invalidateQueries({ queryKey: accountOptions(idAccount).queryKey })
+                router.navigate({
+                    to: "/configuration/comptes/$idAccount",
+                    params: { idAccount: idAccount }
+                })
+                toast({ title: "Compte mis à jour", variant: "success" })
+
                 return true
             }}
         >
