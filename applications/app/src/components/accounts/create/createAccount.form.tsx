@@ -28,7 +28,7 @@ export function CreateAccountForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountsOptions.queryKey })
+                await queryClient.invalidateQueries(accountsOptions)
                 router.navigate({
                     to: "/configuration/comptes/$idAccount",
                     params: { idAccount: response.id }

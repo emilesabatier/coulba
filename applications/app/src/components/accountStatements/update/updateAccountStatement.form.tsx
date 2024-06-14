@@ -42,7 +42,7 @@ export function UpdateAccountStatementForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountStatementOptions(idAccountStatement).queryKey })
+                await queryClient.invalidateQueries(accountStatementOptions(idAccountStatement))
                 router.navigate({
                     to: "/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement",
                     params: {

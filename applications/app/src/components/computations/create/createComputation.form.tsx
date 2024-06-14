@@ -26,7 +26,7 @@ export function CreateComputationForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: computationsOptions.queryKey })
+                await queryClient.invalidateQueries(computationsOptions)
                 router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
                 toast({ title: "Nouveau calcul ajouté", variant: "success" })
 

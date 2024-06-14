@@ -44,7 +44,7 @@ export function UpdateComputationStatementForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: computationStatementOptions(idComputationStatement).queryKey })
+                await queryClient.invalidateQueries(computationStatementOptions(idComputationStatement))
                 router.navigate({
                     to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
                     params: {

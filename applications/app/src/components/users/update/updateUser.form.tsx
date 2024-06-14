@@ -36,7 +36,7 @@ export function UpdateUserForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: usersOptions.queryKey })
+                await queryClient.invalidateQueries(usersOptions)
                 router.navigate({ to: "/configuration/utilisateurs" })
                 toast({ title: "Utilisateur mis à jour", variant: "success" })
 

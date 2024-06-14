@@ -29,7 +29,7 @@ export function CreateRecordForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: recordsOptions.queryKey })
+                await queryClient.invalidateQueries(recordsOptions)
                 router.navigate({
                     to: "/ecritures/$idRecord",
                     params: { idRecord: response.id }

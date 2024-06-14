@@ -31,7 +31,7 @@ export function CreateYearForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                await queryClient.invalidateQueries(yearsOptions)
                 if (response.isSelected) await currentYear.mutate()
                 router.navigate({ to: "/configuration/exercices" })
                 toast({ title: "Nouvel exercice ajouté", variant: "success" })

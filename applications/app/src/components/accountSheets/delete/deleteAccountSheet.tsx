@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
-import { accountSheetsOptions } from "../../../services/api/auth/accountSheets/accountSheetsOptions"
 import { deleteAccountSheet } from "../../../services/api/auth/accountSheets/deleteAccountSheet"
+import { sheetOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { Delete } from "../../layouts/actions/delete"
 
 
@@ -28,11 +28,11 @@ export function DeleteAccountSheet(props: DeleteAccountSheet) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountSheetsOptions.queryKey })
-                router.navigate({
+                await router.navigate({
                     to: "/configuration/bilan/$idSheet",
                     params: { idSheet: props.accountSheet.idSheet }
                 })
+                await queryClient.invalidateQueries(sheetOptions(props.accountSheet.idSheet))
                 toast({ title: "Données supprimées", variant: "success" })
 
                 return true

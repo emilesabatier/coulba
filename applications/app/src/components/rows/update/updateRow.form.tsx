@@ -47,7 +47,7 @@ export function UpdateRowForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: rowOptions(idRow).queryKey })
+                await queryClient.invalidateQueries(rowOptions(idRow))
                 router.navigate({
                     to: "/ecritures/$idRecord/lignes/$idRow",
                     params: {

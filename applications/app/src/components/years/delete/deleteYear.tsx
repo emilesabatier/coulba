@@ -27,7 +27,7 @@ export function DeleteYear(props: DeleteYear) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                await queryClient.invalidateQueries(yearsOptions)
                 toast({ title: "Exercice supprimé", variant: "success" })
 
                 return true

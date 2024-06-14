@@ -27,7 +27,7 @@ export function CreateStatementForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: statementsOptions.queryKey })
+                await queryClient.invalidateQueries(statementsOptions)
                 router.navigate({
                     to: "/configuration/compte-de-resultat/lignes/$idStatement",
                     params: { idStatement: response.id }

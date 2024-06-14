@@ -41,7 +41,7 @@ export function UpdateAccountForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountOptions(idAccount).queryKey })
+                await queryClient.invalidateQueries(accountOptions(idAccount))
                 router.navigate({
                     to: "/configuration/comptes/$idAccount",
                     params: { idAccount: idAccount }

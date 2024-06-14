@@ -36,7 +36,7 @@ export function UpdateJournalForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: journalsOptions.queryKey })
+                await queryClient.invalidateQueries(journalsOptions)
                 router.navigate({ to: "/configuration/journaux" })
                 toast({ title: "Journal mis à jour", variant: "success" })
 

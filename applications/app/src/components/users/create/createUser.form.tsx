@@ -26,7 +26,7 @@ export function CreateUserForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: usersOptions.queryKey })
+                await queryClient.invalidateQueries(usersOptions)
                 router.navigate({ to: "/configuration/utilisateurs" })
                 toast({ title: "Nouvel accès utilisateur ajouté", variant: "success" })
 

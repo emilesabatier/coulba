@@ -36,7 +36,7 @@ export function CreateAccountSheetForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountSheetsOptions.queryKey })
+                await queryClient.invalidateQueries(accountSheetsOptions)
                 router.navigate({
                     to: "/configuration/bilan/$idSheet",
                     params: { idSheet: idSheet }

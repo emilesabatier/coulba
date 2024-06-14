@@ -34,7 +34,7 @@ export function CreateAccountStatementForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountStatementsOptions.queryKey })
+                await queryClient.invalidateQueries(accountStatementsOptions)
                 router.navigate({
                     to: "/configuration/compte-de-resultat/lignes/$idStatement",
                     params: { idStatement: idStatement }

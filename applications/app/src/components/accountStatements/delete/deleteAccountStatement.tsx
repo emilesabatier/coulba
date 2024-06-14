@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
-import { accountStatementsOptions } from "../../../services/api/auth/accountStatements/accountStatementsOptions"
 import { deleteAccountStatement } from "../../../services/api/auth/accountStatements/deleteAccountStatement"
+import { statementOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { Delete } from "../../layouts/actions/delete"
 
 
@@ -28,11 +28,11 @@ export function DeleteAccountStatement(props: DeleteAccountStatement) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountStatementsOptions.queryKey })
-                router.navigate({
+                await router.navigate({
                     to: "/configuration/compte-de-resultat/lignes/$idStatement",
                     params: { idStatement: props.accountStatement.idStatement }
                 })
+                await queryClient.invalidateQueries(statementOptions(props.accountStatement.idStatement))
                 toast({ title: "Données supprimées", variant: "success" })
 
                 return true

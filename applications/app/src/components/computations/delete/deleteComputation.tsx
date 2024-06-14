@@ -28,8 +28,8 @@ export function DeleteComputation(props: DeleteComputation) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: computationsOptions.queryKey })
-                router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
+                await router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
+                await queryClient.invalidateQueries(computationsOptions)
                 toast({ title: "Calcul supprimé", variant: "success" })
 
                 return true

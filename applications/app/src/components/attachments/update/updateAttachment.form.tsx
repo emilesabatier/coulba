@@ -44,7 +44,7 @@ export function UpdateAttachmentForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: attachmentOptions(idAttachment).queryKey })
+                await queryClient.invalidateQueries(attachmentOptions(idAttachment))
                 router.navigate({
                     to: "/fichiers/$idAttachment",
                     params: { idAttachment: response.id }

@@ -27,7 +27,7 @@ export function DeleteUser(props: DeleteUser) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: usersOptions.queryKey })
+                await queryClient.invalidateQueries(usersOptions)
                 toast({ title: "Accès utilisateur supprimé", variant: "success" })
 
                 return true

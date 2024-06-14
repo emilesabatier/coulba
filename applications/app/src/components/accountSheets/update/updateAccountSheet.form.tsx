@@ -44,7 +44,7 @@ export function UpdateAccountSheetForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountSheetOptions(idAccountSheet).queryKey })
+                await queryClient.invalidateQueries(accountSheetOptions(idAccountSheet))
                 router.navigate({
                     to: "/configuration/bilan/$idSheet/comptes/$idAccountSheet",
                     params: {

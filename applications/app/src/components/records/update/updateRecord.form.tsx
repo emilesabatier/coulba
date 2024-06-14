@@ -45,7 +45,7 @@ export function UpdateRecordForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: recordOptions(idRecord).queryKey })
+                await queryClient.invalidateQueries(recordOptions(idRecord))
                 router.navigate({
                     to: "/ecritures/$idRecord",
                     params: { idRecord: idRecord }

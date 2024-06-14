@@ -27,7 +27,7 @@ export function DeleteJournal(props: DeleteJournal) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: journalsOptions.queryKey })
+                await queryClient.invalidateQueries(journalsOptions)
                 toast({ title: "Journal supprimé", variant: "success" })
 
                 return true

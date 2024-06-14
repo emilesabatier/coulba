@@ -28,8 +28,8 @@ export function DeleteAccount(props: DeleteAccount) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: accountsOptions.queryKey })
-                router.navigate({ to: "/configuration/comptes" })
+                await router.navigate({ to: "/configuration/comptes" })
+                await queryClient.invalidateQueries(accountsOptions)
                 toast({ title: "Compte supprimé", variant: "success" })
 
                 return true

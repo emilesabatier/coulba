@@ -28,8 +28,8 @@ export function DeleteRecord(props: DeleteRecord) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: recordsOptions.queryKey })
-                router.navigate({ to: "/ecritures" })
+                await router.navigate({ to: "/ecritures" })
+                await queryClient.invalidateQueries(recordsOptions)
                 toast({ title: "Écriture supprimée", variant: "success" })
 
                 return true

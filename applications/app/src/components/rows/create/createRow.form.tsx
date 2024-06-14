@@ -36,7 +36,7 @@ export function CreateRowForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: rowsOptions.queryKey })
+                await queryClient.invalidateQueries(rowsOptions)
                 router.navigate({
                     to: "/ecritures/$idRecord",
                     params: { idRecord: idRecord }

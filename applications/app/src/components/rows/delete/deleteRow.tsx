@@ -5,8 +5,8 @@ import { ReactElement } from "react"
 import * as v from "valibot"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
+import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
 import { deleteRow } from "../../../services/api/auth/rows/deleteRow"
-import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
 import { Delete } from "../../layouts/actions/delete"
 
 
@@ -29,12 +29,12 @@ export function DeleteRow(props: DeleteRow) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: rowsOptions.queryKey })
-                toast({ title: "Ligne supprimée", variant: "success" })
-                router.navigate({
+                await router.navigate({
                     to: "/ecritures/$idRecord",
                     params: { idRecord: props.record.id }
                 })
+                await queryClient.invalidateQueries(recordOptions(props.record.id))
+                toast({ title: "Ligne supprimée", variant: "success" })
 
                 return true
             }}

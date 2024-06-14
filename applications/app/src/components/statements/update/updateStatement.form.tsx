@@ -40,7 +40,7 @@ export function UpdateStatementForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: statementOptions(idStatement).queryKey })
+                await queryClient.invalidateQueries(statementOptions(idStatement))
                 router.navigate({
                     to: "/configuration/compte-de-resultat/lignes/$idStatement",
                     params: { idStatement: idStatement }

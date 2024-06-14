@@ -4,6 +4,7 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { readRowRoute } from "../../../routes/auth/records/rows/readRow.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
 import { rowOptions } from "../../../services/api/auth/rows/rowsOptions"
@@ -14,7 +15,6 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteRow } from "../delete/deleteRow"
 import { UpdateRow } from "../update/updateRow"
-import { readRowRoute } from "../../../routes/auth/records/rows/readRow.route"
 
 
 export function RowContent() {

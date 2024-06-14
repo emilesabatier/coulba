@@ -26,7 +26,7 @@ export function CreateJournalForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: journalsOptions.queryKey })
+                await queryClient.invalidateQueries(journalsOptions)
                 router.navigate({ to: "/configuration/journaux" })
                 toast({ title: "Nouveau journal ajouté", variant: "success" })
 

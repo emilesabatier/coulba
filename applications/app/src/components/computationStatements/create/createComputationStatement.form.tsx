@@ -37,7 +37,7 @@ export function CreateComputationStatementForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: computationStatementsOptions.queryKey })
+                await queryClient.invalidateQueries(computationStatementsOptions)
                 router.navigate({
                     to: "/configuration/compte-de-resultat/calculs/$idComputation",
                     params: { idComputation: idComputation }

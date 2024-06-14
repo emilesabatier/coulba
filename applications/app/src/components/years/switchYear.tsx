@@ -28,7 +28,7 @@ export function SwitchYear() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                await queryClient.invalidateQueries(yearsOptions)
                 await currentYear.mutate()
                 router.navigate({ to: "/configuration/exercices" })
                 toast({ title: "L'exercice actuel a été changé", variant: "success" })

@@ -32,7 +32,7 @@ export function AuthLayout() {
                 </Link>
                 <DisplayVersion />
             </div>
-            <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 grid grid-cols-[auto_max-content] border-b border-neutral/20">
+            <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 grid grid-cols-[auto_max-content] gap-3 border-b border-neutral/20 overflow-x-auto">
                 <div className="w-full flex justify-start items-end">
                     {
                         breadcrumbs.map((breadcrumb, index) => (

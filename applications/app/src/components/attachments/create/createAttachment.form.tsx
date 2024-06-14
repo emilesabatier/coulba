@@ -60,7 +60,7 @@ export function CreateAttachmentForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: attachmentsOptions.queryKey })
+                await queryClient.invalidateQueries(attachmentsOptions)
                 router.navigate({ to: "/fichiers" })
                 toast({ title: "Nouveau fichier ajouté", variant: "success" })
 

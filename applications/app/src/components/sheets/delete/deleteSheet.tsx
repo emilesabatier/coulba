@@ -28,8 +28,8 @@ export function DeleteSheet(props: DeleteSheet) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: sheetsOptions.queryKey })
-                router.navigate({ to: "/configuration/bilan" })
+                await router.navigate({ to: "/configuration/bilan" })
+                await queryClient.invalidateQueries(sheetsOptions)
                 toast({ title: "Données supprimées", variant: "success" })
 
                 return true

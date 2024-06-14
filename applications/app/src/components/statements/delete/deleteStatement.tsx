@@ -28,8 +28,8 @@ export function DeleteStatement(props: DeleteStatement) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: statementsOptions.queryKey })
-                router.navigate({ to: "/configuration/compte-de-resultat/lignes" })
+                await router.navigate({ to: "/configuration/compte-de-resultat/lignes" })
+                await queryClient.invalidateQueries(statementsOptions)
                 toast({ title: "Ligne supprimée", variant: "success" })
 
                 return true

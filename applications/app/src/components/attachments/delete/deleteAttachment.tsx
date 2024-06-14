@@ -42,8 +42,8 @@ export function DeleteAttachment(props: DeleteAttachment) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: attachmentsOptions.queryKey })
-                router.navigate({ to: "/fichiers" })
+                await router.navigate({ to: "/fichiers" })
+                await queryClient.invalidateQueries(attachmentsOptions)
                 toast({ title: "Fichier supprimé", variant: "success" })
 
                 return true

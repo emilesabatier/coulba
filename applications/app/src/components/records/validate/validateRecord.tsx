@@ -30,7 +30,7 @@ export function ValidateRecord(props: ValidateRecord) {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: recordOptions(props.record.id).queryKey })
+                await queryClient.invalidateQueries(recordOptions(props.record.id))
                 // router.navigate({
                 //     to: "/ecritures/$idRecord",
                 //     params: { idRecord: props.record.id }

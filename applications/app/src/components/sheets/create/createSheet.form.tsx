@@ -30,7 +30,7 @@ export function CreateSheetForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: sheetsOptions.queryKey })
+                await queryClient.invalidateQueries(sheetsOptions)
                 router.navigate({
                     to: "/configuration/bilan/$idSheet",
                     params: { idSheet: response.id }

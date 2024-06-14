@@ -37,7 +37,7 @@ export function UpdateYearForm() {
                 })
                 if (!response) return false
 
-                queryClient.invalidateQueries({ queryKey: yearsOptions.queryKey })
+                await queryClient.invalidateQueries(yearsOptions)
                 router.navigate({ to: "/configuration/exercices" })
                 toast({ title: "Exercice mis à jour", variant: "success" })
 
