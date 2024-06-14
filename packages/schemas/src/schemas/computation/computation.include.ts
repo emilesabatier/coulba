@@ -1,7 +1,7 @@
 
 export const computationInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
     number: true,
     label: true,

@@ -6,6 +6,7 @@ import { valibotResolver } from "@hookform/resolvers/valibot"
 import { useForm } from "react-hook-form"
 import * as v from "valibot"
 import { useSession } from "../../contexts/session/useSession"
+import { signIn } from "../../services/api/shared/sessions/signIn"
 
 
 export function SignInForm() {
@@ -22,18 +23,24 @@ export function SignInForm() {
         const triggerResponse = await form.trigger()
         if (!triggerResponse) return
 
-        await session.signIn({
+        const response = await signIn({
             body: {
                 email: form.getValues().email,
                 password: form.getValues().password
             }
         })
+        if (!response) return
+
+        await session.mutate()
+        // toast({ title: "Connexion réussie", variant: "success" })
+        // router.navigate({ to: "/" })
+        window.location.reload()
     }
 
     return (
         <FormRoot {...form}>
-            <form className="flex flex-col justify-start items-stretch gap-4">
-                <div className="flex flex-col justify-start items-stretch gap-2">
+            <form className="w-full flex flex-col justify-start items-stretch gap-6">
+                <div className="flex flex-col justify-start items-stretch gap-3">
                     <FormField
                         control={form.control}
                         name="email"
@@ -79,8 +86,9 @@ export function SignInForm() {
                 </div>
                 <div className="flex flex-row justify-end items-center gap-3">
                     <ButtonPlain
-                        onClick={() => onSubmit()}
+                        onClick={async () => await onSubmit()}
                         text="Se connecter"
+                        loader
                         className="w-full justify-center"
                     />
                 </div>

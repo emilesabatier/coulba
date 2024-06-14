@@ -4,6 +4,7 @@ import { cn } from "../services"
 
 export type ChipColors = "neutral" | "error" | "warning" | "success" | "information" | "primary"
 
+
 type Chip = {
     text?: string | null
     color?: ChipColors

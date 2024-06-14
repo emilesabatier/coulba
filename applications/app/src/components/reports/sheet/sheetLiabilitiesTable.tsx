@@ -1,9 +1,9 @@
-import { FormatPrice, FormatText } from "@coulba/design/formats"
+import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { cn } from "@coulba/design/services"
 import { Fragment } from "react"
 import { toRoman } from "../../../services/toRoman"
 import { Table } from "../../layouts/table/table"
-import { SheetLiability } from "./sheetContent"
+import { SheetLiability } from "./groupSheets"
 
 
 type SheetLiabilitiesTable = {
@@ -12,23 +12,36 @@ type SheetLiabilitiesTable = {
 
 export function SheetLiabilitiesTable(props: SheetLiabilitiesTable) {
     return (
-        <div className="w-full flex flex-col justify-start items-stretch border border-neutral/20 rounded-md">
-            <div className="w-full flex flex-col justify-start items-stretch overflow-auto">
-                <Table.Root>
-                    <Table.Header.Root>
-                        <Table.Header.Row>
-                            <Table.Header.Cell />
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm">Net</span>
-                            </Table.Header.Cell>
-                        </Table.Header.Row>
-                    </Table.Header.Root>
-                    <Table.Body.Root>
-                        <SheetLiabilityBody sheet={props.sheet} displayNumber={true} increment={0} />
-                    </Table.Body.Root>
-                </Table.Root>
-            </div>
-        </div>
+        <Table.Root>
+            <Table.Header.Root>
+                <Table.Header.Row>
+                    <Table.Header.Cell />
+                    <Table.Header.Cell className="w-[1%]" align="right">
+                        <span className="text-neutral/75 text-sm">Net</span>
+                    </Table.Header.Cell>
+                </Table.Header.Row>
+            </Table.Header.Root>
+            <Table.Body.Root>
+                {
+                    props.sheet.length > 0 ? (
+                        <SheetLiabilityBody
+                            sheet={props.sheet}
+                            displayNumber={true}
+                            increment={0}
+                        />
+                    )
+                        : (
+                            <Table.Body.Root className="border-b border-neutral/10 last:border-b-0">
+                                <Table.Body.Row>
+                                    <Table.Body.Cell>
+                                        <FormatNull className="" />
+                                    </Table.Body.Cell>
+                                </Table.Body.Row>
+                            </Table.Body.Root>
+                        )
+                }
+            </Table.Body.Root>
+        </Table.Root>
     )
 }
 
@@ -62,9 +75,15 @@ function SheetLiabilityBody(props: SheetLiabilityBody) {
                                         )}
                                     />
                                 </Table.Body.Cell>
-                                <Table.Body.Cell className="w-[1%]" align="right">
-                                    <FormatPrice price={entry.net} />
-                                </Table.Body.Cell>
+                                {
+                                    entry.sheets.length > 0 ? (
+                                        <Table.Body.Cell colSpan={3} />
+                                    ) : (
+                                        <Table.Body.Cell className="w-[1%]" align="right">
+                                            <FormatPrice price={entry.net} />
+                                        </Table.Body.Cell>
+                                    )
+                                }
                             </Table.Body.Row>
                             <SheetLiabilityBody sheet={entry.sheets} increment={props.increment + 1} />
                         </Fragment>

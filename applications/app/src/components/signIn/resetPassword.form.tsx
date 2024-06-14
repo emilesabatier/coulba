@@ -1,11 +1,9 @@
-import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormControl, FormError, FormField, FormItem, FormRoot } from "@coulba/design/forms"
 import { InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { shared } from "@coulba/schemas/routes"
 import { valibotResolver } from "@hookform/resolvers/valibot"
-import { IconArrowLeft } from "@tabler/icons-react"
-import { Link } from "@tanstack/react-router"
 import { useForm } from "react-hook-form"
 import * as v from "valibot"
 import { router } from "../../routes/router"
@@ -35,8 +33,8 @@ export function ResetPasswordForm() {
 
     return (
         <FormRoot {...form}>
-            <form className="w-full flex flex-col justify-start items-stretch gap-4">
-                <div className="flex flex-col justify-start items-stretch gap-2">
+            <form className="w-full flex flex-col justify-start items-stretch gap-3">
+                <div className="flex flex-col justify-start items-stretch gap-3">
                     <FormField
                         control={form.control}
                         name="email"
@@ -60,18 +58,11 @@ export function ResetPasswordForm() {
                         )}
                     />
                 </div>
-                <div className="flex flex-row justify-end items-center gap-1">
-                    <Link to="/connexion">
-                        <ButtonOutline
-                            icon={<IconArrowLeft />}
-                            text="Retour"
-                            className="border-dashed"
-                        />
-                    </Link>
+                <div className="flex flex-row justify-end items-center gap-1.5">
                     <ButtonPlain
-                        onClick={() => onSubmit()}
+                        onClick={async () => await onSubmit()}
+                        loader
                         text="Envoyer l'email de récupération"
-                        className="w-full justify-center"
                     />
                 </div>
             </form>

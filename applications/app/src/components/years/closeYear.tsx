@@ -1,53 +1,153 @@
-import { ButtonOutline } from "@coulba/design/buttons"
-import { FormatBoolean } from "@coulba/design/formats"
+import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
+import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
-import { useCurrentYear } from "../../contexts/currentYear/useCurrentYear"
-import { closeYear } from "../../services/api/auth/years/closeYear"
-import { ConfirmDialog } from "../layouts/actions/confirmDialog"
+import { auth } from "@coulba/schemas/routes"
+import { useQuery } from "@tanstack/react-query"
+import { Fragment } from "react/jsx-runtime"
+import * as v from "valibot"
+import { CurrentYearContext } from "../../contexts/currentYear/currentYear.context"
+import { router } from "../../routes/router"
+import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
+import { journalsOptions } from "../../services/api/auth/journals/journalsOptions"
+import { closeYear } from "../../services/api/auth/years/patch/closeYear"
+import { computeResult } from "../../services/api/auth/years/patch/computeResult"
+import { settleSheet } from "../../services/api/auth/years/patch/settleSheet"
+import { AccountCombobox } from "../accounts/accountCombobox"
+import { JournalCombobox } from "../journals/journalCombobox"
+import { ErrorMessage } from "../layouts/errorMessage"
+import { Form } from "../layouts/forms/form"
 
 
-export function CloseYear() {
-    const currentYear = useCurrentYear()
+type CloseYear = {
+    currentYear: CurrentYearContext
+}
 
-    if (!currentYear.data) return null
+export function CloseYear(props: CloseYear) {
+    const journals = useQuery(journalsOptions)
+    const accounts = useQuery(accountsOptions)
+
+    if (!props.currentYear.data) return null
+    if (journals.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
+    if (journals.isError) return <ErrorMessage message={journals.error.message} />
+    if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
+    if (!journals.data || !accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch gap-4 overflow-auto border border-neutral/20 rounded-md p-4">
-            <div className="flex flex-col justify-start items-start gap-1">
-                <h2 className="text-xl">Figer les comptes</h2>
-                <p className="text-neutral/75">Cela permet de clôturer l'exercice actuel et d'empêcher la saisie de nouvelles transactions.</p>
-                <div className="flex justify-start items-center gap-2">
-                    <span>Exercice actuel figé ?</span>
-                    <FormatBoolean boolean={currentYear.data.isClosed} />
-                </div>
-            </div>
-            <div className="flex justify-start items-center gap-1">
-                {
-                    currentYear.data.isClosed ? null
-                        : (
-                            <ConfirmDialog
-                                title="Figer les comptes ?"
-                                description={"Attention, cette action est définitive et empêche les futurs ajouts et modifications des saisies comptables."}
-                                submitLabel="Figer"
-                                color="error"
-                                onSubmit={async () => {
-                                    if (!currentYear.data) return false
+        <Form
+            validationSchema={v.object({
+                ...auth.years.patch.computeResult.body.entries,
+                ...auth.years.patch.settleSheet.body.entries
+            })}
+            defaultValues={{
+                idJournalClosing: journals.data.find((journal) => journal.code === "OD")?.id,
+                idAccountProfit: accounts.data.find((account) => account.number === 120)?.id,
+                idAccountLoss: accounts.data.find((account) => account.number === 129)?.id
+            }}
+            onCancel={() => router.navigate({ to: "/configuration/exercices" })}
+            submitLabel="Clôturer l'exercice"
+            onSubmit={async (data) => {
 
-                                    const response = await closeYear({ params: { idYear: currentYear.data.id } })
-                                    if (!response) return false
-
-                                    currentYear.mutate()
-                                    toast({ title: "Exercice clôturé", variant: "success" })
-                                    return true
-                                }}
-                            >
-                                <ButtonOutline
-                                    text="Figer les comptes pour l'année sélectionnée"
-                                    className="shrink-0"
-                                />
-                            </ConfirmDialog>
-                        )
+                // compute result
+                const computeResultResponse = await computeResult({
+                    body: {
+                        idJournalClosing: data.idJournalClosing,
+                        idAccountProfit: data.idAccountProfit,
+                        idAccountLoss: data.idAccountLoss
+                    }
+                })
+                if (!computeResultResponse) {
+                    toast({ title: "Erreur lors du calcul du résultat de l'exercice", variant: "error" })
+                    return false
                 }
-            </div>
-        </div>
+                toast({ title: "Calcul du résultat de l'exercice effectué", variant: "success" })
+
+                // settle sheet
+                const settleSheetResponse = await settleSheet({
+                    body: {
+                        idJournalClosing: data.idJournalClosing
+                    }
+                })
+                if (!settleSheetResponse) {
+                    toast({ title: "Erreur lors du solde des comptes de bilan", variant: "error" })
+                    return false
+                }
+                toast({ title: "Solde des comptes de bilan réussi", variant: "success" })
+
+                // close year
+                const closeYearResponse = await closeYear()
+                if (!closeYearResponse) {
+                    toast({ title: "Erreur lors de la clôture de l'exercice", variant: "error" })
+                    return false
+                }
+                toast({ title: "Exercice clôturé", variant: "success" })
+
+                router.navigate({ to: "/configuration/exercices" })
+                return true
+            }}
+        >
+            {(form) => (
+                <Fragment>
+                    <FormField
+                        control={form.control}
+                        name="idJournalClosing"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Journal des écritures de clôture"
+                                    tooltip="Le journal dans lequel seront ajoutées les écritures de clôture générées par l'application."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <JournalCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="idAccountProfit"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Compte de résultat (bénéfice)"
+                                    tooltip="Le compte qui sera mouvementé en cas de résultat positif."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <AccountCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="idAccountLoss"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Compte de résultat (perte)"
+                                    tooltip="Le compte qui sera mouvementé en cas de résultat négatif."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <AccountCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                </Fragment>
+            )}
+        </Form>
     )
 }

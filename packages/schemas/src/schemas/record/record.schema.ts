@@ -1,23 +1,26 @@
 import { createSelectSchema } from 'drizzle-valibot'
+import * as v from "valibot"
+import { booleanSchema } from '../../components/schemas/boolean.schema.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
-import { numericSchema } from "../../components/schemas/numeric.schema.js"
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
-import { records } from "../../models/index.js"
+import { textSchema } from '../../components/schemas/text.schema.js'
+import { records } from '../../models/records.model.js'
 
 
 export const recordSchema = createSelectSchema(records, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idYear: idSchema,
-    idAccount: idSchema,
     idJournal: idSchema,
     idAttachment: idSchema,
-    idTransaction: idSchema,
-    label: requiredTextSchema,
-    date: dateTimeSchema,
-    debit: numericSchema,
-    credit: numericSchema,
+    idAutomatic: textSchema,
+    isValidated: booleanSchema,
+    validatedOn: dateTimeSchema,
+    label: v.nonNullish(requiredTextSchema, "Le libellé doit être renseigné"),
+    date: v.nonNullish(dateTimeSchema, "La date doit être renseignée"),
+    lastUpdatedOn: dateTimeSchema,
+    lastUpdatedBy: idSchema,
     createdOn: dateTimeSchema,
     createdBy: idSchema
 })

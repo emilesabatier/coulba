@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -10,37 +10,59 @@ import { createSheet } from "../../../services/api/auth/sheets/createSheet"
 import { sheetsOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { Form } from "../../layouts/forms/form"
 import { SheetCombobox } from "../sheetCombobox"
+import { sideOptions } from "../sideOptions"
 
 
 export function CreateSheetForm() {
-
-    const mutation = useMutation({
-        mutationKey: sheetsOptions.queryKey,
-        mutationFn: createSheet
-    })
+    const mutation = useMutation({ mutationFn: createSheet })
 
     return (
         <Form
             validationSchema={auth.sheets.post.body}
-            defaultValues={{}}
-            cancelLabel="Retour"
+            defaultValues={{
+                side: "asset"
+            }}
             onCancel={() => router.navigate({ to: "/configuration/bilan" })}
-            submitLabel="Ajouter la ligne"
+            submitLabel="Ajouter"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/bilan" })
-                        toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(sheetsOptions)
+                router.navigate({
+                    to: "/configuration/bilan/$idSheet",
+                    params: { idSheet: response.id }
+                })
+                toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
 
                 return true
             }}
         >
             {(form) => (
                 <Fragment>
+                    <FormField
+                        control={form.control}
+                        name="side"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Côté"
+                                    tooltip="Le côté du bilan."
+                                    isRequired
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={sideOptions}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="number"

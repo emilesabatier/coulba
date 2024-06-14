@@ -6,13 +6,13 @@ import { operations } from '../../components/values/operations.js'
 import { computationStatements } from '../../models/computationStatements.model.js'
 
 
-const computationStatementOperationSchema = v.picklist(operations)
-
 export const computationStatementSchema = createSelectSchema(computationStatements, {
     id: idSchema,
+    idOrganization: idSchema,
+    idYear: idSchema,
     idComputation: idSchema,
-    idStatement: idSchema,
-    operation: computationStatementOperationSchema,
+    idStatement: v.nonNullish(idSchema, "Une ligne doit être renseignée"),
+    operation: v.nonNullish(v.picklist(operations), "Une opération doit être renseignée"),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

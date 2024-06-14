@@ -22,7 +22,7 @@ export const computationsRoute = new Hono<AuthEnv>()
                 .insert(computations)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     number: body.number,
                     label: body.label,
@@ -44,7 +44,7 @@ export const computationsRoute = new Hono<AuthEnv>()
             if (!params.idComputation) {
                 const readComputations = await db.query.computations.findMany({
                     where: and(
-                        eq(computations.idCompany, c.var.user.idCompany),
+                        eq(computations.idOrganization, c.var.user.idOrganization),
                         eq(computations.idYear, c.var.currentYear.id)
                     ),
                     columns: computationInclude,
@@ -58,8 +58,8 @@ export const computationsRoute = new Hono<AuthEnv>()
 
             const readComputation = await db.query.computations.findFirst({
                 where: and(
-                    eq(computations.id, params.idComputation),
-                    eq(computations.idCompany, c.var.user.idCompany)
+                    eq(computations.idOrganization, c.var.user.idOrganization),
+                    eq(computations.id, params.idComputation)
                 ),
                 columns: computationInclude,
                 with: {
@@ -86,7 +86,10 @@ export const computationsRoute = new Hono<AuthEnv>()
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
-                .where(eq(computations.id, params.idComputation))
+                .where(and(
+                    eq(computations.idOrganization, c.var.user.idOrganization),
+                    eq(computations.id, params.idComputation)
+                ))
                 .returning()
 
             return c.json(updateComputation, 200)
@@ -100,7 +103,10 @@ export const computationsRoute = new Hono<AuthEnv>()
 
             const [deleteComputation] = await db
                 .delete(computations)
-                .where(eq(computations.id, params.idComputation))
+                .where(and(
+                    eq(computations.idOrganization, c.var.user.idOrganization),
+                    eq(computations.id, params.idComputation)
+                ))
                 .returning()
 
             return c.json(deleteComputation, 200)

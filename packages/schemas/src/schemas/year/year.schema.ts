@@ -4,21 +4,19 @@ import { booleanSchema } from '../../components/schemas/boolean.schema.js'
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
-import { systems } from '../../components/values/systems.js'
 import { years } from "../../models/index.js"
 
-const yearSystemSchema = v.picklist(systems)
 
 export const yearSchema = createSelectSchema(years, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idPreviousYear: idSchema,
     isClosed: booleanSchema,
     isSelected: booleanSchema,
-    label: requiredTextSchema,
-    startingOn: dateTimeSchema,
-    endingOn: dateTimeSchema,
-    system: yearSystemSchema,
+    isMinimalSystem: booleanSchema,
+    label: v.nonNullish(requiredTextSchema, "Un libellé doit être renseigné"),
+    startingOn: v.nonNullish(dateTimeSchema, "Une date de début doit être renseignée"),
+    endingOn: v.nonNullish(dateTimeSchema, "Une date de fin doit être renseignée"),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

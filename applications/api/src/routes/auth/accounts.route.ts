@@ -23,13 +23,16 @@ export const accountsRoute = new Hono<AuthEnv>()
                 .insert(accounts)
                 .values({
                     id: generateId(),
-                    idCompany: c.var.company.id,
+                    idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
-                    idStatement: body.idStatement,
                     idParent: body.idParent,
+                    isClass: body.isClass,
+                    isSelectable: body.isSelectable,
                     label: body.label,
                     number: body.number,
-                    system: c.var.currentYear.system,
+                    type: body.type,
+                    scope: c.var.organization.scope,
+                    isMandatory: true,
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })
@@ -49,7 +52,7 @@ export const accountsRoute = new Hono<AuthEnv>()
                     .select()
                     .from(accounts)
                     .where(and(
-                        eq(accounts.idCompany, c.var.user.idCompany),
+                        eq(accounts.idOrganization, c.var.user.idOrganization),
                         eq(accounts.idYear, c.var.currentYear.id)
                     ))
 
@@ -60,7 +63,7 @@ export const accountsRoute = new Hono<AuthEnv>()
                 .select()
                 .from(accounts)
                 .where(and(
-                    eq(accounts.idCompany, c.var.user.idCompany),
+                    eq(accounts.idOrganization, c.var.user.idOrganization),
                     eq(accounts.id, params.idAccount)
                 ))
 
@@ -79,15 +82,16 @@ export const accountsRoute = new Hono<AuthEnv>()
             const [updateAccount] = await db
                 .update(accounts)
                 .set({
-                    idStatement: body.idStatement,
                     idParent: body.idParent,
                     label: body.label,
                     number: body.number,
-                    system: body.system,
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
-                .where(eq(accounts.id, params.idAccount))
+                .where(and(
+                    eq(accounts.idOrganization, c.var.user.idOrganization),
+                    eq(accounts.id, params.idAccount)
+                ))
                 .returning()
 
             return c.json(updateAccount, 200)
@@ -102,7 +106,10 @@ export const accountsRoute = new Hono<AuthEnv>()
 
             const [deleteAccount] = await db
                 .delete(accounts)
-                .where(eq(accounts.id, params.idAccount))
+                .where(and(
+                    eq(accounts.idOrganization, c.var.user.idOrganization),
+                    eq(accounts.id, params.idAccount)
+                ))
                 .returning()
 
             return c.json(deleteAccount, 200)

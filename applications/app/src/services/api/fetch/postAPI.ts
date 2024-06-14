@@ -37,6 +37,6 @@ export async function postAPI<T extends v.ObjectEntries>(props: PostAPI<T>) {
         }
 
         if (props.message) toast({ title: props.message ?? "Erreur avec la requête", variant: "error" })
-        throw new Error("Error with the response")
+        return undefined
     }
 }

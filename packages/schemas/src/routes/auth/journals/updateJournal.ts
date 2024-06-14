@@ -8,7 +8,7 @@ export const updateJournalParams = v.object({
 })
 
 export const updateJournalBody = v.partial(v.object({
-    acronym: journalSchema.entries.acronym,
+    code: journalSchema.entries.code,
     label: journalSchema.entries.label
 }))
 

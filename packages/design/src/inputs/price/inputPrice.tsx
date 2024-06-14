@@ -7,19 +7,19 @@ import { cn } from "../../services/cn"
 type InputPrice = Omit<InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "onChange"> & {
     error?: FieldError
     defaultValue?: string | undefined | null
-    value?: string | undefined | null
-    onChange: (value: string | undefined) => void
+    value?: number | string | undefined | null
+    onChange: (value: number | string | undefined) => void
 }
 
 export const InputPrice = forwardRef<HTMLInputElement, InputPrice>(
     function (props, ref) {
 
-        function input(value: string | undefined | null) {
+        function input(value: number | string | undefined | null) {
             if (value === null || value === undefined) return undefined
             return value?.toString()
         }
 
-        function output(value: string | undefined) {
+        function output(value: number | string | undefined) {
             if (value === undefined) return value
             return value
         }
@@ -47,7 +47,7 @@ export const InputPrice = forwardRef<HTMLInputElement, InputPrice>(
                     unmask={"typed"}
                     // onClick={(event) => { event.currentTarget.select() }}
                     // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
-                    onAccept={(value) => props.onChange(output(value))}
+                    onAccept={(value) => props.onChange(output(Number(value)))}
                     value={input(props.value)}
                     className={cn(
                         "rounded-[inherit] w-full text-base placeholder:text-neutral/25 p-2",

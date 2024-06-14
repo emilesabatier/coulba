@@ -11,7 +11,7 @@ export function TextTitle(props: TextTitle) {
     return (
         <h2
             className={cn(
-                "text-2xl uppercase text-neutral/30",
+                "text-xl uppercase text-neutral/30",
                 props.className
             )}
             children={props.children}

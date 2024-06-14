@@ -15,23 +15,21 @@ type DeleteUser = {
 }
 
 export function DeleteUser(props: DeleteUser) {
-
-    const mutation = useMutation({
-        mutationKey: usersOptions.queryKey,
-        mutationFn: deleteUser
-    })
+    const mutation = useMutation({ mutationFn: deleteUser })
 
     return (
         <Delete
             title="Supprimer l'accès utilisateur ?"
             description="Attention, cela supprimera toutes les données."
             onSubmit={async () => {
-                mutation.mutate({ params: { idUser: props.user.id } }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        toast({ title: "Accès utilisateur supprimé", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    params: { idUser: props.user.id }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(usersOptions)
+                toast({ title: "Accès utilisateur supprimé", variant: "success" })
+
                 return true
             }}
             children={props.children}

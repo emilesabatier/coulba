@@ -9,7 +9,7 @@ type CreateComputation = {
 export function CreateComputation(props: CreateComputation) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/operations/ajouter"
+            to="/configuration/compte-de-resultat/calculs/ajouter"
             children={props.children}
         />
     )

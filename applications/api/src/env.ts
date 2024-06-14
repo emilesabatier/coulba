@@ -2,7 +2,6 @@ import * as v from 'valibot'
 
 enum Env {
     development = 'development',
-    test = 'test',
     production = 'production'
 }
 
@@ -31,7 +30,7 @@ export function env() {
     } catch (error) {
         if (error instanceof v.ValiError) {
             const errorMessage = v.flatten<typeof envSchema>(error)
-            // const errorMessage = Object.records(fieldErrors)
+            // const errorMessage = Object.rows(fieldErrors)
             //     .map(([field, errors]) =>
             //         errors ? `${field}: ${errors.join(", ")}` : field,
             //     )

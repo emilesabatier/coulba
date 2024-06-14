@@ -1,23 +1,20 @@
 import { createSelectSchema } from 'drizzle-valibot'
 import * as v from "valibot"
-import { integerSchema } from "../../components/index.js"
+import { integerSchema, sides } from "../../components/index.js"
 import { dateTimeSchema } from "../../components/schemas/dateTime.schema.js"
 import { idSchema } from "../../components/schemas/id.schema.js"
 import { requiredTextSchema } from '../../components/schemas/requiredText.schema.js'
-import { sheetSides } from '../../components/values/sheetSide.js'
 import { sheets } from "../../models/index.js"
 
 
-const sheetSideSchema = v.picklist(sheetSides)
-
 export const sheetSchema = createSelectSchema(sheets, {
     id: idSchema,
-    idCompany: idSchema,
+    idOrganization: idSchema,
     idYear: idSchema,
-    idParent: idSchema,
-    side: sheetSideSchema,
-    number: integerSchema,
-    label: requiredTextSchema,
+    idParent: v.nonNullish(idSchema, "Un parent doit être renseigné"),
+    side: v.picklist(sides),
+    number: v.nonNullish(integerSchema, "Un numéro doit être renseigné"),
+    label: v.nonNullish(requiredTextSchema, "Un libellé doit être renseigné"),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

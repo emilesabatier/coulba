@@ -20,7 +20,7 @@ const DialogOverlay = forwardRef<
         ref={ref}
         // style={{ zIndex: 100 }}
         className={cn(
-            "fixed z-10 inset-0 w-full h-full flex justify-end items-center overflow-auto p-4 md:p-8 bg-neutral/25 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+            "fixed z-10 inset-0 w-full h-full flex justify-end items-center overflow-auto p-3 md:p-8 bg-neutral/25 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             className
         )}
         {...props}
@@ -60,7 +60,7 @@ const DialogHeader = ({
     <div
         {...props}
         className={cn(
-            "grid grid-cols-[auto_min-content] gap-x-2 items-center bg-white border-b border-neutral/10 p-2 md:p-4",
+            "grid grid-cols-[auto_min-content] gap-x-2 items-center bg-white border-b border-neutral/10 p-2 md:p-3",
             className
         )}
     >
@@ -82,7 +82,7 @@ const DialogFooter = ({
 }: HTMLAttributes<HTMLDivElement>) => (
     <div
         className={cn(
-            "mt-auto p-2 md:p-4 bg-white border-t border-neutral/10 flex justify-end items-center gap-1 md:gap-2",
+            "mt-auto p-2 md:p-3 bg-white border-t border-neutral/10 flex justify-end items-center gap-1 md:gap-2",
             className
         )}
         {...props}
@@ -120,3 +120,4 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName
 export {
     Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger
 }
+

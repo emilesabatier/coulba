@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateJournalRoute } from "../../../routes/auth/app/configuration/journals/updateJournal.route"
+import { updateJournalRoute } from "../../../routes/auth/configuration/journals/updateJournal.route"
 import { router } from "../../../routes/router"
 import { journalOptions, journalsOptions } from "../../../services/api/auth/journals/journalsOptions"
 import { updateJournal } from "../../../services/api/auth/journals/updateJournal"
@@ -18,11 +18,7 @@ import { Form } from "../../layouts/forms/form"
 export function UpdateJournalForm() {
     const { idJournal } = useParams({ from: updateJournalRoute.id })
     const journal = useQuery(journalOptions(idJournal))
-
-    const mutation = useMutation({
-        mutationKey: journalsOptions.queryKey,
-        mutationFn: updateJournal
-    })
+    const mutation = useMutation({ mutationFn: updateJournal })
 
     if (journal.isLoading) return <CircularLoader />
     if (journal.isError) return <ErrorMessage message={journal.error.message} />
@@ -31,20 +27,19 @@ export function UpdateJournalForm() {
         <Form
             validationSchema={auth.journals.put.body}
             defaultValues={journal.data}
-            cancelLabel="Retour aux journaux"
             onCancel={() => router.navigate({ to: "/configuration/journaux" })}
             submitLabel="Modifier le journal"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idJournal: idJournal },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/journaux" })
-                        toast({ title: "Journal mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(journalsOptions)
+                router.navigate({ to: "/configuration/journaux" })
+                toast({ title: "Journal mis à jour", variant: "success" })
+
                 return true
             }}
         >
@@ -73,12 +68,12 @@ export function UpdateJournalForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="acronym"
+                        name="code"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Acronyme"
-                                    tooltip="L'acronyme qui sera affiché."
+                                    label="codee"
+                                    tooltip="L'codee qui sera affiché."
                                     isRequired
                                 />
                                 <FormControl>

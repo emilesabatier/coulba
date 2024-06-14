@@ -15,17 +15,12 @@ import { Form } from "../../layouts/forms/form"
 
 
 export function CreateAttachmentForm() {
-
-    const mutation = useMutation({
-        mutationKey: attachmentsOptions.queryKey,
-        mutationFn: createAttachment
-    })
+    const mutation = useMutation({ mutationFn: createAttachment })
 
     return (
         <Form
-            validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: fileSchema })])}
+            validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: v.nonNullish(fileSchema, "Un fichier doit être uploadé") })])}
             defaultValues={{}}
-            cancelLabel="Retour aux fichiers"
             onCancel={() => router.navigate({ to: "/fichiers" })}
             submitLabel="Ajouter le fichier"
             onSubmit={async (data) => {
@@ -53,7 +48,7 @@ export function CreateAttachmentForm() {
                 }))
                 if (!uploadFileResponse?.ok) return false
 
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     body: {
                         reference: data.reference,
                         label: data.label,
@@ -62,13 +57,12 @@ export function CreateAttachmentForm() {
                         type: data.file.type,
                         size: data.file.size
                     }
-                }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(attachmentsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
-                        router.navigate({ to: "/fichiers" })
-                        toast({ title: "Nouveau fichier ajouté", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(attachmentsOptions)
+                router.navigate({ to: "/fichiers" })
+                toast({ title: "Nouveau fichier ajouté", variant: "success" })
 
                 return true
             }}

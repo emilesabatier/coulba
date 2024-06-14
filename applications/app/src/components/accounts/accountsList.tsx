@@ -1,17 +1,17 @@
-import { ButtonGhost, ButtonOutline } from "@coulba/design/buttons"
+import { ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
+import { CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronDown, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
-import { ComponentProps } from "react"
+import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { ErrorMessage } from "../layouts/errorMessage"
+import { Section } from "../layouts/section/section"
 import { CreateAccount } from "./create/createAccount"
-import { DeleteAccount } from "./delete/deleteAccount"
-import { UpdateAccount } from "./update/updateAccount"
+import { ReadAccount } from "./read/readAccount"
 
 
 type GroupedAccount = {
@@ -38,32 +38,35 @@ export function AccountsList() {
     const groupedAccounts = groupAccounts(accounts.data ?? [], 1)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
 
-    if (accounts.isLoading) return <CircularLoader />
+    if (accounts.isLoading) return <CircularLoader className="m-3" />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
     if (!accounts.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-            <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
+        <Section.Root>
+            <Section.Item>
                 <CreateAccount>
-                    <ButtonOutline
+                    <ButtonPlain
                         icon={<IconPlus />}
                         text="Ajouter un compte"
-                        className="border-dashed"
                     />
                 </CreateAccount>
-            </div>
-            <Accordion type="multiple" className="p-4">
+            </Section.Item>
+            <Section.Item className="p-0 flex-col justify-start items-stretch gap-0 overflow-auto">
                 {
-                    (groupedAccounts.length === 0) ? (<FormatNull />) : groupedAccounts.map((groupedAccount) => (
-                        <AccountItem
-                            key={groupedAccount.account.id}
-                            groupedAccount={groupedAccount}
-                            className="pl-0"
-                        />
-                    ))
+                    (groupedAccounts.length > 0) ?
+                        groupedAccounts.map((groupedAccount) => (
+                            <AccountItem
+                                key={groupedAccount.account.id}
+                                groupedAccount={groupedAccount}
+                                level={0}
+                            />
+                        ))
+                        : (
+                            <FormatNull className="p-3" />
+                        )
                 }
-            </Accordion>
-        </div>
+            </Section.Item>
+        </Section.Root>
     )
 }
 
@@ -71,60 +74,45 @@ export function AccountsList() {
 
 type AccountItem = {
     groupedAccount: GroupedAccount
+    level: number
     className?: ComponentProps<'div'>['className']
 }
 
 function AccountItem(props: AccountItem) {
-    const hasSubAccounts = props.groupedAccount.subAccounts.length > 0
-
     return (
-        <AccordionItem
-            disabled={!hasSubAccounts}
-            value={props.groupedAccount.account.id}
-            className={cn(
-                "pl-4",
-                props.className
-            )}
-        >
-            <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
-                <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-start gap-2 p-2">
-                        <h2 className="font-bold">{props.groupedAccount.account.number}</h2>
-                        <span className="text-neutral/75 text-left">{props.groupedAccount.account.label}</span>
-                    </div>
-                    <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50 shrink-0",
-                        hasSubAccounts ? undefined : "opacity-0"
-                    )} />
-                </AccordionTrigger>
-                <div className="flex justify-end items-center gap-1">
-                    <UpdateAccount account={props.groupedAccount.account}>
-                        <ButtonGhost
-                            icon={<IconPencil />}
-                        />
-                    </UpdateAccount>
-                    <DeleteAccount account={props.groupedAccount.account}>
-                        <ButtonGhost
-                            icon={<IconTrash />}
-                            color="error"
-                        />
-                    </DeleteAccount>
+        <Fragment>
+            <ReadAccount idAccount={props.groupedAccount.account.id} className="w-full border-b border-neutral/5 last:border-b-0">
+                <div
+                    className="w-full flex justify-start items-start gap-1.5 p-3 hover:bg-neutral/5"
+                    style={{
+                        paddingLeft: `${(1 + props.level) * 12}px`
+                    }}
+                >
+                    <span className={cn(
+                        "text-neutral font-bold",
+                        props.groupedAccount.account.isMandatory ? "" : ""
+                    )}>
+                        {props.groupedAccount.account.number}
+                    </span>
+                    <span className={cn(
+                        "text-neutral text-left",
+                        props.groupedAccount.account.isMandatory ? "" : ""
+                    )}>
+                        {props.groupedAccount.account.label}
+                    </span>
                 </div>
-            </div>
-            <AccordionContent>
-                <Accordion type="multiple">
-                    {
-                        props.groupedAccount.subAccounts
-                            .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
-                            .map((groupedSubAccount) => (
-                                <AccountItem
-                                    key={groupedSubAccount.account.id}
-                                    groupedAccount={groupedSubAccount}
-                                />
-                            ))
-                    }
-                </Accordion>
-            </AccordionContent>
-        </AccordionItem>
+            </ReadAccount>
+            {
+                props.groupedAccount.subAccounts
+                    .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
+                    .map((groupedSubAccount) => (
+                        <AccountItem
+                            key={groupedSubAccount.account.id}
+                            groupedAccount={groupedSubAccount}
+                            level={props.level + 1}
+                        />
+                    ))
+            }
+        </Fragment>
     )
 }

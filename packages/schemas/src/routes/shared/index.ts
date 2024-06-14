@@ -1,10 +1,10 @@
-import { companies } from "./companies/index.js"
+import { organizations } from "./organizations/index.js"
 import { sessions } from "./sessions/index.js"
 import { users } from "./users/index.js"
 
 
 export const shared = {
-    companies: companies,
+    organizations: organizations,
     sessions: sessions,
     users: users
 }

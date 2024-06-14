@@ -1,172 +1,256 @@
 import { ParseRoute, createRouter } from '@tanstack/react-router'
 import { activationRoute } from './auth/activation.route'
-import { appLayout } from './auth/app.layout'
-import { attachmentsLayout } from './auth/app/attachments/attachments.layout'
-import { attachmentsRoute } from './auth/app/attachments/attachments.route'
-import { createAttachmentRoute } from './auth/app/attachments/createAttachment.route'
-import { readAttachmentRoute } from './auth/app/attachments/readAttachment.route'
-import { updateAttachmentRoute } from './auth/app/attachments/updateAttachment.route'
-import { APIRoute } from './auth/app/configuration/API.route'
-import { accountsLayout } from './auth/app/configuration/accounts/accounts.layout'
-import { accountsRoute } from './auth/app/configuration/accounts/accounts.route'
-import { createAccountRoute } from './auth/app/configuration/accounts/createAccount.route'
-import { updateAccountRoute } from './auth/app/configuration/accounts/updateAccount.route'
-import { closingRoute } from './auth/app/configuration/closing.route'
-import { companyLayout } from './auth/app/configuration/company/company.layout'
-import { companyRoute } from './auth/app/configuration/company/company.route'
-import { updateCompanyRoute } from './auth/app/configuration/company/updateCompany.route'
-import { configurationLayout } from './auth/app/configuration/configuration.layout'
-import { configurationRoute } from './auth/app/configuration/configuration.route'
-import { createJournalRoute } from './auth/app/configuration/journals/createJournal.route'
-import { journalsLayout } from './auth/app/configuration/journals/journals.layout'
-import { journalsRoute } from './auth/app/configuration/journals/journals.route'
-import { updateJournalRoute } from './auth/app/configuration/journals/updateJournal.route'
-import { createSheetRoute } from './auth/app/configuration/sheets/createSheet.route'
-import { sheetsLayout } from './auth/app/configuration/sheets/sheets.layout'
-import { sheetsRoute } from './auth/app/configuration/sheets/sheets.route'
-import { updateSheetRoute } from './auth/app/configuration/sheets/updateSheet.route'
-import { computationsLayout } from './auth/app/configuration/statements/computations/computations.layout'
-import { createComputationRoute } from './auth/app/configuration/statements/computations/createComputation.route'
-import { updateComputationRoute } from './auth/app/configuration/statements/computations/updateComputation.route'
-import { createStatementRoute } from './auth/app/configuration/statements/createStatement.route'
-import { statementsLayout } from './auth/app/configuration/statements/statements.layout'
-import { statementsRoute } from './auth/app/configuration/statements/statements.route'
-import { updateStatementRoute } from './auth/app/configuration/statements/updateStatement.route'
-import { subscriptionRoute } from './auth/app/configuration/subscription.route'
-import { createUserRoute } from './auth/app/configuration/users/createUser.route'
-import { updateUserRoute } from './auth/app/configuration/users/updateUser.route'
-import { usersLayout } from './auth/app/configuration/users/users.layout'
-import { usersRoute } from './auth/app/configuration/users/users.route'
-import { createYearRoute } from './auth/app/configuration/years/createYear.route'
-import { updateYearRoute } from './auth/app/configuration/years/updateYear.route'
-import { yearsLayout } from './auth/app/configuration/years/years.layout'
-import { yearsRoute } from './auth/app/configuration/years/years.route'
-import { overviewRoute } from './auth/app/overview/overview.route'
-import { profileLayout } from './auth/app/profile/profile.layout'
-import { profileRoute } from './auth/app/profile/profile.route'
-import { updateProfileLayout } from './auth/app/profile/update/updateProfile.layout'
-import { updateProfileRoute } from './auth/app/profile/update/updateProfile.page'
-import { updateProfileEmailRoute } from './auth/app/profile/update/updateProfileEmail.page'
-import { updateProfilePasswordRoute } from './auth/app/profile/update/updateProfilePassword.page'
-import { balanceRoute } from './auth/app/reports/balance.route'
-import { ledgerRoute } from './auth/app/reports/ledger.route'
-import { recordsRoute } from './auth/app/reports/records.route'
-import { reportsLayout } from './auth/app/reports/reports.layout'
-import { reportsRoute } from './auth/app/reports/reports.route'
-import { sheetRoute } from './auth/app/reports/sheet.route'
-import { statementRoute } from './auth/app/reports/statement.route'
-import { supportRoute } from './auth/app/support.route'
-import { createTransactionRoute } from './auth/app/transactions/createTransaction.route'
-import { readTransactionRoute } from './auth/app/transactions/readTransaction.route'
-import { transactionsLayout } from './auth/app/transactions/transactions.layout'
-import { transactionsRoute } from './auth/app/transactions/transactions.route'
-import { updateTransactionRoute } from './auth/app/transactions/updateTransaction.route'
+import { attachmentsLayout } from './auth/attachments/attachments.layout'
+import { attachmentsRoute } from './auth/attachments/attachments.route'
+import { createAttachmentRoute } from './auth/attachments/createAttachment.route'
+import { readAttachmentLayout } from './auth/attachments/readAttachment.layout'
+import { readAttachmentRoute } from './auth/attachments/readAttachment.route'
+import { updateAttachmentRoute } from './auth/attachments/updateAttachment.route'
 import { authLayout } from './auth/auth.layout'
+import { APIRoute } from './auth/configuration/API.route'
+import { accountsLayout } from './auth/configuration/accounts/accounts.layout'
+import { accountsRoute } from './auth/configuration/accounts/accounts.route'
+import { createAccountRoute } from './auth/configuration/accounts/createAccount.route'
+import { readAccountLayout } from './auth/configuration/accounts/readAccount.layout'
+import { readAccountRoute } from './auth/configuration/accounts/readAccount.route'
+import { updateAccountRoute } from './auth/configuration/accounts/updateAccount.route'
+import { configurationLayout } from './auth/configuration/configuration.layout'
+import { configurationRoute } from './auth/configuration/configuration.route'
+import { createJournalRoute } from './auth/configuration/journals/createJournal.route'
+import { journalsLayout } from './auth/configuration/journals/journals.layout'
+import { journalsRoute } from './auth/configuration/journals/journals.route'
+import { updateJournalRoute } from './auth/configuration/journals/updateJournal.route'
+import { organizationLayout } from './auth/configuration/organization/organization.layout'
+import { organizationRoute } from './auth/configuration/organization/organization.route'
+import { updateOrganizationRoute } from './auth/configuration/organization/updateOrganization.route'
+import { accountSheetsLayout } from './auth/configuration/sheets/accountSheets/accountSheets.layout'
+import { createAccountSheetRoute } from './auth/configuration/sheets/accountSheets/createAccountSheet.route'
+import { readAccountSheetLayout } from './auth/configuration/sheets/accountSheets/readAccountSheet.layout'
+import { readAccountSheetRoute } from './auth/configuration/sheets/accountSheets/readAccountSheet.route'
+import { updateAccountSheetRoute } from './auth/configuration/sheets/accountSheets/updateAccountSheet.route'
+import { createSheetRoute } from './auth/configuration/sheets/createSheet.route'
+import { readSheetLayout } from './auth/configuration/sheets/readSheet.layout'
+import { readSheetRoute } from './auth/configuration/sheets/readSheet.route'
+import { sheetsLayout } from './auth/configuration/sheets/sheets.layout'
+import { sheetsRoute } from './auth/configuration/sheets/sheets.route'
+import { updateSheetRoute } from './auth/configuration/sheets/updateSheet.route'
+import { computationStatementsLayout } from './auth/configuration/statements/computations/computationStatements/computationStatements.layout'
+import { createComputationStatementRoute } from './auth/configuration/statements/computations/computationStatements/createComputationStatement.route'
+import { readComputationStatementLayout } from './auth/configuration/statements/computations/computationStatements/readComputationStatement.layout'
+import { readComputationStatementRoute } from './auth/configuration/statements/computations/computationStatements/readComputationStatement.route'
+import { updateComputationStatementRoute } from './auth/configuration/statements/computations/computationStatements/updateComputationStatement.route'
+import { computationsLayout } from './auth/configuration/statements/computations/computations.layout'
+import { computationsRoute } from './auth/configuration/statements/computations/computations.route'
+import { createComputationRoute } from './auth/configuration/statements/computations/createComputation.route'
+import { readComputationLayout } from './auth/configuration/statements/computations/readComputation.layout'
+import { readComputationRoute } from './auth/configuration/statements/computations/readComputation.route'
+import { updateComputationRoute } from './auth/configuration/statements/computations/updateComputation.route'
+import { accountStatementsLayout } from './auth/configuration/statements/statements/accountStatements/accountStatements.layout'
+import { createAccountStatementRoute } from './auth/configuration/statements/statements/accountStatements/createAccountStatement.route'
+import { readAccountStatementLayout } from './auth/configuration/statements/statements/accountStatements/readAccountStatement.layout'
+import { readAccountStatementRoute } from './auth/configuration/statements/statements/accountStatements/readAccountStatement.route'
+import { updateAccountStatementRoute } from './auth/configuration/statements/statements/accountStatements/updateAccountStatement.route'
+import { createStatementRoute } from './auth/configuration/statements/statements/createStatement.route'
+import { readStatementLayout } from './auth/configuration/statements/statements/readStatement.layout'
+import { readStatementRoute } from './auth/configuration/statements/statements/readStatement.route'
+import { statementsLayout } from './auth/configuration/statements/statements/statements.layout'
+import { statementsRoute } from './auth/configuration/statements/statements/statements.route'
+import { updateStatementRoute } from './auth/configuration/statements/statements/updateStatement.route'
+import { statementsConfigLayout } from './auth/configuration/statements/statementsConfig.layout'
+import { statementsConfigRoute } from './auth/configuration/statements/statementsConfig.route'
+import { createUserRoute } from './auth/configuration/users/createUser.route'
+import { updateUserRoute } from './auth/configuration/users/updateUser.route'
+import { usersLayout } from './auth/configuration/users/users.layout'
+import { usersRoute } from './auth/configuration/users/users.route'
+import { createYearRoute } from './auth/configuration/years/createYear.route'
+import { downloadDocumentsRoute } from './auth/configuration/years/patch/downloadDocuments.route'
+import { openYearRoute } from './auth/configuration/years/patch/openYear.route'
+import { switchYearRoute } from './auth/configuration/years/patch/switchYear.route'
+import { updateYearRoute } from './auth/configuration/years/updateYear.route'
+import { yearsLayout } from './auth/configuration/years/years.layout'
+import { yearsRoute } from './auth/configuration/years/years.route'
+import { yearsListRoute } from './auth/configuration/years/yearsList.route'
+import { overviewRoute } from './auth/overview/overview.route'
+import { profileLayout } from './auth/profile/profile.layout'
+import { profileRoute } from './auth/profile/profile.route'
+import { updateProfileLayout } from './auth/profile/update/updateProfile.layout'
+import { updateProfileRoute } from './auth/profile/update/updateProfile.page'
+import { updateProfileEmailRoute } from './auth/profile/update/updateProfileEmail.page'
+import { updateProfilePasswordRoute } from './auth/profile/update/updateProfilePassword.page'
+import { createRecordRoute } from './auth/records/createRecord.route'
+import { readRecordLayout } from './auth/records/readRecord.layout'
+import { readRecordRoute } from './auth/records/readRecord.route'
+import { recordsLayout } from './auth/records/records.layout'
+import { recordsRoute } from './auth/records/records.route'
+import { createRowRoute } from './auth/records/rows/createRow.route'
+import { readRowLayout } from './auth/records/rows/readRow.layout'
+import { readRowRoute } from './auth/records/rows/readRow.route'
+import { rowsLayout } from './auth/records/rows/rows.layout'
+import { updateRowRoute } from './auth/records/rows/updateRow.route'
+import { updateRecordRoute } from './auth/records/updateRecord.route'
+import { balanceRoute } from './auth/reports/balance.route'
+import { journalRoute } from './auth/reports/journal.route'
+import { ledgerRoute } from './auth/reports/ledger.route'
+import { reportsLayout } from './auth/reports/reports.layout'
+import { reportsRoute } from './auth/reports/reports.route'
+import { sheetRoute } from './auth/reports/sheet.route'
+import { statementRoute } from './auth/reports/statement.route'
+import { supportRoute } from './auth/support.route'
 import { rootLayout } from './root.layout'
-import { sharedLayout } from './shared/shared.layout'
-import { validateEmailRoute } from './shared/validateEmail.route'
-import { validateInvitationRoute } from './shared/validateInvitation.route'
-import { resetPasswordRoute } from './signIn/resetPassword.route'
-import { signInLayout } from './signIn/signIn.layout'
-import { signInRoute } from './signIn/signIn.route'
-import { signUpRoute } from './signUp/signUp.route'
+import { sharedLayout } from './unauth/shared/shared.layout'
+import { validateEmailRoute } from './unauth/shared/validateEmail.route'
+import { validateInvitationRoute } from './unauth/shared/validateInvitation.route'
+import { resetPasswordRoute } from './unauth/signIn/resetPassword.route'
+import { signInLayout } from './unauth/signIn/signIn.layout'
+import { signInRoute } from './unauth/signIn/signIn.route'
+import { signUpRoute } from './unauth/signUp/signUp.route'
+import { unauthLayout } from './unauth/unauth.layout'
+import { closeYearRoute } from './auth/configuration/years/patch/closeYear.route'
 
 
 const routeTree = rootLayout.addChildren([
+    unauthLayout.addChildren([
+        signUpRoute,
 
-    signUpRoute,
+        signInLayout.addChildren([
+            signInRoute,
+            resetPasswordRoute
+        ]),
 
-    signInLayout.addChildren([
-        signInRoute,
-        resetPasswordRoute
+        sharedLayout.addChildren([
+            validateInvitationRoute,
+            validateEmailRoute
+        ])
     ]),
-
-    sharedLayout.addChildren([
-        validateInvitationRoute,
-        validateEmailRoute
-    ]),
-
     authLayout.addChildren([
+        overviewRoute,
         activationRoute,
-        appLayout.addChildren([
-            overviewRoute,
+        supportRoute,
 
-            transactionsLayout.addChildren([
-                transactionsRoute,
-                createTransactionRoute,
-                readTransactionRoute,
-                updateTransactionRoute
-            ]),
+        profileLayout.addChildren([
+            profileRoute,
+            updateProfileLayout.addChildren([
+                updateProfileRoute,
+                updateProfileEmailRoute,
+                updateProfilePasswordRoute
+            ])
+        ]),
 
-            attachmentsLayout.addChildren([
-                attachmentsRoute,
-                createAttachmentRoute,
+        recordsLayout.addChildren([
+            recordsRoute,
+            createRecordRoute,
+            readRecordLayout.addChildren([
+                readRecordRoute,
+                updateRecordRoute,
+                rowsLayout.addChildren([
+                    createRowRoute,
+                    readRowLayout.addChildren([
+                        readRowRoute,
+                        updateRowRoute
+                    ])
+                ])
+            ])
+        ]),
+
+        attachmentsLayout.addChildren([
+            attachmentsRoute,
+            createAttachmentRoute,
+            readAttachmentLayout.addChildren([
                 readAttachmentRoute,
                 updateAttachmentRoute
-            ]),
+            ])
+        ]),
 
-            reportsLayout.addChildren([
-                reportsRoute,
-                recordsRoute,
-                ledgerRoute,
-                balanceRoute,
-                sheetRoute,
-                statementRoute
-            ]),
+        reportsLayout.addChildren([
+            reportsRoute,
+            journalRoute,
+            ledgerRoute,
+            balanceRoute,
+            sheetRoute,
+            statementRoute
+        ]),
 
-            configurationLayout.addChildren([
-                configurationRoute,
-                companyLayout.addChildren([
-                    companyRoute,
-                    updateCompanyRoute
-                ]),
-                subscriptionRoute,
-                usersLayout.addChildren([
-                    usersRoute,
-                    createUserRoute,
-                    updateUserRoute
-                ]),
-                APIRoute,
-                yearsLayout.addChildren([
-                    yearsRoute,
-                    createYearRoute,
-                    updateYearRoute
-                ]),
-                closingRoute,
-                journalsLayout.addChildren([
-                    journalsRoute,
-                    createJournalRoute,
-                    updateJournalRoute
-                ]),
-                accountsLayout.addChildren([
-                    accountsRoute,
-                    createAccountRoute,
+        configurationLayout.addChildren([
+            configurationRoute,
+            organizationLayout.addChildren([
+                organizationRoute,
+                updateOrganizationRoute
+            ]),
+            usersLayout.addChildren([
+                usersRoute,
+                createUserRoute,
+                updateUserRoute
+            ]),
+            APIRoute,
+            yearsLayout.addChildren([
+                yearsRoute,
+                yearsListRoute,
+                createYearRoute,
+                updateYearRoute,
+                switchYearRoute,
+                closeYearRoute,
+                downloadDocumentsRoute,
+                openYearRoute
+            ]),
+            journalsLayout.addChildren([
+                journalsRoute,
+                createJournalRoute,
+                updateJournalRoute
+            ]),
+            accountsLayout.addChildren([
+                accountsRoute,
+                createAccountRoute,
+                readAccountLayout.addChildren([
+                    readAccountRoute,
                     updateAccountRoute
-                ]),
-                sheetsLayout.addChildren([
-                    sheetsRoute,
-                    createSheetRoute,
-                    updateSheetRoute
-                ]),
-                statementsLayout.addChildren([
-                    statementsRoute,
-                    createStatementRoute,
-                    updateStatementRoute,
-                    computationsLayout.addChildren([
-                        createComputationRoute,
-                        updateComputationRoute
+                ])
+            ]),
+            sheetsLayout.addChildren([
+                sheetsRoute,
+                createSheetRoute,
+                readSheetLayout.addChildren([
+                    readSheetRoute,
+                    updateSheetRoute,
+                    accountSheetsLayout.addChildren([
+                        createAccountSheetRoute,
+                        readAccountSheetLayout.addChildren([
+                            readAccountSheetRoute,
+                            updateAccountSheetRoute
+                        ])
                     ])
                 ])
             ]),
-
-            supportRoute,
-
-            profileLayout.addChildren([
-                profileRoute,
-                updateProfileLayout.addChildren([
-                    updateProfileRoute,
-                    updateProfileEmailRoute,
-                    updateProfilePasswordRoute
+            statementsConfigLayout.addChildren([
+                statementsConfigRoute,
+                statementsLayout.addChildren([
+                    statementsRoute,
+                    createStatementRoute,
+                    readStatementLayout.addChildren([
+                        readStatementRoute,
+                        updateStatementRoute,
+                        accountStatementsLayout.addChildren([
+                            createAccountStatementRoute,
+                            readAccountStatementLayout.addChildren([
+                                readAccountStatementRoute,
+                                updateAccountStatementRoute
+                            ])
+                        ])
+                    ])
+                ]),
+                computationsLayout.addChildren([
+                    computationsRoute,
+                    createComputationRoute,
+                    readComputationLayout.addChildren([
+                        readComputationRoute,
+                        updateComputationRoute,
+                        computationStatementsLayout.addChildren([
+                            createComputationStatementRoute,
+                            readComputationStatementLayout.addChildren([
+                                readComputationStatementRoute,
+                                updateComputationStatementRoute
+                            ])
+                        ])
+                    ])
                 ])
             ])
         ])
@@ -181,11 +265,12 @@ export const router = createRouter({
     routeTree,
     context: {
         title: undefined,
+        description: undefined,
         session: {
             isLoading: false,
             mutate: async () => { },
             profile: undefined,
-            isSignedIn: undefined
+            isSignedIn: false
         }
     },
     notFoundMode: "root"

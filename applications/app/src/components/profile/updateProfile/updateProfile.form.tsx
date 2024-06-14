@@ -19,14 +19,13 @@ export function UpdateProfileForm() {
         <Form
             validationSchema={auth.profile.put.body}
             defaultValues={session.profile}
-            cancelLabel="Retour"
             onCancel={() => router.navigate({ to: "/profil" })}
             submitLabel="Modifier"
             onSubmit={async (data) => {
                 const response = await updateProfile({ body: data })
                 if (!response) return false
 
-                session.mutate()
+                await session.mutate()
                 router.navigate({ to: "/profil" })
                 toast({ title: "Profil mis à jour", variant: "success" })
 
@@ -42,7 +41,6 @@ export function UpdateProfileForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Pseudonyme"
-                                    isRequired
                                 />
                                 <FormControl>
                                     <InputText

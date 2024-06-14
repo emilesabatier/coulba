@@ -14,7 +14,6 @@ export function SendSupportMessageForm() {
         <Form
             validationSchema={auth.profile.patch.sendSupportMessage.body}
             defaultValues={{}}
-            cancelLabel="Retour à la vue d'ensemble"
             onCancel={() => router.navigate({ to: "/" })}
             submitLabel="Envoyer le message"
             onSubmit={async (data) => {

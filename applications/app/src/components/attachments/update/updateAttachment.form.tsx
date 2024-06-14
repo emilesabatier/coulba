@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateAttachmentRoute } from "../../../routes/auth/app/attachments/updateAttachment.route"
+import { updateAttachmentRoute } from "../../../routes/auth/attachments/updateAttachment.route"
 import { router } from "../../../routes/router"
 import { attachmentOptions } from "../../../services/api/auth/attachments/attachmentsOptions"
 import { updateAttachment } from "../../../services/api/auth/attachments/updateAttachment"
@@ -19,11 +19,7 @@ import { Form } from "../../layouts/forms/form"
 export function UpdateAttachmentForm() {
     const { idAttachment } = useParams({ from: updateAttachmentRoute.id })
     const attachment = useQuery(attachmentOptions(idAttachment))
-
-    const mutation = useMutation({
-        mutationKey: attachmentOptions(idAttachment).queryKey,
-        mutationFn: updateAttachment
-    })
+    const mutation = useMutation({ mutationFn: updateAttachment })
 
     if (attachment.isLoading) return <CircularLoader />
     if (attachment.isError) return <ErrorMessage message={attachment.error.message} />
@@ -32,27 +28,29 @@ export function UpdateAttachmentForm() {
         <Form
             validationSchema={auth.attachments.put.body}
             defaultValues={attachment.data}
-            cancelLabel="Retour"
             onCancel={() => {
                 if (!attachment.data) return null
                 router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: attachment.data.id } })
             }}
             submitLabel="Modifier le fichier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idAttachment: idAttachment },
                     body: {
                         reference: data.reference,
                         label: data.label,
                         date: data.date
                     }
-                }, {
-                    onSuccess: (newData) => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: newData.id } })
-                        toast({ title: "Fichier mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(attachmentOptions(idAttachment))
+                router.navigate({
+                    to: "/fichiers/$idAttachment",
+                    params: { idAttachment: response.id }
+                })
+                toast({ title: "Fichier mis à jour", variant: "success" })
+
                 return true
             }}
         >

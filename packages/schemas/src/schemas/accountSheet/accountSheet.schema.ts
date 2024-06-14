@@ -7,14 +7,14 @@ import { flows } from '../../components/values/flows.js'
 import { accountSheets } from '../../models/accountSheets.model.js'
 
 
-const accountSheetFlowSchema = v.picklist(flows)
-
 export const accountSheetSchema = createSelectSchema(accountSheets, {
     id: idSchema,
-    idAccount: idSchema,
+    idOrganization: idSchema,
+    idYear: idSchema,
+    idAccount: v.nonNullish(idSchema, "Un compte lié doit être renseigné"),
     idSheet: idSchema,
-    flow: accountSheetFlowSchema,
-    isAllowance: booleanSchema,
+    flow: v.nonNullish(v.picklist(flows), "Un flux doit être renseigné"),
+    isAllowance: v.nullish(booleanSchema,),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

@@ -7,9 +7,9 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateStatementRoute } from "../../../routes/auth/app/configuration/statements/updateStatement.route"
+import { updateStatementRoute } from "../../../routes/auth/configuration/statements/statements/updateStatement.route"
 import { router } from "../../../routes/router"
-import { statementOptions, statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
+import { statementOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { updateStatement } from "../../../services/api/auth/statements/updateStatement"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
@@ -19,11 +19,7 @@ import { StatementCombobox } from "../statementCombobox"
 export function UpdateStatementForm() {
     const { idStatement } = useParams({ from: updateStatementRoute.id })
     const statement = useQuery(statementOptions(idStatement))
-
-    const mutation = useMutation({
-        mutationKey: statementsOptions.queryKey,
-        mutationFn: updateStatement
-    })
+    const mutation = useMutation({ mutationFn: updateStatement })
 
     if (statement.isLoading) return <CircularLoader />
     if (statement.isError) return <ErrorMessage message={statement.error.message} />
@@ -32,20 +28,25 @@ export function UpdateStatementForm() {
         <Form
             validationSchema={auth.statements.put.body}
             defaultValues={statement.data}
-            cancelLabel="Retour"
-            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
-            submitLabel="Modifier la ligne"
+            onCancel={() => router.navigate({
+                to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                params: { idStatement: idStatement }
+            })}
+            submitLabel="Modifier"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idStatement: idStatement },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat" })
-                        toast({ title: "Ligne mise à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(statementOptions(idStatement))
+                router.navigate({
+                    to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                    params: { idStatement: idStatement }
+                })
+                toast({ title: "Ligne mise à jour", variant: "success" })
+
                 return true
             }}
         >

@@ -1,13 +1,15 @@
 
 export const accountInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
-    idStatement: true,
     idParent: true,
+    isMandatory: true,
+    isClass: true,
+    isSelectable: true,
     number: true,
     label: true,
-    system: true,
+    type: true,
     lastUpdatedOn: true,
     createdOn: true,
     lastUpdatedBy: true,

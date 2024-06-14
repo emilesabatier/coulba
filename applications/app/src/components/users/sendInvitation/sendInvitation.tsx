@@ -20,11 +20,13 @@ export function SendInvitation(props: SendInvitation) {
             submitLabel="Envoyer"
             color="success"
             onSubmit={async () => {
-                const response = await sendInvitation({ params: { idUser: props.user.id } })
-
+                const response = await sendInvitation({
+                    params: { idUser: props.user.id }
+                })
                 if (!response) return false
 
                 toast({ title: "Invitation envoyée", variant: "success" })
+
                 return true
             }}
             children={props.children}

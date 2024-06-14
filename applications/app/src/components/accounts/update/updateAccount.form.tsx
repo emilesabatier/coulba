@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputSwitch, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -7,24 +7,20 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateAccountRoute } from "../../../routes/auth/app/configuration/accounts/updateAccount.route"
+import { updateAccountRoute } from "../../../routes/auth/configuration/accounts/updateAccount.route"
 import { router } from "../../../routes/router"
-import { accountOptions, accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
+import { accountOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { updateAccount } from "../../../services/api/auth/accounts/updateAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Form } from "../../layouts/forms/form"
-import { StatementCombobox } from "../../statements/statementCombobox"
 import { AccountCombobox } from "../accountCombobox"
+import { accountTypeOptions } from "../accountTypeOptions"
 
 
 export function UpdateAccountForm() {
     const { idAccount } = useParams({ from: updateAccountRoute.id })
     const account = useQuery(accountOptions(idAccount))
-
-    const mutation = useMutation({
-        mutationKey: accountsOptions.queryKey,
-        mutationFn: updateAccount
-    })
+    const mutation = useMutation({ mutationFn: updateAccount })
 
     if (account.isLoading) return <CircularLoader />
     if (account.isError) return <ErrorMessage message={account.error.message} />
@@ -33,20 +29,25 @@ export function UpdateAccountForm() {
         <Form
             validationSchema={auth.accounts.put.body}
             defaultValues={account.data}
-            cancelLabel="Retour aux comptes"
-            onCancel={() => router.navigate({ to: "/configuration/comptes" })}
+            onCancel={() => router.navigate({
+                to: "/configuration/comptes/$idAccount",
+                params: { idAccount: idAccount }
+            })}
             submitLabel="Modifier le compte"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idAccount: idAccount },
                     body: data
-                }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData && newData && [...oldData.filter((account) => account.id !== newData.id), newData])
-                        router.navigate({ to: "/configuration/comptes" })
-                        toast({ title: "Compte mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(accountOptions(idAccount))
+                router.navigate({
+                    to: "/configuration/comptes/$idAccount",
+                    params: { idAccount: idAccount }
+                })
+                toast({ title: "Compte mis à jour", variant: "success" })
+
                 return true
             }}
         >
@@ -114,17 +115,56 @@ export function UpdateAccountForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idStatement"
+                        name="isClass"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne du compte de résultat"
-                                    tooltip="La ligne du compte de résultat sur laquelle la balance du compte est ajoutée."
+                                    label="Classe/sous-classe ?"
+                                    tooltip="Le compte est une classe ou une sous-classe de compte."
                                 />
                                 <FormControl>
-                                    <StatementCombobox
+                                    <InputSwitch
                                         value={field.value}
                                         onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="isSelectable"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Sélectionnable ?"
+                                    tooltip="Le compte est sélectionnable pour les écritures."
+                                />
+                                <FormControl>
+                                    <InputSwitch
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="type"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Type de compte"
+                                    tooltip="Si le compte est de bilan, de gestion ou spécial."
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={accountTypeOptions}
                                     />
                                 </FormControl>
                                 <FormError />

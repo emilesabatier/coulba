@@ -1,8 +1,8 @@
 
 
 import { ReactNode } from "@tanstack/react-router"
-import { CompanyProvider } from "./company/company.provider"
 import { CurrentYearProvider } from "./currentYear/currentYear.provider"
+import { OrganizationProvider } from "./organization/organization.provider"
 import { StateProvider } from "./state/state.context"
 
 
@@ -12,12 +12,12 @@ type AuthProvider = {
 
 export function AuthProvider(props: AuthProvider) {
     return (
-        <CompanyProvider>
+        <OrganizationProvider>
             <CurrentYearProvider>
                 <StateProvider>
                     {props.children}
                 </StateProvider>
             </CurrentYearProvider>
-        </CompanyProvider>
+        </OrganizationProvider>
     )
 }

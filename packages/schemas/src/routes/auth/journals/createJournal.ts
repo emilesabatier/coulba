@@ -4,7 +4,7 @@ import { journalSchema } from "../../../schemas/journal/journal.schema.js"
 
 // Input
 export const createJournalBody = v.object({
-    acronym: journalSchema.entries.acronym,
+    code: journalSchema.entries.code,
     label: journalSchema.entries.label
 })
 

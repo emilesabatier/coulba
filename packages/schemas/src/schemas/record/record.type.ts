@@ -1,5 +1,5 @@
-import { records } from "../../models/index.js"
-import { recordInclude } from "./record.include.js"
+import { records } from "../../models"
+import { recordInclude } from "./record.include"
 
 
 type recordInclude = keyof typeof recordInclude

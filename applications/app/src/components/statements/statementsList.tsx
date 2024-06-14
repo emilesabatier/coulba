@@ -1,17 +1,19 @@
-import { ButtonGhost, ButtonOutline } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatNull } from "@coulba/design/formats"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, CircularLoader } from "@coulba/design/layouts"
+import { CircularLoader } from "@coulba/design/layouts"
 import { cn } from "@coulba/design/services"
 import { auth } from "@coulba/schemas/routes"
-import { IconChevronDown, IconPencil, IconPlus, IconTrash } from "@tabler/icons-react"
+import { IconChevronLeft, IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
-import { ComponentProps } from "react"
+import { ComponentProps, Fragment } from "react"
 import * as v from "valibot"
+import { router } from "../../routes/router"
 import { statementsOptions } from "../../services/api/auth/statements/statementsOptions"
+import { toRoman } from "../../services/toRoman"
 import { ErrorMessage } from "../layouts/errorMessage"
+import { Section } from "../layouts/section/section"
 import { CreateStatement } from "./create/createStatement"
-import { DeleteStatement } from "./delete/deleteStatement"
-import { UpdateStatement } from "./update/updateStatement"
+import { ReadStatement } from "./read/readStatement"
 
 
 type GroupedStatement = {
@@ -38,32 +40,38 @@ export function StatementsList() {
     const groupedStatements = groupStatements(statements.data ?? [], null)
         .sort((a, b) => a.statement.number - b.statement.number)
 
-    if (statements.isLoading) return <CircularLoader />
+    if (statements.isLoading) return <CircularLoader className="m-3" />
     if (statements.isError) return <ErrorMessage message={statements.error.message} />
     if (!statements.data) return null
     return (
-        <div className="w-full h-full flex flex-col justify-start items-stretch overflow-auto border border-neutral/20 rounded-md">
-            <div className="w-full flex justify-between items-center p-4 border-b border-neutral/10 last:border-b-0">
+        <Section.Root>
+            <Section.Item className="justify-start">
+                <ButtonOutline
+                    onClick={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
+                    icon={<IconChevronLeft />}
+                />
                 <CreateStatement>
-                    <ButtonOutline
+                    <ButtonPlain
                         icon={<IconPlus />}
-                        text="Ajouter une ligne"
-                        className="border-dashed"
+                        text="Ajouter"
                     />
                 </CreateStatement>
-            </div>
-            <Accordion type="multiple" className="p-4">
+            </Section.Item>
+            <Section.Item className="p-0 flex-col justify-start items-stretch gap-0">
                 {
-                    (groupedStatements.length === 0) ? (<FormatNull />) : groupedStatements.map((groupedStatement) => (
+                    (groupedStatements.length > 0) ? groupedStatements.map((groupedStatement) => (
                         <StatementItem
                             key={groupedStatement.statement.id}
                             groupedStatement={groupedStatement}
-                            className="pl-0"
+                            level={0}
                         />
                     ))
+                        : (
+                            <FormatNull className="p-3" />
+                        )
                 }
-            </Accordion>
-        </div>
+            </Section.Item>
+        </Section.Root>
     )
 }
 
@@ -71,60 +79,42 @@ export function StatementsList() {
 
 type StatementItem = {
     groupedStatement: GroupedStatement
+    level: number
     className?: ComponentProps<'div'>['className']
 }
 
 function StatementItem(props: StatementItem) {
-    const hasSubStatements = props.groupedStatement.subStatements.length > 0
-
     return (
-        <AccordionItem
-            disabled={!hasSubStatements}
-            value={props.groupedStatement.statement.id}
-            className={cn(
-                "pl-4",
-                props.className
-            )}
-        >
-            <div className="flex justify-between items-center gap-4 hover:bg-neutral/5 rounded-sm">
-                <AccordionTrigger className="w-full flex justify-start items-center ">
-                    <div className="flex justify-start items-start gap-2 p-2">
-                        <h2 className="font-bold">{props.groupedStatement.statement.number}</h2>
-                        <span className="text-neutral/75 text-left">{props.groupedStatement.statement.label}</span>
-                    </div>
-                    <IconChevronDown size={16} className={cn(
-                        "stroke-neutral/50 shrink-0",
-                        hasSubStatements ? undefined : "opacity-0"
-                    )} />
-                </AccordionTrigger>
-                <div className="flex justify-end items-center gap-1">
-                    <UpdateStatement statement={props.groupedStatement.statement}>
-                        <ButtonGhost
-                            icon={<IconPencil />}
-                        />
-                    </UpdateStatement>
-                    <DeleteStatement statement={props.groupedStatement.statement}>
-                        <ButtonGhost
-                            icon={<IconTrash />}
-                            color="error"
-                        />
-                    </DeleteStatement>
+        <Fragment>
+            <ReadStatement idStatement={props.groupedStatement.statement.id} className="w-full">
+                <div
+                    className="w-full flex justify-start items-start gap-1.5 p-3 border-b border-neutral/5 hover:bg-neutral/5"
+                    style={{
+                        paddingLeft: `${(1 + props.level) * 12}px`
+                    }}
+                >
+                    {props.level > 0 ? null : (
+                        <span className="text-neutral font-bold">{toRoman(props.groupedStatement.statement.number)}</span>
+                    )}
+                    <span className={cn(
+                        "text-neutral text-left",
+                        props.level === 0 ? "font-bold" : ""
+                    )}>
+                        {props.groupedStatement.statement.label}
+                    </span>
                 </div>
-            </div>
-            <AccordionContent>
-                <Accordion type="multiple">
-                    {
-                        props.groupedStatement.subStatements
-                            .sort((a, b) => a.statement.number - b.statement.number)
-                            .map((groupedSubStatement) => (
-                                <StatementItem
-                                    key={groupedSubStatement.statement.id}
-                                    groupedStatement={groupedSubStatement}
-                                />
-                            ))
-                    }
-                </Accordion>
-            </AccordionContent>
-        </AccordionItem>
+            </ReadStatement>
+            {
+                props.groupedStatement.subStatements
+                    .sort((a, b) => a.statement.number - b.statement.number)
+                    .map((groupedSubStatement) => (
+                        <StatementItem
+                            key={groupedSubStatement.statement.id}
+                            groupedStatement={groupedSubStatement}
+                            level={props.level + 1}
+                        />
+                    ))
+            }
+        </Fragment>
     )
 }

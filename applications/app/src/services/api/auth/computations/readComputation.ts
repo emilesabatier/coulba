@@ -10,12 +10,12 @@ type ReadComputation = {
 
 export function readComputation(props: ReadComputation) {
     if (!props.params.idComputation) {
-        toast({ title: "Identifiant de la ligne manquant" })
+        toast({ title: "Identifiant du calcul manquant" })
         return
     }
     return getAPI({
         path: `/auth/computations/${props.params.idComputation}`,
         schema: auth.computations.get.return,
-        message: "Erreur avec la lecture de l'opération"
+        message: "Erreur avec la lecture du calcul"
     })
 }

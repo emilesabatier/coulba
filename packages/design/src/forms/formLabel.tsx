@@ -23,11 +23,11 @@ export const FormLabel = forwardRef<
             ref={ref}
             htmlFor={formItemId}
             aria-required={props.isRequired}
-            className="flex justify-start items-center gap-2"
+            className="flex justify-start items-center gap-1.5"
         >
             <div className="inline-flex justify-start items-center gap-1">
                 {(!props.isRequired) ? null : <span className="text-error">*</span>}
-                <span className="w-fit inline-flex flex-row justify-start items-center flex-wrap text-base before:content-['\200b']">{props.label}</span>
+                <span className="w-fit inline-flex flex-row justify-start items-center flex-wrap text-base before:content-['\200b'] text-neutral/75">{props.label}</span>
             </div>
             {(!props.tooltip) ? null : (
                 <TooltipProvider>

@@ -26,7 +26,7 @@ export function FormatDateTime(props: FormatDateTime) {
 
     return (
         <FormatBase className={props.className}>
-            <div className="flex justify-start items-center flex-wrap gap-1">
+            <div className="flex justify-start items-center gap-1">
                 <span className="">{`${[day, month, year].join('/')}`}</span>
                 <span className="text-sm leading-none text-neutral/75">{`${[hour, minute].join(':')}`}</span>
             </div>

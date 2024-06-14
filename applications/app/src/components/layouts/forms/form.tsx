@@ -1,7 +1,7 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormRoot } from "@coulba/design/forms"
 import { valibotResolver } from "@hookform/resolvers/valibot"
-import { IconChevronLeft } from "@tabler/icons-react"
+import { IconCheck, IconChevronLeft } from "@tabler/icons-react"
 import { ReactElement } from "react"
 import { DefaultValues, UseFormReturn, useForm } from "react-hook-form"
 import * as v from "valibot"
@@ -12,7 +12,6 @@ type Form<T extends v.ObjectSchema<v.ObjectEntries>> = {
     defaultValues?: DefaultValues<v.Output<T>>
     validationSchema: T
     onCancel: () => void
-    cancelLabel: string
     onSubmit: (data: v.Output<T>) => Promise<boolean>
     submitLabel: string
     children: (form: UseFormReturn<v.Output<T>>) => ReactElement | ReactElement[]
@@ -40,29 +39,29 @@ export function Form<T extends v.ObjectSchema<v.ObjectEntries>>(props: Form<T>) 
         const submitResponse = await props.onSubmit(form.getValues())
         if (!submitResponse) return
 
-        form.reset({}, {
-            keepValues: false,
-            keepDirtyValues: false,
-            keepDefaultValues: false
-        })
+        // form.reset({}, {
+        //     keepValues: false,
+        //     keepDirtyValues: false,
+        //     keepDefaultValues: false
+        // })
     }
 
     return (
         <FormRoot {...form}>
-            <form className="w-[768px] overflow-y-auto overflow-x-hidden flex flex-col justify-start items-stretch gap-4">
-                <div className="flex justify-start items-center gap-1">
+            <form className="grid grid-cols-1 grid-rows-[max-content_auto]">
+                <div className="flex justify-start items-center gap-1.5 p-3 border-b border-neutral/10">
                     <ButtonOutline
                         onClick={() => props.onCancel()}
                         icon={<IconChevronLeft />}
-                        text={props.cancelLabel}
                     />
                     <ButtonPlain
                         onClick={() => onSubmit()}
+                        icon={<IconCheck />}
                         text={props.submitLabel}
                         loader
                     />
                 </div>
-                <div className="flex flex-col justify-start items-stretch gap-4">
+                <div className="w-full max-w-[768px] flex flex-col justify-start items-stretch gap-6 p-6 overflow-auto">
                     {props.children(form)}
                 </div>
             </form>

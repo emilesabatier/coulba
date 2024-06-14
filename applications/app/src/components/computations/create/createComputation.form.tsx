@@ -12,28 +12,23 @@ import { Form } from "../../layouts/forms/form"
 
 
 export function CreateComputationForm() {
-
-    const mutation = useMutation({
-        mutationKey: computationsOptions.queryKey,
-        mutationFn: createComputation
-    })
+    const mutation = useMutation({ mutationFn: createComputation })
 
     return (
         <Form
             validationSchema={auth.computations.post.body}
             defaultValues={{}}
-            cancelLabel="Retour"
-            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat" })}
-            submitLabel="Ajouter l'opération"
+            onCancel={() => router.navigate({ to: "/configuration/compte-de-resultat/calculs" })}
+            submitLabel="Ajouter"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/compte-de-resultat" })
-                        toast({ title: "Nouvelle opération ajoutée", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(computationsOptions)
+                router.navigate({ to: "/configuration/compte-de-resultat/calculs" })
+                toast({ title: "Nouveau calcul ajouté", variant: "success" })
 
                 return true
             }}
@@ -47,7 +42,7 @@ export function CreateComputationForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de l'opération."
+                                    tooltip="Le numéro qui définit l'ordre du calcul."
                                     isRequired
                                 />
                                 <FormControl>

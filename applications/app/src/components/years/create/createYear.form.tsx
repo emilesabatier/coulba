@@ -1,40 +1,40 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputDate, InputSelect, InputText } from "@coulba/design/inputs"
+import { InputDate, InputSwitch, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
 import { Fragment } from "react"
+import { useCurrentYear } from "../../../contexts/currentYear/useCurrentYear"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { router } from "../../../routes/router"
 import { createYear } from "../../../services/api/auth/years/createYear"
 import { yearsOptions } from "../../../services/api/auth/years/yearsOptions"
-import { systemOptions } from "../../accounts/systemOptions"
 import { Form } from "../../layouts/forms/form"
 import { YearCombobox } from "../input/yearCombobox"
 
 
 export function CreateYearForm() {
-
-    const mutation = useMutation({
-        mutationKey: yearsOptions.queryKey,
-        mutationFn: createYear
-    })
+    const currentYear = useCurrentYear()
+    const mutation = useMutation({ mutationFn: createYear })
 
     return (
         <Form
             validationSchema={auth.years.post.body}
-            defaultValues={{}}
-            cancelLabel="Retour aux exercices"
+            defaultValues={{
+                isMinimalSystem: false
+            }}
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
             onSubmit={async (data) => {
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/exercices" })
-                        toast({ title: "Nouvel exercice ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(yearsOptions)
+                if (response.isSelected) await currentYear.mutate()
+                router.navigate({ to: "/configuration/exercices" })
+                toast({ title: "Nouvel exercice ajouté", variant: "success" })
 
                 return true
             }}
@@ -104,19 +104,18 @@ export function CreateYearForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="system"
+                        name="isMinimalSystem"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Système"
-                                    tooltip="Le système pour l'exercice créé: abrégé, de base ou développé."
+                                    label="Système minimal ?"
+                                    tooltip="Si activé, seuls les comptes du système minimal seront créés."
                                     isRequired
                                 />
                                 <FormControl>
-                                    <InputSelect
+                                    <InputSwitch
                                         value={field.value}
                                         onChange={field.onChange}
-                                        options={systemOptions}
                                     />
                                 </FormControl>
                                 <FormError />
@@ -131,7 +130,6 @@ export function CreateYearForm() {
                                 <FormLabel
                                     label="Exercice précédent"
                                     tooltip="L'exercice qui précède chronologiquement."
-                                    isRequired
                                 />
                                 <FormControl>
                                     <YearCombobox

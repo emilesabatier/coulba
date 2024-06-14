@@ -1,16 +1,16 @@
 import { Row } from "@tanstack/react-table"
 
 
-export function recordFilter<T>(idRecordKey: keyof T) {
+export function rowFilter<T>(idrowKey: keyof T) {
     return (row: Row<T>, _columnId: string, value: string) => {
         if (!value) return true
 
         let rawValue = value
 
-        let relatedRecordId = row.original[idRecordKey]
-        if (!relatedRecordId) return true
+        let relatedrowId = row.original[idrowKey]
+        if (!relatedrowId) return true
 
-        if (rawValue !== relatedRecordId) return false
+        if (rawValue !== relatedrowId) return false
 
         return true
     }

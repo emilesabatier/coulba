@@ -24,10 +24,10 @@ export const menuItems: MenuItem[] = [
         path: "/"
     },
     {
-        key: "transactions",
-        label: "Enregistrements",
-        basePath: "/enregistrements",
-        path: "/enregistrements"
+        key: "rows",
+        label: "Écritures",
+        basePath: "/ecritures",
+        path: "/ecritures"
     },
     {
         key: "attachments",
@@ -42,9 +42,9 @@ export const menuItems: MenuItem[] = [
         path: "/documents/bilan",
         subMenuItems: [
             {
-                basePath: "/documents/journal",
-                path: "/documents/journal",
-                label: "Journal"
+                basePath: "/documents/livre-journal",
+                path: "/documents/livre-journal",
+                label: "Livre-journal"
             },
             {
                 basePath: "/documents/grand-livre",
@@ -64,7 +64,7 @@ export const menuItems: MenuItem[] = [
             {
                 basePath: "/documents/compte-de-resultat",
                 path: "/documents/compte-de-resultat",
-                label: "Compte de résultats"
+                label: "Compte de résultat"
             }
         ]
     },
@@ -72,23 +72,18 @@ export const menuItems: MenuItem[] = [
         key: "configuration",
         label: "Configuration",
         basePath: "/configuration",
-        path: "/configuration/societe",
+        path: "/configuration/organisation",
         subMenuItems: [
             {
-                basePath: "/configuration/societe",
-                path: "/configuration/societe",
-                label: "Société"
+                basePath: "/configuration/organisation",
+                path: "/configuration/organisation",
+                label: "Organisation"
             },
             {
                 basePath: "/configuration/utilisateurs",
                 path: "/configuration/utilisateurs",
                 label: "Utilisateurs"
             },
-            // {
-            //     basePath: "/configuration/abonnement",
-            //     path: "/configuration/abonnement",
-            //     label: "Abonnement"
-            // },
             {
                 basePath: "/configuration/api",
                 path: "/configuration/api",
@@ -100,14 +95,9 @@ export const menuItems: MenuItem[] = [
                 label: "Exercices fiscaux"
             },
             {
-                basePath: "/configuration/cloture",
-                path: "/configuration/cloture",
-                label: "Clôture"
-            },
-            {
                 basePath: "/configuration/journaux",
                 path: "/configuration/journaux",
-                label: "Journaux comptables"
+                label: "Journaux auxiliaires"
             },
             {
                 basePath: "/configuration/comptes",

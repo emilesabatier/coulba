@@ -1,4 +1,3 @@
-import { cn } from "@coulba/design/services"
 import { ComponentProps, ReactElement } from "react"
 
 
@@ -9,12 +8,10 @@ type MainContent = {
 
 export function MainContent(props: MainContent) {
     return (
-        <div
-            className={cn(
-                "w-full min-h-full h-full max-h-full overflow-auto p-4 flex flex-col justify-start items-center",
-                props.className
-            )}
-            children={props.children}
-        />
+        <div className="w-full h-fit p-3 flex justify-center items-center">
+            <div className="w-full max-w-[1280px] flex flex-col justify-between items-start gap-3">
+                {props.children}
+            </div>
+        </div>
     )
 }

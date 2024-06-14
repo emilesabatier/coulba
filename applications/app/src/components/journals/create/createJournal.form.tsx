@@ -12,28 +12,23 @@ import { Form } from "../../layouts/forms/form"
 
 
 export function CreateJournalForm() {
-
-    const mutation = useMutation({
-        mutationKey: journalsOptions.queryKey,
-        mutationFn: createJournal
-    })
+    const mutation = useMutation({ mutationFn: createJournal })
 
     return (
         <Form
             validationSchema={auth.journals.post.body}
             defaultValues={{}}
-            cancelLabel="Retour aux journaux"
             onCancel={() => router.navigate({ to: "/configuration/journaux" })}
             submitLabel="Ajouter le journal"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/journaux" })
-                        toast({ title: "Nouveau journal ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(journalsOptions)
+                router.navigate({ to: "/configuration/journaux" })
+                toast({ title: "Nouveau journal ajouté", variant: "success" })
 
                 return true
             }}
@@ -63,12 +58,12 @@ export function CreateJournalForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="acronym"
+                        name="code"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Acronyme"
-                                    tooltip="L'acronyme qui sera affiché."
+                                    label="codee"
+                                    tooltip="L'codee qui sera affiché."
                                     isRequired
                                 />
                                 <FormControl>

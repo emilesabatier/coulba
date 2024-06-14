@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateUserRoute } from "../../../routes/auth/app/configuration/users/updateUser.route"
+import { updateUserRoute } from "../../../routes/auth/configuration/users/updateUser.route"
 import { router } from "../../../routes/router"
 import { updateUser } from "../../../services/api/auth/users/updateUser"
 import { userOptions, usersOptions } from "../../../services/api/auth/users/usersOptions"
@@ -18,11 +18,7 @@ import { Form } from "../../layouts/forms/form"
 export function UpdateUserForm() {
     const { idUser } = useParams({ from: updateUserRoute.id })
     const user = useQuery(userOptions(idUser))
-
-    const mutation = useMutation({
-        mutationKey: usersOptions.queryKey,
-        mutationFn: updateUser
-    })
+    const mutation = useMutation({ mutationFn: updateUser })
 
     if (user.isLoading) return <CircularLoader />
     if (user.isError) return <ErrorMessage message={user.error.message} />
@@ -31,20 +27,19 @@ export function UpdateUserForm() {
         <Form
             validationSchema={auth.users.put.body}
             defaultValues={user.data}
-            cancelLabel="Retour aux utilisateurs"
             onCancel={() => router.navigate({ to: "/configuration/utilisateurs" })}
             submitLabel="Modifier l'utilisateur"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idUser: idUser },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/utilisateurs" })
-                        toast({ title: "Utilisateur mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(usersOptions)
+                router.navigate({ to: "/configuration/utilisateurs" })
+                toast({ title: "Utilisateur mis à jour", variant: "success" })
+
                 return true
             }}
         >
@@ -58,7 +53,6 @@ export function UpdateUserForm() {
                                 <FormLabel
                                     label="Pseudonyme"
                                     tooltip="Le peusdonyme de la personne qui aura l'accès."
-                                    isRequired
                                 />
                                 <FormControl>
                                     <InputText

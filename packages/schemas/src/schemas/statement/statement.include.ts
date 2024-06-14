@@ -1,7 +1,7 @@
 
 export const statementInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
     idParent: true,
     number: true,

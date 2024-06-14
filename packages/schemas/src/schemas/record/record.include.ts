@@ -1,16 +1,17 @@
 
 export const recordInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
-    idAccount: true,
     idJournal: true,
     idAttachment: true,
-    idTransaction: true,
+    idAutomatic: true,
+    isValidated: true,
+    validatedOn: true,
     label: true,
     date: true,
-    debit: true,
-    credit: true,
+    lastUpdatedOn: true,
     createdOn: true,
+    lastUpdatedBy: true,
     createdBy: true
 } as const

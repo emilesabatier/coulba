@@ -11,7 +11,7 @@ export function TextRoot(props: TextRoot) {
     return (
         <div
             className={cn(
-                "flex flex-col justify-start items-start gap-4",
+                "flex flex-col justify-start items-start gap-3",
                 props.className
             )}
             children={props.children}

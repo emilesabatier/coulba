@@ -1,7 +1,7 @@
 
 export const sheetInclude = {
     id: true,
-    idCompany: true,
+    idOrganization: true,
     idYear: true,
     idParent: true,
     side: true,

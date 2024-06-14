@@ -1,8 +1,8 @@
 
 export const journalInclude = {
     id: true,
-    idCompany: true,
-    acronym: true,
+    idOrganization: true,
+    code: true,
     label: true,
     lastUpdatedOn: true,
     createdOn: true,

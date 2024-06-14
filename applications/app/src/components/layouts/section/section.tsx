@@ -1,10 +1,10 @@
-import { SectionContent } from "./sectionContent"
-import { SectionHeader } from "./sectionHeader"
+import { SectionItem } from "./sectionItem"
 import { SectionRoot } from "./sectionRoot"
+import { SectionTitle } from "./sectionTitle"
 
 
 export const Section = {
     Root: SectionRoot,
-    Header: SectionHeader,
-    Content: SectionContent
+    Item: SectionItem,
+    Title: SectionTitle
 }

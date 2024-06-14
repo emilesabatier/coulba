@@ -1,4 +1,5 @@
-import { IconAccessible, IconApiApp, IconCrown, IconFiles, IconLock, IconPencilPlus, IconReportAnalytics, IconScale, IconTool, IconUsers } from "@tabler/icons-react"
+import { cn } from "@coulba/design/services"
+import { IconAccessible, IconBuilding, IconCrown, IconFiles, IconLock, IconPencilPlus, IconPigMoney, IconReportAnalytics, IconScale, IconTool, IconUsers, IconUsersGroup } from "@tabler/icons-react"
 
 
 const features = [
@@ -8,14 +9,19 @@ const features = [
         description: "Un design épuré qui met en avant seulement ce dont vous avez besoin."
     },
     {
+        icon: <IconBuilding />,
+        title: "Organisation",
+        description: "L'application est adaptée pour les entreprises ou pour les associations."
+    },
+    {
         icon: <IconScale />,
         title: "Respect des normes",
         description: "L'application est construite autour des exigences d'inaltérabilité, de sécurisation, de conservation et d'archivage des données."
     },
     {
         icon: <IconPencilPlus />,
-        title: "Enregistrements",
-        description: "Ajoutez, éditez et supprimez les enregistrements de manière fluide et sécurisé, avant validation et inscription définitive dans le journal."
+        title: "Écritures",
+        description: "Ajoutez, éditez et supprimez les écritures de manière fluide et sécurisé, avant validation et inscription définitive dans le livre-journal."
     },
     {
         icon: <IconFiles />,
@@ -30,27 +36,37 @@ const features = [
     {
         icon: <IconUsers />,
         title: "Partage d'accès",
-        description: "Ajoutez autant d'accès utilisateurs que vous le souhaitez, pour vos associés par exemple."
+        description: "Ajoutez autant d'accès utilisateurs que vous le souhaitez."
     },
     {
         icon: <IconTool />,
         title: "Configuration",
-        description: "Configurez les détails de vos exercices fiscaux, des journaux et du plan des comptes pour répondre à votre besoin spécifique."
+        description: "Configurez l'application en détail pour répondre à votre besoin spécifique (exercices fiscaux, journaux auxiliaires, plan des comptes, bilan ou encore compte de résultat)."
     },
-    {
-        icon: <IconApiApp />,
-        title: "API",
-        description: "Disposez d'une API personnalisée pour automatiser l'ajout des enregistrements comptables."
-    },
+    // {
+    //     icon: <IconApiApp />,
+    //     title: "API",
+    //     description: "Disposez d'une API personnalisée pour automatiser l'ajout des écritures comptables."
+    // },
     {
         icon: <IconCrown />,
         title: "Souveraineté",
-        description: "Les données sont stockées sur des serveurs en France. Tous nos prestataires sont des entreprises française ou de l'union européennes."
+        description: "Les données sont stockées sur des serveurs situés en France. Tous nos prestataires sont des entreprises française ou de l'union européennes."
     },
     {
         icon: <IconLock />,
         title: "RGPD",
-        description: "Seules certaines données sont collectées et dans un seul but d'utilisation interne d'amélioration du produit. Elle ne seront jamais partagées à un tiers."
+        description: "Seules certaines données sont collectées et dans un seul but d'utilisation interne d'amélioration de l'application. Elles ne seront jamais partagées ou vendues à un tiers."
+    },
+    {
+        icon: <IconUsersGroup />,
+        title: "Collaboratif",
+        description: "L'application est améliorée en fonction de vos retours. Une documentation ouverte est disponible publiquement."
+    },
+    {
+        icon: <IconPigMoney />,
+        title: "Aucun frais",
+        description: "L'utilisation de l'application est gratuite."
     }
 ]
 
@@ -58,15 +74,18 @@ export function Features() {
     return (
         <div id="fonctionnalites" className="w-full max-w-full h-full flex flex-col justify-start items-center gap-8 py-16">
             <div className="flex flex-col justify-start items-center gap-2 max-w-[768px]">
-                <h2 className="text-3xl leading-none uppercase text-center">Nos fonctionnalités</h2>
+                <h2 className="text-3xl leading-none uppercase text-center">Ce que nous proposons</h2>
                 <p className="text-lg text-neutral/75 text-balance text-center">Pour avoir un point de vue global et savoir si l'application répond à vos besoins.</p>
             </div>
-            <div className="w-full h-full gap-2 flex flex-wrap justify-center items-stretch">
+            <div className="w-full h-full grid grid-cols-2 border-t border-neutral/20">
                 {
                     features.map((feature) => {
                         return (
-                            <div className="min-w-[300px] w-full max-w-[600px] border border-neutral/20 rounded-md p-2 md:p-4 hover:shadow-sm flex flex-col justify-start items-start gap-2 md:gap-4">
-                                <div className="flex justify-start items-center gap-2">
+                            <div className={cn(
+                                "min-w-[300px] w-full p-3 hover:bg-neutral/5 flex flex-col justify-start items-start gap-3",
+                                "border-neutral/20 odd:border-x even:border-r border-b"
+                            )}>
+                                <div className="flex justify-start items-center gap-1.5">
                                     {feature.icon}
                                     <h3 className="text-lg leading-none uppercase whitespace-nowrap">{feature.title}</h3>
                                 </div>

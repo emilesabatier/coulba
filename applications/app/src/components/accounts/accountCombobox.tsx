@@ -24,7 +24,8 @@ export function AccountCombobox(props: AccountCombobox) {
         .filter(props.filter ?? (() => true))
         .map((x) => ({
             key: x.id,
-            label: formatAccount(x)
+            label: formatAccount(x),
+            disabled: !x.isSelectable
         }))
         .sort((a, b) => a.label.localeCompare(b.label))
 

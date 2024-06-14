@@ -1,5 +1,5 @@
-import { defaultAccounts, DefaultComputation, defaultComputations, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, companies, computations, computationStatements, journals, records, sheets, statements, users, years } from '@coulba/schemas/models'
+import { companyAccounts, DefaultComputation, defaultComputations, defaultJournals, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
+import { accounts, accountSheets, accountStatements, computations, computationStatements, journals, organizations, records, rows, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -7,7 +7,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
 import { env } from '../env'
-import { defaultRecords } from './records'
+import { defaultRecords2022 } from './records2022.js'
 
 
 export function generateTemporaryPassword(): string {
@@ -26,71 +26,99 @@ async function seed() {
         await db.transaction(async (tx) => {
 
 
-            // Companies
-            console.log("Add company")
-            const newCompany: (typeof companies.$inferInsert) = {
+            // Organizations
+            console.log("Add organization")
+            const newOrganization: (typeof organizations.$inferInsert) = {
                 id: generateId(),
+                scope: "company",
                 siren: null,
                 name: null,
                 email: null
             }
-            await tx.insert(companies).values(newCompany)
+            await tx.insert(organizations).values(newOrganization)
 
 
             // Years
             console.log("Add years")
-            const idCurrentYear = generateId()
+            const idYear2022 = generateId()
+            const idYear2023 = generateId()
             const newYears: (typeof years.$inferInsert)[] = [
                 {
-                    id: idCurrentYear,
-                    idCompany: newCompany.id,
+                    id: idYear2022,
+                    idOrganization: newOrganization.id,
                     isSelected: true,
-                    label: "Exercice 2024",
-                    startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
-                    endingOn: new Date(2024, 11, 31, 12, 0, 0).toISOString(),
-                    system: "developed"
-                }
+                    isClosed: false,
+                    label: "Exercice 2022",
+                    startingOn: new Date(2021, 11, 29, 0, 0).toISOString(),
+                    endingOn: new Date(2022, 11, 31, 23, 59, 99).toISOString(),
+                    isMinimalSystem: false
+                },
+                // {
+                //     id: idYear2023,
+                //     idOrganization: newOrganization.id,
+                //     isSelected: false,
+                //     label: "Exercice 2023",
+                //     startingOn: new Date(2023, 0, 1, 0, 0).toISOString(),
+                //     endingOn: new Date(2023, 11, 31, 23, 59, 99).toISOString(),
+                //     state: "open",
+                //     isMinimalSystem: false
+                // },
+                // {
+                //     id: generateId(),
+                //     idOrganization: newOrganization.id,
+                //     isSelected: true,
+                //     label: "Exercice 2024",
+                //     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
+                //     endingOn: new Date(2024, 11, 31, 23, 59, 99).toISOString(),
+                //     state: "open",
+                //     isMinimalSystem: false
+                // }
             ]
             await tx.insert(years).values(newYears)
 
 
             // Journals
             console.log("Add journals")
-            const newJournals: (typeof journals.$inferInsert)[] = [
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    acronym: "VT",
-                    label: "Ventes"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    acronym: "HA",
-                    label: "Achats"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    acronym: "SL",
-                    label: "Salaires"
-                },
-                {
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    acronym: "BQ",
-                    label: "Banque"
-                },
-            ]
+            const newJournals: (typeof journals.$inferInsert)[] = defaultJournals.map((journal) => ({
+                id: generateId(),
+                idOrganization: newOrganization.id,
+                code: journal.code,
+                label: journal.label
+            }))
             await tx.insert(journals).values(newJournals)
+
+
+            // Accounts
+            console.log("Add accounts")
+            let newAccounts: (typeof accounts.$inferInsert)[] = companyAccounts.map((_account) => ({
+                id: generateId(),
+                idOrganization: newOrganization.id,
+                idYear: idYear2022,
+                number: _account.number,
+                isMandatory: _account.isMandatory,
+                isClass: _account.isClass,
+                isSelectable: _account.isSelectable,
+                label: _account.label,
+                type: _account.type,
+                scope: "company"
+            }))
+            newAccounts = newAccounts.map((_account) => {
+                const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
+
+                return ({
+                    ..._account,
+                    idParent: parent?.id
+                })
+            })
+            await tx.insert(accounts).values(newAccounts)
 
 
             // Sheets
             console.log("Add sheets")
             let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
                 id: generateId(),
-                idCompany: newCompany.id,
-                idYear: idCurrentYear,
+                idOrganization: newOrganization.id,
+                idYear: idYear2022,
                 side: _sheet.side,
                 number: _sheet.number,
                 label: _sheet.label,
@@ -108,12 +136,34 @@ async function seed() {
             await tx.insert(sheets).values(newSheets)
 
 
+            // AccountSheets
+            console.log("Add accountSheets")
+            const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
+            newSheets.forEach((_sheet) => {
+                _sheet.accounts.forEach((_account) => {
+                    const account = newAccounts.find((x) => x.number === _account.number)
+
+                    if (!account) return console.log(`Account not found ${_sheet.number} ${_account.number}`)
+                    newAccountSheets.push({
+                        id: generateId(),
+                        idOrganization: newOrganization.id,
+                        idYear: idYear2022,
+                        idAccount: account.id,
+                        idSheet: _sheet.id,
+                        flow: _account.flow,
+                        isAllowance: _account.isAllowance
+                    })
+                })
+            })
+            await tx.insert(accountSheets).values(newAccountSheets)
+
+
             // Statements
             console.log("Add statements")
             let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
                 id: generateId(),
-                idCompany: newCompany.id,
-                idYear: idCurrentYear,
+                idOrganization: newOrganization.id,
+                idYear: idYear2022,
                 number: _statement.number,
                 label: _statement.label,
                 numberParent: _statement.numberParent,
@@ -130,13 +180,34 @@ async function seed() {
             await tx.insert(statements).values(newStatements)
 
 
+            // AccountStatements
+            console.log("Add accountStatements")
+            const newAccountStatements: Array<(typeof accountStatements.$inferInsert)> = []
+            newStatements.forEach((_statement) => {
+                _statement.accounts.forEach((_account) => {
+                    const account = newAccounts.find((x) => x.number === _account)
+
+                    if (!account) return console.log(`Account not found ${_statement.number} ${_account}`)
+                    // if (newAccountStatements.find(x => x.idAccount === account.id && x.idStatement == _statement.id)) console.log(_account)
+                    newAccountStatements.push({
+                        id: generateId(),
+                        idOrganization: newOrganization.id,
+                        idYear: idYear2022,
+                        idAccount: account.id,
+                        idStatement: _statement.id
+                    })
+                })
+            })
+            await tx.insert(accountStatements).values(newAccountStatements)
+
+
             // Computations
             console.log("Add computations")
             const newComputations: (typeof computations.$inferInsert & { statements: DefaultComputation["statements"][number][] })[] = defaultComputations.map((_computation) => {
                 return ({
                     id: generateId(),
-                    idCompany: newCompany.id,
-                    idYear: idCurrentYear,
+                    idOrganization: newOrganization.id,
+                    idYear: idYear2022,
                     number: _computation.number,
                     label: _computation.label,
                     statements: _computation.statements
@@ -152,9 +223,11 @@ async function seed() {
                 _computation.statements.forEach((_statement) => {
                     const statement = newStatements.find((x) => x.number === _statement.number)
 
-                    if (!statement) throw new Error(`Erreur ${_computation.number} ${_statement.number}`)
+                    if (!statement) return console.log(`Statement not found ${_computation.number} ${_statement.number}`)
                     newComputationStatements.push({
                         id: generateId(),
+                        idOrganization: newOrganization.id,
+                        idYear: idYear2022,
                         idComputation: _computation.id,
                         idStatement: statement.id,
                         operation: _statement.operation
@@ -163,51 +236,25 @@ async function seed() {
             })
             await tx.insert(computationStatements).values(newComputationStatements)
 
-            // Accounts
-            console.log("Add accounts")
-            let newAccounts: (typeof accounts.$inferInsert)[] = defaultAccounts.map((_account) => {
-                const statement = newStatements.find((_statement) => _statement.accounts.find(x => x.toString().startsWith(_account.number.toString())))
 
-                return ({
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    idYear: idCurrentYear,
-                    idStatement: statement?.id,
-                    number: _account.number,
-                    system: _account.system,
-                    label: _account.label
-                })
+            // Check accounts
+            newAccounts.forEach((account) => {
+                if (account.isClass) return
+                if (!account.isSelectable) return
+                // if (newAccounts.find(x => x.idParent === account.id)) return
+
+                const accountClass = account.number.toString().at(0) ?? ""
+
+                if (["1", "2", "3", "4", "5"].includes(accountClass)) {
+                    const accountSheet = newAccountSheets.find((accountSheet) => accountSheet.idAccount === account.id)
+                    if (!accountSheet) console.log(`Account not used (sheet) ${account.number} ${account.isMandatory}`)
+                }
+
+                if (["6", "7"].includes(accountClass)) {
+                    const accountStatement = newAccountStatements.find((accountStatement) => accountStatement.idAccount === account.id)
+                    if (!accountStatement) console.log(`Account not used (statement) ${account.number} ${account.isMandatory}`)
+                }
             })
-            newAccounts = newAccounts.map((_account) => {
-                const parent = newAccounts.find((x) => x.number !== _account.number && _account.number.toString().includes(x.number.toString()) && _account.number.toString().length === x.number.toString().length + 1)
-
-                return ({
-                    ..._account,
-                    idParent: parent?.id
-                })
-            })
-            await tx.insert(accounts).values(newAccounts)
-
-
-            // AccountSheets
-            console.log("Add accountSheets")
-            const newAccountSheets: Array<(typeof accountSheets.$inferInsert)> = []
-            newSheets.forEach((_sheet) => {
-                _sheet.accounts.forEach((_account) => {
-                    const account = newAccounts.find((x) => x.number === _account.number)
-
-                    if (!account) throw new Error(`Erreur ${_sheet.number} ${_account.number}`)
-                    newAccountSheets.push({
-                        id: generateId(),
-                        idAccount: account.id,
-                        idSheet: _sheet.id,
-                        flow: _account.flow,
-                        isAllowance: _account.isAllowance
-                    })
-                })
-            })
-            await tx.insert(accountSheets).values(newAccountSheets)
-
 
             // Users
             console.log("Add user")
@@ -216,7 +263,7 @@ async function seed() {
             const passwordHash = pbkdf2Sync(invitationToken, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
             const adminUser: (typeof users.$inferInsert) = {
                 id: generateId(),
-                idCompany: newCompany.id,
+                idOrganization: newOrganization.id,
                 isAdmin: true,
                 isActive: true,
                 email: "dev@emilesabatier.com",
@@ -230,26 +277,48 @@ async function seed() {
             await tx.insert(users).values(adminUser)
 
 
-            // Records
-            console.log("Add records")
-            const newRecords: (typeof records.$inferInsert)[] = defaultRecords.flatMap((record) => {
-                const idAccount = newAccounts.find((account) => account.number === record.accountNumber)?.id
-                if (!idAccount) {
-                    console.log("Erreur record", record)
-                    return []
-                }
-                return ([{
-                    id: generateId(),
-                    idCompany: newCompany.id,
-                    idYear: idCurrentYear,
-                    idAccount: idAccount,
+            // Rows
+            console.log("Add rows")
+            const newRecords: (typeof records.$inferInsert)[] = []
+            const newRows: (typeof rows.$inferInsert)[] = []
+            defaultRecords2022.forEach((record) => {
+
+                const idRecord = generateId()
+                newRecords.push({
+                    id: idRecord,
+                    idOrganization: newOrganization.id,
+                    idYear: idYear2022,
+                    idJournal: undefined,
+                    idAttachment: undefined,
+                    isValidated: true,
+                    validatedOn: undefined,
                     label: record.label,
-                    date: record.date,
-                    debit: record.debit.toString(),
-                    credit: record.credit.toString()
-                }])
+                    date: record.date
+                })
+
+                record.rows.forEach((row) => {
+                    const idAccount = newAccounts.find((account) => account.number === row.accountNumber)?.id
+                    if (!idAccount) {
+                        console.log("Erreur row", row)
+                        return
+                    }
+                    newRows.push({
+                        id: generateId(),
+                        idOrganization: newOrganization.id,
+                        idYear: idYear2022,
+                        idAccount: idAccount,
+                        idRecord: idRecord,
+                        isValidated: true,
+                        isComputed: true,
+                        label: row.label,
+                        debit: row.debit.toString(),
+                        credit: row.credit.toString()
+                    })
+                })
+
             })
             await tx.insert(records).values(newRecords)
+            await tx.insert(rows).values(newRows)
         })
 
     } catch (error) {

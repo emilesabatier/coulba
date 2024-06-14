@@ -1,10 +1,21 @@
 import { createRoute } from "@tanstack/react-router"
-import { PricingPage } from "../pages/pricingPage"
+import { Main } from "../components/layout/main/main"
+import { PricingText } from "../components/pricing/pricingText"
 import { rootLayout } from "./root.layout"
 
 
 export const pricingRoute = createRoute({
     getParentRoute: () => rootLayout,
+    beforeLoad: () => ({
+        title: "Tarif"
+    }),
     path: '/tarif',
-    component: () => <PricingPage />
+    component: () => (
+        <Main.Root>
+            <Main.Header />
+            <Main.Content>
+                <PricingText />
+            </Main.Content>
+        </Main.Root >
+    )
 })

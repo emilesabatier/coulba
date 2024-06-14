@@ -1,1 +1,2 @@
-export type * from "./record.type.js";
+export type * from "./record.type";
+

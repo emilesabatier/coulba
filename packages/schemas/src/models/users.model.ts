@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm"
 import { AnyPgColumn, boolean, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
-import { companies } from "./companies.model.js"
+import { organizations } from "./organizations.model.js"
 
 
 // Model
@@ -10,7 +10,7 @@ export const users = pgTable(
     "users",
     {
         id: idColumn("id").primaryKey(),
-        idCompany: idColumn("id_company").references(() => companies.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
         isAdmin: boolean("is_admin").default(false).notNull(),
         alias: text("alias"),
         email: text("email").notNull().unique(),

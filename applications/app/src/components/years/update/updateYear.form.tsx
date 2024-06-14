@@ -7,7 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { queryClient } from "../../../contexts/state/queryClient"
-import { updateYearRoute } from "../../../routes/auth/app/configuration/years/updateYear.route"
+import { updateYearRoute } from "../../../routes/auth/configuration/years/updateYear.route"
 import { router } from "../../../routes/router"
 import { updateYear } from "../../../services/api/auth/years/updateYear"
 import { yearOptions, yearsOptions } from "../../../services/api/auth/years/yearsOptions"
@@ -19,11 +19,7 @@ import { YearCombobox } from "../input/yearCombobox"
 export function UpdateYearForm() {
     const { idYear } = useParams({ from: updateYearRoute.id })
     const year = useQuery(yearOptions(idYear))
-
-    const mutation = useMutation({
-        mutationKey: yearsOptions.queryKey,
-        mutationFn: updateYear
-    })
+    const mutation = useMutation({ mutationFn: updateYear })
 
     if (year.isLoading) return <CircularLoader />
     if (year.isError) return <ErrorMessage message={year.error.message} />
@@ -32,20 +28,19 @@ export function UpdateYearForm() {
         <Form
             validationSchema={auth.years.put.body}
             defaultValues={year.data}
-            cancelLabel="Retour aux exercices"
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Modifier l'exercice"
             onSubmit={async (data) => {
-                mutation.mutate({
+                const response = await mutation.mutateAsync({
                     params: { idYear: idYear },
                     body: data
-                }, {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries()
-                        router.navigate({ to: "/configuration/exercices" })
-                        toast({ title: "Exercice mis à jour", variant: "success" })
-                    }
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(yearsOptions)
+                router.navigate({ to: "/configuration/exercices" })
+                toast({ title: "Exercice mis à jour", variant: "success" })
+
                 return true
             }}
         >

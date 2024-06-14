@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputSelect, InputSwitch, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -9,33 +9,31 @@ import { router } from "../../../routes/router"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { createAccount } from "../../../services/api/auth/accounts/createAccount"
 import { Form } from "../../layouts/forms/form"
-import { StatementCombobox } from "../../statements/statementCombobox"
 import { AccountCombobox } from "../accountCombobox"
+import { accountTypeOptions } from "../accountTypeOptions"
 
 
 export function CreateAccountForm() {
-
-    const mutation = useMutation({
-        mutationKey: accountsOptions.queryKey,
-        mutationFn: createAccount
-    })
+    const mutation = useMutation({ mutationFn: createAccount })
 
     return (
         <Form
             validationSchema={auth.accounts.post.body}
             defaultValues={{}}
-            cancelLabel="Retour aux comptes"
             onCancel={() => router.navigate({ to: "/configuration/comptes" })}
             submitLabel="Ajouter le compte"
             onSubmit={async (data) => {
-
-                mutation.mutate({ body: data }, {
-                    onSuccess: (newData) => {
-                        queryClient.setQueryData(accountsOptions.queryKey, (oldData) => oldData && newData && [...oldData, newData])
-                        router.navigate({ to: "/configuration/comptes" })
-                        toast({ title: "Nouveau compte ajouté", variant: "success" })
-                    }
+                const response = await mutation.mutateAsync({
+                    body: data
                 })
+                if (!response) return false
+
+                await queryClient.invalidateQueries(accountsOptions)
+                router.navigate({
+                    to: "/configuration/comptes/$idAccount",
+                    params: { idAccount: response.id }
+                })
+                toast({ title: "Nouveau compte ajouté", variant: "success" })
 
                 return true
             }}
@@ -104,17 +102,56 @@ export function CreateAccountForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="idStatement"
+                        name="isClass"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne du compte de résultat"
-                                    tooltip="La ligne du compte de résultat sur laquelle la balance du compte est ajoutée."
+                                    label="Classe/sous-classe ?"
+                                    tooltip="Le compte est une classe ou une sous-classe de compte."
                                 />
                                 <FormControl>
-                                    <StatementCombobox
+                                    <InputSwitch
                                         value={field.value}
                                         onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="isSelectable"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Sélectionnable ?"
+                                    tooltip="Le compte est sélectionnable pour les écritures."
+                                />
+                                <FormControl>
+                                    <InputSwitch
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="type"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Type de compte"
+                                    tooltip="Si le compte est de bilan, de gestion ou spécial."
+                                />
+                                <FormControl>
+                                    <InputSelect
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        options={accountTypeOptions}
                                     />
                                 </FormControl>
                                 <FormError />

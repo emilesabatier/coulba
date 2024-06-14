@@ -18,8 +18,8 @@ export const signedUrlRoute = new Hono<AuthEnv>()
         async (c) => {
             const body = c.req.valid('json')
 
-            const idCompany = body.storageKey.split("/").at(1)
-            if (idCompany !== c.var.company.id) throw new HTTPException(500, { message: "File access is forbidden" })
+            const idOrganization = body.storageKey.split("/").at(1)
+            if (idOrganization !== c.var.organization.id) throw new HTTPException(500, { message: "File access is forbidden" })
 
             const signingDate = new Date()
             signingDate.setUTCHours(0, 0, 0, 0)
@@ -49,7 +49,7 @@ export const signedUrlRoute = new Hono<AuthEnv>()
 
             if (body.size > 10000000) throw new HTTPException(500, { message: "File too large" })
 
-            const key = `companies/${c.var.company.id}/${c.var.currentYear.id}/${generateId()}`
+            const key = `organizations/${c.var.organization.id}/${c.var.currentYear.id}/${generateId()}`
 
             const url = await getSignedUrl(
                 s3Client,
@@ -60,7 +60,7 @@ export const signedUrlRoute = new Hono<AuthEnv>()
                     ContentLength: body.size,
                     ContentType: body.contentType,
                     Metadata: {
-                        idCompany: c.var.company.id,
+                        idOrganization: c.var.organization.id,
                         idYear: c.var.currentYear.id,
                         idUser: c.var.user.id
                     }
@@ -77,8 +77,8 @@ export const signedUrlRoute = new Hono<AuthEnv>()
         async (c) => {
             const body = c.req.valid('json')
 
-            const idCompany = body.storageKey.split("/").at(1)
-            if (idCompany !== c.var.company.id) throw new HTTPException(500, { message: "File access is forbidden" })
+            const idOrganization = body.storageKey.split("/").at(1)
+            if (idOrganization !== c.var.organization.id) throw new HTTPException(500, { message: "File access is forbidden" })
 
             const url = await getSignedUrl(
                 s3Client,
