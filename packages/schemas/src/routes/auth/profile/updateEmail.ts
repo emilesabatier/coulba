@@ -5,8 +5,8 @@ import { userSchema } from "../../../schemas/user/user.schema.js"
 
 // Input
 export const updateEmailBody = v.object({
-    currentPassword: textSchema,
-    emailToValidate: userSchema.entries.emailToValidate,
+    currentPassword: v.nonNullish(textSchema, "Le mot de passe doit être renseigné"),
+    emailToValidate: v.nonNullish(userSchema.entries.emailToValidate, "L'email doit être renseigné")
 })
 
 // Output

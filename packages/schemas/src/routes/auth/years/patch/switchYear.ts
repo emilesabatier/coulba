@@ -4,7 +4,7 @@ import { yearSchema } from "../../../../schemas/year/year.schema"
 
 // Input
 export const switchYearParams = v.object({
-    idYear: yearSchema.entries.id
+    idYear: v.nonNullish(yearSchema.entries.id, "L'exercice doit être sélectionné")
 })
 
 

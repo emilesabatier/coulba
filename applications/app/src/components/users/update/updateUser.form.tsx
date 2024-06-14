@@ -53,7 +53,6 @@ export function UpdateUserForm() {
                                 <FormLabel
                                     label="Pseudonyme"
                                     tooltip="Le peusdonyme de la personne qui aura l'accès."
-                                    isRequired
                                 />
                                 <FormControl>
                                     <InputText

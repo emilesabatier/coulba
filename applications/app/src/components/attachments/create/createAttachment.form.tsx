@@ -19,7 +19,7 @@ export function CreateAttachmentForm() {
 
     return (
         <Form
-            validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: fileSchema })])}
+            validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: v.nonNullish(fileSchema, "Un fichier doit être uploadé") })])}
             defaultValues={{}}
             onCancel={() => router.navigate({ to: "/fichiers" })}
             submitLabel="Ajouter le fichier"

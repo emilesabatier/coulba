@@ -4,7 +4,7 @@ import { journalSchema } from "../../../../schemas/journal/journal.schema"
 
 // Input
 export const settleSheetBody = v.object({
-    idJournalClosing: journalSchema.entries.id
+    idJournalClosing: v.nonNullish(journalSchema.entries.id, "Le journal doit être renseigné")
 })
 
 

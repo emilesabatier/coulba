@@ -5,9 +5,9 @@ import { journalSchema } from "../../../../schemas/journal/journal.schema"
 
 // Input
 export const computeResultBody = v.object({
-    idJournalClosing: journalSchema.entries.id,
-    idAccountProfit: accountSchema.entries.id,
-    idAccountLoss: accountSchema.entries.id
+    idJournalClosing: v.nonNullish(journalSchema.entries.id, "Le journal doit être renseigné"),
+    idAccountProfit: v.nonNullish(accountSchema.entries.id, "Le compte doit être renseigné"),
+    idAccountLoss: v.nonNullish(accountSchema.entries.id, "Le compte doit être renseigné")
 })
 
 

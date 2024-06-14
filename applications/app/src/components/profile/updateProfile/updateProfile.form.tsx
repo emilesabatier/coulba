@@ -41,7 +41,6 @@ export function UpdateProfileForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Pseudonyme"
-                                    isRequired
                                 />
                                 <FormControl>
                                     <InputText

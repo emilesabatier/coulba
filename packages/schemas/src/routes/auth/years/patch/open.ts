@@ -4,7 +4,7 @@ import { journalSchema } from "../../../../schemas/journal/journal.schema"
 
 // Input
 export const openBody = v.object({
-    idJournalOpening: journalSchema.entries.id
+    idJournalOpening: v.nonNullish(journalSchema.entries.id, "Le journal doit être renseigné")
 })
 
 
