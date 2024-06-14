@@ -140,7 +140,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                 }
             })
             if (!readRecord) throw new HTTPException(403, { message: "L'écriture n'a pas été trouvée" })
-            // if (!readRecord.idAttachment) throw new HTTPException(403, { message: "Il manque une pièce jointe" })
+            if (!readRecord.idAttachment) throw new HTTPException(403, { message: "Il manque une pièce jointe" })
 
             await db.transaction(async (tx) => {
                 await tx

@@ -1,7 +1,7 @@
-import { organizations, years } from "@coulba/schemas/models"
-import { OrganizationReturned, YearReturned } from "@coulba/schemas/schemas"
+import { organizations } from "@coulba/schemas/models"
+import { OrganizationReturned } from "@coulba/schemas/schemas"
 import { pbkdf2Sync } from "crypto"
-import { and, eq } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { MiddlewareHandler } from "hono"
 import { HTTPException } from "hono/http-exception"
 import { db } from "../clients/db.js"
@@ -10,7 +10,6 @@ import { env } from "../env.js"
 
 export type V1Env = {
     Variables: {
-        currentYear: YearReturned
         organization: OrganizationReturned
     }
 }
@@ -33,17 +32,7 @@ export const checkApiKey: MiddlewareHandler<V1Env> = async (c, next) => {
         )
     if (!readOrganization) throw new HTTPException(401, { message: "Connexion à l'API impossible" })
 
-    const [readYear] = await db
-        .select()
-        .from(years)
-        .where(and(
-            eq(years.idOrganization, readOrganization.id),
-            eq(years.isSelected, true)
-        ))
-    if (!readYear) throw new HTTPException(401, { message: "Connexion à l'API impossible" })
-
     c.set('organization', readOrganization)
-    c.set('currentYear', readYear)
 
     await next()
 }
