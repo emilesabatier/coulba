@@ -13,6 +13,14 @@ jobs:
             contents: read
 
         steps:
+            
+            -   name: Login to the container registry
+                uses: docker/login-action@v3.1.0
+                with:
+                    registry: ghcr.io
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
+
             -   name: Deploy the new images
                 uses: appleboy/ssh-action@v1.0.3
                 with:
