@@ -35,7 +35,7 @@ RUN pnpm deploy --filter="api" --prod /api
 
 # Start api
 FROM base AS api
-COPY --from=build /api /api
+COPY --from=build /api/build /api
 WORKDIR /api
 CMD [ "pnpm", "--filter=api", "start"]
 
