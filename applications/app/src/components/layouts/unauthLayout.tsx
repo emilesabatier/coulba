@@ -11,7 +11,7 @@ export function UnauthLayout() {
         <div id="unauth" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden grid grid-cols-1 grid-rows-[64px_auto]">
             <div className="w-full border-b border-neutral/20 flex justify-center items-center">
                 <div className="w-full max-w-[768px] h-full p-3 flex justify-between items-end gap-3">
-                    <Link to="/" className="h-full flex justify-center items-center">
+                    <Link to="/" className="h-full w-fit flex justify-start items-center">
                         <Logo />
                     </Link>
                     <div className="flex justify-end items-center gap-1.5">
