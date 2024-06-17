@@ -41,7 +41,7 @@ CMD [ "pnpm", "--filter=api", "start"]
 
 # Start app
 FROM nginx:alpine as app
-COPY .docker/nginx/default.conf /etc/nginx/conf.d/
+COPY .docker/nginx/default.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 3101
@@ -53,7 +53,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # Start website
 FROM nginx:alpine as website
-COPY .docker/nginx/default.conf /etc/nginx/conf.d/
+COPY .docker/nginx/default.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /website/build /usr/share/nginx/html
 EXPOSE 3102
