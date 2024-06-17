@@ -7,7 +7,7 @@
         "build": "tsc --build"
     },
     "dependencies": {
-        "drizzle-orm": "0.30.10",
+        "drizzle-orm": "0.31.2",
         "drizzle-valibot": "0.2.0",
         "postgres": "3.4.4",
         "valibot": "0.30.0"

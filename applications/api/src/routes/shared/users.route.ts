@@ -62,6 +62,7 @@ export const usersRoute = new Hono()
         async (c) => {
             const body = c.req.valid('json')
 
+            if (!body.invitationToken) throw new HTTPException(403, { message: "Invitation non trouvée" })
             const [readUser] = await db
                 .select()
                 .from(users)
@@ -111,6 +112,7 @@ export const usersRoute = new Hono()
         async (c) => {
             const body = c.req.valid('json')
 
+            if (!body.emailToken) throw new HTTPException(403, { message: "Utilisateur non trouvé" })
             const [readUser] = await db
                 .select()
                 .from(users)
