@@ -49,6 +49,7 @@ export const organizationsRoute = new Hono<AuthEnv>()
         validator("json", bodyValidator(auth.organizations.patch.generateApiKey.body)),
         async (c) => {
             const body = c.req.valid('json')
+            if (!body.apiKey) throw new HTTPException(500, { message: "Impossible de générer la clé" })
 
             const salt = env()?.V1_API_KEY_SALT
             if (!salt) throw new HTTPException(500, { message: "Impossible de générer la clé" })

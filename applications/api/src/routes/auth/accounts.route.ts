@@ -2,13 +2,13 @@ import { accounts } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
-import { Hono } from 'hono'
-import { validator } from 'hono/validator'
-import { db } from "../../clients/db.js"
-import { bodyValidator } from "../../middlewares/bodyValidator.js"
-import { AuthEnv } from "../../middlewares/checkAuth.js"
-import { checkCurrentYear } from "../../middlewares/checkCurrentYear.js"
-import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { Hono } from "hono"
+import { validator } from "hono/validator"
+import { db } from "../../clients/db"
+import { bodyValidator } from "../../middlewares/bodyValidator"
+import { AuthEnv } from "../../middlewares/checkAuth"
+import { checkCurrentYear } from "../../middlewares/checkCurrentYear"
+import { paramsValidator } from "../../middlewares/paramsValidator"
 
 
 export const accountsRoute = new Hono<AuthEnv>()
@@ -26,8 +26,8 @@ export const accountsRoute = new Hono<AuthEnv>()
                     idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idParent: body.idParent,
-                    isClass: body.isClass,
-                    isSelectable: body.isSelectable,
+                    isClass: body.isClass ?? false,
+                    isSelectable: body.isSelectable ?? false,
                     label: body.label,
                     number: body.number,
                     type: body.type,

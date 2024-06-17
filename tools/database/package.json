@@ -17,7 +17,7 @@
         "@coulba/schemas": "workspace:*",
         "@ngneat/falso": "7.2.0",
         "dotenv": "16.4.5",
-        "drizzle-orm": "0.30.10",
+        "drizzle-orm": "0.31.2",
         "nanoid": "5.0.7",
         "pg": "8.11.5",
         "postgres": "3.4.4",
