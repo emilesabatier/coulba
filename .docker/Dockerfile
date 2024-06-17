@@ -45,7 +45,7 @@ COPY .docker/nginx/default.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 3101
-CMD ["nginx", "-g"]
+CMD ["nginx"]
 # FROM base AS app
 # COPY --from=build /build/app /build/app
 # WORKDIR /build/app
@@ -57,7 +57,7 @@ COPY .docker/nginx/default.conf /etc/nginx/nginx.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /website/build /usr/share/nginx/html
 EXPOSE 3102
-CMD ["nginx", "-g"]
+CMD ["nginx"]
 # FROM base AS website
 # COPY --from=build /build/website /build/website
 # WORKDIR /build/website
