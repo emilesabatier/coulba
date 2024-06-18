@@ -3,6 +3,7 @@
   src: url("./assets/fonts/switzer/Switzer-Regular.ttf");
   font-style: normal;
   font-weight: normal;
+  font-display: auto;
 }
 
 @font-face {
@@ -10,4 +11,5 @@
   src: url("./assets/fonts/switzer/Switzer-Bold.ttf");
   font-style: normal;
   font-weight: bold;
+  font-display: auto;
 }

@@ -1,12 +1,11 @@
-import { rows } from "@coulba/schemas/models"
+import { records, rows } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
+import { recordInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
-import { records } from "../../../../../packages/schemas/build/models/records.model.js"
-import { recordInclude } from "../../../../../packages/schemas/build/schemas/record/record.include.js"
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"

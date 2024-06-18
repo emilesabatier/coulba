@@ -16,6 +16,7 @@ export function DonationBanner() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-sm p-2 border border-neutral/10 hover:bg-neutral/5"
+                    aria-label="Consulter le tarif"
                 >
                     <span className="p-0">En savoir plus</span>
                     <IconExternalLink size={16} />
@@ -24,6 +25,7 @@ export function DonationBanner() {
                     href="https://donate.stripe.com/6oE8xg5PV5EocWAfYY"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Faire un don"
                 >
                     <ButtonPlainContent
                         text="Faire un don"

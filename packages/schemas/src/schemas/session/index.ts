@@ -1,1 +1,2 @@
-export type * from "./session.type";
+export type * from "./session.type.js";
+

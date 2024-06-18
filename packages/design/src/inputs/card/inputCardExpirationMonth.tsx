@@ -42,7 +42,7 @@ export const InputCardExpirationMonth = forwardRef<HTMLInputElement, InputCardEx
                 onAccept={(value) => props.onChange(output(value))}
                 value={input(props.value)}
                 className={cn(
-                    "w-full h-[40px] flex justify-start items-stretch gap-1 p-2 border border-neutral/20 rounded-sm placeholder:text-neutral/10",
+                    "w-full h-[40px] flex justify-start items-stretch gap-1 p-2 border border-neutral/20 rounded-sm placeholder:text-neutral/25",
                     "focus-within:border-neutral/50 focus-within:shadow-inner focus-within:bg-neutral/5",
                     (!props.error) ? "border-neutral/20" : "border-error"
                 )}

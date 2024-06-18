@@ -8,12 +8,9 @@ export default defineConfig(() => {
         server: {
             port: 3101
         },
+        plugins: [react()],
         build: {
             outDir: './build'
-        },
-        plugins: [
-            react()
-        ],
-        assetsInclude: ['**/*.md']
+        }
     }
 })

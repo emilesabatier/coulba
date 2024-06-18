@@ -12,7 +12,7 @@ export function ScreenshotFrame() {
                 alt="Une capture d'écran de l'application web"
                 rel="preload"
                 loading="lazy"
-                className="w-full"
+                className="min-w-[300px] w-full max-w-[1024px]"
             />
         </div>
     )

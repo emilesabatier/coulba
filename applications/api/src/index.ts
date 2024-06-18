@@ -20,11 +20,17 @@ const corsConfig: Parameters<typeof cors>[0] = {
     allowMethods: ['POST', 'GET', 'OPTIONS', 'PUT', 'PATCH', 'DELETE', "UPDATE"],
     credentials: true
 }
+
+app.notFound((c) => {
+    return c.text('Inexisting page', 404)
+})
+
 app.use('/auth/*', cors({
     ...corsConfig,
     credentials: true
 }))
 app.use('/shared/*', cors(corsConfig))
+
 
 
 app.onError((error, c) => {

@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://espace.coulba.fr/sitemap.xml
