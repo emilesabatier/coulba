@@ -72,7 +72,16 @@ export function SendSupportMessageForm() {
                         )}
                     />
                     <p className="text-sm text-neutral">
-                        Si jamais l'envoi ne fonctionne pas, vous pouvez nous contacter directement ici: <a href="mailto:support@coulba.fr" target="_blank" rel="noopener noreferrer" className="font-bold underline hover:no-underline">support@coulba.fr</a>
+                        Si jamais l'envoi ne fonctionne pas, vous pouvez nous contacter directement ici:
+                        <a
+                            href="mailto:support@coulba.fr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold underline hover:no-underline"
+                            aria-label="Contacter le support"
+                        >
+                            support@coulba.fr
+                        </a>
                     </p>
                 </Fragment>
             )}

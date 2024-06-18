@@ -1,1 +1,2 @@
-export type * from "./account.type";
+export type * from "./account.type.js";
+

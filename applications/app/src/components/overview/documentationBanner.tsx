@@ -14,6 +14,7 @@ export function DocumentationBanner() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cursor-pointer ml-auto flex justify-center items-center gap-2 group rounded-sm p-2 border border-neutral/10 hover:bg-neutral/5"
+                aria-label="Adresse de la documentation"
             >
                 <span className="p-0">Consulter la documentation</span>
                 <IconExternalLink size={16} />

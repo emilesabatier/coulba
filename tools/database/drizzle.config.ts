@@ -5,10 +5,10 @@ import { env } from "./src/env"
 export default {
     schema: "./src/schemas.ts",
     out: "./drizzle",
-    driver: "pg",
+    dialect: "postgresql",
     strict: true,
     dbCredentials: {
-        connectionString: env()?.DATABASE_URL ?? "",
+        url: env()?.DATABASE_URL ?? "",
     },
     verbose: true,
 } satisfies Config

@@ -31,6 +31,7 @@ export function HeroHeader() {
                         href={`${import.meta.env.VITE_PUBLIC_APP_BASE}/inscription`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Créer un compte"
                     >
                         <ButtonPlainContent
                             text="Créer un compte"

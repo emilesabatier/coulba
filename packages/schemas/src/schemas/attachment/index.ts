@@ -1,1 +1,2 @@
-export type * from "./attachment.type";
+export type * from "./attachment.type.js";
+

@@ -3,18 +3,6 @@ import { DefaultRecord } from "./records2022"
 
 export const defaultRecords2023: Array<DefaultRecord> = [
     {
-        label: "Réouverture",
-        date: "2023-01-01T11:00:00.000Z",
-        rows: [
-            {
-                accountNumber: 890,
-                label: "Réouverture",
-                debit: 6140.58,
-                credit: 9760.98
-            }
-        ]
-    },
-    {
         label: "Abonnement Qonto (janvier)",
         date: "2023-01-05T11:00:00.000Z",
         rows: [
@@ -35,7 +23,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 9.04
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-01-05T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -77,10 +71,16 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Zoho",
                 debit: 0,
                 credit: 10.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Zoho",
+        date: "2023-01-16T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
-                label: "Paiement Zoho",
+                label: "Fournisseur Zoho",
                 debit: 10.8,
                 credit: 0
             },
@@ -113,7 +113,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 10.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-02-01T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -149,7 +155,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 10.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-03-01T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -161,6 +173,60 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Paiement Qonto",
                 debit: 0,
                 credit: 10.8
+            }
+        ]
+    },
+    {
+        label: "Affectation réserve légale",
+        date: "2022-12-31T10:00:00.000Z",
+        rows: [
+            {
+                accountNumber: 120,
+                label: "Affectation depuis le compte de résultat",
+                debit: 100,
+                credit: 0
+            },
+            {
+                accountNumber: 1061,
+                label: "Affectation vers la réserve légale",
+                debit: 0,
+                credit: 100
+            }
+        ]
+    },
+    {
+        label: "Affectation autres réserves",
+        date: "2022-12-31T10:00:00.000Z",
+        rows: [
+            {
+                accountNumber: 120,
+                label: "Affectation depuis le compte de résultat",
+                debit: 181.02,
+                credit: 0
+            },
+            {
+                accountNumber: 1068,
+                label: "Affectation vers les autres réserves",
+                debit: 0,
+                credit: 181.02
+            }
+        ]
+    },
+    {
+        label: "Affectation vers le report à nouveau",
+        date: "2022-12-31T10:00:00.000Z",
+        rows: [
+            {
+                accountNumber: 120,
+                label: "Affectation depuis le compte de résultat",
+                debit: 3339.38,
+                credit: 0
+            },
+            {
+                accountNumber: 110,
+                label: "Affectation vers le report à nouveau",
+                debit: 0,
+                credit: 3339.38
             }
         ]
     },
@@ -185,7 +251,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Pères populaire",
                 debit: 0,
                 credit: 66.4
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Pères Populaire",
+        date: "2023-03-18T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Pères Populaire",
@@ -221,7 +293,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 10.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-04-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -257,7 +335,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur INPI",
                 debit: 0,
                 credit: 45.01
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement INPI",
+        date: "2023-04-05T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur INPI",
@@ -293,7 +377,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur INPI",
                 debit: 0,
                 credit: 2.52
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement INPI",
+        date: "2023-04-20T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur INPI",
@@ -329,7 +419,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Felicità",
                 debit: 0,
                 credit: 7
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Felicità",
+        date: "2023-04-28T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Felicità",
@@ -365,7 +461,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Felicità",
                 debit: 0,
                 credit: 4.4
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Felicità",
+        date: "2023-04-28T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Felicità",
@@ -401,7 +503,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 10.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-05-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -437,7 +545,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 47.38
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-05-19T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Hostinger",
@@ -473,7 +587,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 9.59
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-05-19T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Hostinger",
@@ -509,7 +629,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 28.51
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-05-19T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Hostinger",
@@ -545,7 +671,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 28.51
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-05-19T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Hostinger",
@@ -581,7 +713,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scalingo",
                 debit: 0,
                 credit: 3.93
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scalingo",
+        date: "2023-06-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scalingo",
@@ -617,7 +755,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 10.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-06-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -641,7 +785,8 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Remboursement INPI",
                 debit: 0,
                 credit: 39.36
-            }, {
+            },
+            {
                 accountNumber: 44571,
                 label: "TVA due",
                 debit: 0,
@@ -652,7 +797,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur INPI",
                 debit: 41.13,
                 credit: 0
-            },
+            }
+        ]
+    },
+    {
+        label: "Remboursement INPI",
+        date: "2023-06-15T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur INPI",
@@ -692,19 +843,19 @@ export const defaultRecords2023: Array<DefaultRecord> = [
         ]
     },
     {
-        label: "Paiement IS",
+        label: "Paiement Impôts sur les sociétés",
         date: "2023-06-18T10:00:00.000Z",
         rows: [
 
             {
                 accountNumber: 444,
-                label: "IS exercice précédent",
+                label: "Impôts sur les sociétés exercice précédent",
                 debit: 639,
                 credit: 0
             },
             {
                 accountNumber: 512,
-                label: "Paiement IS",
+                label: "Paiement Impôts sur les sociétés",
                 debit: 0,
                 credit: 639
             }
@@ -715,7 +866,7 @@ export const defaultRecords2023: Array<DefaultRecord> = [
         date: "2023-06-18T10:00:00.000Z",
         rows: [
             {
-                accountNumber: 4458,
+                accountNumber: 44551,
                 label: "TVA exercice précédent",
                 debit: 874,
                 credit: 0
@@ -749,7 +900,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur INPI",
                 debit: 0,
                 credit: 45.01
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement INPI",
+        date: "2023-06-22T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur INPI",
@@ -785,7 +942,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Felicità",
                 debit: 0,
                 credit: 4.4
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Felicità",
+        date: "2023-06-30T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Felicità",
@@ -821,7 +984,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur La Halte",
                 debit: 0,
                 credit: 43.6
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement La Halte",
+        date: "2023-06-30T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur La Halte",
@@ -857,7 +1026,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scalingo",
                 debit: 0,
                 credit: 38.14
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scalingo",
+        date: "2023-07-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scalingo",
@@ -893,7 +1068,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 13.2
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-07-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -935,7 +1116,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 10.16
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-07-03T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Hostinger",
@@ -977,7 +1164,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 10.16
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-07-03T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Hostinger",
@@ -1019,7 +1212,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 7.99
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-07-03T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Hostinger",
@@ -1061,7 +1260,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 10.16,
                 credit: 0
-            },
+            }
+        ]
+    },
+    {
+        label: "Remboursement Hostinger",
+        date: "2023-07-04T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Hostinger",
@@ -1097,7 +1302,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur INPI",
                 debit: 0,
                 credit: 2.52
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement INPI",
+        date: "2023-07-10T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur INPI",
@@ -1117,7 +1328,7 @@ export const defaultRecords2023: Array<DefaultRecord> = [
         date: "2023-07-26T10:00:00.000Z",
         rows: [
             {
-                accountNumber: 6712,
+                accountNumber: 678,
                 label: "Pénalité de retard",
                 debit: 43,
                 credit: 0
@@ -1127,7 +1338,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur DGFIP",
                 debit: 0,
                 credit: 43
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement DGFIP",
+        date: "2023-07-26T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur DGFIP",
@@ -1163,7 +1380,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scalingo",
                 debit: 0,
                 credit: 28.3
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scalingo",
+        date: "2023-08-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scalingo",
@@ -1199,7 +1422,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 13.2
-            },
+            }
+        ]
+    },
+    {
+        label: "Abonnement Qonto (août)",
+        date: "2023-08-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -1235,7 +1464,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Brevo",
                 debit: 0,
                 credit: 22.8
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Brevo",
+        date: "2023-08-15T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Brevo",
@@ -1271,7 +1506,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scalingo",
                 debit: 0,
                 credit: 26.78
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scalingo",
+        date: "2023-09-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scalingo",
@@ -1307,7 +1548,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 13.2
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-09-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -1343,7 +1590,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Vertical",
                 debit: 0,
                 credit: 30
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Vertical",
+        date: "2023-09-30T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 401,
                 label: "Fournisseur Vertical",
@@ -1379,6 +1632,18 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 13.2
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-10-01T10:00:00.000Z",
+        rows: [
+            {
+                accountNumber: 4011,
+                label: "Fournisseur Qonto",
+                debit: 13.2,
+                credit: 0
             },
             {
                 accountNumber: 512,
@@ -1409,7 +1674,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scalingo",
                 debit: 0,
                 credit: 5.98
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scalingo",
+        date: "2023-10-01T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scalingo",
@@ -1451,7 +1722,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 83.88
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-10-02T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Hostinger",
@@ -1467,7 +1744,7 @@ export const defaultRecords2023: Array<DefaultRecord> = [
         ]
     },
     {
-        label: "Abonnement",
+        label: "Abonnement Hostinger",
         date: "2023-10-03T10:00:00.000Z",
         rows: [
             {
@@ -1493,7 +1770,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 83.88
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-10-03T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Hostinger",
@@ -1523,7 +1806,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scaleway",
                 debit: 0,
                 credit: 0.01
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scaleway",
+        date: "2023-10-03T10:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scaleway",
@@ -1559,7 +1848,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 13.2
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-11-01T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -1589,7 +1884,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scaleway",
                 debit: 0,
                 credit: 0.02
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scaleway",
+        date: "2023-11-02T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scaleway",
@@ -1631,7 +1932,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Hostinger",
                 debit: 0,
                 credit: 76.32
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Hostinger",
+        date: "2023-11-11T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Hostinger",
@@ -1667,7 +1974,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Qonto",
                 debit: 0,
                 credit: 13.2
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Qonto",
+        date: "2023-12-01T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Qonto",
@@ -1697,7 +2010,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Scaleway",
                 debit: 0,
                 credit: 0.02
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Scaleway",
+        date: "2023-12-04T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 4011,
                 label: "Fournisseur Scaleway",
@@ -1733,7 +2052,13 @@ export const defaultRecords2023: Array<DefaultRecord> = [
                 label: "Fournisseur Cdiscount",
                 debit: 0,
                 credit: 209.99
-            },
+            }
+        ]
+    },
+    {
+        label: "Paiement Cdiscount",
+        date: "2023-12-08T11:00:00.000Z",
+        rows: [
             {
                 accountNumber: 404,
                 label: "Fournisseur Cdiscount",

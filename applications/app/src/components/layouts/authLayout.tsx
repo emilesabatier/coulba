@@ -1,7 +1,7 @@
 import { ButtonGhost, ButtonMenu, ButtonMenuContent } from "@coulba/design/buttons"
 import { CircularLoader, Logo } from "@coulba/design/layouts"
 import { PopoverMenu } from "@coulba/design/overlays"
-import { IconBook, IconChevronRight, IconExternalLink, IconLifebuoy, IconLogout2, IconSettings, IconUser } from "@tabler/icons-react"
+import { IconChevronRight, IconExternalLink, IconLifebuoy, IconLogout2, IconSettings, IconUser } from "@tabler/icons-react"
 import { Link, Outlet, useRouter } from "@tanstack/react-router"
 import { Fragment } from "react/jsx-runtime"
 import { useSession } from "../../contexts/session/useSession"
@@ -32,7 +32,7 @@ export function AuthLayout() {
                 </Link>
                 <DisplayVersion />
             </div>
-            <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 grid grid-cols-[auto_max-content] gap-3 border-b border-neutral/20 overflow-x-auto">
+            <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 grid grid-cols-[auto_max-content] gap-3 border-b border-neutral/20 overflow-y-hidden overflow-x-auto">
                 <div className="w-full flex justify-start items-end">
                     {
                         breadcrumbs.map((breadcrumb, index) => (
@@ -79,13 +79,25 @@ export function AuthLayout() {
                                 text="Contacter le support"
                             />
                         </Link>
-                        <a href="https://documentation.coulba.fr" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                        {/* <a
+                            href="https://documentation.coulba.fr"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cursor-pointer"
+                            aria-label="Accès à la documentation"
+                        >
                             <ButtonMenuContent
                                 icon={<IconBook />}
                                 text="Documentation"
                             />
-                        </a>
-                        <a href={import.meta.env.VITE_PUBLIC_WEBSITE_BASE} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                        </a> */}
+                        <a
+                            href={import.meta.env.VITE_PUBLIC_WEBSITE_BASE}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cursor-pointer"
+                            aria-label="Adresse du site internet"
+                        >
                             <ButtonMenuContent
                                 icon={<IconExternalLink />}
                                 text="Site internet"

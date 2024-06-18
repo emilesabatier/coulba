@@ -4,9 +4,9 @@
     "type": "module",
     "scripts": {
         "studio": "pnpm drizzle-kit studio --port 4000 --config=drizzle.config.ts",
-        "generate": "pnpm drizzle-kit generate:pg --config=drizzle.config.ts",
-        "push": "pnpm drizzle-kit push:pg --config=drizzle.config.ts",
-        "pull": "pnpm drizzle-kit introspect:pg --config=drizzle.config.ts",
+        "generate": "pnpm drizzle-kit generate --config=drizzle.config.ts",
+        "push": "pnpm drizzle-kit push --config=drizzle.config.ts",
+        "pull": "pnpm drizzle-kit introspect --config=drizzle.config.ts",
         "migrate": "tsx ./src/migrate.ts",
         "seed": "tsx ./src/seed/seed.ts",
         "clear": "tsx ./src/clearDB.ts && pnpm run push",
@@ -25,7 +25,7 @@
     },
     "devDependencies": {
         "@types/node": "20.12.8",
-        "drizzle-kit": "0.20.17",
+        "drizzle-kit": "0.22.7",
         "tsx": "4.9.0",
         "typescript": "5.4.5"
     }

@@ -1,2 +1,2 @@
-export type * from "./row.type";
+export type * from "./row.type.js";
 

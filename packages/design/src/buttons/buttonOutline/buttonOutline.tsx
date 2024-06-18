@@ -15,6 +15,7 @@ export const ButtonOutline = forwardRef<HTMLButtonElement, ButtonOutlineContent 
                 className={cn("min-w-[42px] group", props.className)}
                 disabled={props.disabled}
                 tabIndex={props.tabIndex}
+                aria-label={props.text}
             >
                 <ButtonOutlineContent {...props} />
             </Button>

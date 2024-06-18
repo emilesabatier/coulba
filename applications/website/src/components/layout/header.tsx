@@ -25,7 +25,13 @@ export function Header() {
                     className="justify-center"
                 />
             </Link>
-            <a href={import.meta.env.VITE_PUBLIC_APP_BASE} target="_blank" rel="noopener noreferrer" className="w-full md:w-fit">
+            <a
+                href={import.meta.env.VITE_PUBLIC_APP_BASE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-fit"
+                aria-label="Se connecter"
+            >
                 <ButtonPlainContent
                     text="Connexion"
                     className="justify-center"

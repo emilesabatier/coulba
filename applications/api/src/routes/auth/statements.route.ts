@@ -1,11 +1,11 @@
 import { accounts, computations, rows, statements } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
+import { statementInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
 import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 import { launch } from "puppeteer"
-import { statementInclude } from "../../../../../packages/schemas/build/schemas/statement/statement.include.js"
 import { db } from "../../clients/db.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
