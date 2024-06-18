@@ -1,9 +1,9 @@
 import { css, cx } from "hono/css"
 import { Fragment } from "hono/jsx"
-import { toRoman } from "../../../toRoman"
-import { FormatPrice } from "../components/price/formatPrice"
-import { Table } from "../components/table/table"
-import { Statement } from "./groupStatements"
+import { toRoman } from "../../../toRoman.js"
+import { FormatPrice } from "../components/price/formatPrice.js"
+import { Table } from "../components/table/table.js"
+import { Statement } from "./groupStatements.js"
 
 
 type StatementBody = {

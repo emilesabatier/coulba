@@ -1,4 +1,4 @@
-import { createRecordBody, createRecordReturn } from "./createRecord"
+import { createRecordBody, createRecordReturn } from "./createRecord.js"
 
 
 export const records = {

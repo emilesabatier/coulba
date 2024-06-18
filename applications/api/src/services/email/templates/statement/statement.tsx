@@ -1,8 +1,8 @@
 import { auth } from "@coulba/schemas/routes"
-import * as v from "valibot"
-import { Statement as StatementItem } from "./groupStatements"
-import { StatementTable } from "./statements"
 import { Style, css } from "hono/css"
+import * as v from "valibot"
+import { Statement as StatementItem } from "./groupStatements.js"
+import { StatementTable } from "./statements.js"
 
 
 type Statement = {

@@ -1,9 +1,9 @@
 import { css, cx } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
-import { toRoman } from "../../../toRoman"
-import { FormatPrice } from "../components/price/formatPrice"
-import { Table } from "../components/table/table"
-import { SheetLiability } from "./groupSheets"
+import { Table } from "../components/table/table.js"
+import { toRoman } from "../../../toRoman.js"
+import { FormatPrice } from "../components/price/formatPrice.js"
+import { SheetLiability } from "./groupSheets.js"
 
 
 type SheetLiabilityBody = {
