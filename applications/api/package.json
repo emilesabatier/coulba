@@ -5,13 +5,12 @@
     "scripts": {
         "dev": "tsx watch --env-file=.env src/index.ts",
         "build": "tsc --build",
-        "start": "node --env-file=.env ./build/index.js",
-        "lint": "pnpx eslint src/**/*.ts"
+        "start": "node --env-file=.env ./build/index.js"
     },
     "dependencies": {
+        "@coulba/schemas": "workspace:*",
         "@aws-sdk/client-s3": "3.535.0",
         "@aws-sdk/s3-request-presigner": "3.535.0",
-        "@coulba/schemas": "workspace:*",
         "@hono/node-server": "1.11.1",
         "drizzle-orm": "0.31.2",
         "hono": "4.3.0",
@@ -21,13 +20,8 @@
         "valibot": "0.30.0"
     },
     "devDependencies": {
-        "@eslint/js": "9.5.0",
-        "@types/eslint__js": "8.42.3",
         "@types/node": "20.12.8",
         "@types/nodemailer": "6.4.15",
-        "eslint": "8.57.0",
-        "eslint-plugin-import": "2.29.1",
-        "globals": "^15.6.0",
         "tsx": "4.9.0",
         "typescript": "5.4.5"
     }

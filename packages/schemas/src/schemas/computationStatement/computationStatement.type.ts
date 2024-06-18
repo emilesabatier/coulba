@@ -1,5 +1,5 @@
-import { computationStatements } from "../../models/computationStatements.model"
-import { computationStatementInclude } from "./computationStatement.include"
+import { computationStatements } from "../../models/computationStatements.model.js"
+import { computationStatementInclude } from "./computationStatement.include.js"
 
 
 type computationStatementInclude = keyof typeof computationStatementInclude
