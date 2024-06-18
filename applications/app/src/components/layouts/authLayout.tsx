@@ -26,8 +26,8 @@ export function AuthLayout() {
     )
     return (
         <div id="auth" className="min-w-full w-full max-w-full min-h-full h-full max-h-full overflow-hidden grid grid-cols-[max-content_auto] grid-rows-[64px_auto]">
-            <div className="col-start-1 col-end-1 row-start-1 row-end-1 w-full h-full p-3 border-b border-r border-neutral/20 flex justify-between items-end">
-                <Link to="/" className="h-full flex justify-center items-center">
+            <div className="col-start-1 col-end-1 row-start-1 row-end-1 h-full p-3 border-b border-r border-neutral/20 flex justify-between items-end gap-3">
+                <Link to="/" className="flex w-fit max-w-fit">
                     <Logo />
                 </Link>
                 <DisplayVersion />
@@ -126,10 +126,10 @@ export function AuthLayout() {
                     </PopoverMenu>
                 </div>
             </div>
-            <div className="col-start-1 col-end-1 row-start-2 row-end-2 w-full h-full border-r border-neutral/20">
+            <div className="col-start-1 col-end-1 row-start-2 row-end-2 h-full border-r border-neutral/20">
                 <Navigation />
             </div>
-            <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full max-w-full min-h-full h-full max-h-full overflow-auto">
+            <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full max-w-full min-h-full h-full max-h-full overflow-y-auto overflow-x-hidden">
                 <Outlet />
             </div>
         </div>

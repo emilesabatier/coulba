@@ -9,6 +9,6 @@ type Logo = {
 
 export function Logo(props: Logo) {
     return (
-        <LogoSvg className={cn("h-full w-auto fill-neutral overflow-visible", props.className)} />
+        <LogoSvg className={cn("w-auto h-[40px] max-h-full fill-neutral overflow-visible", props.className)} />
     )
 }
