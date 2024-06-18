@@ -2,11 +2,11 @@ import { auth } from "@coulba/schemas/routes"
 import { css } from "hono/css"
 import { Fragment } from "hono/jsx/jsx-runtime"
 import * as v from "valibot"
-import { toRoman } from "../../../toRoman"
-import { FormatPrice } from "../components/price/formatPrice"
-import { Table } from "../components/table/table"
-import { Statement } from "./groupStatements"
-import { StatementBody } from "./statementBody"
+import { Table } from "../components/table/table.js"
+import { Statement } from "./groupStatements.js"
+import { toRoman } from "../../../toRoman.js"
+import { FormatPrice } from "../components/price/formatPrice.js"
+import { StatementBody } from "./statementBody.js"
 
 
 type StatementTable = {

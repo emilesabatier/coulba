@@ -1,8 +1,8 @@
 import { Style, css } from "hono/css"
-import { FormatPrice } from "../components/price/formatPrice"
-import { Table } from "../components/table/table"
-import { SheetAsset } from "./groupSheets"
-import { SheetAssetBody } from "./sheetAssetBody"
+import { FormatPrice } from "../components/price/formatPrice.js"
+import { Table } from "../components/table/table.js"
+import { SheetAsset } from "./groupSheets.js"
+import { SheetAssetBody } from "./sheetAssetBody.js"
 
 
 type SheetAssets = {

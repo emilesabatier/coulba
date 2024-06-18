@@ -1,6 +1,6 @@
 import { auth } from "@coulba/schemas/routes"
 import * as v from "valibot"
-import { Balance } from "./getBalance"
+import { Balance } from "./getBalance.js"
 
 
 export type SheetAsset = {

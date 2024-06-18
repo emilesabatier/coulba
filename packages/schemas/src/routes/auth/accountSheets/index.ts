@@ -1,7 +1,7 @@
-import { createAccountStatementBody, createAccountStatementReturn } from "./createAccountSheet"
-import { deleteAccountStatementParams, deleteAccountStatementReturn } from "./deleteAccountSheet"
-import { readAccountStatementParams, readAccountStatementReturn } from "./readAccountSheet"
-import { updateAccountStatementBody, updateAccountStatementParams, updateAccountStatementReturn } from "./updateAccountSheet"
+import { createAccountStatementBody, createAccountStatementReturn } from "./createAccountSheet.js"
+import { deleteAccountStatementParams, deleteAccountStatementReturn } from "./deleteAccountSheet.js"
+import { readAccountStatementParams, readAccountStatementReturn } from "./readAccountSheet.js"
+import { updateAccountStatementBody, updateAccountStatementParams, updateAccountStatementReturn } from "./updateAccountSheet.js"
 
 
 export const accountSheets = {

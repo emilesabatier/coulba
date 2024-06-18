@@ -1,6 +1,6 @@
 import { css, cx } from "hono/css"
 import { DOMAttributes } from "hono/jsx"
-import { formatPrice } from "./price.format"
+import { formatPrice } from "./price.format.js"
 
 
 

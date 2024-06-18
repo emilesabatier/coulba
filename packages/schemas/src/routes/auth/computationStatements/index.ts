@@ -1,7 +1,7 @@
-import { createComputationStatementBody, createComputationStatementReturn } from "./createComputationStatement";
-import { deleteComputationStatementParams, deleteComputationStatementReturn } from "./deleteComputationStatement";
-import { readComputationStatementParams, readComputationStatementReturn } from "./readComputationStatement";
-import { updateComputationStatementBody, updateComputationStatementParams, updateComputationStatementReturn } from "./updateComputationStatement";
+import { createComputationStatementBody, createComputationStatementReturn } from "./createComputationStatement.js"
+import { deleteComputationStatementParams, deleteComputationStatementReturn } from "./deleteComputationStatement.js"
+import { readComputationStatementParams, readComputationStatementReturn } from "./readComputationStatement.js"
+import { updateComputationStatementBody, updateComputationStatementParams, updateComputationStatementReturn } from "./updateComputationStatement.js"
 
 
 export const computationStatements = {

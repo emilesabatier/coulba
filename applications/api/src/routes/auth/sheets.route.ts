@@ -6,13 +6,13 @@ import { and, eq } from "drizzle-orm"
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 import { launch } from "puppeteer"
-import { db } from "../../clients/db"
-import { bodyValidator } from "../../middlewares/bodyValidator"
-import { AuthEnv } from "../../middlewares/checkAuth"
-import { paramsValidator } from "../../middlewares/paramsValidator"
-import { getBalance } from "../../services/email/templates/sheet/getBalance"
-import { groupSheetsAssets, groupSheetsLiabilities } from "../../services/email/templates/sheet/groupSheets"
-import { sheetTemplate } from "../../services/email/templates/sheet/sheet"
+import { db } from "../../clients/db.js"
+import { bodyValidator } from "../../middlewares/bodyValidator.js"
+import { AuthEnv } from "../../middlewares/checkAuth.js"
+import { paramsValidator } from "../../middlewares/paramsValidator.js"
+import { getBalance } from "../../services/email/templates/sheet/getBalance.js"
+import { groupSheetsAssets, groupSheetsLiabilities } from "../../services/email/templates/sheet/groupSheets.js"
+import { sheetTemplate } from "../../services/email/templates/sheet/sheet.js"
 
 
 export const sheetsRoute = new Hono<AuthEnv>()
