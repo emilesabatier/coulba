@@ -10,7 +10,7 @@ export function DonationBanner() {
                 <h2 className="text-2xl">Faire un don</h2>
                 <p className="text-neutral/50">L'application repose sur les dons des utilisateurs</p>
             </div>
-            <div className="flex justify-end items-center gap-1.5">
+            <div className="ml-auto flex justify-end items-center gap-1.5">
                 <a
                     href={`${import.meta.env.VITE_PUBLIC_WEBSITE_BASE}/tarif`}
                     target="_blank"

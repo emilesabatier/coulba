@@ -54,9 +54,7 @@ export function Table<T>(props: Table<T>) {
 
     if (props.isLoading) return <CircularLoader className="m-3" />
     return (
-        <Section.Root
-        // className="h-full"
-        >
+        <Section.Root>
             <Section.Item>
                 <div>
                     {props.children ?? null}
@@ -71,8 +69,8 @@ export function Table<T>(props: Table<T>) {
                     />
                 </InputDebounced>
             </Section.Item>
-            <Section.Item className="w-full h-fit overflow-auto p-0 flex flex-col justify-start items-stretch">
-                <table className="w-full h-full border-collapse">
+            <Section.Item className="w-full max-w-full max-h-[600px] p-0 flex flex-col justify-start items-stretch">
+                <table className="w-full max-w-full h-full max-h-full border-collapse">
                     <thead className="w-full sticky top-0 bg-white">
                         <tr className="w-full">
                             {table.getFlatHeaders().map((header) => {

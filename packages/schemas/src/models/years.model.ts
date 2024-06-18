@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm"
-import { AnyPgColumn, boolean, pgEnum, pgTable, text, unique } from "drizzle-orm/pg-core"
-import { yearStates } from "../components/index.js"
+import { AnyPgColumn, boolean, pgTable, text, unique } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { organizations } from "./organizations.model.js"
@@ -8,8 +7,6 @@ import { users } from "./users.model.js"
 
 
 // Model
-export const yearStateEnum = pgEnum("year_state", yearStates)
-
 export const years = pgTable(
     "years",
     {
