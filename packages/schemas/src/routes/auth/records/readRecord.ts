@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { recordSchema } from "../../../schemas/record/record.schema"
-import { rowSchema } from "../../../schemas/row/row.schema"
+import { recordSchema } from "../../../schemas/record/record.schema.js"
+import { rowSchema } from "../../../schemas/row/row.schema.js"
 
 
 // Input

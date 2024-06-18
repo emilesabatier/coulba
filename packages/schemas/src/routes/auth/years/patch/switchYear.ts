@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { yearSchema } from "../../../../schemas/year/year.schema"
+import { yearSchema } from "../../../../schemas/year/year.schema.js"
 
 
 // Input

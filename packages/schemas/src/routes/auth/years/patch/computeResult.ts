@@ -1,6 +1,6 @@
 import * as v from "valibot"
-import { accountSchema } from "../../../../schemas/account/account.schema"
-import { journalSchema } from "../../../../schemas/journal/journal.schema"
+import { accountSchema } from "../../../../schemas/account/account.schema.js"
+import { journalSchema } from "../../../../schemas/journal/journal.schema.js"
 
 
 // Input

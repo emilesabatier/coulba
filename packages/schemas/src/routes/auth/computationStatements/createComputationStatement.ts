@@ -1,5 +1,5 @@
 import * as v from "valibot"
-import { computationStatementSchema } from "../../../schemas/computationStatement/computationStatement.schema"
+import { computationStatementSchema } from "../../../schemas/computationStatement/computationStatement.schema.js"
 
 
 // Input

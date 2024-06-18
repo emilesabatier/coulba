@@ -1,5 +1,5 @@
-import { accountStatements } from "../../models/accountStatements.model"
-import { accountStatementInclude } from "./accountStatement.include"
+import { accountStatements } from "../../models/accountStatements.model.js"
+import { accountStatementInclude } from "./accountStatement.include.js"
 
 
 type accountStatementInclude = keyof typeof accountStatementInclude

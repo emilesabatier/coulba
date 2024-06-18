@@ -1,4 +1,4 @@
-import { yearSchema } from "../../../../schemas/year/year.schema"
+import { yearSchema } from "../../../../schemas/year/year.schema.js"
 
 
 // Output
