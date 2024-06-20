@@ -30,7 +30,7 @@ export function UpdateComputationStatementForm() {
             validationSchema={auth.computationStatements.put.body}
             defaultValues={computationStatement.data}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
+                to: "/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement",
                 params: {
                     idComputation: idComputation,
                     idComputationStatement: idComputationStatement
@@ -46,7 +46,7 @@ export function UpdateComputationStatementForm() {
 
                 await queryClient.invalidateQueries(computationStatementOptions(idComputationStatement))
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
+                    to: "/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement",
                     params: {
                         idComputation: idComputation,
                         idComputationStatement: idComputationStatement

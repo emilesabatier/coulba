@@ -8,6 +8,6 @@ export function readStatements() {
     return getAPI({
         path: `/auth/statements`,
         schema: v.array(auth.statements.get.return),
-        message: "Erreur avec la lecture des lignes"
+        message: "Erreur avec la lecture du poste de compte de résultat"
     })
 }

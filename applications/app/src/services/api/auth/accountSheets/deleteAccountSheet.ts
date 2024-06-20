@@ -11,6 +11,6 @@ export function deleteAccountSheet(props: DeleteAccountSheet) {
     return deleteAPI({
         path: `/auth/account-sheets/${props.params.idAccountSheet}`,
         schema: auth.accountSheets.delete.return,
-        message: "Erreur avec la suppression du lien entre compte et bilan"
+        message: "Erreur avec la suppression du lien entre compte et poste de bilan"
     })
 }

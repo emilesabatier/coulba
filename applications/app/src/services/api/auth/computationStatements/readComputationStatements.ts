@@ -8,6 +8,6 @@ export function readComputationStatements() {
     return getAPI({
         path: `/auth/computation-statements`,
         schema: v.array(auth.computationStatements.get.return),
-        message: "Erreur avec la lecture des liens entre compte et compte de résultat"
+        message: "Erreur avec la lecture des liens entre calcul et poste de compte de résultat"
     })
 }

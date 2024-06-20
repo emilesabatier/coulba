@@ -44,7 +44,7 @@ export function RowContent() {
                         <ButtonPlain
                             icon={<IconPencil />}
                             text="Modifier"
-                            disabled={row.data.isValidated}
+                            disabled={record.data.isValidated}
                         />
                     </UpdateRow>
                 </div>
@@ -53,7 +53,7 @@ export function RowContent() {
                         <ButtonGhost
                             icon={<IconTrash />}
                             color="error"
-                            disabled={row.data.isValidated}
+                            disabled={record.data.isValidated}
                         />
                     </DeleteRow>
                 </div>

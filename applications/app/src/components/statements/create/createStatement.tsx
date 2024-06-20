@@ -9,7 +9,7 @@ type CreateStatement = {
 export function CreateStatement(props: CreateStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/lignes/ajouter"
+            to="/configuration/compte-de-resultat/postes/ajouter"
             children={props.children}
         />
     )

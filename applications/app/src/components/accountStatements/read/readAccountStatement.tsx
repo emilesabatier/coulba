@@ -14,7 +14,7 @@ type ReadAccountStatement = {
 export function ReadAccountStatement(props: ReadAccountStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement"
+            to="/configuration/compte-de-resultat/postes/$idStatement/comptes/$idAccountStatement"
             params={{
                 idStatement: props.idStatement,
                 idAccountStatement: props.idAccountStatement

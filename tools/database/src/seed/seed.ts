@@ -48,7 +48,7 @@ async function seed() {
                 isAdmin: true,
                 isActive: true,
                 email: "dev@emilesabatier.com",
-                isEmailValidated: false,
+                isEmailValidated: true,
                 alias: randFirstName(),
                 passwordHash: passwordHash,
                 passwordSalt: passwordSalt,
@@ -115,6 +115,7 @@ async function seed() {
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: year.id,
+                    isDefault: true,
                     number: _account.number,
                     isMandatory: _account.isMandatory,
                     isClass: _account.isClass,
@@ -140,9 +141,12 @@ async function seed() {
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: year.id,
+                    isDefault: true,
                     side: _sheet.side,
                     number: _sheet.number,
                     label: _sheet.label,
+                    addedGrossAmount: "0",
+                    addedAllowanceAmount: "0",
                     numberParent: _sheet.numberParent,
                     accounts: _sheet.accounts
                 }))
@@ -185,8 +189,10 @@ async function seed() {
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: year.id,
+                    isDefault: true,
                     number: _statement.number,
                     label: _statement.label,
+                    addedNetAmount: "0",
                     numberParent: _statement.numberParent,
                     accounts: _statement.accounts
                 }))
@@ -291,6 +297,7 @@ async function seed() {
                         idJournal: undefined,
                         idAttachment: undefined,
                         isValidated: false,
+                        isComputed: true,
                         validatedOn: undefined,
                         label: record.label,
                         date: record.date
@@ -308,8 +315,6 @@ async function seed() {
                             idYear: year.id,
                             idAccount: idAccount,
                             idRecord: idRecord,
-                            isValidated: false,
-                            isComputed: false,
                             label: row.label,
                             debit: row.debit.toString(),
                             credit: row.credit.toString()

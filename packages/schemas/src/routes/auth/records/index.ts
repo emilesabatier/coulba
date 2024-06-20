@@ -1,3 +1,4 @@
+import { computeRecordParams, computeRecordReturn } from "./computeRecord.js"
 import { createRecordBody, createRecordReturn } from "./createRecord.js"
 import { deleteRecordParams, deleteRecordReturn } from "./deleteRecord.js"
 import { readRecordParams, readRecordReturn } from "./readRecord.js"
@@ -27,6 +28,10 @@ export const records = {
         validate: {
             params: validateRecordParams,
             return: validateRecordReturn
+        },
+        compute: {
+            params: computeRecordParams,
+            return: computeRecordReturn
         }
     }
 }

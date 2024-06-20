@@ -12,6 +12,6 @@ export function createStatement(props: CreateStatement) {
         path: `/auth/statements`,
         body: props.body,
         schema: auth.statements.post.return,
-        message: "Erreur avec l'ajout de la ligne"
+        message: "Erreur avec l'ajout du poste de compte de résultat"
     })
 }

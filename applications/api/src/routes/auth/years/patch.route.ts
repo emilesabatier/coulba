@@ -49,8 +49,8 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
         }
     )
     .patch(
-        '/compute-result',
-        validator("json", bodyValidator(auth.years.patch.computeResult.body)),
+        '/settle-statement',
+        validator("json", bodyValidator(auth.years.patch.settleStatement.body)),
         async (c) => {
             const body = c.req.valid('json')
 
@@ -83,9 +83,10 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idYear: c.var.currentYear.id,
                         idJournal: body.idJournalClosing,
                         idAutomatic: "COMPUTE_RESULT",
-                        label: "Résultat de l'exercice",
-                        date: c.var.currentYear.endingOn,
                         isValidated: true,
+                        isComputed: false,
+                        label: "Solde des comptes de gestion",
+                        date: c.var.currentYear.endingOn,
                         validatedOn: c.var.currentYear.endingOn,
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
@@ -99,7 +100,11 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         eq(accounts.idYear, c.var.currentYear.id)
                     ),
                     with: {
-                        rows: true,
+                        rows: {
+                            with: {
+                                record: true
+                            }
+                        },
                         accountStatements: true
                     }
                 })
@@ -115,7 +120,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                     }
 
                     account.rows.forEach((row) => {
-                        if (!row.isValidated || !row.isComputed) return
+                        if (!row.record.isValidated || !row.record.isComputed) return
                         sum.debit += Number(row.debit)
                         sum.credit += Number(row.credit)
                     })
@@ -132,8 +137,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
                         idAccount: account.id,
-                        isValidated: true,
-                        isComputed: false,
                         debit: balance.credit.toString(),
                         credit: balance.debit.toString(),
                         label: "Solde du compte",
@@ -156,8 +159,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                             idYear: c.var.currentYear.id,
                             idRecord: createRecord.id,
                             idAccount: (algebricBalance < 0) ? body.idAccountLoss : body.idAccountProfit,
-                            isValidated: true,
-                            isComputed: true,
                             debit: balance.credit.toString(),
                             credit: balance.debit.toString(),
                             label: "Résultat de l'exercice",
@@ -196,9 +197,10 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idYear: c.var.currentYear.id,
                         idJournal: body.idJournalClosing,
                         idAutomatic: "SETTLE_SHEET",
+                        isValidated: true,
+                        isComputed: false,
                         label: "Solde des comptes de bilan",
                         date: c.var.currentYear.endingOn,
-                        isValidated: true,
                         validatedOn: c.var.currentYear.endingOn,
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
@@ -212,7 +214,11 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         eq(accounts.idYear, c.var.currentYear.id)
                     ),
                     with: {
-                        rows: true,
+                        rows: {
+                            with: {
+                                record: true
+                            }
+                        },
                         accountSheets: true
                     }
                 })
@@ -227,7 +233,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         credit: 0
                     }
                     account.rows.forEach((row) => {
-                        if (!row.isValidated || !row.isComputed) return
+                        if (!row.record.isValidated || !row.record.isComputed) return
                         sum.debit += Number(row.debit)
                         sum.credit += Number(row.credit)
                     })
@@ -244,8 +250,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
                         idAccount: account.id,
-                        isValidated: true,
-                        isComputed: false,
                         debit: balance.credit.toString(),
                         credit: balance.debit.toString(),
                         label: "Solde du compte",
@@ -310,9 +314,10 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idYear: c.var.currentYear.id,
                         idJournal: body.idJournalOpening,
                         idAutomatic: "OPEN_SHEET",
+                        isValidated: true,
+                        isComputed: true,
                         label: "Report du bilan de l'exercice précédent",
                         date: c.var.currentYear.startingOn,
-                        isValidated: true,
                         lastUpdatedBy: c.var.user.id,
                         createdBy: c.var.user.id
                     })
@@ -340,8 +345,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
                         idAccount: row.idAccount,
-                        isValidated: true,
-                        isComputed: true,
                         debit: row.credit.toString(),
                         credit: row.debit.toString(),
                         label: "Report du compte",

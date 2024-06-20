@@ -8,6 +8,6 @@ export function readComputations() {
     return getAPI({
         path: `/auth/computations`,
         schema: v.array(auth.computations.get.return),
-        message: "Erreur avec la lecture des opérations"
+        message: "Erreur avec la lecture des calculs"
     })
 }

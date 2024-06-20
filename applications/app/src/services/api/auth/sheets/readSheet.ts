@@ -10,12 +10,12 @@ type ReadSheet = {
 
 export function readSheet(props: ReadSheet) {
     if (!props.params.idSheet) {
-        toast({ title: "Identifiant de la ligne manquant" })
+        toast({ title: "Identifiant du poste de bilan manquant" })
         return
     }
     return getAPI({
         path: `/auth/sheets/${props.params.idSheet}`,
         schema: auth.sheets.get.return,
-        message: "Erreur avec la lecture de la ligne"
+        message: "Erreur avec la lecture du poste de bilan"
     })
 }

@@ -1,10 +1,11 @@
 import { createRoute } from "@tanstack/react-router"
 import { Main } from "../../../components/layouts/main"
+import { ActivationBanner } from "../../../components/overview/activationBanner"
 import { DocumentationBanner } from "../../../components/overview/documentationBanner"
 import { DonationBanner } from "../../../components/overview/donationBanner"
 import { SupportBanner } from "../../../components/overview/supportBanner"
 import { authLayout } from "../auth.layout"
-import { ActivationBanner } from "../../../components/overview/activationBanner"
+import { EmailValidationBanner } from "../../../components/overview/validateEmailBanner"
 
 
 export const overviewRoute = createRoute({
@@ -18,6 +19,7 @@ export const overviewRoute = createRoute({
         return (
             <Main>
                 <ActivationBanner />
+                <EmailValidationBanner />
                 <DocumentationBanner />
                 <SupportBanner />
                 <DonationBanner />

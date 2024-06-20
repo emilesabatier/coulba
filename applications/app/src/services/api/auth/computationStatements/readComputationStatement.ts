@@ -10,12 +10,12 @@ type ReadComputationStatement = {
 
 export function readComputationStatement(props: ReadComputationStatement) {
     if (!props.params.idComputationStatement) {
-        toast({ title: "Identifiant du lien entre compte et compte de résultat manquant" })
+        toast({ title: "Identifiant du lien entre calcul et poste de compte de résultat manquant" })
         return
     }
     return getAPI({
         path: `/auth/computation-statements/${props.params.idComputationStatement}`,
         schema: auth.computationStatements.get.return,
-        message: "Erreur avec la lecture du lien entre compte et compte de résultat"
+        message: "Erreur avec la lecture du lien entre calcul et poste de compte de résultat"
     })
 }

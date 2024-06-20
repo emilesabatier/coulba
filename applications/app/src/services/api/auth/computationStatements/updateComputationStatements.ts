@@ -13,6 +13,6 @@ export function updateComputationStatement(props: UpdateComputationStatement) {
         path: `/auth/computation-statements/${props.params.idComputationStatement}`,
         body: props.body,
         schema: auth.computationStatements.put.return,
-        message: "Erreur avec la modification du lien entre compte et compte de résultat"
+        message: "Erreur avec la modification du lien entre calcul et poste de compte de résultat"
     })
 }

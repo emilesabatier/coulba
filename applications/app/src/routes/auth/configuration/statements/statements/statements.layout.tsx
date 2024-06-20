@@ -5,9 +5,9 @@ import { statementsConfigLayout } from "../statementsConfig.layout"
 export const statementsLayout = createRoute({
     getParentRoute: () => statementsConfigLayout,
     beforeLoad: () => ({
-        title: "Lignes",
+        title: "Postes",
         description: undefined
     }),
-    path: '/lignes',
+    path: '/postes',
     component: () => <Outlet />
 })

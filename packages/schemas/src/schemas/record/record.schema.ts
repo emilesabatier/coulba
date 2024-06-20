@@ -16,6 +16,7 @@ export const recordSchema = createSelectSchema(records, {
     idAttachment: idSchema,
     idAutomatic: textSchema,
     isValidated: booleanSchema,
+    isComputed: booleanSchema,
     validatedOn: dateTimeSchema,
     label: v.nonNullish(requiredTextSchema, "Le libellé doit être renseigné"),
     date: v.nonNullish(dateTimeSchema, "La date doit être renseignée"),

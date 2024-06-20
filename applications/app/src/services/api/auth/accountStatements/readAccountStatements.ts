@@ -7,6 +7,6 @@ export function readAccountStatements() {
     return getAPI({
         path: `/auth/account-statements`,
         schema: v.array(auth.accountStatements.get.return),
-        message: "Erreur avec la lecture des données"
+        message: "Erreur avec la lecture des liens entre compte et poste de compte de résultat"
     })
 }

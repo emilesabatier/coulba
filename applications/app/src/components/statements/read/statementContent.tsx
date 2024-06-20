@@ -1,9 +1,10 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
-import { FormatDateTime, FormatNull, FormatText } from "@coulba/design/formats"
+import { FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { readStatementRoute } from "../../../routes/auth/configuration/statements/statements/readStatement.route"
 import { router } from "../../../routes/router"
 import { statementOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { AccountStatementsTable } from "../../accountStatements/accountStatementsTable"
@@ -14,7 +15,6 @@ import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteStatement } from "../delete/deleteStatement"
 import { FormatStatementWithFetch } from "../format/formatStatementWithFetch"
 import { UpdateStatement } from "../update/updateStatement"
-import { readStatementRoute } from "../../../routes/auth/configuration/statements/statements/readStatement.route"
 
 
 export function StatementContent() {
@@ -29,7 +29,7 @@ export function StatementContent() {
             <Section.Item>
                 <div className="flex justify-start items-center gap-1.5">
                     <ButtonOutline
-                        onClick={() => router.navigate({ to: "/configuration/compte-de-resultat/lignes" })}
+                        onClick={() => router.navigate({ to: "/configuration/compte-de-resultat/postes" })}
                         icon={<IconChevronLeft />}
                     />
                     <UpdateStatement statement={statement.data}>
@@ -61,6 +61,9 @@ export function StatementContent() {
                     </DataBlock.Item>
                     <DataBlock.Item label="Ligne parent">
                         {!statement.data.idParent ? <FormatNull /> : <FormatStatementWithFetch idStatement={statement.data.idParent} />}
+                    </DataBlock.Item>
+                    <DataBlock.Item label="Montant net ajouté">
+                        <FormatPrice price={statement.data.addedNetAmount} />
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>

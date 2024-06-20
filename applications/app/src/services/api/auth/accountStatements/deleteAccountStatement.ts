@@ -11,6 +11,6 @@ export function deleteAccountStatement(props: DeleteAccountStatement) {
     return deleteAPI({
         path: `/auth/account-statements/${props.params.idAccountStatement}`,
         schema: auth.accountStatements.delete.return,
-        message: "Erreur avec la suppression des données"
+        message: "Erreur avec la suppression du lien entre compte et poste de compte de résultat"
     })
 }

@@ -2,7 +2,7 @@ import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
-import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
+import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { formatAccount } from "../../accounts/format/formatAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -12,11 +12,13 @@ import { getBalance } from "./getBalance"
 
 export function BalanceReport() {
     const accounts = useQuery(accountsOptions)
-    const rows = useQuery(rowsOptions)
+    const records = useQuery(recordsOptions)
 
     const accountsData = accounts.data ?? []
-    const rowsData = (rows.data ?? [])
-        .filter((row) => row.isValidated && row.isComputed)
+    const rowsData = (records.data ?? [])
+        .filter((record) => record.isComputed)
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .flatMap((record) => record.rows)
 
     const balance = getBalance(rowsData, accountsData)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))

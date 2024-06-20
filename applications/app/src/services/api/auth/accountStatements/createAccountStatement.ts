@@ -12,6 +12,6 @@ export function createAccountStatement(props: CreateAccountStatement) {
         path: `/auth/account-statements`,
         body: props.body,
         schema: auth.accountStatements.post.return,
-        message: "Erreur avec l'ajout des données"
+        message: "Erreur avec l'ajout du lien entre compte et poste de compte de résultat"
     })
 }

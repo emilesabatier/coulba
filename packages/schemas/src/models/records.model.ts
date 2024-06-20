@@ -21,6 +21,7 @@ export const records = pgTable(
         idAttachment: idColumn("id_attachment").references(() => attachments.id, { onDelete: "set null", onUpdate: "cascade" }),
         idAutomatic: idColumn("id_automatic"),
         isValidated: boolean("is_validated").notNull(),
+        isComputed: boolean("is_computed").notNull(),
         validatedOn: dateTimeColumn("validated_on"),
         label: text("label").notNull(),
         date: dateTimeColumn("date").notNull(),

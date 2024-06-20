@@ -10,10 +10,12 @@ function ResetPassword(props: ResetPassword) {
         <html lang="fr">
             <body>
                 <p>
-                    Bonjour {props.to},
+                    Bonjour,
                 </p>
                 <p>
-                    Pour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant: <a href={props.urlInvitation}>{props.urlInvitation}</a>
+                    Pour réinitialiser votre mot de passe, veuillez cliquer sur le lien suivant:
+                    <br />
+                    <a href={props.urlInvitation}>Mettre à jour mon mot de passe</a>
                 </p>
             </body>
         </html>

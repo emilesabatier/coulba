@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm"
-import { boolean, numeric, pgTable, text } from "drizzle-orm/pg-core"
+import { numeric, pgTable, text } from "drizzle-orm/pg-core"
 import { dateTimeColumn } from "../components/models/dateTime.column.js"
 import { idColumn } from "../components/models/id.column.js"
 import { accounts } from "./accounts.model.js"
@@ -18,8 +18,6 @@ export const rows = pgTable(
         idYear: idColumn("id_year").references(() => years.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idRecord: idColumn("id_record").references(() => records.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idAccount: idColumn("id_account").references(() => accounts.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
-        isValidated: boolean("is_validated").notNull(),
-        isComputed: boolean("is_computed").notNull(),
         label: text("label").notNull(),
         debit: numeric("debit", { scale: 2 }).notNull(),
         credit: numeric("credit", { scale: 2 }).notNull(),

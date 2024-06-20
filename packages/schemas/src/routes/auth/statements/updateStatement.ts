@@ -10,7 +10,8 @@ export const updateStatementParams = v.object({
 export const updateStatementBody = v.partial(v.object({
     idParent: statementSchema.entries.idParent,
     number: statementSchema.entries.number,
-    label: statementSchema.entries.label
+    label: statementSchema.entries.label,
+    addedNetAmount: statementSchema.entries.addedNetAmount
 }))
 
 

@@ -35,7 +35,7 @@ export function AccountStatementsTable(props: AccountStatementsTable) {
             ]}
             onRowClick={(row) => {
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement",
+                    to: "/configuration/compte-de-resultat/postes/$idStatement/comptes/$idAccountStatement",
                     params: {
                         idStatement: row.original.idStatement,
                         idAccountStatement: row.original.id

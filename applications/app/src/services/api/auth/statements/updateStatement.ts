@@ -13,6 +13,6 @@ export function updateStatement(props: UpdateStatement) {
         path: `/auth/statements/${props.params.idStatement}`,
         body: props.body,
         schema: auth.statements.put.return,
-        message: "Erreur avec la modification de la ligne"
+        message: "Erreur avec la modification du poste de compte de résultat"
     })
 }

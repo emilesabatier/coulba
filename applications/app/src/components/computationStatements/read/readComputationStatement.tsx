@@ -14,7 +14,7 @@ type ReadComputationStatement = {
 export function ReadComputationStatement(props: ReadComputationStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement"
+            to="/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement"
             params={{
                 idComputation: props.idComputation,
                 idComputationStatement: props.idComputationStatement

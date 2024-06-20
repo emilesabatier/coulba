@@ -11,6 +11,6 @@ export function deleteSheet(props: DeleteSheet) {
     return deleteAPI({
         path: `/auth/sheets/${props.params.idSheet}`,
         schema: auth.sheets.delete.return,
-        message: "Erreur avec la suppression de la ligne"
+        message: "Erreur avec la suppression du poste de bilan"
     })
 }

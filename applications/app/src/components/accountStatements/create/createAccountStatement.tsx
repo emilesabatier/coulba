@@ -12,7 +12,7 @@ type CreateAccountStatement = {
 export function CreateAccountStatement(props: CreateAccountStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/lignes/$idStatement/comptes/ajouter"
+            to="/configuration/compte-de-resultat/postes/$idStatement/comptes/ajouter"
             params={{
                 idStatement: props.statement.id
             }}

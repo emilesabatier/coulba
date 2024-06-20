@@ -13,6 +13,6 @@ export function updateSheet(props: UpdateSheet) {
         path: `/auth/sheets/${props.params.idSheet}`,
         body: props.body,
         schema: auth.sheets.put.return,
-        message: "Erreur avec la modification de la ligne"
+        message: "Erreur avec la modification du poste de bilan"
     })
 }

@@ -8,6 +8,6 @@ export function readSheets() {
     return getAPI({
         path: `/auth/sheets`,
         schema: v.array(auth.sheets.get.return),
-        message: "Erreur avec la lecture des lignes"
+        message: "Erreur avec la lecture des postes de bilan"
     })
 }

@@ -13,6 +13,6 @@ export function updateComputation(props: UpdateComputation) {
         path: `/auth/computations/${props.params.idComputation}`,
         body: props.body,
         schema: auth.computations.put.return,
-        message: "Erreur avec la modification de l'opération"
+        message: "Erreur avec la modification du calcul"
     })
 }

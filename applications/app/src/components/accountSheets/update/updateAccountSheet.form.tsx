@@ -66,7 +66,7 @@ export function UpdateAccountSheetForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Compte lié"
-                                    tooltip="Le compte lié à la ligne du bilan."
+                                    tooltip="Le compte lié au poste du bilan."
                                     isRequired
                                 />
                                 <FormControl>

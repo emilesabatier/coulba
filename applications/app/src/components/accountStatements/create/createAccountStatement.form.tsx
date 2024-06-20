@@ -24,7 +24,7 @@ export function CreateAccountStatementForm() {
                 idStatement: idStatement
             }}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                to: "/configuration/compte-de-resultat/postes/$idStatement",
                 params: { idStatement: idStatement }
             })}
             submitLabel="Ajouter"
@@ -36,7 +36,7 @@ export function CreateAccountStatementForm() {
 
                 await queryClient.invalidateQueries(accountStatementsOptions)
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                    to: "/configuration/compte-de-resultat/postes/$idStatement",
                     params: { idStatement: idStatement }
                 })
                 toast({ title: "Données ajoutées", variant: "success" })
@@ -53,7 +53,7 @@ export function CreateAccountStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Compte lié"
-                                    tooltip="Le compte lié à la ligne du compte de résultat."
+                                    tooltip="Le compte lié au poste du compte de résultat."
                                     isRequired
                                 />
                                 <FormControl>

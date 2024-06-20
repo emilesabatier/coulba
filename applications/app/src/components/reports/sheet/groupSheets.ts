@@ -29,7 +29,6 @@ export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return
 
             let gross = 0
             let allowance = 0
-            let net = 0
 
             if (childrenSheets.length === 0) {
                 sheet.accountSheets.forEach((accountSheet) => {
@@ -47,15 +46,13 @@ export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return
                 })
             }
 
-            net = gross - allowance
-
             return ({
                 id: sheet.id,
                 number: sheet.number,
                 label: sheet.label,
-                gross: gross,
-                allowance: allowance,
-                net: net,
+                gross: gross + Number(sheet.addedGrossAmount),
+                allowance: allowance + Number(sheet.addedAllowanceAmount),
+                net: gross - allowance + Number(sheet.addedGrossAmount) - Number(sheet.addedAllowanceAmount),
                 sheets: childrenSheets
             })
         })
@@ -87,7 +84,7 @@ export function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.r
                 id: sheet.id,
                 number: sheet.number,
                 label: sheet.label,
-                net: net,
+                net: net + Number(sheet.addedAllowanceAmount) + Number(sheet.addedGrossAmount),
                 sheets: childrenSheets
             })
         })

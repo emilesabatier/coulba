@@ -10,12 +10,12 @@ type ReadAccountStatement = {
 
 export function readAccountStatement(props: ReadAccountStatement) {
     if (!props.params.idAccountStatement) {
-        toast({ title: "Identifiant du lien entre compte et bilan manquant" })
+        toast({ title: "Identifiant du lien entre compte et poste de compte de résultat manquant" })
         return
     }
     return getAPI({
         path: `/auth/account-statements/${props.params.idAccountStatement}`,
         schema: auth.accountStatements.get.return,
-        message: "Erreur avec la lecture des données"
+        message: "Erreur avec la lecture du lien entre compte et poste de compte de résultat"
     })
 }

@@ -12,7 +12,7 @@ type CreateComputationStatement = {
 export function CreateComputationStatement(props: CreateComputationStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/calculs/$idComputation/lignes/ajouter"
+            to="/configuration/compte-de-resultat/calculs/$idComputation/postes/ajouter"
             params={{
                 idComputation: props.computation.id
             }}

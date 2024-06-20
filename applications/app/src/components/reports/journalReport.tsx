@@ -11,7 +11,7 @@ export function JournalReport() {
     const records = useQuery(recordsOptions)
 
     const recordsData = (records.data ?? [])
-        .filter((record) => record.isValidated)
+        .filter((record) => record.isComputed)
         .sort((a, b) => b.date.localeCompare(a.date))
 
     const totalDebit = recordsData.reduce<number>((sum, record) => {

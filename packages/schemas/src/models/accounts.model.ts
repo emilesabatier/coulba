@@ -25,6 +25,7 @@ export const accounts = pgTable(
         isMandatory: boolean("is_mandatory").notNull(),
         isClass: boolean("is_class").notNull(),
         isSelectable: boolean("is_selectable").notNull(),
+        isDefault: boolean("is_default").notNull(),
         number: integer("number").notNull(),
         label: text("label").notNull(),
         type: accountTypeEnum("type").notNull(),

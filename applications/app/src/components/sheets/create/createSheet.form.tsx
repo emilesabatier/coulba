@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputSelect, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputPrice, InputSelect, InputText } from "@coulba/design/inputs"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { useMutation } from "@tanstack/react-query"
@@ -20,7 +20,9 @@ export function CreateSheetForm() {
         <Form
             validationSchema={auth.sheets.post.body}
             defaultValues={{
-                side: "asset"
+                side: "asset",
+                addedGrossAmount: 0,
+                addedAllowanceAmount: 0
             }}
             onCancel={() => router.navigate({ to: "/configuration/bilan" })}
             submitLabel="Ajouter"
@@ -122,6 +124,70 @@ export function CreateSheetForm() {
                             </FormItem>
                         )}
                     />
+                    {
+                        (form.watch("side") === "asset") ? (
+                            <Fragment>
+                                <FormField
+                                    control={form.control}
+                                    name="addedGrossAmount"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Montant brut à ajouter"
+                                                tooltip="Le montant brut à ajouter."
+                                            />
+                                            <FormControl>
+                                                <InputPrice
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="addedAllowanceAmount"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Montant amortissements et dépréciations à ajouter"
+                                                tooltip="Le montant amortissements et dépréciations à ajouter."
+                                            />
+                                            <FormControl>
+                                                <InputPrice
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                            </Fragment>
+                        ) : (
+                            <FormField
+                                control={form.control}
+                                name="addedGrossAmount"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel
+                                            label="Montant net à ajouter"
+                                            tooltip="Le montant net à ajouter."
+                                        />
+                                        <FormControl>
+                                            <InputPrice
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormError />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
                 </Fragment>
             )}
         </Form>

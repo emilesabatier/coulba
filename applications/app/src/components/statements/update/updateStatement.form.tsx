@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputPrice, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -29,7 +29,7 @@ export function UpdateStatementForm() {
             validationSchema={auth.statements.put.body}
             defaultValues={statement.data}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                to: "/configuration/compte-de-resultat/postes/$idStatement",
                 params: { idStatement: idStatement }
             })}
             submitLabel="Modifier"
@@ -42,7 +42,7 @@ export function UpdateStatementForm() {
 
                 await queryClient.invalidateQueries(statementOptions(idStatement))
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                    to: "/configuration/compte-de-resultat/postes/$idStatement",
                     params: { idStatement: idStatement }
                 })
                 toast({ title: "Ligne mise à jour", variant: "success" })
@@ -102,6 +102,25 @@ export function UpdateStatementForm() {
                                 />
                                 <FormControl>
                                     <StatementCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="addedNetAmount"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Montant net à ajouter"
+                                    tooltip="Le montant net à ajouter."
+                                />
+                                <FormControl>
+                                    <InputPrice
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

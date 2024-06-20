@@ -12,7 +12,7 @@ type UpdateStatement = {
 export function UpdateStatement(props: UpdateStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/lignes/$idStatement/modifier"
+            to="/configuration/compte-de-resultat/postes/$idStatement/modifier"
             params={{ idStatement: props.statement.id }}
             children={props.children}
         />

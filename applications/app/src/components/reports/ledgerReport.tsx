@@ -3,7 +3,7 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react/jsx-runtime"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
-import { rowsOptions } from "../../services/api/auth/rows/rowsOptions"
+import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
 import { formatAccount } from "../accounts/format/formatAccount"
 import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
@@ -24,11 +24,15 @@ export type Ledger = {
 }
 
 export function LedgerReport() {
-    const rows = useQuery(rowsOptions)
+    const records = useQuery(recordsOptions)
     const accounts = useQuery(accountsOptions)
 
-    const ledger = (rows.data ?? [])
-        .filter((row) => row.isValidated && row.isComputed)
+    const rowsData = (records.data ?? [])
+        .filter((record) => record.isComputed)
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .flatMap((record) => record.rows)
+
+    const ledger = (rowsData)
         .reduce<Ledger[]>((_ledger, _row) => {
 
             const row = {
@@ -60,10 +64,10 @@ export function LedgerReport() {
         }, [])
         .sort((a, b) => a.label.localeCompare(b.label))
 
-    if (rows.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
-    if (rows.isError) return <ErrorMessage message={rows.error.message} />
+    if (records.isLoading || accounts.isLoading) return <CircularLoader className="m-3" />
+    if (records.isError) return <ErrorMessage message={records.error.message} />
     if (accounts.isError) return <ErrorMessage message={accounts.error.message} />
-    if (!rows.data || !accounts.data) return null
+    if (!records.data || !accounts.data) return null
     return (
         <Section.Root>
             <Section.Item className="p-0">

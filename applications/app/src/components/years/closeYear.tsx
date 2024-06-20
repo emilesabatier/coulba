@@ -10,8 +10,8 @@ import { router } from "../../routes/router"
 import { accountsOptions } from "../../services/api/auth/accounts/accountsOptions"
 import { journalsOptions } from "../../services/api/auth/journals/journalsOptions"
 import { closeYear } from "../../services/api/auth/years/patch/closeYear"
-import { computeResult } from "../../services/api/auth/years/patch/computeResult"
 import { settleSheet } from "../../services/api/auth/years/patch/settleSheet"
+import { settleStatement } from "../../services/api/auth/years/patch/settleStatement"
 import { AccountCombobox } from "../accounts/accountCombobox"
 import { JournalCombobox } from "../journals/journalCombobox"
 import { ErrorMessage } from "../layouts/errorMessage"
@@ -34,7 +34,7 @@ export function CloseYear(props: CloseYear) {
     return (
         <Form
             validationSchema={v.object({
-                ...auth.years.patch.computeResult.body.entries,
+                ...auth.years.patch.settleStatement.body.entries,
                 ...auth.years.patch.settleSheet.body.entries
             })}
             defaultValues={{
@@ -47,14 +47,14 @@ export function CloseYear(props: CloseYear) {
             onSubmit={async (data) => {
 
                 // compute result
-                const computeResultResponse = await computeResult({
+                const settleStatementResponse = await settleStatement({
                     body: {
                         idJournalClosing: data.idJournalClosing,
                         idAccountProfit: data.idAccountProfit,
                         idAccountLoss: data.idAccountLoss
                     }
                 })
-                if (!computeResultResponse) {
+                if (!settleStatementResponse) {
                     toast({ title: "Erreur lors du calcul du résultat de l'exercice", variant: "error" })
                     return false
                 }

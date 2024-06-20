@@ -43,7 +43,7 @@ export function groupStatements(statements: v.Output<typeof auth.statements.get.
                 id: statement.id,
                 number: statement.number,
                 label: statement.label,
-                net: net,
+                net: net + Number(statement.addedNetAmount),
                 statements: childrenStatements
             })
         })

@@ -20,7 +20,7 @@ export function SignUpForm() {
         shouldFocusError: true,
         defaultValues: {
             scope: "company",
-            isMinimalSystem: false
+            isMinimalSystem: true
         },
         resolver: valibotResolver(shared.organizations.post.body),
     })
@@ -73,7 +73,7 @@ export function SignUpForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Système minimal ?"
-                                    tooltip="."
+                                    tooltip="Si oui, génère seulement les comptes du système minimal"
                                     isRequired
                                 />
                                 <FormControl>

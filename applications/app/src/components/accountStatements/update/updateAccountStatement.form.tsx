@@ -28,7 +28,7 @@ export function UpdateAccountStatementForm() {
             validationSchema={auth.accountStatements.put.body}
             defaultValues={accountStatement.data}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement",
+                to: "/configuration/compte-de-resultat/postes/$idStatement/comptes/$idAccountStatement",
                 params: {
                     idStatement: idStatement,
                     idAccountStatement: idAccountStatement
@@ -44,7 +44,7 @@ export function UpdateAccountStatementForm() {
 
                 await queryClient.invalidateQueries(accountStatementOptions(idAccountStatement))
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/lignes/$idStatement/comptes/$idAccountStatement",
+                    to: "/configuration/compte-de-resultat/postes/$idStatement/comptes/$idAccountStatement",
                     params: {
                         idStatement: idStatement,
                         idAccountStatement: idAccountStatement
@@ -64,7 +64,7 @@ export function UpdateAccountStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Compte lié"
-                                    tooltip="Le compte lié à la ligne du compte de résultat."
+                                    tooltip="Le compte lié au poste du compte de résultat."
                                     isRequired
                                 />
                                 <FormControl>

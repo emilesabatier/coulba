@@ -7,6 +7,7 @@ export const recordInclude = {
     idAttachment: true,
     idAutomatic: true,
     isValidated: true,
+    isComputed: true,
     validatedOn: true,
     label: true,
     date: true,

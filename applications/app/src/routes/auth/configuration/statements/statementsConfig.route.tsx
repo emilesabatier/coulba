@@ -1,7 +1,7 @@
 import { Link, createRoute } from "@tanstack/react-router"
-import { statementsConfigLayout } from "./statementsConfig.layout"
 import { Main } from "../../../../components/layouts/main"
 import { Section } from "../../../../components/layouts/section/section"
+import { statementsConfigLayout } from "./statementsConfig.layout"
 
 
 export const statementsConfigRoute = createRoute({
@@ -15,10 +15,10 @@ export const statementsConfigRoute = createRoute({
         <Main>
             <Section.Root>
                 <Section.Item className="p-0">
-                    <Link to="/configuration/compte-de-resultat/lignes" className="w-full p-3 cursor-pointer hover:bg-neutral/5">
+                    <Link to="/configuration/compte-de-resultat/postes" className="w-full p-3 cursor-pointer hover:bg-neutral/5">
                         <div className="flex flex-col justify-start items-start">
                             <h2 className="text-2xl">Lignes</h2>
-                            <p className="text-neutral/50">Consulter et modifier les lignes du compte de résultat</p>
+                            <p className="text-neutral/50">Consulter et modifier les postes de compte de résultat</p>
                         </div>
                     </Link>
                 </Section.Item>

@@ -42,7 +42,7 @@ export function ComputationStatementsTable(props: ComputationStatementsTable) {
             ]}
             onRowClick={(row) => {
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
+                    to: "/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement",
                     params: {
                         idComputation: row.original.idComputation,
                         idComputationStatement: row.original.id

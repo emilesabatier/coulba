@@ -20,7 +20,7 @@ export function SheetAssetsTable(props: SheetAssetsTable) {
                         <span className="text-neutral/75 text-sm">Brut</span>
                     </Table.Header.Cell>
                     <Table.Header.Cell className="w-[1%]" align="right">
-                        <span className="text-neutral/75 text-sm whitespace-nowrap">Amort. & Dépre.</span>
+                        <span className="text-neutral/75 text-sm whitespace-nowrap">Amort. & Dépré.</span>
                     </Table.Header.Cell>
                     <Table.Header.Cell className="w-[1%]" align="right">
                         <span className="text-neutral/75 text-sm">Net</span>

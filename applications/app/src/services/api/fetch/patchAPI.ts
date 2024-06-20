@@ -4,7 +4,7 @@ import * as v from "valibot"
 
 type PatchAPI<T extends v.ObjectEntries> = {
     path: string
-    schema: v.ObjectSchema<T> | v.BaseSchema
+    schema: v.ObjectSchema<T>
     body?: object
     message?: string
 }
@@ -26,6 +26,7 @@ export async function patchAPI<T extends v.ObjectEntries>(props: PatchAPI<T>) {
         if (!response.ok) throw new Error("Error with the response")
 
         return v.parse(props.schema, await response.json())
+
     } catch (error) {
         if (import.meta.env.VITE_ENV !== "production") {
             if (error instanceof v.ValiError) {

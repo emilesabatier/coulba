@@ -12,7 +12,7 @@ export const computationStatementSchema = createSelectSchema(computationStatemen
     idYear: idSchema,
     idComputation: idSchema,
     idStatement: v.nonNullish(idSchema, "Une ligne doit être renseignée"),
-    operation: v.nonNullish(v.picklist(operations), "Une opération doit être renseignée"),
+    operation: v.nonNullish(v.picklist(operations), "Un calcul doit être renseigné"),
     lastUpdatedOn: dateTimeSchema,
     createdOn: dateTimeSchema,
     lastUpdatedBy: idSchema,

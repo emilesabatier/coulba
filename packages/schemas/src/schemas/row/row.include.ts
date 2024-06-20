@@ -4,8 +4,6 @@ export const rowInclude = {
     idOrganization: true,
     idYear: true,
     idAccount: true,
-    isValidated: true,
-    isComputed: true,
     label: true,
     debit: true,
     credit: true,

@@ -1,9 +1,11 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
-import { FormatDateTime, FormatNull, FormatSelect, FormatText } from "@coulba/design/formats"
+import { FormatDateTime, FormatNull, FormatPrice, FormatSelect, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { Fragment } from "react/jsx-runtime"
+import { readSheetRoute } from "../../../routes/auth/configuration/sheets/readSheet.route"
 import { router } from "../../../routes/router"
 import { sheetOptions } from "../../../services/api/auth/sheets/sheetsOptions"
 import { AccountSheetsTable } from "../../accountSheets/accountSheetsTable"
@@ -15,7 +17,6 @@ import { DeleteSheet } from "../delete/deleteSheet"
 import { FormatSheetWithFetch } from "../format/formatSheetWithFetch"
 import { sideOptions } from "../sideOptions"
 import { UpdateSheet } from "../update/updateSheet"
-import { readSheetRoute } from "../../../routes/auth/configuration/sheets/readSheet.route"
 
 
 export function SheetContent() {
@@ -65,6 +66,21 @@ export function SheetContent() {
                     </DataBlock.Item>
                     <DataBlock.Item label="Ligne parent">
                         {!sheet.data.idParent ? <FormatNull /> : <FormatSheetWithFetch idSheet={sheet.data.idParent} />}
+                    </DataBlock.Item>
+                    {
+                        (sheet.data.side === "liability") ? null : (
+                            <Fragment>
+                                <DataBlock.Item label="Montant brut ajouté">
+                                    <FormatPrice price={sheet.data.addedGrossAmount} />
+                                </DataBlock.Item>
+                                <DataBlock.Item label="Montant amortissements et dépréciations ajouté">
+                                    <FormatPrice price={sheet.data.addedAllowanceAmount} />
+                                </DataBlock.Item>
+                            </Fragment>
+                        )
+                    }
+                    <DataBlock.Item label="Montant net ajouté">
+                        <FormatPrice price={Number(sheet.data.addedGrossAmount) + Number(sheet.data.addedAllowanceAmount)} />
                     </DataBlock.Item>
                 </DataBlock.Root>
             </Section.Item>

@@ -12,7 +12,7 @@ type UpdateComputationStatement = {
 export function UpdateComputationStatement(props: UpdateComputationStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement/modifier"
+            to="/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement/modifier"
             params={{
                 idComputation: props.computationStatement.idComputation,
                 idComputationStatement: props.computationStatement.id
