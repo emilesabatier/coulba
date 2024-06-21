@@ -6,9 +6,9 @@ import { pbkdf2Sync, randomBytes } from "crypto"
 import { drizzle } from "drizzle-orm/postgres-js"
 import { customAlphabet } from "nanoid"
 import postgres from "postgres"
-import { env } from '../env'
+import { env } from '../env.js'
 import { DefaultRecord, defaultRecords2022 } from './records2022.js'
-import { defaultRecords2023 } from './records2023'
+import { defaultRecords2023 } from './records2023.js'
 
 
 export function generateTemporaryPassword(): string {
