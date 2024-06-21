@@ -1,6 +1,6 @@
 import { auth } from "@coulba/schemas/routes"
 import * as v from "valibot"
-import { Balance } from "../balance/getBalance"
+import { Account } from "../balance/getBalance"
 
 
 export type SheetAsset = {
@@ -21,7 +21,7 @@ export type SheetLiability = {
     sheets: SheetLiability[]
 }
 
-export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Balance[], idParent?: string | null): SheetAsset[] {
+export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Array<Account>, idParent?: string | null): SheetAsset[] {
     return sheets
         .filter((sheet) => sheet.idParent === idParent)
         .map((sheet) => {
@@ -58,7 +58,7 @@ export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return
         })
 }
 
-export function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Balance[], idParent?: string | null): SheetLiability[] {
+export function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.return>[], balance: Array<Account>, idParent?: string | null): SheetLiability[] {
     return sheets
         .filter((sheet) => sheet.idParent === idParent)
         .map((sheet) => {

@@ -1,13 +1,14 @@
 import { FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
+import { Fragment } from "react/jsx-runtime"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { formatAccount } from "../../accounts/format/formatAccount"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
 import { Table } from "../../layouts/table/table"
-import { getBalance } from "./getBalance"
+import { getBalance, getGroupedBalance } from "./getBalance"
 
 
 export function BalanceReport() {
@@ -22,6 +23,8 @@ export function BalanceReport() {
 
     const balance = getBalance(rowsData, accountsData)
         .sort((a, b) => a.account.number.toString().localeCompare(b.account.number.toString()))
+
+    const groupedBalance = getGroupedBalance(balance)
 
     const totalDebit = rowsData.reduce<number>((sum, row) => {
         return sum + Number(row.debit)
@@ -86,26 +89,57 @@ export function BalanceReport() {
                     </Table.Body.Root>
                     <Table.Body.Root>
                         {
-                            balance.length > 0 ?
-                                balance.map((entry) => {
+                            groupedBalance.length > 0 ?
+                                groupedBalance.map((balanceEntry) => {
                                     return (
-                                        <Table.Body.Row key={entry.account.id} className="border-neutral/5">
-                                            <Table.Body.Cell>
-                                                <FormatText text={formatAccount(entry.account)} />
-                                            </Table.Body.Cell>
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={entry.sum.debit} />
-                                            </Table.Body.Cell>
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={entry.sum.credit} />
-                                            </Table.Body.Cell>
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={entry.balance.debit} />
-                                            </Table.Body.Cell>
-                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                <FormatPrice price={entry.balance.credit} />
-                                            </Table.Body.Cell>
-                                        </Table.Body.Row>
+                                        <Fragment>
+                                            <Table.Body.Row
+                                                key={balanceEntry.classNumber}
+                                                className="border-neutral/5 bg-neutral/5"
+                                            >
+                                                <Table.Body.Cell>
+                                                    <FormatText
+                                                        text={`Classe ${balanceEntry.classNumber}`}
+                                                        className="font-bold"
+                                                    />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                    <FormatPrice price={balanceEntry.sum.debit} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                    <FormatPrice price={balanceEntry.sum.credit} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                    <FormatPrice price={balanceEntry.balance.debit} />
+                                                </Table.Body.Cell>
+                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                    <FormatPrice price={balanceEntry.balance.credit} />
+                                                </Table.Body.Cell>
+                                            </Table.Body.Row>
+                                            {
+                                                balanceEntry.accounts.map((accountEntry) => {
+                                                    return (
+                                                        <Table.Body.Row key={accountEntry.account.id} className="border-neutral/5">
+                                                            <Table.Body.Cell>
+                                                                <FormatText text={formatAccount(accountEntry.account)} />
+                                                            </Table.Body.Cell>
+                                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                                <FormatPrice price={accountEntry.sum.debit} />
+                                                            </Table.Body.Cell>
+                                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                                <FormatPrice price={accountEntry.sum.credit} />
+                                                            </Table.Body.Cell>
+                                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                                <FormatPrice price={accountEntry.balance.debit} />
+                                                            </Table.Body.Cell>
+                                                            <Table.Body.Cell className="w-[1%]" align="right">
+                                                                <FormatPrice price={accountEntry.balance.credit} />
+                                                            </Table.Body.Cell>
+                                                        </Table.Body.Row>
+                                                    )
+                                                })
+                                            }
+                                        </Fragment>
                                     )
                                 })
                                 : (
