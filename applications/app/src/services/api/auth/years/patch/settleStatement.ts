@@ -12,6 +12,6 @@ export function settleStatement(props: ComputeResult) {
         path: `/auth/years/settle-statement`,
         body: props.body,
         schema: auth.years.patch.settleStatement.return,
-        message: "Erreur avec le calcul du résultat"
+        message: "Erreur avec le solde des comptes de gestion"
     })
 }
