@@ -4,16 +4,17 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { readComputationRoute } from "../../../routes/auth/configuration/statements/computations/readComputation.route"
 import { router } from "../../../routes/router"
 import { computationOptions } from "../../../services/api/auth/computations/computationsOptions"
 import { ComputationStatementsTable } from "../../computationStatements/computationStatementsTable"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { Title } from "../../layouts/title"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteComputation } from "../delete/deleteComputation"
 import { UpdateComputation } from "../update/updateComputation"
-import { readComputationRoute } from "../../../routes/auth/configuration/statements/computations/readComputation.route"
 
 
 export function ComputationContent() {
@@ -38,7 +39,7 @@ export function ComputationContent() {
                         />
                     </UpdateComputation>
                 </div>
-                <div className="flex justify-end items-center gap-1.5">
+                <div className="ml-auto flex justify-end items-center gap-1.5">
                     <DeleteComputation computation={computation.data}>
                         <ButtonOutline
                             icon={<IconTrash />}
@@ -47,45 +48,44 @@ export function ComputationContent() {
                     </DeleteComputation>
                 </div>
             </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Informations" />
-            </Section.Item>
-            <Section.Item>
+            <Section.Item className="flex-col">
                 <DataBlock.Root>
-                    <DataBlock.Item label="Numéro">
-                        <FormatText text={computation.data.number.toString()} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Libellé">
-                        <FormatText text={computation.data.label} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Informations" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Numéro">
+                            <FormatText text={computation.data.number.toString()} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Libellé">
+                            <FormatText text={computation.data.label} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
+                </DataBlock.Root>
+                <DataBlock.Root>
+                    <DataBlock.Header>
+                        <Title title="Métadonnées" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Ajouté le">
+                            <FormatDateTime isoDate={computation.data.createdOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Ajouté par">
+                            {!computation.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={computation.data.createdBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié le">
+                            <FormatDateTime isoDate={computation.data.lastUpdatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié par">
+                            {!computation.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={computation.data.lastUpdatedBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Id">
+                            <FormatText text={computation.data.id} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Métadonnées" />
-            </Section.Item>
             <Section.Item>
-                <DataBlock.Root>
-                    <DataBlock.Item label="Ajouté le">
-                        <FormatDateTime isoDate={computation.data.createdOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Ajouté par">
-                        {!computation.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={computation.data.createdBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié le">
-                        <FormatDateTime isoDate={computation.data.lastUpdatedOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié par">
-                        {!computation.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={computation.data.lastUpdatedBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Id">
-                        <FormatText text={computation.data.id} />
-                    </DataBlock.Item>
-                </DataBlock.Root>
-            </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Lignes du compte de résultat utilisées dans le calcul" />
-            </Section.Item>
-            <Section.Item className="p-0 border-b-0">
                 <ComputationStatementsTable
                     computation={computation.data}
                     isLoading={computation.isLoading}

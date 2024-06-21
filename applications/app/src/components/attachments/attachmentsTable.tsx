@@ -4,7 +4,7 @@ import { IconPlus } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { router } from "../../routes/router"
 import { attachmentsOptions } from "../../services/api/auth/attachments/attachmentsOptions"
-import { Table } from "../layouts/table"
+import { DataTable } from "../layouts/dataTable"
 import { CreateAttachment } from "./create/createAttachment"
 
 
@@ -15,7 +15,7 @@ export function AttachmentsTable() {
         .sort((a, b) => b.date.localeCompare(a.date))
 
     return (
-        <Table
+        <DataTable
             data={attachmentsData}
             isLoading={attachments.isLoading}
             columns={[
@@ -70,6 +70,6 @@ export function AttachmentsTable() {
                     className="border-dashed"
                 />
             </CreateAttachment>
-        </Table>
+        </DataTable>
     )
 }

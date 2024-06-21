@@ -34,7 +34,7 @@ export function CreateStatementForm() {
                     to: "/configuration/compte-de-resultat/postes/$idStatement",
                     params: { idStatement: response.id }
                 })
-                toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
+                toast({ title: "Nouveau poste ajouté", variant: "success" })
 
                 return true
             }}
@@ -48,7 +48,7 @@ export function CreateStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de la ligne."
+                                    tooltip="Le numéro qui définit l'ordre du poste."
                                     isRequired
                                 />
                                 <FormControl>
@@ -87,8 +87,8 @@ export function CreateStatementForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne parent"
-                                    tooltip="La ligne parent de la ligne créé."
+                                    label="Poste parent"
+                                    tooltip="Le poste parent du poste créé."
                                 />
                                 <FormControl>
                                     <StatementCombobox

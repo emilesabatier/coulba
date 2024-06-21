@@ -61,7 +61,7 @@ export function Form<T extends v.ObjectSchema<v.ObjectEntries>>(props: Form<T>) 
                         loader
                     />
                 </div>
-                <div className="w-full max-w-[768px] flex flex-col justify-start items-stretch gap-6 p-6 overflow-auto">
+                <div className="w-full max-w-[768px] flex flex-col justify-start items-stretch gap-3 p-3 overflow-auto">
                     {props.children(form)}
                 </div>
             </form>

@@ -4,17 +4,18 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { readComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/readComputationStatement.route"
 import { router } from "../../../routes/router"
 import { computationStatementOptions } from "../../../services/api/auth/computationStatements/computationStatementsOptions"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { Title } from "../../layouts/title"
 import { FormatStatementWithFetch } from "../../statements/format/formatStatementWithFetch"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteComputationStatement } from "../delete/deleteComputationStatement"
 import { operationOptions } from "../operationOptions"
 import { UpdateComputationStatement } from "../update/updateComputationStatement"
-import { readComputationStatementRoute } from "../../../routes/auth/configuration/statements/computations/computationStatements/readComputationStatement.route"
 
 
 export function ComputationStatementContent() {
@@ -42,7 +43,7 @@ export function ComputationStatementContent() {
                         />
                     </UpdateComputationStatement>
                 </div>
-                <div className="flex justify-end items-center gap-1.5">
+                <div className="ml-auto flex justify-end items-center gap-1.5">
                     <DeleteComputationStatement computationStatement={computationStatement.data}>
                         <ButtonOutline
                             icon={<IconTrash />}
@@ -51,39 +52,41 @@ export function ComputationStatementContent() {
                     </DeleteComputationStatement>
                 </div>
             </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Informations" />
-            </Section.Item>
-            <Section.Item>
+            <Section.Item className="flex-col">
                 <DataBlock.Root>
-                    <DataBlock.Item label="Ligne du compte de résultat">
-                        <FormatStatementWithFetch idStatement={computationStatement.data.idStatement} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Opération">
-                        <FormatSelect option={computationStatement.data.operation} options={operationOptions} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Informations" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Poste du compte de résultat">
+                            <FormatStatementWithFetch idStatement={computationStatement.data.idStatement} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Opération">
+                            <FormatSelect option={computationStatement.data.operation} options={operationOptions} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
-            </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Métadonnées" />
-            </Section.Item>
-            <Section.Item>
                 <DataBlock.Root>
-                    <DataBlock.Item label="Ajouté le">
-                        <FormatDateTime isoDate={computationStatement.data.createdOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Ajouté par">
-                        {!computationStatement.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={computationStatement.data.createdBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié le">
-                        <FormatDateTime isoDate={computationStatement.data.lastUpdatedOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié par">
-                        {!computationStatement.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={computationStatement.data.lastUpdatedBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Id">
-                        <FormatText text={computationStatement.data.id} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Métadonnées" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Ajouté le">
+                            <FormatDateTime isoDate={computationStatement.data.createdOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Ajouté par">
+                            {!computationStatement.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={computationStatement.data.createdBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié le">
+                            <FormatDateTime isoDate={computationStatement.data.lastUpdatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié par">
+                            {!computationStatement.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={computationStatement.data.lastUpdatedBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Id">
+                            <FormatText text={computationStatement.data.id} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
             </Section.Item>
         </Section.Root>

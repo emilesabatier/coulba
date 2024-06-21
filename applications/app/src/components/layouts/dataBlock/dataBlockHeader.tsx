@@ -2,16 +2,16 @@ import { cn } from "@coulba/design/services"
 import { ComponentProps, ReactElement } from "react"
 
 
-type SectionItem = {
+type DataBlockHeader = {
     children: null | ReactElement | (null | ReactElement)[]
     className?: ComponentProps<'div'>['className']
 }
 
-export function SectionItem(props: SectionItem) {
+export function DataBlockHeader(props: DataBlockHeader) {
     return (
         <div
             className={cn(
-                "w-full max-w-full h-fit max-h-full flex justify-start items-start gap-1.5 p-3 border-b border-neutral/5 last:border-0 overflow-y-auto overflow-x-auto",
+                "shrink-0 w-full h-fit p-3 flex justify-start items-start gap-1.5 bg-neutral/5 rounded-md",
                 props.className
             )}
             children={props.children}

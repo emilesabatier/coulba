@@ -1,4 +1,4 @@
-import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
@@ -12,6 +12,7 @@ import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithF
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { Title } from "../../layouts/title"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteRow } from "../delete/deleteRow"
 import { UpdateRow } from "../update/updateRow"
@@ -28,7 +29,7 @@ export function RowContent() {
     if (!record.data || !row.data) return null
     return (
         <Section.Root>
-            <Section.Item>
+            <Section.Item className="p-3">
                 <div className="flex justify-start items-center gap-1.5">
                     <ButtonOutline
                         onClick={() => router.navigate({
@@ -48,9 +49,9 @@ export function RowContent() {
                         />
                     </UpdateRow>
                 </div>
-                <div className="flex justify-end items-center gap-1.5">
+                <div className="ml-auto flex justify-end items-center gap-1.5">
                     <DeleteRow row={row.data} record={record.data}>
-                        <ButtonGhost
+                        <ButtonOutline
                             icon={<IconTrash />}
                             color="error"
                             disabled={record.data.isValidated}
@@ -58,45 +59,47 @@ export function RowContent() {
                     </DeleteRow>
                 </div>
             </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Informations" />
-            </Section.Item>
-            <Section.Item>
+            <Section.Item className="flex-col">
                 <DataBlock.Root>
-                    <DataBlock.Item label="Libellé">
-                        <FormatText text={row.data.label} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Compte">
-                        {!row.data.idAccount ? <FormatNull /> : <FormatAccountWithFetch idAccount={row.data.idAccount} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Débit">
-                        <FormatPrice price={row.data.debit} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Crédit">
-                        <FormatPrice price={row.data.credit} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Informations" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Libellé">
+                            <FormatText text={row.data.label} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Compte">
+                            {!row.data.idAccount ? <FormatNull /> : <FormatAccountWithFetch idAccount={row.data.idAccount} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Débit">
+                            <FormatPrice price={row.data.debit} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Crédit">
+                            <FormatPrice price={row.data.credit} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
-            </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Métadonnées" />
-            </Section.Item>
-            <Section.Item>
                 <DataBlock.Root>
-                    <DataBlock.Item label="Ajouté le">
-                        <FormatDateTime isoDate={row.data.createdOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Ajouté par">
-                        {!row.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={row.data.createdBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié le">
-                        <FormatDateTime isoDate={row.data.lastUpdatedOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié par">
-                        {!row.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={row.data.lastUpdatedBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Id">
-                        <FormatText text={row.data.id} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Métadonnées" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Ajouté le">
+                            <FormatDateTime isoDate={row.data.createdOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Ajouté par">
+                            {!row.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={row.data.createdBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié le">
+                            <FormatDateTime isoDate={row.data.lastUpdatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié par">
+                            {!row.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={row.data.lastUpdatedBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Id">
+                            <FormatText text={row.data.id} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
             </Section.Item>
         </Section.Root>

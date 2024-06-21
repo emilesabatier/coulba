@@ -6,7 +6,7 @@ import { router } from "../../routes/router"
 import { recordsOptions } from "../../services/api/auth/records/recordsOptions"
 import { FormatAttachmentWithFetch } from "../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../journals/format/formatJournalWithFetch"
-import { Table } from "../layouts/table"
+import { DataTable } from "../layouts/dataTable"
 import { CreateRecord } from "./create/createRecord"
 
 
@@ -17,7 +17,7 @@ export function RecordsTable() {
         .sort((a, b) => b.date.localeCompare(a.date))
 
     return (
-        <Table
+        <DataTable
             data={recordsData}
             isLoading={records.isLoading}
             columns={[
@@ -82,6 +82,6 @@ export function RecordsTable() {
                     text="Ajouter une écriture"
                 />
             </CreateRecord>
-        </Table>
+        </DataTable>
     )
 }

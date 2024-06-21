@@ -51,20 +51,22 @@ export function AccountsList() {
                     />
                 </CreateAccount>
             </Section.Item>
-            <Section.Item className="p-0 flex-col justify-start items-stretch gap-0 overflow-auto">
-                {
-                    (groupedAccounts.length > 0) ?
-                        groupedAccounts.map((groupedAccount) => (
-                            <AccountItem
-                                key={groupedAccount.account.id}
-                                groupedAccount={groupedAccount}
-                                level={0}
-                            />
-                        ))
-                        : (
-                            <FormatNull className="p-3" />
-                        )
-                }
+            <Section.Item>
+                <div className="w-full flex flex-col justify-start items-stretch rounded-md border border-neutral/10">
+                    {
+                        (groupedAccounts.length > 0) ?
+                            groupedAccounts.map((groupedAccount) => (
+                                <AccountItem
+                                    key={groupedAccount.account.id}
+                                    groupedAccount={groupedAccount}
+                                    level={0}
+                                />
+                            ))
+                            : (
+                                <FormatNull className="p-3" />
+                            )
+                    }
+                </div>
             </Section.Item>
         </Section.Root>
     )

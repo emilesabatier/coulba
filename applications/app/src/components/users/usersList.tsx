@@ -29,39 +29,41 @@ export function UsersList() {
                     />
                 </CreateUser>
             </Section.Item>
-            <Section.Item className="p-0 flex flex-col justify-start items-stretch">
-                {
-                    (!users.data || users.data?.length === 0) ? (<FormatNull />) : users.data.map((user) => {
-                        return (
-                            <div className="w-full flex justify-between items-center p-3">
-                                <div className="flex justify-start items-center gap-3">
-                                    <h2>{formatUser(user)}</h2>
-                                    <span className="text-neutral/50">{user.email}</span>
-                                    {!user.isAdmin ? null : <Chip color="neutral" text="Administrateur" />}
+            <Section.Item>
+                <div className="w-full flex flex-col justify-start items-stretch rounded-md border border-neutral/10">
+                    {
+                        (!users.data || users.data?.length === 0) ? (<FormatNull />) : users.data.map((user) => {
+                            return (
+                                <div className="w-full flex justify-between items-center p-3">
+                                    <div className="flex justify-start items-center gap-3">
+                                        <h2>{formatUser(user)}</h2>
+                                        <span className="text-neutral/50">{user.email}</span>
+                                        {!user.isAdmin ? null : <Chip color="neutral" text="Administrateur" />}
+                                    </div>
+                                    <div className="flex justify-end items-center gap-1">
+                                        <SendInvitation user={user}>
+                                            <ButtonGhost
+                                                icon={<IconSend />}
+                                                color="success"
+                                            />
+                                        </SendInvitation>
+                                        <UpdateUser user={user}>
+                                            <ButtonGhost
+                                                icon={<IconPencil />}
+                                            />
+                                        </UpdateUser>
+                                        <DeleteUser user={user}>
+                                            <ButtonGhost
+                                                icon={<IconTrash />}
+                                                color="error"
+                                            />
+                                        </DeleteUser>
+                                    </div>
                                 </div>
-                                <div className="flex justify-end items-center gap-1">
-                                    <SendInvitation user={user}>
-                                        <ButtonGhost
-                                            icon={<IconSend />}
-                                            color="success"
-                                        />
-                                    </SendInvitation>
-                                    <UpdateUser user={user}>
-                                        <ButtonGhost
-                                            icon={<IconPencil />}
-                                        />
-                                    </UpdateUser>
-                                    <DeleteUser user={user}>
-                                        <ButtonGhost
-                                            icon={<IconTrash />}
-                                            color="error"
-                                        />
-                                    </DeleteUser>
-                                </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                </div>
             </Section.Item>
         </Section.Root>
     )

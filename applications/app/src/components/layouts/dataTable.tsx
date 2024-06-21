@@ -15,10 +15,9 @@ import {
     useReactTable
 } from '@tanstack/react-table'
 import { ReactElement, useMemo, useState } from "react"
-import { Section } from "./section/section"
 
 
-type Table<T> = {
+type DataTable<T> = {
     children?: ReactElement | null
     data: Array<T>
     isLoading?: boolean
@@ -26,7 +25,7 @@ type Table<T> = {
     onRowClick?: (context: Row<T>) => void
 }
 
-export function Table<T>(props: Table<T>) {
+export function DataTable<T>(props: DataTable<T>) {
 
     const memoizedData = useMemo(() => props.data, [props.data])
     const [globalFilter, setGlobalFilter] = useState("")
@@ -54,8 +53,8 @@ export function Table<T>(props: Table<T>) {
 
     if (props.isLoading) return <CircularLoader className="m-3" />
     return (
-        <Section.Root>
-            <Section.Item>
+        <div className="shrink-0 w-full h-fit flex flex-col justify-start items-stretch gap-3">
+            <div className="shrink-0 w-full h-fit flex justify-start items-start gap-1.5">
                 <div>
                     {props.children ?? null}
                 </div>
@@ -68,8 +67,8 @@ export function Table<T>(props: Table<T>) {
                         className="max-w-[300px] ml-auto"
                     />
                 </InputDebounced>
-            </Section.Item>
-            <Section.Item className="w-full max-w-full max-h-[600px] p-0 flex flex-col justify-start items-stretch">
+            </div>
+            <div className="w-full max-w-full max-h-[600px] p-0 flex flex-col justify-start items-stretch overflow-auto rounded-md border border-neutral/10">
                 <table className="w-full max-w-full h-full max-h-full border-collapse">
                     <thead className="w-full sticky top-0 bg-white">
                         <tr className="w-full">
@@ -134,7 +133,7 @@ export function Table<T>(props: Table<T>) {
                         })}
                     </tbody>
                 </table>
-            </Section.Item>
-        </Section.Root>
+            </div>
+        </div>
     )
 }

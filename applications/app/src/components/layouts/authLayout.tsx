@@ -128,7 +128,7 @@ export function AuthLayout() {
                     </PopoverMenu>
                 </div>
             </div>
-            <div className="col-start-1 col-end-1 row-start-2 row-end-2 h-full border-r border-neutral/20">
+            <div className="col-start-1 col-end-1 row-start-2 row-end-2 h-full border-r border-neutral/20 p-3">
                 <Navigation />
             </div>
             <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full max-w-full min-h-full h-full max-h-full overflow-y-auto overflow-x-hidden">

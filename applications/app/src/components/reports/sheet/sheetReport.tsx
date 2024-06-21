@@ -1,4 +1,4 @@
-import { formatPrice } from "@coulba/design/formats"
+import { FormatPrice } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
@@ -40,15 +40,15 @@ export function SheetReport() {
     if (!records.data || !accounts.data) return null
     return (
         <Section.Root>
-            <Section.Item className="p-0">
-                <div className="w-full grid grid-cols-2 grid-rows-[max-content_auto]">
-                    <div className="w-full px-3 py-1.5 border-r border-b border-neutral/10 flex justify-start items-end gap-3">
-                        <span className="text-lg uppercase text-neutral/50">Total actif</span>
-                        <span className="text-2xl">{formatPrice(totalSheetAsset)}</span>
+            <Section.Item>
+                <div className="w-full min-w-full max-w-full h-full max-h-full grid grid-cols-2 grid-rows-[max-content_auto] overflow-auto rounded-md border border-neutral/10">
+                    <div className="w-full px-3 py-1.5 border-r border-b border-neutral/10 flex justify-between items-center gap-3">
+                        <span className="text-lg uppercase text-neutral/50">Actif</span>
+                        <FormatPrice price={totalSheetAsset} />
                     </div>
-                    <div className="w-full px-3 py-1.5 border-b border-neutral/10 flex justify-start items-end gap-3">
-                        <span className="text-lg uppercase text-neutral/50">Total passif</span>
-                        <span className="text-2xl">{formatPrice(totalSheetLiability)}</span>
+                    <div className="w-full px-3 py-1.5 border-r border-b border-neutral/10 flex justify-between items-center gap-3">
+                        <span className="text-lg uppercase text-neutral/50">Passif</span>
+                        <FormatPrice price={totalSheetLiability} />
                     </div>
                     <SheetAssetsTable sheet={sheetAssets} />
                     <SheetLiabilitiesTable sheet={sheetLiabilities} />

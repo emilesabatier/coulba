@@ -47,111 +47,117 @@ export function BalanceReport() {
     if (!accounts.data) return null
     return (
         <Section.Root>
-            <Section.Item className="p-0">
-                <Table.Root>
-                    <Table.Header.Root>
-                        <Table.Header.Row>
-                            <Table.Header.Cell>
-                                <span className="text-neutral/75 text-sm">Compte</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm whitespace-nowrap">Débit</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm whitespace-nowrap">Crédit</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm whitespace-nowrap">Solde débiteur</span>
-                            </Table.Header.Cell>
-                            <Table.Header.Cell className="w-[1%]" align="right">
-                                <span className="text-neutral/75 text-sm whitespace-nowrap">Solde créditeur</span>
-                            </Table.Header.Cell>
-                        </Table.Header.Row>
-                    </Table.Header.Root>
-                    <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
-                        <Table.Body.Row>
-                            <Table.Body.Cell align="right">
-                                <span className="text-neutral/50">Total</span>
-                            </Table.Body.Cell>
-                            <Table.Body.Cell className="w-[1%]" align="right">
-                                <FormatPrice price={totalDebit} className="font-bold" />
-                            </Table.Body.Cell>
-                            <Table.Body.Cell className="w-[1%]" align="right">
-                                <FormatPrice price={totalCredit} className="font-bold" />
-                            </Table.Body.Cell>
-                            <Table.Body.Cell className="w-[1%]" align="right">
-                                <FormatPrice price={totalBalanceDebit} className="font-bold" />
-                            </Table.Body.Cell>
-                            <Table.Body.Cell className="w-[1%]" align="right">
-                                <FormatPrice price={totalBalanceCredit} className="font-bold" />
-                            </Table.Body.Cell>
-                        </Table.Body.Row>
-                    </Table.Body.Root>
-                    <Table.Body.Root>
-                        {
-                            groupedBalance.length > 0 ?
-                                groupedBalance.map((balanceEntry) => {
-                                    return (
-                                        <Fragment>
-                                            <Table.Body.Row
-                                                key={balanceEntry.classNumber}
-                                                className="border-neutral/5 bg-neutral/5"
-                                            >
-                                                <Table.Body.Cell>
-                                                    <FormatText
-                                                        text={`Classe ${balanceEntry.classNumber}`}
-                                                        className="font-bold"
-                                                    />
-                                                </Table.Body.Cell>
-                                                <Table.Body.Cell className="w-[1%]" align="right">
-                                                    <FormatPrice price={balanceEntry.sum.debit} />
-                                                </Table.Body.Cell>
-                                                <Table.Body.Cell className="w-[1%]" align="right">
-                                                    <FormatPrice price={balanceEntry.sum.credit} />
-                                                </Table.Body.Cell>
-                                                <Table.Body.Cell className="w-[1%]" align="right">
-                                                    <FormatPrice price={balanceEntry.balance.debit} />
-                                                </Table.Body.Cell>
-                                                <Table.Body.Cell className="w-[1%]" align="right">
-                                                    <FormatPrice price={balanceEntry.balance.credit} />
-                                                </Table.Body.Cell>
-                                            </Table.Body.Row>
-                                            {
-                                                balanceEntry.accounts.map((accountEntry) => {
-                                                    return (
-                                                        <Table.Body.Row key={accountEntry.account.id} className="border-neutral/5">
-                                                            <Table.Body.Cell>
-                                                                <FormatText text={formatAccount(accountEntry.account)} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                                <FormatPrice price={accountEntry.sum.debit} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                                <FormatPrice price={accountEntry.sum.credit} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                                <FormatPrice price={accountEntry.balance.debit} />
-                                                            </Table.Body.Cell>
-                                                            <Table.Body.Cell className="w-[1%]" align="right">
-                                                                <FormatPrice price={accountEntry.balance.credit} />
-                                                            </Table.Body.Cell>
-                                                        </Table.Body.Row>
-                                                    )
-                                                })
-                                            }
-                                        </Fragment>
+            <Section.Item>
+                <div className="min-w-full max-w-full h-full max-h-full overflow-auto rounded-md border border-neutral/10">
+                    <Table.Root>
+                        <Table.Header.Root>
+                            <Table.Header.Row>
+                                <Table.Header.Cell>
+                                    <span className="text-neutral/75 text-sm">Compte</span>
+                                </Table.Header.Cell>
+                                <Table.Header.Cell className="w-[1%]" align="right">
+                                    <span className="text-neutral/75 text-sm whitespace-nowrap">Débit</span>
+                                </Table.Header.Cell>
+                                <Table.Header.Cell className="w-[1%]" align="right">
+                                    <span className="text-neutral/75 text-sm whitespace-nowrap">Crédit</span>
+                                </Table.Header.Cell>
+                                <Table.Header.Cell className="w-[1%]" align="right">
+                                    <span className="text-neutral/75 text-sm whitespace-nowrap">Solde débiteur</span>
+                                </Table.Header.Cell>
+                                <Table.Header.Cell className="w-[1%]" align="right">
+                                    <span className="text-neutral/75 text-sm whitespace-nowrap">Solde créditeur</span>
+                                </Table.Header.Cell>
+                            </Table.Header.Row>
+                        </Table.Header.Root>
+                        <Table.Body.Root className="border-y border-neutral/10 last:border-b-0">
+                            <Table.Body.Row>
+                                <Table.Body.Cell align="right">
+                                    <span className="text-neutral/50">Total</span>
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className="w-[1%]" align="right">
+                                    <FormatPrice price={totalDebit} className="font-bold" />
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className="w-[1%]" align="right">
+                                    <FormatPrice price={totalCredit} className="font-bold" />
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className="w-[1%]" align="right">
+                                    <FormatPrice price={totalBalanceDebit} className="font-bold" />
+                                </Table.Body.Cell>
+                                <Table.Body.Cell className="w-[1%]" align="right">
+                                    <FormatPrice price={totalBalanceCredit} className="font-bold" />
+                                </Table.Body.Cell>
+                            </Table.Body.Row>
+                        </Table.Body.Root>
+                        <Table.Body.Root>
+                            {
+                                groupedBalance.length > 0 ?
+                                    groupedBalance.map((balanceEntry) => {
+                                        return (
+                                            <Fragment>
+                                                <Table.Body.Row
+                                                    key={balanceEntry.classNumber}
+                                                    className="border-neutral/5 bg-neutral/5"
+                                                >
+                                                    <Table.Body.Cell>
+                                                        <FormatText
+                                                            text={`Classe ${balanceEntry.classNumber}`}
+                                                            className="font-bold"
+                                                            wrap
+                                                        />
+                                                    </Table.Body.Cell>
+                                                    <Table.Body.Cell className="w-[1%]" align="right">
+                                                        <FormatPrice price={balanceEntry.sum.debit} />
+                                                    </Table.Body.Cell>
+                                                    <Table.Body.Cell className="w-[1%]" align="right">
+                                                        <FormatPrice price={balanceEntry.sum.credit} />
+                                                    </Table.Body.Cell>
+                                                    <Table.Body.Cell className="w-[1%]" align="right">
+                                                        <FormatPrice price={balanceEntry.balance.debit} />
+                                                    </Table.Body.Cell>
+                                                    <Table.Body.Cell className="w-[1%]" align="right">
+                                                        <FormatPrice price={balanceEntry.balance.credit} />
+                                                    </Table.Body.Cell>
+                                                </Table.Body.Row>
+                                                {
+                                                    balanceEntry.accounts.map((accountEntry) => {
+                                                        return (
+                                                            <Table.Body.Row key={accountEntry.account.id} className="border-neutral/5">
+                                                                <Table.Body.Cell>
+                                                                    <FormatText
+                                                                        text={formatAccount(accountEntry.account)}
+                                                                        wrap
+                                                                    />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={accountEntry.sum.debit} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={accountEntry.sum.credit} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={accountEntry.balance.debit} />
+                                                                </Table.Body.Cell>
+                                                                <Table.Body.Cell className="w-[1%]" align="right">
+                                                                    <FormatPrice price={accountEntry.balance.credit} />
+                                                                </Table.Body.Cell>
+                                                            </Table.Body.Row>
+                                                        )
+                                                    })
+                                                }
+                                            </Fragment>
+                                        )
+                                    })
+                                    : (
+                                        <Table.Body.Row>
+                                            <Table.Body.Cell>
+                                                <FormatNull className="" />
+                                            </Table.Body.Cell>
+                                        </Table.Body.Row>
                                     )
-                                })
-                                : (
-                                    <Table.Body.Row>
-                                        <Table.Body.Cell>
-                                            <FormatNull className="" />
-                                        </Table.Body.Cell>
-                                    </Table.Body.Row>
-                                )
-                        }
-                    </Table.Body.Root>
-                </Table.Root>
+                            }
+                        </Table.Body.Root>
+                    </Table.Root>
+                </div>
             </Section.Item>
         </Section.Root>
     )

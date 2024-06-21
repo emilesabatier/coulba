@@ -45,7 +45,7 @@ export function UpdateSheetForm() {
                     to: "/configuration/bilan/$idSheet",
                     params: { idSheet: idSheet }
                 })
-                toast({ title: "Ligne mise à jour", variant: "success" })
+                toast({ title: "Poste mis à jour", variant: "success" })
 
                 return true
             }}
@@ -59,7 +59,7 @@ export function UpdateSheetForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de la ligne."
+                                    tooltip="Le numéro qui définit l'ordre du poste."
                                     isRequired
                                 />
                                 <FormControl>
@@ -97,8 +97,8 @@ export function UpdateSheetForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne parent"
-                                    tooltip="La ligne parent de la ligne créé."
+                                    label="Poste parent"
+                                    tooltip="Le poste parent du poste créé."
                                 />
                                 <FormControl>
                                     <SheetCombobox

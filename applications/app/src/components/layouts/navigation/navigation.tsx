@@ -21,7 +21,7 @@ export function Navigation(props: Navigation) {
             <Accordion
                 type="single"
                 collapsible
-                className="min-w-[var(--radix-accordion-content-width)] w-full flex flex-col justify-start items-stretch"
+                className="min-w-[var(--radix-accordion-content-width)] w-full flex flex-col justify-start items-stretch gap-1.5"
                 defaultValue={currentOpenMenu?.key}
             >
                 {
@@ -36,7 +36,7 @@ export function Navigation(props: Navigation) {
                             >
                                 <div
                                     aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
-                                    className="group w-full flex justify-start items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5"
+                                    className="group w-full flex justify-start items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
                                 >
                                     <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral">
                                         {menuItem.label}
@@ -53,7 +53,7 @@ export function Navigation(props: Navigation) {
                                 <AccordionTrigger className="w-full" style={{ minWidth: "var(--radix-accordion-content-width)" }}>
                                     <div
                                         aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
-                                        className="group w-full flex justify-between items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5"
+                                        className="group w-full flex justify-between items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
                                     >
                                         <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral group-aria-current:text-neutral">
                                             {menuItem.label}
@@ -62,7 +62,7 @@ export function Navigation(props: Navigation) {
                                     </div>
                                 </AccordionTrigger>
                                 <AccordionContent className="pl-4">
-                                    <ul className="w-full flex flex-col justify-start items-stretch pl-2 py-2">
+                                    <ul className="w-full flex flex-col justify-start items-stretch gap-0.5 pl-2 py-2">
                                         {
                                             menuItem.subMenuItems.map((subMenuItem) => {
                                                 return (
@@ -78,7 +78,7 @@ export function Navigation(props: Navigation) {
                                                         >
                                                             <div
                                                                 aria-current={current?.pathname.split("/").slice(0, 3).join("/") === subMenuItem.basePath}
-                                                                className="group w-full flex justify-start items-center p-3 rounded-l-sm hover:bg-neutral/5 aria-current:bg-neutral/5"
+                                                                className="group w-full flex justify-start items-center p-3 rounded-sm hover:bg-neutral/5 aria-current:bg-neutral/5"
                                                             >
                                                                 <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral group-aria-current:text-neutral">
                                                                     {subMenuItem.label}

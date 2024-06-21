@@ -45,7 +45,7 @@ export function UpdateStatementForm() {
                     to: "/configuration/compte-de-resultat/postes/$idStatement",
                     params: { idStatement: idStatement }
                 })
-                toast({ title: "Ligne mise à jour", variant: "success" })
+                toast({ title: "Poste mis à jour", variant: "success" })
 
                 return true
             }}
@@ -59,7 +59,7 @@ export function UpdateStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de la ligne."
+                                    tooltip="Le numéro qui définit l'ordre du poste."
                                     isRequired
                                 />
                                 <FormControl>
@@ -98,7 +98,7 @@ export function UpdateStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Compte parent"
-                                    tooltip="La ligne parent de la ligne créé."
+                                    tooltip="Le poste parent du poste créé."
                                 />
                                 <FormControl>
                                     <StatementCombobox

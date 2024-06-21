@@ -1,7 +1,8 @@
 import { createRoute } from "@tanstack/react-router"
-import { attachmentsLayout } from "./attachments.layout"
 import { AttachmentsTable } from "../../../components/attachments/attachmentsTable"
 import { Main } from "../../../components/layouts/main"
+import { attachmentsLayout } from "./attachments.layout"
+import { Section } from "../../../components/layouts/section/section"
 
 
 export const attachmentsRoute = createRoute({
@@ -13,7 +14,11 @@ export const attachmentsRoute = createRoute({
     path: '/',
     component: () => (
         <Main>
-            <AttachmentsTable />
+            <Section.Root>
+                <Section.Item>
+                    <AttachmentsTable />
+                </Section.Item>
+            </Section.Root>
         </Main>
     )
 })

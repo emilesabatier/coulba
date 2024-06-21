@@ -35,22 +35,24 @@ export function ComputationsList() {
                     />
                 </CreateComputation>
             </Section.Item>
-            <Section.Item className="p-0 flex flex-col justify-start items-stretch gap-0">
-                {
-                    (sortedComputations?.length > 0) ? sortedComputations.map((computation) => {
-                        return (
-                            <ReadComputation idComputation={computation.id} className="w-full cursor-pointer hover:bg-neutral/5 border-b border-neutral/5 last:border-b-0">
-                                <div className="flex justify-start items-center gap-1.5 p-3">
-                                    <span className="text-neutral/50">{computation.number}</span>
-                                    <h2>{formatComputation(computation)}</h2>
-                                </div>
-                            </ReadComputation>
-                        )
-                    })
-                        : (
-                            <FormatNull className="p-3" />
-                        )
-                }
+            <Section.Item>
+                <div className="w-full flex flex-col justify-start items-stretch rounded-md border border-neutral/10">
+                    {
+                        (sortedComputations?.length > 0) ? sortedComputations.map((computation) => {
+                            return (
+                                <ReadComputation idComputation={computation.id} className="w-full cursor-pointer hover:bg-neutral/5 border-b border-neutral/5 last:border-b-0">
+                                    <div className="flex justify-start items-center gap-1.5 p-3">
+                                        <span className="text-neutral/50">{computation.number}</span>
+                                        <h2>{formatComputation(computation)}</h2>
+                                    </div>
+                                </ReadComputation>
+                            )
+                        })
+                            : (
+                                <FormatNull className="p-3" />
+                            )
+                    }
+                </div>
             </Section.Item>
         </Section.Root>
     )

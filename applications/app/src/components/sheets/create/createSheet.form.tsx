@@ -37,7 +37,7 @@ export function CreateSheetForm() {
                     to: "/configuration/bilan/$idSheet",
                     params: { idSheet: response.id }
                 })
-                toast({ title: "Nouvelle ligne ajoutée", variant: "success" })
+                toast({ title: "Nouveau poste ajouté", variant: "success" })
 
                 return true
             }}
@@ -72,7 +72,7 @@ export function CreateSheetForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de la ligne."
+                                    tooltip="Le numéro qui définit l'ordre du poste."
                                     isRequired
                                 />
                                 <FormControl>
@@ -111,8 +111,8 @@ export function CreateSheetForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne parent"
-                                    tooltip="La ligne parent de la ligne créé."
+                                    label="Poste parent"
+                                    tooltip="Le poste parent du poste créé."
                                 />
                                 <FormControl>
                                     <SheetCombobox

@@ -20,8 +20,8 @@ export function DeleteStatement(props: DeleteStatement) {
 
     return (
         <Delete
-            title="Supprimer la ligne ?"
-            description="Attention, cela supprimera toutes les données et les sous-lignes associés."
+            title="Supprimer le poste ?"
+            description="Attention, cela supprimera toutes les données et les sous-postes associés."
             onSubmit={async () => {
                 const response = await mutation.mutateAsync({
                     params: { idStatement: props.statement.id }
@@ -30,7 +30,7 @@ export function DeleteStatement(props: DeleteStatement) {
 
                 await router.navigate({ to: "/configuration/compte-de-resultat/postes" })
                 await queryClient.invalidateQueries(statementsOptions)
-                toast({ title: "Ligne supprimée", variant: "success" })
+                toast({ title: "Poste supprimé", variant: "success" })
 
                 return true
             }}

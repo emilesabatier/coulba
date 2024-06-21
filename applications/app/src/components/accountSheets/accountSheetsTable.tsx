@@ -5,7 +5,7 @@ import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { router } from "../../routes/router"
 import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
-import { Table } from "../layouts/table"
+import { DataTable } from "../layouts/dataTable"
 import { CreateAccountSheet } from "./create/createAccountSheet"
 import { flowOptions } from "./flowOptions"
 
@@ -17,7 +17,7 @@ type AccountSheetsTable = {
 
 export function AccountSheetsTable(props: AccountSheetsTable) {
     return (
-        <Table
+        <DataTable
             data={props.sheet.accountSheets}
             isLoading={props.isLoading}
             columns={[
@@ -36,7 +36,7 @@ export function AccountSheetsTable(props: AccountSheetsTable) {
                 {
                     accessorKey: 'isAllowance',
                     header: 'Colonne brut ?',
-                    cell: ({ row }) => (<FormatBoolean boolean={row.original.isAllowance} />),
+                    cell: ({ row }) => (<FormatBoolean boolean={!row.original.isAllowance} />),
                     filterFn: 'includesString'
                 },
                 {
@@ -62,6 +62,6 @@ export function AccountSheetsTable(props: AccountSheetsTable) {
                     text="Ajouter"
                 />
             </CreateAccountSheet>
-        </Table>
+        </DataTable>
     )
 }

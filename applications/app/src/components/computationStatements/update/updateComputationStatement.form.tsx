@@ -86,8 +86,8 @@ export function UpdateComputationStatementForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne du compte de résultat"
-                                    tooltip="La ligne du compte de résultat utilisée dans le calcul."
+                                    label="Poste du compte de résultat"
+                                    tooltip="Le poste du compte de résultat utilisée dans le calcul."
                                     isRequired
                                 />
                                 <FormControl>

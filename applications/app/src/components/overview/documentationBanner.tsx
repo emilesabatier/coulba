@@ -1,13 +1,12 @@
 import { IconExternalLink } from "@tabler/icons-react"
-import { Section } from "../layouts/section/section"
 
 
 export function DocumentationBanner() {
     return (
-        <Section.Item>
+        <div className="border border-neutral/10 rounded-md p-3 flex flex-col justify-start items-start gap-3">
             <div className="flex flex-col justify-start items-start">
                 <h2 className="text-2xl">Documentation</h2>
-                <p className="text-neutral/50">Collaborative et open source</p>
+                <p className="text-neutral/50">Collaborative et ouverte</p>
             </div>
             <a
                 href="https://documentation.coulba.fr"
@@ -17,8 +16,8 @@ export function DocumentationBanner() {
                 aria-label="Adresse de la documentation"
             >
                 <span className="p-0">Consulter la documentation</span>
-                <IconExternalLink size={16} />
+                <IconExternalLink size={16} className="shrink-0" />
             </a>
-        </Section.Item>
+        </div>
     )
 }

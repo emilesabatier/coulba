@@ -5,7 +5,7 @@ import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { router } from "../../routes/router"
 import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
-import { Table } from "../layouts/table"
+import { DataTable } from "../layouts/dataTable"
 import { CreateAccountStatement } from "./create/createAccountStatement"
 
 
@@ -16,7 +16,7 @@ type AccountStatementsTable = {
 
 export function AccountStatementsTable(props: AccountStatementsTable) {
     return (
-        <Table
+        <DataTable
             data={props.statement.accountStatements}
             isLoading={props.isLoading}
             columns={[
@@ -49,6 +49,6 @@ export function AccountStatementsTable(props: AccountStatementsTable) {
                     text="Ajouter"
                 />
             </CreateAccountStatement>
-        </Table>
+        </DataTable>
     )
 }
