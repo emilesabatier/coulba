@@ -11,7 +11,8 @@ import { db } from "../../clients/db.js"
 import { env } from "../../env.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
-import { validateEmailTemplate } from "../../services/email/templates/validateEmail.js"
+import { emailValidationTemplate } from "../../services/email/templates/emailValidation.js"
+import { generateYearData } from "../auth/years/generateYearData.js"
 
 
 export const organizationsRoute = new Hono()
@@ -22,29 +23,28 @@ export const organizationsRoute = new Hono()
             const body = c.req.valid('json')
 
             if (body.user.password !== body.user.passwordCheck) throw new HTTPException(400, { message: "Les mots de passe renseignés sont différents" })
-            const emailToken = randomBytes(128).toString('hex')
 
             const [userResponse] = await db.transaction(async (tx) => {
 
                 // Add organization
-                const idOrganization = generateId()
-                await tx
+                const [createOrganization] = await tx
                     .insert(organizations)
                     .values({
-                        id: idOrganization,
+                        id: generateId(),
                         scope: body.scope,
                         siren: null,
                         name: null,
                         email: null
                     })
+                    .returning()
 
                 // Add current Year
                 const currentDate = new Date()
-                await tx
+                const [createYear] = await tx
                     .insert(years)
                     .values({
                         id: generateId(),
-                        idOrganization: idOrganization,
+                        idOrganization: createOrganization.id,
                         isSelected: true,
                         label: `Exercice ${currentDate.getFullYear()}`,
                         startingOn: new Date(currentDate.getFullYear(), 0, 1, 0, 0, 0).toISOString(),
@@ -52,6 +52,13 @@ export const organizationsRoute = new Hono()
                         isClosed: false,
                         isMinimalSystem: body.isMinimalSystem
                     })
+                    .returning()
+
+                await generateYearData({
+                    tx: tx,
+                    organization: createOrganization,
+                    year: createYear
+                })
 
                 // Add journals
                 await tx
@@ -59,7 +66,7 @@ export const organizationsRoute = new Hono()
                     .values(
                         defaultJournals.map((journal) => ({
                             id: generateId(),
-                            idOrganization: idOrganization,
+                            idOrganization: createOrganization.id,
                             code: journal.code,
                             label: journal.label
                         }))
@@ -68,11 +75,12 @@ export const organizationsRoute = new Hono()
                 // Add user
                 const passwordSalt = randomBytes(16).toString('hex')
                 const passwordHash = pbkdf2Sync(body.user.password, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+                const emailToken = randomBytes(128).toString('hex')
                 return await tx
                     .insert(users)
                     .values({
                         id: generateId(),
-                        idOrganization: idOrganization,
+                        idOrganization: createOrganization.id,
                         isAdmin: true,
                         alias: null,
                         email: body.user.email,
@@ -95,8 +103,7 @@ export const organizationsRoute = new Hono()
             await sendEmail({
                 to: userResponse.email,
                 subject: "Valider votre email",
-                html: validateEmailTemplate({
-                    to: `${userResponse.alias ?? userResponse.email}`,
+                html: emailValidationTemplate({
                     url: `${urlApp}/services/email?id=${userResponse.id}&token=${userResponse.emailToken}`,
                 })
             })

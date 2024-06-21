@@ -12,6 +12,6 @@ export function createAccountSheet(props: CreateAccountSheet) {
         path: `/auth/account-sheets`,
         body: props.body,
         schema: auth.accountSheets.post.return,
-        message: "Erreur avec l'ajout du lien entre compte et bilan"
+        message: "Erreur avec l'ajout du lien entre compte et poste de bilan"
     })
 }

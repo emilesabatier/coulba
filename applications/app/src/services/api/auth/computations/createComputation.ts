@@ -12,6 +12,6 @@ export function createComputation(props: CreateComputation) {
         path: `/auth/computations`,
         body: props.body,
         schema: auth.computations.post.return,
-        message: "Erreur avec l'ajout de l'opération"
+        message: "Erreur avec l'ajout du calcul"
     })
 }

@@ -13,6 +13,6 @@ export function updateAccountSheet(props: UpdateAccountSheet) {
         path: `/auth/account-sheets/${props.params.idAccountSheet}`,
         body: props.body,
         schema: auth.accountSheets.put.return,
-        message: "Erreur avec la modification du lien entre compte et bilan"
+        message: "Erreur avec la modification du lien entre compte et poste de bilan"
     })
 }

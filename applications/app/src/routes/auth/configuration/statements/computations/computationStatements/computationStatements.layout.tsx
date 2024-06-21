@@ -8,6 +8,6 @@ export const computationStatementsLayout = createRoute({
         title: undefined,
         description: undefined
     }),
-    path: '/lignes',
+    path: '/postes',
     component: () => <Outlet />
 })

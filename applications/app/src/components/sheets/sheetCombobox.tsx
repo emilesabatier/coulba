@@ -32,7 +32,7 @@ export function SheetCombobox(props: SheetCombobox) {
         <InputCombobox
             value={props.value}
             onChange={props.onChange}
-            placeholder="Choisir la ligne"
+            placeholder="Choisir le poste de bilan"
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}

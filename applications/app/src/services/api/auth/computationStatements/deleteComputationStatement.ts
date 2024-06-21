@@ -11,6 +11,6 @@ export function deleteComputationStatement(props: DeleteComputationStatement) {
     return deleteAPI({
         path: `/auth/computation-statements/${props.params.idComputationStatement}`,
         schema: auth.computationStatements.delete.return,
-        message: "Erreur avec la suppression du lien entre compte et compte de résultat"
+        message: "Erreur avec la suppression du lien entre calcul et poste de compte de résultat"
     })
 }

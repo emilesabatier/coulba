@@ -67,8 +67,8 @@ export function DownloadFEC(props: DownloadFEC) {
             JournalLibNode.innerHTML = journal.label
             journalNode.appendChild(JournalLibNode)
 
-            recordsData.filter((record) => record.idJournal === journal.id).forEach((record) => {
-                const rows = record.rows.filter((row) => row.isValidated)
+            recordsData.filter((record) => (record.idJournal === journal.id) && record.isComputed).forEach((record) => {
+                const rows = record.rows
                 if (rows.length === 0) return
 
                 const attachment = attachments.data?.find((attachment) => attachment.id === record.idAttachment)

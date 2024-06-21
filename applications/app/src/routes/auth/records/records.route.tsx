@@ -1,7 +1,8 @@
 import { createRoute } from "@tanstack/react-router"
-import { recordsLayout } from "./records.layout"
 import { Main } from "../../../components/layouts/main"
+import { Section } from "../../../components/layouts/section/section"
 import { RecordsTable } from "../../../components/records/recordsTable"
+import { recordsLayout } from "./records.layout"
 
 
 export const recordsRoute = createRoute({
@@ -13,7 +14,11 @@ export const recordsRoute = createRoute({
     path: '/',
     component: () => (
         <Main>
-            <RecordsTable />
+            <Section.Root>
+                <Section.Item>
+                    <RecordsTable />
+                </Section.Item>
+            </Section.Root>
         </Main>
     )
 })

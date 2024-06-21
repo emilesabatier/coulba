@@ -4,7 +4,7 @@ import { journalSchema } from "../../../../schemas/journal/journal.schema.js"
 
 
 // Input
-export const computeResultBody = v.object({
+export const settleStatementBody = v.object({
     idJournalClosing: v.nonNullish(journalSchema.entries.id, "Le journal doit être renseigné"),
     idAccountProfit: v.nonNullish(accountSchema.entries.id, "Le compte doit être renseigné"),
     idAccountLoss: v.nonNullish(accountSchema.entries.id, "Le compte doit être renseigné")
@@ -12,4 +12,4 @@ export const computeResultBody = v.object({
 
 
 // Output
-export const computeResultReturn = v.object({})
+export const settleStatementReturn = v.object({})

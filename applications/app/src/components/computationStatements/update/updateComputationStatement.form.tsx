@@ -30,7 +30,7 @@ export function UpdateComputationStatementForm() {
             validationSchema={auth.computationStatements.put.body}
             defaultValues={computationStatement.data}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
+                to: "/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement",
                 params: {
                     idComputation: idComputation,
                     idComputationStatement: idComputationStatement
@@ -46,7 +46,7 @@ export function UpdateComputationStatementForm() {
 
                 await queryClient.invalidateQueries(computationStatementOptions(idComputationStatement))
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/calculs/$idComputation/lignes/$idComputationStatement",
+                    to: "/configuration/compte-de-resultat/calculs/$idComputation/postes/$idComputationStatement",
                     params: {
                         idComputation: idComputation,
                         idComputationStatement: idComputationStatement
@@ -86,8 +86,8 @@ export function UpdateComputationStatementForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne du compte de résultat"
-                                    tooltip="La ligne du compte de résultat utilisée dans le calcul."
+                                    label="Poste du compte de résultat"
+                                    tooltip="Le poste du compte de résultat utilisée dans le calcul."
                                     isRequired
                                 />
                                 <FormControl>

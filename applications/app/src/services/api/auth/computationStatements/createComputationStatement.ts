@@ -12,6 +12,6 @@ export function createComputationStatement(props: CreateComputationStatement) {
         path: `/auth/computation-statements`,
         body: props.body,
         schema: auth.computationStatements.post.return,
-        message: "Erreur avec l'ajout du lien entre compte et compte de résultat"
+        message: "Erreur avec l'ajout du lien entre calcul et poste de compte de résultat"
     })
 }

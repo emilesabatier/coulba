@@ -16,6 +16,7 @@ export const accountSchema = createSelectSchema(accounts, {
     isMandatory: booleanSchema,
     isClass: v.nullish(booleanSchema),
     isSelectable: v.nullish(booleanSchema),
+    isDefault: booleanSchema,
     number: v.nonNullish(integerSchema, "Un numéro doit être renseigné"),
     label: v.nonNullish(requiredTextSchema, "Un libellé doit être renseigné"),
     type: v.nonNullish(v.picklist(accountTypes), "Un type doit être renseigné"),

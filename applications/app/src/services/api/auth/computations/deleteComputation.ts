@@ -11,6 +11,6 @@ export function deleteComputation(props: DeleteComputation) {
     return deleteAPI({
         path: `/auth/computations/${props.params.idComputation}`,
         schema: auth.computations.delete.return,
-        message: "Erreur avec la suppression de l'opération"
+        message: "Erreur avec la suppression du calcul"
     })
 }

@@ -9,6 +9,8 @@ export const createSheetBody = v.object({
     side: sheetSchema.entries.side,
     number: sheetSchema.entries.number,
     label: sheetSchema.entries.label,
+    addedGrossAmount: sheetSchema.entries.addedGrossAmount,
+    addedAllowanceAmount: sheetSchema.entries.addedAllowanceAmount,
     accountSheets: v.array(v.object({
         idAccount: accountSheetSchema.entries.idAccount,
         flow: accountSheetSchema.entries.flow,

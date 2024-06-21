@@ -24,6 +24,7 @@ export function FormatAccountWithFetch(props: FormatAccountWithFetch) {
             <FormatText
                 text={formatAccount(account.data)}
                 className="underline hover:no-underline"
+                wrap
             />
         </ReadAccount>
     )

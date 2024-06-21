@@ -7,6 +7,7 @@ export const accountInclude = {
     isMandatory: true,
     isClass: true,
     isSelectable: true,
+    isDefault: true,
     number: true,
     label: true,
     type: true,

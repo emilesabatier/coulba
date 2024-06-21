@@ -34,28 +34,30 @@ export function AuthLayout() {
             </div>
             <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 grid grid-cols-[auto_max-content] gap-3 border-b border-neutral/20 overflow-y-hidden overflow-x-auto">
                 <div className="w-full flex justify-start items-end">
-                    {
-                        breadcrumbs.map((breadcrumb, index) => (
-                            <Fragment key={breadcrumb.id}>
-                                {index === 0 ? null : (
-                                    <IconChevronRight className="text-neutral/50" />
-                                )}
-                                {
-                                    index < breadcrumbs.length - 1 ? (
-                                        <Link to={breadcrumb.pathname}>
-                                            <span className="text-xl text-neutral/50 hover:underline whitespace-nowrap">{breadcrumb.context.title}</span>
-                                        </Link>
-                                    ) : (
-                                        <span className="text-xl">{breadcrumb.context.title}</span>
-                                    )
-                                }
-                            </Fragment>
-                        ))
-                    }
-                    {/* <h1 className="text-2xl">{currentRoute?.context.title}</h1> */}
-                    {/* {!props.description ? null : (
+                    <div className="w-full flex justify-start items-center">
+                        {
+                            breadcrumbs.map((breadcrumb, index) => (
+                                <Fragment key={breadcrumb.id}>
+                                    {index === 0 ? null : (
+                                        <IconChevronRight className="stroke-neutral/50" size={18} shapeRendering="geometricPrecision" />
+                                    )}
+                                    {
+                                        index < breadcrumbs.length - 1 ? (
+                                            <Link to={breadcrumb.pathname}>
+                                                <span className="text-xl text-neutral/50 hover:underline whitespace-nowrap">{breadcrumb.context.title}</span>
+                                            </Link>
+                                        ) : (
+                                            <span className="text-xl">{breadcrumb.context.title}</span>
+                                        )
+                                    }
+                                </Fragment>
+                            ))
+                        }
+                        {/* <h1 className="text-2xl">{currentRoute?.context.title}</h1> */}
+                        {/* {!props.description ? null : (
                     <p className="text-neutral/50 max-w-[768px]">{props.description}</p>
                 )} */}
+                    </div>
                 </div>
                 <div className="w-fit">
                     <PopoverMenu
@@ -126,7 +128,7 @@ export function AuthLayout() {
                     </PopoverMenu>
                 </div>
             </div>
-            <div className="col-start-1 col-end-1 row-start-2 row-end-2 h-full border-r border-neutral/20">
+            <div className="col-start-1 col-end-1 row-start-2 row-end-2 h-full border-r border-neutral/20 p-3">
                 <Navigation />
             </div>
             <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full max-w-full min-h-full h-full max-h-full overflow-y-auto overflow-x-hidden">

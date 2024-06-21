@@ -21,31 +21,33 @@ export function DownloadDocuments(props: DownloadDocuments) {
                     icon={<IconChevronLeft />}
                 />
             </Section.Item>
-            <Section.Item className="flex-col justify-start items-start gap-3">
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <Section.Title title="Télécharger les Fichier des Écritures Comptables (FEC)" />
-                    <p>Au format .xml</p>
+            <Section.Item className="grid grid-cols-3">
+                <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
+                    <div className="flex flex-col justify-start items-start gap-1">
+                        <h2 className="text-2xl">Télécharger les Fichier des Écritures Comptables (FEC)</h2>
+                        <p className="text-neutral/50">Au format .xml</p>
+                    </div>
+                    <div className="w-full flex justify-end items-center">
+                        <DownloadFEC currentYear={props.currentYear} />
+                    </div>
                 </div>
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <DownloadFEC currentYear={props.currentYear} />
+                <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
+                    <div className="flex flex-col justify-start items-start gap-1">
+                        <h2 className="text-2xl">Télécharger le bilan</h2>
+                        <p className="text-neutral/50">Au format .pdf</p>
+                    </div>
+                    <div className="w-full flex justify-end items-center">
+                        <DownloadSheet currentYear={props.currentYear} />
+                    </div>
                 </div>
-            </Section.Item>
-            <Section.Item className="flex-col justify-start items-start gap-3">
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <Section.Title title="Télécharger le bilan" />
-                    <p>Au format .pdf</p>
-                </div>
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <DownloadSheet currentYear={props.currentYear} />
-                </div>
-            </Section.Item>
-            <Section.Item className="flex-col justify-start items-start gap-3">
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <Section.Title title="Télécharger le compte de résultat" />
-                    <p>Au format .pdf</p>
-                </div>
-                <div className="flex flex-col justify-start items-start gap-1">
-                    <DownloadStatement currentYear={props.currentYear} />
+                <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
+                    <div className="flex flex-col justify-start items-start gap-1">
+                        <h2 className="text-2xl">Télécharger le compte de résultat</h2>
+                        <p className="text-neutral/50">Au format .pdf</p>
+                    </div>
+                    <div className="w-full flex justify-end items-center">
+                        <DownloadStatement currentYear={props.currentYear} />
+                    </div>
                 </div>
             </Section.Item>
         </Section.Root>

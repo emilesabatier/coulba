@@ -5,8 +5,8 @@ import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { router } from "../../routes/router"
 import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
-import { Table } from "../layouts/table"
 import { CreateRow } from "./create/createRow"
+import { DataTable } from "../layouts/dataTable"
 
 
 type RowsTable = {
@@ -16,7 +16,7 @@ type RowsTable = {
 
 export function RowsTable(props: RowsTable) {
     return (
-        <Table
+        <DataTable
             data={props.record.rows}
             isLoading={props.isLoading}
             columns={[
@@ -71,6 +71,6 @@ export function RowsTable(props: RowsTable) {
                     disabled={props.record.isValidated}
                 />
             </CreateRow>
-        </Table>
+        </DataTable>
     )
 }

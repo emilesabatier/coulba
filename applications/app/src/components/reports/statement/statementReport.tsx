@@ -2,7 +2,7 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { useQuery } from "@tanstack/react-query"
 import { accountsOptions } from "../../../services/api/auth/accounts/accountsOptions"
 import { computationsOptions } from "../../../services/api/auth/computations/computationsOptions"
-import { rowsOptions } from "../../../services/api/auth/rows/rowsOptions"
+import { recordsOptions } from "../../../services/api/auth/records/recordsOptions"
 import { statementsOptions } from "../../../services/api/auth/statements/statementsOptions"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
@@ -15,10 +15,12 @@ export function StatementReport() {
     const statements = useQuery(statementsOptions)
     const computations = useQuery(computationsOptions)
     const accounts = useQuery(accountsOptions)
-    const rows = useQuery(rowsOptions)
+    const records = useQuery(recordsOptions)
 
-    const rowsData = (rows.data ?? [])
-        .filter((row) => row.isValidated && row.isComputed)
+    const rowsData = (records.data ?? [])
+        .filter((record) => record.isComputed)
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .flatMap((record) => record.rows)
 
     const balance = getBalance(rowsData, accounts.data ?? [])
 
@@ -34,11 +36,13 @@ export function StatementReport() {
     if (!accounts.data) return null
     return (
         <Section.Root>
-            <Section.Item className="p-0">
-                <StatementTable
-                    statements={sortedStatements}
-                    computations={sortedComputations}
-                />
+            <Section.Item>
+                <div className="min-w-full max-w-full h-full max-h-full overflow-auto rounded-md border border-neutral/10">
+                    <StatementTable
+                        statements={sortedStatements}
+                        computations={sortedComputations}
+                    />
+                </div>
             </Section.Item>
         </Section.Root>
     )

@@ -28,7 +28,7 @@ export function UpdateYearForm() {
         <Form
             validationSchema={auth.years.put.body}
             defaultValues={year.data}
-            onCancel={() => router.navigate({ to: "/configuration/exercices" })}
+            onCancel={() => router.navigate({ to: "/configuration/exercices/liste" })}
             submitLabel="Modifier l'exercice"
             onSubmit={async (data) => {
                 const response = await mutation.mutateAsync({

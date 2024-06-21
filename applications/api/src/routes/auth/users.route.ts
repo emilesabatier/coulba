@@ -12,7 +12,7 @@ import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../middlewares/paramsValidator.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
-import { validateInvitationTemplate } from "../../services/email/templates/validateInvitation.js"
+import { invitationTemplate } from "../../services/email/templates/invitation.js"
 
 
 export const usersRoute = new Hono<AuthEnv>()
@@ -30,7 +30,7 @@ export const usersRoute = new Hono<AuthEnv>()
                     isAdmin: body.isAdmin,
                     alias: body.alias,
                     email: body.email,
-                    isEmailValidated: false,
+                    isEmailValidated: true,
                     isActive: true,
                     isInvitationValidated: false,
                     passwordSalt: randomBytes(16).toString('hex'),
@@ -142,12 +142,9 @@ export const usersRoute = new Hono<AuthEnv>()
             await sendEmail({
                 to: updateUser.email,
                 subject: "Invitation à collaborer sur Coulba",
-                html: validateInvitationTemplate({
-                    from: `${c.var.user.alias ?? c.var.user.email}`,
-                    to: `${updateUser.alias ?? updateUser.email}`,
+                html: invitationTemplate({
                     urlInvitation: `${urlApp}/services/invitation?id=${updateUser.id}&token=${updateUser.invitationToken}`,
-                    urlWebsite: urlWebsite,
-                    urlDocumentation: "https://documentation.coulba.fr"
+                    urlWebsite: urlWebsite
                 })
             })
 

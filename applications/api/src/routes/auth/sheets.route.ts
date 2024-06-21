@@ -1,4 +1,4 @@
-import { accounts, rows, sheets } from "@coulba/schemas/models"
+import { accounts, records, sheets } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { sheetInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
@@ -29,9 +29,12 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     idOrganization: c.var.organization.id,
                     idYear: c.var.currentYear.id,
                     idParent: body.idParent,
+                    isDefault: false,
                     side: body.side,
                     number: body.number,
                     label: body.label,
+                    addedGrossAmount: body.addedGrossAmount.toString(),
+                    addedAllowanceAmount: body.addedAllowanceAmount.toString(),
                     lastUpdatedBy: c.var.user.id,
                     createdBy: c.var.user.id
                 })
@@ -91,6 +94,8 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     side: body.side,
                     label: body.label,
                     number: body.number,
+                    addedGrossAmount: body.addedGrossAmount?.toString(),
+                    addedAllowanceAmount: body.addedAllowanceAmount?.toString(),
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
@@ -132,14 +137,18 @@ export const sheetsRoute = new Hono<AuthEnv>()
                     accountSheets: true
                 }
             })
-            const readRows = await db.query.rows.findMany({
+            const readRows = (await db.query.records.findMany({
                 where: and(
-                    eq(rows.idOrganization, c.var.user.idOrganization),
-                    eq(rows.idYear, c.var.currentYear.id),
-                    eq(rows.isValidated, true),
-                    eq(rows.isComputed, true)
-                )
-            })
+                    eq(records.idOrganization, c.var.user.idOrganization),
+                    eq(records.idYear, c.var.currentYear.id),
+                    eq(records.isComputed, true)
+                ),
+                with: {
+                    rows: true
+                }
+            }))
+                .flatMap((record) => record.rows)
+
             const readAccounts = await db.query.accounts.findMany({
                 where: and(
                     eq(accounts.idOrganization, c.var.user.idOrganization),

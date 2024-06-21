@@ -1,14 +1,13 @@
 import { ButtonPlainContent } from "@coulba/design/buttons"
 import { IconExternalLink } from "@tabler/icons-react"
-import { Section } from "../layouts/section/section"
 
 
 export function DonationBanner() {
     return (
-        <Section.Item>
+        <div className="border border-neutral/10 rounded-md p-3 flex flex-col justify-start items-start gap-3">
             <div className="flex flex-col justify-start items-start">
-                <h2 className="text-2xl">Faire un don</h2>
-                <p className="text-neutral/50">L'application repose sur les dons des utilisateurs</p>
+                <h2 className="text-2xl">Donations</h2>
+                <p className="text-neutral/50">Soutenir le projet</p>
             </div>
             <div className="ml-auto flex justify-end items-center gap-1.5">
                 <a
@@ -32,6 +31,6 @@ export function DonationBanner() {
                     />
                 </a>
             </div>
-        </Section.Item>
+        </div>
     )
 }

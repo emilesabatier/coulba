@@ -28,6 +28,7 @@ export const accountsRoute = new Hono<AuthEnv>()
                     idParent: body.idParent,
                     isClass: body.isClass ?? false,
                     isSelectable: body.isSelectable ?? false,
+                    isDefault: false,
                     label: body.label,
                     number: body.number,
                     type: body.type,

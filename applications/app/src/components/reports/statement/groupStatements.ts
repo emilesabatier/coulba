@@ -1,6 +1,6 @@
 import { auth } from "@coulba/schemas/routes"
 import * as v from "valibot"
-import { Balance } from "../balance/getBalance"
+import { Account } from "../balance/getBalance"
 
 
 export type Statement = {
@@ -11,7 +11,7 @@ export type Statement = {
     statements: Statement[]
 }
 
-export function groupStatements(statements: v.Output<typeof auth.statements.get.return>[], balance: Balance[], idParent?: string | null): Statement[] {
+export function groupStatements(statements: v.Output<typeof auth.statements.get.return>[], balance: Array<Account>, idParent?: string | null): Statement[] {
     return statements
         .filter((statement) => statement.idParent === idParent)
         .map((statement) => {
@@ -43,7 +43,7 @@ export function groupStatements(statements: v.Output<typeof auth.statements.get.
                 id: statement.id,
                 number: statement.number,
                 label: statement.label,
-                net: net,
+                net: net + Number(statement.addedNetAmount),
                 statements: childrenStatements
             })
         })

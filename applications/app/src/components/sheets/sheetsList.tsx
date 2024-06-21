@@ -13,6 +13,7 @@ import { ErrorMessage } from "../layouts/errorMessage"
 import { Section } from "../layouts/section/section"
 import { CreateSheet } from "./create/createSheet"
 import { ReadSheet } from "./read/readSheet"
+import { Title } from "../layouts/title"
 
 
 type GroupedSheet = {
@@ -57,10 +58,10 @@ export function SheetsList() {
                     />
                 </CreateSheet>
             </Section.Item>
-            <Section.Item className="p-0">
-                <div className="w-full grid grid-cols-2 grid-rows-[max-content_auto]">
+            <Section.Item>
+                <div className="w-full grid grid-cols-2 grid-rows-[max-content_auto] rounded-md border border-neutral/10">
                     <div className="col-start-1 col-end-1 row-start-1 row-end-1 w-full h-full p-3 border-b border-r border-neutral/10">
-                        <Section.Title title="Actif" />
+                        <Title title="Actif" />
                     </div>
                     <div className="col-start-1 col-end-1 row-start-2 row-end-2 w-full h-full border-r border-neutral/10 p-0 flex-col justify-start items-stretch gap-0">
                         {
@@ -77,7 +78,7 @@ export function SheetsList() {
                         }
                     </div>
                     <div className="col-start-2 col-end-2 row-start-1 row-end-1 w-full h-full p-3 border-b border-neutral/10">
-                        <Section.Title title="Passif" />
+                        <Title title="Passif" />
                     </div>
                     <div className="col-start-2 col-end-2 row-start-2 row-end-2 w-full h-full p-0 flex-col justify-start items-stretch gap-0">
                         {

@@ -24,9 +24,10 @@ export const recordsRoute = new Hono<V1Env>()
                         idYear: body.idYear,
                         idAttachment: body.idAttachment,
                         idJournal: body.idJournal,
+                        isValidated: false,
+                        isComputed: true,
                         label: body.label,
-                        date: body.date,
-                        isValidated: false
+                        date: body.date
                     })
                     .returning()
 

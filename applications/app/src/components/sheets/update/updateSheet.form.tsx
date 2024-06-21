@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputPrice, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -45,7 +45,7 @@ export function UpdateSheetForm() {
                     to: "/configuration/bilan/$idSheet",
                     params: { idSheet: idSheet }
                 })
-                toast({ title: "Ligne mise à jour", variant: "success" })
+                toast({ title: "Poste mis à jour", variant: "success" })
 
                 return true
             }}
@@ -59,7 +59,7 @@ export function UpdateSheetForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de la ligne."
+                                    tooltip="Le numéro qui définit l'ordre du poste."
                                     isRequired
                                 />
                                 <FormControl>
@@ -97,8 +97,8 @@ export function UpdateSheetForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Ligne parent"
-                                    tooltip="La ligne parent de la ligne créé."
+                                    label="Poste parent"
+                                    tooltip="Le poste parent du poste créé."
                                 />
                                 <FormControl>
                                     <SheetCombobox
@@ -110,6 +110,70 @@ export function UpdateSheetForm() {
                             </FormItem>
                         )}
                     />
+                    {
+                        (form.watch("side") === "asset") ? (
+                            <Fragment>
+                                <FormField
+                                    control={form.control}
+                                    name="addedGrossAmount"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Montant brut à ajouter"
+                                                tooltip="Le montant brut à ajouter."
+                                            />
+                                            <FormControl>
+                                                <InputPrice
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="addedAllowanceAmount"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                label="Montant amortissements et dépréciations à ajouter"
+                                                tooltip="Le montant amortissements et dépréciations à ajouter."
+                                            />
+                                            <FormControl>
+                                                <InputPrice
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                />
+                                            </FormControl>
+                                            <FormError />
+                                        </FormItem>
+                                    )}
+                                />
+                            </Fragment>
+                        ) : (
+                            <FormField
+                                control={form.control}
+                                name="addedGrossAmount"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel
+                                            label="Montant net à ajouter"
+                                            tooltip="Le montant net à ajouter."
+                                        />
+                                        <FormControl>
+                                            <InputPrice
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormError />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
                 </Fragment>
             )}
         </Form>

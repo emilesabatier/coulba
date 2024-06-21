@@ -12,6 +12,6 @@ export function createSheet(props: CreateSheet) {
         path: `/auth/sheets`,
         body: props.body,
         schema: auth.sheets.post.return,
-        message: "Erreur avec l'ajout de la ligne"
+        message: "Erreur avec l'ajout du poste de bilan"
     })
 }

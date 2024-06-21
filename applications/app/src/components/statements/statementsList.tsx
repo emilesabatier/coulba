@@ -57,19 +57,21 @@ export function StatementsList() {
                     />
                 </CreateStatement>
             </Section.Item>
-            <Section.Item className="p-0 flex-col justify-start items-stretch gap-0">
-                {
-                    (groupedStatements.length > 0) ? groupedStatements.map((groupedStatement) => (
-                        <StatementItem
-                            key={groupedStatement.statement.id}
-                            groupedStatement={groupedStatement}
-                            level={0}
-                        />
-                    ))
-                        : (
-                            <FormatNull className="p-3" />
-                        )
-                }
+            <Section.Item>
+                <div className="w-full flex flex-col justify-start items-stretch rounded-md border border-neutral/10">
+                    {
+                        (groupedStatements.length > 0) ? groupedStatements.map((groupedStatement) => (
+                            <StatementItem
+                                key={groupedStatement.statement.id}
+                                groupedStatement={groupedStatement}
+                                level={0}
+                            />
+                        ))
+                            : (
+                                <FormatNull className="p-3" />
+                            )
+                    }
+                </div>
             </Section.Item>
         </Section.Root>
     )

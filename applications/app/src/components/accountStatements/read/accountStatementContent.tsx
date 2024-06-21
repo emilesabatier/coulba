@@ -4,6 +4,7 @@ import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
+import { readAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/readAccountStatement.route"
 import { router } from "../../../routes/router"
 import { accountStatementOptions } from "../../../services/api/auth/accountStatements/accountStatementsOptions"
 import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithFetch"
@@ -13,7 +14,7 @@ import { Section } from "../../layouts/section/section"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteAccountStatement } from "../delete/deleteAccountStatement"
 import { UpdateAccountStatement } from "../update/updateAccountStatement"
-import { readAccountStatementRoute } from "../../../routes/auth/configuration/statements/statements/accountStatements/readAccountStatement.route"
+import { Title } from "../../layouts/title"
 
 
 export function AccountStatementContent() {
@@ -29,7 +30,7 @@ export function AccountStatementContent() {
                 <div className="flex justify-start items-center gap-1.5">
                     <ButtonOutline
                         onClick={() => router.navigate({
-                            to: "/configuration/compte-de-resultat/lignes",
+                            to: "/configuration/compte-de-resultat/postes",
                             params: { idStatement: idStatement }
                         })}
                         icon={<IconChevronLeft />}
@@ -41,7 +42,7 @@ export function AccountStatementContent() {
                         />
                     </UpdateAccountStatement>
                 </div>
-                <div className="flex justify-end items-center gap-1.5">
+                <div className="ml-auto flex justify-end items-center gap-1.5">
                     <DeleteAccountStatement accountStatement={accountStatement.data}>
                         <ButtonOutline
                             icon={<IconTrash />}
@@ -50,36 +51,38 @@ export function AccountStatementContent() {
                     </DeleteAccountStatement>
                 </div>
             </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Informations" />
-            </Section.Item>
-            <Section.Item>
+            <Section.Item className="flex-col">
                 <DataBlock.Root>
-                    <DataBlock.Item label="Compte lié">
-                        <FormatAccountWithFetch idAccount={accountStatement.data.idAccount} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Informations" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Compte lié">
+                            <FormatAccountWithFetch idAccount={accountStatement.data.idAccount} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
-            </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Métadonnées" />
-            </Section.Item>
-            <Section.Item>
                 <DataBlock.Root>
-                    <DataBlock.Item label="Ajouté le">
-                        <FormatDateTime isoDate={accountStatement.data.createdOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Ajouté par">
-                        {!accountStatement.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={accountStatement.data.createdBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié le">
-                        <FormatDateTime isoDate={accountStatement.data.lastUpdatedOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifié par">
-                        {!accountStatement.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={accountStatement.data.lastUpdatedBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Id">
-                        <FormatText text={accountStatement.data.id} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Métadonnées" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Ajouté le">
+                            <FormatDateTime isoDate={accountStatement.data.createdOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Ajouté par">
+                            {!accountStatement.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={accountStatement.data.createdBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié le">
+                            <FormatDateTime isoDate={accountStatement.data.lastUpdatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifié par">
+                            {!accountStatement.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={accountStatement.data.lastUpdatedBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Id">
+                            <FormatText text={accountStatement.data.id} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
             </Section.Item>
         </Section.Root>

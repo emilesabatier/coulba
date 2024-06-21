@@ -72,7 +72,7 @@ export function SendSupportMessageForm() {
                         )}
                     />
                     <p className="text-sm text-neutral">
-                        Si jamais l'envoi ne fonctionne pas, vous pouvez nous contacter directement ici:
+                        Si jamais l'envoi ne fonctionne pas, vous pouvez nous contacter directement ici:&nbsp;
                         <a
                             href="mailto:support@coulba.fr"
                             target="_blank"

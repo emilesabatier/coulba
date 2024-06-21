@@ -1,5 +1,5 @@
-import { ButtonGhost, ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
-import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatText, formatPrice } from "@coulba/design/formats"
+import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
+import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
 import { IconChevronLeft, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
@@ -14,6 +14,7 @@ import { Banner } from "../../layouts/banner"
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { Title } from "../../layouts/title"
 import { RowsTable } from "../../rows/rowsTable"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteRecord } from "../delete/deleteRecord"
@@ -63,11 +64,11 @@ export function RecordContent() {
                         </Fragment>
                     )}
                 </div>
-                <div className="flex justify-end items-center gap-1.5">
+                <div className="ml-auto flex justify-end items-center gap-1.5">
                     {record.data.isValidated ? null : (
                         <Fragment>
                             <DeleteRecord record={record.data}>
-                                <ButtonGhost
+                                <ButtonOutline
                                     icon={<IconTrash />}
                                     color="error"
                                 />
@@ -102,67 +103,62 @@ export function RecordContent() {
                     </Section.Item>
                 )
             }
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Informations" />
-            </Section.Item>
-            <Section.Item>
+            <Section.Item className="flex-col">
                 <DataBlock.Root>
-                    <DataBlock.Item label="Libellé">
-                        <FormatText text={record.data.label} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Journal">
-                        {!record.data.idJournal ? <FormatNull /> : <FormatJournalWithFetch idJournal={record.data.idJournal} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Date">
-                        <FormatDate isoDate={record.data.date} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Pièce justificative">
-                        {!record.data.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={record.data.idAttachment} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Écriture validée ?">
-                        <FormatBoolean boolean={record.data.isValidated} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Écriture validée le">
-                        <FormatDate isoDate={record.data.validatedOn} />
-                    </DataBlock.Item>
+                    <DataBlock.Header>
+                        <Title title="Informations" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Libellé">
+                            <FormatText text={record.data.label} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Journal">
+                            {!record.data.idJournal ? <FormatNull /> : <FormatJournalWithFetch idJournal={record.data.idJournal} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Date">
+                            <FormatDate isoDate={record.data.date} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Pièce justificative">
+                            {!record.data.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={record.data.idAttachment} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Écriture validée ?">
+                            <FormatBoolean boolean={record.data.isValidated} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Écriture validée le">
+                            <FormatDate isoDate={record.data.validatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Total débit">
+                            <FormatPrice price={totalDebit} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Total crédit">
+                            <FormatPrice price={totalCredit} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
+                </DataBlock.Root>
+                <DataBlock.Root>
+                    <DataBlock.Header>
+                        <Title title="Métadonnées" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
+                        <DataBlock.Item label="Ajoutée le">
+                            <FormatDateTime isoDate={record.data.createdOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Ajoutée par">
+                            {!record.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={record.data.createdBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifiée le">
+                            <FormatDateTime isoDate={record.data.lastUpdatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Modifiée par">
+                            {!record.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={record.data.lastUpdatedBy} />}
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Id">
+                            <FormatText text={record.data.id} />
+                        </DataBlock.Item>
+                    </DataBlock.Content>
                 </DataBlock.Root>
             </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Métadonnées" />
-            </Section.Item>
             <Section.Item>
-                <DataBlock.Root>
-                    <DataBlock.Item label="Ajoutée le">
-                        <FormatDateTime isoDate={record.data.createdOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Ajoutée par">
-                        {!record.data.createdBy ? <FormatNull /> : <FormatUserWithFetch idUser={record.data.createdBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifiée le">
-                        <FormatDateTime isoDate={record.data.lastUpdatedOn} />
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Modifiée par">
-                        {!record.data.lastUpdatedBy ? <FormatNull /> : <FormatUserWithFetch idUser={record.data.lastUpdatedBy} />}
-                    </DataBlock.Item>
-                    <DataBlock.Item label="Id">
-                        <FormatText text={record.data.id} />
-                    </DataBlock.Item>
-                </DataBlock.Root>
-            </Section.Item>
-            <Section.Item className="bg-neutral/5">
-                <Section.Title title="Lignes" />
-            </Section.Item>
-            <Section.Item className="p-0 grid grid-cols-2">
-                <div className="w-full px-3 py-1.5 border-r border-neutral/10 flex justify-start items-end gap-3">
-                    <span className="text-lg uppercase text-neutral/50">Total débit</span>
-                    <span className="text-2xl">{formatPrice(totalDebit)}</span>
-                </div>
-                <div className="w-full px-3 py-1.5 flex justify-start items-end gap-3">
-                    <span className="text-lg uppercase text-neutral/50">Total crédit</span>
-                    <span className="text-2xl">{formatPrice(totalCredit)}</span>
-                </div>
-            </Section.Item>
-            <Section.Item className="p-0 border-b-0">
                 <RowsTable
                     record={record.data}
                     isLoading={record.isLoading}

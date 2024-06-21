@@ -37,8 +37,6 @@ export const rowsRoute = new Hono<AuthEnv>()
                     idYear: c.var.currentYear.id,
                     idRecord: body.idRecord,
                     idAccount: body.idAccount,
-                    isValidated: false,
-                    isComputed: false,
                     label: body.label,
                     debit: (body.debit ?? 0).toString(),
                     credit: (body.credit ?? 0).toString(),
@@ -88,7 +86,24 @@ export const rowsRoute = new Hono<AuthEnv>()
             const params = c.req.valid('param')
             const body = c.req.valid('json')
 
-            const [udpateRow] = await db
+            const readRow = await db.query.rows.findFirst({
+                where: and(
+                    eq(rows.idOrganization, c.var.user.idOrganization),
+                    eq(rows.id, params.idRow)
+                )
+            })
+            if (!readRow) throw new HTTPException(400, { message: "La ligne n'existe pas" })
+
+            const readRecord = await db.query.records.findFirst({
+                where: and(
+                    eq(records.idOrganization, c.var.organization.id),
+                    eq(records.id, readRow.idRecord)
+                )
+            })
+            if (!readRecord) throw new HTTPException(400, { message: "L'écriture n'existe pas" })
+            if (readRecord.isValidated) throw new HTTPException(400, { message: "L'écriture est déjà validée" })
+
+            const [updateRow] = await db
                 .update(rows)
                 .set({
                     idAccount: body.idAccount,
@@ -100,12 +115,12 @@ export const rowsRoute = new Hono<AuthEnv>()
                 })
                 .where(and(
                     eq(rows.idOrganization, c.var.user.idOrganization),
-                    eq(rows.id, params.idRow),
-                    eq(rows.isValidated, false)
+                    eq(rows.id, params.idRow)
                 ))
                 .returning()
 
-            return c.json(udpateRow, 200)
+
+            return c.json(updateRow, 200)
         }
     )
     .delete(
@@ -115,12 +130,28 @@ export const rowsRoute = new Hono<AuthEnv>()
         async (c) => {
             const params = c.req.valid('param')
 
+            const readRow = await db.query.rows.findFirst({
+                where: and(
+                    eq(rows.idOrganization, c.var.user.idOrganization),
+                    eq(rows.id, params.idRow)
+                )
+            })
+            if (!readRow) throw new HTTPException(400, { message: "La ligne n'existe pas" })
+
+            const readRecord = await db.query.records.findFirst({
+                where: and(
+                    eq(records.idOrganization, c.var.organization.id),
+                    eq(records.id, readRow.idRecord)
+                )
+            })
+            if (!readRecord) throw new HTTPException(400, { message: "L'écriture n'existe pas" })
+            if (readRecord.isValidated) throw new HTTPException(400, { message: "L'écriture est déjà validée" })
+
             const [deleteRow] = await db
                 .delete(rows)
                 .where(and(
                     eq(rows.idOrganization, c.var.user.idOrganization),
-                    eq(rows.id, params.idRow),
-                    eq(rows.isValidated, false)
+                    eq(rows.id, params.idRow)
                 ))
                 .returning()
 

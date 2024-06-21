@@ -13,7 +13,7 @@ type ReadStatement = {
 export function ReadStatement(props: ReadStatement) {
     return (
         <Link
-            to="/configuration/compte-de-resultat/lignes/$idStatement"
+            to="/configuration/compte-de-resultat/postes/$idStatement"
             params={{ idStatement: props.idStatement }}
             className={props.className}
             children={props.children}

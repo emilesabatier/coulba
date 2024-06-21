@@ -17,12 +17,12 @@ export type MenuItem = {
 
 
 export const menuItems: MenuItem[] = [
-    {
-        key: "overview",
-        label: "Vue d'ensemble",
-        basePath: "/",
-        path: "/"
-    },
+    // {
+    //     key: "overview",
+    //     label: "Accueil",
+    //     basePath: "/",
+    //     path: "/"
+    // },
     {
         key: "rows",
         label: "Écritures",

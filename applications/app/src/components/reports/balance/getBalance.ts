@@ -2,53 +2,7 @@ import { auth } from "@coulba/schemas/routes"
 import * as v from "valibot"
 
 
-// function getBalanceEntry(debitAcc: number, creditAcc: number, debitNew: number, creditNew: number) {
-//     if (debitNew > 0) {
-//         if (debitAcc > 0) return {
-//             debit: debitAcc + debitNew,
-//             credit: 0
-//         }
-//         if (debitNew < creditAcc) return {
-//             debit: 0,
-//             credit: creditAcc - debitNew
-//         }
-//         if (debitNew >= creditAcc) return {
-//             debit: debitNew - creditAcc,
-//             credit: 0
-//         }
-//         return {
-//             debit: 0,
-//             credit: 0
-//         }
-//     }
-
-//     if (creditNew > 0) {
-//         if (creditAcc > 0) return {
-//             debit: 0,
-//             credit: creditAcc + creditNew
-//         }
-//         if (creditNew < debitAcc) return {
-//             debit: debitAcc - creditNew,
-//             credit: 0
-//         }
-//         if (creditNew >= debitAcc) return {
-//             debit: 0,
-//             credit: creditNew - debitAcc
-//         }
-//         return {
-//             debit: 0,
-//             credit: 0
-//         }
-//     }
-
-//     return {
-//         debit: 0,
-//         credit: 0
-//     }
-// }
-
-
-export type Balance = {
+export type Account = {
     account: v.Output<typeof auth.accounts.get.return>
     sum: {
         debit: number
@@ -61,7 +15,7 @@ export type Balance = {
 }
 
 export function getBalance(rows: v.Output<typeof auth.rows.get.return>[], accounts: v.Output<typeof auth.accounts.get.return>[]) {
-    const accountsArray = rows.reduce<Balance[]>((accountsArray, row) => {
+    const accountsArray = rows.reduce<Array<Account>>((accountsArray, row) => {
         const account = accounts.find((account) => account.id === row.idAccount)
         if (!account) return accountsArray
 
@@ -79,7 +33,7 @@ export function getBalance(rows: v.Output<typeof auth.rows.get.return>[], accoun
             }
         }
 
-        const currentEntry = accountsArray.find((entry) => entry.account.id === row.idAccount)
+        const currentEntry = accountsArray.find((accountEntry) => accountEntry.account.id === row.idAccount)
         if (currentEntry === undefined) {
             accountsArray.push(entry)
             return accountsArray
@@ -91,14 +45,75 @@ export function getBalance(rows: v.Output<typeof auth.rows.get.return>[], accoun
         return accountsArray
     }, [])
 
-    return accountsArray.map((accountEntry) => {
-        const algebricBalance = accountEntry.sum.debit - accountEntry.sum.credit
+    return accountsArray
+        .map((accountEntry) => {
+            const algebricBalance = accountEntry.sum.debit - accountEntry.sum.credit
+            const balance = {
+                debit: (algebricBalance > 0) ? algebricBalance : 0,
+                credit: (algebricBalance < 0) ? -algebricBalance : 0
+            }
+            return ({
+                ...accountEntry,
+                balance: balance
+            })
+        })
+}
+
+
+
+export type Balance = {
+    classNumber: number
+    sum: {
+        debit: number
+        credit: number
+    }
+    balance: {
+        debit: number
+        credit: number
+    }
+    accounts: Array<Account>
+}
+
+export function getGroupedBalance(balance: Array<Account>) {
+    const balanceArray: Array<Balance> = []
+
+    balance
+        .forEach((accountEntry) => {
+            const classNumber = Number(accountEntry.account.number.toString().at(0))
+
+            const index = balanceArray.findIndex((balance) => balance.classNumber === classNumber)
+            if (index === -1) {
+                balanceArray.push({
+                    classNumber: classNumber,
+                    sum: {
+                        debit: accountEntry.sum.debit,
+                        credit: accountEntry.sum.credit
+                    },
+                    balance: {
+                        debit: accountEntry.balance.debit,
+                        credit: accountEntry.balance.credit
+                    },
+                    accounts: [accountEntry]
+                })
+            } else {
+                const balanceEntry = balanceArray.at(index)
+                if (!balanceEntry) return
+
+                balanceEntry.accounts.push(accountEntry)
+                balanceEntry.sum.debit += accountEntry.sum.debit
+                balanceEntry.sum.credit += accountEntry.sum.credit
+
+            }
+        })
+
+    return balanceArray.map((balanceEntry) => {
+        const algebricBalance = balanceEntry.sum.debit - balanceEntry.sum.credit
         const balance = {
             debit: (algebricBalance > 0) ? algebricBalance : 0,
             credit: (algebricBalance < 0) ? -algebricBalance : 0
         }
         return ({
-            ...accountEntry,
+            ...balanceEntry,
             balance: balance
         })
     })

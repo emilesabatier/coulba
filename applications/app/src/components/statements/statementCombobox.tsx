@@ -32,7 +32,7 @@ export function StatementCombobox(props: StatementCombobox) {
         <InputCombobox
             value={props.value}
             onChange={props.onChange}
-            placeholder="Choisir la ligne"
+            placeholder="Choisir le poste"
             options={options}
             isDisabled={props.isDisabled}
             autoFocus={props.autoFocus}

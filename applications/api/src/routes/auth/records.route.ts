@@ -1,4 +1,4 @@
-import { records, rows } from "@coulba/schemas/models"
+import { records } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { recordInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
@@ -29,6 +29,7 @@ export const recordsRoute = new Hono<AuthEnv>()
                     idJournal: body.idJournal,
                     idAttachment: body.idAttachment,
                     isValidated: false,
+                    isComputed: true,
                     label: body.label,
                     date: body.date,
                     lastUpdatedBy: c.var.user.id,
@@ -141,33 +142,19 @@ export const recordsRoute = new Hono<AuthEnv>()
             if (!readRecord) throw new HTTPException(403, { message: "L'écriture n'a pas été trouvée" })
             if (!readRecord.idAttachment) throw new HTTPException(403, { message: "Il manque une pièce jointe" })
 
-            await db.transaction(async (tx) => {
-                await tx
-                    .update(records)
-                    .set({
-                        isValidated: true,
-                        validatedOn: new Date().toISOString(),
-                        lastUpdatedBy: c.var.user.id,
-                        lastUpdatedOn: new Date().toISOString()
-                    })
-                    .where(and(
-                        eq(records.idOrganization, c.var.user.idOrganization),
-                        eq(records.id, params.idRecord)
-                    ))
-
-                await tx
-                    .update(rows)
-                    .set({
-                        isValidated: true,
-                        isComputed: true,
-                        lastUpdatedBy: c.var.user.id,
-                        lastUpdatedOn: new Date().toISOString()
-                    })
-                    .where(and(
-                        eq(rows.idOrganization, c.var.user.idOrganization),
-                        eq(rows.idRecord, params.idRecord)
-                    ))
-            })
+            await db
+                .update(records)
+                .set({
+                    isValidated: true,
+                    isComputed: true,
+                    validatedOn: new Date().toISOString(),
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(and(
+                    eq(records.idOrganization, c.var.user.idOrganization),
+                    eq(records.id, params.idRecord)
+                ))
 
             return c.json({}, 200)
         }

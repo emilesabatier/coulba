@@ -11,7 +11,7 @@ export function SectionItem(props: SectionItem) {
     return (
         <div
             className={cn(
-                "w-full max-w-full h-fit max-h-full flex justify-start items-start gap-1.5 p-3 border-b border-neutral/10 overflow-y-auto overflow-x-auto",
+                "w-full max-w-full h-fit max-h-full flex justify-start items-start gap-1.5 p-3 border-b border-neutral/5 last:border-0 overflow-y-auto overflow-x-auto",
                 props.className
             )}
             children={props.children}

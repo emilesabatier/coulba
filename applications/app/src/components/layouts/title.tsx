@@ -1,12 +1,12 @@
 import { ComponentProps } from "react"
 
 
-type SectionTitle = {
+type Title = {
     title: string
     className?: ComponentProps<'div'>['className']
 }
 
-export function SectionTitle(props: SectionTitle) {
+export function Title(props: Title) {
     return (
         <span className="uppercase text-neutral/50">{props.title}</span>
     )

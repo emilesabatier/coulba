@@ -1,5 +1,5 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
-import { InputInteger, InputText } from "@coulba/design/inputs"
+import { InputInteger, InputPrice, InputText } from "@coulba/design/inputs"
 import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
@@ -29,7 +29,7 @@ export function UpdateStatementForm() {
             validationSchema={auth.statements.put.body}
             defaultValues={statement.data}
             onCancel={() => router.navigate({
-                to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                to: "/configuration/compte-de-resultat/postes/$idStatement",
                 params: { idStatement: idStatement }
             })}
             submitLabel="Modifier"
@@ -42,10 +42,10 @@ export function UpdateStatementForm() {
 
                 await queryClient.invalidateQueries(statementOptions(idStatement))
                 router.navigate({
-                    to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                    to: "/configuration/compte-de-resultat/postes/$idStatement",
                     params: { idStatement: idStatement }
                 })
-                toast({ title: "Ligne mise à jour", variant: "success" })
+                toast({ title: "Poste mis à jour", variant: "success" })
 
                 return true
             }}
@@ -59,7 +59,7 @@ export function UpdateStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Numéro"
-                                    tooltip="Le numéro qui définit l'ordre de la ligne."
+                                    tooltip="Le numéro qui définit l'ordre du poste."
                                     isRequired
                                 />
                                 <FormControl>
@@ -98,10 +98,29 @@ export function UpdateStatementForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Compte parent"
-                                    tooltip="La ligne parent de la ligne créé."
+                                    tooltip="Le poste parent du poste créé."
                                 />
                                 <FormControl>
                                     <StatementCombobox
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <FormError />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="addedNetAmount"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel
+                                    label="Montant net à ajouter"
+                                    tooltip="Le montant net à ajouter."
+                                />
+                                <FormControl>
+                                    <InputPrice
                                         value={field.value}
                                         onChange={field.onChange}
                                     />

@@ -29,7 +29,7 @@ export function DeleteAccountStatement(props: DeleteAccountStatement) {
                 if (!response) return false
 
                 await router.navigate({
-                    to: "/configuration/compte-de-resultat/lignes/$idStatement",
+                    to: "/configuration/compte-de-resultat/postes/$idStatement",
                     params: { idStatement: props.accountStatement.idStatement }
                 })
                 await queryClient.invalidateQueries(statementOptions(props.accountStatement.idStatement))

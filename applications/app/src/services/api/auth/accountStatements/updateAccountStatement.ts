@@ -13,6 +13,6 @@ export function updateAccountStatement(props: UpdateAccountStatement) {
         path: `/auth/account-statements/${props.params.idAccountStatement}`,
         body: props.body,
         schema: auth.accountStatements.put.return,
-        message: "Erreur avec la modification des données"
+        message: "Erreur avec la modification du lien entre compte et poste de compte de résultat"
     })
 }
