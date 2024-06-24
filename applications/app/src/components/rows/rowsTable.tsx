@@ -5,8 +5,8 @@ import { IconPlus } from "@tabler/icons-react"
 import * as v from "valibot"
 import { router } from "../../routes/router"
 import { FormatAccountWithFetch } from "../accounts/format/formatAccountWithFetch"
-import { CreateRow } from "./create/createRow"
 import { DataTable } from "../layouts/dataTable"
+import { CreateRow } from "./create/createRow"
 
 
 type RowsTable = {
@@ -35,19 +35,19 @@ export function RowsTable(props: RowsTable) {
                 {
                     accessorKey: 'debit',
                     header: "Débit",
-                    cell: (context) => (<FormatPrice price={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatPrice price={row.original.debit} />),
                     filterFn: 'includesString'
                 },
                 {
                     accessorKey: 'credit',
                     header: "Crédit",
-                    cell: (context) => (<FormatPrice price={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatPrice price={row.original.credit} />),
                     filterFn: 'includesString'
                 },
                 {
                     accessorKey: 'createdOn',
                     header: "Ajouté le",
-                    cell: (context) => (<FormatDateTime isoDate={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.createdOn} />),
                     filterFn: 'includesString'
                 }
             ]}

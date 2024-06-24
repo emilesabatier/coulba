@@ -272,7 +272,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
             const [updateYear] = await db
                 .update(years)
                 .set({
-                    isClosed: sql`${!years.isClosed}`,
+                    isClosed: Boolean(sql`${!years.isClosed}`),
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })

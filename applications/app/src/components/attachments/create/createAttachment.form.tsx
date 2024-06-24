@@ -76,7 +76,6 @@ export function CreateAttachmentForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Fichier"
-                                    tooltip="La référence associée au document."
                                     isRequired
                                 />
                                 <FormControl>

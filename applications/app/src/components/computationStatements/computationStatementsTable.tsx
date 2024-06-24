@@ -36,7 +36,7 @@ export function ComputationStatementsTable(props: ComputationStatementsTable) {
                 {
                     accessorKey: 'createdOn',
                     header: "Ajouté le",
-                    cell: (context) => (<FormatDateTime isoDate={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.createdOn} />),
                     filterFn: 'includesString'
                 }
             ]}

@@ -52,7 +52,13 @@ export function AttachmentsTable() {
                 {
                     accessorKey: 'createdOn',
                     header: "Ajouté le",
-                    cell: (context) => (<FormatDateTime isoDate={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.createdOn} />),
+                    filterFn: 'includesString'
+                },
+                {
+                    accessorKey: 'lastUpdatedOn',
+                    header: "Dernière mise à jour le",
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.lastUpdatedOn} />),
                     filterFn: 'includesString'
                 }
             ]}

@@ -9,4 +9,4 @@ export const computeRecordParams = v.object({
 
 
 // Output
-export const computeRecordReturn = v.object({})
+export const computeRecordReturn = recordSchema

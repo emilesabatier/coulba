@@ -3,5 +3,6 @@ import * as v from "valibot"
 
 
 export function formatAttachment(attachment: v.Output<typeof auth.attachments.get.return>) {
-    return attachment.reference
+    if (!attachment.label) return attachment.reference
+    return `${attachment.reference} (${attachment.label})`
 }

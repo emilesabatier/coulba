@@ -67,7 +67,7 @@ export const yearsRoute = createRoute({
                                 <p className="text-neutral/50">Télécharger les documents comptables (FEC, bilan, compte de résultat)</p>
                             </div>
                             <Link to="/configuration/exercices/documents" className="ml-auto">
-                                <ButtonOutlineContent text="Clôturer l'exercice" />
+                                <ButtonOutlineContent text="Télécharger les documents" />
                             </Link>
                         </div>
                         <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
@@ -76,7 +76,7 @@ export const yearsRoute = createRoute({
                                 <p className="text-neutral/50">Effectuer les opérations d'ouverture de l'exercice actuellement sélectionné</p>
                             </div>
                             <Link to="/configuration/exercices/ouverture" className="ml-auto">
-                                <ButtonOutlineContent text="Clôturer l'exercice" />
+                                <ButtonOutlineContent text="Ouvrir l'exercice" />
                             </Link>
                         </div>
                     </Section.Item>

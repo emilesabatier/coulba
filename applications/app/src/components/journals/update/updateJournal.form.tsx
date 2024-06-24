@@ -72,8 +72,8 @@ export function UpdateJournalForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="codee"
-                                    tooltip="L'codee qui sera affiché."
+                                    label="Code"
+                                    tooltip="Le code qui sera affiché."
                                     isRequired
                                 />
                                 <FormControl>

@@ -1,13 +1,14 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
-import { IconChevronLeft, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
+import { IconCalculator, IconChevronLeft, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
 import { readRecordRoute } from "../../../routes/auth/records/readRecord.route"
 import { router } from "../../../routes/router"
 import { recordOptions } from "../../../services/api/auth/records/recordsOptions"
+import { compareAmounts } from "../../../services/compareAmounts"
 import { FormatAttachmentWithFetch } from "../../attachments/format/formatAttachmentWithFetch"
 import { FormatJournalWithFetch } from "../../journals/format/formatJournalWithFetch"
 import { Banner } from "../../layouts/banner"
@@ -17,6 +18,7 @@ import { Section } from "../../layouts/section/section"
 import { Title } from "../../layouts/title"
 import { RowsTable } from "../../rows/rowsTable"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
+import { ComputeRecord } from "../compute/computeRecord"
 import { DeleteRecord } from "../delete/deleteRecord"
 import { UpdateRecord } from "../update/updateRecord"
 import { ValidateRecord } from "../validate/validateRecord"
@@ -61,6 +63,13 @@ export function RecordContent() {
                                     disabled={totalDebit !== totalCredit}
                                 />
                             </ValidateRecord>
+                            <ComputeRecord record={record.data}>
+                                <ButtonOutline
+                                    text={!record.data.isComputed ? "Simuler" : "Ne plus simuler"}
+                                    icon={<IconCalculator />}
+                                    color="information"
+                                />
+                            </ComputeRecord>
                         </Fragment>
                     )}
                 </div>
@@ -90,11 +99,7 @@ export function RecordContent() {
                 record.data.isValidated ? null : (
                     <Section.Item className="p-0">
                         {
-                            totalDebit === totalCredit ? (
-                                <Banner variant="success">
-                                    Les montants au débit et au crédit sont identiques.
-                                </Banner>
-                            ) : (
+                            compareAmounts(totalDebit, totalCredit) ? null : (
                                 <Banner variant="error">
                                     Les montants au débit et au crédit sont différents, veuillez corriger pour pouvoir valider.
                                 </Banner>
@@ -121,11 +126,21 @@ export function RecordContent() {
                         <DataBlock.Item label="Pièce justificative">
                             {!record.data.idAttachment ? <FormatNull /> : <FormatAttachmentWithFetch idAttachment={record.data.idAttachment} />}
                         </DataBlock.Item>
+                    </DataBlock.Content>
+                </DataBlock.Root>
+                <DataBlock.Root>
+                    <DataBlock.Header>
+                        <Title title="Détail" />
+                    </DataBlock.Header>
+                    <DataBlock.Content>
                         <DataBlock.Item label="Écriture validée ?">
                             <FormatBoolean boolean={record.data.isValidated} />
                         </DataBlock.Item>
                         <DataBlock.Item label="Écriture validée le">
                             <FormatDate isoDate={record.data.validatedOn} />
+                        </DataBlock.Item>
+                        <DataBlock.Item label="Écriture simulée ?">
+                            <FormatBoolean boolean={record.data.isComputed} />
                         </DataBlock.Item>
                         <DataBlock.Item label="Total débit">
                             <FormatPrice price={totalDebit} />

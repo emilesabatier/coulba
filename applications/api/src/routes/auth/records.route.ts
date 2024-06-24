@@ -2,7 +2,7 @@ import { records } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { recordInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
-import { and, eq } from "drizzle-orm"
+import { and, eq, sql } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
@@ -78,6 +78,7 @@ export const recordsRoute = new Hono<AuthEnv>()
     )
     .put(
         '/:idRecord',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.records.put.params)),
         validator("json", bodyValidator(auth.records.put.body)),
         async (c) => {
@@ -106,6 +107,7 @@ export const recordsRoute = new Hono<AuthEnv>()
     )
     .delete(
         '/:idRecord',
+        checkCurrentYear,
         validator("param", paramsValidator(auth.records.put.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -124,7 +126,6 @@ export const recordsRoute = new Hono<AuthEnv>()
     )
     .patch(
         '/:idRecord/validate',
-        checkCurrentYear,
         validator("param", paramsValidator(auth.records.patch.validate.params)),
         async (c) => {
             const params = c.req.valid('param')
@@ -139,10 +140,18 @@ export const recordsRoute = new Hono<AuthEnv>()
                     rows: true
                 }
             })
-            if (!readRecord) throw new HTTPException(403, { message: "L'écriture n'a pas été trouvée" })
-            if (!readRecord.idAttachment) throw new HTTPException(403, { message: "Il manque une pièce jointe" })
+            if (!readRecord) throw new HTTPException(400, { message: "L'écriture n'a pas été trouvée" })
+            if (!readRecord.idAttachment) throw new HTTPException(400, { message: "Il manque une pièce jointe" })
 
-            await db
+            let totalDebit = 0
+            let totalCredit = 0
+            readRecord.rows.forEach((row) => {
+                totalDebit += Number(row.debit)
+                totalCredit += Number(row.credit)
+            })
+            if (Math.abs(totalDebit - totalCredit) > 0.01) throw new HTTPException(400, { message: "L'écriture n'est pas équilibrée" })
+
+            const [validateResponse] = await db
                 .update(records)
                 .set({
                     isValidated: true,
@@ -155,7 +164,30 @@ export const recordsRoute = new Hono<AuthEnv>()
                     eq(records.idOrganization, c.var.user.idOrganization),
                     eq(records.id, params.idRecord)
                 ))
+                .returning()
 
-            return c.json({}, 200)
+            return c.json(validateResponse, 200)
+        }
+    )
+    .patch(
+        '/:idRecord/compute',
+        validator("param", paramsValidator(auth.records.patch.compute.params)),
+        async (c) => {
+            const params = c.req.valid('param')
+
+            const [computeResponse] = await db
+                .update(records)
+                .set({
+                    isComputed: Boolean(sql`${!records.isComputed}`),
+                    lastUpdatedBy: c.var.user.id,
+                    lastUpdatedOn: new Date().toISOString()
+                })
+                .where(and(
+                    eq(records.idOrganization, c.var.user.idOrganization),
+                    eq(records.id, params.idRecord)
+                ))
+                .returning()
+
+            return c.json(computeResponse, 200)
         }
     )
