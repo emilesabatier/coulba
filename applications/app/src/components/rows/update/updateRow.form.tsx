@@ -22,7 +22,7 @@ export function UpdateRowForm() {
     const row = useQuery(rowOptions(idRow))
     const mutation = useMutation({ mutationFn: updateRow })
 
-    if (row.isLoading) return <CircularLoader />
+    if (row.isLoading) return <CircularLoader className="m-3" />
     if (row.isError) return <ErrorMessage message={row.error.message} />
     if (!row.data) return null
     return (
@@ -49,10 +49,9 @@ export function UpdateRowForm() {
 
                 await queryClient.invalidateQueries(rowOptions(idRow))
                 router.navigate({
-                    to: "/ecritures/$idRecord/lignes/$idRow",
+                    to: "/ecritures/$idRecord/lignes",
                     params: {
-                        idRecord: idRecord,
-                        idRow: idRow
+                        idRecord: idRecord
                     }
                 })
                 toast({ title: "Ligne mise à jour", variant: "success" })

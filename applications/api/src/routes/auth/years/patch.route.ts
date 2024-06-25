@@ -149,6 +149,8 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                     debit: (algebricBalance > 0) ? algebricBalance : 0,
                     credit: (algebricBalance < 0) ? -algebricBalance : 0
                 }
+
+                if (statementRows.length === 0) throw new HTTPException(400, { message: "Aucune écriture ne peut être passée" })
                 await tx
                     .insert(rows)
                     .values([
@@ -257,6 +259,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         createdBy: c.var.user.id
                     })
                 })
+                if (sheetRows.length === 0) throw new HTTPException(400, { message: "Aucune écriture ne peut être passée" })
                 await tx
                     .insert(rows)
                     .values(sheetRows)
@@ -272,7 +275,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
             const [updateYear] = await db
                 .update(years)
                 .set({
-                    isClosed: sql`${!years.isClosed}`,
+                    isClosed: Boolean(sql`${!years.isClosed}`),
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })

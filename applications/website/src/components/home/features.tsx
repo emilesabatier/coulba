@@ -21,12 +21,12 @@ const features = [
     {
         icon: <IconPencilPlus />,
         title: "Écritures",
-        description: "Ajoutez, éditez et supprimez les écritures de manière fluide et sécurisé, avant validation et inscription définitive dans le livre-journal."
+        description: "Ajoutez, éditez, supprimez et simulez les écritures de manière fluide et sécurisée."
     },
     {
         icon: <IconFiles />,
         title: "Pièces justificatives",
-        description: "Uploadez et consultez toutes les pièces justificatives nécessaires."
+        description: "Uploadez et consultez toutes vos pièces justificatives ainsi que tout type de documents."
     },
     {
         icon: <IconReportAnalytics />,

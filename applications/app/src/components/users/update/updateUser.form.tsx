@@ -20,7 +20,7 @@ export function UpdateUserForm() {
     const user = useQuery(userOptions(idUser))
     const mutation = useMutation({ mutationFn: updateUser })
 
-    if (user.isLoading) return <CircularLoader />
+    if (user.isLoading) return <CircularLoader className="m-3" />
     if (user.isError) return <ErrorMessage message={user.error.message} />
     if (!user.data) return null
     return (

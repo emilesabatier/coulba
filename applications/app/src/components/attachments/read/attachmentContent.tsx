@@ -22,7 +22,7 @@ export function AttachmentContent() {
     const attachment = useQuery(attachmentOptions(idAttachment))
     const [urlFile, isFileLoading] = useFile(attachment.data?.storageKey)
 
-    if (attachment.isLoading || isFileLoading) return <CircularLoader />
+    if (attachment.isLoading || isFileLoading) return <CircularLoader className="m-3" />
     if (attachment.isError) return <ErrorMessage message={attachment.error.message} />
     if (!attachment.data) return null
     return (
@@ -30,7 +30,7 @@ export function AttachmentContent() {
             <Section.Item>
                 <div className="flex justify-start items-center gap-1.5">
                     <ButtonOutline
-                        onClick={() => router.navigate({ to: "/fichiers" })}
+                        onClick={() => router.navigate({ to: "/stockage" })}
                         icon={<IconChevronLeft />}
                     />
                     <UpdateAttachment attachment={attachment.data}>

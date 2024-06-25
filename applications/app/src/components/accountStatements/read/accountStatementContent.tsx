@@ -11,17 +11,17 @@ import { FormatAccountWithFetch } from "../../accounts/format/formatAccountWithF
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { Title } from "../../layouts/title"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { DeleteAccountStatement } from "../delete/deleteAccountStatement"
 import { UpdateAccountStatement } from "../update/updateAccountStatement"
-import { Title } from "../../layouts/title"
 
 
 export function AccountStatementContent() {
     const { idStatement, idAccountStatement } = useParams({ from: readAccountStatementRoute.id })
     const accountStatement = useQuery(accountStatementOptions(idAccountStatement))
 
-    if (accountStatement.isLoading) return <CircularLoader />
+    if (accountStatement.isLoading) return <CircularLoader className="m-3" />
     if (accountStatement.isError) return <ErrorMessage message={accountStatement.error.message} />
     if (!accountStatement.data) return null
     return (

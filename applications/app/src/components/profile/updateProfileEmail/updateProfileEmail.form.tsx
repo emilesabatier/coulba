@@ -1,19 +1,19 @@
 import { FormControl, FormError, FormField, FormItem, FormLabel } from "@coulba/design/forms"
 import { InputPassword, InputText } from "@coulba/design/inputs"
+import { CircularLoader } from "@coulba/design/layouts"
 import { toast } from "@coulba/design/overlays"
 import { auth } from "@coulba/schemas/routes"
 import { Fragment } from "react"
+import { useSession } from "../../../contexts/session/useSession"
 import { router } from "../../../routes/router"
 import { updateProfileEmail } from "../../../services/api/auth/profile/updateProfileEmail"
 import { Form } from "../../layouts/forms/form"
-import { CircularLoader } from "@coulba/design/layouts"
-import { useSession } from "../../../contexts/session/useSession"
 
 
 export function UpdateProfileEmailForm() {
     const session = useSession()
 
-    if (session.isLoading) return <CircularLoader />
+    if (session.isLoading) return <CircularLoader className="m-3" />
     if (!session.profile) return null
     return (
         <Form

@@ -22,7 +22,7 @@ export function AccountSheetContent() {
     const { idSheet, idAccountSheet } = useParams({ from: readAccountSheetRoute.id })
     const accountSheet = useQuery(accountSheetOptions(idAccountSheet))
 
-    if (accountSheet.isLoading) return <CircularLoader />
+    if (accountSheet.isLoading) return <CircularLoader className="m-3" />
     if (accountSheet.isError) return <ErrorMessage message={accountSheet.error.message} />
     if (!accountSheet.data) return null
     return (

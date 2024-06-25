@@ -9,4 +9,4 @@ export const validateRecordParams = v.object({
 
 
 // Output
-export const validateRecordReturn = v.object({})
+export const validateRecordReturn = recordSchema

@@ -21,7 +21,7 @@ export function UpdateAttachmentForm() {
     const attachment = useQuery(attachmentOptions(idAttachment))
     const mutation = useMutation({ mutationFn: updateAttachment })
 
-    if (attachment.isLoading) return <CircularLoader />
+    if (attachment.isLoading) return <CircularLoader className="m-3" />
     if (attachment.isError) return <ErrorMessage message={attachment.error.message} />
     if (!attachment.data) return null
     return (
@@ -30,7 +30,7 @@ export function UpdateAttachmentForm() {
             defaultValues={attachment.data}
             onCancel={() => {
                 if (!attachment.data) return null
-                router.navigate({ to: "/fichiers/$idAttachment", params: { idAttachment: attachment.data.id } })
+                router.navigate({ to: "/stockage/$idAttachment", params: { idAttachment: attachment.data.id } })
             }}
             submitLabel="Modifier le fichier"
             onSubmit={async (data) => {
@@ -46,7 +46,7 @@ export function UpdateAttachmentForm() {
 
                 await queryClient.invalidateQueries(attachmentOptions(idAttachment))
                 router.navigate({
-                    to: "/fichiers/$idAttachment",
+                    to: "/stockage/$idAttachment",
                     params: { idAttachment: response.id }
                 })
                 toast({ title: "Fichier mis à jour", variant: "success" })

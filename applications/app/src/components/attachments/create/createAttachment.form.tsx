@@ -21,7 +21,7 @@ export function CreateAttachmentForm() {
         <Form
             validationSchema={v.merge([v.pick(auth.attachments.post.body, ["reference", "label", "date"]), v.object({ file: v.nonNullish(fileSchema, "Un fichier doit être uploadé") })])}
             defaultValues={{}}
-            onCancel={() => router.navigate({ to: "/fichiers" })}
+            onCancel={() => router.navigate({ to: "/stockage" })}
             submitLabel="Ajouter le fichier"
             onSubmit={async (data) => {
                 if (!data.file) {
@@ -61,7 +61,7 @@ export function CreateAttachmentForm() {
                 if (!response) return false
 
                 await queryClient.invalidateQueries(attachmentsOptions)
-                router.navigate({ to: "/fichiers" })
+                router.navigate({ to: "/stockage" })
                 toast({ title: "Nouveau fichier ajouté", variant: "success" })
 
                 return true
@@ -76,7 +76,6 @@ export function CreateAttachmentForm() {
                             <FormItem>
                                 <FormLabel
                                     label="Fichier"
-                                    tooltip="La référence associée au document."
                                     isRequired
                                 />
                                 <FormControl>

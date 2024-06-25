@@ -23,7 +23,7 @@ export function RowContent() {
     const record = useQuery(recordOptions(idRecord))
     const row = useQuery(rowOptions(idRow))
 
-    if (record.isLoading || row.isLoading) return <CircularLoader />
+    if (record.isLoading || row.isLoading) return <CircularLoader className="m-3" />
     if (record.isError) return <ErrorMessage message={record.error.message} />
     if (row.isError) return <ErrorMessage message={row.error.message} />
     if (!record.data || !row.data) return null

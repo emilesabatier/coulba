@@ -21,7 +21,7 @@ export function UpdateSheetForm() {
     const sheet = useQuery(sheetOptions(idSheet))
     const mutation = useMutation({ mutationFn: updateSheet })
 
-    if (sheet.isLoading) return <CircularLoader />
+    if (sheet.isLoading) return <CircularLoader className="m-3" />
     if (sheet.isError) return <ErrorMessage message={sheet.error.message} />
     if (!sheet.data) return null
     return (

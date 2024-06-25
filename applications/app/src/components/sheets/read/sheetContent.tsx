@@ -24,7 +24,7 @@ export function SheetContent() {
     const { idSheet } = useParams({ from: readSheetRoute.id })
     const sheet = useQuery(sheetOptions(idSheet))
 
-    if (sheet.isLoading) return <CircularLoader />
+    if (sheet.isLoading) return <CircularLoader className="m-3" />
     if (sheet.isError) return <ErrorMessage message={sheet.error.message} />
     if (!sheet.data) return null
     return (

@@ -20,7 +20,7 @@ export function UpdateAccountStatementForm() {
     const accountStatement = useQuery(accountStatementOptions(idAccountStatement))
     const mutation = useMutation({ mutationFn: updateAccountStatement })
 
-    if (accountStatement.isLoading) return <CircularLoader />
+    if (accountStatement.isLoading) return <CircularLoader className="m-3" />
     if (accountStatement.isError) return <ErrorMessage message={accountStatement.error.message} />
     if (!accountStatement.data) return null
     return (

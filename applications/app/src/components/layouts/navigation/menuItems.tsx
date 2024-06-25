@@ -1,3 +1,5 @@
+import { IconFolders, IconPencil, IconReport, IconSettings } from "@tabler/icons-react"
+import { ReactElement } from "react"
 import { ValidRoutes } from "../../../routes/router"
 
 
@@ -10,6 +12,7 @@ type SubMenuItem = {
 export type MenuItem = {
     key: string
     label: string
+    icon: ReactElement
     path?: ValidRoutes
     basePath: ValidRoutes
     subMenuItems?: SubMenuItem[]
@@ -26,18 +29,21 @@ export const menuItems: MenuItem[] = [
     {
         key: "rows",
         label: "Écritures",
+        icon: <IconPencil size={16} />,
         basePath: "/ecritures",
         path: "/ecritures"
     },
     {
         key: "attachments",
-        label: "Stockage de fichiers",
-        basePath: "/fichiers",
-        path: "/fichiers"
+        label: "Stockage",
+        icon: <IconFolders size={16} />,
+        basePath: "/stockage",
+        path: "/stockage"
     },
     {
         key: "reports",
-        label: "Documents comptables",
+        label: "Documents",
+        icon: <IconReport size={16} />,
         basePath: "/documents",
         path: "/documents/bilan",
         subMenuItems: [
@@ -71,6 +77,7 @@ export const menuItems: MenuItem[] = [
     {
         key: "configuration",
         label: "Configuration",
+        icon: <IconSettings size={16} />,
         basePath: "/configuration",
         path: "/configuration/organisation",
         subMenuItems: [

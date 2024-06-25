@@ -33,6 +33,16 @@ export function RecordsTable() {
                     filterFn: 'includesString'
                 },
                 {
+                    accessorKey: 'isComputed',
+                    header: 'Simulé ?',
+                    cell: ({ row }) => (
+                        <FormatBoolean
+                            boolean={row.original.isComputed}
+                        />
+                    ),
+                    filterFn: 'includesString'
+                },
+                {
                     accessorKey: 'label',
                     header: 'Libellé',
                     cell: ({ row }) => (<FormatText text={row.original.label} />),
@@ -47,7 +57,7 @@ export function RecordsTable() {
                 {
                     accessorKey: 'date',
                     header: "Date",
-                    cell: (context) => (<FormatDate isoDate={String(context.getValue())} />),
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.date} />),
                     filterFn: 'includesString'
                 },
                 {
@@ -66,6 +76,12 @@ export function RecordsTable() {
                     accessorKey: 'createdOn',
                     header: "Ajouté le",
                     cell: ({ row }) => (<FormatDateTime isoDate={row.original.createdOn} />),
+                    filterFn: 'includesString'
+                },
+                {
+                    accessorKey: 'lastUpdatedOn',
+                    header: "Dernière mise à jour le",
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.lastUpdatedOn} />),
                     filterFn: 'includesString'
                 }
             ]}
