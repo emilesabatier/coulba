@@ -184,7 +184,8 @@ export const recordsRoute = new Hono<AuthEnv>()
                 })
                 .where(and(
                     eq(records.idOrganization, c.var.user.idOrganization),
-                    eq(records.id, params.idRecord)
+                    eq(records.id, params.idRecord),
+                    eq(records.isValidated, false)
                 ))
                 .returning()
 
