@@ -20,7 +20,7 @@ export function UpdateJournalForm() {
     const journal = useQuery(journalOptions(idJournal))
     const mutation = useMutation({ mutationFn: updateJournal })
 
-    if (journal.isLoading) return <CircularLoader />
+    if (journal.isLoading) return <CircularLoader className="m-3" />
     if (journal.isError) return <ErrorMessage message={journal.error.message} />
     if (!journal.data) return null
     return (

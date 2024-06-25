@@ -22,7 +22,7 @@ export function UpdateComputationStatementForm() {
     const computationStatement = useQuery(computationStatementOptions(idComputationStatement))
     const mutation = useMutation({ mutationFn: updateComputationStatement })
 
-    if (computationStatement.isLoading) return <CircularLoader />
+    if (computationStatement.isLoading) return <CircularLoader className="m-3" />
     if (computationStatement.isError) return <ErrorMessage message={computationStatement.error.message} />
     if (!computationStatement.data) return null
     return (

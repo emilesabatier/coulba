@@ -22,7 +22,7 @@ export function UpdateAccountSheetForm() {
     const accountSheet = useQuery(accountSheetOptions(idAccountSheet))
     const mutation = useMutation({ mutationFn: updateAccountSheet })
 
-    if (accountSheet.isLoading) return <CircularLoader />
+    if (accountSheet.isLoading) return <CircularLoader className="m-3" />
     if (accountSheet.isError) return <ErrorMessage message={accountSheet.error.message} />
     if (!accountSheet.data) return null
     return (

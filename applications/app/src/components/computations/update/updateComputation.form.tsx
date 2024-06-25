@@ -20,7 +20,7 @@ export function UpdateComputationForm() {
     const computation = useQuery(computationOptions(idComputation))
     const mutation = useMutation({ mutationFn: updateComputation })
 
-    if (computation.isLoading) return <CircularLoader />
+    if (computation.isLoading) return <CircularLoader className="m-3" />
     if (computation.isError) return <ErrorMessage message={computation.error.message} />
     if (!computation.data) return null
     return (

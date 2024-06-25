@@ -13,7 +13,7 @@ import { Form } from "../../layouts/forms/form"
 export function UpdateOrganizationForm() {
     const organization = useOrganization()
 
-    if (organization.isLoading) return <CircularLoader />
+    if (organization.isLoading) return <CircularLoader className="m-3" />
     if (!organization.data) return null
     return (
         <Form

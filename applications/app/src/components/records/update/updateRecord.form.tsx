@@ -23,7 +23,7 @@ export function UpdateRecordForm() {
     const record = useQuery(recordOptions(idRecord))
     const mutation = useMutation({ mutationFn: updateRecord })
 
-    if (record.isLoading) return <CircularLoader />
+    if (record.isLoading) return <CircularLoader className="m-3" />
     if (record.isError) return <ErrorMessage message={record.error.message} />
     if (!record.data) return null
     return (

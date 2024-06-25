@@ -55,10 +55,10 @@ export function CloseYear(props: CloseYear) {
                     }
                 })
                 if (!settleStatementResponse) {
-                    toast({ title: "Erreur lors du calcul du résultat de l'exercice", variant: "error" })
+                    toast({ title: "Erreur lors du solde des comptes de gestion", variant: "error" })
                     return false
                 }
-                toast({ title: "Calcul du résultat de l'exercice effectué", variant: "success" })
+                toast({ title: "Solde des comptes de gestion effectué", variant: "success" })
 
                 // settle sheet
                 const settleSheetResponse = await settleSheet({
@@ -70,7 +70,7 @@ export function CloseYear(props: CloseYear) {
                     toast({ title: "Erreur lors du solde des comptes de bilan", variant: "error" })
                     return false
                 }
-                toast({ title: "Solde des comptes de bilan réussi", variant: "success" })
+                toast({ title: "Solde des comptes de bilan effectué", variant: "success" })
 
                 // close year
                 const closeYearResponse = await closeYear()
@@ -113,7 +113,7 @@ export function CloseYear(props: CloseYear) {
                             <FormItem>
                                 <FormLabel
                                     label="Compte de résultat (bénéfice)"
-                                    tooltip="Le compte qui sera mouvementé en cas de résultat positif."
+                                    tooltip="Le compte qui sera mouvementé en cas de résultat positif (généralement 120)."
                                     isRequired
                                 />
                                 <FormControl>
@@ -133,7 +133,7 @@ export function CloseYear(props: CloseYear) {
                             <FormItem>
                                 <FormLabel
                                     label="Compte de résultat (perte)"
-                                    tooltip="Le compte qui sera mouvementé en cas de résultat négatif."
+                                    tooltip="Le compte qui sera mouvementé en cas de résultat négatif (généralement 129)."
                                     isRequired
                                 />
                                 <FormControl>

@@ -17,7 +17,7 @@ export function Navigation(props: Navigation) {
 
     const currentOpenMenu = menuItems.find((menuItem) => menuItem.basePath === current?.pathname.split("/").slice(0, 2).join("/"))
     return (
-        <nav className={cn("min-w-[256px] w-full max-w-full h-fit", props.className)}>
+        <nav className={cn("min-w-[200px] w-full max-w-full h-fit", props.className)}>
             <Accordion
                 type="single"
                 collapsible
@@ -36,8 +36,9 @@ export function Navigation(props: Navigation) {
                             >
                                 <div
                                     aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
-                                    className="group w-full flex justify-start items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
+                                    className="group w-full flex justify-start items-center gap-1.5 p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
                                 >
+                                    {menuItem.icon}
                                     <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral">
                                         {menuItem.label}
                                     </span>
@@ -53,8 +54,9 @@ export function Navigation(props: Navigation) {
                                 <AccordionTrigger className="w-full" style={{ minWidth: "var(--radix-accordion-content-width)" }}>
                                     <div
                                         aria-current={current?.pathname.split("/").slice(0, 2).join("/") === menuItem.basePath}
-                                        className="group w-full flex justify-between items-center p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
+                                        className="group w-full flex justify-between items-center gap-1.5 p-3 hover:bg-neutral/5 aria-current:bg-neutral/5 rounded-sm"
                                     >
+                                        {menuItem.icon}
                                         <span className="w-full text-left text-neutral/75 leading-none group-hover:text-neutral group-aria-current:text-neutral">
                                             {menuItem.label}
                                         </span>

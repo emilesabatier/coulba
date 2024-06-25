@@ -21,7 +21,7 @@ export function ComputationContent() {
     const { idComputation } = useParams({ from: readComputationRoute.id })
     const computation = useQuery(computationOptions(idComputation))
 
-    if (computation.isLoading) return <CircularLoader />
+    if (computation.isLoading) return <CircularLoader className="m-3" />
     if (computation.isError) return <ErrorMessage message={computation.error.message} />
     if (!computation.data) return null
     return (

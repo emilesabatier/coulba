@@ -64,7 +64,7 @@ export function AttachmentsTable() {
             ]}
             onRowClick={(row) => {
                 router.navigate({
-                    to: "/fichiers/$idAttachment",
+                    to: "/stockage/$idAttachment",
                     params: { idAttachment: row.original.id }
                 })
             }}

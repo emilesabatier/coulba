@@ -12,7 +12,7 @@ type ReadAttachment = {
 export function ReadAttachment(props: ReadAttachment) {
     return (
         <Link
-            to="/fichiers/$idAttachment"
+            to="/stockage/$idAttachment"
             params={{ idAttachment: props.idAttachment }}
             children={props.children}
         />

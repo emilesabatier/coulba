@@ -12,7 +12,7 @@ type UpdateAttachment = {
 export function UpdateAttachment(props: UpdateAttachment) {
     return (
         <Link
-            to="/fichiers/$idAttachment/modifier"
+            to="/stockage/$idAttachment/modifier"
             params={{ idAttachment: props.attachment.id }}
             children={props.children}
         />

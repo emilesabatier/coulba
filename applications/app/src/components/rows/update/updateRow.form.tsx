@@ -22,7 +22,7 @@ export function UpdateRowForm() {
     const row = useQuery(rowOptions(idRow))
     const mutation = useMutation({ mutationFn: updateRow })
 
-    if (row.isLoading) return <CircularLoader />
+    if (row.isLoading) return <CircularLoader className="m-3" />
     if (row.isError) return <ErrorMessage message={row.error.message} />
     if (!row.data) return null
     return (

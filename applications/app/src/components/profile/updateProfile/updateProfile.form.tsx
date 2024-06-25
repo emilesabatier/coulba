@@ -13,7 +13,7 @@ import { Form } from "../../layouts/forms/form"
 export function UpdateProfileForm() {
     const session = useSession()
 
-    if (session.isLoading) return <CircularLoader />
+    if (session.isLoading) return <CircularLoader className="m-3" />
     if (!session.profile) return null
     return (
         <Form

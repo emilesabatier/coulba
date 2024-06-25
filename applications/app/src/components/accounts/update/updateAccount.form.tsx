@@ -22,7 +22,7 @@ export function UpdateAccountForm() {
     const account = useQuery(accountOptions(idAccount))
     const mutation = useMutation({ mutationFn: updateAccount })
 
-    if (account.isLoading) return <CircularLoader />
+    if (account.isLoading) return <CircularLoader className="m-3" />
     if (account.isError) return <ErrorMessage message={account.error.message} />
     if (!account.data) return null
     return (

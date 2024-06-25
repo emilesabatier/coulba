@@ -22,7 +22,7 @@ export function StatementContent() {
     const { idStatement } = useParams({ from: readStatementRoute.id })
     const statement = useQuery(statementOptions(idStatement))
 
-    if (statement.isLoading) return <CircularLoader />
+    if (statement.isLoading) return <CircularLoader className="m-3" />
     if (statement.isError) return <ErrorMessage message={statement.error.message} />
     if (!statement.data) return null
     return (

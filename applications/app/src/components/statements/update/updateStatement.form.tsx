@@ -21,7 +21,7 @@ export function UpdateStatementForm() {
     const statement = useQuery(statementOptions(idStatement))
     const mutation = useMutation({ mutationFn: updateStatement })
 
-    if (statement.isLoading) return <CircularLoader />
+    if (statement.isLoading) return <CircularLoader className="m-3" />
     if (statement.isError) return <ErrorMessage message={statement.error.message} />
     if (!statement.data) return null
     return (

@@ -8,6 +8,6 @@ export const attachmentsLayout = createRoute({
         title: "Stockage de fichiers",
         description: undefined
     }),
-    path: '/fichiers',
+    path: '/stockage',
     component: () => <Outlet />
 })

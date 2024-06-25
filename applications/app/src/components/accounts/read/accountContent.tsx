@@ -10,19 +10,19 @@ import { accountOptions } from "../../../services/api/auth/accounts/accountsOpti
 import { DataBlock } from "../../layouts/dataBlock/dataBlock"
 import { ErrorMessage } from "../../layouts/errorMessage"
 import { Section } from "../../layouts/section/section"
+import { Title } from "../../layouts/title"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { accountTypeOptions } from "../accountTypeOptions"
 import { DeleteAccount } from "../delete/deleteAccount"
 import { FormatAccountWithFetch } from "../format/formatAccountWithFetch"
 import { UpdateAccount } from "../update/updateAccount"
-import { Title } from "../../layouts/title"
 
 
 export function AccountContent() {
     const { idAccount } = useParams({ from: readAccountRoute.id })
     const account = useQuery(accountOptions(idAccount))
 
-    if (account.isLoading) return <CircularLoader />
+    if (account.isLoading) return <CircularLoader className="m-3" />
     if (account.isError) return <ErrorMessage message={account.error.message} />
     if (!account.data) return null
     return (

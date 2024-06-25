@@ -21,7 +21,7 @@ export function UpdateYearForm() {
     const year = useQuery(yearOptions(idYear))
     const mutation = useMutation({ mutationFn: updateYear })
 
-    if (year.isLoading) return <CircularLoader />
+    if (year.isLoading) return <CircularLoader className="m-3" />
     if (year.isError) return <ErrorMessage message={year.error.message} />
     if (!year.data) return null
     return (
