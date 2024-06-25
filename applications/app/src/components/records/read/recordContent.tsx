@@ -60,7 +60,7 @@ export function RecordContent() {
                                     text="Valider"
                                     icon={<IconLockCheck />}
                                     color="success"
-                                    disabled={totalDebit !== totalCredit}
+                                    disabled={!compareAmounts(totalDebit, totalCredit)}
                                 />
                             </ValidateRecord>
                             <ComputeRecord record={record.data}>
