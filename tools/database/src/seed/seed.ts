@@ -296,7 +296,7 @@ async function seed() {
                         idYear: year.id,
                         idJournal: undefined,
                         idAttachment: undefined,
-                        isValidated: false,
+                        isValidated: true,
                         isComputed: true,
                         validatedOn: undefined,
                         label: record.label,
