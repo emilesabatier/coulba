@@ -54,7 +54,7 @@ export function OpenYear(props: OpenYear) {
                     }
                 })
                 if (!openYearResponse) {
-                    toast({ title: "Erreur lors de la reprise des comptes", variant: "error" })
+                    // toast({ title: "Erreur lors de la reprise des comptes", variant: "error" })
                     return false
                 }
                 toast({ title: "Reprise des comptes effectuée", variant: "success" })

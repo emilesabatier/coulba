@@ -27,7 +27,7 @@ export function RecordsTable() {
                     cell: ({ row }) => (
                         <FormatBoolean
                             boolean={row.original.isValidated}
-                            text={!row.original.isValidated ? "Brouillon" : "Confirmé"}
+                            text={!row.original.isValidated ? "Brouillon" : "Validée"}
                         />
                     ),
                     filterFn: 'includesString'

@@ -334,20 +334,33 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         eq(records.idAutomatic, "SETTLE_SHEET")
                     ),
                     with: {
-                        rows: true,
+                        rows: {
+                            with: {
+                                account: true
+                            }
+                        },
                     }
                 })
                 if (!readRecord) throw new HTTPException(400, { message: "Le solde du bilan de l'exercice précédent n'a pas été trouvé" })
 
+                const readAccounts = await tx.query.accounts.findMany({
+                    where: and(
+                        eq(records.idOrganization, c.var.user.idOrganization),
+                        eq(records.idYear, c.var.currentYear.id)
+                    )
+                })
+
                 // We create the new rows
                 const sheetRows: Array<(typeof rows.$inferInsert)> = []
                 readRecord.rows.forEach((row) => {
+                    const account = readAccounts.find((_account) => _account.number === row.account.number)
+                    if (!account) throw new HTTPException(400, { message: "Les comptes liés n'ont pas été rapprochés" })
                     sheetRows.push({
                         id: generateId(),
                         idOrganization: c.var.organization.id,
                         idYear: c.var.currentYear.id,
                         idRecord: createRecord.id,
-                        idAccount: row.idAccount,
+                        idAccount: account.id,
                         debit: row.credit.toString(),
                         credit: row.debit.toString(),
                         label: "Report du compte",
