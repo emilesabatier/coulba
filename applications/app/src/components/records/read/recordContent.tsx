@@ -87,7 +87,7 @@ export function RecordContent() {
                 </div>
             </Section.Item>
             {
-                record.data.idAttachment ? null : (
+                (record.data.idAttachment || record.data.isValidated) ? null : (
                     <Section.Item className="p-0">
                         <Banner variant="error">
                             Il manque une pièce justificative.
