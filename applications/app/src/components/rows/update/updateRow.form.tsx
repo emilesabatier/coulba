@@ -49,7 +49,7 @@ export function UpdateRowForm() {
 
                 await queryClient.invalidateQueries(rowOptions(idRow))
                 router.navigate({
-                    to: "/ecritures/$idRecord/lignes",
+                    to: "/ecritures/$idRecord",
                     params: {
                         idRecord: idRecord
                     }
