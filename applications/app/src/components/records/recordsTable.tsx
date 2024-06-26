@@ -57,7 +57,7 @@ export function RecordsTable() {
                 {
                     accessorKey: 'date',
                     header: "Date",
-                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.date} />),
+                    cell: ({ row }) => (<FormatDate isoDate={row.original.date} />),
                     filterFn: 'includesString'
                 },
                 {
@@ -69,7 +69,7 @@ export function RecordsTable() {
                 {
                     accessorKey: 'validatedOn',
                     header: "Validé le",
-                    cell: ({ row }) => (<FormatDate isoDate={row.original.validatedOn} />),
+                    cell: ({ row }) => (<FormatDateTime isoDate={row.original.validatedOn} />),
                     filterFn: 'includesString'
                 },
                 {
