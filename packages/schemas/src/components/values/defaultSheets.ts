@@ -1166,6 +1166,21 @@ export const defaultSheets: DefaultSheet[] = [
                 isAllowance: false
             },
             {
+                number: 4455,
+                flow: "debit",
+                isAllowance: false
+            },
+            {
+                number: 44551,
+                flow: "debit",
+                isAllowance: false
+            },
+            {
+                number: 44558,
+                flow: "debit",
+                isAllowance: false
+            },
+            {
                 number: 4456,
                 flow: "debit",
                 isAllowance: false
@@ -1197,17 +1212,17 @@ export const defaultSheets: DefaultSheet[] = [
             },
             {
                 number: 4457,
-                flow: "credit",
+                flow: "debit",
                 isAllowance: false
             },
             {
                 number: 44571,
-                flow: "credit",
+                flow: "debit",
                 isAllowance: false
             },
             {
                 number: 44578,
-                flow: "credit",
+                flow: "debit",
                 isAllowance: false
             },
             {
@@ -2445,17 +2460,17 @@ export const defaultSheets: DefaultSheet[] = [
             },
             {
                 number: 4421,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 4422,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 4423,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
@@ -2484,48 +2499,33 @@ export const defaultSheets: DefaultSheet[] = [
                 isAllowance: false
             },
             {
-                number: 4455,
-                flow: "credit",
-                isAllowance: false
-            },
-            {
-                number: 44551,
-                flow: "credit",
-                isAllowance: false
-            },
-            {
-                number: 44558,
-                flow: "credit",
-                isAllowance: false
-            },
-            {
                 number: 4456,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 44562,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 44563,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 44566,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 44567,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
                 number: 44568,
-                flow: "debit",
+                flow: "credit",
                 isAllowance: false
             },
             {
