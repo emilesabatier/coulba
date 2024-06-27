@@ -25,7 +25,7 @@ COPY ./.docker ./.docker
 # Build the app
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm install
-RUN pnpm run --filter="app" build
+RUN pnpm --filter="app" run build
 RUN pnpm deploy --filter="app" --prod /app
 
 # Start app
