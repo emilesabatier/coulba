@@ -3,10 +3,14 @@ FROM node:22-alpine AS base
 RUN corepack enable
 
 # Define build arguments for environment variables
+ARG VITE_PUBLIC_WEBSITE_BASE
 ARG VITE_PUBLIC_APP_BASE
+ARG VITE_PUBLIC_API_BASE
 
 # Set environment variables during the build process
+ENV VITE_PUBLIC_WEBSITE_BASE=$VITE_PUBLIC_WEBSITE_BASE
 ENV VITE_PUBLIC_APP_BASE=$VITE_PUBLIC_APP_BASE
+ENV VITE_PUBLIC_API_BASE=$VITE_PUBLIC_API_BASE
 
 # Build the monorepo
 FROM base AS build
