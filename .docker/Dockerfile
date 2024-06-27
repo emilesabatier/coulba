@@ -2,6 +2,15 @@
 FROM node:22-alpine AS base
 RUN corepack enable
 
+ENV CHROME_BIN="/usr/bin/chromium-browser" \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
+RUN set -x \
+    && apk update \
+    && apk upgrade \
+    && apk add --no-cache \
+    udev \
+    ttf-freefont \
+    chromium
 
 # Define build arguments for environment variables
 ARG VITE_PUBLIC_API_BASE
