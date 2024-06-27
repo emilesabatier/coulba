@@ -20,12 +20,12 @@ COPY ./.docker ./.docker
 # Build the api
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm install
-RUN pnpm --filter="api" run build
+RUN pnpm run build
 RUN pnpm deploy --filter="api" --prod /api
 
 # Start api
 FROM base AS api
 COPY --from=build /api /api
-COPY --from=build /root/.cache/puppeteer /root/.cache/puppeteer
+# COPY --from=build /root/.cache/puppeteer /root/.cache/puppeteer
 WORKDIR /api
 CMD [ "pnpm", "--filter=api", "start"]
