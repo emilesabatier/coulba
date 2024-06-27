@@ -25,7 +25,7 @@ COPY ./.docker ./.docker
 # Build the
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm install
-RUN pnpm run build
+RUN pnpm run build --filter="website"
 RUN pnpm deploy --filter="website" --prod /website
 
 # Start website
