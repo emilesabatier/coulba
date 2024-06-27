@@ -72,7 +72,7 @@ export function SheetAssets(props: SheetAssets) {
                             <FormatPrice price={totalAllowanceSheetAssets} />
                         </Table.Body.Cell>
                         <Table.Body.Cell align="right" class={css`border-top: 1px solid #111111; border-bottom: 0px;`}>
-                            <FormatPrice price={totalGrossSheetAssets - totalAllowanceSheetAssets} />
+                            <FormatPrice price={totalGrossSheetAssets + totalAllowanceSheetAssets} />
                         </Table.Body.Cell>
                     </Table.Body.Row>
                 </Table.Body.Root>
