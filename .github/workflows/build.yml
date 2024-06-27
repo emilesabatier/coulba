@@ -19,10 +19,16 @@ jobs:
               include:
                 - image: website
                   target: website
+                  args: |
+                    VITE_PUBLIC_WEBSITE_BASE=https://coulba.fr
                 - image: api
                   target: api
+                  args: |
+                    VITE_PUBLIC_API_BASE=https://api.coulba.fr
                 - image: app
                   target: app
+                  args: |
+                    VITE_PUBLIC_APP_BASE=https://espace.coulba.fr
 
         permissions:
             contents: read
@@ -52,12 +58,10 @@ jobs:
                 uses: docker/build-push-action@v5.3.0
                 with:
                     context: .
-                    file: ./.docker/Dockerfile
+                    file: ./.docker/Dockerfile.${{ matrix.target }}
                     target: ${{ matrix.target }}
                     push: true
                     tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}
-                    build-args: |
-                        VITE_PUBLIC_API_BASE=https://api.coulba.fr
-                        VITE_PUBLIC_APP_BASE=https://espace.coulba.fr
-                        VITE_PUBLIC_WEBSITE_BASE=https://coulba.fr
+                    build-args: ${{ matrix.args }}
+                        
