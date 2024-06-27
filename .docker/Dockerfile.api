@@ -20,7 +20,7 @@ COPY ./.docker ./.docker
 # Build the api
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN pnpm install
-RUN pnpm run build --filter="api"
+RUN pnpm run --filter="api" build
 RUN pnpm deploy --filter="api" --prod /api
 
 # Start api
