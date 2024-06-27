@@ -168,6 +168,10 @@ export const statementsRoute = new Hono<AuthEnv>()
 
 
             const browser = await launch({
+                executablePath: '/usr/bin/chromium-browser',
+                args: [
+                    '--no-sandbox'
+                ],
                 headless: true,
                 defaultViewport: {
                     width: 2480,
