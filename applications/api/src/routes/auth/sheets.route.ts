@@ -164,6 +164,12 @@ export const sheetsRoute = new Hono<AuthEnv>()
 
 
             const browser = await launch({
+                executablePath: '/usr/bin/chromium-browser',
+                args: [
+                    '--no-sandbox',
+                    '--disable-gpu',
+                    '--disable-dev-shm-usage'
+                ],
                 headless: true,
                 defaultViewport: {
                     width: 2480,
