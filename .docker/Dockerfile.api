@@ -4,8 +4,6 @@ RUN corepack enable
 
 # Install chrome
 RUN apk update && apk upgrade && apk --no-cache add chromium
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
-ENV CHROME_BIN /usr/bin/chromium-browser
 
 # Build the monorepo
 FROM base AS build
