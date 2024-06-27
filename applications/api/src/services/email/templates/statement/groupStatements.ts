@@ -24,12 +24,8 @@ export function groupStatements(statements: v.Output<typeof auth.statements.get.
                     balance
                         .filter((_balance) => _balance.account.id === accountStatement.idAccount)
                         .forEach((_balance) => {
-                            if (_balance.account.number.toString().at(0) === "6") {
-                                net += _balance.balance.debit - _balance.balance.credit
-                            }
-                            if (_balance.account.number.toString().at(0) === "7") {
-                                net += _balance.balance.credit - _balance.balance.debit
-                            }
+                            if (_balance.account.number.toString().at(0) === "6") net += _balance.balance.debit - _balance.balance.credit
+                            if (_balance.account.number.toString().at(0) === "7") net += _balance.balance.credit - _balance.balance.debit
                         })
                 })
             }
@@ -43,7 +39,7 @@ export function groupStatements(statements: v.Output<typeof auth.statements.get.
                 id: statement.id,
                 number: statement.number,
                 label: statement.label,
-                net: net,
+                net: net + Number(statement.addedNetAmount),
                 statements: childrenStatements
             })
         })
