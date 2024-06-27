@@ -21,7 +21,9 @@ export const InputPrice = forwardRef<HTMLInputElement, InputPrice>(
 
         function output(value: number | string | undefined) {
             if (value === undefined) return value
-            return value
+            const numberValue = Number(value)
+            if (!numberValue) return value
+            return numberValue
         }
 
         return (
@@ -36,18 +38,18 @@ export const InputPrice = forwardRef<HTMLInputElement, InputPrice>(
                     blocks={{
                         n: {
                             mask: IMask.MaskedNumber,
-                            from: 0,
+                            // from: 0,
                             scale: 2
                         }
                     }}
                     autofix={false}
                     lazy={false}
-                    overwrite={true}
+                    overwrite={false}
                     eager="append"
                     unmask={"typed"}
                     // onClick={(event) => { event.currentTarget.select() }}
                     // onFocus={(event) => { event.currentTarget.setSelectionRange(-1, -1) }}
-                    onAccept={(value) => props.onChange(output(Number(value)))}
+                    onAccept={(value) => props.onChange(output(value))}
                     value={input(props.value)}
                     className={cn(
                         "rounded-[inherit] w-full text-base placeholder:text-neutral/25 p-2",
