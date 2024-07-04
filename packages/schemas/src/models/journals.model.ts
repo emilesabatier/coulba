@@ -11,7 +11,7 @@ export const journals = pgTable(
     "journals",
     {
         id: idColumn("id").primaryKey(),
-        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         code: text("code").notNull(),
         label: text("label").notNull(),
         lastUpdatedOn: dateTimeColumn("last_updated_on").default(sql`CURRENT_TIMESTAMP`).notNull(),

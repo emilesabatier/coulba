@@ -10,7 +10,7 @@ export const users = pgTable(
     "users",
     {
         id: idColumn("id").primaryKey(),
-        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "restrict", onUpdate: "cascade" }).notNull(),
+        idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         isAdmin: boolean("is_admin").default(false).notNull(),
         alias: text("alias"),
         email: text("email").notNull().unique(),

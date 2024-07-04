@@ -8,3 +8,5 @@ const sql = postgres(env()?.DATABASE_URL ?? "", { max: 1 })
 const db = drizzle(sql)
 
 await migrate(db, { migrationsFolder: "drizzle" })
+
+await sql.end()

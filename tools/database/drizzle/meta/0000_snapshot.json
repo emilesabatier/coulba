@@ -1,0 +1,2264 @@
+{
+  "id": "67b27a1a-3e7d-449e-b10b-a5a72ca2fd81",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.account_sheets": {
+      "name": "account_sheets",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_account": {
+          "name": "id_account",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_sheet": {
+          "name": "id_sheet",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "flow": {
+          "name": "flow",
+          "type": "account_sheet_flow",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_allowance": {
+          "name": "is_allowance",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "account_sheets_id_organization_organizations_id_fk": {
+          "name": "account_sheets_id_organization_organizations_id_fk",
+          "tableFrom": "account_sheets",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_sheets_id_year_years_id_fk": {
+          "name": "account_sheets_id_year_years_id_fk",
+          "tableFrom": "account_sheets",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_sheets_id_account_accounts_id_fk": {
+          "name": "account_sheets_id_account_accounts_id_fk",
+          "tableFrom": "account_sheets",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "id_account"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_sheets_id_sheet_sheets_id_fk": {
+          "name": "account_sheets_id_sheet_sheets_id_fk",
+          "tableFrom": "account_sheets",
+          "tableTo": "sheets",
+          "columnsFrom": [
+            "id_sheet"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_sheets_last_updated_by_users_id_fk": {
+          "name": "account_sheets_last_updated_by_users_id_fk",
+          "tableFrom": "account_sheets",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "account_sheets_created_by_users_id_fk": {
+          "name": "account_sheets_created_by_users_id_fk",
+          "tableFrom": "account_sheets",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "account_sheets_id_organization_id_year_id_account_id_sheet_unique": {
+          "name": "account_sheets_id_organization_id_year_id_account_id_sheet_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "id_account",
+            "id_sheet"
+          ]
+        }
+      }
+    },
+    "public.account_statements": {
+      "name": "account_statements",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_account": {
+          "name": "id_account",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_statement": {
+          "name": "id_statement",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "account_statements_id_organization_organizations_id_fk": {
+          "name": "account_statements_id_organization_organizations_id_fk",
+          "tableFrom": "account_statements",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_statements_id_year_years_id_fk": {
+          "name": "account_statements_id_year_years_id_fk",
+          "tableFrom": "account_statements",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_statements_id_account_accounts_id_fk": {
+          "name": "account_statements_id_account_accounts_id_fk",
+          "tableFrom": "account_statements",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "id_account"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_statements_id_statement_statements_id_fk": {
+          "name": "account_statements_id_statement_statements_id_fk",
+          "tableFrom": "account_statements",
+          "tableTo": "statements",
+          "columnsFrom": [
+            "id_statement"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "account_statements_last_updated_by_users_id_fk": {
+          "name": "account_statements_last_updated_by_users_id_fk",
+          "tableFrom": "account_statements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "account_statements_created_by_users_id_fk": {
+          "name": "account_statements_created_by_users_id_fk",
+          "tableFrom": "account_statements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "account_statements_id_organization_id_year_id_account_id_statement_unique": {
+          "name": "account_statements_id_organization_id_year_id_account_id_statement_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "id_account",
+            "id_statement"
+          ]
+        }
+      }
+    },
+    "public.accounts": {
+      "name": "accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_parent": {
+          "name": "id_parent",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_mandatory": {
+          "name": "is_mandatory",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_class": {
+          "name": "is_class",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_selectable": {
+          "name": "is_selectable",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_default": {
+          "name": "is_default",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "account_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scope": {
+          "name": "scope",
+          "type": "account_scope",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "accounts_id_organization_organizations_id_fk": {
+          "name": "accounts_id_organization_organizations_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "accounts_id_year_years_id_fk": {
+          "name": "accounts_id_year_years_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "accounts_last_updated_by_users_id_fk": {
+          "name": "accounts_last_updated_by_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "accounts_created_by_users_id_fk": {
+          "name": "accounts_created_by_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "accounts_id_organization_id_year_number_unique": {
+          "name": "accounts_id_organization_id_year_number_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "number"
+          ]
+        }
+      }
+    },
+    "public.attachments": {
+      "name": "attachments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reference": {
+          "name": "reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "storage_key": {
+          "name": "storage_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "size": {
+          "name": "size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "attachments_id_organization_organizations_id_fk": {
+          "name": "attachments_id_organization_organizations_id_fk",
+          "tableFrom": "attachments",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "attachments_id_year_years_id_fk": {
+          "name": "attachments_id_year_years_id_fk",
+          "tableFrom": "attachments",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "attachments_last_updated_by_users_id_fk": {
+          "name": "attachments_last_updated_by_users_id_fk",
+          "tableFrom": "attachments",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "attachments_created_by_users_id_fk": {
+          "name": "attachments_created_by_users_id_fk",
+          "tableFrom": "attachments",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "attachments_id_organization_id_year_reference_unique": {
+          "name": "attachments_id_organization_id_year_reference_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "reference"
+          ]
+        }
+      }
+    },
+    "public.computation_statements": {
+      "name": "computation_statements",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_computation": {
+          "name": "id_computation",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_statement": {
+          "name": "id_statement",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "operation": {
+          "name": "operation",
+          "type": "computation_statement_operation",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "computation_statements_id_organization_organizations_id_fk": {
+          "name": "computation_statements_id_organization_organizations_id_fk",
+          "tableFrom": "computation_statements",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "computation_statements_id_year_years_id_fk": {
+          "name": "computation_statements_id_year_years_id_fk",
+          "tableFrom": "computation_statements",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "computation_statements_id_computation_computations_id_fk": {
+          "name": "computation_statements_id_computation_computations_id_fk",
+          "tableFrom": "computation_statements",
+          "tableTo": "computations",
+          "columnsFrom": [
+            "id_computation"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "computation_statements_id_statement_statements_id_fk": {
+          "name": "computation_statements_id_statement_statements_id_fk",
+          "tableFrom": "computation_statements",
+          "tableTo": "statements",
+          "columnsFrom": [
+            "id_statement"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "computation_statements_last_updated_by_users_id_fk": {
+          "name": "computation_statements_last_updated_by_users_id_fk",
+          "tableFrom": "computation_statements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "computation_statements_created_by_users_id_fk": {
+          "name": "computation_statements_created_by_users_id_fk",
+          "tableFrom": "computation_statements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "computation_statements_id_organization_id_year_id_computation_id_statement_unique": {
+          "name": "computation_statements_id_organization_id_year_id_computation_id_statement_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "id_computation",
+            "id_statement"
+          ]
+        }
+      }
+    },
+    "public.computations": {
+      "name": "computations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "computations_id_organization_organizations_id_fk": {
+          "name": "computations_id_organization_organizations_id_fk",
+          "tableFrom": "computations",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "computations_id_year_years_id_fk": {
+          "name": "computations_id_year_years_id_fk",
+          "tableFrom": "computations",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "computations_last_updated_by_users_id_fk": {
+          "name": "computations_last_updated_by_users_id_fk",
+          "tableFrom": "computations",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "computations_created_by_users_id_fk": {
+          "name": "computations_created_by_users_id_fk",
+          "tableFrom": "computations",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "computations_id_organization_id_year_number_unique": {
+          "name": "computations_id_organization_id_year_number_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "number"
+          ]
+        }
+      }
+    },
+    "public.journals": {
+      "name": "journals",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "journals_id_organization_organizations_id_fk": {
+          "name": "journals_id_organization_organizations_id_fk",
+          "tableFrom": "journals",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "journals_last_updated_by_users_id_fk": {
+          "name": "journals_last_updated_by_users_id_fk",
+          "tableFrom": "journals",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "journals_created_by_users_id_fk": {
+          "name": "journals_created_by_users_id_fk",
+          "tableFrom": "journals",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "journals_id_organization_code_unique": {
+          "name": "journals_id_organization_code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "code"
+          ]
+        }
+      }
+    },
+    "public.organizations": {
+      "name": "organizations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "scope": {
+          "name": "scope",
+          "type": "organization_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "siren": {
+          "name": "siren",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "api_key_hash": {
+          "name": "api_key_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "organizations_last_updated_by_users_id_fk": {
+          "name": "organizations_last_updated_by_users_id_fk",
+          "tableFrom": "organizations",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "organizations_api_key_hash_unique": {
+          "name": "organizations_api_key_hash_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "api_key_hash"
+          ]
+        }
+      }
+    },
+    "public.records": {
+      "name": "records",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_journal": {
+          "name": "id_journal",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_attachment": {
+          "name": "id_attachment",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_automatic": {
+          "name": "id_automatic",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_validated": {
+          "name": "is_validated",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_computed": {
+          "name": "is_computed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "validated_on": {
+          "name": "validated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "records_id_organization_organizations_id_fk": {
+          "name": "records_id_organization_organizations_id_fk",
+          "tableFrom": "records",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "records_id_year_years_id_fk": {
+          "name": "records_id_year_years_id_fk",
+          "tableFrom": "records",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "records_id_journal_journals_id_fk": {
+          "name": "records_id_journal_journals_id_fk",
+          "tableFrom": "records",
+          "tableTo": "journals",
+          "columnsFrom": [
+            "id_journal"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "records_id_attachment_attachments_id_fk": {
+          "name": "records_id_attachment_attachments_id_fk",
+          "tableFrom": "records",
+          "tableTo": "attachments",
+          "columnsFrom": [
+            "id_attachment"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "records_last_updated_by_users_id_fk": {
+          "name": "records_last_updated_by_users_id_fk",
+          "tableFrom": "records",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "records_created_by_users_id_fk": {
+          "name": "records_created_by_users_id_fk",
+          "tableFrom": "records",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.rows": {
+      "name": "rows",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_record": {
+          "name": "id_record",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_account": {
+          "name": "id_account",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "debit": {
+          "name": "debit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "credit": {
+          "name": "credit",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "rows_id_organization_organizations_id_fk": {
+          "name": "rows_id_organization_organizations_id_fk",
+          "tableFrom": "rows",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "rows_id_year_years_id_fk": {
+          "name": "rows_id_year_years_id_fk",
+          "tableFrom": "rows",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "rows_id_record_records_id_fk": {
+          "name": "rows_id_record_records_id_fk",
+          "tableFrom": "rows",
+          "tableTo": "records",
+          "columnsFrom": [
+            "id_record"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "rows_id_account_accounts_id_fk": {
+          "name": "rows_id_account_accounts_id_fk",
+          "tableFrom": "rows",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "id_account"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "cascade"
+        },
+        "rows_last_updated_by_users_id_fk": {
+          "name": "rows_last_updated_by_users_id_fk",
+          "tableFrom": "rows",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "rows_created_by_users_id_fk": {
+          "name": "rows_created_by_users_id_fk",
+          "tableFrom": "rows",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.sessions": {
+      "name": "sessions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_user": {
+          "name": "id_user",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_on": {
+          "name": "expires_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sessions_id_user_users_id_fk": {
+          "name": "sessions_id_user_users_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "id_user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.sheets": {
+      "name": "sheets",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_parent": {
+          "name": "id_parent",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_default": {
+          "name": "is_default",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "side": {
+          "name": "side",
+          "type": "sheet_side",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "added_gross_amount": {
+          "name": "added_gross_amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "added_allowance_amount": {
+          "name": "added_allowance_amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sheets_id_organization_organizations_id_fk": {
+          "name": "sheets_id_organization_organizations_id_fk",
+          "tableFrom": "sheets",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "sheets_id_year_years_id_fk": {
+          "name": "sheets_id_year_years_id_fk",
+          "tableFrom": "sheets",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "sheets_last_updated_by_users_id_fk": {
+          "name": "sheets_last_updated_by_users_id_fk",
+          "tableFrom": "sheets",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "sheets_created_by_users_id_fk": {
+          "name": "sheets_created_by_users_id_fk",
+          "tableFrom": "sheets",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sheets_id_organization_id_year_side_number_unique": {
+          "name": "sheets_id_organization_id_year_side_number_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "side",
+            "number"
+          ]
+        }
+      }
+    },
+    "public.statements": {
+      "name": "statements",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_year": {
+          "name": "id_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_parent": {
+          "name": "id_parent",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_default": {
+          "name": "is_default",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "added_net_amount": {
+          "name": "added_net_amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "statements_id_organization_organizations_id_fk": {
+          "name": "statements_id_organization_organizations_id_fk",
+          "tableFrom": "statements",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "statements_id_year_years_id_fk": {
+          "name": "statements_id_year_years_id_fk",
+          "tableFrom": "statements",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "statements_last_updated_by_users_id_fk": {
+          "name": "statements_last_updated_by_users_id_fk",
+          "tableFrom": "statements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "statements_created_by_users_id_fk": {
+          "name": "statements_created_by_users_id_fk",
+          "tableFrom": "statements",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "statements_id_organization_id_year_id_parent_number_unique": {
+          "name": "statements_id_organization_id_year_id_parent_number_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_year",
+            "id_parent",
+            "number"
+          ]
+        }
+      }
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_admin": {
+          "name": "is_admin",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "alias": {
+          "name": "alias",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_email_validated": {
+          "name": "is_email_validated",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email_to_validate": {
+          "name": "email_to_validate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_token": {
+          "name": "email_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_token_expires_on": {
+          "name": "email_token_expires_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password_salt": {
+          "name": "password_salt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "invitation_token": {
+          "name": "invitation_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_invitation_validated": {
+          "name": "is_invitation_validated",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "invitation_token_expires_on": {
+          "name": "invitation_token_expires_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "invitation_last_sent_on": {
+          "name": "invitation_last_sent_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "users_id_organization_organizations_id_fk": {
+          "name": "users_id_organization_organizations_id_fk",
+          "tableFrom": "users",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "users_last_updated_by_users_id_fk": {
+          "name": "users_last_updated_by_users_id_fk",
+          "tableFrom": "users",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "users_created_by_users_id_fk": {
+          "name": "users_created_by_users_id_fk",
+          "tableFrom": "users",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "public.years": {
+      "name": "years",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "id_organization": {
+          "name": "id_organization",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id_previous_year": {
+          "name": "id_previous_year",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_selected": {
+          "name": "is_selected",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_minimal_system": {
+          "name": "is_minimal_system",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_closed": {
+          "name": "is_closed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "closed_on": {
+          "name": "closed_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "starting_on": {
+          "name": "starting_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ending_on": {
+          "name": "ending_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_updated_on": {
+          "name": "last_updated_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "created_on": {
+          "name": "created_on",
+          "type": "timestamp(0) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "last_updated_by": {
+          "name": "last_updated_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "years_id_organization_organizations_id_fk": {
+          "name": "years_id_organization_organizations_id_fk",
+          "tableFrom": "years",
+          "tableTo": "organizations",
+          "columnsFrom": [
+            "id_organization"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "years_id_previous_year_years_id_fk": {
+          "name": "years_id_previous_year_years_id_fk",
+          "tableFrom": "years",
+          "tableTo": "years",
+          "columnsFrom": [
+            "id_previous_year"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "years_last_updated_by_users_id_fk": {
+          "name": "years_last_updated_by_users_id_fk",
+          "tableFrom": "years",
+          "tableTo": "users",
+          "columnsFrom": [
+            "last_updated_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        },
+        "years_created_by_users_id_fk": {
+          "name": "years_created_by_users_id_fk",
+          "tableFrom": "years",
+          "tableTo": "users",
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "years_id_organization_id_previous_year_is_selected_unique": {
+          "name": "years_id_organization_id_previous_year_is_selected_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id_organization",
+            "id_previous_year",
+            "is_selected"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {
+    "public.account_sheet_flow": {
+      "name": "account_sheet_flow",
+      "schema": "public",
+      "values": [
+        "debit",
+        "credit"
+      ]
+    },
+    "public.account_scope": {
+      "name": "account_scope",
+      "schema": "public",
+      "values": [
+        "company",
+        "association"
+      ]
+    },
+    "public.account_type": {
+      "name": "account_type",
+      "schema": "public",
+      "values": [
+        "sheet",
+        "statement",
+        "special"
+      ]
+    },
+    "public.computation_statement_operation": {
+      "name": "computation_statement_operation",
+      "schema": "public",
+      "values": [
+        "plus",
+        "minus"
+      ]
+    },
+    "public.organization_type": {
+      "name": "organization_type",
+      "schema": "public",
+      "values": [
+        "company",
+        "association"
+      ]
+    },
+    "public.sheet_side": {
+      "name": "sheet_side",
+      "schema": "public",
+      "values": [
+        "asset",
+        "liability"
+      ]
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

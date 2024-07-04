@@ -1970,7 +1970,7 @@ export const defaultCompanySheets: DefaultSheet[] = [
             },
             {
                 number: 129,
-                flow: "credit",
+                flow: "debit",
                 isAllowance: false
             }
         ]
