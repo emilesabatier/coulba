@@ -44,6 +44,7 @@ export const checkAuth: MiddlewareHandler<AuthEnv> = async (c, next) => {
         c.redirect(baseUrl)
         throw new HTTPException(401, { message: "Session non trouvée" })
     }
+    if (!readSession.idUser) throw new HTTPException(401, { message: "Session non trouvée" })
 
     const [readUser] = await db
         .select()
