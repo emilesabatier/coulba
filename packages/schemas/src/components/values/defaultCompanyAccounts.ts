@@ -9,7 +9,7 @@ export type DefaultAccount = {
     label: string,
 }
 
-export const companyAccounts: DefaultAccount[] = [
+export const defaultCompanyAccounts: DefaultAccount[] = [
     {
         number: 1,
         isMandatory: true,
@@ -1894,7 +1894,7 @@ export const companyAccounts: DefaultAccount[] = [
         number: 297,
         isMandatory: true,
         isClass: false,
-        isSelectable: true,
+        isSelectable: false,
         type: "sheet",
         label: "Dépréciations des autres immobilisations financières"
     },

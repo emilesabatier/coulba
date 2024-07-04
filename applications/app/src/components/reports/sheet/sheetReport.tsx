@@ -24,11 +24,13 @@ export function SheetReport() {
 
     const balance = getBalance(rowsData, accounts.data ?? [])
 
-    const sheetAssets = groupSheetsAssets((sheets.data ?? []).filter((sheet) => sheet.side === "asset"), balance, null)
-        .sort((a, b) => a.number - b.number)
+    const sheetsData = (sheets.data ?? [])
 
-    const sheetLiabilities = groupSheetsLiabilities((sheets.data ?? []).filter((sheet) => sheet.side === "liability"), balance, null)
-        .sort((a, b) => a.label.localeCompare(b.label))
+    const sheetAssets = groupSheetsAssets(sheetsData.filter((sheet) => sheet.side === "asset"), balance, null)
+        .sort((a, b) => a.number.toString().localeCompare(b.number.toString()))
+
+    const sheetLiabilities = groupSheetsLiabilities(sheetsData.filter((sheet) => sheet.side === "liability"), balance, null)
+        .sort((a, b) => a.number.toString().localeCompare(b.number.toString()))
 
     const totalSheetAsset = sheetAssets.reduce<number>((previous, entry) => previous + Number(entry.net), 0)
 

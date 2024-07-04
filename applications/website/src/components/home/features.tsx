@@ -77,19 +77,19 @@ export function Features() {
                 <h2 className="text-3xl leading-none uppercase text-center">Ce que nous proposons</h2>
                 <p className="text-lg text-neutral/75 text-balance text-center">Pour avoir un point de vue global et savoir si l'application répond à vos besoins.</p>
             </div>
-            <div className="w-full h-full grid grid-cols-2 border-t border-neutral/20">
+            <div className="w-full h-full grid grid-cols-1 border border-neutral/20 rounded-md">
                 {
                     features.map((feature) => {
                         return (
                             <div className={cn(
-                                "min-w-[300px] w-full p-3 hover:bg-neutral/5 flex flex-col justify-start items-start gap-3",
-                                "border-neutral/20 odd:border-x even:border-r border-b"
+                                "min-w-[300px] w-full p-6 hover:bg-neutral/5 flex flex-col justify-start items-start gap-3",
+                                "border-neutral/20 odd:border-r border-b last:border-b-0"
                             )}>
                                 <div className="flex justify-start items-center gap-1.5">
                                     {feature.icon}
-                                    <h3 className="text-lg leading-none uppercase whitespace-nowrap">{feature.title}</h3>
+                                    <h3 className="text-lg text-neutral leading-none uppercase whitespace-nowrap">{feature.title}</h3>
                                 </div>
-                                <p className="text-neutral/75">{feature.description}</p>
+                                <p className="text-neutral/75 leading-none">{feature.description}</p>
                             </div>
                         )
                     })

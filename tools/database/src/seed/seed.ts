@@ -1,5 +1,5 @@
-import { companyAccounts, DefaultComputation, defaultComputations, defaultJournals, DefaultSheet, defaultSheets, defaultStatements } from '@coulba/schemas/components'
-import { accounts, accountSheets, accountStatements, computations, computationStatements, journals, organizations, records, rows, sheets, statements, users, years } from '@coulba/schemas/models'
+import { DefaultComputation, DefaultSheet, defaultCompanyAccounts, defaultCompanySheets, defaultCompanyStatements, defaultComputations, defaultJournals } from '@coulba/schemas/components'
+import { accountSheets, accountStatements, accounts, computationStatements, computations, journals, organizations, records, rows, sheets, statements, users, years } from '@coulba/schemas/models'
 import { generateId } from '@coulba/schemas/services'
 import { randFirstName } from '@ngneat/falso'
 import { pbkdf2Sync, randomBytes } from "crypto"
@@ -111,7 +111,7 @@ async function seed() {
 
                 // Accounts
                 console.log("Add accounts")
-                let newAccounts: (typeof accounts.$inferInsert)[] = companyAccounts.map((_account) => ({
+                let newAccounts: (typeof accounts.$inferInsert)[] = defaultCompanyAccounts.map((_account) => ({
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: year.id,
@@ -137,7 +137,7 @@ async function seed() {
 
                 // Sheets
                 console.log("Add sheets")
-                let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultSheets.map((_sheet) => ({
+                let newSheets: (typeof sheets.$inferInsert & { numberParent: number | undefined, accounts: DefaultSheet["accounts"][number][] })[] = defaultCompanySheets.map((_sheet) => ({
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: year.id,
@@ -185,7 +185,7 @@ async function seed() {
 
                 // Statements
                 console.log("Add statements")
-                let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultStatements.map((_statement) => ({
+                let newStatements: (typeof statements.$inferInsert & { numberParent: number | undefined, accounts: number[] })[] = defaultCompanyStatements.map((_statement) => ({
                     id: generateId(),
                     idOrganization: newOrganization.id,
                     idYear: year.id,

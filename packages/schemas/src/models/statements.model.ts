@@ -27,7 +27,7 @@ export const statements = pgTable(
         createdBy: idColumn("created_by").references(() => users.id, { onDelete: "set null", onUpdate: "cascade" }),
     },
     (t) => ({
-        uniqueConstraint: unique().on(t.idOrganization, t.idYear, t.number)
+        uniqueConstraint: unique().on(t.idOrganization, t.idYear, t.idParent, t.number)
     })
 )
 
