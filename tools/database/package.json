@@ -7,7 +7,7 @@
         "generate": "pnpm drizzle-kit generate --config=drizzle.config.ts",
         "push": "pnpm drizzle-kit push --config=drizzle.config.ts",
         "pull": "pnpm drizzle-kit introspect --config=drizzle.config.ts",
-        "migrate": "tsx ./src/migrate.ts",
+        "migrate": "pnpm drizzle-kit migrate --config=drizzle.config.ts",
         "seed": "tsx ./src/seed/seed.ts",
         "clear": "tsx ./src/clearDB.ts && pnpm run push",
         "reset": "tsx ./src/clearDB.ts && pnpm run push && tsx ./src/seed/seed.ts",
