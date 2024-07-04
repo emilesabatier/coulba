@@ -12,7 +12,7 @@ export type DefaultSheet = {
     }>
 }
 
-export const defaultSheets: DefaultSheet[] = [
+export const defaultCompanySheets: DefaultSheet[] = [
     {
         side: "asset",
         number: 1,
@@ -129,6 +129,21 @@ export const defaultSheets: DefaultSheet[] = [
             },
             {
                 number: 2905,
+                flow: "credit",
+                isAllowance: true
+            },
+            {
+                number: 229,
+                flow: "debit",
+                isAllowance: true
+            },
+            {
+                number: 282,
+                flow: "credit",
+                isAllowance: true
+            },
+            {
+                number: 292,
                 flow: "credit",
                 isAllowance: true
             }
@@ -807,6 +822,11 @@ export const defaultSheets: DefaultSheet[] = [
                 number: 2976,
                 flow: "credit",
                 isAllowance: true
+            },
+            {
+                number: 278,
+                flow: "debit",
+                isAllowance: false
             }
         ]
     },
@@ -1317,6 +1337,16 @@ export const defaultSheets: DefaultSheet[] = [
             },
             {
                 number: 467,
+                flow: "debit",
+                isAllowance: false
+            },
+            {
+                number: 478,
+                flow: "debit",
+                isAllowance: false
+            },
+            {
+                number: 4781,
                 flow: "debit",
                 isAllowance: false
             },
@@ -2202,6 +2232,11 @@ export const defaultSheets: DefaultSheet[] = [
         numberParent: 3,
         accounts: [
             {
+                number: 162,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
                 number: 165,
                 flow: "credit",
                 isAllowance: false
@@ -2238,6 +2273,26 @@ export const defaultSheets: DefaultSheet[] = [
             },
             {
                 number: 1668,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 1671,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 16718,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 1674,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 16748,
                 flow: "credit",
                 isAllowance: false
             },
@@ -2644,6 +2699,41 @@ export const defaultSheets: DefaultSheet[] = [
         label: "Autres dettes",
         numberParent: 3,
         accounts: [
+            {
+                number: 171,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 174,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 178,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 181,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 186,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 187,
+                flow: "credit",
+                isAllowance: false
+            },
+            {
+                number: 188,
+                flow: "credit",
+                isAllowance: false
+            },
             {
                 number: 4196,
                 flow: "credit",

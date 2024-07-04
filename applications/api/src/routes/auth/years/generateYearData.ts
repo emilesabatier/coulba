@@ -1,4 +1,4 @@
-import { DefaultComputation, DefaultSheet, companyAccounts, defaultComputations, defaultSheets, defaultStatements } from "@coulba/schemas/components"
+import { DefaultComputation, DefaultSheet, defaultAssociationAccounts, defaultAssociationSheets, defaultAssociationStatements, defaultCompanyAccounts, defaultCompanySheets, defaultCompanyStatements, defaultComputations } from "@coulba/schemas/components"
 import { accountSheets, accountStatements, accounts, computationStatements, computations, sheets, statements } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
@@ -16,8 +16,9 @@ export async function generateYearData(props: GenerateYearData) {
 
     // Add accounts
     let newAccounts: Array<(typeof accounts.$inferInsert)> = []
-    // const defaultAccounts = (c.var.organization.scope === "association") ? associationAccounts : companyAccounts
-    const defaultAccounts = companyAccounts
+    const defaultAccounts = (props.organization.scope === "association") ? defaultAssociationAccounts : defaultCompanyAccounts
+    const defaultSheets = (props.organization.scope === "association") ? defaultAssociationSheets : defaultCompanySheets
+    const defaultStatements = (props.organization.scope === "association") ? defaultAssociationStatements : defaultCompanyStatements
 
     defaultAccounts
         .filter((account) => {
