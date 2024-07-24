@@ -3806,7 +3806,7 @@ export const defaultAssociationAccounts: DefaultAccount[] = [
         number: 53,
         isMandatory: true,
         isClass: true,
-        isSelectable: false,
+        isSelectable: true,
         type: "sheet",
         label: "Caisse"
     },

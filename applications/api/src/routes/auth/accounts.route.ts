@@ -84,8 +84,13 @@ export const accountsRoute = new Hono<AuthEnv>()
                 .update(accounts)
                 .set({
                     idParent: body.idParent,
+                    isClass: body.isClass ?? undefined,
+                    isSelectable: body.isSelectable ?? undefined,
+                    isDefault: false,
                     label: body.label,
                     number: body.number,
+                    type: body.type,
+                    isMandatory: true,
                     lastUpdatedOn: new Date().toISOString(),
                     lastUpdatedBy: c.var.user.id
                 })
