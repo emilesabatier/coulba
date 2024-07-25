@@ -94,6 +94,7 @@ export function CreateAccountForm() {
                                     <AccountCombobox
                                         value={field.value}
                                         onChange={field.onChange}
+                                        keepAll
                                     />
                                 </FormControl>
                                 <FormError />
