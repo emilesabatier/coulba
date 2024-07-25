@@ -12,6 +12,7 @@ type AccountCombobox = {
     filter?: (value: v.Output<typeof auth.accounts.get.return>) => boolean
     isDisabled?: boolean
     autoFocus?: boolean
+    keepAll?: boolean
 }
 
 export function AccountCombobox(props: AccountCombobox) {
@@ -25,7 +26,7 @@ export function AccountCombobox(props: AccountCombobox) {
         .map((x) => ({
             key: x.id,
             label: formatAccount(x),
-            disabled: !x.isSelectable
+            disabled: !props.keepAll ? !x.isSelectable : false
         }))
         .sort((a, b) => a.label.localeCompare(b.label))
 
