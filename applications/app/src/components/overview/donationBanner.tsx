@@ -21,7 +21,7 @@ export function DonationBanner() {
                     <IconExternalLink size={16} />
                 </a>
                 <a
-                    href="https://donate.stripe.com/6oE8xg5PV5EocWAfYY"
+                    href="https://buy.stripe.com/6oE8xg5PV5EocWAfYY"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Soutenir"
