@@ -6,6 +6,7 @@ import { auth } from "@coulba/schemas/routes"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
+import { useCurrentYear } from "../../../contexts/currentYear/useCurrentYear"
 import { queryClient } from "../../../contexts/state/queryClient"
 import { updateYearRoute } from "../../../routes/auth/configuration/years/updateYear.route"
 import { router } from "../../../routes/router"
@@ -18,6 +19,7 @@ import { YearCombobox } from "../input/yearCombobox"
 
 export function UpdateYearForm() {
     const { idYear } = useParams({ from: updateYearRoute.id })
+    const currentYear = useCurrentYear()
     const year = useQuery(yearOptions(idYear))
     const mutation = useMutation({ mutationFn: updateYear })
 
@@ -38,6 +40,7 @@ export function UpdateYearForm() {
                 if (!response) return false
 
                 await queryClient.invalidateQueries(yearsOptions)
+                await currentYear.mutate()
                 router.navigate({ to: "/configuration/exercices" })
                 toast({ title: "Exercice mis à jour", variant: "success" })
 

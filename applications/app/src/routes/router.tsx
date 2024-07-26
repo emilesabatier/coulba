@@ -63,7 +63,9 @@ import { updateUserRoute } from './auth/configuration/users/updateUser.route'
 import { usersLayout } from './auth/configuration/users/users.layout'
 import { usersRoute } from './auth/configuration/users/users.route'
 import { createYearRoute } from './auth/configuration/years/createYear.route'
+import { closeYearRoute } from './auth/configuration/years/patch/closeYear.route'
 import { downloadDocumentsRoute } from './auth/configuration/years/patch/downloadDocuments.route'
+import { generateClosingOperationsRoute } from './auth/configuration/years/patch/generateClosingOperations.route'
 import { openYearRoute } from './auth/configuration/years/patch/openYear.route'
 import { switchYearRoute } from './auth/configuration/years/patch/switchYear.route'
 import { updateYearRoute } from './auth/configuration/years/updateYear.route'
@@ -105,7 +107,6 @@ import { signInLayout } from './unauth/signIn/signIn.layout'
 import { signInRoute } from './unauth/signIn/signIn.route'
 import { signUpRoute } from './unauth/signUp/signUp.route'
 import { unauthLayout } from './unauth/unauth.layout'
-import { closeYearRoute } from './auth/configuration/years/patch/closeYear.route'
 
 
 const routeTree = rootLayout.addChildren([
@@ -189,6 +190,7 @@ const routeTree = rootLayout.addChildren([
                 updateYearRoute,
                 switchYearRoute,
                 closeYearRoute,
+                generateClosingOperationsRoute,
                 downloadDocumentsRoute,
                 openYearRoute
             ]),

@@ -10,7 +10,7 @@ const features = [
     },
     {
         icon: <IconBuilding />,
-        title: "Organisation",
+        title: "Pour tous",
         description: "L'application est adaptée pour les entreprises ou pour les associations."
     },
     {
@@ -20,13 +20,13 @@ const features = [
     },
     {
         icon: <IconPencilPlus />,
-        title: "Écritures",
-        description: "Ajoutez, éditez, supprimez et simulez les écritures de manière fluide et sécurisée."
+        title: "Gestion des écritures",
+        description: "Ajoutez, éditez, supprimez et simulez les écritures de manière fluide."
     },
     {
         icon: <IconFiles />,
         title: "Pièces justificatives",
-        description: "Uploadez et consultez toutes vos pièces justificatives ainsi que tout type de documents."
+        description: "Uploadez et consultez toutes vos pièces justificatives ainsi que tout autre type de documents."
     },
     {
         icon: <IconReportAnalytics />,
@@ -56,17 +56,17 @@ const features = [
     {
         icon: <IconLock />,
         title: "RGPD",
-        description: "Seules certaines données sont collectées et dans un seul but d'utilisation interne d'amélioration de l'application. Elles ne seront jamais partagées ou vendues à un tiers."
+        description: "Seules les données que vous saisissez sont enregistrées. Elles ne seront jamais partagées ou vendues à un tiers."
     },
     {
         icon: <IconUsersGroup />,
-        title: "Collaboratif",
-        description: "L'application est améliorée en fonction de vos retours. Une documentation ouverte est disponible publiquement."
+        title: "Amélioration collaborative",
+        description: "L'application est améliorée en fonction de vos retours."
     },
     {
         icon: <IconPigMoney />,
-        title: "Aucun frais",
-        description: "L'utilisation de l'application est gratuite."
+        title: "Un prix adapté",
+        description: "L'application est soumise à un tarif libre. Vous pouvez l'utiliser gratuitement ou nous aider à maintenir la solution, en fonction de vos moyens."
     }
 ]
 

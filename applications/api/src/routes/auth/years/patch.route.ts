@@ -1,7 +1,7 @@
 import { accounts, records, rows, years } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { generateId } from "@coulba/schemas/services"
-import { and, eq, sql } from "drizzle-orm"
+import { and, eq, not } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
@@ -275,7 +275,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
             const [updateYear] = await db
                 .update(years)
                 .set({
-                    isClosed: Boolean(sql`${!years.isClosed}`),
+                    isClosed: not(years.isClosed),
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
