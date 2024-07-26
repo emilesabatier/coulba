@@ -120,7 +120,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                     }
 
                     account.rows.forEach((row) => {
-                        if (!row.record.isValidated) return
+                        if (!row.record.isComputed) return
                         sum.debit += Number(row.debit)
                         sum.credit += Number(row.credit)
                     })
@@ -235,7 +235,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         credit: 0
                     }
                     account.rows.forEach((row) => {
-                        if (!row.record.isValidated) return
+                        if (!row.record.isComputed) return
                         sum.debit += Number(row.debit)
                         sum.credit += Number(row.credit)
                     })
