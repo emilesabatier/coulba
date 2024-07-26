@@ -47,7 +47,7 @@ export function PricingText() {
                     Vous pouvez nous soutenir financièrement en cliquant sur le lien suivant.
                 </Text.Paragraph>
                 <a
-                    href="https://donate.stripe.com/6oE8xg5PV5EocWAfYY"
+                    href="https://buy.stripe.com/6oE8xg5PV5EocWAfYY"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-fit"
