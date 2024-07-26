@@ -10,7 +10,9 @@ export function PricingText() {
                     Quel est le prix ?
                 </Text.Title>
                 <Text.Paragraph>
-                    L'application est <b>gratuite</b> d'utilisation.
+                    L'application est soumise à un <b>tarif libre</b>.
+                    <br />
+                    Vous pouvez l'utiliser gratuitement ou nous soutenir en fonction de vos moyens et de l'évolution de votre entreprise.
                 </Text.Paragraph>
             </Text.Section>
             <Text.Section>
@@ -18,9 +20,9 @@ export function PricingText() {
                     Pourquoi ?
                 </Text.Title>
                 <Text.Paragraph>
-                    La comptabilité est une pierre fondamentale de la vie d'une entreprise. Nous sommes convaincus qu'en deça d'une certaine taille, une entreprise peut gérer sa comptabilité en interne.
+                    La comptabilité est une pierre fondamentale de la vie d'une entreprise. Nous sommes convaincus qu'en deçà d'une certaine taille, une entreprise/association peut gérer sa comptabilité en interne. En plus de réaliser des économies, cela permet de bien comprendre les flux économiques et financiers.
                     <br />
-                    En plus de réaliser des économies, cela permet de bien comprendre les flux économiques et financiers.
+                    Au début de sa vie, une entité doit faire face à un certain nombre de charges avec des produits qui peuvent se faire attendre. Nous pensons que la comptabilité ne doit pas constituer une charge élevée pendant cette période.
                 </Text.Paragraph>
             </Text.Section>
             <Text.Section>
@@ -28,29 +30,31 @@ export function PricingText() {
                     Quel est notre modèle ?
                 </Text.Title>
                 <Text.Paragraph>
-                    Les serveurs (hébergement et  base de données) ont un coût, qui augmente avec le nombre d'utilisateurs.
+                    · Nos coûts sont principalement constitués des frais liés aux différents serveurs (hébergement et  base de données).
                     <br />
-                    Pour le moment, notre modèle repose sur le don. Il est possible que le modèle évolue si on se rend compte qu'il n'est pas viable.
+                    · Nous pensons que nous pouvons assumer ces coûts avec un soutien réparti sur l'ensemble de nos utilisateurs.
                     <br />
-                    Cependant, nous nous engageons à garder la solution gratuite et à respecter vos données.
+                    · Nous réfléchissons actuellement à une solution pour mettre en avant nos sponsors.
+                    <br />
+                    · Nous nous engageons à garder ce modèle le plus longtemps possible et à respecter vos données.
                 </Text.Paragraph>
             </Text.Section>
             <Text.Section>
                 <Text.Title>
-                    Comment faire un don ?
+                    Comment nous soutenir ?
                 </Text.Title>
                 <Text.Paragraph>
-                    Vous pouvez faire un don en cliquant sur le lien suivant.
+                    Vous pouvez nous soutenir financièrement en cliquant sur le lien suivant.
                 </Text.Paragraph>
                 <a
                     href="https://donate.stripe.com/6oE8xg5PV5EocWAfYY"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-fit"
-                    aria-label="Faire un don"
+                    aria-label="Soutenir le projet"
                 >
                     <ButtonPlainContent
-                        text="Faire un don"
+                        text="Soutenir le projet"
                         className="justify-center"
                     />
                 </a>

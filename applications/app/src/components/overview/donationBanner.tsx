@@ -6,8 +6,8 @@ export function DonationBanner() {
     return (
         <div className="border border-neutral/10 rounded-md p-3 flex flex-col justify-start items-start gap-3">
             <div className="flex flex-col justify-start items-start">
-                <h2 className="text-2xl">Donations</h2>
-                <p className="text-neutral/50">Soutenir le projet</p>
+                <h2 className="text-2xl">Soutenir le projet</h2>
+                <p className="text-neutral/50">Soutenir financièrement le projet et devenir un sponsor.</p>
             </div>
             <div className="ml-auto flex justify-end items-center gap-1.5">
                 <a
@@ -24,10 +24,10 @@ export function DonationBanner() {
                     href="https://donate.stripe.com/6oE8xg5PV5EocWAfYY"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Faire un don"
+                    aria-label="Soutenir"
                 >
                     <ButtonPlainContent
-                        text="Faire un don"
+                        text="Soutenir"
                     />
                 </a>
             </div>

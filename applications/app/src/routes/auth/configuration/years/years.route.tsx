@@ -54,11 +54,20 @@ export const yearsRoute = createRoute({
                         </div>
                         <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
                             <div className="flex flex-col justify-start items-start">
-                                <h2 className="text-2xl">Clôture de l'exercice</h2>
-                                <p className="text-neutral/50">Effectuer les opérations de clôture sur l'exercice actuellement sélectionné</p>
+                                <h2 className="text-2xl">Générer les opérations de clôture</h2>
+                                <p className="text-neutral/50">Générer les écritures de solde des comptes de bilan et de gestion</p>
+                            </div>
+                            <Link to="/configuration/exercices/generer-operations-de-cloture" className="ml-auto">
+                                <ButtonOutlineContent text="Générer les opérations" />
+                            </Link>
+                        </div>
+                        <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
+                            <div className="flex flex-col justify-start items-start">
+                                <h2 className="text-2xl">Gérer la clôture de l'exercice</h2>
+                                <p className="text-neutral/50">Clôturer/ouvrir l'exercice actuellement sélectionné</p>
                             </div>
                             <Link to="/configuration/exercices/cloture" className="ml-auto">
-                                <ButtonOutlineContent text="Clôturer l'exercice" />
+                                <ButtonOutlineContent text="Gérer la clôture" />
                             </Link>
                         </div>
                         <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
@@ -72,11 +81,11 @@ export const yearsRoute = createRoute({
                         </div>
                         <div className="w-full h-full border border-neutral/10 rounded-md p-3 flex flex-col justify-between items-start gap-3">
                             <div className="flex flex-col justify-start items-start">
-                                <h2 className="text-2xl">Ouverture de l'exercice</h2>
-                                <p className="text-neutral/50">Effectuer les opérations d'ouverture de l'exercice actuellement sélectionné</p>
+                                <h2 className="text-2xl">Générer les opérations d'ouverture</h2>
+                                <p className="text-neutral/50">Générer les opérations d'ouverture de l'exercice actuellement sélectionné</p>
                             </div>
                             <Link to="/configuration/exercices/ouverture" className="ml-auto">
-                                <ButtonOutlineContent text="Ouvrir l'exercice" />
+                                <ButtonOutlineContent text="Générer les opérations" />
                             </Link>
                         </div>
                     </Section.Item>

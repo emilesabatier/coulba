@@ -6,7 +6,7 @@ export function SupportBanner() {
     return (
         <div className="border border-neutral/10 rounded-md p-3 flex flex-col justify-start items-start gap-3">
             <div className="flex flex-col justify-start items-start">
-                <h2 className="text-2xl">Support</h2>
+                <h2 className="text-2xl">Nous contacter</h2>
                 <p className="text-neutral/50">Reporter un bug ou suggérer une amélioration</p>
             </div>
             <Link

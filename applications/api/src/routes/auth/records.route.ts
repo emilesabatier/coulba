@@ -2,7 +2,7 @@ import { records } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { recordInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
-import { and, eq, sql } from "drizzle-orm"
+import { and, eq, not } from "drizzle-orm"
 import { Hono } from 'hono'
 import { HTTPException } from "hono/http-exception"
 import { validator } from 'hono/validator'
@@ -178,7 +178,7 @@ export const recordsRoute = new Hono<AuthEnv>()
             const [computeResponse] = await db
                 .update(records)
                 .set({
-                    isComputed: Boolean(sql`${!records.isComputed}`),
+                    isComputed: not(records.isComputed),
                     lastUpdatedBy: c.var.user.id,
                     lastUpdatedOn: new Date().toISOString()
                 })
