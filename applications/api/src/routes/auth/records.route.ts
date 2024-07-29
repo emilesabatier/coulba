@@ -1,4 +1,4 @@
-import { records } from "@coulba/schemas/models"
+import { records, rows } from "@coulba/schemas/models"
 import { auth } from "@coulba/schemas/routes"
 import { recordInclude } from "@coulba/schemas/schemas"
 import { generateId } from "@coulba/schemas/services"
@@ -122,6 +122,60 @@ export const recordsRoute = new Hono<AuthEnv>()
                 .returning()
 
             return c.json(deleteRecord, 200)
+        }
+    )
+    .patch(
+        '/:idRecord/duplicate',
+        validator("param", paramsValidator(auth.records.patch.duplicate.params)),
+        async (c) => {
+            const params = c.req.valid('param')
+
+            const readRecord = await db.query.records.findFirst({
+                where: and(
+                    eq(records.idOrganization, c.var.user.idOrganization),
+                    eq(records.id, params.idRecord)
+                ),
+                columns: recordInclude,
+                with: {
+                    rows: true
+                }
+            })
+            if (!readRecord) throw new HTTPException(400, { message: "L'écriture n'a pas été trouvée" })
+
+            const [createRecord] = await db
+                .insert(records)
+                .values({
+                    id: generateId(),
+                    idOrganization: c.var.organization.id,
+                    idYear: c.var.currentYear.id,
+                    idJournal: readRecord.idJournal,
+                    idAttachment: readRecord.idAttachment,
+                    isValidated: false,
+                    isComputed: true,
+                    label: readRecord.label,
+                    date: readRecord.date,
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
+                })
+                .returning()
+
+            const newRows = readRecord.rows.map((row) => ({
+                id: generateId(),
+                idOrganization: c.var.organization.id,
+                idYear: c.var.currentYear.id,
+                idRecord: createRecord.id,
+                idAccount: row.idAccount,
+                label: row.label,
+                debit: row.debit,
+                credit: row.credit,
+                lastUpdatedBy: c.var.user.id,
+                createdBy: c.var.user.id
+            }))
+            await db
+                .insert(rows)
+                .values(newRows)
+
+            return c.json(readRecord, 200)
         }
     )
     .patch(

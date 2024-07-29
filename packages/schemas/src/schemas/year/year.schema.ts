@@ -13,7 +13,6 @@ export const yearSchema = createSelectSchema(years, {
     idPreviousYear: idSchema,
     isClosed: booleanSchema,
     isSelected: booleanSchema,
-    isMinimalSystem: booleanSchema,
     label: v.nonNullish(requiredTextSchema, "Un libellé doit être renseigné"),
     startingOn: v.nonNullish(dateTimeSchema, "Une date de début doit être renseignée"),
     endingOn: v.nonNullish(dateTimeSchema, "Une date de fin doit être renseignée"),

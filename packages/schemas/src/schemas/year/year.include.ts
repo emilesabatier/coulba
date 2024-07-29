@@ -5,7 +5,6 @@ export const yearInclude = {
     idPreviousYear: true,
     isClosed: true,
     isSelected: true,
-    isMinimalSystem: true,
     label: true,
     startingOn: true,
     endingOn: true,

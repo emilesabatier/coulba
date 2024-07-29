@@ -45,6 +45,13 @@ export async function generateLastYearData(props: GenerateLastYearData) {
     }
 
     // Add sheets
+    const currentSheets = await db
+        .select()
+        .from(sheets)
+        .where(and(
+            eq(sheets.idOrganization, props.organization.id),
+            eq(sheets.idYear, props.year.id)
+        ))
     const lastYearSheets = await db
         .select()
         .from(sheets)
@@ -52,18 +59,22 @@ export async function generateLastYearData(props: GenerateLastYearData) {
             eq(sheets.idOrganization, props.organization.id),
             eq(sheets.idYear, props.year.idPreviousYear)
         ))
-    const newSheets: Array<typeof sheets.$inferInsert> = lastYearSheets.map((sheet) => ({
-        id: generateId(),
-        idOrganization: props.organization.id,
-        idYear: props.year.id,
-        idParent: sheet.idParent,
-        isDefault: sheet.isDefault,
-        side: sheet.side,
-        number: sheet.number,
-        label: sheet.label,
-        addedGrossAmount: "0",
-        addedAllowanceAmount: "0"
-    }))
+    const newSheets: Array<typeof sheets.$inferInsert> = lastYearSheets.map((sheet) => {
+        const currentParent = currentSheets.find((x) => x.id === sheet.idParent)
+        const newParent = lastYearSheets.find((x) => x.number === currentParent?.number)
+        return ({
+            id: generateId(),
+            idOrganization: props.organization.id,
+            idYear: props.year.id,
+            idParent: newParent?.id,
+            isDefault: sheet.isDefault,
+            side: sheet.side,
+            number: sheet.number,
+            label: sheet.label,
+            addedGrossAmount: "0",
+            addedAllowanceAmount: "0"
+        })
+    })
     if (newSheets.length > 0) {
         await db
             .insert(sheets)
@@ -97,6 +108,13 @@ export async function generateLastYearData(props: GenerateLastYearData) {
 
 
     // Add statements
+    const currentStatements = await db
+        .select()
+        .from(statements)
+        .where(and(
+            eq(statements.idOrganization, props.organization.id),
+            eq(statements.idYear, props.year.id)
+        ))
     const lastYearStatements = await db
         .select()
         .from(statements)
@@ -104,16 +122,20 @@ export async function generateLastYearData(props: GenerateLastYearData) {
             eq(statements.idOrganization, props.organization.id),
             eq(statements.idYear, props.year.idPreviousYear)
         ))
-    const newStatements: Array<typeof statements.$inferInsert> = lastYearStatements.map((statement) => ({
-        id: generateId(),
-        idOrganization: props.organization.id,
-        idYear: props.year.id,
-        idParent: statement.idParent,
-        isDefault: statement.isDefault,
-        number: statement.number,
-        label: statement.label,
-        addedNetAmount: "0"
-    }))
+    const newStatements: Array<typeof statements.$inferInsert> = lastYearStatements.map((statement) => {
+        const currentParent = currentStatements.find((x) => x.id === statement.idParent)
+        const newParent = lastYearStatements.find((x) => x.number === currentParent?.number)
+        return ({
+            id: generateId(),
+            idOrganization: props.organization.id,
+            idYear: props.year.id,
+            idParent: statement.idParent,
+            isDefault: statement.isDefault,
+            number: statement.number,
+            label: statement.label,
+            addedNetAmount: "0"
+        })
+    })
     if (newStatements.length > 0) {
         await db
             .insert(statements)

@@ -68,7 +68,6 @@ async function seed() {
                     label: "Exercice 2022",
                     startingOn: new Date(2021, 11, 29, 0, 0).toISOString(),
                     endingOn: new Date(2022, 11, 31, 23, 59, 99).toISOString(),
-                    isMinimalSystem: false,
                     defaultRecords: defaultRecords2022
                 },
                 {
@@ -79,7 +78,6 @@ async function seed() {
                     label: "Exercice 2023",
                     startingOn: new Date(2023, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2023, 11, 31, 23, 59, 99).toISOString(),
-                    isMinimalSystem: false,
                     defaultRecords: defaultRecords2023
                 },
                 {
@@ -90,7 +88,6 @@ async function seed() {
                     label: "Exercice 2024",
                     startingOn: new Date(2024, 0, 1, 0, 0).toISOString(),
                     endingOn: new Date(2024, 11, 31, 23, 59, 99).toISOString(),
-                    isMinimalSystem: false,
                     defaultRecords: []
                 }
             ]

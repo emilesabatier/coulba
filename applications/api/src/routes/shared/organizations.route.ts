@@ -47,14 +47,14 @@ export const organizationsRoute = new Hono()
                     label: `Exercice ${currentDate.getFullYear()}`,
                     startingOn: new Date(currentDate.getFullYear(), 0, 1, 0, 0, 0).toISOString(),
                     endingOn: new Date(currentDate.getFullYear(), 11, 31, 23, 59, 59).toISOString(),
-                    isClosed: false,
-                    isMinimalSystem: body.isMinimalSystem
+                    isClosed: false
                 })
                 .returning()
 
             await generateDefaultYearData({
                 organization: createOrganization,
-                year: createYear
+                year: createYear,
+                isMinimalSystem: body.isMinimalSystem ?? false
             })
 
             // Add journals

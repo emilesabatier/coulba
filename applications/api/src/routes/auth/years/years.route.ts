@@ -28,7 +28,6 @@ export const yearsRoute = new Hono<AuthEnv>()
                     id: generateId(),
                     idOrganization: c.var.organization.id,
                     idPreviousYear: body.idPreviousYear,
-                    isMinimalSystem: body.isMinimalSystem,
                     isSelected: false,
                     isClosed: false,
                     label: body.label,
@@ -42,7 +41,8 @@ export const yearsRoute = new Hono<AuthEnv>()
             if (!body.isReplicatingAccounts) {
                 await generateDefaultYearData({
                     organization: c.var.organization,
-                    year: createYear
+                    year: createYear,
+                    isMinimalSystem: body.isMinimalSystem ?? false
                 })
             } else {
                 await generateLastYearData({

@@ -14,7 +14,6 @@ export const years = pgTable(
         idOrganization: idColumn("id_organization").references(() => organizations.id, { onDelete: "cascade", onUpdate: "cascade" }).notNull(),
         idPreviousYear: idColumn("id_previous_year").references((): AnyPgColumn => years.id, { onDelete: "set null", onUpdate: "cascade" }),
         isSelected: boolean("is_selected").notNull(),
-        isMinimalSystem: boolean("is_minimal_system").notNull(),
         isClosed: boolean("is_closed").notNull(),
         closedOn: dateTimeColumn("closed_on"),
         label: text("label").notNull(),

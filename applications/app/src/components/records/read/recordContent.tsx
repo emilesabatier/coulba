@@ -1,7 +1,7 @@
 import { ButtonOutline, ButtonPlain } from "@coulba/design/buttons"
 import { FormatBoolean, FormatDate, FormatDateTime, FormatNull, FormatPrice, FormatText } from "@coulba/design/formats"
 import { CircularLoader } from "@coulba/design/layouts"
-import { IconCalculator, IconChevronLeft, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
+import { IconCalculator, IconChevronLeft, IconCopy, IconLockCheck, IconPencil, IconTrash } from "@tabler/icons-react"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "@tanstack/react-router"
 import { Fragment } from "react"
@@ -20,6 +20,7 @@ import { RowsTable } from "../../rows/rowsTable"
 import { FormatUserWithFetch } from "../../users/format/formatUserWithFetch"
 import { ComputeRecord } from "../compute/computeRecord"
 import { DeleteRecord } from "../delete/deleteRecord"
+import { DuplicateRecord } from "../duplicate/duplicateRecord"
 import { UpdateRecord } from "../update/updateRecord"
 import { ValidateRecord } from "../validate/validateRecord"
 
@@ -70,6 +71,12 @@ export function RecordContent() {
                                     color="information"
                                 />
                             </ComputeRecord>
+                            <DuplicateRecord record={record.data}>
+                                <ButtonOutline
+                                    text="Dupliquer"
+                                    icon={<IconCopy />}
+                                />
+                            </DuplicateRecord>
                         </Fragment>
                     )}
                 </div>
