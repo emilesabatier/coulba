@@ -38,12 +38,12 @@ export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return
                         .forEach((_balance) => {
                             if (accountSheet.isAllowance) {
                                 gross += 0
-                                if (accountSheet.flow === "debit") allowance += _balance.balance.credit - _balance.balance.debit
-                                if (accountSheet.flow === "credit") allowance += _balance.balance.debit - _balance.balance.credit
+                                if (accountSheet.flow === "debit") allowance += - _balance.balance.debit
+                                if (accountSheet.flow === "credit") allowance += - _balance.balance.credit
                             } else {
                                 allowance += 0
-                                if (accountSheet.flow === "debit") gross += _balance.balance.debit - _balance.balance.credit
-                                if (accountSheet.flow === "credit") gross += _balance.balance.credit - _balance.balance.debit
+                                if (accountSheet.flow === "debit") gross += _balance.balance.debit
+                                if (accountSheet.flow === "credit") gross += _balance.balance.credit
                             }
                         })
                 })
@@ -81,8 +81,8 @@ export function groupSheetsLiabilities(sheets: v.Output<typeof auth.sheets.get.r
                     balance
                         .filter((_balance) => _balance.account.id === accountSheet.idAccount)
                         .forEach((_balance) => {
-                            if (accountSheet.flow === "debit") net += _balance.balance.debit - _balance.balance.credit
-                            if (accountSheet.flow === "credit") net += _balance.balance.credit - _balance.balance.debit
+                            if (accountSheet.flow === "debit") net += _balance.balance.debit
+                            if (accountSheet.flow === "credit") net += _balance.balance.credit
                         })
                 })
             } else {
