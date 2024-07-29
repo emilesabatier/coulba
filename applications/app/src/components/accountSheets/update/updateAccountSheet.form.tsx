@@ -107,8 +107,8 @@ export function UpdateAccountSheetForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel
-                                    label="Colonne brut ?"
-                                    tooltip="Oui si le compte ajoute à la colonne 'Brut' (Actif uniquement)."
+                                    label="Colonne amortissements et dépréciations ?"
+                                    tooltip="Oui si le compte est dans la colonne 'Amortissements et dépréciations' (Actif uniquement)."
                                 />
                                 <FormControl>
                                     <InputSwitch
