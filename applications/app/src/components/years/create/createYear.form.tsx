@@ -21,7 +21,7 @@ export function CreateYearForm() {
         <Form
             validationSchema={auth.years.post.body}
             defaultValues={{
-                isMinimalSystem: false
+                isMinimalSystem: true
             }}
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
             submitLabel="Ajouter l'exercice"
@@ -104,26 +104,6 @@ export function CreateYearForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="isMinimalSystem"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel
-                                    label="Système minimal ?"
-                                    tooltip="Si activé, seuls les comptes du système minimal seront créés."
-                                    isRequired
-                                />
-                                <FormControl>
-                                    <InputSwitch
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                    />
-                                </FormControl>
-                                <FormError />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
                         name="idPreviousYear"
                         render={({ field }) => (
                             <FormItem>
@@ -142,7 +122,28 @@ export function CreateYearForm() {
                         )}
                     />
                     {
-                        !form.watch("idPreviousYear") ? null : (
+                        !form.watch("idPreviousYear") ? (
+                            <FormField
+                                control={form.control}
+                                name="isMinimalSystem"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel
+                                            label="Système minimal ?"
+                                            tooltip="Si activé, seuls les comptes du système minimal seront créés."
+                                            isRequired
+                                        />
+                                        <FormControl>
+                                            <InputSwitch
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormError />
+                                    </FormItem>
+                                )}
+                            />
+                        ) : (
                             <FormField
                                 control={form.control}
                                 name="isReplicatingAccounts"

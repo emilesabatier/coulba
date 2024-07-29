@@ -9,6 +9,7 @@ import { db } from "../../../clients/db.js"
 type GenerateDefaultYearData = {
     organization: v.Output<typeof auth.organizations.get.return>
     year: v.Output<typeof auth.years.get.return>
+    isMinimalSystem: boolean
 }
 
 export async function generateDefaultYearData(props: GenerateDefaultYearData) {
@@ -21,7 +22,7 @@ export async function generateDefaultYearData(props: GenerateDefaultYearData) {
 
     defaultAccounts
         .filter((account) => {
-            if (!account.isMandatory && props.year.isMinimalSystem) return false
+            if (!account.isMandatory && props.isMinimalSystem) return false
             return true
         })
         .forEach((_account) => {
