@@ -8,7 +8,8 @@ import { db } from "../../../clients/db.js"
 import { bodyValidator } from "../../../middlewares/bodyValidator.js"
 import { AuthEnv } from "../../../middlewares/checkAuth.js"
 import { paramsValidator } from "../../../middlewares/paramsValidator.js"
-import { generateYearData } from "./generateYearData.js"
+import { generateDefaultYearData } from "./generateDefaultYearData.js"
+import { generateLastYearData } from "./generateLastYearData.js"
 import { yearPatchRoutes } from "./patch.route.js"
 
 
@@ -20,34 +21,35 @@ export const yearsRoute = new Hono<AuthEnv>()
             const body = c.req.valid('json')
 
             // Generate data
-            const createYear = await db.transaction(async (tx) => {
 
-                const [createYear] = await tx
-                    .insert(years)
-                    .values({
-                        id: generateId(),
-                        idOrganization: c.var.organization.id,
-                        idPreviousYear: body.idPreviousYear,
-                        isMinimalSystem: body.isMinimalSystem,
-                        isSelected: false,
-                        isClosed: false,
-                        label: body.label,
-                        startingOn: body.startingOn,
-                        endingOn: body.endingOn,
-                        lastUpdatedBy: c.var.user.id,
-                        createdBy: c.var.user.id
-                    })
-                    .returning()
+            const [createYear] = await db
+                .insert(years)
+                .values({
+                    id: generateId(),
+                    idOrganization: c.var.organization.id,
+                    idPreviousYear: body.idPreviousYear,
+                    isMinimalSystem: body.isMinimalSystem,
+                    isSelected: false,
+                    isClosed: false,
+                    label: body.label,
+                    startingOn: body.startingOn,
+                    endingOn: body.endingOn,
+                    lastUpdatedBy: c.var.user.id,
+                    createdBy: c.var.user.id
+                })
+                .returning()
 
-                await generateYearData({
-                    tx: tx,
+            if (!body.isReplicatingAccounts) {
+                await generateDefaultYearData({
                     organization: c.var.organization,
                     year: createYear
                 })
-
-                return createYear
-            })
-
+            } else {
+                await generateLastYearData({
+                    organization: c.var.organization,
+                    year: createYear
+                })
+            }
 
             return c.json(createYear, 200)
         }
