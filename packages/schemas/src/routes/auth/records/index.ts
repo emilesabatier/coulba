@@ -1,6 +1,7 @@
 import { computeRecordParams, computeRecordReturn } from "./computeRecord.js"
 import { createRecordBody, createRecordReturn } from "./createRecord.js"
 import { deleteRecordParams, deleteRecordReturn } from "./deleteRecord.js"
+import { duplicateRecordParams, duplicateRecordReturn } from "./duplicateRecord.js"
 import { readRecordParams, readRecordReturn } from "./readRecord.js"
 import { updateRecordBody, updateRecordParams, updateRecordReturn } from "./updateRecord.js"
 import { validateRecordParams, validateRecordReturn } from "./validateRecord.js"
@@ -25,6 +26,10 @@ export const records = {
         return: deleteRecordReturn
     },
     patch: {
+        duplicate: {
+            params: duplicateRecordParams,
+            return: duplicateRecordReturn
+        },
         validate: {
             params: validateRecordParams,
             return: validateRecordReturn
