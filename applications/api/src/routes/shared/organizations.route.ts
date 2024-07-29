@@ -12,7 +12,7 @@ import { env } from "../../env.js"
 import { bodyValidator } from "../../middlewares/bodyValidator.js"
 import { sendEmail } from "../../services/email/sendEmail.js"
 import { emailValidationTemplate } from "../../services/email/templates/emailValidation.js"
-import { generateYearData } from "../auth/years/generateYearData.js"
+import { generateDefaultYearData } from "../auth/years/generateDefaultYearData.js"
 
 
 export const organizationsRoute = new Hono()
@@ -24,78 +24,73 @@ export const organizationsRoute = new Hono()
 
             if (body.user.password !== body.user.passwordCheck) throw new HTTPException(400, { message: "Les mots de passe renseignés sont différents" })
 
-            const [userResponse] = await db.transaction(async (tx) => {
-
-                // Add organization
-                const [createOrganization] = await tx
-                    .insert(organizations)
-                    .values({
-                        id: generateId(),
-                        scope: body.scope,
-                        siren: null,
-                        name: null,
-                        email: null
-                    })
-                    .returning()
-
-                // Add current Year
-                const currentDate = new Date()
-                const [createYear] = await tx
-                    .insert(years)
-                    .values({
-                        id: generateId(),
-                        idOrganization: createOrganization.id,
-                        isSelected: true,
-                        label: `Exercice ${currentDate.getFullYear()}`,
-                        startingOn: new Date(currentDate.getFullYear(), 0, 1, 0, 0, 0).toISOString(),
-                        endingOn: new Date(currentDate.getFullYear(), 11, 31, 23, 59, 59).toISOString(),
-                        isClosed: false,
-                        isMinimalSystem: body.isMinimalSystem
-                    })
-                    .returning()
-
-                await generateYearData({
-                    tx: tx,
-                    organization: createOrganization,
-                    year: createYear
+            // Add organization
+            const [createOrganization] = await db
+                .insert(organizations)
+                .values({
+                    id: generateId(),
+                    scope: body.scope,
+                    siren: null,
+                    name: null,
+                    email: null
                 })
+                .returning()
 
-                // Add journals
-                await tx
-                    .insert(journals)
-                    .values(
-                        defaultJournals.map((journal) => ({
-                            id: generateId(),
-                            idOrganization: createOrganization.id,
-                            code: journal.code,
-                            label: journal.label
-                        }))
-                    )
+            // Add current Year
+            const currentDate = new Date()
+            const [createYear] = await db
+                .insert(years)
+                .values({
+                    id: generateId(),
+                    idOrganization: createOrganization.id,
+                    isSelected: true,
+                    label: `Exercice ${currentDate.getFullYear()}`,
+                    startingOn: new Date(currentDate.getFullYear(), 0, 1, 0, 0, 0).toISOString(),
+                    endingOn: new Date(currentDate.getFullYear(), 11, 31, 23, 59, 59).toISOString(),
+                    isClosed: false,
+                    isMinimalSystem: body.isMinimalSystem
+                })
+                .returning()
 
-                // Add user
-                const passwordSalt = randomBytes(16).toString('hex')
-                const passwordHash = pbkdf2Sync(body.user.password, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
-                const emailToken = randomBytes(128).toString('hex')
-                return await tx
-                    .insert(users)
-                    .values({
+            await generateDefaultYearData({
+                organization: createOrganization,
+                year: createYear
+            })
+
+            // Add journals
+            await db
+                .insert(journals)
+                .values(
+                    defaultJournals.map((journal) => ({
                         id: generateId(),
                         idOrganization: createOrganization.id,
-                        isAdmin: true,
-                        alias: null,
-                        email: body.user.email,
-                        isEmailValidated: false,
-                        emailToValidate: body.user.email,
-                        emailToken: emailToken,
-                        emailTokenExpiresOn: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString(),
-                        isInvitationValidated: true,
-                        isActive: true,
-                        passwordHash: passwordHash,
-                        passwordSalt: passwordSalt
-                    })
-                    .returning()
+                        code: journal.code,
+                        label: journal.label
+                    }))
+                )
 
-            })
+            // Add user
+            const passwordSalt = randomBytes(16).toString('hex')
+            const passwordHash = pbkdf2Sync(body.user.password, passwordSalt, 128000, 64, `sha512`).toString(`hex`)
+            const emailToken = randomBytes(128).toString('hex')
+            const [userResponse] = await db
+                .insert(users)
+                .values({
+                    id: generateId(),
+                    idOrganization: createOrganization.id,
+                    isAdmin: true,
+                    alias: null,
+                    email: body.user.email,
+                    isEmailValidated: false,
+                    emailToValidate: body.user.email,
+                    emailToken: emailToken,
+                    emailTokenExpiresOn: new Date(new Date().getTime() + (24 * 60 * 60 * 1000)).toISOString(),
+                    isInvitationValidated: true,
+                    isActive: true,
+                    passwordHash: passwordHash,
+                    passwordSalt: passwordSalt
+                })
+                .returning()
 
             const urlApp = env()?.APP_BASE_URL
             if (!urlApp) throw new HTTPException(500)
@@ -109,7 +104,6 @@ export const organizationsRoute = new Hono()
             })
 
             // Set up session cookies
-            const currentDate = new Date()
             const sessionLifetime = Number(env()?.SESSION_LIFETIME)
             const cookiesKey = env()?.COOKIES_KEY
             if (!sessionLifetime || !cookiesKey) throw new HTTPException(401, { message: "Connexion impossible" })

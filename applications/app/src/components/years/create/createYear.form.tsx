@@ -141,6 +141,29 @@ export function CreateYearForm() {
                             </FormItem>
                         )}
                     />
+                    {
+                        !form.watch("idPreviousYear") ? null : (
+                            <FormField
+                                control={form.control}
+                                name="isReplicatingAccounts"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel
+                                            label="Répliquer les comptes de l'exercice précédent ?"
+                                            tooltip="Si oui, réplique à l'identique. Si non, génère les comptes par défaut."
+                                        />
+                                        <FormControl>
+                                            <InputSwitch
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormError />
+                                    </FormItem>
+                                )}
+                            />
+                        )
+                    }
                 </Fragment>
             )}
         </Form>

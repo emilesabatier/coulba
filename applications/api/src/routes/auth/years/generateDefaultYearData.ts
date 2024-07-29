@@ -6,13 +6,12 @@ import * as v from "valibot"
 import { db } from "../../../clients/db.js"
 
 
-type GenerateYearData = {
-    tx: (typeof db)["transaction"]["arguments"]["tx"]
+type GenerateDefaultYearData = {
     organization: v.Output<typeof auth.organizations.get.return>
     year: v.Output<typeof auth.years.get.return>
 }
 
-export async function generateYearData(props: GenerateYearData) {
+export async function generateDefaultYearData(props: GenerateDefaultYearData) {
 
     // Add accounts
     let newAccounts: Array<(typeof accounts.$inferInsert)> = []
@@ -48,7 +47,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newAccounts.length > 0) {
-        await props.tx
+        await db
             .insert(accounts)
             .values(newAccounts)
     }
@@ -76,7 +75,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newSheets.length > 0) {
-        await props.tx
+        await db
             .insert(sheets)
             .values(newSheets)
     }
@@ -100,7 +99,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newAccountSheets.length > 0) {
-        await props.tx
+        await db
             .insert(accountSheets)
             .values(newAccountSheets)
     }
@@ -126,7 +125,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newStatements.length > 0) {
-        await props.tx
+        await db
             .insert(statements)
             .values(newStatements)
     }
@@ -148,7 +147,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newAccountStatements.length > 0) {
-        await props.tx
+        await db
             .insert(accountStatements)
             .values(newAccountStatements)
     }
@@ -166,7 +165,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newComputations.length > 0) {
-        await props.tx
+        await db
             .insert(computations)
             .values(newComputations)
     }
@@ -189,7 +188,7 @@ export async function generateYearData(props: GenerateYearData) {
         })
     })
     if (newComputationStatements.length > 0) {
-        await props.tx
+        await db
             .insert(computationStatements)
             .values(newComputationStatements)
     }
