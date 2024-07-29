@@ -97,7 +97,8 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                 const readAccounts = await tx.query.accounts.findMany({
                     where: and(
                         eq(accounts.idOrganization, c.var.user.idOrganization),
-                        eq(accounts.idYear, c.var.currentYear.id)
+                        eq(accounts.idYear, c.var.currentYear.id),
+                        eq(accounts.type, "statement")
                     ),
                     with: {
                         rows: {
@@ -112,7 +113,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                 // Add closing rows
                 const statementRows: Array<(typeof rows.$inferInsert)> = []
                 readAccounts.forEach((account) => {
-                    if (account.accountStatements.length === 0) return
 
                     const sum = {
                         debit: 0,
@@ -213,7 +213,8 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                 const readAccounts = await tx.query.accounts.findMany({
                     where: and(
                         eq(accounts.idOrganization, c.var.user.idOrganization),
-                        eq(accounts.idYear, c.var.currentYear.id)
+                        eq(accounts.idYear, c.var.currentYear.id),
+                        eq(accounts.type, "sheet")
                     ),
                     with: {
                         rows: {
@@ -228,7 +229,6 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                 // We create the new rows
                 const sheetRows: Array<(typeof rows.$inferInsert)> = []
                 readAccounts.forEach((account) => {
-                    if (account.accountSheets.length === 0) return
 
                     const sum = {
                         debit: 0,

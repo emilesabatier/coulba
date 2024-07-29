@@ -42,7 +42,7 @@ export function GenerateClosingOperations(props: GenerateClosingOperations) {
                 idAccountLoss: accounts.data.find((account) => account.number === 129)?.id
             }}
             onCancel={() => router.navigate({ to: "/configuration/exercices" })}
-            submitLabel="Clôturer l'exercice"
+            submitLabel="Générer les opérations"
             onSubmit={async (data) => {
 
                 // compute result
