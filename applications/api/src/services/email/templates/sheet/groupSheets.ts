@@ -54,8 +54,6 @@ export function groupSheetsAssets(sheets: v.Output<typeof auth.sheets.get.return
                 })
             }
 
-            net = gross - allowance
-
             return ({
                 id: sheet.id,
                 number: sheet.number,

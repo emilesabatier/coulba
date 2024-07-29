@@ -235,7 +235,7 @@ export const yearPatchRoutes = new Hono<AuthEnv>()
                         credit: 0
                     }
                     account.rows.forEach((row) => {
-                        if (!row.record.isComputed) return
+                        if (!row.record.isComputed && row.record.idAutomatic === null) return
                         sum.debit += Number(row.debit)
                         sum.credit += Number(row.credit)
                     })
